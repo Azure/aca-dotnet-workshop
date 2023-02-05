@@ -9,7 +9,7 @@ nav_order: 1
 
 The main components of Azure Container Apps are:
 
-![Azure Container Apps main components](/assets/images/00-workshop-intro/ACA-Tutorial-ACA-Components.jpg)
+![Azure Container Apps main components](assets/images/00-workshop-intro/ACA-Tutorial-ACA-Components.jpg)
 
 **1. Environments in Azure Container Apps**
 The Environment is a secure boundary around several Container Apps, It contains at least one single container app or many, all container apps within an environment are deployed into a dedicated Azure Virtual Network, which makes it possible for these different container apps to communicate securely. As well all the logs produced from all container apps in the environment are sent to a dedicated Log Analytics workspace. and makes it possible for these different container apps to communicate, much like an App Service Environment when using Azure App Services
