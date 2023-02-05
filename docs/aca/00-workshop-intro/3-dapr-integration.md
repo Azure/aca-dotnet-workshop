@@ -16,13 +16,13 @@ Building Blocks address common challenges in building resilient, microservices a
 
 The diagram below shows the 9 Building Blocks which exposes public API that can be called from your code, and can be configured using [components](https://docs.dapr.io/concepts/components-concept/) to implement the building blocks’ capability. Remember that you can pick whatever building block suites your distributed microservice application and you can incorporate other building blocks as needed.
 
-![Dapr Building Blocks](assets/images/00-workshop-intro/DaprBuildingBlocks.jpg)
+![Dapr Building Blocks](../../assets/images/00-workshop-intro/DaprBuildingBlocks.jpg)
 
 ## Dapr & Microservices
 
 Dapr exposes its Building Blocks and components through a **sidecar architecture**. A sidecar enables Dapr to run in a separate memory process or separate container alongside your service. Sidecars provide isolation and encapsulation as they aren't part of the service, but connected to it. This separation enables each to have its own runtime environment and be built upon different programming platforms.
 
-![Dapr SideCar](assets/images/00-workshop-intro/ACA-Tutorial-DaprSidecar-s.jpg)
+![Dapr SideCar](../../assets/images/00-workshop-intro/ACA-Tutorial-DaprSidecar-s.jpg)
 
 This pattern is named Sidecar because it resembles a sidecar attached to a motorcycle. In the previous figure, note how the Dapr sidecar is attached to your service to provide distributed application capabilities.
 

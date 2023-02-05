@@ -11,7 +11,7 @@ In this workshop we will build a tasks management application following the micr
 
 ## Solution Architecture 
 
-![Solution Architecture](assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg)
+![Solution Architecture](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg)
 
 1. "ACA Web App-Frontend" is a simple MVC Razor Web front-end application that accepts requests from public users to manage their tasks. It invokes the component "ACA WebAPI-Backend" endpoints via HTTP or gRPC.
 2. "ACA WebAPI-Backend" is a backend Web API which contains the business logic of tasks management service, data storage, and publishing messages to Azure Service Bus Topic.
