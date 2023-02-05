@@ -5,7 +5,7 @@ has_children: false
 nav_order: 3
 ---
 
-# Dapr Overview
+## Dapr Overview
 As developers, we are often tasked to create scalable resilient and distributed applications as microservices, but face the same challenges such as recovering state after failures, services discovery and calling other microservices, integration with external resources, asynchronous communications between different services, distributed tracing and measuring message calls and performance across components and networked services.
 
 Dapr (Distributed Application Runtime) offers a solution for the common problems that needed in any distributed microservice application. Dapr can be used with any language (Go, .NET python, Node, Java, C++) and can run anywhere (On-premise, Kubernetes, Azure Cloud, GCP, AWS, IBM, etc...)
@@ -16,17 +16,17 @@ Building Blocks address common challenges in building resilient, microservices a
 
 The diagram below shows the 9 Building Blocks which exposes public API that can be called from your code, and can be configured using [components](https://docs.dapr.io/concepts/components-concept/) to implement the building blocks’ capability. Remember that you can pick whatever building block suites your distributed microservice application and you can incorporate other building blocks as needed.
 
-![Dapr Building Blocks](/assets/0-workshop-intro/DaprBuildingBlocks.jpg)
+![Dapr Building Blocks](/assets/images/00-workshop-intro/DaprBuildingBlocks.jpg)
 
-# Dapr & Microservices
+## Dapr & Microservices
 
 Dapr exposes its Building Blocks and components through a **sidecar architecture**. A sidecar enables Dapr to run in a separate memory process or separate container alongside your service. Sidecars provide isolation and encapsulation as they aren't part of the service, but connected to it. This separation enables each to have its own runtime environment and be built upon different programming platforms.
 
-![Dapr SideCar](/assets/0-workshop-intro/ACA-Tutorial-DaprSidecar-s.jpg)
+![Dapr SideCar](/assets/images/00-workshop-intro/ACA-Tutorial-DaprSidecar-s.jpg)
 
 This pattern is named Sidecar because it resembles a sidecar attached to a motorcycle. In the previous figure, note how the Dapr sidecar is attached to your service to provide distributed application capabilities.
 
-# Dapr usage in the workshop
+## Dapr usage in the workshop
 
 We are going to enable Dapr for all Azure Container Apps in the solution, the Dapr APIs/Building Blocks used in this workshop are:
 

@@ -4,10 +4,10 @@ has_children: true
 nav_order: 1
 ---
 
-# Description
+## Description
 The Building Microservice Applications with Azure Container Apps workshop will provide you with the practical knowledge to create, deploy and operate an enterprise level microservice application deployed on the latest serverless containers offering (Azure Container Apps) We will demonstrate enabling different components like Dapr which will you address common challenges when building an event driven distributed application while keeping your code platform agnostic. In addition to this you will get familiar with the built-in autoscaling capabilities in Azure Container Apps using KEDA and how to control spending by scaling down to zero replicas.
 
-# Objectives & Outcomes
+## Objectives & Outcomes
 After completing the workshop, you should:
  
 - Gain practical knowledge to create, deploy, and operate a distributed application with multiple microservices deployed to ACA.

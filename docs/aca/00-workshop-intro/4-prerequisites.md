@@ -16,8 +16,8 @@ Make sure you have your development environment setup and configured.
  7. VS Code Dapr extension. Depends on Dapr CLI - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr)
  8. Azure CLI - [Install](https://docs.microsoft.com/cli/azure/install-azure-cli)
 
-# Workshop Instruction
+## Workshop Instructions
  
 The workshop is deviled into separate modules, each module will guide you throughout building the solution code step-by-step and will build on top of the previous module.
 
-Yet you can download/clone the source code repository final version from this link `LINK Goes HERE` and you can use the modules to deploy Azure resources using the provided Azure CLI commands.
+If you don't want to build the solution code from scratch, you can clone the source code repository final version from this link `git clone https://github.com/Azure/aca-dotnet-workshop.git` and you can use the modules to deploy Azure resources using the provided Azure CLI commands.

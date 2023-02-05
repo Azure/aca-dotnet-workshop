@@ -5,13 +5,13 @@ has_children: false
 nav_order: 2
 ---
 
-# Workshop Scenario
+## Workshop Scenario
 
 In this workshop we will build a tasks management application following the microservices architecture pattern, this application will consist of 3 microservices and each one has certain capabilities to show how ACA and Dapr can simplify the building of a microservices application. Below is the architecture diagram of the application we are going to build in this workshop.
 
-# Solution Architecture 
+## Solution Architecture 
 
-![Solution Architecture](/assets/0-workshop-intro/ACA-Architecture-workshop.jpg)
+![Solution Architecture](/assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg)
 
 1. "ACA Web App-Frontend" is a simple MVC Razor Web front-end application that accepts requests from public users to manage their tasks. It invokes the component "ACA WebAPI-Backend" endpoints via HTTP or gRPC.
 2. "ACA WebAPI-Backend" is a backend Web API which contains the business logic of tasks management service, data storage, and publishing messages to Azure Service Bus Topic.
