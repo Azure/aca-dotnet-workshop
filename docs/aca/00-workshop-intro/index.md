@@ -1,7 +1,7 @@
 ---
 title: Workshop Introduction
 has_children: true
-nav_order: 1
+nav_order: 0
 canonical_url: 'https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/'
 ---
 

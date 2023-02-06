@@ -1,7 +1,7 @@
 ---
-title: Deploy Backend API to ACA
+title: Module 1 - Deploy Backend API to ACA
 has_children: false
-nav_order: 2
+nav_order: 1
 canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application-azure-container-apps/'
 ---
 In this module, we will start by creating the first microservice named `ACA Web API – Backend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). Then we will provision Azure resources needed to deploy the service to Azure Container Apps using Azure CLI.
@@ -64,15 +64,10 @@ In this module, we will start by creating the first microservice named `ACA Web 
             public interface ITasksManager
             {
                 Task<List<TaskModel>> GetTasksByCreator(string createdBy);
-
                 Task<TaskModel?> GetTaskById(Guid taskId);
-
                 Task<Guid> CreateNewTask(string taskName, string createdBy, string assignedTo, DateTime dueDate);
-
                 Task<bool> UpdateTask(Guid taskId, string taskName, string assignedTo, DateTime dueDate);
-
                 Task<bool> MarkTaskCompleted(Guid taskId);
-
                 Task<bool> DeleteTask(Guid taskId);
             }
         }
@@ -102,7 +97,6 @@ In this module, we will start by creating the first microservice named `ACA Web 
                         TaskDueDate = DateTime.UtcNow.AddDays(i),
                         TaskAssignedTo = $"assignee{rnd.Next(50)}@mail.com",
                     };
-
                     _tasksList.Add(task);
                 }
             }
@@ -123,7 +117,6 @@ In this module, we will start by creating the first microservice named `ACA Web 
                     TaskDueDate = dueDate,
                     TaskAssignedTo = assignedTo,
                 };
-
                 _tasksList.Add(task);
                 return Task.FromResult(task.TaskId);
             }
@@ -131,47 +124,40 @@ In this module, we will start by creating the first microservice named `ACA Web 
             public Task<bool> DeleteTask(Guid taskId)
             {
                 var task = _tasksList.FirstOrDefault(t => t.TaskId.Equals(taskId));
-
                 if (task != null)
                 {
                     _tasksList.Remove(task);
                     return Task.FromResult(true);
                 }
-
                 return Task.FromResult(false);
             }
 
             public Task<TaskModel?> GetTaskById(Guid taskId)
             {
                 var taskModel = _tasksList.FirstOrDefault(t => t.TaskId.Equals(taskId));
-
                 return Task.FromResult(taskModel);
             }
 
             public Task<List<TaskModel>> GetTasksByCreator(string createdBy)
             {
                 var tasksList = _tasksList.Where(t => t.TaskCreatedBy.Equals(createdBy)).OrderByDescending(o => o.TaskCreatedOn).ToList();
-
                 return Task.FromResult(tasksList);
             }
 
             public Task<bool> MarkTaskCompleted(Guid taskId)
             {
                 var task = _tasksList.FirstOrDefault(t => t.TaskId.Equals(taskId));
-
                 if (task != null)
                 {
                     task.IsCompleted = true;
                     return Task.FromResult(true);
                 }
-
                 return Task.FromResult(false);
             }
 
             public Task<bool> UpdateTask(Guid taskId, string taskName, string assignedTo, DateTime dueDate)
             {
                 var task = _tasksList.FirstOrDefault(t => t.TaskId.Equals(taskId));
-
                 if (task != null)
                 {
                     task.TaskName = taskName;
@@ -179,7 +165,6 @@ In this module, we will start by creating the first microservice named `ACA Web 
                     task.TaskDueDate = dueDate;
                     return Task.FromResult(true);
                 }
-
                 return Task.FromResult(false);
             }
         }
@@ -191,13 +176,9 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
     ```csharp
     var builder = WebApplication.CreateBuilder(args);
-
     // Add services to the container.
-
     builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
-
     // Code removed for brevity
-
     app.Run();
     ```
 
@@ -233,7 +214,6 @@ In this module, we will start by creating the first microservice named `ACA Web 
                 {
                     return Ok(task);
                 }
-
                 return NotFound();
 
             }
@@ -245,8 +225,6 @@ In this module, we will start by creating the first microservice named `ACA Web 
                                     taskAddModel.TaskCreatedBy,
                                     taskAddModel.TaskAssignedTo,
                                     taskAddModel.TaskDueDate);
-
-            
                 return Created($"/api/tasks/{taskId}", null);
 
             }
@@ -262,7 +240,6 @@ In this module, we will start by creating the first microservice named `ACA Web 
                 {
                     return Ok();
                 }
-
                 return BadRequest();
             }
 
@@ -270,12 +247,10 @@ In this module, we will start by creating the first microservice named `ACA Web 
             public async Task<IActionResult> MarkComplete(Guid taskId)
             {
                 var updated = await _tasksManager.MarkTaskCompleted(taskId);
-
                 if (updated)
                 {
                     return Ok();
                 }
-
                 return BadRequest();
             }
 
@@ -287,7 +262,6 @@ In this module, we will start by creating the first microservice named `ACA Web 
                 {
                     return Ok();
                 }
-
                 return NotFound();
             }
         }
@@ -370,7 +344,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA, to do so follow
 8. You can now verify the deployment of the first ACA by navigating to the Azure Portal, login with your credentials, and select the resource group named `tasks-tracker-rg` created, you should see the 4 recourses created below. By default when you create an Azure Container Environment, a `Log Analytics `Workspace will be created, we will cover this in the Monitoring and observability future module.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)
 
-    To execute an e2e test copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api` and issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-random-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image
+    To execute an e2e test copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api` and issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image
     ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
 
 In the next module, we will see how we will add a new Frontend Web App as a microservice and how it will communicate with the backend API.
