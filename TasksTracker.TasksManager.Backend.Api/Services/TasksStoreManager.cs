@@ -63,10 +63,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
 
         public async Task<List<TaskModel>> GetTasksByCreator(string createdBy)
         {
-            //Currently, the query API for Cosmos DB is not working when deploying it to Azure Container Apps, this is an open
-            //issue and prodcut team is wokring on it. Details of the issue is here: https://github.com/microsoft/azure-container-apps/issues/155
-            //Due to this issue, we will query directly the cosmos db to list tasks per created by user.
-
+            
             _logger.LogInformation("Query tasks created by: '{0}'", createdBy);
 
             var query = "{" +
@@ -80,41 +77,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
 
             return tasksList.ToList();
 
-            //Workaround: Query cosmos DB directly
-
-            // var result = await QueryCosmosDb(createdBy);
-
-            // return result;
-
         }
-
-        private async Task<List<TaskModel>> QueryCosmosDb(string createdBy)
-        {
-
-            var cosmosKey = _config.GetValue<string>("cosmosDb:key");
-            var account = _config.GetValue<string>("cosmosDb:accountUrl");
-            var cosmosClient = new CosmosClient(account, cosmosKey);
-            var container = cosmosClient.GetContainer(databaseName, containerName);
-
-            var queryString = $"SELECT * FROM C['value'] as tasksList Where tasksList.taskCreatedBy = @taskCreatedBy";
-            var queryDefinition = new QueryDefinition(queryString).WithParameter("@taskCreatedBy", createdBy);
-
-            using FeedIterator<TaskModel> feed = container.GetItemQueryIterator<TaskModel>(queryDefinition: queryDefinition);
-
-            var results = new List<TaskModel>();
-
-            while (feed.HasMoreResults)
-            {
-                FeedResponse<TaskModel> response = await feed.ReadNextAsync();
-
-                results.AddRange(response.OrderByDescending(o => o.TaskCreatedOn).ToList());
-
-            }
-
-            return results;
-        }
-
-
         public async Task<List<TaskModel>> GetTasksByTime(DateTime waterMark)
         {
 
@@ -197,7 +160,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
 
         private async Task PublishTaskSavedEvent(TaskModel taskModel)
         {
-            _logger.LogInformation("Publish Task Saved event for task with Id: '{0}' and Name: '{1}' for Assigne: '{2}'",
+            _logger.LogInformation("Publish Task Saved event for task with Id: '{0}' and Name: '{1}' for Assignee: '{2}'",
                                                                 taskModel.TaskId, taskModel.TaskName, taskModel.TaskAssignedTo);
 
             await _daprClient.PublishEventAsync(PUBSUB_SVCBUS_NAME, TASK_SAVED_TOPICNAME, taskModel);

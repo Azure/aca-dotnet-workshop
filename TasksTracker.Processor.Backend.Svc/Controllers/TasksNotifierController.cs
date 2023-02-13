@@ -39,7 +39,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
 
             if (sendGridResponse.Item1)
             {
-                return Ok($"SendGrid response staus code: {sendGridResponse.Item1}");
+                return Ok($"SendGrid response status code: {sendGridResponse.Item1}");
             }
 
             return BadRequest($"Failed to send email, SendGrid response status code: {sendGridResponse.Item1}");
@@ -60,7 +60,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
             var htmlContent = plainTextContent;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
            
-            //Send actual email using SendGrid API (Disbled when running load test)
+            //Send actual email using SendGrid API (Disabled when running load test)
             if (integrationEnabled)
             {
                 var response = await client.SendEmailAsync(msg);
@@ -76,13 +76,13 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
 
             if (sendEmailResponse)
             {
-                _logger.LogInformation("Email with subject '{0}' sent to: '{1}' successfuly", subject, taskModel.TaskAssignedTo);
+                _logger.LogInformation("Email with subject '{0}' sent to: '{1}' successfully", subject, taskModel.TaskAssignedTo);
 
                 await _daprClient.SaveStateAsync(STORE_NAME,
                                                         $"{Guid.NewGuid().ToString()}_{taskModel.TaskAssignedTo}",
                                                         new EmailLogModel() { TaskId = taskModel.TaskId,  EmailTo = to.Email, EmailContent = plainTextContent });
 
-                _logger.LogInformation("Email log for task with id: {0} saved successfuly", taskModel.TaskId);
+                _logger.LogInformation("Email log for task with id: {0} saved successfully", taskModel.TaskId);
             }
             else
             {

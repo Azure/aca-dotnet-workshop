@@ -29,7 +29,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
             {
                 string? _instanceId = Environment.GetEnvironmentVariable("HOSTNAME");
 
-                _logger.LogInformation("Readiness::Invoked readiness ednpoint by instance {0}", _instanceId);
+                _logger.LogInformation("Readiness::Invoked readiness endpoint by instance {0}", _instanceId);
 
                 _logger.LogInformation("Readiness::Testing state store (blob) availability by creating new dummy file by instance {0}", _instanceId);
                 await _daprClient.SaveStateAsync(BLOB_STORE_NAME, BLOB_KEY_NAME, DateTime.UtcNow);

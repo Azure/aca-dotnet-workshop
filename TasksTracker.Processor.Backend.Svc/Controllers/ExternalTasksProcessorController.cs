@@ -22,7 +22,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
         }
 
         [HttpPost("process")]
-        public async Task<IActionResult> ProcesseTaskAndStore([FromBody] TaskModel taskModel)
+        public async Task<IActionResult> ProcessTaskAndStore([FromBody] TaskModel taskModel)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
                 //Dapr SideCar Invocation (save task to a state store)
                 await _daprClient.InvokeMethodAsync(HttpMethod.Post, "tasksmanager-backend-api", $"api/tasks", taskModel);
 
-                _logger.LogInformation("Saved external task to the state store successfuly. Task name: '{0}', Task Id: '{1}'", taskModel.TaskName, taskModel.TaskId);
+                _logger.LogInformation("Saved external task to the state store successfully. Task name: '{0}', Task Id: '{1}'", taskModel.TaskName, taskModel.TaskId);
 
                  IReadOnlyDictionary<string,string> metaData = new Dictionary<string, string>()
                     {
