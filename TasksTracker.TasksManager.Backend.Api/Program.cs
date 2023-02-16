@@ -7,9 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSingleton<DaprClient>(_ => new DaprClientBuilder().Build());
+// builder.Services.AddSingleton<DaprClient>(_ => new DaprClientBuilder().Build());
 
 //builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
+
+builder.Services.AddDaprClient();
 
 builder.Services.AddSingleton<ITasksManager, TasksStoreManager>();
 

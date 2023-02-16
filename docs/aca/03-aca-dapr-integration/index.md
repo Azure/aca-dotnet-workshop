@@ -69,7 +69,8 @@ When we complete the previous step, we are ready to run the applications locally
     <PackageReference Include="Dapr.AspNetCore" Version="1.9.0" />
     </ItemGroup>
     ```
-    Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the code below, The DaprClient object is intended to be long-lived. A single DaprClient instance can be reused for the lifetime of the application
+    Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the code below. 
+    The `AddDaprClient` call registers the `DaprClient` class with the ASP.NET Core dependency injection system. With the client registered, you can now inject an instance of DaprClient into your service code to communicate with the Dapr sidecar, building blocks, and components.
 
     ```csharp
     namespace TasksTracker.WebPortal.Frontend.Ui
@@ -81,9 +82,8 @@ When we complete the previous step, we are ready to run the applications locally
                 var builder = WebApplication.CreateBuilder(args);
                 // Add services to the container.
                 builder.Services.AddRazorPages();
-            // Code removed for brevity 	
-        
-            builder.Services.AddSingleton<DaprClient>(_ => new DaprClientBuilder().Build());
+                // Code removed for brevity 	
+                builder.Services.AddDaprClient();
                 var app = builder.Build();
                 // Code removed for brevity 
             }
