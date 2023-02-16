@@ -27,6 +27,22 @@ description: >- # this means to ignore newlines until "baseurl:"
 search_enabled: true
 color_scheme: "light"
 remote_theme: pmarsceill/just-the-docs
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
 search:
   # Split pages into sections that can be searched individually
   # Supports 1 - 6, default: 2

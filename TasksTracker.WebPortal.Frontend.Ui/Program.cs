@@ -18,7 +18,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui
        
             });
 
-            builder.Services.AddSingleton<DaprClient>(_ => new DaprClientBuilder().Build());
+            builder.Services.AddDaprClient();
 
             builder.Services.AddApplicationInsightsTelemetry();
 
