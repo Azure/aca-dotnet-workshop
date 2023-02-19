@@ -4,6 +4,8 @@ has_children: false
 nav_order: 2
 canonical_url: 'https://bitoftech.net/2022/08/25/communication-microservices-azure-container-apps/'
 ---
+# Module 2 - Communication between Microservices in ACA
+
 In this module, we will add a the service named `ACA Web API – Frontend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). This service will host a simple ASP.NET Razor pages web app which allow end users to manage their tasks. Then we will provision Azure resources needed to deploy the service to ACA using Azure CLI.
 ### 1. Create the frontend Web App project (Web APP)
 1. Open a command-line terminal and navigate to root folder of your project. Create a new folder as shown below:
