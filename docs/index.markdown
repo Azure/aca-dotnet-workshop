@@ -1,65 +1,11 @@
 
-<img src="assets/images/apim-logo-transparent.png">
+<img src="assets/images/00-workshop-intro/azure_container_apps.png"> 
 
-#  Code Of Conduct
 
-Before we dive into learning about the APIOPs tool we would like to share some guidance on how to navigate the associated Github repo as you learn your way around the tool:
-- Always use the latest [release](https://github.com/Azure/apiops/releases) which includes the latest features and bug fixes
-- Please use the [issues](https://github.com/Azure/apiops/issues) section to report any issues that you encounter as well as any requested features that you would like to raise to the development team. Always remember to close your issues when its gets resolved 
-- Remember to subscribe to this repo (at least subscribe to be notified about new releases) to stay in the loop as we are always adding new features and squashing these pesky bugs
-- Please read this guide before opening any issues
-- This is an open source project and hence we are always accepting contributions from the community so make sure you fork and submit your PRs. We take them seriously and they help us make the tool better
+There is no doubt that building containerized applications and following a microservices architecture is one of the most common software architecture patterns observed in the past couple of years.
 
-#  Versions
-Please note that starting with release V.3.0.0 we changed the way the updates to the system get delivered. Thus when reading the docs you will notice that there are some sections that are designated with the <= V.3.0.0 and >= V.3.0.0 suffixes to distinguish between the old and the new update delivery methodology. We recommend switching to the new methodology whenever possible as it greatly simplifies fetching the latest version of the code. 
+Microsoft Azure offers different services to package, deploy and manage cloud-native applications, each of which serves a certain purpose and has its own pros and cons. This [page](https://learn.microsoft.com/en-us/azure/container-apps/compare-options) provides a good comparison between the available services to host and manage cloud-native containerized applications in Azure. 
 
-## Old method (version < 3.0.0)
+Whereas building cloud-native apps on Azure Kubernetes Service (AKS) is powerful,  there is a bit of a learning curve needed when it comes to creating and configuring the cluster, configuring networking between microservices, services discovery, certificates provisioning, and lastly managing the cluster over the lifetime of the application.
 
-Each time a new release was pushed you would have to:
-- Download the updated code folder as well as the updated pipelines
-- You would have to run the publish-extractor and publish-publisher pipelines and store the resulting binaries in your own internal feed
-- We dropped the publish-publisher and publish-extractor pipelines as we now host the binaries for you. If you would rather host the binaries yourself you still have access to the source code which you can download and build yourself. Just keep in mind that these deprecated pipelines now live in the releases themselves and won't be found in the repository.
-
-## New method (version >= 3.0.0)
-
-- The binaries are now hosted for you on the public github repo as part of the release
-- Utilizing the new version simply involves pointing the pipelines to the new version by changing environment variables (refer to the docs on how to achieve that). No more rebuilding or hosting of binaries
-- You only have to download the updated pipelines if they are updated. As part of the release we now push two different sets of pipelines. The Azure_DevOps.zip if you are a Azure Devops user and Github.zip if you are a Github user
-- If you would still rather host the extractor and publisher binaries within your own environment you have two options:
-    - We publish the compiled publisher and extractor binaries as part of the release so you can download these and host them internally if you want
-    - The publish-publisher and publish-extractor pipelines are now legacy pipelines that can be found under the V.2.x release if you still need access to them. Also note that we still include the source code as part of the Source code (zip) in each release
-
-#  About this Tool
-
-APIOps places the Azure API Management infrastructure under version control to achieve these goals. Rather than making changes directly in API Management portal, most operations happen through code changes that can be reviewed and audited. In this section we include links to both a complementary Guide and Wiki to get you started with the tool.
-
-## Complementary Guide
-
-This guide is designed to bring a 400-level understanding of automating API deployments in Azure Api Management. This is meant to be a hands-on lab experience, all instructions are provided, but a basic level of understanding of apis, devops and gitops is expected.
-This guide will guide you through the concept of APIOps. It applies the concepts of GitOps and DevOps to API deployment. By using practices from these two methodologies, APIOps can enable everyone involved in the lifecycle of API design, development, and deployment with self-service and automated tools to ensure the quality of the specifications and APIs that they're building.
-[This Guide is delivered using Github Pages and Just-The-Docs theme at https://azure.github.io/apiops/.](https://azure.github.io/apiops/).
-
-## Wiki
-The Wiki covers all of our supported resources. Think about it as being more resource-focused with deeper dives, as opposed to the aforementioned guide which is more scenario-based and holistic. So in essence you need to read both to have a successful adoption of the tool. [The wiki can be found on wiki tab within this repo or by following this link](https://github.com/Azure/apiops/wiki).
-
-# Contributing
-
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-# Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+In this workshop, we will be focusing on a containerization service offered by Microsoft Azure which is Azure Container Apps (ACA). Microsoft announced the public preview of Azure Container Apps back in Nov 2021 and in May 2022 it announced the General Availability of Azure Container Apps. In brief, Azure Container Apps is a fully managed serverless container runtime for building and running cloud-native applications which focuses on the business logic of the apps rather than on cloud infrastructure management.
