@@ -362,7 +362,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
 ```
 What we've done In the code above is the following:
 * We've updated the attribute `Dapr.Topic` to use the same Pub/Sub component name used in the publisher `dapr-pubsub-servicebus`. Then we add a new method that is responsible to consume the proceed message, taking the assignee email, and trying to send an email using SendGrid API.
-* We are returning `200 Ok` if the SendGrid was able to send the email successfully, and we are returning `400 Bad request` if the SendGrid failed to send the email, this will allow the consumer service to re-try processing the message again.
+* We are returning `200 Ok` if the SendGrid was able to send the email successfully, and we are returning `400 Bad Request` if the SendGrid failed to send the email, this will allow the consumer service to re-try processing the message again.
 * Don't forget to add the NuGet package named `SendGrid` version `9.28.1` to the Backend processor project, as well we are reading the `SendGrid:ApiKey` from AppSettings, we will read this value from environment variables once we deploy this service to Azure Container Apps. So open the file named `appsettings.json` and add the below config:
 
 ```json
@@ -476,7 +476,7 @@ Now we need to create a new Azure Container App, we need to have this new contai
 
 * Ingress for this container app should be disabled (No access via HTTP at all, this is a background processor responsible to process published messages).
 * Dapr needs to be enabled.
-* Setting the value of SendGrid API in the secrets store and referencing it in the environment variables.
+* Setting the value of SendGrid API in the secrets store and referencing it in the environment variables, as well setting the flag `IntegrationEnabled` to `true` so it will send actual emails.
 To achieve the above run the below PowerShell script and notice how we removed the Ingress property totally Ingress is disabled for this Container App:
 
 ```powershell
@@ -493,7 +493,7 @@ az containerapp create `
 --dapr-app-id  $BACKEND_SVC_NAME `
 --dapr-app-port 80 `
 --secrets "sendgrid-apikey=Replace with your SendGrid API Key" `
---env-vars "SendGrid__ApiKey=secretref:sendgrid-apikey"
+--env-vars "SendGrid__ApiKey=secretref:sendgrid-apikey" "SendGrid__IntegrationEnabled=true"
 ```
 
 ##### 3. Deploy new revisions of the Backend API to Azure Container Apps
@@ -526,7 +526,7 @@ In the previous module we have [already configured](../04-aca-dapr-stateapi/inde
 
 Run the command below to create `system-assigned` identity for our Backend Processor App:
 
-```Powershell
+```powershell
 az containerapp identity assign `
   --resource-group $RESOURCE_GROUP `
   --name $BACKEND_SVC_NAME `
