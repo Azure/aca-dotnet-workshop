@@ -380,7 +380,7 @@ It is optional to use SendGrid APIs to send emails, you can use another service 
 Now we will switch our implementation to use Azure Service Bus as a message broker, Redis worked perfectly for local development and testing but we need to prepare ourselves for the cloud deployment, to do so we need to create Service Bus Namespace, then a Topic.
 
 ##### 1. Create Azure Service Bus Namespace and a Topic
-You can do this from Azure Portal or use the below PowerShell command to create the services. I will assume you are using the same PowerShell session from the previous module so variables still hold the right values, you need to change the namespace variable as this one should be unique globally:
+You can do this from Azure Portal or use the below PowerShell command to create the services. I will assume you are using the same PowerShell session from the previous module so variables still hold the right values, you need to change the namespace variable as this one should be unique globally across all Azure subscriptions:
 
 ```powershell
 $NamespaceName="taskstracker"
