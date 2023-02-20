@@ -1,33 +1,11 @@
-# Project
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+<img src="docs/assets/images/00-workshop-intro/azure_container_apps.png"> 
 
-As the maintainer of this project, please make a few updates:
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+There is no doubt that building containerized applications and following a microservices architecture is one of the most common software architecture patterns observed in the past couple of years.
 
-## Contributing
+Microsoft Azure offers different services to package, deploy and manage cloud-native applications, each of which serves a certain purpose and has its own pros and cons. This [page](https://learn.microsoft.com/en-us/azure/container-apps/compare-options) provides a good comparison between the available services to host and manage cloud-native containerized applications in Azure. 
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+Whereas building cloud-native apps on Azure Kubernetes Service (AKS) is powerful,  there is a bit of a learning curve needed when it comes to creating and configuring the cluster, configuring networking between microservices, services discovery, certificates provisioning, and lastly managing the cluster over the lifetime of the application.
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+In this workshop, we will be focusing on a containerization service offered by Microsoft Azure which is Azure Container Apps (ACA). Microsoft announced the public preview of Azure Container Apps back in Nov 2021 and in May 2022 it announced the General Availability of Azure Container Apps. In brief, Azure Container Apps is a fully managed serverless container runtime for building and running cloud-native applications which focuses on the business logic of the apps rather than on cloud infrastructure management.
