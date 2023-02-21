@@ -6,7 +6,7 @@ canonical_url: 'https://bitoftech.net/2022/08/25/tutorial-building-microservice-
 ---
 
 ## Description
-The Building Microservice Applications with Azure Container Apps workshop will provide you with the practical knowledge to create, deploy and operate an enterprise level microservice application deployed on the latest serverless containers offering (Azure Container Apps) We will demonstrate enabling different components like Dapr which will you address common challenges when building an event driven distributed application while keeping your code platform agnostic. In addition to this you will get familiar with the built-in autoscaling capabilities in Azure Container Apps using KEDA and how to control spending by scaling down to zero replicas.
+The Building Microservice Applications with Azure Container Apps workshop will provide you with the practical knowledge to create, deploy and operate an enterprise level microservice application deployed on the latest serverless containers offering [Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/overview). We will demonstrate enabling different components like Dapr which will allow you to address common challenges when building an event driven distributed application while keeping your code platform agnostic. In addition to this you will get familiar with the built-in autoscaling capabilities in Azure Container Apps using KEDA and how to control spending by scaling down to zero replicas.
 
 ## Objectives & Outcomes
 After completing the workshop, you should:
@@ -16,5 +16,5 @@ After completing the workshop, you should:
 - Use various building blocks of Dapr to simplify the building of Microservice applications, utilizing different building blocks like service-to-service Invocation using HTTP and gRPC, State management, Pub and Sub, and Input & output bindings.
 - Get familiar with Autoscaling feature in ACA using KEDA.
 - Configure Monitoring, Observability, and distributed tracings of ACA using Application Insights.
-- Continuous Deployment for your microservice application to ACA using GitHub Actions.
+- Setup Continuous Deployment for your microservice application using GitHub Actions.
 - Recreate your entire microservice application components and generate IaC scripts using Bicep.

@@ -20,6 +20,6 @@ Make sure you have your development environment setup and configured.
 
 ## Workshop Instructions
  
-The workshop is deviled into separate modules, each module will guide you throughout building the solution code step-by-step and will build on top of the previous module.
+The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependency on each other.
 
-If you don't want to build the solution code from scratch, you can clone the source code repository final version from this link `git clone https://github.com/Azure/aca-dotnet-workshop.git` and you can use the modules to deploy Azure resources using the provided Azure CLI commands.
+If you don't want to build the solution code from scratch, you can clone the source code repository final version by utilizing this command `git clone https://github.com/Azure/aca-dotnet-workshop.git` and you can use the modules to deploy Azure resources using the provided Azure CLI commands.
