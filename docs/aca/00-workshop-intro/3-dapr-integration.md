@@ -37,7 +37,7 @@ This pattern is named Sidecar because it resembles a sidecar attached to a motor
 
 We are going to enable Dapr for all Azure Container Apps in the solution, the Dapr APIs/Building Blocks used in this workshop are:
 
-* **Service to Service invocation**: "ACA Web App-Frontend" microservice invokes the "ACA WebAPI-Backend" microservice using Dapr Service-to-service invocation building blocks.
+* **Service to Service invocation**: "ACA Web App-Frontend" microservice invokes the "ACA WebAPI-Backend" microservice using Dapr sidecar via the Service-to-service invocation building block
 * **State Management**: "ACA WebAPI-Backend" stores data on Azure Cosmos DB and stores email logs on Azure Table Storage using Dapr State Management building blocks.
-*** Pub/Sub**: "ACA WebAPI-Backend" publishes messages to Azure Service Bus when a task is saved and the "ACA Processor-Backend" microservices consumes those messages and sends emails using SendGrid.
+* **Pub/Sub**: "ACA WebAPI-Backend" publishes messages to Azure Service Bus when a task is saved and the "ACA Processor-Backend" microservices consumes those messages and sends emails using SendGrid.
 * **Bindings**: "ACA Processor-Backend" is triggered based on an incoming event such as a Cron job.
