@@ -322,6 +322,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     cd {YourLocalPath}\TasksTracker.ContainerApps
     az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
     ```
+    Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created and there is a new docker image with a `latest` tag is created.
 
 6. Create an Azure Container Apps Environment, as shared in the [workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). It acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
     ```shell
