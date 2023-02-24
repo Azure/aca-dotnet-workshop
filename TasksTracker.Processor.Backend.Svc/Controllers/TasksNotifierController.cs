@@ -11,7 +11,6 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
     [ApiController]
     public class TasksNotifierController : ControllerBase
     {
-        private static string STORE_NAME = "emaillogsstatestore";
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
 
@@ -37,68 +36,53 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
 
             var sendGridResponse = await SendEmail(taskModel);
 
-            if (sendGridResponse.Item1)
+            if (sendGridResponse)
             {
-                return Ok($"SendGrid response status code: {sendGridResponse.Item1}");
+                return Ok();
             }
 
-            return BadRequest($"Failed to send email, SendGrid response status code: {sendGridResponse.Item1}");
+            return BadRequest("Failed to send an email");
         }
 
-        private async Task<Tuple<bool, string>> SendEmail(TaskModel taskModel)
+        private async Task<bool> SendEmail(TaskModel taskModel)
         {
-
-            var apiKey = _config.GetValue<string>("SendGrid:ApiKey");
             var integrationEnabled = _config.GetValue<bool>("SendGrid:IntegrationEnabled");
             var sendEmailResponse = true;
-            var sendEmailStatusCode = System.Net.HttpStatusCode.Accepted;
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("taiseer.joudeh@gmail.com", "Tasks Tracker Notification");
             var subject = $"Task '{taskModel.TaskName}' is assigned to you!";
-            var to = new EmailAddress(taskModel.TaskAssignedTo, taskModel.TaskAssignedTo);
             var plainTextContent = $"Task '{taskModel.TaskName}' is assigned to you. Task should be completed by the end of: {taskModel.TaskDueDate.ToString("dd/MM/yyyy")}";
-            var htmlContent = plainTextContent;
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-           
-            //Send actual email using SendGrid API (Disabled when running load test)
-            if (integrationEnabled)
+
+            try
             {
-                var response = await client.SendEmailAsync(msg);
-                sendEmailResponse = response.IsSuccessStatusCode;
-                sendEmailStatusCode = response.StatusCode;
+                //Send actual email using Dapr SendGrid Outbound Binding (Disabled when running load test)
+                if (integrationEnabled)
+                {
+                    IReadOnlyDictionary<string, string> metaData = new Dictionary<string, string>()
+                {
+                    { "emailTo", taskModel.TaskAssignedTo },
+                    { "emailToName", taskModel.TaskAssignedTo },
+                    { "subject", subject }
+                };
+                    await _daprClient.InvokeBindingAsync("sendgrid", "create", plainTextContent, metaData);
+                }
+                else
+                {
+                    //Introduce artificial delay to slow down message processing
+                    _logger.LogInformation("Simulate slow processing for email sending for Email with Email subject '{0}' Email to: '{1}'", subject, taskModel.TaskAssignedTo);
+                    Thread.Sleep(5000);
+                }
+
+                if (sendEmailResponse)
+                {
+                    _logger.LogInformation("Email with subject '{0}' sent to: '{1}' successfully", subject, taskModel.TaskAssignedTo);
+                }
             }
-            else
+            catch (System.Exception ex)
             {
-                //Introduce artificial delay to slow down message processing
-                _logger.LogInformation("Simulate slow processing for email sending for Email with Email subject '{0}' Email to: '{1}'", subject, taskModel.TaskAssignedTo);
-                Thread.Sleep(5000);
+                sendEmailResponse = false;
+                _logger.LogError(ex, "Failed to send email with subject '{0}' To: '{1}'.", subject, taskModel.TaskAssignedTo);
+                throw;
             }
-
-            if (sendEmailResponse)
-            {
-                _logger.LogInformation("Email with subject '{0}' sent to: '{1}' successfully", subject, taskModel.TaskAssignedTo);
-
-                await _daprClient.SaveStateAsync(STORE_NAME,
-                                                        $"{Guid.NewGuid().ToString()}_{taskModel.TaskAssignedTo}",
-                                                        new EmailLogModel() { TaskId = taskModel.TaskId,  EmailTo = to.Email, EmailContent = plainTextContent });
-
-                _logger.LogInformation("Email log for task with id: {0} saved successfully", taskModel.TaskId);
-            }
-            else
-            {
-                _logger.LogWarning("Failed to send email with subject '{0}' To: '{1}'. Status Code: {2}", subject, taskModel.TaskAssignedTo, sendEmailStatusCode);
-            }
-
-            return new Tuple<bool, string>(sendEmailResponse, sendEmailStatusCode.ToString());
-
+            return sendEmailResponse;
         }
     }
-
-    public class EmailLogModel
-    {
-        public Guid TaskId { get; set; }
-        public string EmailTo { get; set; } = string.Empty;
-        public string EmailContent { get; set; } = string.Empty;
-    }
-
 }

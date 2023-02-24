@@ -37,16 +37,6 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
                 _logger.LogInformation("Readiness::Deleting dummy file from state store (blob) by instance {0}", _instanceId);
                 await _daprClient.DeleteStateAsync(BLOB_STORE_NAME, BLOB_KEY_NAME);
 
-                _logger.LogInformation("Readiness::Testing state store (Table storage) availability by creating new dummy record by instance {0}", _instanceId);
-                var rowKey = Guid.NewGuid().ToString();
-                await _daprClient.SaveStateAsync(TABLE_STORE_NAME,
-                                                      rowKey,
-                                                      new EmailLogModel() { EmailTo = "meail@mail.com", EmailContent = "Readiness Prob Test" });
-
-                _logger.LogInformation("Readiness::Deleting dummy record from state store (Table storage) by instance {0}", _instanceId);
-                await _daprClient.DeleteStateAsync(TABLE_STORE_NAME, rowKey);
-
-
             }
             catch (Exception e)
             {
