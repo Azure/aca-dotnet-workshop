@@ -6,7 +6,7 @@ canonical_url: 'https://bitoftech.net/2022/09/02/azure-container-apps-async-comm
 ---
 # Module 5 - ACA Async Communication with Dapr Pub/Sub API
 
-In this module, we will introduce a new background service which is named `ACA-Processer Backend` according to our[architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). This new service will be responsible for sending notification emails (simulated) to task owners to notify them that a new task has been assigned to them. We can do this in the Backend API and send the email right after saving the task, but we want to offload this process to another service and keep the Backend API service responsible for managing tasks data only.
+In this module, we will introduce a new background service which is named `ACA-Processer Backend` according to our [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). This new service will be responsible for sending notification emails (simulated) to task owners to notify them that a new task has been assigned to them. We can do this in the Backend API and send the email right after saving the task, but we want to offload this process to another service and keep the Backend API service responsible for managing tasks data only.
 
 To do this the right way, we need to decouple the 2 services from each other, so this means we are going to rely on the Publisher-Subscriber pattern (Pub/Sub Pattern).
 The main advantage of this pattern is that it offers loose coupling between services, the sender/publisher of the message doesn't know anything about the receiver/consumers, even you can have multiple consumers consuming a copy of the message in a totally different way, think of adding another consumer which is responsible to send push notification for the task owner (If we have a mobile app channel).
@@ -374,7 +374,7 @@ What we've done In the code above is the following:
 }
 ```
 {: .note }
-It is optional to use SendGrid APIs to send emails, you can use another service to complete the workshop or you can just simulate sending email by returning always `true` from the `SendEmail` method.
+It is optional to use SendGrid APIs to send emails, you can use another service to complete the workshop or you can just simulate sending email by returning always `true` from the `SendEmail` method. [Next module](/aca/06-aca-dapr-bindingsapi/index.md/#1-create-dapr-sendgrid-output-binding-component-file) we will be using a new type of Dapr components to send emails using SendGrid.
 
 ### Use Azure Service Bus as a Service Broker for Dapr Pub/Sub API
 Now we will switch our implementation to use Azure Service Bus as a message broker, Redis worked perfectly for local development and testing but we need to prepare ourselves for the cloud deployment, to do so we need to create Service Bus Namespace, then a Topic.
@@ -503,10 +503,7 @@ As we've done this multiple times we need to update the Azure Container App host
 az containerapp update `
 --name $BACKEND_API_NAME `
 --resource-group $RESOURCE_GROUP `
---revision-suffix v20230220-1 `
---cpu 0.25 --memory 0.5Gi `
---min-replicas 1 `
---max-replicas 1
+--revision-suffix v20230220-1 
 ```
 
 ##### 4. Add Azure Service Bus Dapr Pub/Sub Component to Azure Container Apps Environment
@@ -596,4 +593,4 @@ With this in place, you should be able to test the 3 services end to end and sho
 
 ![email-log](../../assets/images/05-aca-dapr-pubsubapi/email-log.jpg)
 
-In the next module, we will cover how are going to use Dapr binding with Azure Container Apps.
+In the next module, we will cover how are going to use Dapr bindings with ACA.

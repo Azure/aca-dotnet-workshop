@@ -1,0 +1,12 @@
+componentType: bindings.twilio.sendgrid
+version: v1
+secretStoreComponent: "secretstoreakv"
+metadata:
+- name: emailFrom
+  value: "<Your email from white listed with SendGrid when you obtained the API Key>"
+- name: emailFromName
+  value: "Tasks Tracker Notification"
+- name: apiKey
+  secretRef: sendgrid-api-key
+scopes:
+- tasksmanager-backend-processor
