@@ -10,8 +10,8 @@ In this post, we are going to extend the backend background processor service na
 
 * Trigger a process on the `ACA-Processor Backend` based on a **message sent to a specific Azure Storage Queue**, this is a fictitious scenario but we will assume that this Azure Storage Queue is an external system to which external clients can submit tasks to this queue and our `ACA-Processor Backend` will be configured to trigger a certain process when a new message is received.
 * From the service `ACA-Processor Backend` we will **invoke an external resource** that is storing the content of the incoming task from the external queue as a JSON blob file on Azure Storage Blobs.
-* Trigger a process on the `ACA-Processor Backend` based on a **configurable interval schedule**, this implements a background worker to wake up (at a regular interval) and check if tasks created are overdue and mark them as overdue, then store the updated state on Azure Cosmos DB.
 * Remove the SendGrid SDK and specific code created in the previous module to send emails and replace it with [Dapr SendGrid output binding.](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/)
+* Trigger a process on the `ACA-Processor Backend` based on a **configurable interval schedule**, this implements a background worker to wake up (at a regular interval) and check if tasks created are overdue and mark them as overdue, then store the updated state on Azure Cosmos DB. (Covered in the [next module](/aca/07-aca-cron-bindings/index.md))
 
 Let's take a look at the high-level architecture diagram below to understand the flow of input and output bindings in Dapr:
 
@@ -545,7 +545,7 @@ az containerapp env dapr-component set `
   --dapr-component-name sendgrid `
  --yaml '.\aca-components\containerapps-bindings-out-sendgrid.yaml'
 ```
-{: .highlight }
+{: .note }
 Executing those commands should be similar to create any component using yaml file. But there is an [issue on the CLI](https://github.com/microsoft/azure-container-apps/issues/643) when trying to create a component file which contains reference to a `secretStoreComponent` via CLI. Until this issue is fixed, we are going to create the 3 components from the Azure Portal.
 
 To do this from Azure Portal, navigate to your Container Apps Environment, select `Dapr Components`, then click on `Add` component, and provide the values of the component as the image below, I will be showing the component `externaltasksmanager` and you can do the other 2 components (`externaltasksblobstore` and `sendgrid`) using the values in the yaml file for each component.
@@ -571,3 +571,5 @@ az containerapp secret remove --name $BACKEND_SVC_NAME `
 ```
 With those changes in place and deployed, from the Azure Portal, you can open the log streams of the container app hosting the `ACA-Processor-Backend` and check the logs generated after queuing a message into Azure Storage Queue as an external system, you should receive logs similar to the below
 ![app-logs](../../assets/images/06-aca-dapr-bindingsapi/app-logs.jpg)
+
+In the next module, we will cover a special type of Dapr input binding named Cron Binding.

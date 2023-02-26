@@ -19,9 +19,9 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<TaskModel>> Get(DateTime waterMark)
+        public async Task<IEnumerable<TaskModel>> Get()
         {
-            return await _tasksManager.GetTasksByTime(waterMark);
+            return await _tasksManager.GetYesterdaysDueTasks();
         }
 
         [HttpPost("markoverdue")]
