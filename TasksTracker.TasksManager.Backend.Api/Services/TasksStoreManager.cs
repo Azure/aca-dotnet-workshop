@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Nodes;
-using Dapr.Client;
-using Microsoft.Azure.Cosmos;
+﻿using Dapr.Client;
 using TasksTracker.TasksManager.Backend.Api.Models;
 
 namespace TasksTracker.TasksManager.Backend.Api.Services
@@ -11,8 +9,6 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
         // private static string PUBSUB_NAME = "taskspubsub";
         private static string PUBSUB_SVCBUS_NAME = "dapr-pubsub-servicebus";
         private static string TASK_SAVED_TOPICNAME = "tasksavedtopic";
-        private static string databaseName = "tasksmanagerdb";
-        private static string containerName = "taskscollection";
         private readonly DaprClient _daprClient;
         private readonly IConfiguration _config;
         private readonly ILogger<TasksStoreManager> _logger;
@@ -78,30 +74,30 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
             return tasksList.ToList();
 
         }
-        public async Task<List<TaskModel>> GetTasksByTime(DateTime waterMark)
+
+        public async Task<List<TaskModel>> GetYesterdaysDueTasks()
         {
+        
+            var settings=new Newtonsoft.Json.JsonSerializerSettings { DateFormatString ="yyyy-MM-ddTHH:mm:ss"};
+            var yesterday = DateTime.Today.AddDays(-1);
+            var jsonDate= Newtonsoft.Json.JsonConvert.SerializeObject(yesterday,settings);
+         
+           _logger.LogInformation("Getting overdue tasks for yesterday date: '{0}'", jsonDate);
 
-            var cosmosKey = _config.GetValue<string>("cosmosDb:key");
-            var account = _config.GetValue<string>("cosmosDb:accountUrl");
-            var cosmosClient = new CosmosClient(account, cosmosKey);
-            var container = cosmosClient.GetContainer(databaseName, containerName);
+            var query = "{" +
+                   "\"filter\": {" +
+                       "\"EQ\": { \"taskDueDate\": " + jsonDate + " }" +
+                   "}}";
 
-            var queryString = $"SELECT * FROM C['value'] as tasksList Where tasksList.taskCreatedOn > @taskCreatedOn";
-            var queryDefinition = new QueryDefinition(queryString).WithParameter("@taskCreatedOn", waterMark);
+            //Filter on boolean field not working currently with state store query
+            // var query = "{ \"filter\": { \"AND\": [ {\"EQ\": { \"taskDueDate\": " + jsonDate + "} }, {\"EQ\": { \"isCompleted\": \"false\"} } ] }}";
 
-            using FeedIterator<TaskModel> feed = container.GetItemQueryIterator<TaskModel>(queryDefinition: queryDefinition);
+            var queryResponse = await _daprClient.QueryStateAsync<TaskModel>(STORE_NAME, query);
 
-            var results = new List<TaskModel>();
+            var tasksList = queryResponse.Results.Select(q => q.Data).Where(q=>q.IsCompleted==false && q.IsOverDue==false).OrderBy(o=>o.TaskCreatedOn);
 
-            while (feed.HasMoreResults)
-            {
-                FeedResponse<TaskModel> response = await feed.ReadNextAsync();
+            return tasksList.ToList();
 
-                results.AddRange(response.ToList());
-
-            }
-
-            return results;
         }
 
         public async Task<bool> MarkTaskCompleted(Guid taskId)
