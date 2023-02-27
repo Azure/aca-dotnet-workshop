@@ -149,14 +149,14 @@ The message structure our backend processor expects is as JSON below, so copy th
     }
 }
 ```
-![svcbus-send](/assets/images/09-aca-autoscale-keda/svs-bus-send.jpg)
+![svcbus-send](../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg)
 
 ##### 4. Verify that multiple replicas are created
 
 If all is setup correctly, 5 replicas will be created based on the number of messages we generated into the topic, there are various ways to verify this:
 - You can run the Azure CLI command used in [previous step](#3-run-an-end-to-end-test-and-generate-a-load-of-messages) to list the names of replicas.
 - You can verify this from Container Apps “Console” tab you will see those replicas in the drop-down list
-![replica-console](/assets/images/09-aca-autoscale-keda/replica-console.png)
+![replica-console](../../assets/images/09-aca-autoscale-keda/replica-console.png)
 
 **Note about KEDA Scale In:**
 Container Apps implements the [KEDA ScaledObject](https://keda.sh/docs/2.8/concepts/scaling-deployments/#scaledobject-spec) with the following default settings:
