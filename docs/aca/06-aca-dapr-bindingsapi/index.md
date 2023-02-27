@@ -6,7 +6,7 @@ canonical_url: 'https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-
 ---
 # Module 6 - ACA with Dapr Bindings Building Block
 
-In this post, we are going to extend the backend background processor service named `ACA-Processor Backend`, we will rely on [Dapr Input and Output Bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/) to achieve 3 scenarios as the following:
+In this module, we are going to extend the backend background processor service named `ACA-Processor Backend`, we will rely on [Dapr Input and Output Bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/) to achieve 3 scenarios as the following:
 
 * Trigger a process on the `ACA-Processor Backend` based on a **message sent to a specific Azure Storage Queue**, this is a fictitious scenario but we will assume that this Azure Storage Queue is an external system to which external clients can submit tasks to this queue and our `ACA-Processor Backend` will be configured to trigger a certain process when a new message is received.
 * From the service `ACA-Processor Backend` we will **invoke an external resource** that is storing the content of the incoming task from the external queue as a JSON blob file on Azure Storage Blobs.
