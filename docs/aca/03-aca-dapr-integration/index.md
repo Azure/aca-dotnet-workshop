@@ -46,7 +46,7 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 
     What happened here is that Dapr exposes its HTTP and gRPC APIs as a sidecar process which can access our Backend Web API. We didn't do any changes to the application code to include any Dapr runtime code. We also ensured separation of the application logic for improved supportability.
 
-    Looking back at the HTTP GET request, we can break as follows:
+    Looking back at the HTTP GET request, we can break it as follows:
 
     * `/v1.0/invoke` Endpoint: is the Dapr feature identifier for the "Service to Service invocation" building block. This building block enables applications to communicate with each other through well-known endpoints in the form of http or gRPC messages. Dapr provides an endpoint that acts as a combination of a reverse proxy with built-in service discovery while leveraging built-in distributed tracing and error handling.
     * `3500`: the HTTP port that Dapr is listening on.
