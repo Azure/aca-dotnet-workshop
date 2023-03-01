@@ -349,7 +349,7 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
     ```
     Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-frontend-webapp` has been created and there is a new docker image with a `latest` tag is created.
 
-2. Next, we will create and deploy the Web App to ACA using the following command:
+2. Next, we will create and deploy the Web App to ACA using the following command. Remember to replace the place holders with your own values:
 
     ```powershell
     az containerapp create `
@@ -357,9 +357,9 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
    --resource-group $RESOURCE_GROUP `
    --environment $ENVIRONMENT `
    --image "$ACR_NAME.azurecr.io/tasksmanager/$FRONTEND_WEBAPP_NAME" `
-   --registry-server "$ACR_NAME.azurecr.io" ` 
-   --env-vars BackendApiConfig_BaseUrlExternalHttp=[url to your backend api goes here. You can find this on the azure portal overview tab. Look for the Application url property there.]/ `
-   --target-port [port number that was generated when you created your docker file in vs code] `
+   --registry-server "$ACR_NAME.azurecr.io" `
+   --env-vars "BackendApiConfig_BaseUrlExternalHttp=[url to your backend api goes here. You can find this on the azure portal overview tab. Look for the Application url property there.]/" `
+   --target-port [port number that was generated when you created your docker file in vs code for your frontend application] `
    --ingress 'external' `
    --min-replicas 1 `
    --max-replicas 1 `
@@ -382,7 +382,7 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API, an
     az containerapp ingress enable `
     --name  $BACKEND_API_NAME  `
     --resource-group  $RESOURCE_GROUP `
-    --target-port [port number that was generated when you created your docker file in vs code] `
+    --target-port [port number that was generated when you created your docker file in vs code for your backend application] `
     --type "internal"
     ```
 
@@ -399,7 +399,7 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API, an
     az containerapp update `
     --name "$FRONTEND_WEBAPP_NAME"  `
     --resource-group $RESOURCE_GROUP `
-    --set-env-vars BackendApiConfig__BaseUrlExternalHttp=https://tasksmanager-backend-api.internal.[Environment unique identifier].eastus.azurecontainerapps.io
+    --set-env-vars "BackendApiConfig__BaseUrlExternalHttp=https://tasksmanager-backend-api.internal.[Environment unique identifier].eastus.azurecontainerapps.io"
     ```
     Browse the web app again and you should be able to see the same results and access the backend API endpoints from the Web App.
 
