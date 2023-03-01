@@ -17,7 +17,7 @@ In order to run applications using Dapr, we need to install and initialize Dapr 
 ### Run Backend API and Frontend Web App locally using Dapr
 You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called [Dapr](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.
 
-1. Lets start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, change the directory in the terminal to folder `TasksTracker.TasksManager.Backend.Api` and run the below command in PS terminal:
+1. Lets start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, change the directory in the terminal to folder `TasksTracker.TasksManager.Backend.Api` and run the below command in PS terminal. Remember to replace the place holders with your own values:
 
     ```powershell
     If you are on .Net 6 or below use the following command:
@@ -192,7 +192,7 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 
     We need now to update the [Create.cshtml.cs](https://github.com/Azure/aca-dotnet-workshop/blob/5dc6b68dcf118440df4c96c14dd538d4d69f80f4/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Create.cshtml.cs) and [Edit.cshtml.cs](https://github.com/Azure/aca-dotnet-workshop/blob/5dc6b68dcf118440df4c96c14dd538d4d69f80f4/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Edit.cshtml.cs) by injecting the DaprClient.
 
-3. We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected, to do so run the below 2 commands (Ensure that you are on the right project directory when running each command):
+3. We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected, to do so run the below 2 commands (Ensure that you are on the right project directory when running each command). Remember to replace the place holders with your own values:
 
     ```powershell
     If you are on .Net 6 or below use the following commands:
