@@ -289,11 +289,13 @@ Make sure that the build is successful and that there are no build errors. Usual
 We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the following steps:
 1. We will start with Installing/Upgrading the Azure Container Apps Extension. Update the azure cli by issuing the following command `az upgrade`. This is a good practice to ensure you are running the latest Azure CLI Commands. Open a PowerShell console and Login to your Azure account by using the command `az login`. If you have multiple subscriptions, set the subscription you want to use for this workshop before proceeding. You can do this by using `az account set --subscription <name or id>`. To install or update the Azure Container Apps extension for the CLI run the following command `az extension add --name containerapp --upgrade`
 
-2. Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name.
+2. Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:
     ```shell
     $RESOURCE_GROUP="tasks-tracker-rg"
     $LOCATION="eastus"
     $ENVIRONMENT="tasks-tracker-containerapps-env"
+    $WORKSPACE_NAME="[replace this with your unique app log analytics workspace name]"
+    $APPINSIGHTS_NAME="[replace this with your unique app insights name]"
     $BACKEND_API_NAME="tasksmanager-backend-api"
     $ACR_NAME="[replace this with your unique acr name]"
     ```
@@ -316,7 +318,59 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
     > Notice that we create the registry with admin rights `--admin-enabled` flag set to `true` which is not suited for real production, but good for our workshop.
 
-5. Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the `.csproj`.
+5. Create a Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace. To create it, run the command below:
+    ```shell
+    # create the log analytics workspace
+    az monitor log-analytics workspace create `
+    --resource-group $RESOURCE_GROUP `
+    --workspace-name $WORKSPACE_NAME
+
+    # retrieve workspace ID
+    $WORKSPACE_ID=az monitor log-analytics workspace show --query customerId `
+    -g $RESOURCE_GROUP `
+    -n $WORKSPACE_NAME -o tsv
+
+    # retrieve workspace secret
+    $WORKSPACE_SECRET=az monitor log-analytics workspace get-shared-keys --query primarySharedKey `
+    -g $RESOURCE_GROUP `
+    -n $WORKSPACE_NAME -o tsv
+    ```
+6. Create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net) Instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing) between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
+    ```shell
+    # Install the application-insights extension for the CLI
+    az extension add -n application-insights
+    
+    # Create application-insights instance
+    az monitor app-insights component create `
+    -g $RESOURCE_GROUP `
+    -l $LOCATION `
+    --app $APPINSIGHTS_NAME `
+    --workspace $WORKSPACE_NAME
+    
+    # Get Application Insights Instrumentation Key
+    $APPINSIGHTS_INSTRUMENTATIONKEY=($(az monitor app-insights component show `
+    --app $APPINSIGHTS_NAME `
+    -g $RESOURCE_GROUP)  | ConvertFrom-Json).instrumentationKey
+    ```
+
+7. Now we will create an Azure Container Apps Environment. As a reminder of the different ACA component [check this link in the workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
+    ```shell
+    # Create the ACA environment
+    az containerapp env create `
+    --name $ENVIRONMENT `
+    --resource-group $RESOURCE_GROUP `
+    --logs-workspace-id $WORKSPACE_ID `
+    --logs-workspace-key $WORKSPACE_SECRET `
+    --dapr-instrumentation-key $APPINSIGHTS_INSTRUMENTATIONKEY `
+    --location $LOCATION
+    ```
+    The above command achieves the following:
+    - It creates an ACA environment and associates it with the Log Analytics Workspace created in the previous step.
+    - We are setting the `--dapr-instrumentation-key` value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr in later modules and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.  
+    > **_NOTE:_**
+    You can set the `--dapr-instrumentation-key` after you create the ACA environment but this is not possible via the AZ CLI right now. There is an [open issue](https://github.com/microsoft/azure-container-apps/issues/293) which is being tracked by the product group.
+
+8. Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the `.csproj`.
 
     ```shell
     cd {YourLocalPath}\TasksTracker.ContainerApps
@@ -324,15 +378,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
     Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created and there is a new docker image with a `latest` tag is created.
 
-6. Create an Azure Container Apps Environment, as shared in the [workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). It acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
-    ```shell
-    az containerapp env create `
-    --name $ENVIRONMENT `
-    --resource-group $RESOURCE_GROUP `
-    --location $LOCATION
-    ```
-
-7. The last step here is to create and deploy the Web API to ACA following the below command:
+9. The last step here is to create and deploy the Web API to ACA following the below command. Remember to replace the place holders with your own values:
 
     ```shell
     az containerapp create `
@@ -344,7 +390,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --target-port [port number that was generated when you created your docker file in vs code] `
     --ingress 'external' `
     --min-replicas 1 `
-    --max-replicas 2 `
+    --max-replicas 1 `
     --cpu 0.25 --memory 0.5Gi `
     --query configuration.ingress.fqdn
     ```
@@ -358,7 +404,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
     For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create).  
 
-8. You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 4 recourses created below. By default when you create an Azure Container Environment, a `Log Analytics `Workspace will be created. We will cover this in the Monitoring and observability module.
+10. You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 recourses created below.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)
 
     To test the backend api service, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api` and issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image
