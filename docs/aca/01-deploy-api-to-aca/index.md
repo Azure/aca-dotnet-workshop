@@ -289,7 +289,7 @@ Make sure that the build is successful and that there are no build errors. Usual
 We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the following steps:
 1. We will start with Installing/Upgrading the Azure Container Apps Extension. Update the azure cli by issuing the following command `az upgrade`. This is a good practice to ensure you are running the latest Azure CLI Commands. Open a PowerShell console and Login to your Azure account by using the command `az login`. If you have multiple subscriptions, set the subscription you want to use for this workshop before proceeding. You can do this by using `az account set --subscription <name or id>`. To install or update the Azure Container Apps extension for the CLI run the following command `az extension add --name containerapp --upgrade`
 
-2. Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name.
+2. Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:
     ```shell
     $RESOURCE_GROUP="tasks-tracker-rg"
     $LOCATION="eastus"
@@ -318,7 +318,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
     > Notice that we create the registry with admin rights `--admin-enabled` flag set to `true` which is not suited for real production, but good for our workshop.
 
-5. Create Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment, each environment should has it is on Log Analytics Workspace, to create it, run the below command:
+5. Create a Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace. To create it, run the command below:
     ```shell
     # create the log analytics workspace
     az monitor log-analytics workspace create `
@@ -335,7 +335,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     -g $RESOURCE_GROUP `
     -n $WORKSPACE_NAME -o tsv
     ```
-6. Optional: Create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net) Instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing) between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. Our recommendation is to create the Application Insights component now as it will be needed in the upcoming module when covering the monitoring and observability of ACA. To create it, run the below command:
+6. Create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net) Instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing) between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
     ```shell
     # Install the application-insights extension for the CLI
     az extension add -n application-insights
@@ -353,7 +353,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     -g $RESOURCE_GROUP)  | ConvertFrom-Json).instrumentationKey
     ```
 
-7. Create an Azure Container Apps Environment, as shared in the [workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). It acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
+7. Now we will create an Azure Container Apps Environment. As a reminder of the different ACA component [check this link in the workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
     ```shell
     # Create the ACA environment
     az containerapp env create `
@@ -365,10 +365,10 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --location $LOCATION
     ```
     The above command achieves the following:
-    - It creates an ACA environment and associate the Log Analytics Workspace created in the previous step.
-    - We are setting the `--dapr-instrumentation-key` value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.
-    {: .note }
-    You can set the `--dapr-instrumentation-key` after you create the ACA environment but this is not possible via the AC CLI right now, there is an [open issue](https://github.com/microsoft/azure-container-apps/issues/293) which is tracked by product group.
+    - It creates an ACA environment and associates it with the Log Analytics Workspace created in the previous step.
+    - We are setting the `--dapr-instrumentation-key` value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr in later modules and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.  
+    > **_NOTE:_**
+    You can set the `--dapr-instrumentation-key` after you create the ACA environment but this is not possible via the AZ CLI right now. There is an [open issue](https://github.com/microsoft/azure-container-apps/issues/293) which is being tracked by the product group.
 
 8. Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the `.csproj`.
 
@@ -378,7 +378,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
     Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created and there is a new docker image with a `latest` tag is created.
 
-9. The last step here is to create and deploy the Web API to ACA following the below command:
+9. The last step here is to create and deploy the Web API to ACA following the below command. Remember to replace the place holders with your own values:
 
     ```shell
     az containerapp create `
