@@ -399,7 +399,7 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API, an
     az containerapp update `
     --name "$FRONTEND_WEBAPP_NAME"  `
     --resource-group $RESOURCE_GROUP `
-    --set-env-vars "BackendApiConfig__BaseUrlExternalHttp=https://tasksmanager-backend-api.internal.[Environment unique identifier].eastus.azurecontainerapps.io"
+    --set-env-vars "BackendApiConfig_BaseUrlExternalHttp=https://tasksmanager-backend-api.internal.[Environment unique identifier].eastus.azurecontainerapps.io"
     ```
     Browse the web app again and you should be able to see the same results and access the backend API endpoints from the Web App.
 
