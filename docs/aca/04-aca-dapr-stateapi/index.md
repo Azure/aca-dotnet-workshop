@@ -212,7 +212,7 @@ The query API will not work against the local Redis store as you need to install
 
 ##### 3. Register the TasksStoreManager new service and DaprClient
 
-Now we need to register the new service named `TasksStoreManager` and `RedisClient` when the Backend API app starts up. To do so open the file `Program.cs` and register both as shown below. Do not forget to comment out the registration of the `FakeTasksManager` service as we don’t want to store tasks in memory anymore.
+Now we need to register the new service named `TasksStoreManager` and `DaprClient` when the Backend API app starts up. To do so open the file `Program.cs` and register both as shown below. Do not forget to comment out the registration of the `FakeTasksManager` service as we don’t want to store tasks in memory anymore.
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
