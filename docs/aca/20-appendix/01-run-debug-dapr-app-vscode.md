@@ -5,13 +5,17 @@ has_children: false
 nav_order: 1
 canonical_url: 'https://bitoftech.net/2022/08/29/dapr-integration-with-azure-container-apps/'
 ---
-This page shows you how to configure VScode to run and debug multiple dapr applications on same time.
+This page shows you how to configure VScode to run and debug multiple Dapr applications at same time.
 
 ### Debug and launch Dapr applications in VSCode
 
-We need to update VS code `tasks.json` and `launch.json` configuration to make this automated and you only need to click on Run and Debug button in VS Code to launch all services be able to debug them locally.
+We need to update VS code `tasks.json` and `launch.json` configuration files included in your workspace. Once completed you should be able to use the Run and Debug button on the activity bar within VS Code to launch all services to be able to debug them locally.
 
-Firstly we need to add a new launch configuration for the Backend Web API and Frontend Web App projects, to do so, open file `launch.json` and add the below 2 configurations. For the complete launch.json file, you can check the [file](https://github.com/Azure/aca-dotnet-workshop/blob/main/.vscode/launch.json) here.
+First we need to add a new launch configuration for the Backend Web API and Frontend Web App projects. To do so, open file `launch.json` and add the two configurations shown below. Make sure you append the configurations below to the existing array instead of replacing what you have. This way you will preserve your existing configuration and simply add two new ones. For the complete launch.json file, you can check the [file](https://github.com/Azure/aca-dotnet-workshop/blob/main/.vscode/launch.json) here.
+
+{: .note }
+The configuration below assumes that you are using .net 6. If you are using a different .net version make sure you update the paths to use the correct version. For example if using .net 7 then change the path to say net7.0 instead of net6.0.
+
 
 ```json
 {"configurations": 
@@ -61,7 +65,7 @@ Firstly we need to add a new launch configuration for the Backend Web API and Fr
 ]}
 ```
 
-Notice that we have a `preLaunchTask` and a `postDebugTask` which we need to define right now, those tasks are Dapr tasks.
+Notice that we have a `preLaunchTask` and a `postDebugTask` which we need to define right now. Those tasks are Dapr tasks.
 
 The [Dapr VSCode extension](https://docs.dapr.io/developing-applications/ides/vscode/vscode-dapr-extension/#scaffold-dapr-debugging-tasks) we have previously installed helps us to define those pre and post debug tasks, to do so, open the file tasks.json and click <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>, and type `Dapr: Scaffold Dapr Tasks` the Dapr VS Code extension will allow us to manage Dapr application and test it out in an easier way, the below image shows a full list of helper commands.
 ![dapr-vscode-extension](../../assets/images/appendix/dapr-vscode-extension.jpg)
@@ -73,14 +77,15 @@ Now we will add 4 tasks, for each application, there will be a task to support t
 "tasks": [
 {
     "appId": "tasksmanager-backend-api",
-    "appPort": 7088,
+    "appPort": [web api application port number found under properties->launchSettings.json. e.g. 7112],
     "httpPort": 3500,
     "grpcPort": 50001,
     "appSsl": true,
     "label": "backend-api-dapr-debug",
     "type": "dapr",
     "dependsOn": "build-backend-api",
-    "componentsPath": "./components"
+    // Uncomment this line after adding Azure Cosmos DB in module 4
+    //"componentsPath": "./components"
 },
 {
     "appId": "tasksmanager-backend-api",
@@ -89,7 +94,7 @@ Now we will add 4 tasks, for each application, there will be a task to support t
 },
 {
     "appId": "tasksmanager-frontend-webapp",
-    "appPort": 7208,
+    "appPort": [frontend application port number found under properties->launchSettings.json. e.g. 7112],
     "httpPort": 3501,
     "grpcPort": 50002,
     "appSsl": true,
@@ -106,14 +111,14 @@ Now we will add 4 tasks, for each application, there will be a task to support t
 ```
 What we have added right now is the following:
 
-* The tasks with the label `backend-api-dapr-debug` will invoke the `daprd` task, this task is similar to calling dapr run  from CLI
-* We are setting the appPort, httpPort, and grpcPort properties (grpcPort is needed in future posts when we staring using the state manager building block. If you didn't set it, you might face a similar [issue](https://github.com/dapr/dotnet-sdk/issues/609))
-* We are setting the “componentsPath” property, this is needed when start working with the state manager, pub/sub, etc.. you can remove it for now.
-* We are setting the dependsOn property, so this means this task will fire after the dependsOn tasks complete successfully, we need to add those dependsOn tasks.
-* The tasks with the label `daprd-down-backend-api` will terminate the Dapr Sidecar process, this will be used for the `postDebug` activity in configuration.json.
+* The tasks with the label `backend-api-dapr-debug` will invoke the `daprd` task. This task is similar to calling dapr run from CLI.
+* We are setting the appPort, httpPort, and grpcPort properties (grpcPort is needed in future modules when we start using the state manager building block. If you didn't set it, you might face a similar [issue](https://github.com/dapr/dotnet-sdk/issues/609))
+* We are setting the “componentsPath” property. This is needed when start working with the state manager, pub/sub, etc.
+* We are setting the dependsOn property, so this means this task will fire after the dependsOn tasks complete successfully. We need to add those dependsOn tasks.
+* The tasks with the label `daprd-down-backend-api` will terminate the Dapr Sidecar process. This will be used for the `postDebug` activity in configuration.json.
 * For a complete list of available properties please check this [link.](https://docs.dapr.io/developing-applications/ides/vscode/vscode-how-to-debug-multiple-dapr-apps/#daprd-parameter-table)
 
-So let's add the dependsOn tasks, so open `tasks.json` and add the tasks below:
+Next let's add the dependsOn tasks. Open `tasks.json` and add the tasks below:
 ```json
 {
     "label": "build-backend-api",
