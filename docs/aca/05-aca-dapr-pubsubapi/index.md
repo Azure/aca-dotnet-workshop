@@ -75,8 +75,8 @@ Right now those published messages are stored in the message broker topic doing 
 
 Now we will add a new ASP.NET Core Web API project named `TasksTracker.Processor.Backend.Svc`. Open a command-line terminal and navigate to root folder of your project. Create a new folder as shown below:
 ```shell
-mkdir TasksTracker.Processor.Backend.Sv
-cd TasksTracker.Processor.Backend.Sv
+mkdir TasksTracker.Processor.Backend.Svc
+cd TasksTracker.Processor.Backend.Svc
 ```
 From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.Processor.Backend.Svc` and initialize the project by typing: `dotnet new webapi  -o TasksTracker.Processor.Backend.Svc` This will create and ASP.NET Web API project scaffolded with 1 single controller.
 
