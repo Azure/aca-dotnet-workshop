@@ -109,7 +109,7 @@ Similar to what we have done in the Frontend Web App, we need to use Dapr Client
 ```
 
 ##### 2. Create a new concrete implementation to manage tasks persistence
-As you recall from the previous module, we were storing the tasks in memory. Now we need to store them in Redis and later on Azure Cosmos DB. The key thing to keep in mind here is that switching from redis to Azure Cosmos DB won't required changing the code below which is a huge advantage of using Dapr. Add a new file named `TasksStoreManager.cs` under the folder named `Services`. This file will implement the interface `ITasksManager`. Copy & Paste the code below:
+As you recall from the previous module, we were storing the tasks in memory. Now we need to store them in Redis and later on Azure Cosmos DB. The key thing to keep in mind here is that switching from redis to Azure Cosmos DB won't require changing the code below which is a huge advantage of using Dapr. Add a new file named `TasksStoreManager.cs` under the folder named `Services`. This file will implement the interface `ITasksManager`. Copy & Paste the code below:
 
 ```csharp
 using Dapr.Client;
@@ -311,17 +311,17 @@ Few things to note about this yaml file:
 - We've used the name `statestore` which should match the name of statestore we've used in the `TaskStoreManager.cs` file. As well we have set the metadata key/value to allow us to connect to Azure Cosmos DB. You need to replace the `masterKey` value with your Cosmos Account key. Remember this is only needed for local development debugging, we will not be using the masterKey when we deploy to ACA. 
 - We've updated the other metadata keys such as `database`, `collection`, etc... to match the values of your Cosmos DB instance. For full metadata specs, you can check this [page](https://docs.dapr.io/reference/components-reference/supported-state-stores/setup-azure-cosmosdb/).
 - Replace the url value with the URI value of your cosmos database account. You can get that from the Azure portal by navigating to the cosmos database account overview page and get the uri value from there. Basically the uri should have the following structure. https://COSMOS_DB_ACCOUNT.documents.azure.com:443/.
-- By default, all dapr-enabled container apps within the same environment will load the full set of deployed components. By adding `scopes` to a component, you tell the Dapr sidecars for each respective container app which components to load at runtime. Using scopes is recommended for production workloads. In our case, we have set the scopes to `tasksmanager-backend-api` as this will be the application that needs access to Azure Cosmos DB State Store. More about scopes can be found on this [link](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview?tabs=bicep1%2Cyaml#component-scopes).
+- By default, all dapr-enabled container apps within the same environment will load the full set of deployed components. By adding `scopes` to a component, you tell the Dapr sidecars for each respective container app which components to load at runtime. Using scopes is recommended for production workloads. In our case, we have set the scopes to `tasksmanager-backend-api` which represents the dapr-app-id which is associated to the container app that needs access to Azure Cosmos DB State Store as this will be the application that needs access to Azure Cosmos DB State Store. More about scopes can be found on this [link](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview?tabs=bicep1%2Cyaml#component-scopes).
 
 {: .note }
 Dapr component scopes correspond to the Dapr application ID of a container app, not the container app name.
 
-Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned. If you have been running the different microservices using the [debug and launch Dapr applications in VSCode](../../aca/20-appendix/01-run-debug-dapr-app-vscode.md) then remember to uncomment the following line inside tasks.json file. This will dapr to load the local projects components instead of the global components folder.
+Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned. If you have been running the different microservices using the [debug and launch Dapr applications in VSCode](../../aca/20-appendix/01-run-debug-dapr-app-vscode.md) then remember to uncomment the following line inside tasks.json file. This will instruct dapr to load the local projects components (./components) instead of the global components folder.
 ```json
 "componentsPath": "./components"
 ```
 
-If you have been using the dapr cli commands instead of the aforementioned debugging then you will need to execute the backend api with the components-path property as follows. Remember to replace the place holders with your own values:
+If you have been using the dapr cli commands instead of the aforementioned debugging then you will need to execute the backend api with the resources-path property as follows. Remember to replace the place holders with your own values:
 
  ```powershell
     If you are on .Net 6 or below use the following command:
