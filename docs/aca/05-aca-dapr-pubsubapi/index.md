@@ -388,7 +388,9 @@ Now we will install the NuGet package named `SendGrid` version `9.28.1` to the B
 </ItemGroup>
 ```
 
-What we've done In the code above is the following:
+Follow this [link](https://signup.sendgrid.com/) to setup a SendGrid account. Also follow [these](https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key) instruction to fetch your SendGrid ApiKey. Please note that the SendGrid API KEY is generated and displayed to you just once. So be sure to copy and save it somewhere. After that only the subset key is displayed.
+
+What we've done in the code above is the following:
 * We've updated the attribute `Dapr.Topic` to use the same Pub/Sub component name used in the publisher `dapr-pubsub-servicebus`. Then we added a new method that is responsible to consume the received message, taking the assignee email and trying to send an email using SendGrid API.
 * We are returning `200 Ok` if the SendGrid was able to send the email successfully, otherwise we are returning `400 Bad Request` if the SendGrid failed to send the email. This will allow the consumer service to re-try processing the message again on failure.
 * We are reading the `SendGrid:ApiKey` from AppSettings and later we will read this value from environment variables once we deploy this service to Azure Container Apps. 
