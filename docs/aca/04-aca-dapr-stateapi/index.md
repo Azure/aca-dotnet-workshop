@@ -13,18 +13,18 @@ Moreover, we will use Redis to store tasks when we are running the application l
 
 ### Overview of Dapr State Management API
 
-Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out and without doing any code changes or installing any NuGet packages we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path `%USERPROFILE%\.dapr\components ` you will find a file named `statestore.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. The [state store template component file structure](https://docs.dapr.io/operations/components/setup-state-store/) can be found on this link.
+Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out and without doing any code changes or installing any NuGet packages we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path `%USERPROFILE%\.dapr\components` you will find a file named `statestore.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. The [state store template component file structure](https://docs.dapr.io/operations/components/setup-state-store/) can be found on this link.
 
 To try out the State Management APIs, run the Backend API from VS Code by running the following command. Remember to replace the place holders with your own values:
 
 ```powershell
 If you are on .Net 6 or below use the following command:
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port [web api application port number found under properties->launchSettings.json. e.g. 7112] --dapr-http-port 3500 --app-ssl -- dotnet run
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
 ```
 
 ```powershell
 If you are on .Net 7 or above use the following command:
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port [web api application port number found under properties->launchSettings.json. e.g. 7112] --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
 ```
 
 Now from any rest client, invoke the below POST request to the endpoint `http://localhost:3500/v1.0/state/statestore`
@@ -231,7 +231,7 @@ Now you are ready to run both applications and debug them. You can store new tas
 Now we will create an Azure Cosmos DB account, Database, and a new container that will store our tasks. You can use the PowerShell script below to create the Cosmos DB resources on the same resource group we used in the previous module. You need to set the variable name of the `$COSMOS_DB_ACCOUNT` to a unique name as it needs to be unique globally. Remember to replace the place holders with your own values:
 
 ```powershell
-$COSMOS_DB_ACCOUNT="[choose a unique cosmos db account name e.g. taskstracker-state-store-your initials here]" `
+$COSMOS_DB_ACCOUNT="<choose a unique cosmos db account name e.g. taskstracker-state-store-your initials here>" `
 $COSMOS_DB_DBNAME="tasksmanagerdb" `
 $COSMOS_DB_CONTAINER="taskscollection" 
 
@@ -326,12 +326,12 @@ If you have been using the dapr cli commands instead of the aforementioned debug
  ```powershell
     If you are on .Net 6 or below use the following command:
     
-    dapr run --app-id tasksmanager-backend-api --app-port [web api application port number as shown in the image below. e.g. 7112] --dapr-http-port 3500 --app-ssl -- --resources-path "../components" dotnet run
+    dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run
     ```
     ```powershell
     If you are on .Net 7 or above use the following command:
     
-    dapr run --app-id tasksmanager-backend-api --app-port [web api application port number as shown in the image below. e.g. 7112] --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
  ```
 
 {: .note }
@@ -379,10 +379,10 @@ This command will create an Enterprise Application (basically a Service Principa
 ```
 
 ##### 2. Assign the container app system-identity to the built in Cosmos DB role
-Next, we need to associate the container app system-identity with the target Cosmos DB resource. You can read more about Azure built-in roles for Cosmos DB or how to create custom fine-tuned roles [here](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac#built-in-role-definitions). Run the command below to associate the container app `system-assigned` identity with `Cosmos DB Built-in Data Contributor` role. Remember to replace the place holders with your own values:
+Next, we need to associate the container app system-identity with the target Cosmos DB resource. You can read more about Azure built-in roles for Cosmos DB or how to create custom fine-tuned roles [here](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac#built-in-role-definitions). Run the command below to associate the container app `system-assigned` identity with `Cosmos DB Built-in Data Contributor` role. Make sure you save this principal id somewhere as you will need it in later modules. You can't rely on having it saved in powershell under $PRINCIPAL_ID as this variable could replaced later on. Remember to replace the place holders with your own values:
 
 ```powershell
- $PRINCIPAL_ID = "[your principal id goes here]" # Principal Id after creating system identity for container app 
+ $PRINCIPAL_ID = "<your principal id goes here>" # Principal Id after creating system identity for container app 
  $ROLE_ID = "00000000-0000-0000-0000-000000000002" #"Cosmos DB Built-in Data Contributor" 
 
 az cosmosdb sql role assignment create `
@@ -405,7 +405,7 @@ componentType: state.azure.cosmosdb
 version: v1
 metadata:
 - name: url
-  value: [The URI value of your cosmos database account]
+  value: <The URI value of your cosmos database account>
 - name: database
   value: tasksmanagerdb
 - name: collection
@@ -415,7 +415,7 @@ scopes:
 ```
 
 Few things to notice here:
-- We didn't specify the Cosmos DB component name `state-store` when we created this component file. We are going to specify it once we add this dapr component to Azure Container Apps Environment via CLI.
+- We didn't specify the Cosmos DB component name `statestore` when we created this component file. We are going to specify it once we add this dapr component to Azure Container Apps Environment via CLI.
 - We are not referencing any Cosmos DB Keys/Connection strings as the authentication between Dapr and Cosmos DB will be configured using Managed Identities. 
 - We are setting the `scopes` array value to `tasksmanager-backend-api` to ensure Cosmos DB component is loaded at runtime by only the appropriate container apps. In our case it will be needed only for the container apps with Dapr application IDs `tasksmanager-backend-api`. In future modules we are going to include another container app which needs to access Cosmos DB.
 
@@ -445,12 +445,12 @@ Until this moment Dapr was not enabled on the Container Apps we have provisioned
 az containerapp dapr enable --name $BACKEND_API_NAME `
                             --resource-group $RESOURCE_GROUP `
                             --dapr-app-id  $BACKEND_API_NAME `
-                            --dapr-app-port  [web api application port number found under Dockerfile for the web api project. e.g. 5160]
+                            --dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5160>
 
 az containerapp dapr enable --name $FRONTEND_WEBAPP_NAME `
                             --resource-group $RESOURCE_GROUP `
                             --dapr-app-id  $FRONTEND_WEBAPP_NAME `
-                            --dapr-app-port  [web api application port number found under Dockerfile for the web api project. e.g. 5071]
+                            --dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5071>
 ```
 
 Few things to note here:
