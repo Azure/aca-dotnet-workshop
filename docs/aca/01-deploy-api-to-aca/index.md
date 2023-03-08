@@ -294,10 +294,10 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     $RESOURCE_GROUP="tasks-tracker-rg"
     $LOCATION="eastus"
     $ENVIRONMENT="tasks-tracker-containerapps-env"
-    $WORKSPACE_NAME="[replace this with your unique app log analytics workspace name]"
-    $APPINSIGHTS_NAME="[replace this with your unique app insights name]"
+    $WORKSPACE_NAME="<replace this with your unique app log analytics workspace name>"
+    $APPINSIGHTS_NAME="<replace this with your unique app insights name>"
     $BACKEND_API_NAME="tasksmanager-backend-api"
-    $ACR_NAME="[replace this with your unique acr name]"
+    $ACR_NAME="<replace this with your unique acr name>"
     ```
 
 3. Create a `resource group` to organize the services related to the application, run the below command:

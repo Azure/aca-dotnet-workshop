@@ -358,8 +358,8 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
    --environment $ENVIRONMENT `
    --image "$ACR_NAME.azurecr.io/tasksmanager/$FRONTEND_WEBAPP_NAME" `
    --registry-server "$ACR_NAME.azurecr.io" `
-   --env-vars "BackendApiConfig_BaseUrlExternalHttp=[url to your backend api goes here. You can find this on the azure portal overview tab. Look for the Application url property there.]/" `
-   --target-port [port number that was generated when you created your docker file in vs code for your frontend application] `
+   --env-vars "BackendApiConfig_BaseUrlExternalHttp=<url to your backend api goes here. You can find this on the azure portal overview tab. Look for the Application url property there.>/" `
+   --target-port <port number that was generated when you created your docker file in vs code for your frontend application> `
    --ingress 'external' `
    --min-replicas 1 `
    --max-replicas 1 `
@@ -374,7 +374,7 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
 
 ### 3. Update Backend Web API Container App Ingress property
 
-So far the Frontend App is sending HTTP requests to publicly exposed Web API, any REST client can invoke this API, we need to change the Web API ingress settings and make it only accessible for applications deployed within our Azure Container Environment only. Any application outside the Azure Container Environment will not be able to access the Web API.
+So far the Frontend App is sending HTTP requests to publicly exposed Web API which means that any REST client can invoke this API. We need to change the Web API ingress settings and make it only accessible for applications deployed within our Azure Container Environment only. Any application outside the Azure Container Environment will not be able to access the Web API.
 
 1. To change the settings of the Backend API, execute the following command:
 
