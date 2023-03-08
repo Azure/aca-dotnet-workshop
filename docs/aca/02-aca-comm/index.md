@@ -358,7 +358,7 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
    --environment $ENVIRONMENT `
    --image "$ACR_NAME.azurecr.io/tasksmanager/$FRONTEND_WEBAPP_NAME" `
    --registry-server "$ACR_NAME.azurecr.io" `
-   --env-vars "BackendApiConfig_BaseUrlExternalHttp=<url to your backend api goes here. You can find this on the azure portal overview tab. Look for the Application url property there.>/" `
+   --env-vars "BackendApiConfig__BaseUrlExternalHttp=<url to your backend api goes here. You can find this on the azure portal overview tab. Look for the Application url property there.>/" `
    --target-port <port number that was generated when you created your docker file in vs code for your frontend application> `
    --ingress 'external' `
    --min-replicas 1 `

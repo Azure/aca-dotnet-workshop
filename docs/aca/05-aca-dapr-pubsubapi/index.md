@@ -172,7 +172,7 @@ The following is what has been implemented here:
 * If anything went wrong during sending the email (i.e. Email service not responding) and we want to retry processing this message at a later time, we return `400 Bad Request`, which will inform the message broker that the message needs to be retired based on the configuration in the message broker.
 * If we need to drop the message as we are aware it will not be processed even after retries (i.e Email to is not formatted correctly) we return a `404 Not Found` response. This will tell the message broker to drop the message and move it to dead-letter or poison queue.
 
-Now you are probably wondering how the consumer was able to identify what are the subscriptions available and on which route they can be found at. The answer for this is that at startup on the consumer service (more on that below after we add app.MapSubscribeHandler), the Dapr runtime will call the application on a well-known endpoint to identify and create the required subscriptions. The well-known endpoint can be reached on this endpoint: `http://localhost:<appPort>/dapr/subscribe`
+Now you are probably wondering how the consumer was able to identify what are the subscriptions available and on which route they can be found at. The answer for this is that at startup on the consumer service (more on that below after we add app.MapSubscribeHandler()), the Dapr runtime will call the application on a well-known endpoint to identify and create the required subscriptions. The well-known endpoint can be reached on this endpoint: `http://localhost:<appPort>/dapr/subscribe`
 When you invoke this endpoint, the response will contain an array of all available topics for which the applications will subscribe. Each includes a route to call when the topic receives a message. This was generated as we used the attribute `Dapr.Topic` on the action method `api/tasksnotifier/tasksaved`. That means when a message is published on the PubSubname `taskspubsub` on the topic `tasksavedtopic`, it will be routed to the action method `/api/tasksnotifier/tasksaved` and will be consumed in this action method.
 
 In our case, a sample response will be as follows:
@@ -257,7 +257,7 @@ Keep an eye on the terminal logs of the Backend background processor as you will
 
 ##### 6. Optional: Update VS Code tasks and launch configuration files
 
-If you have followed the steps in the [appendix](../../aca/20-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the two services together (frontend and backend api) and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added. You can use this file to update [tasks.json](https://github.com/Azure/aca-dotnet-workshop/blob/3dafcc7b291590177f7ce3a8a629079076149863/.vscode/tasks.json) and this file to update [launch.json](https://github.com/Azure/aca-dotnet-workshop/blob/3dafcc7b291590177f7ce3a8a629079076149863/.vscode/launch.json) files.
+If you have followed the steps in the [appendix](../../aca/20-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added. You can use this file to update [tasks.json](https://github.com/Azure/aca-dotnet-workshop/blob/3dafcc7b291590177f7ce3a8a629079076149863/.vscode/tasks.json) and this file to update [launch.json](https://github.com/Azure/aca-dotnet-workshop/blob/3dafcc7b291590177f7ce3a8a629079076149863/.vscode/launch.json) files.
 
 ### Use the Dapr .NET Client SDK to publish messages
 
@@ -388,7 +388,7 @@ Now we will install the NuGet package named `SendGrid` version `9.28.1` to the B
 </ItemGroup>
 ```
 
-Follow this [link](https://signup.sendgrid.com/) to setup a SendGrid account. Also follow [these](https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key) instruction to fetch your SendGrid ApiKey. Please note that the SendGrid API KEY is generated and displayed to you just once. So be sure to copy and save it somewhere. After that only the subset key is displayed.
+Follow this [link](https://signup.sendgrid.com/) to setup a SendGrid account. Also follow [these](https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key) instructions to fetch your SendGrid ApiKey. Please note that the SendGrid API KEY is generated and displayed to you just once. So be sure to copy and save it somewhere. After that only the subset key is displayed.
 
 What we've done in the code above is the following:
 * We've updated the attribute `Dapr.Topic` to use the same Pub/Sub component name used in the publisher `dapr-pubsub-servicebus`. Then we added a new method that is responsible to consume the received message, taking the assignee email and trying to send an email using SendGrid API.
@@ -429,7 +429,7 @@ If you don't want to bother with signing up for a SendGrid account to send email
 Now we will switch our implementation to use Azure Service Bus as a message broker. Redis worked perfectly for local development and testing but we need to prepare ourselves for the cloud deployment. To do so we need to create Service Bus Namespace followed by a Topic. A namespace provides a scoping container for Service Bus resources within your application.
 
 ##### 1. Create Azure Service Bus Namespace and a Topic
-You can do this from Azure Portal or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values. You need to change the namespace variable as this one should be unique globally across all Azure subscriptions:
+You can do this from Azure Portal or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values. You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters).
 
 ```powershell
 $NamespaceName="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
@@ -437,7 +437,7 @@ $TopicName="tasksavedtopic"
 $TopicSubscription="tasks-processor-subscription"
 
 ##Create servicebus namespace
-az servicebus namespace create --resource-group $RESOURCE_GROUP --name $NamespaceName --location $LOCATION
+az servicebus namespace create --resource-group $RESOURCE_GROUP --name $NamespaceName --location $LOCATION --sku Standard
 
 ##Create a topic under the namespace
 az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $NamespaceName --name $TopicName
@@ -482,7 +482,7 @@ scopes:
 - tasksmanager-backend-processor
 ```
 
-Note that we used the name `dapr-pubsub-servicebus` which should match the name of Pub/Sub component we've used earlier in the `TasksNotifierController.cs` controller on the action method with the attribute `Topic`. AWe also set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata `consumerID` value should match the topic subscription name `tasks-processor-subscription`. We have set the scopes section to include the `tasksmanager-backend-api` and `tasksmanager-backend-processor` app ids, as those will be the Dapr apps that need access to Azure Service Bus for publishing and consuming the messages.
+Note that we used the name `dapr-pubsub-servicebus` which should match the name of Pub/Sub component we've used earlier in the `TasksNotifierController.cs` controller on the action method with the attribute `Topic`. We also set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata `consumerID` value should match the topic subscription name `tasks-processor-subscription`. We have set the scopes section to include the `tasksmanager-backend-api` and `tasksmanager-backend-processor` app ids, as those will be the Dapr apps that need access to Azure Service Bus for publishing and consuming the messages.
 
 ##### 3. Create a ACA Dapr Component file for Pub/Sub API using Azure Service Bus
 
@@ -659,7 +659,7 @@ az role assignment create `
 ```
 
 ##### 4. Restart container apps
-Lastly, we need to restart both container apps revisions to ensure that the identity changes are properly reflected. To do so run the commands below:
+Lastly, we need to restart both container apps revisions to pick up the role assignment. Execute the commands provided below in order to accomplish this task:
 
 ```powershell
 ##Get revision name and assign it to a variable
@@ -687,8 +687,17 @@ az containerapp revision restart `
 
 ```
 
-With this in place, you should be able to test the 3 services end to end and should receive a notification email to the task assignee email, the email will look like the below. Note that if you opted not to activate the SendGrid then you won't receive the email. In this case its enough to test for adding a new task and making sure the application still functions properly.
+With this in place, you should be able to test the 3 services end to end and should receive a notification email to the task assignee email, the email will look like the below. 
 
 ![email-log](../../assets/images/05-aca-dapr-pubsubapi/email-log.jpg)
+
+Note that if you opted not to activate the SendGrid then you won't receive the email. In this case you can get the backend processor logs using the command below. Start by running the command below and then launch the application and start creating new tasks. You should start seeing logs similar to the ones shown in the image below. The command will stop executing after 60 seconds of inactivity.
+
+az containerapp logs show --follow `
+-n $BACKEND_SVC_NAME `
+-g $RESOURCE_GROUP
+
+![email-log](../../assets/images/05-aca-dapr-pubsubapi/az_containerapp_logs.png)
+
 
 The next module will delve into the implementation of Dapr bindings with ACA.
