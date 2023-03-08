@@ -42,10 +42,10 @@ To try out the Pub/Sub API, run the Backend API from VS Code by running the belo
 
 ```powershell
 If you are on .Net 6 or below use the following command:
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run
 
 If you are on .Net 7 or above use the following command:
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
 ```
 
 Now let's try to publish a message by sending a POST request to `http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic` with the below request body, don't forget to set the `Content-Type` header to `application/json`
@@ -221,15 +221,15 @@ With all those bits in place, we are ready to run the publisher service `Backend
 ```powershell
 If you are on .Net 6 or below use the following commands:
 
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
 
-~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run  
+~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application https port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run  
 
 If you are on .Net 7 or above use the following commands:
 
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
 
-~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application https port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
 ```
 
 Notice that we gave the new Backend background service a Dapr App Id with the name `tasksmanager-backend-processor` and a Dapr HTTP port with the value `3502`.
@@ -511,15 +511,15 @@ With all those bits in place, we are ready to run the publisher service `Backend
 ```powershell
 If you are on .Net 6 or below use the following commands:
 
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
 
-~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run  
+~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application https port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run  
 
 If you are on .Net 7 or above use the following commands:
 
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
 
-~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application https port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
 ```
 
 Notice that we gave the new Backend background service a Dapr App Id with the name `tasksmanager-backend-processor` and a Dapr HTTP port with the value `3502`.

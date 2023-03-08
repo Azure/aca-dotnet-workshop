@@ -21,23 +21,22 @@ In order to run applications using Dapr, we need to install and initialize Dapr 
 ### Run Backend API and Frontend Web App locally using Dapr
 You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called [Dapr](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.
 
-1. Lets start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, change the directory in the terminal to folder `TasksTracker.TasksManager.Backend.Api` and run the below command in PS terminal. Remember to replace the place holders with your own values:
+1. Lets start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, change the directory in the terminal to folder `TasksTracker.TasksManager.Backend.Api` and run the below command in PS terminal. Remember to replace the place holders with your own values.
 
     ```powershell
     If you are on .Net 6 or below use the following command:
-    dapr run --app-id tasksmanager-backend-api --app-port <web api application port number as shown in the image below. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
+    dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
     ```
     ```powershell
     If you are on .Net 7 or above use the following command:
-    dapr run --app-id tasksmanager-backend-api --app-port <web api application port number as shown in the image below. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
+    dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
     ```
 
     ![app-port](../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png)
 
-  
     When using Dapr run command you are running a dapr process as a sidecar next to the Web API application. The properties you have configured are as follows:
     * app-id: The unique identifier of the application. Used for service discovery, state encapsulation, and the pub/sub consumer identifier.
-    * app-port: This parameter tells Dapr which port your application is listening on. You can get the app port from `[properties->launchSettings.json` file in the Web API Project as shown in the image above.
+    * app-port: This parameter tells Dapr which port your application is listening on. You can get the app port from `properties->launchSettings.json` file in the Web API Project as shown in the image above. Make sure you use the https port listed within the `properties->launchSettings.json` as we are using the --app-ssl when running the dapr cli locally. Don't use the port inside the DockerFile. The DockerFile port will come in handy when you deploy to ACA at which point the application would be running inside a container.
     * dapr-http-port: The HTTP port for Dapr to listen on.
     * app-ssl: Sets the URI scheme of the app to https and attempts an SSL connection.
     
@@ -201,15 +200,15 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
     ```powershell
     If you are on .Net 6 or below use the following commands:
 
-    ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui> dapr run --app-id tasksmanager-frontend-webapp --app-port <web frontend application port found under properties->launchSettings.json. e.g. 7000> --dapr-http-port 3501 --app-ssl -- dotnet run 
+    ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui> dapr run --app-id tasksmanager-frontend-webapp --app-port <web frontend application https port found under properties->launchSettings.json. e.g. 7000> --dapr-http-port 3501 --app-ssl -- dotnet run 
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
 
     If you are on .Net 7 or above use the following commands:
 
-    ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui> dapr run --app-id tasksmanager-frontend-webapp --app-port <web frontend application port found under properties->launchSettings.json. e.g. 7000> --dapr-http-port 3501 --app-ssl -- dotnet run --launch-profile https
+    ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui> dapr run --app-id tasksmanager-frontend-webapp --app-port <web frontend application https port found under properties->launchSettings.json. e.g. 7000> --dapr-http-port 3501 --app-ssl -- dotnet run --launch-profile https
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
     ```
 
     Notice how we assigned the Dapr App Id “tasksmanager-frontend-webapp” to the Frontend WebApp.

@@ -19,12 +19,12 @@ To try out the State Management APIs, run the Backend API from VS Code by runnin
 
 ```powershell
 If you are on .Net 6 or below use the following command:
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
 ```
 
 ```powershell
 If you are on .Net 7 or above use the following command:
-~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
+~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
 ```
 
 Now from any rest client, invoke the below POST request to the endpoint `http://localhost:3500/v1.0/state/statestore`
@@ -326,12 +326,12 @@ If you have been using the dapr cli commands instead of the aforementioned debug
  ```powershell
     If you are on .Net 6 or below use the following command:
     
-    dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run
+    dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run
     ```
     ```powershell
     If you are on .Net 7 or above use the following command:
     
-    dapr run --app-id tasksmanager-backend-api --app-port <web api application port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
  ```
 
 {: .note }
