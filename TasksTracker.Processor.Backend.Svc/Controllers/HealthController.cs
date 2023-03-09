@@ -12,13 +12,10 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
         private readonly DaprClient _daprClient;
         private static string BLOB_STORE_NAME = "periodicjobstatestore";
         private static string BLOB_KEY_NAME = "ReadinessTestBlob";
-
-        private static string TABLE_STORE_NAME = "emaillogsstatestore";
         public HealthController(ILogger<HealthController> logger, DaprClient daprClient)
         {
             _logger = logger;
             _daprClient = daprClient;
-
         }
 
         [HttpGet("Readiness")]

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "prefix": {
+      "value": ""
+    },
+    "suffix": {
+        "value": ""
+    },
+    "tags": {
+        "value": {}
+    },
+    "backendProcessorServiceName": {
+      "value": "tasksmanager-backend-processor"
+    },
+    "backendApiServiceName": {
+      "value": "tasksmanager-backend-api"
+    },
+    "frontendWebAppServiceName": {
+      "value": "tasksmanager-frontend-webapp"
+    },
+    "serviceBusTopicName": {
+      "value": "tasksavedtopic"
+    },
+    "serviceBusTopicAuthorizationRuleName": {
+      "value": "tasksavedtopic-manage-policy"
+    },
+    "cosmosDbDatabaseName": {
+      "value": "tasksmanagerdb"
+    },
+    "cosmosDbCollectionName": {
+      "value": "taskscollection"
+    },
+    "sendGridKeySecretName": {
+      "value": "sendgrid-api-key"
+    },
+    "sendGridKeySecretValue": {
+      "value": "<SEND_GRID_API_KEY>"
+    },
+    "sendGridEmailFrom": {
+      "value": "<SEND_GRID_FROM_EMAIL>"
+    },
+    "sendGridEmailFromName": {
+      "value": "Tasks Tracker Notification"
+    },
+    "externalTasksQueueName": {
+      "value": "external-tasks-queue"
+    },
+    "externalTasksContainerBlobName": {
+      "value": "externaltasksblob"
+    },
+    "externalStorageKeySecretName": {
+      "value": "external-azure-storage-key"
+    },
+    "scheduledJobCron": {
+      "value": "5 0 * * *"
+    },
+    "secretStoreComponentName": {
+      "value": "secretstoreakv"
+    },
+    "keyVaultName": {
+      "value": "tasks-tracker-akv-4"
+    },
+    "containerRegistryName": {
+      "value": "<CONTAINER_REGISTRY_NAME>"
+    },
+    "containerRegistryUsername": {
+      "value": "<CONTAINER_REGISTRY_ADMIN>"
+    },
+    "containerRegistryPasswordRefName": {
+      "value": "acaworkshopacrazurecrio-acaworkshopacr"
+    },
+    "containerRegistryPassword": {
+      "value": "<CONTAINER_REGISTRY_PASSWORD>"
+    },
+    "backendProcessoServiceImage": {
+      "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest"
+    },
+    "backendApiServiceImage": {
+      "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-api:latest"
+    },
+    "frontendWebAppServiceImage": {
+      "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest"
+    }
+  }
+}

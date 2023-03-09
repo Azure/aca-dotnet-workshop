@@ -27,16 +27,16 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
             var overdueTasksList = new List<TaskModel>();
 
             var tasksList = await _daprClient.InvokeMethodAsync<List<TaskModel>>(HttpMethod.Get, "tasksmanager-backend-api", $"api/overduetasks");
-            _logger.LogInformation($"ScheduledTasksManager::completed query state store for tasks, retrieved tasks count: {tasksList.Count()}");
+            _logger.LogInformation($"ScheduledTasksManager::completed query state store for tasks, retrieved tasks count: {tasksList?.Count()}");
 
-            foreach (var taskModel in tasksList)
+            tasksList?.ForEach(taskModel =>
             {
                 if (runAt.Date> taskModel.TaskDueDate.Date)
                 {
                     overdueTasksList.Add(taskModel);
                 }
-            }
-
+            });
+            
             if (overdueTasksList.Count> 0)
             {
                 _logger.LogInformation($"ScheduledTasksManager::marking {overdueTasksList.Count()} as overdue tasks");

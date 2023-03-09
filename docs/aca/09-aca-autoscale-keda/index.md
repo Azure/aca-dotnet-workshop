@@ -28,7 +28,7 @@ We need to configure our Backend Background Processor named `tasksmanager-backen
 So our requirements for scaling the backend processor are as follows:
 
 * For every 10 messages on the Azure Service Bus Topic, scale-out by one replica.
-* When there are no messages on the topic, scale-in to a Zero replica.
+* When there are no messages on the topic, scale-in to a one single replica.
 * The maximum number of replicas should not exceed 5.
 
 To achieve this, we will start looking into KEDA Azure Service Bus scaler, This specification describes the `azure-servicebus` trigger for Azure Service Bus Queue or Topic, let's take a look at the below yaml file which contains a template for the KEDA specification:
@@ -96,7 +96,7 @@ I had to update `az containerapp`  extension in order to create a scaling rule f
 az containerapp update `
 --name $BACKEND_SVC_NAME `
 --resource-group $RESOURCE_GROUP `
---min-replicas 0 `
+--min-replicas 1 `
 --max-replicas 5 `
 --revision-suffix v20230227-3 `
 --set-env-vars "SendGrid__IntegrationEnabled=false" `
@@ -112,15 +112,17 @@ az containerapp update `
 
 What we have done is the following:
 
-* Setting the minimum number of replicas to Zero, means that this Container App could be scaled-in to Zero replicas if there are no new messages on the topic.
-* Setting the maximum number of replicas to 5, means that this Container App will not exceed more than 5 replicas regardless of the number of messages on the topic.
+* Setting the minimum number of replicas to `1`, means that this Container App could be scaled-in to one single replica if there are no new messages on the topic.
+* Setting the maximum number of replicas to `5`, means that this Container App will not exceed more than 5 replicas regardless of the number of messages on the topic.
 * Setting a friendly name for the scale rule `topic-msgs-length` which will be visible in Azure Portal.
 * Setting the scale rule type to `azure-servicebus`, this is important to tell KEDA which type of scalers our Container App is configuring.
 * Setting the authentication mechanism to type `connection` and indicating which secret reference will be used, in our case `svcbus-connstring`.
 * Setting the `metadata` dictionary of the scale rule, those matching the metadata properties in KEDA template we discussed earlier.
 * Disabled the integration with SendGrid as we are going to send load of messages now to test the scale out rule.
 
-Once you run this command the custom scale rule will be created, we can navigate to the Azure Portal and see the details.
+**Note about setting minimum replicas to 0:**
+* We can set the minimum number of replicas to `zero` to avoid any charges when the backend processor is not processing any message from Azure Service Bus Topic, but this will impact running the other features within this backend processor such as the periodic cron job, the external input bidding and output bindings. So I'm setting the minimum number of replicas to `one` single replica so there is always an instance of the backend processor running and able to process those jobs even if there is no messages coming into the Azure Service Bus Topic.
+* When the single replica of the backend processor is not doing anything, it will be running in an `idle mode`. When replica is on the idle mode; usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit [the link.](https://azure.microsoft.com/en-us/pricing/details/container-apps/)
 
 ##### 3. Run an end-to-end test and generate a load of messages
 Now we are ready to test out our Azure Service Bus Scaling Rule, to generate a load of messages we can do this from Service Bus Explorer under our Azure Service Bus namespace, so navigate to Azure Service Bus, select your topic/subscription, and then select `Service Bus Explorer`.
@@ -155,7 +157,7 @@ The message structure our backend processor expects is as JSON below, so copy th
 
 If all is setup correctly, 5 replicas will be created based on the number of messages we generated into the topic, there are various ways to verify this:
 - You can run the Azure CLI command used in [previous step](#3-run-an-end-to-end-test-and-generate-a-load-of-messages) to list the names of replicas.
-- You can verify this from Container Apps “Console” tab you will see those replicas in the drop-down list
+- You can verify this from Container Apps `Console` tab you will see those replicas in the drop-down list
 ![replica-console](../../assets/images/09-aca-autoscale-keda/replica-console.png)
 
 **Note about KEDA Scale In:**
