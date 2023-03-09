@@ -68,7 +68,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
                 {
                     //Introduce artificial delay to slow down message processing
                     _logger.LogInformation("Simulate slow processing for email sending for Email with Email subject '{0}' Email to: '{1}'", subject, taskModel.TaskAssignedTo);
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1000);
                 }
 
                 if (sendEmailResponse)
