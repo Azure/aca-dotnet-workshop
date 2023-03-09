@@ -1,5 +1,5 @@
 {
-    "name": "Codespaces Apim github pages",
+    "name": "Codespaces Container apps github pages",
     "extensions": [
 		"vscode-icons-team.vscode-icons",
         "ms-azuretools.vscode-docker",
