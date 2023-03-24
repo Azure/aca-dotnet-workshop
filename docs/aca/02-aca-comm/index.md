@@ -210,6 +210,7 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
     --resource-group $RESOURCE_GROUP `
     --set-env-vars "BackendApiConfig__BaseUrlExternalHttp=https://tasksmanager-backend-api.internal.[Environment unique identifier].eastus.azurecontainerapps.io"
     ```
+!!! success
     Browse the web app again, and you should be able to see the same results and access the backend API endpoints from the Web App.
 
-    In the next module, we will start integrating Dapr and use the service to service Building block for services discovery and invocation.
+In the next module, we will start integrating Dapr and use the service to service Building block for services discovery and invocation.
