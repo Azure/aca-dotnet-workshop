@@ -47,23 +47,29 @@ theme:
     - navigation.indexes
     - navigation.top
     - content.code.copy
+    - content.code.annotate
   icon:
     repo: fontawesome/brands/github
   logo: assets/images/00-workshop-intro/azure_container_apps.png
   favicon: assets/images/00-workshop-intro/azure_container_apps.png
 
 markdown_extensions:
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - admonition
   - pymdownx.inlinehilite
   - pymdownx.highlight:
-      linenums: true
-  - pymdownx.superfences
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.details
   - pymdownx.snippets:
       base_path: '.'
       check_paths: true
+      url_download: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -74,6 +80,7 @@ markdown_extensions:
       permalink: true
       toc_depth: 4
   - attr_list
+  - md_in_html
 
 copyright: Copyright &copy; 2023 Microsoft
 

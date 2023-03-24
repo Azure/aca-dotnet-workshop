@@ -2,7 +2,7 @@ build-docs:
 	@$(MAKE) build-docs-website
 
 build-docs-website:
-	mkdir dist
+	mkdir -p dist
 	docker build -t squidfunk/mkdocs-material ./docs/
 	docker run --rm -t -v ${PWD}:/docs squidfunk/mkdocs-material build
 	cp -R site/* dist/
