@@ -4,16 +4,19 @@ has_children: false
 nav_order: 7
 canonical_url: 'https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-bindings-building-block/'
 ---
-# Module 7 - ACA scheduled jobs with Dapr Cron Binding
-In the previous module we have covered how Dapr bindings help us to simplify integrating with external systems when an event occurs, and how to trigger an event that invokes an external resource. In this module we will focus on a special type of Dapr input binding named [Cron Binding.](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/).
-The Cron binding doesn't subscribe for events coming from an external system, Instead, this binding can be used to trigger application code in our service periodically based on a configurable interval. The binding provides a simple way to implement a background worker to wake up and do some work at a regular interval, without the need to implement an endless loop with a configurable delay.
+# Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
+In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources. In this module we will focus on a special type of Dapr input binding named [Cron Binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/).
+The Cron binding doesn't subscribe for events coming from an external system. Instead, this binding can be used to trigger application code in our service periodically based on a configurable interval. The binding provides a simple way to implement a background worker to wake up and do some work at a regular interval, without the need to implement an endless loop with a configurable delay.
 
-The use case we want to cover with this binding that it will trigger one time daily at certain time (i.e. 12:05 am) and lookup for tasks which have due date matching the day before it run and are not completed yet, if the service was able to find some tasks with this criteria; it will mark them as overdue tasks and store the updated state on Azure Cosmos DB. 
+We intend to utilize this binding for a specific use case, wherein it will be triggered once daily at a particular time (12:05 am), and search for tasks that have a due date matching the previous day of its execution and are still pending. Once the service identifies tasks that meet these criteria, it will designate them as overdue tasks and save the revised status on Azure Cosmos DB.
 
 ### Updating the Backend Background Processor Project
 
-##### 1. Add Cron binding configuration
-The first step to configuring Cron binding is to add a component file that describes where is the code that needs to be triggered and on which intervals it should be triggered, to do so add a new file named `dapr-scheduled-cron.yaml` under folder `components` and use the code below:
+##### 1. Add Cron Binding Configuration
+To set up the Cron binding, the initial step involves adding a component file that specifies the location of the code that requires triggering and the intervals at which it should occur. 
+To accomplish this, create a new file called dapr-scheduled-cron.yaml within the components folder and insert the following code:
+
+To accomplish this add a new file named `dapr-scheduled-cron.yaml` under folder `components` and use the code below:
 ```yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
@@ -30,16 +33,20 @@ scopes:
 - tasksmanager-backend-processor
 ```
 
-What we have done here is the following:
+The actions performed here are as follows:
 
-* Added new input binding of type `bindings.cron`.
-* Provided the name `ScheduledTasksManager` for this binding, this means that an HTTP POST endpoint on the URL `/ScheduledTasksManager` should be added as it will be invoked when the job is triggered based on the Cron interval.
-* Setting the interval for this Cron job to be triggered one time each day at 12:05am, for full details and available options on how to set this value, visit the [Cron binding specs.](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format).
+* Added a new input binding of type `bindings.cron`.
+* Provided the name `ScheduledTasksManager` for this binding. This means that an HTTP POST endpoint on the URL `/ScheduledTasksManager` should be added as it will be invoked when the job is triggered based on the Cron interval.
+* Setting the interval for this Cron job to be triggered once a day at 12:05am. For full details and available options on how to set this value, visit the [Cron binding specs.](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format).
 
-##### 2. Add the endpoint which will be invoked by Cron binding
-Let's add an endpoint which will be triggered when the Cron configuration is met, this endpoint will contain the routine needed to run at a regular interval, to do so add a new controller named `ScheduledTasksManagerController.cs` under `controllers` folder in the project `TasksTracker.Processor.Backend.Svc` and use the code below:
+##### 2. Add the Endpoint Which Will be Invoked by Cron Binding
+Let's add an endpoint which will be triggered when the Cron configuration is met. This endpoint will contain the routine needed to run at a regular interval. To accomplish this add a new controller named `ScheduledTasksManagerController.cs` under `controllers` folder in the project `TasksTracker.Processor.Backend.Svc` and use the code below:
 
 ```csharp
+using Dapr.Client;
+using Microsoft.AspNetCore.Mvc;
+using TasksTracker.Processor.Backend.Svc.Models;
+
 namespace TasksTracker.Processor.Backend.Svc.Controllers
 {
     [Route("ScheduledTasksManager")]
@@ -59,10 +66,15 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
         public async Task CheckOverDueTasksJob()
         {
             var runAt = DateTime.UtcNow;
+            
             _logger.LogInformation($"ScheduledTasksManager::Timer Services triggered at: {runAt}");
+
             var overdueTasksList = new List<TaskModel>();
+            
             var tasksList = await _daprClient.InvokeMethodAsync<List<TaskModel>>(HttpMethod.Get, "tasksmanager-backend-api", $"api/overduetasks");
+            
             _logger.LogInformation($"ScheduledTasksManager::completed query state store for tasks, retrieved tasks count: {tasksList?.Count()}");
+            
             tasksList?.ForEach(taskModel =>
             {
                 if (runAt.Date> taskModel.TaskDueDate.Date)
@@ -74,16 +86,17 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
             if (overdueTasksList.Count> 0)
             {
                 _logger.LogInformation($"ScheduledTasksManager::marking {overdueTasksList.Count()} as overdue tasks");
+
                 await _daprClient.InvokeMethodAsync(HttpMethod.Post, "tasksmanager-backend-api", $"api/overduetasks/markoverdue", overdueTasksList);
             }
         }
     }
 }
 ```
-What we have done here that we've added new action method named `CheckOverDueTasksJob` contains the business logic which will be triggered by the Cron job configuration on a certain interval. This action method should be of type `POST` so it will be invoked when the job is triggered based on the Cron interval.
+Here, we have added a new action method called `CheckOverDueTasksJob`, which includes the relevant business logic that will be executed by the Cron job configuration at specified intervals. This action method must be of the `POST` type, allowing it to be invoked when the job is triggered in accordance with the Cron interval.
 
 ##### 3. Update the Backend Web API Project
-Now we need to add 2 new methods which are used by the scheduled job, open interface named `ITasksManager.cs` in the project `TasksTracker.TasksManager.Backend.Api` and add the below 2 methods:
+Now we need to add two new methods which are used by the scheduled job. Open the interface named `ITasksManager.cs` which is located under the `services` folder of the `TasksTracker.TasksManager.Backend.Api` project. Incorporate the following two methods:
 
 ```csharp
 public interface ITasksManager
@@ -92,50 +105,120 @@ public interface ITasksManager
     Task<List<TaskModel>> GetYesterdaysDueTasks();
 }
 ```
-Next we need to provide implementation for those 2 methods, so open file `TasksStoreManager.cs` in the same project and use the code below:
+Next we need to provide the implementation for those two methods. Open the file `TasksStoreManager.cs` which is located under the `services` folder of the `TasksTracker.TasksManager.Backend.Api` project and place the two following methods inside the existing class:
 
 ```csharp
-public class TasksStoreManager : ITasksManager
+public async Task<List<TaskModel>> GetYesterdaysDueTasks()
 {
-    public async Task<List<TaskModel>> GetYesterdaysDueTasks()
+    var options = new JsonSerializerOptions
     {
-        var settings=new Newtonsoft.Json.JsonSerializerSettings { DateFormatString ="yyyy-MM-ddTHH:mm:ss"};
-        var yesterday = DateTime.Today.AddDays(-1);
-        var jsonDate= Newtonsoft.Json.JsonConvert.SerializeObject(yesterday,settings);
-        _logger.LogInformation("Getting overdue tasks for yesterday date: '{0}'", jsonDate);
-       
-        var query = "{" +
-                "\"filter\": {" +
-                    "\"EQ\": { \"taskDueDate\": " + jsonDate + " }" +
-                "}}";
-
-        var queryResponse = await _daprClient.QueryStateAsync<TaskModel>(STORE_NAME, query);
-        var tasksList = queryResponse.Results.Select(q => q.Data).Where(q=>q.IsCompleted==false && q.IsOverDue==false).OrderBy(o=>o.TaskCreatedOn);
-        return tasksList.ToList();
-    }
-
-    public async Task MarkOverdueTasks(List<TaskModel> overDueTasksList)
-    {
-        foreach (var taskModel in overDueTasksList)
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        WriteIndented = true,
+        Converters =
         {
-            _logger.LogInformation("Mark task with Id: '{0}' as OverDue task", taskModel.TaskId);
-            taskModel.IsOverDue = true;
-            await _daprClient.SaveStateAsync<TaskModel>(STORE_NAME, taskModel.TaskId.ToString(), taskModel);
-        }
-    }      
+            new JsonStringEnumConverter(),
+            new DateTimeConverter("yyyy-MM-ddTHH:mm:ss")
+        },
+        PropertyNameCaseInsensitive = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
+    var yesterday = DateTime.Today.AddDays(-1);
+
+    var jsonDate = JsonSerializer.Serialize(yesterday, options);
+    
+    
+    
+    _logger.LogInformation("Getting overdue tasks for yesterday date: '{0}'", jsonDate);
+    
+    var query = "{" +
+            "\"filter\": {" +
+                "\"EQ\": { \"taskDueDate\": " + jsonDate + " }" +
+            "}}";
+
+    var queryResponse = await _daprClient.QueryStateAsync<TaskModel>(STORE_NAME, query);
+    var tasksList = queryResponse.Results.Select(q => q.Data).Where(q=>q.IsCompleted==false && q.IsOverDue==false).OrderBy(o=>o.TaskCreatedOn);
+    return tasksList.ToList();
 }
+
+public async Task MarkOverdueTasks(List<TaskModel> overDueTasksList)
+{
+    foreach (var taskModel in overDueTasksList)
+    {
+        _logger.LogInformation("Mark task with Id: '{0}' as OverDue task", taskModel.TaskId);
+        taskModel.IsOverDue = true;
+        await _daprClient.SaveStateAsync<TaskModel>(STORE_NAME, taskModel.TaskId.ToString(), taskModel);
+    }
+}      
+
 ```
 
+Make sure you add the following using statements at the the top of the `TasksStoreManager.cs` which is located under the `services` folder of the `TasksTracker.TasksManager.Backend.Api` project
+
+```csharp
+using System.Text.Json;
+using System.Text.Encodings.Web;
+using System.Text.Json.Serialization;
+```
+
+We will also need to add a helper method called `DateTimeConverter` under a file called `DateTimeConverter.cs` which itself should live under a folder called `helpers`which in turn should be created under `TasksTracker.TasksManager.Backend.Api` project. Add the following code under `DateTimeConverter.cs`:
+
+
+```csharp
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace TasksTracker.TasksManager.Backend.Api.Services
+{
+    public class DateTimeConverter : JsonConverter<DateTime>
+    {
+        private readonly string _dateFormatString;
+
+        public DateTimeConverter(string dateFormatString)
+        {
+            _dateFormatString = dateFormatString;
+        }
+
+        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            return DateTime.ParseExact(reader.GetString(), _dateFormatString, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value.ToString(_dateFormatString));
+        }
+    }
+}
+```
 What we've implemented here is the following:
-- Method `GetYesterdaysDueTasks` will query the Cosmos DB state store using Dapr State API to lookup all the yesterday's task which are not completed yet, remember that Cron job is configured to run each day at 12:05am so we are interested to check only to check the day before when the service rus. We initially made this implementation simple. There might be some edge cases not handled with the current implementation.
+- Method `GetYesterdaysDueTasks` will query the Cosmos DB state store using Dapr State API to lookup all the yesterday's task which are not completed yet. Remember that Cron job is configured to run each day at 12:05am so we are interested to check only the day before when the service runs. We initially made this implementation simple. There might be some edge cases not handled with the current implementation.
 - Method `MarkOverdueTasks` will take list of all tasks which passed the due date and set the flag `IsOverDue` to `true`.
 
-Do not forget to add fake implementation for class `FakeTasksManager` so the project `TasksTracker.TasksManager.Backend.Api` builds successfully. 
+Do not forget to add fake implementation for class `FakeTasksManager` so the project `TasksTracker.TasksManager.Backend.Api` builds successfully. Add the following action methods at the end of the `FakeTasksManager` class:
 
-##### 4. Add actions methods to Backend Web API project
-
-As you've seen in the [previous step](#2-add-the-endpoint-which-will-be-invoked-by-cron-binding), we are using Dapr Service to Service invocation API to call methods `api/overduetasks` and `api/overduetasks/markoverdue` in the Backend Web API from the Backend Background Processor, to do so add a new file named `OverdueTasksController` in folder `controllers` under project `TasksTracker.TasksManager.Backend.Api`, use the code below:
 ```csharp
+public Task MarkOverdueTasks(List<TaskModel> overDueTasksList)
+{
+    throw new NotImplementedException();
+}
+
+public Task<List<TaskModel>> GetYesterdaysDueTasks()
+{
+    var tasksList = _tasksList.Where(t => t.TaskDueDate.Equals(DateTime.Today.AddDays(-1))).ToList();
+
+    return Task.FromResult(tasksList);
+}     
+```
+
+##### 4. Add Action Methods to Backend Web API project
+
+As you've seen in the [previous step](#2-add-the-endpoint-which-will-be-invoked-by-cron-binding), we are using Dapr Service to Service invocation API to call methods `api/overduetasks` and `api/overduetasks/markoverdue` in the Backend Web API from the Backend Background Processor. To accomplish this add a new file named `OverdueTasksController.cs` in folder `controllers` under project `TasksTracker.TasksManager.Backend.Api` and use the code below:
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using TasksTracker.TasksManager.Backend.Api.Models;
+using TasksTracker.TasksManager.Backend.Api.Services;
+
 namespace TasksTracker.TasksManager.Backend.Api.Controllers
 {
     [Route("api/overduetasks")]
@@ -167,7 +250,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
     }
 }
 ```
-##### 5. Add Cron binding configuration matching ACA Specs
+##### 5. Add Cron Binding Configuration Matching ACA Specs
 
 Now we will add a new file named `containerapps-scheduled-cron.yaml` under folder `aca-components`. this file will be used when updating the Azure Container App Env and enable this binding, and use the code below:
 ```yaml
@@ -179,11 +262,11 @@ metadata:
 scopes:
 - tasksmanager-backend-processor
 ```
-Note that the name of the binding is not part of the file metadata, we are going to set the name of the binding to the value `ScheduledTasksManager` when we update the Azure Container Apps Env.
+Note that the name of the binding is not part of the file metadata. We are going to set the name of the binding to the value `ScheduledTasksManager` when we update the Azure Container Apps Env.
 
 ### Deploy the Backend Background Processor and the Backend API Projects to Azure Container Apps
-##### 1. Build the Backend Background Processor and the Backend API App images and push them to ACR
-As we have done previously we need to build and deploy both app images to ACR so they are ready to be deployed to Azure Container Apps, to do so, continue using the same PowerShell console and paste the code below (Make sure you are on directory `TasksTracker.ContainerApps`):
+##### 1. Build the Backend Background Processor and the Backend API App Images and Push them to ACR
+To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. To do this, we can use the same PowerShell console and copy and paste the following code (make sure you are on directory `TasksTracker.ContainerApps`):
 
 ```powershell
 az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
@@ -201,8 +284,8 @@ az containerapp env dapr-component set `
   --yaml '.\aca-components\containerapps-scheduled-cron.yaml'
 ```
 
-##### 3. Deploy new revisions of the Backend API and Backend Background Processor to ACA
-As we've done multiple times, we need to update the Azure Container App hosting the Backend API & Backend Background Processor with a new revision so our code changes are available for end users, to do so run the below PowerShell script
+##### 3. Deploy New Revisions of the Backend API and Backend Background Processor to ACA
+As we did before, we need to update the Azure Container App hosting the Backend API & Backend Background Processor with a new revision so our code changes are available for the end users. To accomplish this run the PowerShell script below:
 
 ```powershell
 ## Update Backend API App container app and create a new revision 
@@ -219,7 +302,7 @@ az containerapp update `
 ```
 
 {: .note }
-The service `ScheduledTasksManager` which will be triggered by the Cron job on certain intervals is hosted in the ACA service `ACA-Processor Backend`. In the future module we are going to scale this ACA `ACA-Processor Backend` to multiple replicas/instances. It is highly recommended that background periodic jobs to be hosted in a container app with **one single replica**, you don't want your background periodic job to run on multiple replicas trying to do the same thing.
+The service `ScheduledTasksManager` which will be triggered by the Cron job on certain intervals is hosted in the ACA service `ACA-Processor Backend`. In the future module we are going to scale this ACA `ACA-Processor Backend` to multiple replicas/instances. It is highly recommended that background periodic jobs are hosted in a container app with **one single replica**, you don't want your background periodic job to run on multiple replicas trying to do the same thing.
 
 With those changes in place and deployed, from the Azure Portal, you can open the log streams of the container app hosting the `ACA-Processor-Backend` and check the logs generated when the Cron job is triggered, you should see logs similar to the below image
-![app-logs](../../assets/images/07-aca-cron-bindings/cron-logs.jpg)
+![app-logs](../../assets/images/07-aca-cron-bindings/cron-logs.jpg). Keep in mind though that you won't be able to see the results instantaneously as the cron job searches for tasks that have a due date matching the previous day of its execution and are still pending.

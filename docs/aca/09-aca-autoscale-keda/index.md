@@ -67,7 +67,7 @@ Azure Container Apps has its own proprietary schema to map KEDA Scaler template 
 
 ##### 1. Create a new secret in Container App
 
-Let's now create a secret named `svcbus-connstring` in our Container App named `tasksmanager-backend-processor`, this secret will contain the value of Azure Service Bus shared access policy (connection string) with `Manage` policy. To do so, run the below commands in Azure CLI to get the connection string, and then add this secret using the second command:
+Let's now create a secret named `svcbus-connstring` in our Container App named `tasksmanager-backend-processor`, this secret will contain the value of Azure Service Bus shared access policy (connection string) with `Manage` policy. To accomplish this, run the below commands in Azure CLI to get the connection string, and then add this secret using the second command:
 
 ```powershell
 ##List Service Bus Access Policy RootManageSharedAccessKey
@@ -87,7 +87,7 @@ az containerapp secret set `
 ```
 
 ##### 2. Create a Custom Scaling Rule from Azure CLI
-Now we are ready to add a new custom scaling rule to match the business requirements, to do so we need to run the below Azure CLI command:
+Now we are ready to add a new custom scaling rule to match the business requirements. To accomplish this, we need to run the below Azure CLI command:
 
 {: .note }
 I had to update `az containerapp`  extension in order to create a scaling rule from CLI, to update it you can run the following command `az extension update --name containerapp`

@@ -212,7 +212,7 @@ The query API will not work against the local Redis store as you need to install
 
 ##### 3. Register the TasksStoreManager new service and DaprClient
 
-Now we need to register the new service named `TasksStoreManager` and `DaprClient` when the Backend API app starts up. To do so open the file `Program.cs` and register both as shown below. Do not forget to comment out the registration of the `FakeTasksManager` service as we don’t want to store tasks in memory anymore.
+Now we need to register the new service named `TasksStoreManager` and `DaprClient` when the Backend API app starts up. To accomplish this open the file `Program.cs` and register both as shown below. Do not forget to comment out the registration of the `FakeTasksManager` service as we don’t want to store tasks in memory anymore.
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -420,7 +420,7 @@ Few things to notice here:
 - We are setting the `scopes` array value to `tasksmanager-backend-api` to ensure Cosmos DB component is loaded at runtime by only the appropriate container apps. In our case it will be needed only for the container apps with Dapr application IDs `tasksmanager-backend-api`. In future modules we are going to include another container app which needs to access Cosmos DB.
 
 ##### 2. Build Frontend Web App and Backend API App images and push them to ACR
-As we have done previously we need to build and deploy both app images to ACR so they are ready to be deployed to Azure Container Apps. To do so, continue using the same PowerShell console and paste the code below (Make sure you are on the following directory `TasksTracker.ContainerApps`):
+As we have done previously we need to build and deploy both app images to ACR so they are ready to be deployed to Azure Container Apps. To accomplish this, continue using the same PowerShell console and paste the code below (Make sure you are on the following directory `TasksTracker.ContainerApps`):
 
 ```powershell
 az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
@@ -429,7 +429,7 @@ az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" -
 ```
 
 ##### 3. Add Cosmos DB Dapr State Store to Azure Container Apps Environment
-We need to run the command below to add the yaml file `.\aca-components\containerapps-statestore-cosmos.yaml` to Azure Container Apps Environment. To do so run the PowerShell command below:
+We need to run the command below to add the yaml file `.\aca-components\containerapps-statestore-cosmos.yaml` to Azure Container Apps Environment. To accomplish this run the PowerShell command below:
 
 ```powershell
 az containerapp env dapr-component set `
@@ -461,7 +461,7 @@ For a complete list of the supported Dapr sidecar configurations in Container Ap
 
 ##### 5. Deploy new revisions of the Frontend Web App and Backend API to Container Apps
 
-The last thing we need to do here is to update both container apps and deploy the new images from ACR. To do so we need to run the commands found below. Notice here that we used a `revision-suffix` property so it will append to the revision name which offers you better visibility on which revision you are looking at:
+The last thing we need to do here is to update both container apps and deploy the new images from ACR. To accomplish this we need to run the commands found below. Notice here that we used a `revision-suffix` property so it will append to the revision name which offers you better visibility on which revision you are looking at:
 
 ```powershell
 ## Update Frontend web app container app and create a new revision 

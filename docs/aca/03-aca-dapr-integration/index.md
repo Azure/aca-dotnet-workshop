@@ -77,7 +77,7 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 
     We will be using the second approach in this workshop (HTTP services using DaprClient), but it is worth spending some time explaining the first approach (Invoke HTTP services using HttpClient). We will go over the first approach briefly and then discuss the second in details.
 
-    Install DAPR SDK for .NET Core in the Frontend Web APP so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, open the .csproj file of the project `TasksTracker.WebPortal.Frontend.Ui.csproj` and add the following NuGet package:
+    Install DAPR SDK for .NET Core in the Frontend Web APP so we can use the service discovery and service invocation offered by Dapr Sidecar. To accomplish this, open the .csproj file of the project `TasksTracker.WebPortal.Frontend.Ui.csproj` and add the following NuGet package:
 
     ```json
     <ItemGroup>
@@ -105,7 +105,7 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
         }
     }
     ```
-    Now, we will inject the DaprClient into the Index.cshtml page to use the method `InvokeMethodAsync` (second approach). To do so, open the page named `Index.cshtml.cs` under folder `Pages\Tasks` and use the code below
+    Now, we will inject the DaprClient into the Index.cshtml page to use the method `InvokeMethodAsync` (second approach). To accomplish this, open the page named `Index.cshtml.cs` under folder `Pages\Tasks` and use the code below
     ```csharp
     using Dapr.Client;
     using Microsoft.AspNetCore.Mvc;
@@ -195,7 +195,7 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 
     We need now to update the [Create.cshtml.cs](https://github.com/Azure/aca-dotnet-workshop/blob/5dc6b68dcf118440df4c96c14dd538d4d69f80f4/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Create.cshtml.cs) and [Edit.cshtml.cs](https://github.com/Azure/aca-dotnet-workshop/blob/5dc6b68dcf118440df4c96c14dd538d4d69f80f4/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Edit.cshtml.cs) by injecting the DaprClient.
 
-3. We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected. To do so run the two commands commands shown below (ensure that you are on the right project directory when running each command). Remember to replace the place holders with your own values:
+3. We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected. To accomplish this run the two commands commands shown below (ensure that you are on the right project directory when running each command). Remember to replace the place holders with your own values:
 
     ```powershell
     If you are on .Net 6 or below use the following commands:

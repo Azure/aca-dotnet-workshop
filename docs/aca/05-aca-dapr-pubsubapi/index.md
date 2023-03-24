@@ -81,7 +81,7 @@ Right now those published messages are stored in the message broker topic doing 
 
 Now we will add a new ASP.NET Core Web API project named `TasksTracker.Processor.Backend.Svc`. Open a command-line terminal and navigate to root folder of your project. Initialize the creation of a new  project by typing: `dotnet new webapi -o TasksTracker.Processor.Backend.Svc` This will create an ASP.NET Web API project scaffolded with 1 single controller. 
 
-We need to containerize this application so we can push it to Azure Container Registry as a docker image then deploy it to ACA. To do so Open the VS Code Command Palette (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>) and select `Docker: Add Docker Files to Workspace...`
+We need to containerize this application so we can push it to Azure Container Registry as a docker image then deploy it to ACA. To accomplish this Open the VS Code Command Palette (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>) and select `Docker: Add Docker Files to Workspace...`
 - Use `.NET: ASP.NET Core` when prompted for application platform.
 - Choose `Linux` when prompted to choose the operating system.
 - You will be asked if you want to add Docker Compose files. Select `No`.
@@ -113,7 +113,7 @@ namespace TasksTracker.Processor.Backend.Svc.Models
 ```
 
 ##### 3.Install Dapr SDK Client NuGet package
-Now we will install Dapr SDK to be able to subscribe to the service broker topic in a programmatic way. To do so, open the .csproj file of the project `TasksTracker.Processor.Backend.Svc.csproj` and add the NuGet package below:
+Now we will install Dapr SDK to be able to subscribe to the service broker topic in a programmatic way. To accomplish this, open the .csproj file of the project `TasksTracker.Processor.Backend.Svc.csproj` and add the NuGet package below:
 
 ```json
 <ItemGroup> 
@@ -122,7 +122,7 @@ Now we will install Dapr SDK to be able to subscribe to the service broker topic
 ```
 
 ##### 4. Create an API endpoint for the consumer to subscribe to the topic
-Now we will add an endpoint that will be responsible to subscribe to the topic in the message broker we are interested in. This endpoint will start receiving the message published from the Backend API producer. To do so, add a new controller named `TasksNotifierController.cs` under `Controllers` folder and use the code below:
+Now we will add an endpoint that will be responsible to subscribe to the topic in the message broker we are interested in. This endpoint will start receiving the message published from the Backend API producer. To accomplish this, add a new controller named `TasksNotifierController.cs` under `Controllers` folder and use the code below:
 
 ```csharp
 using Dapr.Client;
@@ -216,7 +216,7 @@ What we've done is the following:
 * On line `app.UseCloudEvents();`, the extension method `UseCloudEvents` adds CloudEvents middleware into the ASP.NET Core middleware pipeline. This middleware will unwrap requests that use the CloudEvents structured format, so the receiving method can read the event payload directly. You can read more about [CloudEvents](https://cloudevents.io/) here which includes specs for describing event data in a common and standard way.
 * On line `app.MapSubscribeHandler();`, we make the endpoint `http://localhost:<appPort>/dapr/subscribe` available for the consumer so it responds and returns available subscriptions. When this endpoint is called, it will automatically find all WebAPI action methods decorated with the `Dapr.Topic` attribute and instruct Dapr to create subscriptions for them.
 
-With all those bits in place, we are ready to run the publisher service `Backend API` and the consumer service `Backend Background Service` and test pub/sub pattern end to end. To do so, run the below commands in PowerShell console, ensure you are on the right root folder of each respective project. Remember to replace the place holders with your own values:
+With all those bits in place, we are ready to run the publisher service `Backend API` and the consumer service `Backend Background Service` and test pub/sub pattern end to end. To accomplish this, run the below commands in PowerShell console, ensure you are on the right root folder of each respective project. Remember to replace the place holders with your own values:
 
 ```powershell
 If you are on .Net 6 or below use the following commands:
@@ -380,7 +380,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
 }
 ```
 
-Now we will install the NuGet package named `SendGrid` version `9.28.1` to the Backend processor project which will allow us to send emails as discussed below. To do so, open the .csproj file of the project `TasksTracker.Processor.Backend.Svc.csproj` and add the NuGet package below:
+Now we will install the NuGet package named `SendGrid` version `9.28.1` to the Backend processor project which will allow us to send emails as discussed below. To accomplish this, open the .csproj file of the project `TasksTracker.Processor.Backend.Svc.csproj` and add the NuGet package below:
 
 ```json
 <ItemGroup> 
@@ -426,7 +426,7 @@ If you don't want to bother with signing up for a SendGrid account to send email
   }
 ```
 ### Use Azure Service Bus as a Service Broker for Dapr Pub/Sub API
-Now we will switch our implementation to use Azure Service Bus as a message broker. Redis worked perfectly for local development and testing but we need to prepare ourselves for the cloud deployment. To do so we need to create Service Bus Namespace followed by a Topic. A namespace provides a scoping container for Service Bus resources within your application.
+Now we will switch our implementation to use Azure Service Bus as a message broker. Redis worked perfectly for local development and testing but we need to prepare ourselves for the cloud deployment. To accomplish this we need to create Service Bus Namespace followed by a Topic. A namespace provides a scoping container for Service Bus resources within your application.
 
 ##### 1. Create Azure Service Bus Namespace and a Topic
 You can do this from Azure Portal or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values. You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters).
@@ -508,7 +508,7 @@ Things to note here:
 - The metadata `namespaceName` value is set to the address of the Service Bus namespace as a fully qualified domain name. The `namespaceName` key is mandatory when using Managed Identities for authentication.
 - We are setting the metadata `consumerID` value to match the topic subscription name `tasks-processor-subscription`. If you didn't set this metadata, dapr runtime will try to create a subscription using the dapr application ID.
 
-With all those bits in place, we are ready to run the publisher service `Backend API` and the consumer service `Backend Background Service` and test pub/sub pattern end to end. To do so, run the below commands in PowerShell console, ensure you are on the right root folder of each respective project. Remember to replace the place holders with your own values:
+With all those bits in place, we are ready to run the publisher service `Backend API` and the consumer service `Backend Background Service` and test pub/sub pattern end to end. To accomplish this, run the below commands in PowerShell console, ensure you are on the right root folder of each respective project. Remember to replace the place holders with your own values:
 
 ```powershell
 If you are on .Net 6 or below use the following commands:
@@ -546,7 +546,7 @@ Content-Type: application/json
 
 ##### 1. Build the Backend Background Processor and the Backend API App images and push them to ACR
 
-As we have done previously we need to build and deploy both app images to ACR so they are ready to be deployed to Azure Container Apps. To do so, continue using the same PowerShell console and paste the code below (make sure you are on directory `TasksTracker.ContainerApps`):
+As we have done previously we need to build and deploy both app images to ACR so they are ready to be deployed to Azure Container Apps. To accomplish this, continue using the same PowerShell console and paste the code below (make sure you are on directory `TasksTracker.ContainerApps`):
 
 ```powershell
 $BACKEND_SVC_NAME="tasksmanager-backend-processor"
@@ -582,7 +582,7 @@ az containerapp create `
 ```
 
 ##### 3. Deploy new revisions of the Backend API to Azure Container Apps
-As we've done this multiple times we need to update the Azure Container App hosting the Backend API with a new revision so our code changes for publishing messages after a task is saved is available for users. To do so run the  PowerShell script below:
+As we've done this multiple times we need to update the Azure Container App hosting the Backend API with a new revision so our code changes for publishing messages after a task is saved is available for users. To accomplish this run the  PowerShell script below:
 ```powershell
 ## Update Backend API App container app and create a new revision 
 az containerapp update `
