@@ -44,6 +44,8 @@ theme:
         icon: material/toggle-switch
         name: Switch to light mode
   features:
+    - header.autohide
+    - navigation.instant
     - navigation.indexes
     - navigation.top
     - content.code.copy
@@ -94,6 +96,9 @@ plugins:
 extra:
   dapr:
     version: 1.9.0
+
+extra_css:
+  - assets/stylesheets/extra.css
 
 repo_url: https://github.com/Azure/aca-dotnet-workshop
 edit_uri: edit/main/docs
