@@ -1,25 +1,24 @@
-name: Build and Preview Workshop Docs
+name: Release Workshop Docs
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - closed
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
       - 'Makefile'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
 
 concurrency:
-  group: preview-${{ github.ref }}
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
-  preview-docs:
+  docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -34,12 +33,10 @@ jobs:
           echo "SOURCE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - name: Build workshop site
         run: |
-          echo "GIT_PYTHON_REFRESH=quiet"
           make build-docs-website
-      - name: Deploy preview
-        uses: rossjrw/pr-preview-action@v1
+      - name: Deploy all docs
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          source-dir: ./dist/
-          preview-branch: gh-pages
-          umbrella-dir: docs/pr-preview
-          action: auto
+          folder: ./dist
+          branch: gh-pages
+          clean-exclude: pr-preview
