@@ -48,6 +48,7 @@ theme:
     - navigation.top
     - content.code.copy
     - content.code.annotate
+    - content.tabs.link
   icon:
     repo: fontawesome/brands/github
   logo: assets/images/00-workshop-intro/azure_container_apps.png
@@ -88,6 +89,11 @@ plugins:
   - git-revision-date
   - search
   - macros
+  - glightbox
+
+extra:
+  dapr:
+    version: 1.9.0
 
 repo_url: https://github.com/Azure/aca-dotnet-workshop
 edit_uri: edit/main/docs
