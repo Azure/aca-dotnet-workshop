@@ -1,11 +1,3 @@
----
-title: ACA Core Components Overview 
-parent: Workshop Introduction
-has_children: false
-nav_order: 1
-canonical_url: 'https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/'
----
-
 ## Overview of Azure Container Apps Core Components
 
 The main components of Azure Container Apps are:
