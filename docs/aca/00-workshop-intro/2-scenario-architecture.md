@@ -1,3 +1,11 @@
+---
+title: Scenario and Solution Architecture  
+parent: Workshop Introduction
+has_children: false
+nav_order: 2
+canonical_url: 'https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/'
+---
+
 ## Workshop Scenario
 
 In this workshop we will build a tasks management application following the microservices architecture pattern. This application will consist of 3 microservices where each microservice has certain capabilities to demonstrate how ACA and Dapr can simplify the building of a microservices application. Below is the architecture diagram of the application we are going to build in this workshop.

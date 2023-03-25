@@ -1,10 +1,19 @@
+---
+title: Contribution Guide
+parent: Contributing
+has_children: false
+nav_order: 1
+---
+
 If you'd like to contribute to this guide, please read the following guidelines. Contributors are more than welcome to share your learnings with others from a centralized location.
 
 # What Can I Do?
 
 - [Submit an issue or suggestion](2-Submit-issue-suggestion.md)
 - [Minor update or fix to an existing challenge and adding a new challenge](3-minor-update-fix.md)
-- [Run the github page locally with GitHub Codespaces](4-github-codespaces.md)
+- [Run the github page locally with Github Codespaces](4-github-codespaces.md)
+
+
 
 # Contributing
 
