@@ -1,10 +1,3 @@
----
-title: Minor update or fix, new challenge
-parent: Contributing
-has_children: false
-nav_order: 3
----
-
 # Typos, minor updates, or fixes to existing challenges 
 
 Whenever you are submitting any changes to the guide, please follow these recommendations:
