@@ -105,7 +105,7 @@ public interface ITasksManager
     Task<List<TaskModel>> GetYesterdaysDueTasks();
 }
 ```
-Next we need to provide the implementation for those two methods. Open the file `TasksStoreManager.cs` which is located under the `services` folder of the `TasksTracker.TasksManager.Backend.Api` project and place the two following methods inside the existing class:
+Next we need to provide the implementation for those two methods. Open the file `TasksStoreManager.cs` which is located under the `Services` folder of the `TasksTracker.TasksManager.Backend.Api` project and place the two following methods inside the existing class:
 
 ```csharp
 public async Task<List<TaskModel>> GetYesterdaysDueTasks()
@@ -153,7 +153,7 @@ public async Task MarkOverdueTasks(List<TaskModel> overDueTasksList)
 
 ```
 
-Make sure you add the following using statements at the the top of the `TasksStoreManager.cs` which is located under the `services` folder of the `TasksTracker.TasksManager.Backend.Api` project
+Make sure you add the following using statements at the the top of the `TasksStoreManager.cs` which is located under the `Services` folder of the `TasksTracker.TasksManager.Backend.Api` project
 
 ```csharp
 using System.Text.Json;
@@ -161,7 +161,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 ```
 
-We will also need to add a helper method called `DateTimeConverter` under a file called `DateTimeConverter.cs` which itself should live under a folder called `helpers`which in turn should be created under `TasksTracker.TasksManager.Backend.Api` project. Add the following code under `DateTimeConverter.cs`:
+We will also need to add a utility method called `DateTimeConverter` under a file called `DateTimeConverter.cs` which itself should live under a folder called `Utilities`which in turn should be created under `TasksTracker.TasksManager.Backend.Api` project. Add the following code under `DateTimeConverter.cs`:
 
 
 ```csharp
