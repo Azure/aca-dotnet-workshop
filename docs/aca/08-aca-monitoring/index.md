@@ -106,7 +106,7 @@ az containerapp secret set `
 ```
 
 ###### 2. Build new images and push them to ACR
-As we have done previously we need to build and push the 3 apps images to ACR so they are ready to be deployed to ACA, to do so, continue using the same PowerShell console and paste the code below (Make sure you are on directory `TasksTracker.ContainerApps`):
+As we have done previously we need to build and push the 3 apps images to ACR so they are ready to be deployed to ACA. To accomplish this, continue using the same PowerShell console and paste the code below (Make sure you are on directory `TasksTracker.ContainerApps`):
 
 ```powershell
 ## Build Backend API on ACR and Push to ACR
@@ -119,7 +119,7 @@ az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" -
 
 ##### 3. Deploy new revisions of the services to ACA and set a new environment variable
 
-As we've done multiple times, we need to update the ACA hosting the 3 services with a new revision so our code changes are available for end users, to do so run the below PowerShell script. Notice how we used the property `--set-env-vars` to set new environment variable named `ApplicationInsights__InstrumentationKey` and its value is a secret reference coming from the secret `appinsights-key` we added in [step 1](#1-add-application-insights-instrumentation-key-as-a-secret).
+As we've done multiple times, we need to update the ACA hosting the 3 services with a new revision so our code changes are available for end users. To accomplish this, run the below PowerShell script. Notice how we used the property `--set-env-vars` to set new environment variable named `ApplicationInsights__InstrumentationKey` and its value is a secret reference coming from the secret `appinsights-key` we added in [step 1](#1-add-application-insights-instrumentation-key-as-a-secret).
 
 ```powershell
 ## Update Backend API App container app and create a new revision 

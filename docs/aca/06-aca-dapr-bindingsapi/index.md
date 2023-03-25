@@ -133,7 +133,7 @@ In the previous code we just defined an action method named `ProcessTaskAndStore
 
 ##### 2. Create Dapr Input Binding Component file
 
-Now we need to create the component configuration file which will describe the configuration as well as how our backend background processor will start handling events coming from the external service (Azure Storage Queues). To do so, add a new file named `dapr-bindings-in-storagequeue.yaml` under folder `components` and paste the below:
+Now we need to create the component configuration file which will describe the configuration as well as how our backend background processor will start handling events coming from the external service (Azure Storage Queues). To accomplish this, add a new file named `dapr-bindings-in-storagequeue.yaml` under folder `components` and paste the below:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -169,7 +169,7 @@ The value of the Metadata `storageAccessKey` is used as plain text here for loca
 
 ##### 3. Create Dapr Output Binding Component file
 
-Now we need to create the component configuration file which will describe the configuration and how our service `ACA-Processor Backend` will be able to invoke the external service (Azure Blob Storage) and be able to create and store a JSON blob file that contains the content of the message received from Azure Storage Queues. To do so, add a new file named `dapr-bindings-out-blobstorage.yaml` under folder `components` and paste the below:
+Now we need to create the component configuration file which will describe the configuration and how our service `ACA-Processor Backend` will be able to invoke the external service (Azure Blob Storage) and be able to create and store a JSON blob file that contains the content of the message received from Azure Storage Queues. To accomplish this, add a new file named `dapr-bindings-out-blobstorage.yaml` under folder `components` and paste the below:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -198,7 +198,7 @@ The full specifications of yaml file with Azure blob storage can be found on [th
 * We are setting the property `decodeBase64`  to `false` as we don’t want to encode file content to base64 images, we need to store the file content as is.
 
 ##### 5. Use Dapr client SDK to invoke the output binding
-Now we need to invoke the output binding by using the .NET SDK, to do so, open the file named `ExternalTasksProcessorController.cs` and replace the code in the file with the code below. Pay close attention to the updated `ProcessTaskAndStore` action method:
+Now we need to invoke the output binding by using the .NET SDK. To accomplish this, open the file named `ExternalTasksProcessorController.cs` and replace the code in the file with the code below. Pay close attention to the updated `ProcessTaskAndStore` action method:
 
 ```csharp
 using Dapr.Client;
@@ -266,7 +266,7 @@ Notice how are setting the file name we are storing at the external service. We 
 
 ##### 6. Test Dapr bindings locally
 
-Now we are ready to give it an end-to-end test on our dev machines. To do so, run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together in this [section](../../aca/20-appendix/01-run-debug-dapr-app-vscode.md).
+Now we are ready to give it an end-to-end test on our dev machines. To accomplish this, run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together in this [section](../../aca/20-appendix/01-run-debug-dapr-app-vscode.md).
 
 Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from [here](https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview). Login to your Azure Subscription and navigate to the storage account already created, create a queue, and use the same name you already used in the Dapr Input configuration file. In our case the name of the queue in the configuration file is `external-tasks-queue`.
 
@@ -294,7 +294,7 @@ If all is configured successfully you should be able to see a JSON file created 
 In the previous module we've seen how we are sending notification emails when a task is assigned to a user by installing the SendGrid SDK NuGet package and writing some custom code to trigger sending emails. Dapr Can simplify this process by using the [Dapr SendGrid Output binding component](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/). So let's see how we can simplify this and by replacing the external SendGrid SDK with dapr output binding.
 
 ##### 1. Create Dapr SendGrid Output Binding Component file
-We need to create the component configuration file which will describe the configuration and how our service `ACA-Processor Backend` will be able to invoke SendGrid service and notify the task owner by email. To do so, add a new file named `dapr-bindings-out-sendgrid.yaml` under the `components` folder and paste the code below inside the newly created file:
+We need to create the component configuration file which will describe the configuration and how our service `ACA-Processor Backend` will be able to invoke SendGrid service and notify the task owner by email. To accomplish this, add a new file named `dapr-bindings-out-sendgrid.yaml` under the `components` folder and paste the code below inside the newly created file:
 
 ```yaml
 apiVersion: dapr.io/v1alpha1
@@ -328,7 +328,7 @@ using SendGrid.Helpers.Mail;
 ```
 
 ##### 3. Update SendEmail code to use Output bindings instead of SendGrid SDK
-Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. To do so, open the file named `TasksNotifierController.cs` and update the action method `TaskSaved` and `SendEmail` method code as the below:
+Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. To accomplish this, open the file named `TasksNotifierController.cs` and update the action method `TaskSaved` and `SendEmail` method code as the below:
 
 ```csharp
 private async Task<bool> SendEmail(TaskModel taskModel)
@@ -386,7 +386,7 @@ Currently we have 3 Dapr components which are not Azure AD enabled services. As 
 To do this we need Create a [Dapr secret store component](https://docs.dapr.io/developing-applications/building-blocks/secrets/secrets-overview/) using the Container Apps schema. The Dapr secret store will be configured with [Azure Key Vault secret store](https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/).
 
 ##### 1. Create an Azure Key Vault resource
-First thing we need to do is to create an Azure Key Vault which will be used to store securely any secret or key used in our application. To do so, run the below command:
+First thing we need to do is to create an Azure Key Vault which will be used to store securely any secret or key used in our application. To accomplish this, run the below command:
 
 ```powershell
 $KEYVAULTNAME = "<your akv name. Should be globally unique. 
@@ -422,7 +422,7 @@ az role assignment create `
 ```
 
 ##### 3. Create secrets in the Azure Key Vault
-To create a secret in Azure Key Vault you need to have a role which allows you to create secrets. From the Azure CLI we will assign the role `Key Vault Secrets Officer` to the user signed in to AZ CLI to be able to create secrets. To do so use the script below:
+To create a secret in Azure Key Vault you need to have a role which allows you to create secrets. From the Azure CLI we will assign the role `Key Vault Secrets Officer` to the user signed in to AZ CLI to be able to create secrets. To accomplish this use the script below:
 
 ```powershell
 $SIGNEDIN_UERID =  az ad signed-in-user show --query id
@@ -540,7 +540,7 @@ With those changes in place, we are ready to rebuild the backend background proc
 ### Deploy a new revision of the Backend Background Processor App to ACA
 
 ##### 1. Build the Backend Background Processor image and push it to ACR
-As we have done previously we need to build and deploy the Backend Background Processor image to ACR so it is ready to be deployed to ACA. To do so, continue using the same PowerShell console and paste the code below (make sure you are under the  `TasksTracker.ContainerApps` directory):
+As we have done previously we need to build and deploy the Backend Background Processor image to ACR so it is ready to be deployed to ACA. To accomplish this, continue using the same PowerShell console and paste the code below (make sure you are under the  `TasksTracker.ContainerApps` directory):
 
 ```powershell
 az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .

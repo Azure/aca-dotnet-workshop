@@ -11,7 +11,7 @@ This page shows you how to configure VScode to run and debug multiple Dapr appli
 
 We need to update VS code `tasks.json` and `launch.json` configuration files included in your workspace. Once completed you should be able to use the Run and Debug button on the activity bar within VS Code to launch all services to be able to debug them locally.
 
-First we need to add a new launch configuration for the Backend Web API and Frontend Web App projects. To do so, open file `launch.json` and add the two configurations shown below. Make sure you append the configurations below to the existing array instead of replacing what you have. This way you will preserve your existing configuration and simply add two new ones. For the complete launch.json file, you can check the [file](https://github.com/Azure/aca-dotnet-workshop/blob/main/.vscode/launch.json) here.
+First we need to add a new launch configuration for the Backend Web API and Frontend Web App projects. To accomplish this, open file `launch.json` and add the two configurations shown below. Make sure you append the configurations below to the existing array instead of replacing what you have. This way you will preserve your existing configuration and simply add two new ones. For the complete launch.json file, you can check the [file](https://github.com/Azure/aca-dotnet-workshop/blob/main/.vscode/launch.json) here.
 
 {: .note }
 The configuration below assumes that you are using .net 6. If you are using a different .net version make sure you update the paths to use the correct version. For example if using .net 7 then change the path to say net7.0 instead of net6.0.
@@ -67,7 +67,7 @@ The configuration below assumes that you are using .net 6. If you are using a di
 
 Notice that we have a `preLaunchTask` and a `postDebugTask` which we need to define right now. Those tasks are Dapr tasks.
 
-The [Dapr VSCode extension](https://docs.dapr.io/developing-applications/ides/vscode/vscode-dapr-extension/#scaffold-dapr-debugging-tasks) we have previously installed helps us to define those pre and post debug tasks, to do so, open the file tasks.json and click <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>, and type `Dapr: Scaffold Dapr Tasks` the Dapr VS Code extension will allow us to manage Dapr application and test it out in an easier way, the below image shows a full list of helper commands.
+The [Dapr VSCode extension](https://docs.dapr.io/developing-applications/ides/vscode/vscode-dapr-extension/#scaffold-dapr-debugging-tasks) we have previously installed helps us to define those pre and post debug tasks. To accomplish this, open the file tasks.json and click <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>, and type `Dapr: Scaffold Dapr Tasks` the Dapr VS Code extension will allow us to manage Dapr application and test it out in an easier way, the below image shows a full list of helper commands.
 ![dapr-vscode-extension](../../assets/images/appendix/dapr-vscode-extension.jpg)
 
 Now we will add 4 tasks, for each application, there will be a task to support the `preLaunch` activity and the `postDebug` activity (Terminate/Exit Dapr Sidecar process), so open file tasks.json and add the tasks below:
@@ -147,7 +147,7 @@ Next let's add the dependsOn tasks. Open `tasks.json` and add the tasks below:
 ```
 For a complete reference of tasks.json file, you can check this [link.](https://github.com/Azure/aca-dotnet-workshop/blob/main/.vscode/tasks.json)
 
-Lastly, we need to add a `compound launch` property so we launch and debug both applications together, to do so, open the file `launch.json` again and add the below array after the `configuration` array.
+Lastly, we need to add a `compound launch` property so we launch and debug both applications together. To accomplish this, open the file `launch.json` again and add the below array after the `configuration` array.
 
 ```json
 "compounds": [

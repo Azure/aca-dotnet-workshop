@@ -249,7 +249,7 @@ In this module, we will add a the service named `ACA Web API – Frontend` as il
     ```
     The code added is similar to the create operation. The Edit page accepts the TaskId as a Guid, loads the task, and then updates the task by sending an HTTP PUT operation.
 
-6. Now we will inject an HTTP client factory and define environment variables. To do so we will register the HttpClientFactory named `BackEndApiExternal` to make it available for injection in controllers. Open the `Program.cs` file and paste the code below:
+6. Now we will inject an HTTP client factory and define environment variables. To accomplish this we will register the HttpClientFactory named `BackEndApiExternal` to make it available for injection in controllers. Open the `Program.cs` file and paste the code below:
 
     ```csharp
     namespace TasksTracker.WebPortal.Frontend.Ui
@@ -393,7 +393,7 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
     The FQDN consists of multiple parts. For example, all our Container Apps will be under a specific Environment unique identifier (e.g. `agreeablestone-8c14c04c`) and the Container App will vary based on the name provided, check the image below for a better explanation.
     ![Container Apps FQDN](../../assets/images/02-aca-comm/container-apps-fqdn.jpg)
 
-2. Now we will need to update the Frontend Web App environment variable to point to the internal backend Web API FQDN. The last thing we need to do here is to update the Frontend WebApp environment variable named `BackendApiConfig_BaseUrlExternalHttp` with the new value of the internal Backend Web API base URL, to do so we need to update the Web App container app and it will create a new revision implicitly (more about revisions in the upcoming modules). The following command will update the container app with the changes:
+2. Now we will need to update the Frontend Web App environment variable to point to the internal backend Web API FQDN. The last thing we need to do here is to update the Frontend WebApp environment variable named `BackendApiConfig_BaseUrlExternalHttp` with the new value of the internal Backend Web API base URL. To accomplish this we need to update the Web App container app and it will create a new revision implicitly (more about revisions in the upcoming modules). The following command will update the container app with the changes:
 
     ```powershell
     az containerapp update `
