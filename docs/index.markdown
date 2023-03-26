@@ -1,5 +1,5 @@
 
-<img src="assets/images/00-workshop-intro/azure_container_apps.png"> 
+![Azure Container Apps](assets/images/00-workshop-intro/azure-container-apps-image.png) 
 
 
 There is no doubt that building containerized applications and following a microservices architecture is one of the most common software architecture patterns observed in the past couple of years.

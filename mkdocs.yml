@@ -1,0 +1,109 @@
+site_name: Azure Container Apps - Workshop
+site_description: Azure Container Apps - Workshop
+site_author: Microsoft
+nav:
+  - Homepage: index.markdown
+  - Workshop Introduction:
+    - aca/00-workshop-intro/index.md
+    - ACA Core Components Overview: aca/00-workshop-intro/1-aca-core-components.md
+    - Scenario and Solution Architecture: aca/00-workshop-intro/2-scenario-architecture.md
+    - Dapr Integration in ACA: aca/00-workshop-intro/3-dapr-integration.md
+    - Prerequisites: aca/00-workshop-intro/4-prerequisites.md
+  - Module 1 - Deploy Backend API to ACA: aca/01-deploy-api-to-aca/index.md
+  - Module 2 - Communication between Microservices in ACA: aca/02-aca-comm/index.md
+  - Module 3 - Dapr Integration with ACA: aca/03-aca-dapr-integration/index.md
+  - Module 4 - ACA State Store With Dapr State Management API: aca/04-aca-dapr-stateapi/index.md
+  - Module 5 - ACA Async Communication with Dapr Pub/Sub API: aca/05-aca-dapr-pubsubapi/index.md
+  - Module 6 - ACA with Dapr Bindings Building Block: aca/06-aca-dapr-bindingsapi/index.md
+  - Module 7 - ACA scheduled jobs with Dapr Cron Binding: aca/07-aca-cron-bindings/index.md
+  - Module 8 - ACA Monitoring and Observability with Application Insights: aca/08-aca-monitoring/index.md
+  - Module 9 - ACA Auto Scaling with KEDA: aca/09-aca-autoscale-keda/index.md
+  - Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA: aca/10-aca-iac-bicep/index.md
+  - Contributing:
+    - Contribution Guide: aca/10-contributing/1-contribution-guide.md
+    - Submit an issue or suggestion: aca/10-contributing/2-Submit-issue-suggestion.md
+    - Minor update or fix, new challenge: aca/10-contributing/3-minor-update-fix.md
+    - Testing changes locally with Github Codespaces: aca/10-contributing/4-github-codespaces.md
+  - Appendix:
+    - Debug and launch Dapr applications in VSCode: aca/20-appendix/01-run-debug-dapr-app-vscode.md
+
+theme:
+  name: material
+  font:
+    text: Ubuntu
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - header.autohide
+    - navigation.instant
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+  logo: assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg
+  favicon: assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg
+
+markdown_extensions:
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - pymdownx.keys
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path: '.'
+      check_paths: true
+      url_download: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - meta
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - attr_list
+  - md_in_html
+
+copyright: Copyright &copy; 2023 Microsoft
+
+plugins:
+  - git-revision-date
+  - search
+  - macros
+  - glightbox
+
+extra:
+  dapr:
+    version: 1.9.0
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Azure/aca-dotnet-workshop
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+repo_url: https://github.com/Azure/aca-dotnet-workshop
+edit_uri: edit/main/docs
