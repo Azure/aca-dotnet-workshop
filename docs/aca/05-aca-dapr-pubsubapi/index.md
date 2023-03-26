@@ -95,7 +95,7 @@ dotnet new webapi -o TasksTracker.Processor.Backend.Svc
 ```
 
 We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA. 
-To do so Open the VS Code Command Palette (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>) and select **Docker: Add Docker Files to Workspace...**
+To do so Open the VS Code Command Palette (++ctrl+shift+p++) and select **Docker: Add Docker Files to Workspace...**
 
   - Use `.NET: ASP.NET Core` when prompted for application platform.
   - Choose `Linux` when prompted to choose the operating system.

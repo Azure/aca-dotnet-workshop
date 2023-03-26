@@ -14,7 +14,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
     dotnet new webapi -o TasksManager.Backend.Api
     ```
    
-- Next we need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>) and select `Docker: Add Docker Files to Workspace...`
+- Next we need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
     * Use `.NET: ASP.NET Core` when prompted for application platform.
     * Choose `Linux` when prompted to choose the operating system.
     * You will be asked if you want to add Docker Compose files. Select `No`.

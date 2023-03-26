@@ -48,6 +48,7 @@ theme:
     - navigation.instant
     - navigation.indexes
     - navigation.top
+    - navigation.footer
     - content.code.copy
     - content.code.annotate
     - content.tabs.link
@@ -61,6 +62,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - admonition
+  - pymdownx.keys
   - pymdownx.inlinehilite
   - pymdownx.highlight:
       anchor_linenums: true
@@ -96,6 +98,9 @@ plugins:
 extra:
   dapr:
     version: 1.9.0
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Azure/aca-dotnet-workshop
 
 extra_css:
   - assets/stylesheets/extra.css
