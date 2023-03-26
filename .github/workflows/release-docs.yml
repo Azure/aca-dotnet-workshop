@@ -39,4 +39,6 @@ jobs:
         with:
           folder: ./dist
           branch: gh-pages
-          clean-exclude: pr-preview
+          clean-exclude: |
+            pr-preview
+            .github
