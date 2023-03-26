@@ -54,8 +54,8 @@ theme:
     - content.tabs.link
   icon:
     repo: fontawesome/brands/github
-  logo: assets/images/00-workshop-intro/azure_container_apps.png
-  favicon: assets/images/00-workshop-intro/azure_container_apps.png
+  logo: assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg
+  favicon: assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg
 
 markdown_extensions:
   - def_list
