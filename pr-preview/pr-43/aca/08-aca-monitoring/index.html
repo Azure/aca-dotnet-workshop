@@ -1,0 +1,774 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Azure Container Apps - Workshop" name="description"/>
+<meta content="Microsoft" name="author"/>
+<link href="../07-aca-cron-bindings/" rel="prev"/>
+<link href="../09-aca-autoscale-keda/" rel="next"/>
+<link href="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.1.4" name="generator"/>
+<title>Module 8 - ACA Monitoring and Observability with Application Insights - Azure Container Apps - Workshop</title>
+<link href="../../assets/stylesheets/main.240905d7.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Ubuntu";--md-code-font:"Roboto Mono"}</style>
+<link href="../../assets/stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#module-8-aca-monitoring-and-observability-with-application-insights">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Azure Container Apps - Workshop" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Azure Container Apps - Workshop">
+<img alt="logo" src="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Azure Container Apps - Workshop
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Module 8 - ACA Monitoring and Observability with Application Insights
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="teal" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Azure Container Apps - Workshop" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Azure Container Apps - Workshop">
+<img alt="logo" src="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg"/>
+</a>
+    Azure Container Apps - Workshop
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Homepage
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../00-workshop-intro/">Workshop Introduction</a>
+<label for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          Workshop Introduction
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-workshop-intro/1-aca-core-components/">
+        ACA Core Components Overview
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-workshop-intro/2-scenario-architecture/">
+        Scenario and Solution Architecture
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-workshop-intro/3-dapr-integration/">
+        Dapr Integration in ACA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-workshop-intro/4-prerequisites/">
+        Prerequisites
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../01-deploy-api-to-aca/">
+        Module 1 - Deploy Backend API to ACA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../02-aca-comm/">
+        Module 2 - Communication between Microservices in ACA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../03-aca-dapr-integration/">
+        Module 3 - Dapr Integration with ACA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../04-aca-dapr-stateapi/">
+        Module 4 - ACA State Store With Dapr State Management API
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../05-aca-dapr-pubsubapi/">
+        Module 5 - ACA Async Communication with Dapr Pub/Sub API
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../06-aca-dapr-bindingsapi/">
+        Module 6 - ACA with Dapr Bindings Building Block
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../07-aca-cron-bindings/">
+        Module 7 - ACA scheduled jobs with Dapr Cron Binding
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Module 8 - ACA Monitoring and Observability with Application Insights
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Module 8 - ACA Monitoring and Observability with Application Insights
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#application-insights-overview">
+    Application Insights overview
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#installing-application-insights-sdk-into-the-3-microservices-apps">
+    Installing Application Insights SDK into the 3 Microservices apps
+  </a>
+<nav aria-label="Installing Application Insights SDK into the 3 Microservices apps" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-install-the-application-insights-sdk-using-nuget">
+    1. Install the Application Insights SDK using NuGet
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-set-rolename-property-in-all-the-services">
+    2. Set RoleName property in all the services
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-set-the-application-insights-instrumentation-key">
+    3. Set the Application Insights instrumentation key
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#deploy-services-to-aca-and-create-new-revisions">
+    Deploy services to ACA and create new Revisions
+  </a>
+<nav aria-label="Deploy services to ACA and create new Revisions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-add-application-insights-instrumentation-key-as-a-secret">
+    1. Add Application Insights Instrumentation key as a secret
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-deploy-new-revisions-of-the-services-to-aca-and-set-a-new-environment-variable">
+    3. Deploy new revisions of the services to ACA and set a new environment variable
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#distributed-tracing-via-application-map">
+    Distributed Tracing via Application Map
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monitor-production-application-using-live-metrics">
+    Monitor production application using Live Metrics
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#logs-search-using-transaction-search">
+    Logs search using Transaction Search
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#failures-and-performance-panels">
+    Failures and Performance Panels
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../09-aca-autoscale-keda/">
+        Module 9 - ACA Auto Scaling with KEDA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10-aca-iac-bicep/">
+        Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+          Contributing
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_13_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_13">
+<span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10-contributing/1-contribution-guide/">
+        Contribution Guide
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10-contributing/2-Submit-issue-suggestion/">
+        Submit an issue or suggestion
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10-contributing/3-minor-update-fix/">
+        Minor update or fix, new challenge
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10-contributing/4-github-codespaces/">
+        Testing changes locally with Github Codespaces
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+          Appendix
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_14_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_14">
+<span class="md-nav__icon md-icon"></span>
+          Appendix
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../20-appendix/01-run-debug-dapr-app-vscode/">
+        Debug and launch Dapr applications in VSCode
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#application-insights-overview">
+    Application Insights overview
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#installing-application-insights-sdk-into-the-3-microservices-apps">
+    Installing Application Insights SDK into the 3 Microservices apps
+  </a>
+<nav aria-label="Installing Application Insights SDK into the 3 Microservices apps" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-install-the-application-insights-sdk-using-nuget">
+    1. Install the Application Insights SDK using NuGet
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-set-rolename-property-in-all-the-services">
+    2. Set RoleName property in all the services
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-set-the-application-insights-instrumentation-key">
+    3. Set the Application Insights instrumentation key
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#deploy-services-to-aca-and-create-new-revisions">
+    Deploy services to ACA and create new Revisions
+  </a>
+<nav aria-label="Deploy services to ACA and create new Revisions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-add-application-insights-instrumentation-key-as-a-secret">
+    1. Add Application Insights Instrumentation key as a secret
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-deploy-new-revisions-of-the-services-to-aca-and-set-a-new-environment-variable">
+    3. Deploy new revisions of the services to ACA and set a new environment variable
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#distributed-tracing-via-application-map">
+    Distributed Tracing via Application Map
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monitor-production-application-using-live-metrics">
+    Monitor production application using Live Metrics
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#logs-search-using-transaction-search">
+    Logs search using Transaction Search
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#failures-and-performance-panels">
+    Failures and Performance Panels
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="module-8-aca-monitoring-and-observability-with-application-insights">Module 8 - ACA Monitoring and Observability with Application Insights<a class="headerlink" href="#module-8-aca-monitoring-and-observability-with-application-insights" title="Permanent link">¶</a></h1>
+<p>In this module, we will explore how we can configure ACA and ACA Environment with <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview">Application Insights</a> which will provide a holistic
+view of our container apps health, performance metrics, logs data, various telemetries and traces.
+A
+CA do not support <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers">Auto-Instrumentation</a> for Application Insights, 
+so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.</p>
+<h3 id="application-insights-overview">Application Insights overview<a class="headerlink" href="#application-insights-overview" title="Permanent link">¶</a></h3>
+<p>Application Insights is an offering from Azure Monitor that will help us to monitor all ACAs under the same Container App Environment and collect telemetry about the services within the solution, 
+as well as understand the usage of the services and users' engagement via integrated analytics tools.</p>
+<p>What we mean by Telemetry here is the data collected to observe our application, it can be broken into three categories :</p>
+<ol>
+<li>Distributed Tracing: provides insights into the traffic between services involved in distributed transactions, think of when the Frontend Web App talks with the Backend Api App to insert or retrieve data. 
+An application map of how calls are flowing between services is very important for any distributed application.</li>
+<li>Metrics: provide insights into the performance of a service and its resource utilization, think of the CPU and Memory utilization of the Backend Background processor, and how we can understand when we need 
+to increase the number of replicas.</li>
+<li>Logging: provides insights into how code is executing and if errors have occurred.</li>
+</ol>
+<p>In this <a href="../01-deploy-api-to-aca/#2-deploy-web-api-backend-project-to-aca">module</a> we have already provisioned a Workspace-based Application Insights Instance and configured it with ACA environment 
+by setting the property <code>--dapr-instrumentation-key</code> whn creating the environment, so we will assume that you have already an instance of Application Insights created and ready to be used in the 3 Contains Apps.</p>
+<h3 id="installing-application-insights-sdk-into-the-3-microservices-apps">Installing Application Insights SDK into the 3 Microservices apps<a class="headerlink" href="#installing-application-insights-sdk-into-the-3-microservices-apps" title="Permanent link">¶</a></h3>
+<h4 id="1-install-the-application-insights-sdk-using-nuget">1. Install the Application Insights SDK using NuGet<a class="headerlink" href="#1-install-the-application-insights-sdk-using-nuget" title="Permanent link">¶</a></h4>
+<p>Now we need to add Application Insights SDK to the <strong>three services</strong> we have, this is an identical operation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We will describe how to set up Application Insights for Backend API service, but the same steps need to be done for the other <strong>two services</strong>.</p>
+</div>
+<p>Add the SDK, using below NuGet reference in the <code>csproj</code> file of the Backend API project, you can find the <code>csproj</code> file under the project folder <strong>TasksTracker.TasksManager.Backend.Api</strong>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">TasksTracker.TasksManager.Backend.Api.csproj</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="w">  </span><span class="nt">&lt;ItemGroup&gt;</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="cm">&lt;!--Other packages are removed for brevity--&gt;</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="hll"><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">"Microsoft.ApplicationInsights.AspNetCore"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"2.21.0"</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span></span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="nt">&lt;/ItemGroup&gt;</span>
+</span></code></pre></div>
+</div>
+</div>
+</input></div>
+<h4 id="2-set-rolename-property-in-all-the-services">2. Set RoleName property in all the services<a class="headerlink" href="#2-set-rolename-property-in-all-the-services" title="Permanent link">¶</a></h4>
+<p>For each project, we will add a new file on the root directory of the project <strong>TasksTracker.TasksManager.Backend.Api</strong>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">AppInsightsTelemetryInitializer.cs</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="p">{</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AppInsightsTelemetryInitializer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ITelemetryInitializer</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Initialize</span><span class="p">(</span><span class="n">ITelemetry</span><span class="w"> </span><span class="n">telemetry</span><span class="p">)</span>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">telemetry</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">Cloud</span><span class="p">.</span><span class="n">RoleName</span><span class="p">))</span>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">                </span><span class="c1">//set custom role name here</span>
+</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">                </span><span class="n">telemetry</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">Cloud</span><span class="p">.</span><span class="n">RoleName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"tasksmanager-backend-api"</span><span class="p">;</span>
+</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</input></div>
+<div class="admonition important">
+<p class="admonition-title">RoleName property for three services</p>
+<p>The only difference between each file on the 3 projects is the <strong>RoleName</strong> property value. </p>
+<p>This property will be used by Application Insights to identify the components on the application map, as well for example it will be useful for us if we need to filter on all the warning logs generated from the
+Backend API service, so we will use the value <code>tasksmanager-backend-api</code> when we filter.</p>
+<details class="example">
+<summary>RoleName property values for other two service</summary>
+<p>You can check the <code>AppInsightsTelemetryInitializer.cs</code> files and the RoleName value used in the other projects below: </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">TasksTracker.WebPortal.Frontend.Ui</label><label for="__tabbed_3_2">TasksTracker.Processor.Backend.Svc</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.ApplicationInsights.Channel</span><span class="p">;</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.ApplicationInsights.Extensibility</span><span class="p">;</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.WebPortal.Frontend.Ui</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="p">{</span>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AppInsightsTelemetryInitializer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ITelemetryInitializer</span>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Initialize</span><span class="p">(</span><span class="n">ITelemetry</span><span class="w"> </span><span class="n">telemetry</span><span class="p">)</span>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">telemetry</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">Cloud</span><span class="p">.</span><span class="n">RoleName</span><span class="p">))</span>
+</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">                </span><span class="c1">//set custom role name here</span>
+</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="hll"><span class="w">                </span><span class="n">telemetry</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">Cloud</span><span class="p">.</span><span class="n">RoleName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"tasksmanager-frontend-webapp"</span><span class="p">;</span>
+</span></span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-17"><a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.ApplicationInsights.Channel</span><span class="p">;</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.ApplicationInsights.Extensibility</span><span class="p">;</span>
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc</span>
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="p">{</span>
+</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AppInsightsTelemetryInitializer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ITelemetryInitializer</span>
+</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Initialize</span><span class="p">(</span><span class="n">ITelemetry</span><span class="w"> </span><span class="n">telemetry</span><span class="p">)</span>
+</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">telemetry</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">Cloud</span><span class="p">.</span><span class="n">RoleName</span><span class="p">))</span>
+</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">                </span><span class="c1">//set custom role name here</span>
+</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="hll"><span class="w">                </span><span class="n">telemetry</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">Cloud</span><span class="p">.</span><span class="n">RoleName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"tasksmanager-backend-processor"</span><span class="p">;</span>
+</span></span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-17"><a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</input></input></div>
+</details>
+</div>
+<p>Next, we need to register this <code>AppInsightsTelemetryInitializer</code> class. Update file as highlighted below</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Don't forget that you need to do the same for the remaining <strong>two projects</strong>.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">Program.cs</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1">//Code removed for brevity </span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="hll"><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddApplicationInsightsTelemetry</span><span class="p">();</span>
+</span></span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="hll"><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">Configure</span><span class="o">&lt;</span><span class="n">TelemetryConfiguration</span><span class="o">&gt;</span><span class="p">((</span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span></span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="hll"><span class="w">    </span><span class="n">o</span><span class="p">.</span><span class="n">TelemetryInitializers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AppInsightsTelemetryInitializer</span><span class="p">());</span>
+</span></span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="hll"><span class="p">});</span>
+</span></span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="kt">var</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="n">Build</span><span class="p">();</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="c1">//Code removed for brevity</span>
+</span></code></pre></div>
+</div>
+</div>
+</input></div>
+<h4 id="3-set-the-application-insights-instrumentation-key">3. Set the Application Insights instrumentation key<a class="headerlink" href="#3-set-the-application-insights-instrumentation-key" title="Permanent link">¶</a></h4>
+<p>In the previous module, we've used Dapr Secret Store to store connection strings and keys, on this module we will demonstrate how we can use another approach to secrets in Container Apps.</p>
+<p>Now we need to set the Application Insights Instrumentation Key so the projects are able to send telemetry data to the AI instance.
+We are going to set this via secrets and environment variables once we redeploy the Container Apps and create new revisions.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"><div class="tabbed-labels"><label for="__tabbed_5_1">appsettings.json</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">  </span><span class="nt">"ApplicationInsights"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="nt">"InstrumentationKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</input></div>
+<p>With this step completed, we have done all the changes needed. let's now deploy the changes and create new ACA revisions.</p>
+<h3 id="deploy-services-to-aca-and-create-new-revisions">Deploy services to ACA and create new Revisions<a class="headerlink" href="#deploy-services-to-aca-and-create-new-revisions" title="Permanent link">¶</a></h3>
+<h4 id="1-add-application-insights-instrumentation-key-as-a-secret">1. Add Application Insights Instrumentation key as a secret<a class="headerlink" href="#1-add-application-insights-instrumentation-key-as-a-secret" title="Permanent link">¶</a></h4>
+<p>Let's create a secret named <code>appinsights-key</code> on each Container App which contains the value of the AI instrumentation key. 
+Remember that we can obtain this value from Azure Portal by going to AI instance we created, or we can get it from Azure CLI as we did in module 1. To create the secret use PowerShell console and paste the code below:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">"appinsights-key=&lt;AI Key Here&gt;"</span>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$FRONTEND_WEBAPP_NAME</span> <span class="p">`</span>
+</span><span id="__span-6-8"><a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-6-9"><a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">"appinsights-key=&lt;AI Key Here&gt;"</span>
+</span><span id="__span-6-10"><a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a>
+</span><span id="__span-6-11"><a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-6-12"><a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-6-13"><a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-6-14"><a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">"appinsights-key=&lt;AI Key Here&gt;"</span>
+</span></code></pre></div>
+<h5 id="2-build-new-images-and-push-them-to-acr">2. Build new images and push them to ACR<a class="headerlink" href="#2-build-new-images-and-push-them-to-acr" title="Permanent link">¶</a></h5>
+<p>As we have done previously we need to build and push the three apps images to ACR, so they are ready to be deployed to ACA. </p>
+<p>To accomplish this, continue using the same PowerShell console and paste the code below (Make sure you are on directory <strong>TasksTracker.ContainerApps</strong>):</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c">## Build Backend API on ACR and Push to ACR</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/$BACKEND_API_NAME"</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">'TasksTracker.TasksManager.Backend.Api/Dockerfile'</span> <span class="p">.</span> 
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="c">## Build Backend Service on ACR and Push to ACR</span>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/$BACKEND_SVC_NAME"</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">'TasksTracker.Processor.Backend.Svc/Dockerfile'</span> <span class="p">.</span>
+</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="c">## Build Frontend Web App on ACR and Push to ACR</span>
+</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/$FRONTEND_WEBAPP_NAME"</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">'TasksTracker.WebPortal.Frontend.Ui/Dockerfile'</span> <span class="p">.</span>
+</span></code></pre></div>
+<h4 id="3-deploy-new-revisions-of-the-services-to-aca-and-set-a-new-environment-variable">3. Deploy new revisions of the services to ACA and set a new environment variable<a class="headerlink" href="#3-deploy-new-revisions-of-the-services-to-aca-and-set-a-new-environment-variable" title="Permanent link">¶</a></h4>
+<p>We need to update the ACA hosting the three services with a new revision so our code changes are available for end users. </p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Notice how we used the property <code>--set-env-vars</code> to set new environment variable named <code>ApplicationInsights__InstrumentationKey</code> and its value is a secret reference coming
+from the secret <code>appinsights-key</code> we added in <a href="#1-add-application-insights-instrumentation-key-as-a-secret">step 1</a>.</p>
+</div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c">## Update Backend API App container app and create a new revision </span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span>  <span class="p">`</span>
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230301</span><span class="p">-</span><span class="n">1</span> <span class="p">`</span>
+</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="p">-</span><span class="n">-set-env-vars</span> <span class="s2">"ApplicationInsights__InstrumentationKey=secretref:appinsights-key"</span>
+</span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="c">## Update Frontend Web App container app and create a new revision </span>
+</span><span id="__span-8-9"><a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-8-10"><a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$FRONTEND_WEBAPP_NAME</span>  <span class="p">`</span>
+</span><span id="__span-8-11"><a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-8-12"><a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230301</span><span class="p">-</span><span class="n">1</span> <span class="p">`</span>
+</span><span id="__span-8-13"><a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="p">-</span><span class="n">-set-env-vars</span> <span class="s2">"ApplicationInsights__InstrumentationKey=secretref:appinsights-key"</span>
+</span><span id="__span-8-14"><a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a>
+</span><span id="__span-8-15"><a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="c">## Update Backend Background Service container app and create a new revision </span>
+</span><span id="__span-8-16"><a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-8-17"><a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-8-18"><a href="#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-8-19"><a href="#__codelineno-8-19" id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230301</span><span class="p">-</span><span class="n">1</span> <span class="p">`</span>
+</span><span id="__span-8-20"><a href="#__codelineno-8-20" id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="p">-</span><span class="n">-set-env-vars</span> <span class="s2">"ApplicationInsights__InstrumentationKey=secretref:appinsights-key"</span>
+</span></code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>With those changes in place, you should start seeing telemetry coming to the Application Insights instance provisioned, let's review Application Insights key dashboards and panels in Azure Portal.</p>
+</div>
+<h3 id="distributed-tracing-via-application-map">Distributed Tracing via Application Map<a class="headerlink" href="#distributed-tracing-via-application-map" title="Permanent link">¶</a></h3>
+<p>Application Map will help us to spot any performance bottlenecks or failure hotspots across all our services of our distributed microservice application. 
+Each node on the map represents an application component (service) or its dependencies and has a health KPI and alerts status.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/08-aca-monitoring/distributed-tracing-ai.jpg"><img alt="distributed-tracing-ai" src="../../assets/images/08-aca-monitoring/distributed-tracing-ai.jpg"/></a></p>
+<p>Looking at the image above, you will see for example how the Backend Api with could RoleName <code>tasksmanager-backend-api</code> is depending on the Cosmos DB instance, showing the number of calls and average time 
+to service these calls. The application map is interactive so you can select a service/component and drill down into details.</p>
+<p>For example, when we drill down into the Dapr State node to understand how many times my backend API invoked the Dapr Sidecar state service to Save/Delete state, you will see results similar to the below image:</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/08-aca-monitoring/distributed-tracing-ai-details.jpg"><img alt="distributed-tracing-ai-details" src="../../assets/images/08-aca-monitoring/distributed-tracing-ai-details.jpg"/></a></p>
+<h3 id="monitor-production-application-using-live-metrics">Monitor production application using Live Metrics<a class="headerlink" href="#monitor-production-application-using-live-metrics" title="Permanent link">¶</a></h3>
+<p>This is one of my favorite monitoring panels, it provides you with near real-time (1-second latency) status of your entire distributed application, we can see performance and failures count, we can watch exceptions and traces as they happened, and we can see live servers (replicas in our case) and the CPU and Memory utilization and the number of requests they are handling.</p>
+<p>These live metrics provide very powerful diagnostics for our production microservice application. Check the image below and see the server names and some requests coming to the system.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/08-aca-monitoring/live-metrics-ai.jpg"><img alt="live-metrics-ai" src="../../assets/images/08-aca-monitoring/live-metrics-ai.jpg"/></a></p>
+<h3 id="logs-search-using-transaction-search">Logs search using Transaction Search<a class="headerlink" href="#logs-search-using-transaction-search" title="Permanent link">¶</a></h3>
+<p>Transaction search in Application Insights will help us find and explore individual telemetry items, such as exceptions, web requests, or dependencies as well as any log traces and events that we’ve added to the application.</p>
+<p>For example, if we want to see all the event types of type <code>Request</code> for the cloud RoleName <code>tasksmanager-backend-api</code> in the past 24 hours, we can use the transaction search dashboard to do this. 
+See how the filters are set and the results are displayed nicely, we can drill down on each result to have more details and what telemetry was captured before and after. 
+A very useful feature when troubleshooting exceptions and reading logs.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/08-aca-monitoring/transaction-search-ai.jpg"><img alt="transaction-search-ai" src="../../assets/images/08-aca-monitoring/transaction-search-ai.jpg"/></a></p>
+<h3 id="failures-and-performance-panels">Failures and Performance Panels<a class="headerlink" href="#failures-and-performance-panels" title="Permanent link">¶</a></h3>
+<p>The failure panel allows us to view the frequency of failures across different operations to help us to focus our efforts on those with the highest impact.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/08-aca-monitoring/failures-ai.jpg"><img alt="failures-ai" src="../../assets/images/08-aca-monitoring/failures-ai.jpg"/></a></p>
+<p>The Performance panel displays performance details for the different operations in our system. By identifying those operations with the longest duration, we can diagnose potential problems or best target our 
+ongoing development to improve the overall performance of the system.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/08-aca-monitoring/performance-ai.jpg"><img alt="failures-ai" src="../../assets/images/08-aca-monitoring/performance-ai.jpg"/></a></p>
+<hr/>
+<div class="md-source-file">
+<small>
+    
+      Last update:
+      2023-03-26
+    
+  </small>
+</div>
+</article>
+</div>
+<script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            Back to top
+          </button>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Module 7 - ACA scheduled jobs with Dapr Cron Binding" class="md-footer__link md-footer__link--prev" href="../07-aca-cron-bindings/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                  Previous
+                </span>
+                Module 7 - ACA scheduled jobs with Dapr Cron Binding
+              </div>
+</div>
+</a>
+<a aria-label="Next: Module 9 - ACA Auto Scaling with KEDA" class="md-footer__link md-footer__link--next" href="../09-aca-autoscale-keda/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                  Next
+                </span>
+                Module 9 - ACA Auto Scaling with KEDA
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2023 Microsoft
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/Azure/aca-dotnet-workshop" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../assets/javascripts/bundle.19047be9.min.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
