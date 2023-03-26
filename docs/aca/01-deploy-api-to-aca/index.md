@@ -205,11 +205,14 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 -  You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 recourses created below.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)
 
-To test the backend api service, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`. 
-Issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image.
+!!! success
+    
+    To test the backend api service, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`. 
+    Issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image.
 
-!!! tip "You can find your azure container app application url on the azure portal overview tab."
+    !!! tip 
+        You can find your azure container app application url on the azure portal overview tab.
 
-![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
+    ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
 
 In the next module, we will see how we will add a new Frontend Web App as a microservice and how it will communicate with the backend API.

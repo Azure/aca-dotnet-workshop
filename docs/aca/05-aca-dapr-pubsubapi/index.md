@@ -696,17 +696,17 @@ az containerapp revision restart `
 
     ![email-log](../../assets/images/05-aca-dapr-pubsubapi/email-log.jpg)
 
-!!! note
-
-    If you opted not to activate the SendGrid then you won't receive the email. In this case you can get the backend processor logs using the command below. Start by running the command below and then launch the
-    application and start creating new tasks. You should start seeing logs similar to the ones shown in the image below. The command will stop executing after 60 seconds of inactivity.
-
-    ```powershell
-    az containerapp logs show --follow `
-    -n $BACKEND_SVC_NAME `
-    -g $RESOURCE_GROUP
-    ```
-
-    ![email-log](../../assets/images/05-aca-dapr-pubsubapi/az_containerapp_logs.png)
+    !!! note
+    
+        If you opted not to activate the SendGrid then you won't receive the email. In this case you can get the backend processor logs using the command below. Start by running the command below and then launch the
+        application and start creating new tasks. You should start seeing logs similar to the ones shown in the image below. The command will stop executing after 60 seconds of inactivity.
+    
+        ```powershell
+        az containerapp logs show --follow `
+        -n $BACKEND_SVC_NAME `
+        -g $RESOURCE_GROUP
+        ```
+    
+        ![email-log](../../assets/images/05-aca-dapr-pubsubapi/az_containerapp_logs.png)
 
 The next module will delve into the implementation of Dapr bindings with ACA.
