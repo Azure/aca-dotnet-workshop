@@ -3,7 +3,7 @@ name: Deploy static content to Pages
 on:
   push:
     branches:
-        - gh-pages
+      - gh-pages
   workflow_dispatch:
 
 permissions:
