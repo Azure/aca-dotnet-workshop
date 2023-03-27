@@ -20,6 +20,7 @@ concurrency:
 jobs:
   release-docs:
     runs-on: ubuntu-latest
+    name: Build
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -34,7 +35,7 @@ jobs:
       - name: Build workshop site
         run: |
           make build-docs-website
-      - name: Deploy all docs
+      - name: Release all docs to branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ./dist
@@ -43,4 +44,6 @@ jobs:
             pr-preview
             .github
   publish-docs:
-    uses: ./.github/workflows/release-docs.yml
+    name: Publish
+    needs: release-docs
+    uses: ./.github/workflows/publish-docs.yml

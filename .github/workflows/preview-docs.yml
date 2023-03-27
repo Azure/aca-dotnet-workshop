@@ -21,6 +21,7 @@ concurrency:
 jobs:
   preview-docs:
     runs-on: ubuntu-latest
+    name: Build
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -36,7 +37,7 @@ jobs:
         run: |
           echo "GIT_PYTHON_REFRESH=quiet"
           make build-docs-website
-      - name: Deploy preview
+      - name: Release preview to branch
         uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: ./dist/
@@ -44,4 +45,6 @@ jobs:
           umbrella-dir: pr-preview
           action: auto
   publish-preview-docs:
-    uses: ./.github/workflows/release-docs.yml
+    name: Preview
+    needs: preview-docs
+    uses: ./.github/workflows/publish-docs.yml
