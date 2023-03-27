@@ -43,3 +43,5 @@ jobs:
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: auto
+  publish-preview-docs:
+    uses: ./.github/workflows/release-docs.yml
