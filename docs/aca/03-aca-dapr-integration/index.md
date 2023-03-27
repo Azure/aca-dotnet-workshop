@@ -1,3 +1,7 @@
+---
+canonical_url: https://bitoftech.net/2022/08/29/dapr-integration-with-azure-container-apps/
+---
+
 # Module 3 - Dapr Integration with ACA
 
 In this module, we will start integrating Dapr into both services and see how Dapr with ACA will simplify complex microservices scenarios such as service discovery, service-to-service invocation, calling services asynchronously via pub/sub patterns, auto-scaling for overloaded services, etc..
