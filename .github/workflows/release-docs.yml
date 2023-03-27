@@ -43,4 +43,5 @@ jobs:
             pr-preview
             .github
   publish-docs:
-    uses: ./.github/workflows/release-docs.yml
+    needs: release-docs
+    uses: ./.github/workflows/publish-docs.yml

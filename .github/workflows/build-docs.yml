@@ -44,4 +44,5 @@ jobs:
           umbrella-dir: pr-preview
           action: auto
   publish-preview-docs:
-    uses: ./.github/workflows/release-docs.yml
+    needs: preview-docs
+    uses: ./.github/workflows/publish-docs.yml
