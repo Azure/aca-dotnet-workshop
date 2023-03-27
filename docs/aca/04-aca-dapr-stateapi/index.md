@@ -1,9 +1,7 @@
 ---
-title: Module 4 - ACA State Store With Dapr State Management API
-has_children: false
-nav_order: 4
-canonical_url: 'https://bitoftech.net/2022/08/29/azure-container-apps-state-store-with-dapr-state-management-api/'
+canonical_url: https://bitoftech.net/2022/08/29/azure-container-apps-state-store-with-dapr-state-management-api/
 ---
+
 # Module 4 - ACA State Store With Dapr State Management API
 
 In this module we will switch the in-memory store of tasks and use a key/value persistent store (Azure Cosmos DB). By using the [Dapr State Management Building Block](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/), we will see how we can store the data in Azure Cosmos DB without installing any Cosmos DB SDK or write specific code to integrate our Backend API with Azure Cosmos DB.

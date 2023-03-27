@@ -1,9 +1,7 @@
 ---
-title: Module 9 - ACA Auto Scaling with KEDA
-has_children: false
-nav_order: 9
-canonical_url: 'https://bitoftech.net/2022/09/22/azure-container-apps-auto-scaling-with-keda-part-11/'
+canonical_url: https://bitoftech.net/2022/09/22/azure-container-apps-auto-scaling-with-keda-part-11/
 ---
+
 # Module 9 - ACA Auto Scaling with KEDA
 In this module, we will explore how we can configure Auto Scaling rules in Container Apps. In my opinion, the **Auto Scaling** feature is one of the key features of any **Serverless** hosting platform, you want your application to respond dynamically based on the increased demand on workloads to maintain your system availability and performance.
 Container Apps support Horizontal Scaling (**Scaling Out**) by adding more replicas (new instances of the Container App) and splitting the workload across multiple replicas to process the work in parallel. When the demand decrease, Container Apps will (**Scale In**) by removing the unutilized replicas according to your configured scaling rule. With this approach, you pay only for the replicas provisioned during the increased demand period, and you can as well configure the scaling rule to scale to **Zero** replicas, which means that no charges are incurred when your Container App scales to zero.

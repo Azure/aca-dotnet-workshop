@@ -29,6 +29,7 @@ nav:
 
 theme:
   name: material
+  custom_dir: docs/overrides
   font:
     text: Ubuntu
   palette:

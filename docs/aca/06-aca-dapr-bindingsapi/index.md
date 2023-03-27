@@ -1,3 +1,7 @@
+---
+canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-bindings-building-block/
+---
+
 # Module 6 - ACA with Dapr Bindings Building Block
 
 In this module we are going to extend the backend background processor service  (`ACA-Processor Backend`) to interface with an external system which is outside our Tasks Tracker microservice application.
