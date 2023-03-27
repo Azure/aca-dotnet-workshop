@@ -7,6 +7,6 @@ build-docs-website:
 	docker run --rm -t -v ${PWD}:/docs squidfunk/mkdocs-material build
 	cp -R site/* dist/
 
-docs-local-docker:
+docs-local:
 	docker build -t squidfunk/mkdocs-material ./docs/
 	docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material

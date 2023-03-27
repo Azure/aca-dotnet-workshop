@@ -23,7 +23,7 @@ nav:
     - Contribution Guide: aca/10-contributing/1-contribution-guide.md
     - Submit an issue or suggestion: aca/10-contributing/2-Submit-issue-suggestion.md
     - Minor update or fix, new challenge: aca/10-contributing/3-minor-update-fix.md
-    - Testing changes locally with Github Codespaces: aca/10-contributing/4-github-codespaces.md
+    - Testing changes locally or with GitHub Codespaces: aca/10-contributing/4-github-local-codespaces.md
   - Appendix:
     - Debug and launch Dapr applications in VSCode: aca/20-appendix/01-run-debug-dapr-app-vscode.md
 
