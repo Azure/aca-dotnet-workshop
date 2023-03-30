@@ -30,7 +30,7 @@ Let's get started by defining the Bicep modules needed to create the Infrastruct
 ![aca-resources](../../assets/images/10-aca-iac-bicep/aca-rescources.jpg)
 
 !!! note
-To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the 3 services. We will not provision Azure Container Registry part of this Bicep modules.
+    To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the 3 services. We will not provision Azure Container Registry part of this Bicep modules.
 
 #### 1. Add the needed extension to VS Code
 You need to install an extension named [Bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep), This extension will simplify building Bicep files as they will offer IntelliSense, Validation, listing all available resource types, etc..
