@@ -69,7 +69,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' exis
   name: cosmosDbName
 }
 
-//Secret Store
+//Secret Store Component
 resource secretstoreComponent 'Microsoft.App/managedEnvironments/daprComponents@2022-03-01' = {
   name: secretStoreComponentName
   parent: containerAppsEnvironment
@@ -89,7 +89,7 @@ resource secretstoreComponent 'Microsoft.App/managedEnvironments/daprComponents@
   }
 }
 
-//Cosmos DB State Store
+//Cosmos DB State Store Component
 resource statestoreComponent 'Microsoft.App/managedEnvironments/daprComponents@2022-06-01-preview' = {
   name: 'statestore'
   parent: containerAppsEnvironment
@@ -118,7 +118,7 @@ resource statestoreComponent 'Microsoft.App/managedEnvironments/daprComponents@2
   }
 }
 
-//PubSub service bus
+//PubSub service bus Component
 resource pubsubComponent 'Microsoft.App/managedEnvironments/daprComponents@2022-06-01-preview' = {
   name: 'dapr-pubsub-servicebus'
   parent: containerAppsEnvironment

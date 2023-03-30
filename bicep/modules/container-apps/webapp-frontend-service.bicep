@@ -34,24 +34,16 @@ param containerRegistryPassword string
 @description('The image for the frontend web app service.')
 param frontendWebAppServiceImage string
 
-
 @secure()
 @description('The Application Insights Instrumentation.')
 param appInsightsInstrumentationKey string
-
-// ------------------
-// VARIABLES
-// ------------------
-
-// var containerAppName = 'ca-${frontendWebAppServiceName}'
-var containerAppName = frontendWebAppServiceName
 
 // ------------------
 // RESOURCES
 // ------------------
 
 resource frontendWebAppService 'Microsoft.App/containerApps@2022-06-01-preview' = {
-  name: containerAppName
+  name: frontendWebAppServiceName
   location: location
   tags: tags
   properties: {

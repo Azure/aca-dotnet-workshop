@@ -51,7 +51,7 @@ resource sendGridKeySecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
   }
 }
 
-// External Azure Stroage key secret used by Backend Background Processor Service.
+// External Azure storage key secret used by Backend Background Processor Service.
 resource externalAzureStorageKeySecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
   parent: keyVault
   tags: tags
@@ -61,7 +61,6 @@ resource externalAzureStorageKeySecret 'Microsoft.KeyVault/vaults/secrets@2022-0
   }
 }
 
-//Changed scope to the enture key valut not 1 secret
 resource keyVaultSecretUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(subscription().id, keyVault.id, backendProcessorServicePrincipalId, keyVaultSecretUserRoleGuid) 
   scope: keyVault

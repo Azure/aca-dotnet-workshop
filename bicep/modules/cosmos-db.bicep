@@ -19,12 +19,6 @@ param cosmosDbDatabaseName string
 @description('The name of Cosmos DB\'s collection.')
 param cosmosDbCollectionName string
 
-
-// ------------------
-// VARIABLES
-// ------------------
-
-
 // ------------------
 // RESOURCES
 // ------------------
@@ -89,5 +83,3 @@ output cosmosDbName string = cosmosDbAccount.name
 output cosmosDbDatabaseName string = cosmosDbDatabase.name
 @description('The name of Cosmos DB\'s collection.')
 output cosmosDbCollectionName string = cosmosDbDatabaseCollection.name
-@description('The document endpoint of Cosmos DB\'s account.')
-output cosmosDbDocumentEndpoint string = cosmosDbAccount.properties.documentEndpoint

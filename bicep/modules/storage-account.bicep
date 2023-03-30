@@ -17,11 +17,6 @@ param storageAccountName string
 param externalTasksQueueName string
 
 // ------------------
-// VARIABLES
-// ------------------
-
-
-// ------------------
 // RESOURCES
 // ------------------
 
@@ -35,14 +30,14 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' = {
   kind: 'StorageV2'
 }
 
-resource storageQueues 'Microsoft.Storage/storageAccounts/queueServices@2021-09-01' = {
+resource storageQueuesService 'Microsoft.Storage/storageAccounts/queueServices@2021-09-01' = {
   name: 'default'
   parent: storageAccount
 }
 
 resource externalQueue 'Microsoft.Storage/storageAccounts/queueServices/queues@2021-09-01' = {
   name: externalTasksQueueName
-  parent: storageQueues
+  parent: storageQueuesService
 }
 
 // ------------------

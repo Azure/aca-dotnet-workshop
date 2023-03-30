@@ -59,9 +59,6 @@
     "secretStoreComponentName": {
       "value": "secretstoreakv"
     },
-    "keyVaultName": {
-      "value": "tasks-tracker-akv-4"
-    },
     "containerRegistryName": {
       "value": "<CONTAINER_REGISTRY_NAME>"
     },
