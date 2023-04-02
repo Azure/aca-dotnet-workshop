@@ -157,6 +157,7 @@ The message structure our backend processor expects is similar to the JSON shown
 ##### 4. Verify that Multiple Replicas Are Created
 
 If all is setup correctly, 5 replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:
+
 * You can run the Azure CLI command used in [previous step](#3-run-an-end-to-end-test-and-generate-a-load-of-messages) to list the names of replicas.
 * You can verify this from Container Apps `Console` tab where you will see those replicas in the drop-down list
 ![replica-console](../../assets/images/09-aca-autoscale-keda/replica-console.png)
