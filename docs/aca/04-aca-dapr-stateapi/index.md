@@ -3,6 +3,8 @@ canonical_url: https://bitoftech.net/2022/08/29/azure-container-apps-state-store
 ---
 
 # Module 4 - ACA State Store With Dapr State Management API
+!!! info "Module Duration"
+    60 minutes
 
 In this module we will switch the in-memory store of tasks and use a key/value persistent store (Azure Cosmos DB). By using the [Dapr State Management Building Block](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/), we will see how we can store the data in Azure Cosmos DB without installing any Cosmos DB SDK or write specific code to integrate our Backend API with Azure Cosmos DB.
 Moreover, we will use Redis to store tasks when we are running the application locally. You will see that we can switch between different stores without any code changes, thanks to the [Dapr pluggable state stores feature](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/#pluggable-state-stores). It is a matter of adding new Dapr Component files and the underlying store will be changed. This page shows the [supported state stores](https://docs.dapr.io/reference/components-reference/supported-state-stores/) in Dapr.
@@ -11,7 +13,7 @@ Moreover, we will use Redis to store tasks when we are running the application l
 
 ### Overview of Dapr State Management API
 
-Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out and without doing any code changes or installing any NuGet packages we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path `%USERPROFILE%\.dapr\components` you will find a file named `statestore.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. The [state store template component file structure](https://docs.dapr.io/operations/components/setup-state-store/) can be found on this link.
+Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out and without doing any code changes or installing any NuGet packages we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path `%USERPROFILE%\.dapr\components (assuming you are using windows)` you will find a file named `statestore.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. The [state store template component file structure](https://docs.dapr.io/operations/components/setup-state-store/) can be found on this link.
 
 To try out the State Management APIs, run the Backend API from VS Code by running the following command. Remember to replace the place holders with your own values:
 
@@ -102,11 +104,11 @@ For example if you execute the following GET [http://localhost:3500/v1.0/state/s
 }
 ```
 
-### Use Dapr Client SDK for State Store Management
+### Use Dapr Client SDK For State Store Management
 
 Whereas in the previous section we demonstrated using Dapr State Store without code changes, we will now introduce a change on the Backend API and create a new service named `TasksStoreManager.cs` which will implement the interface `ITasksManager.cs` to start storing tasks data on the persist store. Locally we will start testing with Redis, then we are going to change the state store to use Azure Cosmos DB.
 
-#### 1. Add Dapr Client SDK to the Backend API
+#### 1. Add Dapr Client SDK to The Backend API
 
 Similar to what we have done in the Frontend Web App, we need to use Dapr Client SDK to manage the state store. Update below file with highlighted lines:
 
@@ -119,7 +121,7 @@ Similar to what we have done in the Frontend Web App, we need to use Dapr Client
     </ItemGroup>
     ```
 
-#### 2. Create a new concrete implementation to manage tasks persistence
+#### 2. Create a New Concrete Implementation to Manage Tasks Persistence
 
 As you recall from the previous module, we were storing the tasks in memory. Now we need to store them in Redis and later on Azure Cosmos DB. 
 The key thing to keep in mind here is that switching from redis to Azure Cosmos DB won't require changing the code below which is a huge advantage of using Dapr.
@@ -139,7 +141,7 @@ Add below file under the folder named **Services**. This file will implement the
     The query API will not work against the local Redis store as you need to install [RediSearch](https://redis.io/docs/stack/search/) locally on your machine which is out of the scope for this workshop. 
     It will work locally once we switch to Azure Cosmos DB.
 
-#### 3. Register the TasksStoreManager new service and DaprClient
+#### 3. Register the TasksStoreManager New Service and DaprClient
 
 Now we need to register the new service named `TasksStoreManager` and `DaprClient` when the Backend API app starts up. Update the below file with the highlighted text as shown below.
 
@@ -216,7 +218,7 @@ az cosmosdb keys list `
 --resource-group $RESOURCE_GROUP
 ```
 
-**2. Create a Component file for State Store Management:** Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition. 
+**2. Create a Component File for State Store Management:** Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition. 
 All the components are pluggable so that you can swap out one component with the same interface for another
 
 Components are configured at design-time with a YAML file which is stored in either a components/local folder within your solution, or globally in the `.dapr` folder created when invoking `dapr init`. 
@@ -331,7 +333,7 @@ Keep a note of the property `principalId` as we are going to use it in the next 
 }
 ```
 
-#### 2. Assign the container app system-identity to the built-in Cosmos DB role
+#### 2. Assign the Container App System-Identity To the Built-in Cosmos DB Role
 
 Next, we need to associate the container app system-identity with the target Cosmos DB resource. 
 You can read more about Azure built-in roles for Cosmos DB or how to create custom fine-tuned roles [here](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac#built-in-role-definitions). 
@@ -361,7 +363,7 @@ We have to create a [dapr component schema file](https://learn.microsoft.com/en-
 Azure Container Apps. Reason for this variance is that ACA Dapr schema is slightly simplified to support Dapr components and removes unnecessary fields, including `apiVersion`, `kind`, and redundant metadata and 
 spec properties.
 
-#### 1. Create an ACA-Dapr Component file for State Store Management
+#### 1. Create an ACA-Dapr Component File For State Store Management
 
 Here it is recommended to separate the component files that will be used when deploying to Azure Container Apps from the ones which we will use when running our application locally (Dapr self-hosted). 
 
@@ -381,7 +383,7 @@ Create a new folder named **aca-components** under the directory **TasksTracker.
     - We are not referencing any Cosmos DB Keys/Connection strings as the authentication between Dapr and Cosmos DB will be configured using Managed Identities. 
     - We are setting the `scopes` array value to `tasksmanager-backend-api` to ensure Cosmos DB component is loaded at runtime by only the appropriate container apps. In our case it will be needed only for the container apps with Dapr application IDs `tasksmanager-backend-api`. In future modules we are going to include another container app which needs to access Cosmos DB.
 
-#### 2. Build Frontend Web App and Backend API App images and push them to ACR
+#### 2. Build Frontend Web App and Backend API App Images and Push Them to ACR
 
 As we have done previously we need to build and deploy both app images to ACR, so they are ready to be deployed to Azure Container Apps. 
 To do so, continue using the same PowerShell console and paste the code below (Make sure you are on the following directory **TasksTracker.ContainerApps**):
@@ -428,7 +430,7 @@ az containerapp dapr enable --name $FRONTEND_WEBAPP_NAME `
 
     For a complete list of the supported Dapr sidecar configurations in Container Apps, you can refer to [this link](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview?tabs=bicep1%2Cyaml#dapr-enablement).
 
-#### 5. Deploy new revisions of the Frontend Web App and Backend API to Container Apps
+#### 5. Deploy New Revisions of the Frontend Web App and Backend API to Container Apps
 
 The last thing we need to do here is to update both container apps and deploy the new images from ACR. To do so we need to run the commands found below. 
 

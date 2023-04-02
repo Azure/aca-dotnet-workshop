@@ -3,6 +3,8 @@ canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-b
 ---
 
 # Module 6 - ACA with Dapr Bindings Building Block
+!!! info "Module Duration"
+    90 minutes
 
 In this module we are going to extend the backend background processor service  (`ACA-Processor Backend`) to interface with an external system which is outside our Tasks Tracker microservice application.
 To achieve this in a simple way we will utilize [Dapr Input and Output Bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/). 
@@ -107,7 +109,7 @@ Start by adding a new controller **Controllers** folder under the **TasksTracker
 
     - Then we return `200 OK` to acknowledge that message received is processed successfully and should be removed from the external service queue.
 
-#### 2. Create Dapr Input Binding Component file
+#### 2. Create Dapr Input Binding Component File
 
 Now we need to create the component configuration file which will describe the configuration as well as how our backend background processor will start handling events coming from the 
 external service (Azure Storage Queues). To do so, add a new file under **components** folder.
@@ -134,7 +136,7 @@ external service (Azure Storage Queues). To do so, add a new file under **compon
     The value of the Metadata `storageAccessKey` is used as plain text here for local dev scenario. We will see how we are going to store this key 
     securely in Azure Key Vault and use Dapr Secrets Store API to read the access key.
 
-#### 3. Create Dapr Output Binding Component file
+#### 3. Create Dapr Output Binding Component File
 
 Now we need to create the component configuration file which will describe the configuration and how our service `ACA-Processor Backend` will be able to invoke the external service (Azure Blob Storage) 
 and be able to create and store a JSON blob file that contains the content of the message received from Azure Storage Queues. 
@@ -161,7 +163,7 @@ To do so, add a new file folder **components**.
 
     * We are setting the property `decodeBase64`  to `false` as we don’t want to encode file content to base64 images, we need to store the file content as is.
 
-#### 5. Use Dapr client SDK to invoke the output binding
+#### 5. Use Dapr client SDK to Invoke the Output Binding
 
 Now we need to invoke the output binding by using the .NET SDK.
 
@@ -183,7 +185,7 @@ Update and replace the code in the file with the code below. Pay close attention
     Notice how are setting the file name we are storing at the external service. We need the file names to be created using the same Task Identifier, so we will pass the key `blobName` with the file name values 
     into the `metaData` dictionary.
 
-#### 6. Test Dapr bindings locally
+#### 6. Test Dapr Bindings Locally
 
 Now we are ready to give it an end-to-end test on our dev machines. Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together 
 in this [section](../../aca/20-appendix/01-run-debug-dapr-app-vscode.md).
@@ -241,9 +243,7 @@ Add a new file under the **components** folder as shown below:
 
 #### 2. Remove SendGrid package reference
 
-- Update file **TasksTracker.Processor.Backend.Svc.csproj** and remove the NuGet package reference **PackageReference Include="SendGrid" Version="9.28.1"**. With the introduction of 
-Dapr SendGrid Output bindings there is no need to include the external SDKs. 
-- Also delete the following using statements from the file named `#!csharp TasksNotifierController.cs`:
+- Update file **TasksTracker.Processor.Backend.Svc.csproj** and remove the NuGet package reference **PackageReference Include="SendGrid" Version="9.28.1"**. With the introduction of Dapr SendGrid Output bindings there is no need to include the external SDKs.
 
 ```csharp
 // delete these using statements
@@ -251,59 +251,29 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 ```
 
-#### 3. Update SendEmail code to use Output bindings instead of SendGrid SDK
+#### 3. Update SendEmail Code to Use Output Bindings Instead of SendGrid SDK
 
-Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. Update the file with the highlighted code below:
+Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. Replace the content of the `#!csharp TasksNotifierController.cs` file with the code below. Also its very important that you open the `appsettings.json` file and set the `IntegrationEnabled` to false to avoid sending any emails. This is important as we don't want to send several emails later on when simulate high load in module 9 while demonstrating autoscaling with KEDA. 
 
 === "TasksNotifierController.cs"
 
-    ```csharp hl_lines="1-40"
-    private async Task<bool> SendEmail(TaskModel taskModel)
-    {
-        var integrationEnabled = _config.GetValue<bool>("SendGrid:IntegrationEnabled");
-        var sendEmailResponse = true;
-        var subject = $"Task '{taskModel.TaskName}' is assigned to you!";
-        var plainTextContent = $"Task '{taskModel.TaskName}' is assigned to you. Task should be completed by the end of: {taskModel.TaskDueDate.ToString("dd/MM/yyyy")}";
-    
-        try
+    ```csharp
+    --8<-- "docs/aca/06-aca-dapr-bindingsapi/TasksNotifierController.cs"
+    ```
+
+=== "appsettings.json"
+
+    ```json hl_lines="3"
         {
-            //Send actual email using Dapr SendGrid Outbound Binding (Disabled when running load test)
-            if (integrationEnabled)
-            {
-                IReadOnlyDictionary<string, string> metaData = new Dictionary<string, string>()
-            {
-                { "emailTo", taskModel.TaskAssignedTo },
-                { "emailToName", taskModel.TaskAssignedTo },
-                { "subject", subject }
-            };
-                await _daprClient.InvokeBindingAsync("sendgrid", "create", plainTextContent, metaData);
-            }
-            else
-            {
-                //Introduce artificial delay to slow down message processing
-                _logger.LogInformation("Simulate slow processing for email sending for Email with Email subject '{0}' Email to: '{1}'", subject, taskModel.TaskAssignedTo);
-                Thread.Sleep(5000);
-            }
-    
-            if (sendEmailResponse)
-            {
-                _logger.LogInformation("Email with subject '{0}' sent to: '{1}' successfully", subject, taskModel.TaskAssignedTo);
-            }
+        "SendGrid": {
+        "IntegrationEnabled":false
         }
-        catch (System.Exception ex)
-        {
-            sendEmailResponse = false;
-            _logger.LogError(ex, "Failed to send email with subject '{0}' To: '{1}'.", subject, taskModel.TaskAssignedTo);
-            throw;
-        }
-        return sendEmailResponse;
     }
     ```
 
 !!! note
-    If in the previous module if you opted not to register with SendGrid, and instead you opted to log to the console then the updated code here won't be triggered and hence no emails will be sent. 
-    
-    Also you won't need to populate the metadata required in the `dapr-bindings-out-sendgrid.yaml` above as it won't be utilized since again no email is being sent.
+    Even though we restored the code to send emails it won't actually trigger sending emails as we set the `IntegrationEnabled` flag to false. Also notice that we introduced a Thread.Sleep(5000) statement. This will come in handy in module 9 where it will be used to simulate artificial delay within the `ACA-Processor Backend` service to demonstrate autoscaling with KEDA.
+
 
 ??? tip "Curious to learn more about the code above?"
 
@@ -314,7 +284,7 @@ Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. Up
 
     Notice how are setting the recipient, display name, and email subject by passing the setting the keys `emailTo`, `emailToName`, and `subject` into the `metaData` dictionary.
 
-### Configure Dapr secret store component with Azure Key Vault
+### Configure Dapr Secret Store Component with Azure Key Vault
 Currently, we have 3 Dapr components which are not Azure AD enabled services. As you may have noticed so far, the different component files are storing sensitive keys to access the different external services.
 The recommended approach for retrieving these secrets is to reference an existing Dapr secret store component that securely accesses the secrets.
 
@@ -338,7 +308,7 @@ az keyvault create `
     It is important to create the Azure Key Vault with Azure RBAC for authorization by setting `--enable-rbac-authorization true` because the role we are going to assign to the Azure AD 
     application will work only when RBAC authorization is enabled.
 
-#### 2. Grant Backend Processor App a Role to read secrets from Azure Key Vault
+#### 2. Grant Backend Processor App a Role To Read Secrets from Azure Key Vault
 
 In the previous module we have configured the `system-assigned` identity for the service `ACA-Processor Backend`. Now we need to assign a role named `Key Vault Secrets User` to it, so it access and read 
 secrets from Azure Key Vault.
@@ -361,7 +331,7 @@ az role assignment create `
 --scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
 ```
 
-#### 3. Create secrets in the Azure Key Vault
+#### 3. Create Secrets in the Azure Key Vault
 
 To create a secret in Azure Key Vault you need to have a role which allows you to create secrets. From the Azure CLI we will assign the role `Key Vault Secrets Officer` to the user signed in to AZ CLI to
 be able to create secrets. To do so use the script below:
@@ -409,7 +379,7 @@ Create a new yaml file under the **aca-components** folder.
     - We are allowing this component only to be accessed by the dapr with application id `tasksmanager-backend-processor`. This means that our Backend API or Frontend Web App services will not be able
     to access the Dapr secret store. If we want to allow them to access the secrets we need to update this component file and grant the system-identity of those services a `Key Vault Secrets User` role.
 
-#### 5. Create Input and Output Binding Component files matching Azure Container Apps Specs
+#### 5. Create Input and Output Binding Component Files Matching Azure Container Apps Specs
 
 Add new files under the **aca-components** use the yaml below:
 
@@ -440,7 +410,7 @@ Add new files under the **aca-components** use the yaml below:
         - We are using `secretRef` when setting the metadata `storageAccessKey`. The value `external-azure-storage-key` represents the AKV secret created earlier
 
 
-#### 6. Create SendGrid Output Binding Component file matching Azure Container Apps Specs
+#### 6. Create SendGrid Output Binding Component File Matching Azure Container Apps Specs
 
 Add a new file under the **aca-components** use the yaml below:
 
@@ -457,9 +427,9 @@ Add a new file under the **aca-components** use the yaml below:
 
 With those changes in place, we are ready to rebuild the backend background processor container image, update Azure Container Apps Env, and redeploy a new revision.
 
-### Deploy a new revision of the Backend Background Processor App to ACA
+### Deploy a New Revision of the Backend Background Processor App to ACA
 
-#### 1. Build the Backend Background Processor image and push it to ACR
+#### 1. Build the Backend Background Processor Image and Push it To ACR
 
 As we have done previously we need to build and deploy the Backend Background Processor image to ACR, so it is ready to be deployed to ACA. 
 Continue using the same PowerShell console and paste the code below (make sure you are under the  **TasksTracker.ContainerApps** directory):
@@ -532,10 +502,9 @@ az containerapp update `
 --name $BACKEND_SVC_NAME `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v20230224-1 `
-#comment out this line if you opted not to setup a sendgrid account in module 5
 --remove-env-vars "SendGrid__ApiKey"
 ```
-#### 5. Remove SendGrid secret from the Backend Background Processor App
+#### 5. Remove SendGrid Secret from the Backend Background Processor App
 
 Remove the secret stored in `Secrets` of the Backend Background Processor as this secret is not used anymore.
 

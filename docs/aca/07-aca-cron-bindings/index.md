@@ -3,6 +3,9 @@ canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-b
 ---
 
 # Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
+!!! info "Module Duration"
+    60 minutes
+
 In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources. 
 In this module we will focus on a special type of Dapr input binding named [Cron Binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/).
 

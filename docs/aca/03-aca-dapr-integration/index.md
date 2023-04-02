@@ -3,10 +3,12 @@ canonical_url: https://bitoftech.net/2022/08/29/dapr-integration-with-azure-cont
 ---
 
 # Module 3 - Dapr Integration with ACA
+!!! info "Module Duration"
+    60 minutes
 
 In this module, we will start integrating Dapr into both services and see how Dapr with ACA will simplify complex microservices scenarios such as service discovery, service-to-service invocation, calling services asynchronously via pub/sub patterns, auto-scaling for overloaded services, etc..
 
-### Benefits of integrating Dapr in Azure Container Apps
+### Benefits of Integrating Dapr in Azure Container Apps
 
 The Tasks Tracker microservice application is composed of multiple microservices (2 microservices so far), and function calls are spread across the network. To support the distributed nature of microservices, 
 we need to account for failures, retries, and timeouts. While Container Apps features the building blocks for running microservices, the use of Dapr provides an even richer microservices programming model. 
@@ -22,10 +24,10 @@ Although we won't tap into all these benefits in this workshop its worth keeping
 - Control what operations clients can do using access control policies.
 - Capture traces and metrics for all calls between services to provide insights and diagnostics. 
 
-### Configure Dapr on a local development machine
+### Configure Dapr on a Local Development Machine
 In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to [install](https://docs.dapr.io/getting-started/install-dapr-cli/) Dapr and then [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/) it.
 
-### Run Backend API and Frontend Web App locally using Dapr
+### Run Backend API and Frontend Web App Locally Using Dapr
 You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called [Dapr](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.
 
 - Let's start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, run the below commands in PS terminal based on your .NET version. 

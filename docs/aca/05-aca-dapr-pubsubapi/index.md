@@ -3,6 +3,8 @@ canonical_url: https://bitoftech.net/2022/09/02/azure-container-apps-async-commu
 ---
 
 # Module 5 - ACA Async Communication with Dapr Pub/Sub API
+!!! info "Module Duration"
+    90 minutes
 
 In this module, we will introduce a new background service which is named `ACA-Processer Backend` according to our [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). This new service will be responsible for sending notification emails (simulated) to the task owners to notify them that a new task has been assigned to them. We can do this in the Backend API and send the email right after saving the task, but we want to offload this process to another service and keep the Backend API service responsible for managing tasks data only.
 
@@ -26,7 +28,7 @@ Your consumer services subscribe to a topic to consume messages.
 
 To try this out we can directly invoke the Pub/Sub API and publish a message to Redis locally. If you remember from [module 3](../../aca/03-aca-dapr-integration/index.md) once we initialized Dapr in a 
 local development environment, it installed Redis container instance locally. So we can use Redis locally to publish and subscribe to a message. 
-If you navigate to the path `%USERPROFILE%\.dapr\components` you will find a file named `pubsub.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. 
+If you navigate to the path `%USERPROFILE%\.dapr\components (assuming you are using windows)` you will find a file named `pubsub.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. 
 The publisher/subscriber brokers template component file structure can be found [here](https://docs.dapr.io/operations/components/setup-pubsub/).
 
 We want to have more control and provide our own component file, so let's create pub/sub component file in our **components** folder as shown below:
@@ -135,7 +137,7 @@ Now we will install Dapr SDK to be able to subscribe to the service broker topic
     </ItemGroup>
     ```
 
-#### 4. Create an API endpoint for the consumer to subscribe to the topic
+#### 4. Create an API Endpoint for the Consumer to Subscribe to the Topic
 
 Now we will add an endpoint that will be responsible to subscribe to the topic in the message broker we are interested in. This endpoint will start receiving the message published from the Backend API producer.
 To do so, add a new controller under **Controllers** folder.
@@ -183,7 +185,7 @@ In our case, a sample response will be as follows:
     Follow this [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works) to find a detailed diagram of how the consumers will discover and subscribe to
     those endpoints.
 
-#### 5. Register Dapr and Subscribe handler at the consumer startup
+#### 5. Register Dapr and Subscribe Handler at the Consumer Startup
 
 Update below file in **TasksTracker.Processor.Backend.Svc** project.
 
@@ -259,7 +261,7 @@ in the terminal to indicate the processing of the message.
 
     ![dapr-pub-sub-code-extension](../../assets/images/05-aca-dapr-pubsubapi/dapr-pub-sub-code-extension.jpg)
 
-#### 6. Optional: Update VS Code tasks and launch configuration files
+#### 6. Optional: Update VS Code Tasks and Launch Configuration Files
 
 If you have followed the steps in the [appendix](../../aca/20-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) 
 and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added. 
@@ -279,9 +281,9 @@ and debug them in VS Code, we need to update the files `tasks.json` and `launch.
         --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/3dafcc7b291590177f7ce3a8a629079076149863/.vscode/launch.json"
         ```
 
-### Use the Dapr .NET Client SDK to publish messages
+### Use the Dapr .NET Client SDK to Publish Messages
 
-#### 1. Update Backend API to publish a message when a task is saved
+#### 1. Update Backend API to Publish a Message When a Task Is Saved
 
 Now we need to update our Backend API to publish a message to the message broker when a task is saved (either due to a new task being added or an existing task assignee being updated).
 
@@ -345,9 +347,10 @@ To do this update below file under the project **TasksTracker.TasksManager.Backe
 
     The second parameter `tasksavedtopic` is the topic name the publisher going to send the task model to. That's all the changes required to start publishing async messages from the Backend API.
 
-#### 2. Update Backend Background Processor to consume messages and simulate sending emails
+#### 2. Update Backend Background Processor to Consume Messages and Simulate Sending Emails
 
-Update below files under Backend Processor Project as shown below. We are installing the NuGet package named `SendGrid` to the Backend processor project which will allow us to send emails. 
+
+Update the files below under the Backend Processor Project. We are installing the NuGet package named `SendGrid` to the Backend processor project which will allow us to send emails. 
 
 === "TasksNotifierController.cs"
 
@@ -450,7 +453,7 @@ az servicebus namespace authorization-rule keys list `
 !!! note
     Primary connection string is only needed for local dev testing. We will be using Managed Identities when publishing container apps to ACA.
 
-#### 2. Create a local Dapr Component file for Pub/Sub API using Azure Service Bus
+#### 2. Create a local Dapr Component file for Pub/Sub API Using Azure Service Bus
 
 Add a new files **components** as shown below:
 
@@ -467,7 +470,7 @@ Add a new files **components** as shown below:
     We have set the scopes section to include the `tasksmanager-backend-api` and `tasksmanager-backend-processor` app ids, as those will be the Dapr apps that need access to Azure Service Bus for publishing and 
     consuming the messages.
 
-#### 3. Create an ACA Dapr Component file for Pub/Sub API using Azure Service Bus
+#### 3. Create an ACA Dapr Component file for Pub/Sub API Using Azure Service Bus
 
 Add a new files **aca-components** as shown below: 
 
@@ -532,7 +535,7 @@ Content-Type: application/json
 
 ### Deploy the Backend Background Processor and the Backend API Projects to Azure Container Apps
 
-#### 1. Build the Backend Background Processor and the Backend API App images and push them to ACR
+#### 1. Build the Backend Background Processor and the Backend API App Images and Push Them to ACR
 
 As we have done previously we need to build and deploy both app images to ACR, so they are ready to be deployed to Azure Container Apps.
 
@@ -576,7 +579,7 @@ az containerapp create `
 --env-vars "SendGrid__ApiKey=secretref:sendgrid-apikey" "SendGrid__IntegrationEnabled=true"
 ```
 
-#### 3. Deploy new revisions of the Backend API to Azure Container Apps
+#### 3. Deploy New Revisions of the Backend API to Azure Container Apps
 
 We need to update the Azure Container App hosting the Backend API with a new revision so our code changes for publishing messages after a task is saved is available for users. 
 
@@ -600,9 +603,9 @@ az containerapp env dapr-component set `
 ```
 
 !!! note
-    Notice that we set the component name `dapr-pubsub-servicebus` when we added it Container Apps Environment.
+    Notice that we set the component name `dapr-pubsub-servicebus` when we added it to the Container Apps Environment.
 
-### Configure Managed Identities for both Container Apps
+### Configure Managed Identities for Both Container Apps
 
 In the previous module we have [already configured](../04-aca-dapr-stateapi/index.md#configure-managed-identities-in-container-app) and used system-assigned identity for the Backend API container app. 
 We follow the same steps here to create an association between the backend processor container app and Azure Service Bus.
@@ -666,7 +669,7 @@ az role assignment create `
 --scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
 ```
 
-#### 4. Restart container apps
+#### 4. Restart Container Apps
 
 Lastly, we need to restart both container apps revisions to pick up the role assignment.
 
