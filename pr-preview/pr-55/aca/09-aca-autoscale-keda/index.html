@@ -488,10 +488,12 @@ The message structure our backend processor expects is similar to the JSON shown
 </span></code></pre></div>
 <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg"><img alt="svcbus-send" src="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg"/></a></p>
 <h5 id="4-verify-that-multiple-replicas-are-created">4. Verify that Multiple Replicas Are Created<a class="headerlink" href="#4-verify-that-multiple-replicas-are-created" title="Permanent link">¶</a></h5>
-<p>If all is setup correctly, 5 replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:
-* You can run the Azure CLI command used in <a href="#3-run-an-end-to-end-test-and-generate-a-load-of-messages">previous step</a> to list the names of replicas.
-* You can verify this from Container Apps <code>Console</code> tab where you will see those replicas in the drop-down list
-<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/09-aca-autoscale-keda/replica-console.png"><img alt="replica-console" src="../../assets/images/09-aca-autoscale-keda/replica-console.png"/></a></p>
+<p>If all is setup correctly, 5 replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:</p>
+<ul>
+<li>You can run the Azure CLI command used in <a href="#3-run-an-end-to-end-test-and-generate-a-load-of-messages">previous step</a> to list the names of replicas.</li>
+<li>You can verify this from Container Apps <code>Console</code> tab where you will see those replicas in the drop-down list
+<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/09-aca-autoscale-keda/replica-console.png"><img alt="replica-console" src="../../assets/images/09-aca-autoscale-keda/replica-console.png"/></a></li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Note About KEDA Scale In:</strong>
