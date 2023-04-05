@@ -258,6 +258,30 @@
 <a class="md-nav__link" href="#configure-scaling-rule-in-backend-background-processor-project">
     Configure Scaling Rule in Backend Background Processor Project
   </a>
+<nav aria-label="Configure Scaling Rule in Backend Background Processor Project" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-create-a-new-secret-in-the-container-app">
+    1. Create a New Secret In The Container App
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-create-a-custom-scaling-rule-from-azure-cli">
+    2. Create a Custom Scaling Rule from Azure CLI
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-run-an-end-to-end-test-and-generate-a-several-messages">
+    3. Run an End-to-End Test and Generate a Several Messages
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-verify-that-multiple-replicas-are-created">
+    4. Verify that Multiple Replicas Are Created
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -345,6 +369,30 @@
 <a class="md-nav__link" href="#configure-scaling-rule-in-backend-background-processor-project">
     Configure Scaling Rule in Backend Background Processor Project
   </a>
+<nav aria-label="Configure Scaling Rule in Backend Background Processor Project" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-create-a-new-secret-in-the-container-app">
+    1. Create a New Secret In The Container App
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-create-a-custom-scaling-rule-from-azure-cli">
+    2. Create a Custom Scaling Rule from Azure CLI
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-run-an-end-to-end-test-and-generate-a-several-messages">
+    3. Run an End-to-End Test and Generate a Several Messages
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-verify-that-multiple-replicas-are-created">
+    4. Verify that Multiple Replicas Are Created
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -397,7 +445,8 @@ Azure Container Apps support Horizontal Scaling (<strong>Scaling Out</strong>) b
 </span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">    </span><span class="nt">cloud</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Private</span><span class="w"> </span><span class="c1"># Optional. Default: AzurePublicCloud</span>
 </span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="nt">endpointSuffix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">servicebus.airgap.example</span><span class="w"> </span><span class="c1"># Required when cloud=Private</span>
 </span></code></pre></div></p>
-<p>Let's review the parameters:</p>
+<details class="info">
+<summary>Curious to learn more about the contents of the yaml file?</summary>
 <ul>
 <li>The property <code>type</code> is set to <code>azure-servicebus</code>. Each KEDA scaler specification file has a unique type.</li>
 <li>One of the properties <code>queueName</code> or <code>topicName</code> should be provided. In our case, it will be <code>topicName</code> and we will use the value <code>tasksavedtopic</code>.</li>
@@ -406,12 +455,13 @@ Azure Container Apps support Horizontal Scaling (<strong>Scaling Out</strong>) b
 <li>The property <code>messageCount</code> is used to decide when scaling out should be triggered. In our case, it will be set to <code>10</code>.</li>
 <li>The property <code>cloud</code> represents the name of the cloud environment that the service bus belongs to.</li>
 </ul>
+</details>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Note about authentication: KEDA scaler for Azure Service Bus supports different authentication mechanisms such as <a href="https://learn.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity">Pod Managed Identity</a>, <a href="https://azure.github.io/azure-workload-identity/docs/">Azure AD Workload Identity</a>, and shared access policy (connection string). At the time of writing this workshop, when using KEDA with Azure Container Apps the only supported authentication mechanism is Connection Strings. There is a work item in the ACA product backlog that involves enabling <a href="https://github.com/microsoft/azure-container-apps/issues/592">KEDA Scale with Managed Identity.</a></p>
 </div>
 <p>Azure Container Apps has its own proprietary schema to map KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps <a href="https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples">ARM templates</a>, <a href="https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples">yaml manifest</a>, Azure CLI, or from the Azure Portal. In this module, we will cover how to do it from the Azure CLI.</p>
-<h5 id="1-create-a-new-secret-in-the-container-app">1. Create a New Secret In The Container App<a class="headerlink" href="#1-create-a-new-secret-in-the-container-app" title="Permanent link">¶</a></h5>
+<h4 id="1-create-a-new-secret-in-the-container-app">1. Create a New Secret In The Container App<a class="headerlink" href="#1-create-a-new-secret-in-the-container-app" title="Permanent link">¶</a></h4>
 <p>Let's now create a secret named <code>svcbus-connstring</code> in our <code>tasksmanager-backend-processor</code> Container App. This secret will contain the value of Azure Service Bus shared access policy (connection string) with <code>Manage</code> policy. To accomplish this, run the following commands in the Azure CLI to get the connection string, and then add this secret using the second command:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c">##List Service Bus Access Policy RootManageSharedAccessKey</span>
 </span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nv">$ServiceBusConnectionString</span> <span class="p">=</span> <span class="n">az</span> <span class="n">servicebus</span> <span class="n">namespace</span> <span class="n">authorization-rule</span> <span class="n">keys</span> <span class="n">list</span> <span class="p">`</span>
@@ -427,11 +477,11 @@ Azure Container Apps support Horizontal Scaling (<strong>Scaling Out</strong>) b
 </span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">"svcbus-connstring=$ServiceBusConnectionString"</span>
 </span></code></pre></div>
-<h5 id="2-create-a-custom-scaling-rule-from-azure-cli">2. Create a Custom Scaling Rule from Azure CLI<a class="headerlink" href="#2-create-a-custom-scaling-rule-from-azure-cli" title="Permanent link">¶</a></h5>
+<h4 id="2-create-a-custom-scaling-rule-from-azure-cli">2. Create a Custom Scaling Rule from Azure CLI<a class="headerlink" href="#2-create-a-custom-scaling-rule-from-azure-cli" title="Permanent link">¶</a></h4>
 <p>Now we are ready to add a new custom scaling rule to match the business requirements. To accomplish this, we need to run the Azure CLI command below:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We need to update <code>az containerapp</code> extension in order to create a scaling rule from CLI. To update the extension you can run the following command <code>az extension update --name containerapp</code> inside your powershell terminal. </p>
+<p>You might need to upgrade the extension if you are on an older version of <code>az containerapp</code> which didn't allow you to create a scaling rule from CLI. To update the extension you can run the following command <code>az extension update --name containerapp</code> inside your powershell terminal. </p>
 </div>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
 </span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
@@ -449,7 +499,8 @@ Azure Container Apps support Horizontal Scaling (<strong>Scaling Out</strong>) b
 </span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>                        <span class="s2">"messageCount=10"</span> <span class="p">`</span>
 </span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a>                        <span class="s2">"connectionFromEnv=svcbus-connstring"</span>
 </span></code></pre></div>
-<p>What we have done is the following:</p>
+<details class="info">
+<summary>Curious to learn more about the different parameters passed to the <code>az containerapp update</code> command?</summary>
 <ul>
 <li>Setting the minimum number of replicas to <code>1</code>. This means that this Container App could be scaled-in to a single replica if there are no new messages on the topic.</li>
 <li>Setting the maximum number of replicas to <code>5</code>. This means that this Container App will not exceed more than 5 replicas regardless of the number of messages on the topic.</li>
@@ -459,12 +510,20 @@ Azure Container Apps support Horizontal Scaling (<strong>Scaling Out</strong>) b
 <li>Setting the <code>metadata</code> dictionary of the scale rule. Those match the metadata properties in KEDA template we discussed earlier.</li>
 <li>Disabled the integration with SendGrid as we are going to send several messages to test the scale out rule.</li>
 </ul>
-<p><strong>Note About Setting Minimum Replicas To 0:</strong>
-* We can set the minimum number of replicas to <code>zero</code> to avoid any charges when the backend processor is not processing any message from Azure Service Bus Topic, but this will impact running the other features within this backend processor such as the periodic cron job as well as the external input bidding and output bindings. We are configuring the minimum number of replicas to one, ensuring that a backend processor instance is always running and capable of handling tasks, even if there are no messages being received by the Azure Service Bus Topic.</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Note About Setting Minimum Replicas To 0:</strong></p>
 <ul>
-<li>When the single replica of the backend processor is not doing anything, it will be running in an <code>idle mode</code>. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit <a href="https://azure.microsoft.com/en-us/pricing/details/container-apps/">the link.</a></li>
+<li>
+<p>We can set the minimum number of replicas to <code>zero</code> to avoid any charges when the backend processor is not processing any message from Azure Service Bus Topic, but this will impact running the other features within this backend processor such as the periodic cron job as well as the external input bidding and output bindings. We are configuring the minimum number of replicas to one, ensuring that a backend processor instance is always running and capable of handling tasks, even if there are no messages being received by the Azure Service Bus Topic.</p>
+</li>
+<li>
+<p>When the single replica of the backend processor is not doing anything, it will be running in an <code>idle mode</code>. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit <a href="https://azure.microsoft.com/en-us/pricing/details/container-apps/">the link.</a></p>
+</li>
 </ul>
-<h5 id="3-run-an-end-to-end-test-and-generate-a-several-messages">3. Run an End-to-End Test and Generate a Several Messages<a class="headerlink" href="#3-run-an-end-to-end-test-and-generate-a-several-messages" title="Permanent link">¶</a></h5>
+</div>
+<h4 id="3-run-an-end-to-end-test-and-generate-a-several-messages">3. Run an End-to-End Test and Generate a Several Messages<a class="headerlink" href="#3-run-an-end-to-end-test-and-generate-a-several-messages" title="Permanent link">¶</a></h4>
 <p>Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option. </p>
 <p>To get the number of current replicas of service <code>tasksmanager-backend-processor</code> we could run the command below, this should run single replica as we didn't load the service bus topic yet.</p>
 <p><div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">replica</span> <span class="n">list</span> <span class="p">`</span>
@@ -487,13 +546,16 @@ The message structure our backend processor expects is similar to the JSON shown
 </span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="p">}</span>
 </span></code></pre></div>
 <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg"><img alt="svcbus-send" src="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg"/></a></p>
-<h5 id="4-verify-that-multiple-replicas-are-created">4. Verify that Multiple Replicas Are Created<a class="headerlink" href="#4-verify-that-multiple-replicas-are-created" title="Permanent link">¶</a></h5>
+<h4 id="4-verify-that-multiple-replicas-are-created">4. Verify that Multiple Replicas Are Created<a class="headerlink" href="#4-verify-that-multiple-replicas-are-created" title="Permanent link">¶</a></h4>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
 <p>If all is setup correctly, 5 replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:</p>
 <ul>
 <li>You can run the Azure CLI command used in <a href="#3-run-an-end-to-end-test-and-generate-a-load-of-messages">previous step</a> to list the names of replicas.</li>
 <li>You can verify this from Container Apps <code>Console</code> tab where you will see those replicas in the drop-down list
 <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/09-aca-autoscale-keda/replica-console.png"><img alt="replica-console" src="../../assets/images/09-aca-autoscale-keda/replica-console.png"/></a></li>
 </ul>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Note About KEDA Scale In:</strong>
@@ -509,7 +571,7 @@ Currently, there is no way to override this value, yet there is an <a href="http
 <small>
     
       Last update:
-      2023-04-02
+      2023-04-05
     
   </small>
 </div>

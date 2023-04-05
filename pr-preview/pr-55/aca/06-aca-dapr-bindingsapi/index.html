@@ -1049,7 +1049,7 @@ but let's go over the configuration we have added here:</p>
 </span><span id="__span-9-59"><a href="#__codelineno-9-59" id="__codelineno-9-59" name="__codelineno-9-59"></a><span class="w">                </span><span class="p">{</span>
 </span><span id="__span-9-60"><a href="#__codelineno-9-60" id="__codelineno-9-60" name="__codelineno-9-60"></a><span class="w">                    </span><span class="c1">//Introduce artificial delay to slow down message processing</span>
 </span><span id="__span-9-61"><a href="#__codelineno-9-61" id="__codelineno-9-61" name="__codelineno-9-61"></a><span class="w">                    </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">"Simulate slow processing for email sending for Email with Email subject '{0}' Email to: '{1}'"</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="p">);</span>
-</span><span id="__span-9-62"><a href="#__codelineno-9-62" id="__codelineno-9-62" name="__codelineno-9-62"></a><span class="w">                    </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="m">5000</span><span class="p">);</span>
+</span><span id="__span-9-62"><a href="#__codelineno-9-62" id="__codelineno-9-62" name="__codelineno-9-62"></a><span class="w">                    </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="m">1000</span><span class="p">);</span>
 </span><span id="__span-9-63"><a href="#__codelineno-9-63" id="__codelineno-9-63" name="__codelineno-9-63"></a><span class="w">                </span><span class="p">}</span>
 </span><span id="__span-9-64"><a href="#__codelineno-9-64" id="__codelineno-9-64" name="__codelineno-9-64"></a>
 </span><span id="__span-9-65"><a href="#__codelineno-9-65" id="__codelineno-9-65" name="__codelineno-9-65"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sendEmailResponse</span><span class="p">)</span>
@@ -1081,7 +1081,7 @@ but let's go over the configuration we have added here:</p>
 </input></input></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Even though we restored the code to send emails it won't actually trigger sending emails as we set the <code>IntegrationEnabled</code> flag to false. Also notice that we introduced a Thread.Sleep(5000) statement. This will come in handy in module 9 where it will be used to simulate artificial delay within the <code>ACA-Processor Backend</code> service to demonstrate autoscaling with KEDA.</p>
+<p>Even though we restored the code to send emails it won't actually trigger sending emails as we set the <code>IntegrationEnabled</code> flag to false. Also notice that we introduced a Thread.Sleep(1000) statement. This will come in handy in module 9 where it will be used to simulate artificial delay within the <code>ACA-Processor Backend</code> service to demonstrate autoscaling with KEDA.</p>
 </div>
 <details class="tip">
 <summary>Curious to learn more about the code above?</summary>
@@ -1358,7 +1358,7 @@ message into Azure Storage Queue (using Azure Storage Explorer tool used earlier
 <small>
     
       Last update:
-      2023-04-02
+      2023-04-05
     
   </small>
 </div>
