@@ -34,39 +34,23 @@ So our requirements for scaling the backend processor are as follows:
 
 To achieve this, we will start looking into KEDA Azure Service Bus scaler. This specification describes the `azure-servicebus` trigger for Azure Service Bus Queue or Topic. Let's take a look at the yaml file below which contains a generic template for the KEDA specification:
 ```yaml
-triggers:
-- type: azure-servicebus
-  metadata:
-    # Required: queueName OR topicName and subscriptionName
-    queueName: queueName
-    # or
-    topicName: topicName
-    subscriptionName: subscriptionName
-    # Optional, required when pod identity is used
-    namespace: service-bus-namespace
-    # Optional, can use TriggerAuthentication as well
-    connectionFromEnv: SERVICEBUS_CONNECTIONSTRING_ENV_NAME # This must be a connection string for a queue itself, and not a namespace level (e.g. RootAccessPolicy) connection string 
-    # Optional
-    messageCount: "5" # Optional. Count of messages to trigger scaling on. Default: 5 messages
-    cloud: Private # Optional. Default: AzurePublicCloud
-    endpointSuffix: servicebus.airgap.example # Required when cloud=Private
+--8<-- "docs/aca/09-aca-autoscale-keda/KEDA_Azure_Service_Bus scaler.yaml"
 ```
+??? info "Curious to learn more about the contents of the yaml file?"
+    - The property `type` is set to `azure-servicebus`. Each KEDA scaler specification file has a unique type.
+    - One of the properties `queueName` or `topicName` should be provided. In our case, it will be `topicName` and we will use the value `tasksavedtopic`.
+    - The property `subscriptionName` will be set to use `tasksmanager-backend-processor`. This represents the subscription associated with the topic. Not needed if we are using queues.
+    - The property `connectionFromEnv` will be set to reference a secret stored in our Container App. We will not use the Azure Service Bus shared access policy (connection string) directly. The shared access policy will be stored in the Container App secrets, and the secret will be referenced here. Please note that the Service Bus Shared Access Policy needs to be of type `Manage`. It is required for KEDA to be able to get metrics from Service Bus and read the length of messages in the queue or topic.
+    - The property `messageCount` is used to decide when scaling out should be triggered. In our case, it will be set to `10`.
+    - The property `cloud` represents the name of the cloud environment that the service bus belongs to.
 
-Let's review the parameters:
-
-* The property `type` is set to `azure-servicebus`. Each KEDA scaler specification file has a unique type.
-* One of the properties `queueName` or `topicName` should be provided. In our case, it will be `topicName` and we will use the value `tasksavedtopic`.
-* The property `subscriptionName` will be set to use `tasksmanager-backend-processor`. This represents the subscription associated with the topic. Not needed if we are using queues.
-* The property `connectionFromEnv` will be set to reference a secret stored in our Container App. We will not use the Azure Service Bus shared access policy (connection string) directly. The shared access policy will be stored in the Container App secrets, and the secret will be referenced here. Please note that the Service Bus Shared Access Policy needs to be of type `Manage`. It is required for KEDA to be able to get metrics from Service Bus and read the length of messages in the queue or topic.
-* The property `messageCount` is used to decide when scaling out should be triggered. In our case, it will be set to `10`.
-* The property `cloud` represents the name of the cloud environment that the service bus belongs to.
 
 !!! note
     Note about authentication: KEDA scaler for Azure Service Bus supports different authentication mechanisms such as [Pod Managed Identity](https://learn.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity), [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/), and shared access policy (connection string). At the time of writing this workshop, when using KEDA with Azure Container Apps the only supported authentication mechanism is Connection Strings. There is a work item in the ACA product backlog that involves enabling [KEDA Scale with Managed Identity.](https://github.com/microsoft/azure-container-apps/issues/592)
 
 Azure Container Apps has its own proprietary schema to map KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps [ARM templates](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples), [yaml manifest](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples), Azure CLI, or from the Azure Portal. In this module, we will cover how to do it from the Azure CLI.
 
-##### 1. Create a New Secret In The Container App
+#### 1. Create a New Secret In The Container App
 
 Let's now create a secret named `svcbus-connstring` in our `tasksmanager-backend-processor` Container App. This secret will contain the value of Azure Service Bus shared access policy (connection string) with `Manage` policy. To accomplish this, run the following commands in the Azure CLI to get the connection string, and then add this secret using the second command:
 
@@ -86,11 +70,11 @@ az containerapp secret set `
 --secrets "svcbus-connstring=$ServiceBusConnectionString"
 ```
 
-##### 2. Create a Custom Scaling Rule from Azure CLI
+#### 2. Create a Custom Scaling Rule from Azure CLI
 Now we are ready to add a new custom scaling rule to match the business requirements. To accomplish this, we need to run the Azure CLI command below:
 
 !!! note
-    We need to update `az containerapp` extension in order to create a scaling rule from CLI. To update the extension you can run the following command `az extension update --name containerapp` inside your powershell terminal. 
+    You might need to upgrade the extension if you are on an older version of `az containerapp` which didn't allow you to create a scaling rule from CLI. To update the extension you can run the following command `az extension update --name containerapp` inside your powershell terminal. 
 
 ```powershell
 az containerapp update `
@@ -110,22 +94,23 @@ az containerapp update `
                         "connectionFromEnv=svcbus-connstring"
 ```
 
-What we have done is the following:
+??? info "Curious to learn more about the different parameters passed to the `az containerapp update` command?"
+    - Setting the minimum number of replicas to `1`. This means that this Container App could be scaled-in to a single replica if there are no new messages on the topic.
+    - Setting the maximum number of replicas to `5`. This means that this Container App will not exceed more than 5 replicas regardless of the number of messages on the topic.
+    - Setting a friendly name for the scale rule `topic-msgs-length` which will be visible in the Azure Portal.
+    - Setting the scale rule type to `azure-servicebus`. This is important to tell KEDA which type of scalers our Container App is configuring.
+    - Setting the authentication mechanism to type `connection` and indicating which secret reference will be used. In our case `svcbus-connstring`.
+    - Setting the `metadata` dictionary of the scale rule. Those match the metadata properties in KEDA template we discussed earlier.
+    - Disabled the integration with SendGrid as we are going to send several messages to test the scale out rule.
 
-* Setting the minimum number of replicas to `1`. This means that this Container App could be scaled-in to a single replica if there are no new messages on the topic.
-* Setting the maximum number of replicas to `5`. This means that this Container App will not exceed more than 5 replicas regardless of the number of messages on the topic.
-* Setting a friendly name for the scale rule `topic-msgs-length` which will be visible in the Azure Portal.
-* Setting the scale rule type to `azure-servicebus`. This is important to tell KEDA which type of scalers our Container App is configuring.
-* Setting the authentication mechanism to type `connection` and indicating which secret reference will be used. In our case `svcbus-connstring`.
-* Setting the `metadata` dictionary of the scale rule. Those match the metadata properties in KEDA template we discussed earlier.
-* Disabled the integration with SendGrid as we are going to send several messages to test the scale out rule.
+!!! note 
+    **Note About Setting Minimum Replicas To 0:**
+    
+    * We can set the minimum number of replicas to `zero` to avoid any charges when the backend processor is not processing any message from Azure Service Bus Topic, but this will impact running the other features within this backend processor such as the periodic cron job as well as the external input bidding and output bindings. We are configuring the minimum number of replicas to one, ensuring that a backend processor instance is always running and capable of handling tasks, even if there are no messages being received by the Azure Service Bus Topic.
 
-**Note About Setting Minimum Replicas To 0:**
-* We can set the minimum number of replicas to `zero` to avoid any charges when the backend processor is not processing any message from Azure Service Bus Topic, but this will impact running the other features within this backend processor such as the periodic cron job as well as the external input bidding and output bindings. We are configuring the minimum number of replicas to one, ensuring that a backend processor instance is always running and capable of handling tasks, even if there are no messages being received by the Azure Service Bus Topic.
+    * When the single replica of the backend processor is not doing anything, it will be running in an `idle mode`. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit [the link.](https://azure.microsoft.com/en-us/pricing/details/container-apps/)
 
-* When the single replica of the backend processor is not doing anything, it will be running in an `idle mode`. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit [the link.](https://azure.microsoft.com/en-us/pricing/details/container-apps/)
-
-##### 3. Run an End-to-End Test and Generate a Several Messages
+#### 3. Run an End-to-End Test and Generate a Several Messages
 Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option. 
 
 To get the number of current replicas of service `tasksmanager-backend-processor ` we could run the command below, this should run single replica as we didn't load the service bus topic yet.
@@ -154,13 +139,13 @@ The message structure our backend processor expects is similar to the JSON shown
 ```
 ![svcbus-send](../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg)
 
-##### 4. Verify that Multiple Replicas Are Created
+#### 4. Verify that Multiple Replicas Are Created
+!!! success
+    If all is setup correctly, 5 replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:
 
-If all is setup correctly, 5 replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:
-
-* You can run the Azure CLI command used in [previous step](#3-run-an-end-to-end-test-and-generate-a-load-of-messages) to list the names of replicas.
-* You can verify this from Container Apps `Console` tab where you will see those replicas in the drop-down list
-![replica-console](../../assets/images/09-aca-autoscale-keda/replica-console.png)
+    * You can run the Azure CLI command used in [previous step](#3-run-an-end-to-end-test-and-generate-a-load-of-messages) to list the names of replicas.
+    * You can verify this from Container Apps `Console` tab where you will see those replicas in the drop-down list
+    ![replica-console](../../assets/images/09-aca-autoscale-keda/replica-console.png)
 
 !!! note
     **Note About KEDA Scale In:**

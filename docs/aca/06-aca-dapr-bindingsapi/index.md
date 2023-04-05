@@ -272,7 +272,7 @@ Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. Re
     ```
 
 !!! note
-    Even though we restored the code to send emails it won't actually trigger sending emails as we set the `IntegrationEnabled` flag to false. Also notice that we introduced a Thread.Sleep(5000) statement. This will come in handy in module 9 where it will be used to simulate artificial delay within the `ACA-Processor Backend` service to demonstrate autoscaling with KEDA.
+    Even though we restored the code to send emails it won't actually trigger sending emails as we set the `IntegrationEnabled` flag to false. Also notice that we introduced a Thread.Sleep(1000) statement. This will come in handy in module 9 where it will be used to simulate artificial delay within the `ACA-Processor Backend` service to demonstrate autoscaling with KEDA.
 
 
 ??? tip "Curious to learn more about the code above?"
