@@ -3,6 +3,8 @@ canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application
 ---
 
 # Module 1 - Deploy Backend API to ACA
+!!! info "Module Duration"
+    60 minutes
 
 In this module, we will start by creating the first microservice named `ACA Web API – Backend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). Followed by that we will provision the  Azure resources needed to deploy the service to Azure Container Apps using the Azure CLI.
 ### 1. Create the backend API project (Web API)

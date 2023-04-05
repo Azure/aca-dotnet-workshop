@@ -3,6 +3,8 @@ canonical_url: https://bitoftech.net/2022/09/09/azure-container-apps-monitoring-
 ---
 
 # Module 8 - ACA Monitoring and Observability with Application Insights
+!!! info "Module Duration"
+    60 minutes
 
 In this module, we will explore how we can configure ACA and ACA Environment with [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) which will provide a holistic
 view of our container apps health, performance metrics, logs data, various telemetries and traces.
@@ -114,7 +116,7 @@ With this step completed, we have done all the changes needed. Let's now deploy 
 
 ### Deploy Services to ACA and Create New Revisions
 
-#### 1. Add Application Insights Instrumentation key as a secret
+#### 1. Add Application Insights Instrumentation Key As a Secret
 
 Let's create a secret named `appinsights-key` on each Container App which contains the value of the Application Insights instrumentation key. 
 Remember that we can obtain this value from Azure Portal by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:
