@@ -20,7 +20,7 @@
 <!-- Generator banner -->
 <meta content="mkdocs-1.4.2, $md-name$-$md-version$" name="generator"/>
 <title>Module 3 - Dapr Integration with ACA - Azure Container Apps - Workshop</title>
-<link href="../../assets/stylesheets/main.240905d7.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.7a7fce14.min.css" rel="stylesheet"/>
 <link href="../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -221,17 +221,17 @@
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#benefits-of-integrating-dapr-in-azure-container-apps">
-    Benefits of integrating Dapr in Azure Container Apps
+    Benefits of Integrating Dapr in Azure Container Apps
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#configure-dapr-on-a-local-development-machine">
-    Configure Dapr on a local development machine
+    Configure Dapr on a Local Development Machine
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#run-backend-api-and-frontend-web-app-locally-using-dapr">
-    Run Backend API and Frontend Web App locally using Dapr
+    Run Backend API and Frontend Web App Locally Using Dapr
   </a>
 </li>
 </ul>
@@ -343,17 +343,17 @@
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#benefits-of-integrating-dapr-in-azure-container-apps">
-    Benefits of integrating Dapr in Azure Container Apps
+    Benefits of Integrating Dapr in Azure Container Apps
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#configure-dapr-on-a-local-development-machine">
-    Configure Dapr on a local development machine
+    Configure Dapr on a Local Development Machine
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#run-backend-api-and-frontend-web-app-locally-using-dapr">
-    Run Backend API and Frontend Web App locally using Dapr
+    Run Backend API and Frontend Web App Locally Using Dapr
   </a>
 </li>
 </ul>
@@ -364,8 +364,12 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="module-3-dapr-integration-with-aca">Module 3 - Dapr Integration with ACA<a class="headerlink" href="#module-3-dapr-integration-with-aca" title="Permanent link">¶</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Module Duration</p>
+<p>60 minutes</p>
+</div>
 <p>In this module, we will start integrating Dapr into both services and see how Dapr with ACA will simplify complex microservices scenarios such as service discovery, service-to-service invocation, calling services asynchronously via pub/sub patterns, auto-scaling for overloaded services, etc..</p>
-<h3 id="benefits-of-integrating-dapr-in-azure-container-apps">Benefits of integrating Dapr in Azure Container Apps<a class="headerlink" href="#benefits-of-integrating-dapr-in-azure-container-apps" title="Permanent link">¶</a></h3>
+<h3 id="benefits-of-integrating-dapr-in-azure-container-apps">Benefits of Integrating Dapr in Azure Container Apps<a class="headerlink" href="#benefits-of-integrating-dapr-in-azure-container-apps" title="Permanent link">¶</a></h3>
 <p>The Tasks Tracker microservice application is composed of multiple microservices (2 microservices so far), and function calls are spread across the network. To support the distributed nature of microservices, 
 we need to account for failures, retries, and timeouts. While Container Apps features the building blocks for running microservices, the use of Dapr provides an even richer microservices programming model. </p>
 <p>Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more. 
@@ -378,9 +382,9 @@ Because the calls will flow through sidecars, Dapr can inject some useful cross-
 <li>Control what operations clients can do using access control policies.</li>
 <li>Capture traces and metrics for all calls between services to provide insights and diagnostics. </li>
 </ul>
-<h3 id="configure-dapr-on-a-local-development-machine">Configure Dapr on a local development machine<a class="headerlink" href="#configure-dapr-on-a-local-development-machine" title="Permanent link">¶</a></h3>
+<h3 id="configure-dapr-on-a-local-development-machine">Configure Dapr on a Local Development Machine<a class="headerlink" href="#configure-dapr-on-a-local-development-machine" title="Permanent link">¶</a></h3>
 <p>In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to <a href="https://docs.dapr.io/getting-started/install-dapr-cli/">install</a> Dapr and then <a href="https://docs.dapr.io/getting-started/install-dapr-selfhost/">Initialize</a> it.</p>
-<h3 id="run-backend-api-and-frontend-web-app-locally-using-dapr">Run Backend API and Frontend Web App locally using Dapr<a class="headerlink" href="#run-backend-api-and-frontend-web-app-locally-using-dapr" title="Permanent link">¶</a></h3>
+<h3 id="run-backend-api-and-frontend-web-app-locally-using-dapr">Run Backend API and Frontend Web App Locally Using Dapr<a class="headerlink" href="#run-backend-api-and-frontend-web-app-locally-using-dapr" title="Permanent link">¶</a></h3>
 <p>You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr">Dapr</a> which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.</p>
 <ul>
 <li>Let's start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, run the below commands in PS terminal based on your .NET version. </li>
@@ -756,7 +760,7 @@ If the application is working as expected you should see tasks list associated w
 <small>
     
       Last update:
-      2023-03-28
+      2023-04-05
     
   </small>
 </div>
@@ -776,20 +780,20 @@ If the application is working as expected you should see tasks list associated w
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </div>
 <div class="md-footer__title">
-<div class="md-ellipsis">
 <span class="md-footer__direction">
-                  Previous
-                </span>
+                Previous
+              </span>
+<div class="md-ellipsis">
                 Module 2 - Communication between Microservices in ACA
               </div>
 </div>
 </a>
 <a aria-label="Next: Module 4 - ACA State Store With Dapr State Management API" class="md-footer__link md-footer__link--next" href="../04-aca-dapr-stateapi/" rel="next">
 <div class="md-footer__title">
-<div class="md-ellipsis">
 <span class="md-footer__direction">
-                  Next
-                </span>
+                Next
+              </span>
+<div class="md-ellipsis">
                 Module 4 - ACA State Store With Dapr State Management API
               </div>
 </div>
@@ -824,6 +828,6 @@ If the application is working as expected you should see tasks list associated w
 <div class="md-dialog__inner md-typeset"></div>
 </div>
 <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../assets/javascripts/bundle.19047be9.min.js"></script>
+<script src="../../assets/javascripts/bundle.407015b8.min.js"></script>
 <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>
