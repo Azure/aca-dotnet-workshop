@@ -1,0 +1,812 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<!-- Page description -->
+<meta content="Azure Container Apps - Workshop" name="description"/>
+<!-- Page author -->
+<meta content="Microsoft" name="author"/>
+<!-- Canonical -->
+<link href="https://bitoftech.net/2022/09/16/use-bicep-to-deploy-dapr-microservices-apps-to-azure-container-apps-part-10/" rel="canonical"/>
+<!-- Previous page -->
+<link href="../09-aca-autoscale-keda/" rel="prev">
+<!-- Next page -->
+<link href="../11-contributing/1-contribution-guide/" rel="next"/>
+<!-- Favicon -->
+<link href="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" rel="icon"/>
+<!-- Generator banner -->
+<meta content="mkdocs-1.4.2, $md-name$-$md-version$" name="generator"/>
+<title>Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA - Azure Container Apps - Workshop</title>
+<link href="../../assets/stylesheets/main.7a7fce14.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Ubuntu";--md-code-font:"Roboto Mono"}</style>
+<link href="../../assets/stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<meta content="https://bitoftech.net/2022/09/16/use-bicep-to-deploy-dapr-microservices-apps-to-azure-container-apps-part-10/" name="og:url"/>
+</link><link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#module-10-deployment-via-bicep">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Azure Container Apps - Workshop" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Azure Container Apps - Workshop">
+<img alt="logo" src="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Azure Container Apps - Workshop
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="teal" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Azure Container Apps - Workshop" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Azure Container Apps - Workshop">
+<img alt="logo" src="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg"/>
+</a>
+    Azure Container Apps - Workshop
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Homepage
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../00-workshop-intro/">Workshop Introduction</a>
+<label for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          Workshop Introduction
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-workshop-intro/1-aca-core-components/">
+        ACA Core Components Overview
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-workshop-intro/2-scenario-architecture/">
+        Scenario and Solution Architecture
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-workshop-intro/3-dapr-integration/">
+        Dapr Integration in ACA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-workshop-intro/4-prerequisites/">
+        Prerequisites
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../01-deploy-api-to-aca/">
+        Module 1 - Deploy Backend API to ACA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../02-aca-comm/">
+        Module 2 - Communication between Microservices in ACA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../03-aca-dapr-integration/">
+        Module 3 - Dapr Integration with ACA
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../04-aca-dapr-stateapi/">
+        Module 4 - ACA State Store With Dapr State Management API
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../05-aca-dapr-pubsubapi/">
+        Module 5 - ACA Async Communication with Dapr Pub/Sub API
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../06-aca-dapr-bindingsapi/">
+        Module 6 - ACA with Dapr Bindings Building Block
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../07-aca-cron-bindings/">
+        Module 7 - ACA scheduled jobs with Dapr Cron Binding
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../08-aca-monitoring/">
+        Module 8 - ACA Monitoring and Observability with Application Insights
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../09-aca-autoscale-keda/">
+        Module 9 - ACA Auto Scaling with KEDA
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#arm-templates-in-azure">
+    ARM Templates in Azure
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#build-the-infrastructure-as-code-using-bicep">
+    Build the Infrastructure as Code Using Bicep
+  </a>
+<nav aria-label="Build the Infrastructure as Code Using Bicep" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-add-the-needed-extension-to-vs-code">
+    1. Add the Needed Extension to VS Code
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-define-an-azure-container-apps-environment">
+    2. Define an Azure Container Apps Environment
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-define-an-azure-key-vault-resource">
+    3. Define an Azure Key Vault Resource
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-define-a-azure-service-bus-resource">
+    4. Define a Azure Service Bus Resource
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-define-an-azure-cosmosdb-resource">
+    5. Define an Azure CosmosDb Resource
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6-define-an-azure-storage-resource">
+    6. Define an Azure Storage Resource
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7-define-dapr-components">
+    7. Define Dapr Components
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#8-create-secrets-into-azure-key-vault">
+    8. Create Secrets Into Azure Key Vault
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#9-define-the-frontend-service-azure-container-app">
+    9. Define the Frontend Service Azure Container App
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#10-define-the-backend-api-service-azure-container-app">
+    10. Define the Backend Api Service Azure Container App
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11-define-the-backend-processor-service-azure-container-app">
+    11. Define the Backend Processor Service Azure Container App
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#12-define-a-container-module-for-the-three-container-apps">
+    12. Define a Container Module For the Three Container Apps
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13-define-the-main-module-for-the-solution">
+    13. Define the Main Module For the Solution
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#deploy-the-infrastructure-and-create-the-components">
+    Deploy the Infrastructure and Create the Components
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#verify-the-final-results">
+    Verify the Final Results
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+          Contributing
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_13_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_13">
+<span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11-contributing/1-contribution-guide/">
+        Contribution Guide
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11-contributing/2-Submit-issue-suggestion/">
+        Submit an issue or suggestion
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11-contributing/3-minor-update-fix/">
+        Minor update or fix, new challenge
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+          Appendix
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_14_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_14">
+<span class="md-nav__icon md-icon"></span>
+          Appendix
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../12-appendix/01-run-debug-dapr-app-vscode/">
+        Debug and launch Dapr applications in VSCode
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../12-appendix/02-github-local-codespaces/">
+        Testing changes locally or with GitHub Codespaces
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#arm-templates-in-azure">
+    ARM Templates in Azure
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#build-the-infrastructure-as-code-using-bicep">
+    Build the Infrastructure as Code Using Bicep
+  </a>
+<nav aria-label="Build the Infrastructure as Code Using Bicep" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-add-the-needed-extension-to-vs-code">
+    1. Add the Needed Extension to VS Code
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-define-an-azure-container-apps-environment">
+    2. Define an Azure Container Apps Environment
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-define-an-azure-key-vault-resource">
+    3. Define an Azure Key Vault Resource
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-define-a-azure-service-bus-resource">
+    4. Define a Azure Service Bus Resource
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-define-an-azure-cosmosdb-resource">
+    5. Define an Azure CosmosDb Resource
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6-define-an-azure-storage-resource">
+    6. Define an Azure Storage Resource
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7-define-dapr-components">
+    7. Define Dapr Components
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#8-create-secrets-into-azure-key-vault">
+    8. Create Secrets Into Azure Key Vault
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#9-define-the-frontend-service-azure-container-app">
+    9. Define the Frontend Service Azure Container App
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#10-define-the-backend-api-service-azure-container-app">
+    10. Define the Backend Api Service Azure Container App
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11-define-the-backend-processor-service-azure-container-app">
+    11. Define the Backend Processor Service Azure Container App
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#12-define-a-container-module-for-the-three-container-apps">
+    12. Define a Container Module For the Three Container Apps
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13-define-the-main-module-for-the-solution">
+    13. Define the Main Module For the Solution
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#deploy-the-infrastructure-and-create-the-components">
+    Deploy the Infrastructure and Create the Components
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#verify-the-final-results">
+    Verify the Final Results
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="module-10-deployment-via-bicep">Module 10 - Deployment Via Bicep<a class="headerlink" href="#module-10-deployment-via-bicep" title="Permanent link">¶</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Module Duration</p>
+<p>30 minutes</p>
+</div>
+<p>Throughout the various modules, we have utilized various Azure CLI commands to provision different resources. While this approach is suitable for this workshop, in a production environment, you will likely require a more automated process to deploy the same resources. In this module, we will be working on defining the proper process to automate the infrastructure provisioning by creating the scripts/templates to provision the resources. This process is known as IaC (Infrastructure as Code).</p>
+<p>Once we have this in place, IaC deployments will benefit us in key ways such as:</p>
+<ol>
+<li>By ensuring consistency and reducing human errors in resource provisioning, deployments can be made with greater confidence and consistency.</li>
+<li>Avoid configuration drifts as IaC is an idempotent operation, which means it provides the same result each time it’s run.</li>
+<li>With Infrastructure as Code (IaC) in place, recreating an identical environment to the production one becomes a simple task of executing the scripts. This can be particularly useful during the application's lifecycle when short-term isolation is needed for tasks such as penetration testing or load testing.</li>
+<li>The Azure Portal abstracts several processes when you provision resources. For instance, when you create an Azure Container Apps Environment from the portal, it automatically creates a log analytics workspace and associates it with the environment without your direct involvement. However, using Infrastructure as Code (IaC) can provide you with a deeper understanding of Azure and help you troubleshoot any issues that may arise more effectively.</li>
+</ol>
+<h3 id="arm-templates-in-azure">ARM Templates in Azure<a class="headerlink" href="#arm-templates-in-azure" title="Permanent link">¶</a></h3>
+<p>ARM templates are files that define the infrastructure and configuration for your deployment. The templates use declarative syntax, which lets you state what you intend to deploy without having to write the sequence of programming commands to create it.</p>
+<p>Within Azure there are two ways to create IaC. We can either use the <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview">JSON ARM templates</a> or <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep">Bicep</a> (domain-specific language). As a project grows and the number of components and dependencies increases, working with JSON ARM templates in real-world scenarios can become increasingly complex and difficult to manage and maintain. Bicep provides a more user-friendly and straightforward experience when compared to ARM templates, resulting in increased productivity. However, it's worth noting that Bicep code is eventually compiled into ARM templates through a process called "transpilation."</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-bicep-l.jpg"><img alt="aca-arm-bicep" src="../../assets/images/10-aca-iac-bicep/aca-bicep-l.jpg"/></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For those interested in learning more about Bicep, it is recommended to visit the Microsoft Learn website <a href="https://docs.microsoft.com/en-us/training/paths/fundamentals-bicep/">Fundamentals of Bicep</a>.</p>
+</div>
+<h3 id="build-the-infrastructure-as-code-using-bicep">Build the Infrastructure as Code Using Bicep<a class="headerlink" href="#build-the-infrastructure-as-code-using-bicep" title="Permanent link">¶</a></h3>
+<p>To begin, we need to define the Bicep modules that will be required to generate the Infrastructure code. Our goal for this module is to have a freshly created resource group that encompasses all the necessary resources and configurations - such as connection strings, secrets, environment variables, and Dapr components - which we utilized to construct our solution. By the end, we will have a new resource group that includes the following resources.
+<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"><img alt="aca-resources" src="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"/></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the three services. If we deployed ACR part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images.</p>
+<p>In a production setting, a DevOps pipeline would be in place to automate the whole process - commencing with ACR creation, followed by building and pushing docker images, and concluding with executing the Bicep script to establish the remaining resources. As it is outside the scope of this workshop, we will not delve into the creation of a DevOps pipeline here.</p>
+</div>
+<h4 id="1-add-the-needed-extension-to-vs-code">1. Add the Needed Extension to VS Code<a class="headerlink" href="#1-add-the-needed-extension-to-vs-code" title="Permanent link">¶</a></h4>
+<p>To proceed, you must install an extension called <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep</a>. This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..</p>
+<h4 id="2-define-an-azure-container-apps-environment">2. Define an Azure Container Apps Environment<a class="headerlink" href="#2-define-an-azure-container-apps-environment" title="Permanent link">¶</a></h4>
+<p>Add a new folder named <code>bicep</code> on the root project directory, then add another folder named <code>modules</code>. Add a new file named <code>container-apps-environment.bicep</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps-environment.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>The module takes multiple parameters, all of which are set to default values. This indicates that if no value is specified, the default value will be utilized. </li>
+<li>The <code>location</code> parameter defaults to the location of the container resource group. Bicep has a function called <code>resourceGroup()</code>, which can be used to retrieve the location.</li>
+<li>The parameters <code>prefix</code> and <code>suffix</code> could be used if you want to add a prefix or suffix to the resource names.</li>
+<li>The parameter <code>tag</code> is used to tag the created resources. Tags are key-value pairs that help you identify resources based on settings that are relevant to your organization and deployment.</li>
+<li>The parameters <code>containerAppsEnvironmentName</code>, <code>logAnalyticsWorkspaceName</code>, and <code>applicationInsightName</code> have default values of resource names using the helper function named <code>uniqueString</code>. This function performs a 64-bit hash of the provided strings to create a unique string. This function is helpful when you need to create a unique name for a resource. We are passing the <code>resourceGroup().id</code> to this function to ensure that if we executed this module on two different resource groups, the generated string will be a global unique name.</li>
+<li>This module will create two resources. It will start by creating a <code>logAnalyticsWorkspace</code>, then an <code>applicationInsights</code> resource. Notice how we are setting the <code>logAnalyticsWorkspace.id</code> as an application insights <code>WorkspaceResourceId</code>.</li>
+<li>Lastly we are creating the <code>containerAppsEnvironment</code>. Notice how we are setting the <code>daprAIInstrumentationKey</code> by using the Application Insights <code>InstrumentationKey</code> and then setting <code>logAnalyticsConfiguration.customerId</code> and <code>logAnalyticsConfiguration.sharedKey</code>.</li>
+<li>The output of this module are a is parameter named <code>applicationInsightsName</code>. This output is needed as an input for a subsequent module.</li>
+</ul>
+</details>
+<h4 id="3-define-an-azure-key-vault-resource">3. Define an Azure Key Vault Resource<a class="headerlink" href="#3-define-an-azure-key-vault-resource" title="Permanent link">¶</a></h4>
+<p>Add a new file named <code>key-vault.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/key-vault.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>This module will create the Azure Key Vault resource which will be used to store secrets.</li>
+<li>The output of this module is a single parameter named <code>keyVaultId</code>. This output is needed as an input for a subsequent module.</li>
+</ul>
+</details>
+<h4 id="4-define-a-azure-service-bus-resource">4. Define a Azure Service Bus Resource<a class="headerlink" href="#4-define-a-azure-service-bus-resource" title="Permanent link">¶</a></h4>
+<p>Add a new file named <code>service-bus.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/service-bus.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>This module will create the Azure Service resource, a topic, a subscription for the consumer, and an authorization rule with <code>Manage</code> permissions.</li>
+<li>The output of this module will return three output parameters which will be used as an input for a subsequent module.</li>
+</ul>
+</details>
+<h4 id="5-define-an-azure-cosmosdb-resource">5. Define an Azure CosmosDb Resource<a class="headerlink" href="#5-define-an-azure-cosmosdb-resource" title="Permanent link">¶</a></h4>
+<p>Add a new file named <code>cosmos-db.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/cosmos-db.bicep">at this location</a></p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>This module will create the Azure CosmosDB account, a CosmosDB database, and a CosmosDB collection.</li>
+<li>The output of this module will return three output parameters which will be used as an input for a subsequent module.</li>
+</ul>
+</details>
+<h4 id="6-define-an-azure-storage-resource">6. Define an Azure Storage Resource<a class="headerlink" href="#6-define-an-azure-storage-resource" title="Permanent link">¶</a></h4>
+<p>Add a new file named <code>storage-account.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/storage-account.bicep">at this location</a></p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>This module will create the Azure Storage account, a storage queue service, and a queue.</li>
+<li>The output of this module will be a single output parameter which will be used as an input for a subsequent module.</li>
+</ul>
+</details>
+<h4 id="7-define-dapr-components">7. Define Dapr Components<a class="headerlink" href="#7-define-dapr-components" title="Permanent link">¶</a></h4>
+<p>Next we will define all dapr components used in the solution in a single bicep module. To accomplish this, add a new file called <code>dapr-components.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/dapr-components.bicep">at this location</a></p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>This module will be responsible for creating all dapr components used in the solution. It accepts various input parameters needed by the dapr components.</li>
+<li>
+<p>Notice how we are using the keyword <code>existing</code> to obtain a strongly typed reference to the pre-created resource</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>resource<span class="w"> </span>containerAppsEnvironment<span class="w"> </span><span class="s1">'Microsoft.App/managedEnvironments@2022-03-01'</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>name:<span class="w"> </span>containerAppsEnvironmentName
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="o">}</span>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>resource<span class="w"> </span>cosmosDbAccount<span class="w"> </span><span class="s1">'Microsoft.DocumentDB/databaseAccounts@2022-08-15'</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>name:<span class="w"> </span>cosmosDbName
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="o">}</span>
+</span></code></pre></div>
+</li>
+</ul>
+</details>
+<h4 id="8-create-secrets-into-azure-key-vault">8. Create Secrets Into Azure Key Vault<a class="headerlink" href="#8-create-secrets-into-azure-key-vault" title="Permanent link">¶</a></h4>
+<p>This module will have the responsibility of generating the secrets and saving them in Azure Key Vault. Additionally, it will establish a role assignment for the backend processor service, specifically of type <code>Azure Role Key Vault Secrets User</code>, which will allow the service to access the Key Vault and retrieve the secrets.</p>
+<p>To achieve this, create a new directory called <code>container-apps\secrets</code> within the <code>modules</code> folder, and subsequently, introduce a new file named <code>processor-backend-service-secrets.bicep</code> within the <code>container-apps\secrets</code> folder. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/secrets/processor-backend-service-secrets.bicep">at this location</a>.</p>
+<h4 id="9-define-the-frontend-service-azure-container-app">9. Define the Frontend Service Azure Container App<a class="headerlink" href="#9-define-the-frontend-service-azure-container-app" title="Permanent link">¶</a></h4>
+<p>We will now begin defining the modules that are necessary for producing the container apps, starting with the Frontend App. To initiate this process, create a new file named <code>webapp-frontend-service.bicep</code> within the <code>modules\container-apps</code> directory. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/webapp-frontend-service.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>Observe the usage of the <code>@secure</code> attribute on input parameters that contain confidential information or keys. This attribute may be applied to both string and object parameters that encompass secretive values. By implementing this attribute, Azure will abstain from presenting the parameter values within the deployment logs or on the terminal if you happen to be utilizing Azure CLI.</li>
+<li>The output parameters of this module will provide the fully qualified domain name (FQDN) for the frontend container application.</li>
+</ul>
+</details>
+<h4 id="10-define-the-backend-api-service-azure-container-app">10. Define the Backend Api Service Azure Container App<a class="headerlink" href="#10-define-the-backend-api-service-azure-container-app" title="Permanent link">¶</a></h4>
+<p>Add a new file named <code>webapi-backend-service.bicep</code> under the folder <code>modules\container-apps</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/webapi-backend-service.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>
+<p>Notice how we are assigning the Cosmosdb account a read/write access using the <code>Cosmos DB Built-in Data Contributor</code> role to the Backend API system assigned identity, by using the code below:</p>
+<div class="language-Shell highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>resource<span class="w"> </span>backendApiService_cosmosdb_role_assignment<span class="w"> </span><span class="s1">'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2022-08-15'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>name:<span class="w"> </span>guid<span class="o">(</span>subscription<span class="o">()</span>.id,<span class="w"> </span>backendApiService.name,<span class="w"> </span><span class="s1">'00000000-0000-0000-0000-000000000002'</span><span class="o">)</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>parent:<span class="w"> </span>cosmosDbAccount
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>properties:<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span>principalId:<span class="w"> </span>backendApiService.identity.principalId
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span>roleDefinitionId:<span class="w">  </span>resourceId<span class="o">(</span><span class="s1">'Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions'</span>,<span class="w"> </span>cosmosDbAccount.name,<span class="w"> </span><span class="s1">'00000000-0000-0000-0000-000000000002'</span><span class="o">)</span>//DocumentDB<span class="w"> </span>Data<span class="w"> </span>Contributor
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span>scope:<span class="w"> </span><span class="s1">'${cosmosDbAccount.id}/dbs/${cosmosDbDatabase.name}/colls/${cosmosDbDatabaseCollection.name}'</span>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="o">}</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>A similar technique was applied when assigning the Azure Service Bus Data Sender role to the Backend API, enabling it to publish messages to Azure Service Bus utilizing the Backend API system-assigned identity. This was accomplished utilizing the following code:
+    <div class="language-Shell highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>resource<span class="w"> </span>backendApiService_sb_role_assignment<span class="w"> </span><span class="s1">'Microsoft.Authorization/roleAssignments@2020-04-01-preview'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>name:<span class="w"> </span>guid<span class="o">(</span>resourceGroup<span class="o">()</span>.id,<span class="w"> </span>backendApiService.name,<span class="w"> </span><span class="s1">'69a216fc-b8fb-44d8-bc22-1f3c2cd27a39'</span><span class="o">)</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>properties:<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span>principalId:<span class="w"> </span>backendApiService.identity.principalId
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span>roleDefinitionId:<span class="w"> </span>resourceId<span class="o">(</span><span class="s1">'Microsoft.Authorization/roleDefinitions'</span>,<span class="w"> </span><span class="s1">'69a216fc-b8fb-44d8-bc22-1f3c2cd27a39'</span><span class="o">)</span>//Azure<span class="w"> </span>Service<span class="w"> </span>Bus<span class="w"> </span>Data<span class="w"> </span>Sender
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span>principalType:<span class="w"> </span><span class="s1">'ServicePrincipal'</span>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="o">}</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>scope:<span class="w"> </span>serviceBusTopic
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="o">}</span>
+</span></code></pre></div></p>
+</li>
+</ul>
+</details>
+<h4 id="11-define-the-backend-processor-service-azure-container-app">11. Define the Backend Processor Service Azure Container App<a class="headerlink" href="#11-define-the-backend-processor-service-azure-container-app" title="Permanent link">¶</a></h4>
+<p>Add a new file named <code>processor-backend-service.bicep</code> under the folder <code>modules\container-apps</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/processor-backend-service.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>Notice how we are assigning the role <code>Azure Service Bus Data Receiver</code> to the Backend Processor to be able to consume/read messages from Azure Service Bus Topic using Backend Processor system assigned identity, by using the code below:
+    <div class="language-Shell highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>resource<span class="w"> </span>backendProcessorService_sb_role_assignment<span class="w"> </span><span class="s1">'Microsoft.Authorization/roleAssignments@2020-04-01-preview'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>name:<span class="w"> </span>guid<span class="o">(</span>resourceGroup<span class="o">()</span>.id,<span class="w"> </span>backendProcessorServiceName,<span class="w"> </span><span class="s1">'4f6d3b9b-027b-4f4c-9142-0e5a2a2247e0'</span><span class="o">)</span>
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>properties:<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span>principalId:<span class="w"> </span>backendProcessorService.identity.principalId
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span>roleDefinitionId:<span class="w"> </span>resourceId<span class="o">(</span><span class="s1">'Microsoft.Authorization/roleDefinitions'</span>,<span class="w"> </span><span class="s1">'4f6d3b9b-027b-4f4c-9142-0e5a2a2247e0'</span><span class="o">)</span><span class="w"> </span>//<span class="w"> </span>Azure<span class="w"> </span>Service<span class="w"> </span>Bus<span class="w"> </span>Data<span class="w"> </span>Receiver.
+</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span>principalType:<span class="w"> </span><span class="s1">'ServicePrincipal'</span>
+</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="o">}</span><span class="w"> </span>
+</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a>scope:<span class="w"> </span>serviceBusNamespace
+</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="o">}</span>
+</span></code></pre></div></li>
+<li>Within this module, we've invoked the module defined in <a href="#8-create-secrets-into-azure-key-vault">step 8</a> which is responsible to create the secrets in Azure Key Vault and assign the role <code>Azure Role Key Vault Secrets User</code> to the Backend Processor Service, by using the code below:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>module<span class="w"> </span>backendProcessorKeySecret<span class="w"> </span><span class="s1">'secrets/processor-backend-service-secrets.bicep'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>name:<span class="w"> </span><span class="s1">'backendProcessorKeySecret-${uniqueString(resourceGroup().id)}'</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>params:<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span>keyVaultName:<span class="w"> </span>keyVaultName
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">    </span>sendGridKeySecretName:<span class="w"> </span>sendGridKeySecretName
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span>sendGridKeySecretValue:<span class="w"> </span>sendGridKeySecretValue
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span>externalAzureStorageKeySecretName:<span class="w"> </span>externalStorageKeySecretName
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span>externalAzureStorageKeySecretValue:<span class="w"> </span>storageAccount.listKeys<span class="o">()</span>.keys<span class="o">[</span><span class="m">0</span><span class="o">]</span>.value
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span>backendProcessorServicePrincipalId:<span class="w"> </span>backendProcessorService.identity.principalId
+</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="o">}</span>
+</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>scope:<span class="w"> </span>resourceGroup<span class="o">(</span>keyVaultSubscriptionId,<span class="w"> </span>keyVaultResourceGroupName<span class="o">)</span>
+</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="o">}</span>
+</span></code></pre></div></li>
+</ul>
+</details>
+<h4 id="12-define-a-container-module-for-the-three-container-apps">12. Define a Container Module For the Three Container Apps<a class="headerlink" href="#12-define-a-container-module-for-the-three-container-apps" title="Permanent link">¶</a></h4>
+<p>This module will act as a container for the three Container Apps modules defined in the previous three steps. It is optional to create it, but it makes it easier when we invoke all the created modules as you will see in the next step. To create this module add a new file named <code>container-apps.bicep</code> under the folder <code>modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps.bicep">at this location</a>.</p>
+<h4 id="13-define-the-main-module-for-the-solution">13. Define the Main Module For the Solution<a class="headerlink" href="#13-define-the-main-module-for-the-solution" title="Permanent link">¶</a></h4>
+<p>Finally, we must specify the Main Bicep module that will connect all other modules together. This file will be referenced by the AZ CLI command when producing all resources. To achieve this, add a new file named <code>main.bicep</code> under the <code>bicep</code> directory. The contents of the file can be found at this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.bicep">location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>
+<p>When calling the module <code>dapr-components.bicep</code> we are setting the value of the array <code>dependsOn</code> to the Container Apps Environment. This is called explicit dependency which aids the Bicep interpreter in comprehending the relationships between components. In this instance, the Container Apps Environment must be provisioned before the Dapr Components to guarantee a successful deployment.</p>
+</li>
+<li>
+<p>When calling the module <code>container-apps.bicep</code>, some of the input params are expecting are referencing another resource, for example consider the input param named <code>cosmosDbName</code> and the value used is <code>cosmosDb.outputs.cosmosDbName</code>. This means that the module <code>cosmos-db.bicep</code> should be created successfully before creating the container apps module, this called Implicit dependency.</p>
+</li>
+</ul>
+</details>
+<h3 id="deploy-the-infrastructure-and-create-the-components">Deploy the Infrastructure and Create the Components<a class="headerlink" href="#deploy-the-infrastructure-and-create-the-components" title="Permanent link">¶</a></h3>
+<p>With the steps above completed we are ready to deploy all the different resources. We just need to create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file <code>main.bicep</code> and select <code>Generate Parameter File</code>. This will result in creating a file named <code>main.parameters.json</code> similar to the file found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.parameters.json">here</a>.</p>
+<p>To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values provided on the github link. You only need to replace parameter values between the angle brackets <code>&lt;&gt;</code> with values related to your ACR resource and SendGrid.</p>
+<p>Start the deployment by calling <code>az deployment group create</code>. To accomplish this, open the PowerShell console and use the content below.</p>
+<div class="language-Powershell highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">az</span> <span class="nb">group </span><span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">"&lt;your RG name&gt;"</span> <span class="p">`</span>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="p">-</span><span class="n">-location</span> <span class="s2">"eastus"</span>  
+</span></code></pre></div>
+<p>Next create an ACR inside the newly created Resource Group:</p>
+<div class="language-Powershell highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="p">&lt;</span><span class="n">your</span> <span class="n">RG</span> <span class="n">name</span><span class="p">&gt;</span> <span class="p">`</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>    <span class="p">-</span><span class="n">-name</span> <span class="p">&lt;</span><span class="n">your</span> <span class="n">ACR</span> <span class="n">name</span><span class="p">&gt;`</span>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>    <span class="p">-</span><span class="n">-sku</span> <span class="n">Basic</span> <span class="p">`</span>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>    <span class="p">-</span><span class="n">-admin-enabled</span> <span class="n">true</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once the RG and ACR are created you can check <a href="../08-aca-monitoring/#2-build-new-images-and-push-them-to-acr">this section</a> which shows the different commands to build and push the images to ACR. Make sure you are at the root project directory when executing the aforementioned commands. Finally run the bicep file against the newly created Resource Group as shown below.</p>
+</div>
+<div class="language-Powershell highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">az</span> <span class="n">deployment</span> <span class="nb">group </span><span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="s2">"&lt;your RG name&gt;"</span> <span class="p">`</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="p">-</span><span class="n">-template</span><span class="o">-file</span> <span class="s2">"./bicep/main.bicep"</span> <span class="p">`</span>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="p">-</span><span class="n">-parameters</span> <span class="s2">"./bicep/main.parameters.json"</span>
+</span></code></pre></div>
+<p>The Azure CLI will take the Bicep module and start creating the deployment in the resource group.</p>
+<h3 id="verify-the-final-results">Verify the Final Results<a class="headerlink" href="#verify-the-final-results" title="Permanent link">¶</a></h3>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Upon successful deployment, you should observe all resources generated within the designated resource group. Additionally, you may navigate to the <code>Deployments</code> section to confirm that the ARM templates have been deployed, which should resemble the image provided below:</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-deployment.jpg"><img alt="aca-deployment" src="../../assets/images/10-aca-iac-bicep/aca-deployment.jpg"/></a></p>
+</div>
+<hr/>
+<div class="md-source-file">
+<small>
+    
+      Last update:
+      2023-04-06
+    
+  </small>
+</div>
+</article>
+</div>
+<script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            Back to top
+          </button>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Module 9 - ACA Auto Scaling with KEDA" class="md-footer__link md-footer__link--prev" href="../09-aca-autoscale-keda/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</div>
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Previous
+              </span>
+<div class="md-ellipsis">
+                Module 9 - ACA Auto Scaling with KEDA
+              </div>
+</div>
+</a>
+<a aria-label="Next: Contribution Guide" class="md-footer__link md-footer__link--next" href="../11-contributing/1-contribution-guide/" rel="next">
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Next
+              </span>
+<div class="md-ellipsis">
+                Contribution Guide
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2023 Microsoft
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/Azure/aca-dotnet-workshop" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../assets/javascripts/bundle.407015b8.min.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
