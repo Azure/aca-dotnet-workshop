@@ -4,7 +4,6 @@ If you'd like to contribute to this guide, please read the following guidelines.
 
 - [Submit an issue or suggestion](2-Submit-issue-suggestion.md)
 - [Minor update or fix to an existing challenge and adding a new challenge](3-minor-update-fix.md)
-- [Run the github page locally with GitHub Codespaces](4-github-local-codespaces.md)
 
 # Contributing
 
