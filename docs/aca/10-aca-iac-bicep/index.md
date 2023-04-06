@@ -3,6 +3,9 @@ canonical_url: https://bitoftech.net/2022/09/16/use-bicep-to-deploy-dapr-microse
 ---
 
 # Module 10 - Deployment Via Bicep
+!!! info "Module Duration"
+    30 minutes
+
 Throughout the various modules, we have utilized various Azure CLI commands to provision different resources. While this approach is suitable for this workshop, in a production environment, you will likely require a more automated process to deploy the same resources. In this module, we will be working on defining the proper process to automate the infrastructure provisioning by creating the scripts/templates to provision the resources. This process is known as IaC (Infrastructure as Code).
 
 Once we have this in place, IaC deployments will benefit us in key ways such as:
@@ -30,7 +33,7 @@ To begin, we need to define the Bicep modules that will be required to generate 
 ![aca-resources](../../assets/images/10-aca-iac-bicep/aca-rescources.jpg)
 
 !!! note
-    To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the three services. If we deployed ACR part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images. [This section](../../aca/08-aca-monitoring/index.md#2-build-new-images-and-push-them-to-acr) shows the different commands to build and push the images to an existing ACR. Make sure you are at the root project directory when executing the aforementioned commands.
+    To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the three services. If we deployed ACR part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images.
   
     In a production setting, a DevOps pipeline would be in place to automate the whole process - commencing with ACR creation, followed by building and pushing docker images, and concluding with executing the Bicep script to establish the remaining resources. As it is outside the scope of this workshop, we will not delve into the creation of a DevOps pipeline here.
 #### 1. Add the Needed Extension to VS Code
@@ -186,21 +189,35 @@ With the steps above completed we are ready to deploy all the different resource
 
 To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values provided on the github link. You only need to replace parameter values between the angle brackets `<>` with values related to your ACR resource and SendGrid.
 
-Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below. We will assume you have an existing resource group named `aca-workshop-bicep-rg` along with an ACR deployment which includes the docker images to be deployed to your different Azure Container Apps.
+Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below.
 
 ```Powershell
 az group create `
---name "aca-workshop-bicep-rg" `
+--name "<your RG name>" `
 --location "eastus"  
+```
 
+Next create an ACR inside the newly created Resource Group:
 
+```Powershell
+az acr create `
+    --resource-group <your RG name> `
+    --name <your ACR name>`
+    --sku Basic `
+    --admin-enabled true
+```
+
+!!! note
+    Once the RG and ACR are created you can check [this section](../../aca/08-aca-monitoring/index.md#2-build-new-images-and-push-them-to-acr) which shows the different commands to build and push the images to ACR. Make sure you are at the root project directory when executing the aforementioned commands. Finally run the bicep file against the newly created Resource Group as shown below.
+
+```Powershell
 az deployment group create `
---resource-group "aca-workshop-bicep-rg" `
+--resource-group "<your RG name>" `
 --template-file "./bicep/main.bicep" `
 --parameters "./bicep/main.parameters.json"
 ```
 
-The Azure CLI will take the Bicep module and start creating the deployment in the resource group `aca-workshop-bicep-rg`.
+The Azure CLI will take the Bicep module and start creating the deployment in the resource group.
 
 ### Verify the Final Results
 !!! success
