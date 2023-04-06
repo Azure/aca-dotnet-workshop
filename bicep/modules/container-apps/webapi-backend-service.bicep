@@ -56,13 +56,6 @@ param backendApiServiceImage string
 param appInsightsInstrumentationKey string
 
 // ------------------
-// VARIABLES
-// ------------------
-
-// var containerAppName = 'ca-${backendApiServiceName}'
-var containerAppName = backendApiServiceName
-
-// ------------------
 // RESOURCES
 // ------------------
 
@@ -77,7 +70,6 @@ resource serviceBusTopic 'Microsoft.ServiceBus/namespaces/topics@2021-11-01' exi
 
 resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2022-08-15' existing = {
   name: cosmosDbName
-
 }
 
 resource cosmosDbDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2021-04-15' existing = {
@@ -91,7 +83,7 @@ resource cosmosDbDatabaseCollection 'Microsoft.DocumentDB/databaseAccounts/sqlDa
 }
 
 resource backendApiService 'Microsoft.App/containerApps@2022-06-01-preview' = {
-  name: containerAppName
+  name: backendApiServiceName
   location: location
   tags: tags
   identity: {
@@ -168,7 +160,7 @@ resource backendApiService_cosmosdb_role_assignment 'Microsoft.DocumentDB/databa
   }
 }
 
-// Enable send to servicebus using app managed identity.
+// Enable publish message to Service Bus using app managed identity.
 resource backendApiService_sb_role_assignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
   name: guid(resourceGroup().id, backendApiService.name, '69a216fc-b8fb-44d8-bc22-1f3c2cd27a39')
   properties: {
@@ -176,7 +168,6 @@ resource backendApiService_sb_role_assignment 'Microsoft.Authorization/roleAssig
     roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', '69a216fc-b8fb-44d8-bc22-1f3c2cd27a39')//Azure Service Bus Data Sender
     principalType: 'ServicePrincipal'
   }
-  
   scope: serviceBusTopic
 }
 

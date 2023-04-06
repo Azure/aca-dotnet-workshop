@@ -94,7 +94,7 @@ param sendGridKeySecretValue string
 param secretStoreComponentName string
 
 @description('The key vault name store secrets')
-param keyVaultName string
+param keyVaultName string = '${prefix}kv-${uniqueString(resourceGroup().id)}${suffix}'
 
 // Container Registry & Images
 @description('The name of the container registry.')
@@ -112,22 +112,13 @@ param containerRegistryPasswordRefName string
 param containerRegistryPassword string
 
 @description('The image for the backend processor service.')
-param backendProcessoServiceImage string
+param backendProcessorServiceImage string
 
 @description('The image for the backend api service.')
 param backendApiServiceImage string
 
 @description('The image for the frontend web app service.')
 param frontendWebAppServiceImage string
-
-
-// ------------------
-// VARIABLES
-// ------------------
-
-// var keyVaultIdTokens = split(keyVaultId, '/')
-// var keyVaultName = keyVaultIdTokens[8]
-
 
 // ------------------
 // RESOURCES
@@ -141,8 +132,6 @@ module containerAppsEnvironment 'modules/container-apps-environment.bicep' ={
    applicationInsightName: applicationInsightName
     location: location
     tags: tags
-     prefix: prefix
-     suffix: suffix
   }
 }
 
@@ -164,7 +153,6 @@ module serviceBus 'modules/service-bus.bicep' = {
     serviceBusTopicName: serviceBusTopicName
     serviceBusTopicAuthorizationRuleName: serviceBusTopicAuthorizationRuleName
     backendProcessorServiceName: backendProcessorServiceName
-    
   }
 }
 
@@ -175,8 +163,7 @@ module cosmosDb 'modules/cosmos-db.bicep' = {
     location: location
     tags: tags
     cosmosDbDatabaseName: cosmosDbDatabaseName
-    cosmosDbCollectionName: cosmosDbCollectionName
-    
+    cosmosDbCollectionName: cosmosDbCollectionName 
   }
 }
 
@@ -236,7 +223,7 @@ module containerApps 'modules/container-apps.bicep' = {
     cosmosDbDatabaseName: cosmosDb.outputs.cosmosDbDatabaseName
     cosmosDbCollectionName: cosmosDb.outputs.cosmosDbCollectionName    
     containerRegistryName: containerRegistryName
-    backendProcessoServiceImage: backendProcessoServiceImage
+    backendProcessorServiceImage: backendProcessorServiceImage
     backendApiServiceImage: backendApiServiceImage
     frontendWebAppServiceImage: frontendWebAppServiceImage
     sendGridKeySecretName: sendGridKeySecretName

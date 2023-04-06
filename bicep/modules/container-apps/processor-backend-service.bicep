@@ -36,10 +36,6 @@ param externalStorageKeySecretName string
 @description('The Application Insights Instrumentation.')
 param appInsightsInstrumentationKey string
 
-// @secure()
-// @description('The External Azure Stroage Access key for the Backend Background Processor Service.')
-// param externalAzureStroageKeySecretValue string
-
 // Service Bus
 @description('The name of the service bus namespace.')
 param serviceBusName string
@@ -70,7 +66,7 @@ param containerRegistryPasswordRefName string
 param containerRegistryPassword string
 
 @description('The image for the backend processor service.')
-param backendProcessoServiceImage string
+param backendProcessorServiceImage string
 
 
 // ------------------
@@ -81,9 +77,6 @@ var keyVaultIdTokens = split(keyVaultId, '/')
 var keyVaultSubscriptionId = keyVaultIdTokens[2]
 var keyVaultResourceGroupName = keyVaultIdTokens[4]
 var keyVaultName = keyVaultIdTokens[8]
-
-// var containerAppName = 'ca-${backendProcessorServiceName}'
-var containerAppName = backendProcessorServiceName
 
 // ------------------
 // RESOURCES
@@ -109,7 +102,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-09-01' existing 
 }
 
 resource backendProcessorService 'Microsoft.App/containerApps@2022-06-01-preview' = {
-  name: containerAppName
+  name: backendProcessorServiceName
   location: location
   tags: tags
   identity: {
@@ -153,7 +146,7 @@ resource backendProcessorService 'Microsoft.App/containerApps@2022-06-01-preview
       containers: [
         {
           name: backendProcessorServiceName
-          image: backendProcessoServiceImage
+          image: backendProcessorServiceImage
           resources: {
             cpu: json('0.25')
             memory: '0.5Gi'
@@ -200,8 +193,6 @@ resource backendProcessorService 'Microsoft.App/containerApps@2022-06-01-preview
 }
 
 
-
-
 // Enable consume from servicebus using system managed identity.
 resource backendProcessorService_sb_role_assignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
   name: guid(resourceGroup().id, backendProcessorServiceName, '4f6d3b9b-027b-4f4c-9142-0e5a2a2247e0')
@@ -210,11 +201,10 @@ resource backendProcessorService_sb_role_assignment 'Microsoft.Authorization/rol
     roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', '4f6d3b9b-027b-4f4c-9142-0e5a2a2247e0') // Azure Service Bus Data Receiver.
     principalType: 'ServicePrincipal'
   } 
-  //scope: serviceBusTopicSubscription
   scope: serviceBusNamespace
 }
 
-// Create secrets and assigne Secrets User role to the backend processor service
+// Invoke create secrets and assign role 'Azure Role Key Vault Secrets User' to the backend processor service
 module backendProcessorKeySecret 'secrets/processor-backend-service-secrets.bicep' = {
   name: 'backendProcessorKeySecret-${uniqueString(resourceGroup().id)}'
   params: {

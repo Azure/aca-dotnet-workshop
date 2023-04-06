@@ -7,7 +7,7 @@ targetScope = 'resourceGroup'
 @description('The location where the resources will be created.')
 param location string = resourceGroup().location
 
-@description('Optional. The tags to be assigned to the created resources.')
+@description('The tags to be assigned to the created resources.')
 param tags object = {}
 
 @description('The name of the container apps environment.')
@@ -79,7 +79,7 @@ param containerRegistryPassword string
 param backendApiServiceImage string
 
 @description('The image for the backend processor service.')
-param backendProcessoServiceImage string
+param backendProcessorServiceImage string
 
 @description('The image for the frontend web app service.')
 param frontendWebAppServiceImage string
@@ -156,7 +156,7 @@ module backendProcessorService 'container-apps/processor-backend-service.bicep' 
     sendGridKeySecretValue: sendGridKeySecretValue
     externalStorageAccountName: externalStorageAccountName
     externalStorageKeySecretName:externalStorageKeySecretName
-    backendProcessoServiceImage: backendProcessoServiceImage
+    backendProcessorServiceImage: backendProcessorServiceImage
     appInsightsInstrumentationKey: applicationInsights.properties.InstrumentationKey
   }
 }
