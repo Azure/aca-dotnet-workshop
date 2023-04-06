@@ -261,13 +261,13 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#build-the-infrastructure-as-code-using-bicep">
-    Build the Infrastructure as Code using Bicep
+    Build the Infrastructure as Code Using Bicep
   </a>
-<nav aria-label="Build the Infrastructure as Code using Bicep" class="md-nav">
+<nav aria-label="Build the Infrastructure as Code Using Bicep" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#1-add-the-needed-extension-to-vs-code">
-    1. Add the needed extension to VS Code
+    1. Add the Needed Extension to VS Code
   </a>
 </li>
 <li class="md-nav__item">
@@ -302,7 +302,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#8-create-secrets-into-azure-key-vault">
-    8. Create Secrets into Azure Key Vault
+    8. Create Secrets Into Azure Key Vault
   </a>
 </li>
 <li class="md-nav__item">
@@ -321,13 +321,13 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#12-define-a-container-module-for-the-3-container-apps">
-    12. Define a container module for the 3 Container Apps
+<a class="md-nav__link" href="#12-define-a-container-module-for-the-three-container-apps">
+    12. Define a Container Module For the Three Container Apps
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#13-define-the-main-module-for-the-solution">
-    13. Define the Main module for the solution
+    13. Define the Main Module For the Solution
   </a>
 </li>
 </ul>
@@ -335,12 +335,12 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#deploy-the-infrastructure-and-create-the-components">
-    Deploy the infrastructure and create the components
+    Deploy the Infrastructure and Create the Components
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#verify-the-final-results">
-    Verify the final results
+    Verify the Final Results
   </a>
 </li>
 </ul>
@@ -422,13 +422,13 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#build-the-infrastructure-as-code-using-bicep">
-    Build the Infrastructure as Code using Bicep
+    Build the Infrastructure as Code Using Bicep
   </a>
-<nav aria-label="Build the Infrastructure as Code using Bicep" class="md-nav">
+<nav aria-label="Build the Infrastructure as Code Using Bicep" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#1-add-the-needed-extension-to-vs-code">
-    1. Add the needed extension to VS Code
+    1. Add the Needed Extension to VS Code
   </a>
 </li>
 <li class="md-nav__item">
@@ -463,7 +463,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#8-create-secrets-into-azure-key-vault">
-    8. Create Secrets into Azure Key Vault
+    8. Create Secrets Into Azure Key Vault
   </a>
 </li>
 <li class="md-nav__item">
@@ -482,13 +482,13 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#12-define-a-container-module-for-the-3-container-apps">
-    12. Define a container module for the 3 Container Apps
+<a class="md-nav__link" href="#12-define-a-container-module-for-the-three-container-apps">
+    12. Define a Container Module For the Three Container Apps
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#13-define-the-main-module-for-the-solution">
-    13. Define the Main module for the solution
+    13. Define the Main Module For the Solution
   </a>
 </li>
 </ul>
@@ -496,12 +496,12 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#deploy-the-infrastructure-and-create-the-components">
-    Deploy the infrastructure and create the components
+    Deploy the Infrastructure and Create the Components
   </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#verify-the-final-results">
-    Verify the final results
+    Verify the Final Results
   </a>
 </li>
 </ul>
@@ -511,121 +511,122 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="module-10-deployment-via-bicep">Module 10 - Deployment via Bicep<a class="headerlink" href="#module-10-deployment-via-bicep" title="Permanent link">¶</a></h1>
-<p>In this module, we will be working on defining the proper process to automate the infrastructure provisioning by creating the scripts/templates to provision the resources, this process is known as IaC (Infrastructure as Code).</p>
+<h1 id="module-10-deployment-via-bicep">Module 10 - Deployment Via Bicep<a class="headerlink" href="#module-10-deployment-via-bicep" title="Permanent link">¶</a></h1>
+<p>Throughout the various modules, we have utilized various Azure CLI commands to provision different resources. While this approach is suitable for this workshop, in a production environment, you will likely require a more automated process to deploy the same resources. In this module, we will be working on defining the proper process to automate the infrastructure provisioning by creating the scripts/templates to provision the resources. This process is known as IaC (Infrastructure as Code).</p>
 <p>Once we have this in place, IaC deployments will benefit us in key ways such as:</p>
 <ol>
-<li>Increase confidence in the deployments, ensure consistency, reduce human error in resource provisioning, and ensure consistent deployments.</li>
-<li>Avoid configuration drifts, IaC is an idempotent operation, which means it provides the same result each time it’s run.</li>
-<li>Provision of new environments, during the lifecycle of the application you might need to run penetration testing or load testing for a short period of time in a totally isolated environment, with IaC in place it will be a matter of executing the scripts to recreate an identical environment to the production one.</li>
-<li>When you provision resources from the Azure Portal many processes are abstracted, in our case think of when creating an Azure Container Apps Environment from the portal, behind the sense it will create a log analytics workspace and associate with the environment. With IaC it can help provide a better understanding of how Azure works and how to troubleshoot issues that might arise.</li>
+<li>By ensuring consistency and reducing human errors in resource provisioning, deployments can be made with greater confidence and consistency.</li>
+<li>Avoid configuration drifts as IaC is an idempotent operation, which means it provides the same result each time it’s run.</li>
+<li>With Infrastructure as Code (IaC) in place, recreating an identical environment to the production one becomes a simple task of executing the scripts. This can be particularly useful during the application's lifecycle when short-term isolation is needed for tasks such as penetration testing or load testing.</li>
+<li>The Azure Portal abstracts several processes when you provision resources. For instance, when you create an Azure Container Apps Environment from the portal, it automatically creates a log analytics workspace and associates it with the environment without your direct involvement. However, using Infrastructure as Code (IaC) can provide you with a deeper understanding of Azure and help you troubleshoot any issues that may arise more effectively.</li>
 </ol>
 <h3 id="arm-templates-in-azure">ARM Templates in Azure<a class="headerlink" href="#arm-templates-in-azure" title="Permanent link">¶</a></h3>
-<p>ARM templates are files that define the infrastructure and configuration for your deployment, the template uses declarative syntax, which lets you state what you intend to deploy without having to write the sequence of programming commands to create it.</p>
-<p>Within Azure there are 2 ways to create IaC, we can use the <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview">JSON ARM templates</a> or <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep">Bicep</a> (domain-specific language). From past experience, using JSON ARM templates in real-world scenarios tends to be complex to manage and maintain especially when the project grows and the number of components and dependencies increases.</p>
-<p>Using Bicep is simpler and easier to work with, you can be more productive compared to ARM templates, it is worth mentioning that Bicep code will be compiled into ARM templates eventually, this process called "Transpilation".</p>
-<p>To learn more about Bicep, I highly recommend checking Microsoft learn website <a href="https://docs.microsoft.com/en-us/training/paths/fundamentals-bicep/">Fundamentals of Bicep.</a></p>
+<p>ARM templates are files that define the infrastructure and configuration for your deployment. The templates use declarative syntax, which lets you state what you intend to deploy without having to write the sequence of programming commands to create it.</p>
+<p>Within Azure there are two ways to create IaC. We can either use the <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview">JSON ARM templates</a> or <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep">Bicep</a> (domain-specific language). As a project grows and the number of components and dependencies increases, working with JSON ARM templates in real-world scenarios can become increasingly complex and difficult to manage and maintain. Bicep provides a more user-friendly and straightforward experience when compared to ARM templates, resulting in increased productivity. However, it's worth noting that Bicep code is eventually compiled into ARM templates through a process called "transpilation."</p>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-bicep-l.jpg"><img alt="aca-arm-bicep" src="../../assets/images/10-aca-iac-bicep/aca-bicep-l.jpg"/></a></p>
-<h3 id="build-the-infrastructure-as-code-using-bicep">Build the Infrastructure as Code using Bicep<a class="headerlink" href="#build-the-infrastructure-as-code-using-bicep" title="Permanent link">¶</a></h3>
-<p>Let's get started by defining the Bicep modules needed to create the Infrastructure code, what we want to achieve by the end of this module is to have a new resource group containing all the resources and configuration (connection strings, secrets, env variables, dapr components, etc..) we used to build our solution, we should have a new resource group which contains the below resources.
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For those interested in learning more about Bicep, it is recommended to visit the Microsoft Learn website <a href="https://docs.microsoft.com/en-us/training/paths/fundamentals-bicep/">Fundamentals of Bicep</a>.</p>
+</div>
+<h3 id="build-the-infrastructure-as-code-using-bicep">Build the Infrastructure as Code Using Bicep<a class="headerlink" href="#build-the-infrastructure-as-code-using-bicep" title="Permanent link">¶</a></h3>
+<p>To begin, we need to define the Bicep modules that will be required to generate the Infrastructure code. Our goal for this module is to have a freshly created resource group that encompasses all the necessary resources and configurations - such as connection strings, secrets, environment variables, and Dapr components - which we utilized to construct our solution. By the end, we will have a new resource group that includes the following resources.
 <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"><img alt="aca-resources" src="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"/></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the 3 services. We will not provision Azure Container Registry part of this Bicep modules.</p>
+<p>To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the three services. If we deployed ACR part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images. <a href="../08-aca-monitoring/#2-build-new-images-and-push-them-to-acr">This section</a> shows the different commands to build and push the images to an existing ACR. Make sure you are at the root project directory when executing the aforementioned commands.</p>
+<p>In a production setting, a DevOps pipeline would be in place to automate the whole process - commencing with ACR creation, followed by building and pushing docker images, and concluding with executing the Bicep script to establish the remaining resources. As it is outside the scope of this workshop, we will not delve into the creation of a DevOps pipeline here.</p>
 </div>
-<h4 id="1-add-the-needed-extension-to-vs-code">1. Add the needed extension to VS Code<a class="headerlink" href="#1-add-the-needed-extension-to-vs-code" title="Permanent link">¶</a></h4>
-<p>You need to install an extension named <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep</a>, This extension will simplify building Bicep files as they will offer IntelliSense, Validation, listing all available resource types, etc..</p>
+<h4 id="1-add-the-needed-extension-to-vs-code">1. Add the Needed Extension to VS Code<a class="headerlink" href="#1-add-the-needed-extension-to-vs-code" title="Permanent link">¶</a></h4>
+<p>To proceed, you must install an extension called <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep</a>. This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..</p>
 <h4 id="2-define-an-azure-container-apps-environment">2. Define an Azure Container Apps Environment<a class="headerlink" href="#2-define-an-azure-container-apps-environment" title="Permanent link">¶</a></h4>
-<p>Add a new folder named <code>Bicep</code> on the root project directory, then add another folder named <code>Modules</code>. Add a new file named <code>container-apps-environment.bicep</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps-environment.bicep">link.</a>.</p>
-<p>What we've added to this file is the following:</p>
+<p>Add a new folder named <code>bicep</code> on the root project directory, then add another folder named <code>modules</code>. Add a new file named <code>container-apps-environment.bicep</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps-environment.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
-<li>The module accepts various parameters, all of them are parameters with default values, meaning that if no value is provided it will take the default value. </li>
-<li>The parameter <code>location</code> defaults to the container resource group location. Bicep has a function named <code>resourceGroup()</code> which you can get the location from.</li>
-<li>The parameters <code>prefix</code> and <code>suffix</code> could be used if you want to add a prefix or suffix to the resource names</li>
-<li>The parameter <code>tag</code> is used to tag the created resources, tags are key-value pairs that help you identify resources based on settings that are relevant to your organization and deployment.</li>
-<li>The parameters <code>containerAppsEnvironmentName</code>, <code>logAnalyticsWorkspaceName</code>, and <code>applicationInsightName</code> have default values of resource names using the helper function named <code>uniqueString</code>. This function performs a 64-bit hash of the provided strings to create a unique string. This function is helpful when you need to create a unique name for a resource. We are passing the <code>resourceGroup().id</code> to this function to ensure that if we executed this module on 2 different resource groups, the generated string will be a global unique name.</li>
-<li>This module will create 3 resources, it will start by creating a <code>logAnalyticsWorkspace</code>, then an <code>applicationInsights</code> resource. Notice how we are setting the <code>logAnalyticsWorkspace.id</code> as an application insights <code>WorkspaceResourceId</code></li>
+<li>The module takes multiple parameters, all of which are set to default values. This indicates that if no value is specified, the default value will be utilized. </li>
+<li>The <code>location</code> parameter defaults to the location of the container resource group. Bicep has a function called <code>resourceGroup()</code>, which can be used to retrieve the location.</li>
+<li>The parameters <code>prefix</code> and <code>suffix</code> could be used if you want to add a prefix or suffix to the resource names.</li>
+<li>The parameter <code>tag</code> is used to tag the created resources. Tags are key-value pairs that help you identify resources based on settings that are relevant to your organization and deployment.</li>
+<li>The parameters <code>containerAppsEnvironmentName</code>, <code>logAnalyticsWorkspaceName</code>, and <code>applicationInsightName</code> have default values of resource names using the helper function named <code>uniqueString</code>. This function performs a 64-bit hash of the provided strings to create a unique string. This function is helpful when you need to create a unique name for a resource. We are passing the <code>resourceGroup().id</code> to this function to ensure that if we executed this module on two different resource groups, the generated string will be a global unique name.</li>
+<li>This module will create two resources. It will start by creating a <code>logAnalyticsWorkspace</code>, then an <code>applicationInsights</code> resource. Notice how we are setting the <code>logAnalyticsWorkspace.id</code> as an application insights <code>WorkspaceResourceId</code>.</li>
 <li>Lastly we are creating the <code>containerAppsEnvironment</code>. Notice how we are setting the <code>daprAIInstrumentationKey</code> by using the Application Insights <code>InstrumentationKey</code> and then setting <code>logAnalyticsConfiguration.customerId</code> and <code>logAnalyticsConfiguration.sharedKey</code>.</li>
-<li>The output of this module are a single parameter named <code>applicationInsightsName</code>, This output is needed as an input for other module.</li>
+<li>The output of this module are a is parameter named <code>applicationInsightsName</code>. This output is needed as an input for a subsequent module.</li>
 </ul>
+</details>
 <h4 id="3-define-an-azure-key-vault-resource">3. Define an Azure Key Vault Resource<a class="headerlink" href="#3-define-an-azure-key-vault-resource" title="Permanent link">¶</a></h4>
-<p>Add a new file named <code>key-vault.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/key-vault.bicep">link.</a></p>
+<p>Add a new file named <code>key-vault.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/key-vault.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
 <li>This module will create the Azure Key Vault resource which will be used to store secrets.</li>
-<li>The output of this module are a single parameter named <code>keyVaultId</code>, This output is needed as an input for other module.</li>
+<li>The output of this module is a single parameter named <code>keyVaultId</code>. This output is needed as an input for a subsequent module.</li>
 </ul>
+</details>
 <h4 id="4-define-a-azure-service-bus-resource">4. Define a Azure Service Bus Resource<a class="headerlink" href="#4-define-a-azure-service-bus-resource" title="Permanent link">¶</a></h4>
-<p>Add a new file named <code>service-bus.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/service-bus.bicep">link.</a></p>
+<p>Add a new file named <code>service-bus.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/service-bus.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
-<li>
-<p>This module will create the Azure Service resource, a topic, a subscription for the consumer, and an authorization rule with <code>Manage</code> permissions.</p>
-</li>
-<li>
-<p>The output of this module will return 3 output parameters which will be used as inputs params for other modules.</p>
-</li>
+<li>This module will create the Azure Service resource, a topic, a subscription for the consumer, and an authorization rule with <code>Manage</code> permissions.</li>
+<li>The output of this module will return three output parameters which will be used as an input for a subsequent module.</li>
 </ul>
+</details>
 <h4 id="5-define-an-azure-cosmosdb-resource">5. Define an Azure CosmosDb Resource<a class="headerlink" href="#5-define-an-azure-cosmosdb-resource" title="Permanent link">¶</a></h4>
-<p>Add a new file named <code>cosmos-db.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/cosmos-db.bicep">link.</a></p>
+<p>Add a new file named <code>cosmos-db.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/cosmos-db.bicep">at this location</a></p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
-<li>
-<p>This module will create the Azure CosmosDB account, a CosmosDB database, and a CosmosDB collection.</p>
-</li>
-<li>
-<p>The output of this module will return 3 output parameters which will be used as inputs params for other modules.</p>
-</li>
+<li>This module will create the Azure CosmosDB account, a CosmosDB database, and a CosmosDB collection.</li>
+<li>The output of this module will return three output parameters which will be used as an input for a subsequent module.</li>
 </ul>
+</details>
 <h4 id="6-define-an-azure-storage-resource">6. Define an Azure Storage Resource<a class="headerlink" href="#6-define-an-azure-storage-resource" title="Permanent link">¶</a></h4>
-<p>Add a new file named <code>storage-account.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/storage-account.bicep">link.</a></p>
+<p>Add a new file named <code>storage-account.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/storage-account.bicep">at this location</a></p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
-<li>
-<p>This module will create the Azure Storage account, a storage queue service, and a queue.</p>
-</li>
-<li>
-<p>The output of this module will single output parameter which is the Azure storage account name.</p>
-</li>
+<li>This module will create the Azure Storage account, a storage queue service, and a queue.</li>
+<li>The output of this module will be a single output parameter which will be used as an input for a subsequent module.</li>
 </ul>
+</details>
 <h4 id="7-define-dapr-components">7. Define Dapr Components<a class="headerlink" href="#7-define-dapr-components" title="Permanent link">¶</a></h4>
-<p>Next we will define all dapr components used in the solution in ne single bicep module, to accomplish this, add a new file named <code>dapr-components.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/dapr-components.bicep">link.</a></p>
+<p>Next we will define all dapr components used in the solution in a single bicep module. To accomplish this, add a new file called <code>dapr-components.bicep</code> under the folder <code>bicep\modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/dapr-components.bicep">at this location</a></p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
-<li>
-<p>This module will be responsible to create all dapr components used in the solution, it accepts various input parameters needed by the dapr components.</p>
-</li>
+<li>This module will be responsible for creating all dapr components used in the solution. It accepts various input parameters needed by the dapr components.</li>
 <li>
 <p>Notice how we are using the keyword <code>existing</code> to obtain a strongly typed reference to the pre-created resource</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>resource<span class="w"> </span>containerAppsEnvironment<span class="w"> </span><span class="s1">'Microsoft.App/managedEnvironments@2022-03-01'</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">   </span>name:<span class="w"> </span>containerAppsEnvironmentName
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>name:<span class="w"> </span>containerAppsEnvironmentName
 </span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="o">}</span>
 </span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>
 </span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>resource<span class="w"> </span>cosmosDbAccount<span class="w"> </span><span class="s1">'Microsoft.DocumentDB/databaseAccounts@2022-08-15'</span><span class="w"> </span><span class="nv">existing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">   </span>name:<span class="w"> </span>cosmosDbName
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>name:<span class="w"> </span>cosmosDbName
 </span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="o">}</span>
 </span></code></pre></div>
 </li>
 </ul>
-<h4 id="8-create-secrets-into-azure-key-vault">8. Create Secrets into Azure Key Vault<a class="headerlink" href="#8-create-secrets-into-azure-key-vault" title="Permanent link">¶</a></h4>
-<ul>
-<li>
-<p>This module will be responsible to create the secrets and store them in Azure Key Vault, as well it create a role assignment for the backend processor service of type <code>Azure Role Key Vault Secrets User</code> so the service can access the Key Vault and read secrets.</p>
-</li>
-<li>
-<p>To accomplish this, add a new folder named <code>container-apps\secrets</code> under the <code>modules</code> folder, and then add a new file named <code>processor-backend-service-secrets.bicep</code> under the folder <code>container-apps\secrets</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/secrets/processor-backend-service-secrets.bicep">link.</a></p>
-</li>
-</ul>
+</details>
+<h4 id="8-create-secrets-into-azure-key-vault">8. Create Secrets Into Azure Key Vault<a class="headerlink" href="#8-create-secrets-into-azure-key-vault" title="Permanent link">¶</a></h4>
+<p>This module will have the responsibility of generating the secrets and saving them in Azure Key Vault. Additionally, it will establish a role assignment for the backend processor service, specifically of type <code>Azure Role Key Vault Secrets User</code>, which will allow the service to access the Key Vault and retrieve the secrets.</p>
+<p>To achieve this, create a new directory called <code>container-apps\secrets</code> within the <code>modules</code> folder, and subsequently, introduce a new file named <code>processor-backend-service-secrets.bicep</code> within the <code>container-apps\secrets</code> folder. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/secrets/processor-backend-service-secrets.bicep">at this location</a>.</p>
 <h4 id="9-define-the-frontend-service-azure-container-app">9. Define the Frontend Service Azure Container App<a class="headerlink" href="#9-define-the-frontend-service-azure-container-app" title="Permanent link">¶</a></h4>
-<p>Now we will start defining the modules needed to create the container apps, we will start with the Frontend App, to accomplish this add a new file named <code>webapp-frontend-service.bicep</code> under the folder <code>modules\container-apps</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/webapp-frontend-service.bicep">link.</a></p>
+<p>We will now begin defining the modules that are necessary for producing the container apps, starting with the Frontend App. To initiate this process, create a new file named <code>webapp-frontend-service.bicep</code> within the <code>modules\container-apps</code> directory. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/webapp-frontend-service.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
-<li>
-<p>Notice how we used the attribute <code>@secure</code> on input parameters which contain secrets or keys, this attribute can be applied on string and object parameters that contain secret values, when it is used Azure won't make the parameter values available in the deployment logs nor on the terminal if you are using Azure CLI.</p>
-</li>
-<li>
-<p>The out parameters this module will return the fully qualified domain name (FQDN) of the frontend container app.</p>
-</li>
+<li>Observe the usage of the <code>@secure</code> attribute on input parameters that contain confidential information or keys. This attribute may be applied to both string and object parameters that encompass secretive values. By implementing this attribute, Azure will abstain from presenting the parameter values within the deployment logs or on the terminal if you happen to be utilizing Azure CLI.</li>
+<li>The output parameters of this module will provide the fully qualified domain name (FQDN) for the frontend container application.</li>
 </ul>
+</details>
 <h4 id="10-define-the-backend-api-service-azure-container-app">10. Define the Backend Api Service Azure Container App<a class="headerlink" href="#10-define-the-backend-api-service-azure-container-app" title="Permanent link">¶</a></h4>
-<p>Add a new file named <code>webapi-backend-service.bicep</code> under the folder <code>modules\container-apps</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/webapi-backend-service.bicep">link.</a></p>
+<p>Add a new file named <code>webapi-backend-service.bicep</code> under the folder <code>modules\container-apps</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/webapi-backend-service.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
 <li>
-<p>Notice how we are assigning the Cosmosdb account a read/write access using the <code>Cosmos DB Built-in Data Contributor</code> role to the Backend API system assigned identity by using the code below:</p>
+<p>Notice how we are assigning the Cosmosdb account a read/write access using the <code>Cosmos DB Built-in Data Contributor</code> role to the Backend API system assigned identity, by using the code below:</p>
 <div class="language-Shell highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>resource<span class="w"> </span>backendApiService_cosmosdb_role_assignment<span class="w"> </span><span class="s1">'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2022-08-15'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
 </span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>name:<span class="w"> </span>guid<span class="o">(</span>subscription<span class="o">()</span>.id,<span class="w"> </span>backendApiService.name,<span class="w"> </span><span class="s1">'00000000-0000-0000-0000-000000000002'</span><span class="o">)</span>
 </span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>parent:<span class="w"> </span>cosmosDbAccount
@@ -637,7 +638,7 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>The same approach used when assigning the role <code>Azure Service Bus Data Sender</code> to the Backend API to be able to publish messages to Azure Service Bus using Backend API system assigned identity, this done using the code below:
+<p>A similar technique was applied when assigning the Azure Service Bus Data Sender role to the Backend API, enabling it to publish messages to Azure Service Bus utilizing the Backend API system-assigned identity. This was accomplished utilizing the following code:
     <div class="language-Shell highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>resource<span class="w"> </span>backendApiService_sb_role_assignment<span class="w"> </span><span class="s1">'Microsoft.Authorization/roleAssignments@2020-04-01-preview'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
 </span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>name:<span class="w"> </span>guid<span class="o">(</span>resourceGroup<span class="o">()</span>.id,<span class="w"> </span>backendApiService.name,<span class="w"> </span><span class="s1">'69a216fc-b8fb-44d8-bc22-1f3c2cd27a39'</span><span class="o">)</span>
 </span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>properties:<span class="w"> </span><span class="o">{</span>
@@ -650,11 +651,13 @@
 </span></code></pre></div></p>
 </li>
 </ul>
+</details>
 <h4 id="11-define-the-backend-processor-service-azure-container-app">11. Define the Backend Processor Service Azure Container App<a class="headerlink" href="#11-define-the-backend-processor-service-azure-container-app" title="Permanent link">¶</a></h4>
-<p>Add a new file named <code>processor-backend-service.bicep</code> under the folder <code>modules\container-apps</code>. The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/processor-backend-service.bicep">link.</a></p>
+<p>Add a new file named <code>processor-backend-service.bicep</code> under the folder <code>modules\container-apps</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/processor-backend-service.bicep">at this location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
 <ul>
-<li>
-<p>Notice how we are assigning the role <code>Azure Service Bus Data Receiver</code> to the Backend Processor to be able to consume/read messages from Azure Service Bus Topic using Backend Processor system assigned identity, this done using the code below:
+<li>Notice how we are assigning the role <code>Azure Service Bus Data Receiver</code> to the Backend Processor to be able to consume/read messages from Azure Service Bus Topic using Backend Processor system assigned identity, by using the code below:
     <div class="language-Shell highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>resource<span class="w"> </span>backendProcessorService_sb_role_assignment<span class="w"> </span><span class="s1">'Microsoft.Authorization/roleAssignments@2020-04-01-preview'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
 </span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>name:<span class="w"> </span>guid<span class="o">(</span>resourceGroup<span class="o">()</span>.id,<span class="w"> </span>backendProcessorServiceName,<span class="w"> </span><span class="s1">'4f6d3b9b-027b-4f4c-9142-0e5a2a2247e0'</span><span class="o">)</span>
 </span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>properties:<span class="w"> </span><span class="o">{</span>
@@ -664,10 +667,8 @@
 </span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="o">}</span><span class="w"> </span>
 </span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a>scope:<span class="w"> </span>serviceBusNamespace
 </span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="o">}</span>
-</span></code></pre></div></p>
-</li>
-<li>
-<p>Within this module, we've invoked the module defined in <a href="#7-create-secrets-into-azure-key-vault">step 7</a> which is responsible to create the secrets in Azure Key Vault and assign the role <code>Azure Role Key Vault Secrets User</code> to the Backend Processor Service,  this achieved using the code below:
+</span></code></pre></div></li>
+<li>Within this module, we've invoked the module defined in <a href="#8-create-secrets-into-azure-key-vault">step 8</a> which is responsible to create the secrets in Azure Key Vault and assign the role <code>Azure Role Key Vault Secrets User</code> to the Backend Processor Service, by using the code below:
     <div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>module<span class="w"> </span>backendProcessorKeySecret<span class="w"> </span><span class="s1">'secrets/processor-backend-service-secrets.bicep'</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
 </span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>name:<span class="w"> </span><span class="s1">'backendProcessorKeySecret-${uniqueString(resourceGroup().id)}'</span>
 </span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>params:<span class="w"> </span><span class="o">{</span>
@@ -680,22 +681,28 @@
 </span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="o">}</span>
 </span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>scope:<span class="w"> </span>resourceGroup<span class="o">(</span>keyVaultSubscriptionId,<span class="w"> </span>keyVaultResourceGroupName<span class="o">)</span>
 </span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="o">}</span>
-</span></code></pre></div></p>
+</span></code></pre></div></li>
+</ul>
+</details>
+<h4 id="12-define-a-container-module-for-the-three-container-apps">12. Define a Container Module For the Three Container Apps<a class="headerlink" href="#12-define-a-container-module-for-the-three-container-apps" title="Permanent link">¶</a></h4>
+<p>This module will act as a container for the three Container Apps modules defined in the previous three steps. It is optional to create it, but it makes it easier when we invoke all the created modules as you will see in the next step. To create this module add a new file named <code>container-apps.bicep</code> under the folder <code>modules</code>. The content of the file can be found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps.bicep">at this location</a>.</p>
+<h4 id="13-define-the-main-module-for-the-solution">13. Define the Main Module For the Solution<a class="headerlink" href="#13-define-the-main-module-for-the-solution" title="Permanent link">¶</a></h4>
+<p>Finally, we must specify the Main Bicep module that will connect all other modules together. This file will be referenced by the AZ CLI command when producing all resources. To achieve this, add a new file named <code>main.bicep</code> under the <code>bicep</code> directory. The contents of the file can be found at this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.bicep">location</a>.</p>
+<details class="tip">
+<summary>What we've added in the Bicep file above</summary>
+<ul>
+<li>
+<p>When calling the module <code>dapr-components.bicep</code> we are setting the value of the array <code>dependsOn</code> to the Container Apps Environment. This is called explicit dependency which aids the Bicep interpreter in comprehending the relationships between components. In this instance, the Container Apps Environment must be provisioned before the Dapr Components to guarantee a successful deployment.</p>
+</li>
+<li>
+<p>When calling the module <code>container-apps.bicep</code>, some of the input params are expecting are referencing another resource, for example consider the input param named <code>cosmosDbName</code> and the value used is <code>cosmosDb.outputs.cosmosDbName</code>. This means that the module <code>cosmos-db.bicep</code> should be created successfully before creating the container apps module, this called Implicit dependency.</p>
 </li>
 </ul>
-<h4 id="12-define-a-container-module-for-the-3-container-apps">12. Define a container module for the 3 Container Apps<a class="headerlink" href="#12-define-a-container-module-for-the-3-container-apps" title="Permanent link">¶</a></h4>
-<p>This module will act as a container for the 3 Container Apps modules defined in the previous 3 steps, it is optional to create it, but it makes it easier when we invoke all the created modules as you will see in the next step. To create this module add a new file named <code>container-apps.bicep</code> under the folder <code>modules</code> The content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps.bicep">link.</a></p>
-<h4 id="13-define-the-main-module-for-the-solution">13. Define the Main module for the solution<a class="headerlink" href="#13-define-the-main-module-for-the-solution" title="Permanent link">¶</a></h4>
-<p>Lastly, we need to define the Main Bicep module which will link all other modules together, this will be the file that is referenced from AZ CLI command when creating the entire resources, to do so add a new file named <code>main.bicep</code> under the folder <code>bicep</code>, the content of the file can be found on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.bicep">link.</a></p>
-<p>Few things to notice on this module:
-- When calling the module <code>dapr-components.bicep</code> we are setting the value of the array <code>dependsOn</code> to the Container Apps Environment, this is called explicit dependency which will help the Bicep interpreter to understand the dependencies between components, in this case, the Container Apps Environment should be provisioned before the Dapr Components in order for the deployment to success.</p>
-<ul>
-<li>When calling the module <code>container-apps.bicep</code>, some of the input params are expecting are referencing another resource, for example consider the input param named <code>cosmosDbName</code> and the value used is <code>cosmosDb.outputs.cosmosDbName</code>. This means that the module <code>cosmos-db.bicep</code> should be created successfully before creating the container apps module, this called Implicit dependency.</li>
-</ul>
-<h3 id="deploy-the-infrastructure-and-create-the-components">Deploy the infrastructure and create the components<a class="headerlink" href="#deploy-the-infrastructure-and-create-the-components" title="Permanent link">¶</a></h3>
-<p>With the steps above completed we are ready to an end to end test, we just need to create a parameters file which will simplify the invocation of the main bicep file, to achieve this, right click on file <code>main.bicep</code> and select <code>Generate Parameter File</code>, this will result in creating a file named <code>main.parameters.json</code> similar to the file on this <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.parameters.json">link.</a>.</p>
-<p>To use this file, you need to edit this generated file and provide values for the parameters, you can use the same values provided on the github link, you only need to replace parameter values between the angle brackets <code>&lt;&gt;</code> with values related to your ACR resource and SendGrid.</p>
-<p>To start the actual deployment by calling <code>az deployment group create</code> to do so, open the PowerShell console and use the content below. You need to create an empty resource group before. I'm using a resource group named <code>aca-workshop-bicep-rg</code></p>
+</details>
+<h3 id="deploy-the-infrastructure-and-create-the-components">Deploy the Infrastructure and Create the Components<a class="headerlink" href="#deploy-the-infrastructure-and-create-the-components" title="Permanent link">¶</a></h3>
+<p>With the steps above completed we are ready to deploy all the different resources. We just need to create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file <code>main.bicep</code> and select <code>Generate Parameter File</code>. This will result in creating a file named <code>main.parameters.json</code> similar to the file found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.parameters.json">here</a>.</p>
+<p>To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values provided on the github link. You only need to replace parameter values between the angle brackets <code>&lt;&gt;</code> with values related to your ACR resource and SendGrid.</p>
+<p>Start the deployment by calling <code>az deployment group create</code>. To accomplish this, open the PowerShell console and use the content below. We will assume you have an existing resource group named <code>aca-workshop-bicep-rg</code> along with an ACR deployment which includes the docker images to be deployed to your different Azure Container Apps.</p>
 <div class="language-Powershell highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">az</span> <span class="nb">group </span><span class="n">create</span> <span class="p">`</span>
 </span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">"aca-workshop-bicep-rg"</span> <span class="p">`</span>
 </span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="p">-</span><span class="n">-location</span> <span class="s2">"eastus"</span>  
@@ -706,16 +713,19 @@
 </span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="p">-</span><span class="n">-template</span><span class="o">-file</span> <span class="s2">"./bicep/main.bicep"</span> <span class="p">`</span>
 </span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="p">-</span><span class="n">-parameters</span> <span class="s2">"./bicep/main.parameters.json"</span>
 </span></code></pre></div>
-<p>Azure CLI will take the Bicep module, and start creating the deployment in the resource group <code>aca-workshop-bicep-rg</code></p>
-<h3 id="verify-the-final-results">Verify the final results<a class="headerlink" href="#verify-the-final-results" title="Permanent link">¶</a></h3>
-<p>If the deployment succeeded; you should see all the resources created under the resource group, as well you can navigate to the <code>Deployments</code> tab to verify the ARM templates deployed, it should look like the below image:</p>
+<p>The Azure CLI will take the Bicep module and start creating the deployment in the resource group <code>aca-workshop-bicep-rg</code>.</p>
+<h3 id="verify-the-final-results">Verify the Final Results<a class="headerlink" href="#verify-the-final-results" title="Permanent link">¶</a></h3>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Upon successful deployment, you should observe all resources generated within the designated resource group. Additionally, you may navigate to the <code>Deployments</code> section to confirm that the ARM templates have been deployed, which should resemble the image provided below:</p>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-deployment.jpg"><img alt="aca-deployment" src="../../assets/images/10-aca-iac-bicep/aca-deployment.jpg"/></a></p>
+</div>
 <hr/>
 <div class="md-source-file">
 <small>
     
       Last update:
-      2023-04-04
+      2023-04-05
     
   </small>
 </div>
