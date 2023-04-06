@@ -410,23 +410,18 @@
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../10-contributing/1-contribution-guide/">
+<a class="md-nav__link" href="../11-contributing/1-contribution-guide/">
         Contribution Guide
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../10-contributing/2-Submit-issue-suggestion/">
+<a class="md-nav__link" href="../11-contributing/2-Submit-issue-suggestion/">
         Submit an issue or suggestion
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../10-contributing/3-minor-update-fix/">
+<a class="md-nav__link" href="../11-contributing/3-minor-update-fix/">
         Minor update or fix, new challenge
-      </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../10-contributing/4-github-local-codespaces/">
-        Testing changes locally or with GitHub Codespaces
       </a>
 </li>
 </ul>
@@ -445,8 +440,13 @@
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../20-appendix/01-run-debug-dapr-app-vscode/">
+<a class="md-nav__link" href="../12-appendix/01-run-debug-dapr-app-vscode/">
         Debug and launch Dapr applications in VSCode
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../12-appendix/02-github-local-codespaces/">
+        Testing changes locally or with GitHub Codespaces
       </a>
 </li>
 </ul>
@@ -921,7 +921,7 @@ into the <code>metaData</code> dictionary.</p>
 </details>
 <h4 id="6-test-dapr-bindings-locally">6. Test Dapr Bindings Locally<a class="headerlink" href="#6-test-dapr-bindings-locally" title="Permanent link">¶</a></h4>
 <p>Now we are ready to give it an end-to-end test on our dev machines. Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together 
-in this <a href="../20-appendix/01-run-debug-dapr-app-vscode/">section</a>.</p>
+in this <a href="../12-appendix/01-run-debug-dapr-app-vscode/">section</a>.</p>
 <p>Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from <a href="https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview">here</a>. 
 Login to your Azure Subscription and navigate to the storage account already created, create a queue, and use the same name you already used in the Dapr Input configuration file.
 In our case the name of the queue in the configuration file is <code>external-tasks-queue</code>.</p>
