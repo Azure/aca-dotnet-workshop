@@ -512,6 +512,10 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="module-10-deployment-via-bicep">Module 10 - Deployment Via Bicep<a class="headerlink" href="#module-10-deployment-via-bicep" title="Permanent link">¶</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Module Duration</p>
+<p>30 minutes</p>
+</div>
 <p>Throughout the various modules, we have utilized various Azure CLI commands to provision different resources. While this approach is suitable for this workshop, in a production environment, you will likely require a more automated process to deploy the same resources. In this module, we will be working on defining the proper process to automate the infrastructure provisioning by creating the scripts/templates to provision the resources. This process is known as IaC (Infrastructure as Code).</p>
 <p>Once we have this in place, IaC deployments will benefit us in key ways such as:</p>
 <ol>
@@ -533,7 +537,7 @@
 <a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"><img alt="aca-resources" src="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"/></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the three services. If we deployed ACR part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images. <a href="../08-aca-monitoring/#2-build-new-images-and-push-them-to-acr">This section</a> shows the different commands to build and push the images to an existing ACR. Make sure you are at the root project directory when executing the aforementioned commands.</p>
+<p>To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the three services. If we deployed ACR part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images.</p>
 <p>In a production setting, a DevOps pipeline would be in place to automate the whole process - commencing with ACR creation, followed by building and pushing docker images, and concluding with executing the Bicep script to establish the remaining resources. As it is outside the scope of this workshop, we will not delve into the creation of a DevOps pipeline here.</p>
 </div>
 <h4 id="1-add-the-needed-extension-to-vs-code">1. Add the Needed Extension to VS Code<a class="headerlink" href="#1-add-the-needed-extension-to-vs-code" title="Permanent link">¶</a></h4>
@@ -702,18 +706,28 @@
 <h3 id="deploy-the-infrastructure-and-create-the-components">Deploy the Infrastructure and Create the Components<a class="headerlink" href="#deploy-the-infrastructure-and-create-the-components" title="Permanent link">¶</a></h3>
 <p>With the steps above completed we are ready to deploy all the different resources. We just need to create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file <code>main.bicep</code> and select <code>Generate Parameter File</code>. This will result in creating a file named <code>main.parameters.json</code> similar to the file found <a href="https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.parameters.json">here</a>.</p>
 <p>To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values provided on the github link. You only need to replace parameter values between the angle brackets <code>&lt;&gt;</code> with values related to your ACR resource and SendGrid.</p>
-<p>Start the deployment by calling <code>az deployment group create</code>. To accomplish this, open the PowerShell console and use the content below. We will assume you have an existing resource group named <code>aca-workshop-bicep-rg</code> along with an ACR deployment which includes the docker images to be deployed to your different Azure Container Apps.</p>
+<p>Start the deployment by calling <code>az deployment group create</code>. To accomplish this, open the PowerShell console and use the content below.</p>
 <div class="language-Powershell highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">az</span> <span class="nb">group </span><span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">"aca-workshop-bicep-rg"</span> <span class="p">`</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">"&lt;your RG name&gt;"</span> <span class="p">`</span>
 </span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="p">-</span><span class="n">-location</span> <span class="s2">"eastus"</span>  
-</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>
-</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="n">az</span> <span class="n">deployment</span> <span class="nb">group </span><span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="s2">"aca-workshop-bicep-rg"</span> <span class="p">`</span>
-</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="p">-</span><span class="n">-template</span><span class="o">-file</span> <span class="s2">"./bicep/main.bicep"</span> <span class="p">`</span>
-</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="p">-</span><span class="n">-parameters</span> <span class="s2">"./bicep/main.parameters.json"</span>
 </span></code></pre></div>
-<p>The Azure CLI will take the Bicep module and start creating the deployment in the resource group <code>aca-workshop-bicep-rg</code>.</p>
+<p>Next create an ACR inside the newly created Resource Group:</p>
+<div class="language-Powershell highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="p">&lt;</span><span class="n">your</span> <span class="n">RG</span> <span class="n">name</span><span class="p">&gt;</span> <span class="p">`</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>    <span class="p">-</span><span class="n">-name</span> <span class="p">&lt;</span><span class="n">your</span> <span class="n">ACR</span> <span class="n">name</span><span class="p">&gt;`</span>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>    <span class="p">-</span><span class="n">-sku</span> <span class="n">Basic</span> <span class="p">`</span>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>    <span class="p">-</span><span class="n">-admin-enabled</span> <span class="n">true</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once the RG and ACR are created you can check <a href="../08-aca-monitoring/#2-build-new-images-and-push-them-to-acr">this section</a> which shows the different commands to build and push the images to ACR. Make sure you are at the root project directory when executing the aforementioned commands. Finally run the bicep file against the newly created Resource Group as shown below.</p>
+</div>
+<div class="language-Powershell highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">az</span> <span class="n">deployment</span> <span class="nb">group </span><span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="s2">"&lt;your RG name&gt;"</span> <span class="p">`</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="p">-</span><span class="n">-template</span><span class="o">-file</span> <span class="s2">"./bicep/main.bicep"</span> <span class="p">`</span>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="p">-</span><span class="n">-parameters</span> <span class="s2">"./bicep/main.parameters.json"</span>
+</span></code></pre></div>
+<p>The Azure CLI will take the Bicep module and start creating the deployment in the resource group.</p>
 <h3 id="verify-the-final-results">Verify the Final Results<a class="headerlink" href="#verify-the-final-results" title="Permanent link">¶</a></h3>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
@@ -725,7 +739,7 @@
 <small>
     
       Last update:
-      2023-04-05
+      2023-04-06
     
   </small>
 </div>
