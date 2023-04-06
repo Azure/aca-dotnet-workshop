@@ -25,7 +25,7 @@ To accomplish this, open file `launch.json` and add the two configurations shown
 === "launch.json"
     
     ```json
-    --8<-- "docs/aca/20-appendix/launch.json"
+    --8<-- "docs/aca/12-appendix/launch.json"
     ```
 !!! note 
     We have a `preLaunchTask` and a `postDebugTask` which we need to define right now. Those tasks are Dapr tasks.
@@ -44,7 +44,7 @@ Now we will add 4 tasks, for each application, there will be a task to support t
 === "tasks.json"
     
     ```json
-    --8<-- "docs/aca/20-appendix/tasks.json"
+    --8<-- "docs/aca/12-appendix/tasks.json"
     ```
 
 ??? tip "Curious to learn more about the tasks.json file above?"

@@ -119,7 +119,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --sku Basic `
     --admin-enabled true
     ```
-???+ note
+!!! note
     Notice that we create the registry with admin rights `--admin-enabled` flag set to `true` which is not suited for real production, but good for our workshop.
 
 - Create an Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace. To create it, run the command below:
