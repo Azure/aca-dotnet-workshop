@@ -6,7 +6,7 @@ Taiseer works for Microsoft Consultation Services as a Lead App Dev Consultant. 
 
 Taiseer has been deeply involved in .NET development since early framework versions with a deep knowledge of distributed systems, microservices architecture, cloud-native apps, and Microsoft Azure.
 
-He frequently publishes articles on his [blog](https://bitoftech.net){target=_blank} and shares code samples on his [:material-github: GitHub account](https://github.com/tjoudeh){target=_blank}
+He frequently publishes articles on his [blog](https://bitoftech.net){target=_blank}. Connect with Taiseer on [:material-linkedin: LinkedIn](https://www.linkedin.com/in/taiseer-joudeh-20b3a74/){target=_blank}.
 
 
 ### [:material-github: Wael Kdouh](https://github.com/waelkdouh){target=_blank}
