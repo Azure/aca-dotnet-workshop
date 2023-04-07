@@ -19,14 +19,15 @@ nav:
   - Module 8 - ACA Monitoring and Observability with Application Insights: aca/08-aca-monitoring/index.md
   - Module 9 - ACA Auto Scaling with KEDA: aca/09-aca-autoscale-keda/index.md
   - Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA: aca/10-aca-iac-bicep/index.md
+  - About The Authors: aca/11-about-the-authors/index.md
   - Contributing:
-    - Contribution Guide: aca/11-contributing/1-contribution-guide.md
-    - Submit an issue or suggestion: aca/11-contributing/2-Submit-issue-suggestion.md
-    - Minor update or fix, new challenge: aca/11-contributing/3-minor-update-fix.md
+    - Contribution Guide: aca/12-contributing/1-contribution-guide.md
+    - Submit an issue or suggestion: aca/12-contributing/2-Submit-issue-suggestion.md
+    - Minor update or fix, new challenge: aca/12-contributing/3-minor-update-fix.md
   - Appendix:
-    - Debug and launch Dapr applications in VSCode: aca/12-appendix/01-run-debug-dapr-app-vscode.md
-    - Testing changes locally or with GitHub Codespaces: aca/12-appendix/02-github-local-codespaces.md
-
+    - Debug and launch Dapr applications in VSCode: aca/13-appendix/01-run-debug-dapr-app-vscode.md
+    - Testing changes locally or with GitHub Codespaces: aca/13-appendix/02-github-local-codespaces.md
+  
 theme:
   name: material
   custom_dir: docs/overrides

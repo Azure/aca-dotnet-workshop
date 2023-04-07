@@ -39,7 +39,7 @@ We want to have more control and provide our own component file, so let's create
     --8<-- "docs/aca/05-aca-dapr-pubsubapi/dapr-pubsub-redis.yaml"
     ```
 
-To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../../aca/12-appendix/01-run-debug-dapr-app-vscode.md). 
+To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../../aca/13-appendix/01-run-debug-dapr-app-vscode.md). 
 
 !!! note
     Don't forget to include the property `--resources-path`.  Remember to replace the placeholders with your own values
@@ -263,7 +263,7 @@ in the terminal to indicate the processing of the message.
 
 #### 6. Optional: Update VS Code Tasks and Launch Configuration Files
 
-If you have followed the steps in the [appendix](../../aca/12-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) 
+If you have followed the steps in the [appendix](../../aca/13-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) 
 and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added. 
 
 ??? example "Click to expand the files to update"

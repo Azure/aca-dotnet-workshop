@@ -182,7 +182,7 @@ The SDK offers developers three ways of making remote service invocation calls:
  Notice how we assigned the Dapr App Id “tasksmanager-frontend-webapp” to the Frontend WebApp.
 
 !!! note
-    If you need to run both microservices together, you need to keep calling `dapr run` manually each time in the terminal. And when you have multiple microservices talking to each other you need to run at the same time to debug the solution. This can be a convoluted process. You can refer to the [debug and launch Dapr applications in VSCode](../../aca/12-appendix/01-run-debug-dapr-app-vscode.md) to see how to configure VScode for running and debugging Dapr applications.
+    If you need to run both microservices together, you need to keep calling `dapr run` manually each time in the terminal. And when you have multiple microservices talking to each other you need to run at the same time to debug the solution. This can be a convoluted process. You can refer to the [debug and launch Dapr applications in VSCode](../../aca/13-appendix/01-run-debug-dapr-app-vscode.md) to see how to configure VScode for running and debugging Dapr applications.
 
 !!! success
     Now both Applications are running using Dapr sidecar. Open your browser and browse for `https://localhost:{localwebappport}`. E.g. `https://localhost:7000` and provide an email to load the tasks for the user (e.g. tjoudeh@bitoftech.net).
