@@ -256,7 +256,7 @@ To add the component file state store, add a new folder named **components** und
 
 Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned. 
 
-If you have been running the different microservices using the [debug and launch Dapr applications in VSCode](../../aca/12-appendix/01-run-debug-dapr-app-vscode.md) then remember to uncomment the following line inside tasks.json file. 
+If you have been running the different microservices using the [debug and launch Dapr applications in VSCode](../../aca/13-appendix/01-run-debug-dapr-app-vscode.md) then remember to uncomment the following line inside tasks.json file. 
 This will instruct dapr to load the local projects components [./components](.) instead of the global components' folder.
 
 ```json hl_lines="2"
