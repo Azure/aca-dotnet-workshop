@@ -40,7 +40,13 @@ To begin, we need to define the Bicep modules that will be required to generate 
 To proceed, you must install an extension called [Bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep). This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..
 
 #### 2. Define an Azure Container Apps Environment
-Add a new folder named `bicep` on the root project directory, then add another folder named `modules`. Add a new file named `container-apps-environment.bicep`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps-environment.bicep).
+Add a new folder named `bicep` on the root project directory, then add another folder named `modules`. Add file as shown below:
+
+=== "container-apps-environment.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/container-apps-environment.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
     - The module takes multiple parameters, all of which are set to default values. This indicates that if no value is specified, the default value will be utilized. 
@@ -53,14 +59,28 @@ Add a new folder named `bicep` on the root project directory, then add another f
     - The output of this module are a is parameter named `applicationInsightsName`. This output is needed as an input for a subsequent module.
 
 #### 3. Define an Azure Key Vault Resource
-Add a new file named `key-vault.bicep` under the folder `bicep\modules`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/key-vault.bicep).
+
+Add file as shown below under the folder `bicep\modules`:
+
+=== "key-vault.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/key-vault.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
     - This module will create the Azure Key Vault resource which will be used to store secrets.
     - The output of this module is a single parameter named `keyVaultId`. This output is needed as an input for a subsequent module.
 
 #### 4. Define a Azure Service Bus Resource
-Add a new file named `service-bus.bicep` under the folder `bicep\modules`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/service-bus.bicep).
+
+Add file as shown below under the folder `bicep\modules`:
+
+=== "service-bus.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/service-bus.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
     - This module will create the Azure Service resource, a topic, a subscription for the consumer, and an authorization rule with `Manage` permissions.
@@ -68,7 +88,13 @@ Add a new file named `service-bus.bicep` under the folder `bicep\modules`. The c
 
 #### 5. Define an Azure CosmosDb Resource
 
-Add a new file named `cosmos-db.bicep` under the folder `bicep\modules`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/cosmos-db.bicep)
+Add file as shown below under the folder `bicep\modules`:
+
+=== "cosmos-db.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/cosmos-db.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
     - This module will create the Azure CosmosDB account, a CosmosDB database, and a CosmosDB collection.
@@ -76,7 +102,13 @@ Add a new file named `cosmos-db.bicep` under the folder `bicep\modules`. The con
 
 #### 6. Define an Azure Storage Resource
 
-Add a new file named `storage-account.bicep` under the folder `bicep\modules`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/storage-account.bicep)
+Add file as shown below under the folder `bicep\modules`:
+
+=== "storage-account.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/storage-account.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
     - This module will create the Azure Storage account, a storage queue service, and a queue.
@@ -84,13 +116,19 @@ Add a new file named `storage-account.bicep` under the folder `bicep\modules`. T
 
 #### 7. Define Dapr Components
 
-Next we will define all dapr components used in the solution in a single bicep module. To accomplish this, add a new file called `dapr-components.bicep` under the folder `bicep\modules`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/dapr-components.bicep)
+Next we will define all dapr components used in the solution in a single bicep module. To accomplish this, add a new file under the folder `bicep\modules` as shown below:
+
+=== "dapr-components.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/dapr-components.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
     - This module will be responsible for creating all dapr components used in the solution. It accepts various input parameters needed by the dapr components.
     - Notice how we are using the keyword `existing` to obtain a strongly typed reference to the pre-created resource
 
-        ```shell
+        ```shell hl_lines="1 5"
         resource containerAppsEnvironment 'Microsoft.App/managedEnvironments@2022-03-01' existing = {
         name: containerAppsEnvironmentName
         }
@@ -101,21 +139,41 @@ Next we will define all dapr components used in the solution in a single bicep m
         ```
 
 #### 8. Create Secrets Into Azure Key Vault
+
 This module will have the responsibility of generating the secrets and saving them in Azure Key Vault. Additionally, it will establish a role assignment for the backend processor service, specifically of type `Azure Role Key Vault Secrets User`, which will allow the service to access the Key Vault and retrieve the secrets.
 
-To achieve this, create a new directory called `container-apps\secrets` within the `modules` folder, and subsequently, introduce a new file named `processor-backend-service-secrets.bicep` within the `container-apps\secrets` folder. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/secrets/processor-backend-service-secrets.bicep).
+To achieve this, create a new directory called `container-apps\secrets` within the `modules` folder. Add new file as shown below under the folder `bicep\modules\container-apps\secrets`:
+
+=== "processor-backend-service-secrets.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/container-apps/secrets/processor-backend-service-secrets.bicep"
+    ```
 
 #### 9. Define the Frontend Service Azure Container App
-We will now begin defining the modules that are necessary for producing the container apps, starting with the Frontend App. To initiate this process, create a new file named `webapp-frontend-service.bicep` within the `modules\container-apps` directory. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/webapp-frontend-service.bicep).
+We will now begin defining the modules that are necessary for producing the container apps, starting with the Frontend App. To initiate this process, add a new file under the folder `bicep\modules\container-apps` as shown below:
+
+=== "webapp-frontend-service.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/container-apps/webapp-frontend-service.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
     - Observe the usage of the `@secure` attribute on input parameters that contain confidential information or keys. This attribute may be applied to both string and object parameters that encompass secretive values. By implementing this attribute, Azure will abstain from presenting the parameter values within the deployment logs or on the terminal if you happen to be utilizing Azure CLI.
     - The output parameters of this module will provide the fully qualified domain name (FQDN) for the frontend container application.
 
 #### 10. Define the Backend Api Service Azure Container App
-Add a new file named `webapi-backend-service.bicep` under the folder `modules\container-apps`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/webapi-backend-service.bicep).
+Add a new file under the folder `bicep\modules\container-apps` as shown below:
+
+=== "webapi-backend-service.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/container-apps/webapi-backend-service.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
+
     - Notice how we are assigning the Cosmosdb account a read/write access using the `Cosmos DB Built-in Data Contributor` role to the Backend API system assigned identity, by using the code below:
 
         ```Shell
@@ -142,9 +200,17 @@ Add a new file named `webapi-backend-service.bicep` under the folder `modules\co
         ```
 
 #### 11. Define the Backend Processor Service Azure Container App
-Add a new file named `processor-backend-service.bicep` under the folder `modules\container-apps`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps/processor-backend-service.bicep).
+
+Add a new file under the folder `bicep\modules\container-apps` as shown below:
+
+=== "processor-backend-service.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/container-apps/processor-backend-service.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
+
     - Notice how we are assigning the role `Azure Service Bus Data Receiver` to the Backend Processor to be able to consume/read messages from Azure Service Bus Topic using Backend Processor system assigned identity, by using the code below:
         ```Shell
         resource backendProcessorService_sb_role_assignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
@@ -172,11 +238,29 @@ Add a new file named `processor-backend-service.bicep` under the folder `modules
         scope: resourceGroup(keyVaultSubscriptionId, keyVaultResourceGroupName)
         }
         ```
+
 #### 12. Define a Container Module For the Three Container Apps 
-This module will act as a container for the three Container Apps modules defined in the previous three steps. It is optional to create it, but it makes it easier when we invoke all the created modules as you will see in the next step. To create this module add a new file named `container-apps.bicep` under the folder `modules`. The content of the file can be found [at this location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/modules/container-apps.bicep).
+This module will act as a container for the three Container Apps modules defined in the previous three steps. It is optional to create it, but it makes it easier when we invoke all the created modules as you 
+will see in the next step. 
+
+Add a new file under the folder `bicep\modules` as shown below:
+
+=== "container-apps.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/container-apps.bicep"
+    ```
 
 #### 13. Define the Main Module For the Solution 
-Finally, we must specify the Main Bicep module that will connect all other modules together. This file will be referenced by the AZ CLI command when producing all resources. To achieve this, add a new file named `main.bicep` under the `bicep` directory. The contents of the file can be found at this [location](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.bicep).
+Finally, we must specify the Main Bicep module that will connect all other modules together. This file will be referenced by the AZ CLI command when producing all resources.
+
+To achieve this, add a new file under the `bicep` directory as shown below:
+
+=== "main.bicep"
+
+    ```bicep
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/main.bicep"
+    ```
 
 ??? tip "What we've added in the Bicep file above"
 
@@ -185,9 +269,23 @@ Finally, we must specify the Main Bicep module that will connect all other modul
     - When calling the module `container-apps.bicep`, some of the input params are expecting are referencing another resource, for example consider the input param named `cosmosDbName` and the value used is `cosmosDb.outputs.cosmosDbName`. This means that the module `cosmos-db.bicep` should be created successfully before creating the container apps module, this called Implicit dependency.
 
 ### Deploy the Infrastructure and Create the Components
-With the steps above completed we are ready to deploy all the different resources. We just need to create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file `main.bicep` and select `Generate Parameter File`. This will result in creating a file named `main.parameters.json` similar to the file found [here](https://github.com/Azure/aca-dotnet-workshop/blob/main/bicep/main.parameters.json).
 
-To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values provided on the github link. You only need to replace parameter values between the angle brackets `<>` with values related to your ACR resource and SendGrid.
+With the steps above completed we are ready to deploy all the different resources. We just need to create a parameters file which will simplify the invocation of the main bicep file. 
+
+To achieve this, right click on file `main.bicep` and select **Generate Parameter File**. This will result in creating a file named `main.parameters.json` similar to the file below:
+
+???+ example
+    === "main.parameters.json"
+    
+        ```json
+        --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/main.parameters.json"
+        ```
+
+!!! note
+    
+    To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values shown above in sample file. 
+    
+    You only need to replace parameter values between the angle brackets `<>` with values related to your ACR resource and SendGrid.
 
 Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below.
 
