@@ -71,7 +71,7 @@
     "containerRegistryPassword": {
       "value": "<CONTAINER_REGISTRY_PASSWORD>"
     },
-    "backendProcessoServiceImage": {
+    "backendProcessorServiceImage": {
       "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest"
     },
     "backendApiServiceImage": {
