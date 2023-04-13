@@ -420,7 +420,7 @@ az containerapp dapr enable --name $BACKEND_API_NAME `
 az containerapp dapr enable --name $FRONTEND_WEBAPP_NAME `
                             --resource-group $RESOURCE_GROUP `
                             --dapr-app-id  $FRONTEND_WEBAPP_NAME `
-                            --dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5071>
+                            --dapr-app-port  <front end web application port number found under Dockerfile for the web api project. e.g. 5071>
 ```
 
 ??? tip "Curious to learn more about the command above?"
