@@ -270,24 +270,7 @@ To achieve this, add a new file under the `bicep` directory as shown below:
 
 ### Deploy the Infrastructure and Create the Components
 
-With the steps above completed we are ready to deploy all the different resources. We just need to create a parameters file which will simplify the invocation of the main bicep file. 
-
-To achieve this, right click on file `main.bicep` and select **Generate Parameter File**. This will result in creating a file named `main.parameters.json` similar to the file below:
-
-???+ example
-    === "main.parameters.json"
-    
-        ```json
-        --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/main.parameters.json"
-        ```
-
-!!! note
-    
-    To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values shown above in sample file. 
-    
-    You only need to replace parameter values between the angle brackets `<>` with values related to your ACR resource and SendGrid.
-
-Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below.
+Start by creating a new resource group which will contain all the resources to be created by the Bicep scripts.
 
 ```Powershell
 az group create `
@@ -307,6 +290,26 @@ az acr create `
 
 !!! note
     Once the RG and ACR are created you can check [this section](../../aca/08-aca-monitoring/index.md#2-build-new-images-and-push-them-to-acr) which shows the different commands to build and push the images to ACR. Make sure you are at the root project directory when executing the aforementioned commands. Finally run the bicep file against the newly created Resource Group as shown below.
+
+With the steps above completed we are ready to deploy all the different resources. We just need to create a parameters file which will simplify the invocation of the main bicep file. 
+
+To achieve this, right click on file `main.bicep` and select **Generate Parameter File**. This will result in creating a file named `main.parameters.json` similar to the file below:
+
+???+ example
+    === "main.parameters.json"
+    
+        ```json
+        --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/main.parameters.json"
+        ```
+
+!!! note
+    
+    To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values shown above in sample file. 
+    
+    You only need to replace parameter values between the angle brackets `<>` with values related to your ACR resource and SendGrid.
+
+Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below.
+
 
 ```Powershell
 az deployment group create `
