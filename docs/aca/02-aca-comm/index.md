@@ -9,9 +9,9 @@ canonical_url: https://bitoftech.net/2022/08/25/communication-microservices-azur
 In this module, we will add a service named `ACA Web API – Frontend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). This service will host a simple ASP.NET Razor pages web app which allows the end users to manage their tasks. After that we will provision Azure resources needed to deploy the service to ACA using Azure CLI.
 ### 1. Create the Frontend Web App project (Web APP)
 
-- Open a command-line terminal and navigate to root folder of your project. Create a new folder as shown below:
+- Open a command-line terminal and navigate to root folder of your project. 
     ```shell
-    cd TasksTracker.ContainerApps
+    cd {YourLocalPath}\TasksTracker.ContainerApps
     ```
 
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps` and initialize the project. This will create and ASP.NET Razor Pages web app project.
@@ -21,6 +21,7 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
 - We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA. Open the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
     
     - Use `.NET: ASP.NET Core` when prompted for application platform.
+    - Choose `TasksTracker.WebPortal.Frontend.Ui\TasksTracker.WebPortal.Fortend.Ui.csproj` when prompted to choose a project file.
     - Choose `Linux` when prompted to choose the operating system.
     - You will be asked if you want to add Docker Compose files. Select `No`.
     - Take a note of the provided **application port** as we will be using later on.
@@ -34,11 +35,11 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
     --8<-- "docs/aca/02-aca-comm/TasksModel.cs"
     ```
 
-- Now we will add 3 Razor pages for CRUD operations which will be responsible for listing all the tasks, creating a new task, and updating existing tasks.
+- Now, in the **Tasks** folder, we will add 3 Razor pages for CRUD operations which will be responsible for listing all the tasks, creating a new task, and updating existing tasks.
 By looking at the cshtml content notice that the page is expecting a query string named `createdBy` which will be used to group tasks for application users. 
 
 !!! note
-    We are following this approach here to keep the workshop simple, but for production applications authentication should be applied and the user email should be retrieved from the claims identity of the authenticated users.
+    We are following this approach here to keep the workshop simple, but for production applications, authentication should be applied and the user email should be retrieved from the claims identity of the authenticated users.
 
 === "Index.cshtml"
 
@@ -86,7 +87,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 
 === "Program.cs"
 
-    ```csharp hl_lines="12 13 14 15 16"
+    ```csharp hl_lines="12 13 14 15"
     namespace TasksTracker.WebPortal.Frontend.Ui
     {
         public class Program
@@ -101,7 +102,6 @@ By looking at the cshtml content notice that the page is expecting a query strin
                 builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
                 {
                     httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp"));
-        
                 });
 
                 var app = builder.Build();
@@ -136,7 +136,7 @@ This variable will contain the Base URL for the backend API deployed in the prev
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the frontend directory which hosts the `.csproj` project folder and build the project. 
 
     ```shell
-    cd {YourLocalPath}\TasksTracker.WebPortal.Frontend.Ui
+    cd {YourLocalPath}\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui
     dotnet build
     ```
 !!! note
