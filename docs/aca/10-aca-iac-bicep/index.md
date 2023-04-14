@@ -369,9 +369,11 @@ Next, we will prepare container images for the three container apps and update t
     1. Create an Azure Container Registry (ACR) inside the newly created Resource Group:
 
         ```Powershell
+        $CONTAINER_REGISTRY_NAME="<your ACR name>"
+
         az acr create `
             --resource-group $RESOURCE_GROUP `
-            --name <your ACR name>`
+            --name $CONTAINER_REGISTRY_NAME `
             --sku Basic
         ```
     2. Import the images to your private ACR as shown below:
