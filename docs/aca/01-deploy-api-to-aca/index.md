@@ -55,7 +55,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
 === "Program.cs"
 
-    ```csharp hl_lines="5"
+    ```csharp hl_lines="1 5"
     using TasksTracker.TasksManager.Backend.Api.Services;
 
     var builder = WebApplication.CreateBuilder(args);
@@ -73,7 +73,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
     ```
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project. 
     ```shell
-    cd {YourLocalPath}\TasksTracker.TasksManager.Backend.Api
+    cd {YourLocalPath}\TasksTracker.ContainerApps\TasksManager.Backend.Api
     dotnet build
     ```
 Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.
@@ -178,7 +178,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
     ```shell
     cd {YourLocalPath}\TasksTracker.ContainerApps
-    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksManager.Backend.Api/Dockerfile' .
     ```
     Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created and there is a new docker image with a `latest` tag is created.
 
