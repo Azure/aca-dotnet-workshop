@@ -11,7 +11,7 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
 
 - Open a command-line terminal and navigate to root folder of your project. 
     ```shell
-    cd {YourLocalPath}\TasksTracker.ContainerApps
+    cd ~\TasksTracker.ContainerApps
     ```
 
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps` and initialize the project. This will create and ASP.NET Razor Pages web app project.
@@ -136,7 +136,7 @@ This variable will contain the Base URL for the backend API deployed in the prev
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the frontend directory which hosts the `.csproj` project folder and build the project. 
 
     ```shell
-    cd {YourLocalPath}\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui
+    cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui
     dotnet build
     ```
 !!! note
@@ -152,7 +152,7 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
 - Now we will build and push the Web App project docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context. In our case, we need to be on the parent directory which hosts the .csproject.
     
 ```powershell
-cd {YourLocalPath}\TasksTracker.ContainerApps 
+cd ~\TasksTracker.ContainerApps 
 az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
 ```
 Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-frontend-webapp` has been created and there is a new docker image with a `latest` tag is created.
