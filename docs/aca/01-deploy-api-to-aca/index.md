@@ -72,10 +72,14 @@ In this module, we will start by creating the first microservice named `ACA Web 
     --8<-- "docs/aca/01-deploy-api-to-aca/TasksController.cs"
     ```
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project. 
+
     ```shell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     dotnet build
     ```
+!!! note
+    Throughout the documentation, we will use the the tilde character [~] to represent the base / parent folder where you chose to install the workshop assets. 
+
 Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.
 
 ### 2. Deploy Web API Backend Project to ACA
