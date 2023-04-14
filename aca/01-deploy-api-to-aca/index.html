@@ -375,7 +375,7 @@
 </li>
 <li>
 <p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> and initialize the project. This will create and ASP.NET Web API project scaffolded with a single controller.
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapi<span class="w"> </span>-o<span class="w"> </span>TasksManager.Backend.Api
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapi<span class="w"> </span>-o<span class="w"> </span>TasksTracker.TasksManager.Backend.Api
 </span></code></pre></div></p>
 </li>
 <li>
@@ -558,8 +558,8 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Program.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-csharp highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Services</span><span class="p">;</span>
-</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="hll"><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Services</span><span class="p">;</span>
+</span></span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="kt">var</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebApplication</span><span class="p">.</span><span class="n">CreateBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
 </span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="c1">// Add services to the container.</span>
 </span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="hll"><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddSingleton</span><span class="o">&lt;</span><span class="n">ITasksManager</span><span class="p">,</span><span class="w"> </span><span class="n">FakeTasksManager</span><span class="o">&gt;</span><span class="p">();</span>
@@ -667,7 +667,7 @@
 </input></div>
 <ul>
 <li>From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the <code>.csproj</code> project folder and build the project. 
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span><span class="o">{</span>YourLocalPath<span class="o">}</span><span class="se">\T</span>asksTracker.TasksManager.Backend.Api
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
 </span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>dotnet<span class="w"> </span>build
 </span></code></pre></div>
 Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.</li>
@@ -781,7 +781,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <ul>
 <li>
 <p>Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The <code>.</code> at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the <code>.csproj</code>.</p>
-<p><div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="nb">cd</span><span class="w"> </span><span class="o">{</span>YourLocalPath<span class="o">}</span><span class="se">\T</span>asksTracker.ContainerApps
+<p><div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
 </span><span id="__span-15-2"><a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--image<span class="w"> </span><span class="s2">"tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">"</span><span class="w"> </span>--file<span class="w"> </span><span class="s1">'TasksTracker.TasksManager.Backend.Api/Dockerfile'</span><span class="w"> </span>.
 </span></code></pre></div>
 Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named <code>tasksmanager/tasksmanager-backend-api</code> has been created and there is a new docker image with a <code>latest</code> tag is created.</p>
