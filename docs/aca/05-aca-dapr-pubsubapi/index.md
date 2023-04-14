@@ -213,7 +213,7 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
 !!! info
     Remember to replace the placeholders with your own values.
 
-=== ".Net 6 or below"
+=== ".NET 6 or below"
     
     ```powershell
 
@@ -223,7 +223,7 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
 
     ```
 
-=== ".Net 7 or above"
+=== ".NET 7 or above"
     
     ```powershell   
 
@@ -494,7 +494,7 @@ With all those bits in place, we are ready to run the publisher service `Backend
 !!! note
     Ensure you are on the right root folder of each respective project. Remember to replace the placeholders with your own values.
 
-=== ".Net 6 or below"
+=== ".NET 6 or below"
 
     ```powershell
     
@@ -504,7 +504,7 @@ With all those bits in place, we are ready to run the publisher service `Backend
       
     ```
 
-=== ".Net 7 or above"
+=== ".NET 7 or above"
 
     ````powershell
     
