@@ -65,16 +65,6 @@ param externalStorageAccountName string
 @description('The name of the container registry.')
 param containerRegistryName string
 
-@description('The username of the container registry user.')
-param containerRegistryUsername string
-
-// We disable lint of this line as it is not a secret
-#disable-next-line secure-secrets-in-params
-param containerRegistryPasswordRefName string
-
-@secure()
-param containerRegistryPassword string
-
 @description('The image for the backend api service.')
 param backendApiServiceImage string
 
@@ -86,6 +76,9 @@ param frontendWebAppServiceImage string
 
 @description('The name of the application insights.')
 param applicationInsightsName string
+
+var containerRegistryPullRoleGuid='7f951dda-4ed3-4680-a7ca-43fe172d538d'
+
 
 // ------------------
 // RESOURCES
@@ -100,6 +93,26 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing
   name: applicationInsightsName
 }
 
+resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-01-01-preview' existing = {
+  name: containerRegistryName
+}
+
+resource containerRegistryUserAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'aca-user-identity-${uniqueString(resourceGroup().id)}'
+  location: location
+  tags: tags
+}
+
+resource containerRegistryPullRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if(!empty(containerRegistryName)) {
+  name: guid(subscription().id, containerRegistry.id, containerRegistryUserAssignedIdentity.id) 
+  scope: containerRegistry
+  properties: {
+    principalId: containerRegistryUserAssignedIdentity.properties.principalId
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', containerRegistryPullRoleGuid)
+    principalType: 'ServicePrincipal'
+  }
+}
+
 module frontendWebAppService 'container-apps/webapp-frontend-service.bicep' = {
   name: 'frontendWebAppService-${uniqueString(resourceGroup().id)}'
   params: {
@@ -108,11 +121,10 @@ module frontendWebAppService 'container-apps/webapp-frontend-service.bicep' = {
     tags: tags
     containerAppsEnvironmentId: containerAppsEnvironment.id
     containerRegistryName: containerRegistryName
-    containerRegistryUsername: containerRegistryUsername
-    containerRegistryPasswordRefName: containerRegistryPasswordRefName
-    containerRegistryPassword: containerRegistryPassword
+    containerRegistryUserAssignedIdentityId: containerRegistryUserAssignedIdentity.id
     frontendWebAppServiceImage: frontendWebAppServiceImage
     appInsightsInstrumentationKey: applicationInsights.properties.InstrumentationKey
+    
   }
 }
 
@@ -126,9 +138,7 @@ module backendApiService 'container-apps/webapi-backend-service.bicep' = {
     serviceBusName: serviceBusName
     serviceBusTopicName: serviceBusTopicName
     containerRegistryName: containerRegistryName
-    containerRegistryUsername: containerRegistryUsername
-    containerRegistryPasswordRefName: containerRegistryPasswordRefName
-    containerRegistryPassword: containerRegistryPassword
+    containerRegistryUserAssignedIdentityId: containerRegistryUserAssignedIdentity.id
     backendApiServiceImage: backendApiServiceImage
     cosmosDbName: cosmosDbName
     cosmosDbDatabaseName: cosmosDbDatabaseName
@@ -149,9 +159,7 @@ module backendProcessorService 'container-apps/processor-backend-service.bicep' 
     serviceBusTopicName: serviceBusTopicName
     serviceBusTopicAuthorizationRuleName: serviceBusTopicAuthorizationRuleName
     containerRegistryName: containerRegistryName
-    containerRegistryUsername: containerRegistryUsername
-    containerRegistryPasswordRefName: containerRegistryPasswordRefName
-    containerRegistryPassword: containerRegistryPassword
+    containerRegistryUserAssignedIdentityId: containerRegistryUserAssignedIdentity.id
     sendGridKeySecretName: sendGridKeySecretName
     sendGridKeySecretValue: sendGridKeySecretValue
     externalStorageAccountName: externalStorageAccountName

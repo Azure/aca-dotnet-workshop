@@ -344,16 +344,10 @@ Next, we will prepare container images for the three container apps and update t
 
     3. Update the `main.parameters.jsonc` file with the container registry name and the container images names as shown below:
 
-        ```json hl_lines="3 6 9 12 15 18"
+        ```json hl_lines="3 6 9 12"
         {
             "containerRegistryName": {
                 "value": "<CONTAINER_REGISTRY_NAME>"
-            },
-            "containerRegistryUsername": {
-              "value": "<CONTAINER_REGISTRY_ADMIN>"
-            },
-            "containerRegistryPassword": {
-                "value": "<CONTAINER_REGISTRY_PASSWORD>"
             },
             "backendProcessorServiceImage": {
                 "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<BACKEND_API_NAME>:latest"
@@ -405,16 +399,10 @@ Next, we will prepare container images for the three container apps and update t
 
     3. Update the `main.parameters.jsonc` file with the container registry name and the container images names as shown below:
 
-        ```json hl_lines="3 6 9 12 15 18"
+        ```json hl_lines="3 6 9 12"
         {
             "containerRegistryName": {
                 "value": "<CONTAINER_REGISTRY_NAME>"
-            },
-            "containerRegistryUsername": {
-              "value": "<CONTAINER_REGISTRY_ADMIN>"
-            },
-            "containerRegistryPassword": {
-                "value": "<CONTAINER_REGISTRY_PASSWORD>"
             },
             "backendProcessorServiceImage": {
                 "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest"

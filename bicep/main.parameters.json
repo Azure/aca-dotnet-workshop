@@ -62,15 +62,6 @@
     "containerRegistryName": {
       "value": "<CONTAINER_REGISTRY_NAME>"
     },
-    "containerRegistryUsername": {
-      "value": "<CONTAINER_REGISTRY_ADMIN>"
-    },
-    "containerRegistryPasswordRefName": {
-      "value": "acaworkshopacrazurecrio-acaworkshopacr"
-    },
-    "containerRegistryPassword": {
-      "value": "<CONTAINER_REGISTRY_PASSWORD>"
-    },
     "backendProcessorServiceImage": {
       "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest"
     },
