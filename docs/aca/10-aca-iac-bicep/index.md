@@ -315,8 +315,7 @@ Next, we will prepare container images for the three container apps and update t
         az acr create `
             --resource-group $RESOURCE_GROUP `
             --name $CONTAINER_REGISTRY_NAME `
-            --sku Basic `
-            --admin-enabled true
+            --sku Basic
         ```
 
     2. Build and push the images to ACR as guided in [this section](../../aca/08-aca-monitoring/index.md#2-build-new-images-and-push-them-to-acr). Make sure you are at the root project directory when executing the following commands:
@@ -373,8 +372,7 @@ Next, we will prepare container images for the three container apps and update t
         az acr create `
             --resource-group $RESOURCE_GROUP `
             --name <your ACR name>`
-            --sku Basic `
-            --admin-enabled true
+            --sku Basic
         ```
     2. Import the images to your private ACR as shown below:
 
