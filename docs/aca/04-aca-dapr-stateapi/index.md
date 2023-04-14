@@ -17,14 +17,14 @@ Dapr's state management API allows you to save, read, and query key/value pairs 
 
 To try out the State Management APIs, run the Backend API from VS Code by running the following command. Remember to replace the place holders with your own values:
 
-=== ".Net 6 or below"
+=== ".NET 6 or below"
 
     ```powershell
 
     ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
     ```
 
-=== ".Net 7 or above"
+=== ".NET 7 or above"
     
     ```powershell
 
@@ -270,13 +270,13 @@ If you have been using the dapr cli commands instead of the aforementioned debug
 !!! note
     Remember to replace the placeholders. Remember to use https port number for the Web API application.
 
-=== ".Net 6 or below"
+=== ".NET 6 or below"
     
     ```powershell
      
     dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run
     ```
-=== ".Net 7 or above"
+=== ".NET 7 or above"
 
     ```powershell
     
