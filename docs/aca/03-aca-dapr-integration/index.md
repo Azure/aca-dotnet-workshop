@@ -38,14 +38,14 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 === ".NET 6 or below"
 
     ```powershell
-    cd TasksTracker.TasksManager.Backend.Api
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
     ```
 
 === ".NET 7 or above"
 
     ```powershell
-    cd TasksTracker.TasksManager.Backend.Api
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
     ```
 
