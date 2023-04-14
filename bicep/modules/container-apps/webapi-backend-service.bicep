@@ -105,13 +105,13 @@ resource backendApiService 'Microsoft.App/containerApps@2022-06-01-preview' = {
         logLevel: 'info'
         enableApiLogging: true
       }
-      registries: [
+      registries: !empty(containerRegistryName) ? [
         {
           server: '${containerRegistryName}.azurecr.io'
           username: containerRegistryUsername
           passwordSecretRef: containerRegistryPasswordRefName
         }
-      ]
+      ] : []
       secrets: [
         {
           name: 'appinsights-key'

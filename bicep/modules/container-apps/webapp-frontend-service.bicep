@@ -72,13 +72,13 @@ resource frontendWebAppService 'Microsoft.App/containerApps@2022-06-01-preview' 
           value: containerRegistryPassword
         }
       ]
-      registries: [
+      registries: !empty(containerRegistryName) ? [
         {
           server: '${containerRegistryName}.azurecr.io'
           username: containerRegistryUsername
           passwordSecretRef: containerRegistryPasswordRefName
         }
-      ]
+      ] : []
     }
     template: {
       containers: [
