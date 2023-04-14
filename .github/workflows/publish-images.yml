@@ -8,13 +8,14 @@ on:
       - 'TasksTracker.Processor.Backend.Svc/**'
       - 'TasksTracker.TasksManager.Backend.Api/**'
       - 'TasksTracker.WebPortal.Frontend.Ui/**'
+      - '.github/workflows/publish-images.yml'
   workflow_dispatch: {}
 
 env:
   REGISTRY: ghcr.io
-  BACKEND_API_IMAGE_NAME: azure/tasksmanager-backend-api
-  FRONTEND_APP_IMAGE_NAME: azure/tasksmanager-frontend-webapp
-  BACKEND_PROCESSOR_IMAGE_NAME: azure/tasksmanager-backend-processor
+  BACKEND_API_IMAGE_NAME: ${{ github.repository_owner }}/tasksmanager-backend-api
+  FRONTEND_APP_IMAGE_NAME: ${{ github.repository_owner }}/tasksmanager-frontend-webapp
+  BACKEND_PROCESSOR_IMAGE_NAME: ${{ github.repository_owner }}/tasksmanager-backend-processor
 
 jobs:
   detect-changes:

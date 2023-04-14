@@ -1,0 +1,212 @@
+name: Build and deploy infrastructure as code to Azure
+
+on:
+    push:
+        branches:
+        - main
+        paths:
+        - 'bicep/**'
+        - '.github/workflows/infra-deploy.yml'
+    workflow_dispatch:
+        inputs:
+            teardown:
+                description: 'Set this to true if you want to deleted the infrastructure deployed in the subscription'
+                required: true
+                type: boolean
+
+concurrency:
+  group: infra-deploy-demo-env
+  cancel-in-progress: false
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  REGISTRY: ghcr.io
+  BACKEND_API_IMAGE_NAME: azure/tasksmanager-backend-api
+  FRONTEND_APP_IMAGE_NAME: azure/tasksmanager-frontend-webapp
+  BACKEND_PROCESSOR_IMAGE_NAME: azure/tasksmanager-backend-processor
+
+jobs:
+  # This job is used for linting the bicep files
+  lint:
+      runs-on: ubuntu-latest
+      if : ${{ github.event.inputs.teardown != 'true' }}
+      name: Lint bicep files
+      steps:
+      - uses: actions/checkout@v2
+      - name: Perform linting
+        run: az bicep build --f bicep/main.bicep
+
+  # This job creates the resource group if it does not exist and validates the bicep template
+  validate:
+      runs-on: ubuntu-latest
+      if : ${{ github.event.inputs.teardown != 'true' }}
+      name: Create RG and Validate bicep template
+      needs: [ lint ]
+      steps:
+      - uses: actions/checkout@v2
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Create Resource Group if does not exist
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            if [[ $(az group exists -n ${{ vars.RESOURCE_GROUP }}) == true ]]
+            then
+              echo "Resource group already exists in the subscription"
+            else
+              az group create  --name ${{ vars.RESOURCE_GROUP }} --location ${{ vars.LOCATION }}
+              echo "Resource group created"
+            fi
+
+      - uses: azure/arm-deploy@v1
+        name: Run validation
+        with:
+          deploymentName: ${{ github.run_number }}
+          resourceGroupName: ${{ vars.RESOURCE_GROUP }}
+          region: ${{ vars.LOCATION }}
+          template: ./bicep/main.bicep
+          parameters: ./bicep/main.parameters.json
+          deploymentMode: Validate
+
+  # This job run what-if on the bicep template
+  preview:
+    runs-on: ubuntu-latest
+    if : ${{ github.event.inputs.teardown != 'true' }}
+    needs: [ validate ]
+    name: Run what-if on the bicep template
+    steps:
+      - uses: actions/checkout@v3
+      - uses: azure/login@v1
+        name: Sign in to Azure
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - uses: azure/arm-deploy@v1
+        name: Run what-if
+        with:
+          resourceGroupName: ${{ vars.RESOURCE_GROUP }}
+          template: ./bicep/main.bicep
+          parameters: ./bicep/main.parameters.json containerRegistryName=${{ vars.CONTAINER_REGISTRY_NAME }} backendProcessorServiceImage=${{ env.REGISTRY }}/${{ env.BACKEND_PROCESSOR_IMAGE_NAME }} backendApiServiceImage=${{ env.REGISTRY }}/${{ env.BACKEND_API_IMAGE_NAME }} frontendWebAppServiceImage=${{ env.REGISTRY }}/${{ env.FRONTEND_APP_IMAGE_NAME }}
+          additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types  Ignore"
+
+  # This job creates ACR and imports images from GitHub Container Registry if configured. If ACR already exists but not in same resource group, it will fail the workflow
+  create-acr:
+    runs-on: ubuntu-latest
+    name: Create ACR and import images from GitHub Container Registry if configured
+    if : ${{ vars.CONTAINER_REGISTRY_NAME != '' }}
+    needs: [ preview ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: azure/login@v1
+        name: Sign in to Azure
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Create ACR ${{ vars.CONTAINER_REGISTRY_NAME }} if does not exist
+        uses: azure/CLI@v1
+        with:
+          inlineScript: | 
+            if [[ $(az acr check-name -n ${{ vars.CONTAINER_REGISTRY_NAME }}  -o tsv --query "nameAvailable") == false ]]
+            then
+              echo "ACR already exists."
+              if [[ $(az acr list -g ${{ vars.RESOURCE_GROUP }} -o tsv --query "[?name=='${{ vars.CONTAINER_REGISTRY_NAME }}']") == "" ]]
+              then
+                echo "ACR exists but not in the resource group ${{ vars.RESOURCE_GROUP }}. Please select a different name for the ACR and update in repository variable."
+                echo "::error title=Not Unique ACR::ACR exists but not in the resource group ${{ vars.RESOURCE_GROUP }}. Please select a different name for the ACR and update in repository variable."
+                exit 1
+              fi
+            else
+              az acr create --name ${{ vars.CONTAINER_REGISTRY_NAME }} --resource-group ${{ vars.RESOURCE_GROUP }} --sku Basic --location ${{ vars.LOCATION }}
+              echo "ACR created"
+            fi
+      - name: Import images from GitHub Container Registry
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az acr import --name ${{ vars.CONTAINER_REGISTRY_NAME }} --source ${{ env.REGISTRY }}/${{ env.BACKEND_PROCESSOR_IMAGE_NAME }}:latest --image tasksmanager/tasksmanager-backend-processor --force
+            az acr import --name ${{ vars.CONTAINER_REGISTRY_NAME }} --source ${{ env.REGISTRY }}/${{ env.BACKEND_API_IMAGE_NAME }}:latest --image tasksmanager/tasksmanager-backend-api --force
+            az acr import --name ${{ vars.CONTAINER_REGISTRY_NAME }} --source ${{ env.REGISTRY }}/${{ env.FRONTEND_APP_IMAGE_NAME }}:latest --image tasksmanager/tasksmanager-frontend-webapp --force
+
+  # This job deploys the bicep template to Azure subscription either using ACR images
+  deploy-with-acr-images:
+    runs-on: ubuntu-latest
+    if : ${{ github.event.inputs.teardown != 'true' }}
+    needs: [ create-acr]
+    name: Deploy to Azure subscription with ACR
+    steps:
+      - uses: actions/checkout@v3
+      - uses: azure/login@v1
+        name: Sign in to Azure
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - uses: azure/arm-deploy@v1
+        id: deployment-with-acr-images
+        name: Deploy to Azure subscription
+        with:
+          deploymentName: "github-${{ github.run_number }}"
+          resourceGroupName: ${{ vars.RESOURCE_GROUP }}
+          region: ${{ vars.LOCATION }}
+          template: ./bicep/main.bicep
+          parameters: ./bicep/main.parameters.json containerRegistryName=${{ vars.CONTAINER_REGISTRY_NAME }} backendProcessorServiceImage=${{ vars.CONTAINER_REGISTRY_NAME }}.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest backendApiServiceImage=${{ vars.CONTAINER_REGISTRY_NAME }}.azurecr.io/tasksmanager/tasksmanager-backend-api:latest frontendWebAppServiceImage=${{ vars.CONTAINER_REGISTRY_NAME }}.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest
+          failOnStdErr: false
+
+  # This job deploys the bicep template to Azure subscription using GitHub Container Registry images
+  deploy-with-ghcr-images:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.teardown != 'true' && vars.CONTAINER_REGISTRY_NAME == '' }}
+    needs: [ preview ]
+    name: Deploy to Azure subscription with GHCR
+    steps:
+      - uses: actions/checkout@v3
+      - uses: azure/login@v1
+        name: Sign in to Azure
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - uses: azure/arm-deploy@v1
+        id: deployment-with-ghcr-images
+        name: Deploy to Azure subscription
+        with:
+          deploymentName: "github-${{ github.run_number }}"
+          resourceGroupName: ${{ vars.RESOURCE_GROUP }}
+          region: ${{ vars.LOCATION }}
+          template: ./bicep/main.bicep
+          parameters: ./bicep/main.parameters.json containerRegistryName= backendProcessorServiceImage=${{ env.REGISTRY }}/${{ env.BACKEND_PROCESSOR_IMAGE_NAME }}:latest backendApiServiceImage=${{ env.REGISTRY }}/${{ env.BACKEND_API_IMAGE_NAME }}:latest frontendWebAppServiceImage=${{ env.REGISTRY }}/${{ env.FRONTEND_APP_IMAGE_NAME }}:latest
+          failOnStdErr: false
+
+  # This job deletes the resource group created by the workflow and can only be triggered by the workflow dispatch event.
+  teardown:
+    runs-on: ubuntu-latest
+    if : ${{ github.event.inputs.teardown == 'true' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: azure/login@v1
+        name: Sign in to Azure
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Delete Resource Group if exist
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            if [[ $(az group exists -n ${{ vars.RESOURCE_GROUP }}) == true ]]
+            then
+              echo "Resource group exists. Deleting..."
+               az group delete -n ${{ vars.RESOURCE_GROUP }} --yes
+            else
+              echo "Resource group does not exist in the subscription. Nothing to delete."
+            fi
