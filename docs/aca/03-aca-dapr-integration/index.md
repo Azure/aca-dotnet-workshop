@@ -35,14 +35,14 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 !!! note
     Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.
 
-=== ".Net 6 or below"
+=== ".NET 6 or below"
 
     ```powershell
     cd TasksTracker.TasksManager.Backend.Api
     dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
     ```
 
-=== ".Net 7 or above"
+=== ".NET 7 or above"
 
     ```powershell
     cd TasksTracker.TasksManager.Backend.Api
@@ -164,14 +164,14 @@ The SDK offers developers three ways of making remote service invocation calls:
 !!! note
     Remember to replace the placeholders. Remember to use https port number for the Web API application.
 
-=== ".Net 6 or below"
+=== ".NET 6 or below"
 
     ```powershell
     ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui> dapr run --app-id tasksmanager-frontend-webapp --app-port <web frontend application https port found under properties->launchSettings.json. e.g. 7000> --dapr-http-port 3501 --app-ssl -- dotnet run 
 
     ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
     ```
-=== ".Net 7 or above"
+=== ".NET 7 or above"
 
     ```powershell
     ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui> dapr run --app-id tasksmanager-frontend-webapp --app-port <web frontend application https port found under properties->launchSettings.json. e.g. 7000> --dapr-http-port 3501 --app-ssl -- dotnet run --launch-profile https
