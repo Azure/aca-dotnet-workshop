@@ -17,7 +17,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps` and initialize the project. This will create and ASP.NET Web API project scaffolded with a single controller.
     ```shell
-    dotnet new webapi -o TasksManager.Backend.Api
+    dotnet new webapi -o TasksTracker.TasksManager.Backend.Api
     ```
    
 - Next we need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
@@ -73,7 +73,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
     ```
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project. 
     ```shell
-    cd {YourLocalPath}\TasksTracker.ContainerApps\TasksManager.Backend.Api
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     dotnet build
     ```
 Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.
@@ -177,7 +177,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 -  Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the `.csproj`.
 
     ```shell
-    cd {YourLocalPath}\TasksTracker.ContainerApps
+    cd ~\TasksTracker.ContainerApps
     az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksManager.Backend.Api/Dockerfile' .
     ```
     Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created and there is a new docker image with a `latest` tag is created.
