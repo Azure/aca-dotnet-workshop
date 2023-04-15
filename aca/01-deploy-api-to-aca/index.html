@@ -368,7 +368,7 @@
 <ul>
 <li>
 <p>Open a command-line terminal and create a folder for your project. Use the <code>code</code> command to launch Visual Studio Code from that directory as shown:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>mkdir<span class="w"> </span>TasksTracker.ContainerApps
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>mkdir<span class="w"> </span>~/TasksTracker.ContainerApps
 </span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>TasksTracker.ContainerApps
 </span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>code<span class="w"> </span>.
 </span></code></pre></div></p>
@@ -666,12 +666,18 @@
 </div>
 </input></div>
 <ul>
-<li>From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the <code>.csproj</code> project folder and build the project. 
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
+<li>
+<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the <code>.csproj</code> project folder and build the project. </p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
 </span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>dotnet<span class="w"> </span>build
 </span></code></pre></div>
-Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.</li>
+</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Throughout the documentation, we will use the the tilde character [~] to represent the base / parent folder where you chose to install the workshop assets. </p>
+</div>
+<p>Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.</p>
 <h3 id="2-deploy-web-api-backend-project-to-aca">2. Deploy Web API Backend Project to ACA<a class="headerlink" href="#2-deploy-web-api-backend-project-to-aca" title="Permanent link">¶</a></h3>
 <p>We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the following steps:</p>
 <ul>
@@ -835,7 +841,7 @@ Issue a <code>GET</code> request similar to this one: <code>https://tasksmanager
 <small>
     
       Last update:
-      2023-04-14
+      2023-04-15
     
   </small>
 </div>
