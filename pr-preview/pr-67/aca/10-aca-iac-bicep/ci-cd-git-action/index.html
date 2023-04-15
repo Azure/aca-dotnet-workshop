@@ -518,7 +518,7 @@ Use below values mapped to relevant secrets in GitHub. </p>
 </span></code></pre></div>
 <h3 id="configure-github-repository-variables">Configure GitHub Repository Variables<a class="headerlink" href="#configure-github-repository-variables" title="Permanent link">¶</a></h3>
 <p>Configure repository variables as shown below:</p>
-<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
 </span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location&gt;
 </span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
 </span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1"># RESOURCE_GROUP: Name of the resource group which will be created and resources will be deployed</span>
@@ -527,11 +527,11 @@ Use below values mapped to relevant secrets in GitHub. </p>
 </span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1"># (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported</span>
 </span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span>&lt;container<span class="w"> </span>registry<span class="w"> </span>name&gt;
 </span></code></pre></div>
-!!! note:</p>
-<div class="language-text highlight"><pre><span></span><code>Repository variables `CONTAINER_REGISTRY_NAME` is only needed by workflow, if you wish the images to be deployed from private ACR.
-
-You may chose to skip defining this variable and the workflow will use the [public github container registry images](https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop) to deploy the images.
-</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Repository variables <code>CONTAINER_REGISTRY_NAME</code> is only needed by workflow, if you wish the images to be deployed from private ACR.</p>
+<p>You may chose to skip defining this variable and the workflow will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop">public github container registry images</a> to deploy the images.</p>
+</div>
 <h3 id="trigger-github-actions-workflow">Trigger GitHub Actions Workflow<a class="headerlink" href="#trigger-github-actions-workflow" title="Permanent link">¶</a></h3>
 <p>With these steps completed, you are now ready to trigger the GitHub Actions workflow using workflow dispatch to deploy the infrastructure components of our application.</p>
 <div class="admonition success">
