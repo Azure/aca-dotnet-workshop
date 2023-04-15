@@ -1,5 +1,6 @@
 ---
 canonical_url: 'https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/'
+title: Introduction
 ---
 
 ## Description
