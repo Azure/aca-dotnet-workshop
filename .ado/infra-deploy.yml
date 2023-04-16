@@ -1,0 +1,193 @@
+name: Build and deploy infrastructure as code to Azure
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - bicep/**
+    - '.ado/infra-deploy.yml'
+
+parameters:
+  - name: teardown
+    displayName: Should teardown infrastructure?
+    type: boolean
+    default: false
+
+pool: 
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - name: REGISTRY
+    value: ghcr.io
+  - name: BACKEND_API_IMAGE_NAME
+    value: azure/tasksmanager-backend-api
+  - name: FRONTEND_APP_IMAGE_NAME
+    value: azure/tasksmanager-frontend-webapp
+  - name: BACKEND_PROCESSOR_IMAGE_NAME
+    value: azure/tasksmanager-backend-processor
+  - group: 'AcaApp'
+
+
+stages:
+  - stage: Lint
+    condition:  eq('${{ parameters.teardown }}', false)
+    jobs:
+    - job: Lint  
+      displayName:  Lint bicep files
+      steps:
+        - checkout: self
+        - task: Bash@3
+          displayName: Perform linting
+          inputs:
+            targetType: 'inline'
+            script: |
+              set -e
+              echo "Linting bicep files"
+              az bicep build --f bicep/main.bicep
+
+  - stage: Validate
+    condition: and(succeeded(), eq('${{ parameters.teardown }}', false))
+    dependsOn: Lint
+    jobs:     
+    - job: Validate
+      displayName: Create RG and Validate bicep template
+      steps:
+        - checkout: self
+        - task: AzureCLI@2
+          displayName: Create resource group
+          inputs:
+            azureSubscription: $(AZURE_SUBSCRIPTION)
+            scriptType: 'bash'
+            scriptLocation: 'inlineScript'
+            inlineScript: |
+              set -e
+              echo "Creating resource group"
+              if [[ $(az group exists -n $(RESOURCE_GROUP)) == true ]]
+              then
+                echo "Resource group already exists in the subscription"
+              else
+                az group create  --name $(RESOURCE_GROUP) --location $(LOCATION)
+                echo "Resource group created"
+              fi
+
+        - task: AzureResourceManagerTemplateDeployment@3
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: $(AZURE_SUBSCRIPTION)
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: $(RESOURCE_GROUP)
+            location: $(LOCATION)
+            templateLocation: 'Linked artifact'
+            csmFile: 'bicep/main.bicep'
+            csmParametersFile: 'bicep/main.parameters.json'
+            deploymentMode: 'Validation'
+
+  - stage: Deploy
+    displayName: Deploy infrastructure using GHCR image
+    dependsOn: Validate
+    condition: and(succeeded() , eq(variables.CONTAINER_REGISTRY_NAME, ''))
+    jobs: 
+    - job: Deploy
+      displayName: Deploy infrastructure using GHCR image
+      steps:
+        - checkout: self
+        - task: AzureResourceManagerTemplateDeployment@3
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: $(AZURE_SUBSCRIPTION)
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: $(RESOURCE_GROUP)
+            location: '$(LOCATION)'
+            templateLocation: 'Linked artifact'
+            csmFile: 'bicep/main.bicep'
+            csmParametersFile: 'bicep/main.parameters.json'
+            overrideParameters: '-containerRegistryName -backendProcessorServiceImage $(REGISTRY)/$(BACKEND_PROCESSOR_IMAGE_NAME):latest -backendApiServiceImage $(REGISTRY)/$(BACKEND_API_IMAGE_NAME):latest -frontendWebAppServiceImage $(REGISTRY)/$(FRONTEND_APP_IMAGE_NAME):latest'
+            deploymentMode: 'Incremental'
+            deploymentName: 'azdo-deploy-$(Build.BuildId)'
+
+  - stage: Create_Import_ACR
+    displayName: Create Azure Container Registry if needed
+    dependsOn: Validate
+    condition: and(succeeded(), ne(variables.CONTAINER_REGISTRY_NAME, ''), eq('${{ parameters.teardown }}', false))
+    jobs:
+      - job: Create_ACR
+        displayName: Create Azure Container Registry if needed
+        steps:
+          - task: AzureCLI@2
+            displayName: Create Azure Container Registry if needed
+            inputs:
+              azureSubscription: $(AZURE_SUBSCRIPTION)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                set -e
+                echo "Creating Azure Container Registry if needed"
+                if [[ $(az acr check-name -n $(CONTAINER_REGISTRY_NAME)  -o tsv --query "nameAvailable") == false ]]
+                then
+                  echo "ACR already exists."
+                  if [[ $(az acr list -g $(RESOURCE_GROUP) -o tsv --query "[?name=='$(CONTAINER_REGISTRY_NAME)']") == "" ]]
+                  then
+                    echo "ACR exists but not in the resource group $(RESOURCE_GROUP). Please select a different name for the ACR and update in repository variable."
+                    exit 1
+                  fi
+                else
+                  az acr create --name $(CONTAINER_REGISTRY_NAME) --resource-group $(RESOURCE_GROUP) --sku Basic --location $(LOCATION)
+                  echo "ACR created"
+                fi
+      - job: Import_Image
+        displayName: Import image to ACR from GHCR
+        dependsOn: Create_ACR
+        condition: succeeded()
+        steps:
+          - task: AzureCLI@2
+            displayName: Import images from GitHub Container Registry
+            inputs:
+              azureSubscription: $(AZURE_SUBSCRIPTION)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                set -e
+                echo "Import images from GitHub Container Registry"
+                az acr import --name $(CONTAINER_REGISTRY_NAME) --source $(REGISTRY)/$(BACKEND_PROCESSOR_IMAGE_NAME):latest --image tasksmanager/tasksmanager-backend-processor --force
+                az acr import --name $(CONTAINER_REGISTRY_NAME) --source $(REGISTRY)/$(BACKEND_API_IMAGE_NAME):latest --image tasksmanager/tasksmanager-backend-api --force
+                az acr import --name $(CONTAINER_REGISTRY_NAME) --source $(REGISTRY)/$(FRONTEND_APP_IMAGE_NAME):latest --image tasksmanager/tasksmanager-frontend-webapp --force
+      
+  - stage: Deploy_With_ACR
+    displayName: Deploy infrastructure using ACR image
+    dependsOn: Create_Import_ACR
+    condition: and(succeeded(), ne(variables.CONTAINER_REGISTRY_NAME, ''), eq('${{ parameters.teardown }}', false))
+    jobs: 
+    - job: Deploy
+      displayName: Deploy infrastructure using ACR image
+      steps:
+        - checkout: self
+        - task: AzureResourceManagerTemplateDeployment@3
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: $(AZURE_SUBSCRIPTION)
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: $(RESOURCE_GROUP)
+            location: $(LOCATION)
+            templateLocation: 'Linked artifact'
+            csmFile: 'bicep/main.bicep'
+            csmParametersFile: 'bicep/main.parameters.json'
+            overrideParameters: '-containerRegistryName $(CONTAINER_REGISTRY_NAME) -backendProcessorServiceImage $(CONTAINER_REGISTRY_NAME).azurecr.io/tasksmanager/tasksmanager-backend-processor:latest -backendApiServiceImage $(CONTAINER_REGISTRY_NAME).azurecr.io/tasksmanager/tasksmanager-backend-api:latest -frontendWebAppServiceImage $(CONTAINER_REGISTRY_NAME).azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest'
+            deploymentMode: 'Incremental'
+            deploymentName: 'azdo-deploy-$(Build.BuildId)'
+
+  - stage: Teardown
+    displayName: Teardown infrastructure
+    dependsOn: []
+    condition: eq('${{ parameters.teardown }}', true)
+    jobs: 
+    - job: Teardown
+      displayName: Teardown infrastructure
+      steps:
+        - task: AzureResourceManagerTemplateDeployment@3
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: $(AZURE_SUBSCRIPTION)
+            action: 'DeleteRG'
+            resourceGroupName: $(RESOURCE_GROUP)
