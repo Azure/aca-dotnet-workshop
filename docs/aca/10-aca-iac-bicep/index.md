@@ -30,16 +30,12 @@ Within Azure there are two ways to create IaC. We can either use the [JSON ARM t
 ### Build the Infrastructure as Code Using Bicep
 
 To begin, we need to define the Bicep modules that will be required to generate the Infrastructure code. Our goal for this module is to have a freshly created resource group that encompasses all the necessary resources and configurations - such as connection strings, secrets, environment variables, and Dapr components - which we utilized to construct our solution. By the end, we will have a new resource group that includes the following resources.
+
 ![aca-resources](../../assets/images/10-aca-iac-bicep/aca-rescources.jpg)
 
 !!! note
     To simplify the execution of the module, we will assume that you have already created latest images of three services and pushed them to a container registry. [This section](#deploy-the-infrastructure-and-create-the-components) below guides you through
     different options of getting images pushed to either Azure Container Registry (ACR) or GitHub Container Registry (GHCR).
-    
-    If we created and deployed container registery as part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images.
-  
-    In a production setting, a DevOps pipeline would be in place to automate the whole process - commencing with ACR creation, followed by building and pushing docker images, and concluding with executing the 
-    Bicep script to establish the remaining resources. As it is outside the scope of this workshop, we will not delve into the creation of a DevOps pipeline here.
 
 #### 1. Add the Needed Extension to VS Code
 To proceed, you must install an extension called [Bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep). This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..
@@ -300,7 +296,7 @@ This will result in creating a file named `main.parameters.json` similar to the 
 
     To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values shown above in sample file. 
 
-    You only need to replace parameter values between the angle brackets `<>` with values related to your container registry and SendGrid. Values for container registry and container images can be dervied by following
+    You only need to replace parameter values between the angle brackets `<>` with values related to your container registry and SendGrid. Values for container registry and container images can be derived by following
     one of the three options in next step.
 
 Next, we will prepare container images for the three container apps and update the values in `main.parameters.json` file. You can do so by any of the three options below:
@@ -311,6 +307,7 @@ Next, we will prepare container images for the three container apps and update t
 
         ```Powershell
         $CONTAINER_REGISTRY_NAME="<your ACR name>"
+        
 
         az acr create `
             --resource-group $RESOURCE_GROUP `
@@ -318,30 +315,30 @@ Next, we will prepare container images for the three container apps and update t
             --sku Basic
         ```
 
-    2. Build and push the images to ACR as guided in [this section](../../aca/08-aca-monitoring/index.md#2-build-new-images-and-push-them-to-acr). Make sure you are at the root project directory when executing the following commands:
+    2. Build and push the images to ACR. Make sure you are at the root project directory when executing the following commands:
 
         ```Powershell
 
         ## Build Backend API on ACR and Push to ACR
 
         az acr build --registry $CONTAINER_REGISTRY_NAME `
-            --image "tasksmanager/$BACKEND_API_NAME" `
+            --image "tasksmanager/tasksmanager-backend-api" `
             --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
         
         ## Build Backend Service on ACR and Push to ACR
 
         az acr build --registry $CONTAINER_REGISTRY_NAME `
-            --image "tasksmanager/$BACKEND_SVC_NAME" `
+            --image "tasksmanager/tasksmanager-backend-processor" `
             --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 
         ## Build Frontend Web App on ACR and Push to ACR
 
         az acr build --registry $CONTAINER_REGISTRY_NAME `
-            --image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
+            --image "tasksmanager/tasksmanager-frontend-webapp" `
             --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
         ```
 
-    3. Update the `main.parameters.jsonc` file with the container registry name and the container images names as shown below:
+    3. Update the `main.parameters.json` file with the container registry name and the container images names as shown below:
 
         ```json hl_lines="3 6 9 12"
         {
@@ -381,23 +378,23 @@ Next, we will prepare container images for the three container apps and update t
         ```Powershell 
 
             az acr import `
-            --name $CONTAINER_REGISTRY_NAME  `
-            --image tasksmanager/tasksmanager-backend-api  `
+            --name $CONTAINER_REGISTRY_NAME `
+            --image tasksmanager/tasksmanager-backend-api `
             --source ghcr.io/azure/tasksmanager-backend-api:latest
             
             az acr import  `
-            --name $CONTAINER_REGISTRY_NAME  `
-            --image tasksmanager/tasksmanager-frontend-webapp  `
+            --name $CONTAINER_REGISTRY_NAME `
+            --image tasksmanager/tasksmanager-frontend-webapp `
             --source ghcr.io/azure/tasksmanager-frontend-webapp:latest
             
             az acr import  `
-            --name $CONTAINER_REGISTRY_NAME  `
-            --image tasksmanager/tasksmanager-backend-processor  `
+            --name $CONTAINER_REGISTRY_NAME `
+            --image tasksmanager/tasksmanager-backend-processor `
             --source ghcr.io/azure/tasksmanager-backend-processor:latest
 
         ```
 
-    3. Update the `main.parameters.jsonc` file with the container registry name and the container images names as shown below:
+    3. Update the `main.parameters.json` file with the container registry name and the container images names as shown below:
 
         ```json hl_lines="3 6 9 12"
         {
@@ -420,7 +417,7 @@ Next, we will prepare container images for the three container apps and update t
 
     All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can use the pre-built images from the public repository as shown below.
 
-    The public images can be set directly in the `main.parameters.jsonc` file:
+    The public images can be set directly in the `main.parameters.json` file:
 
     ```json hl_lines="3 6 9 12"
     {
