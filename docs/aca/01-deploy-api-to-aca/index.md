@@ -10,8 +10,8 @@ In this module, we will start by creating the first microservice named `ACA Web 
 ### 1. Create the backend API project (Web API)
 - Open a command-line terminal and create a folder for your project. Use the `code` command to launch Visual Studio Code from that directory as shown:
     ```shell
-    mkdir ~/TasksTracker.ContainerApps
-    cd TasksTracker.ContainerApps
+    mkdir ~\TasksTracker.ContainerApps
+    cd ~\TasksTracker.ContainerApps
     code .
     ```
 
