@@ -538,15 +538,12 @@
 <p>For those interested in learning more about Bicep, it is recommended to visit the Microsoft Learn website <a href="https://docs.microsoft.com/en-us/training/paths/fundamentals-bicep/">Fundamentals of Bicep</a>.</p>
 </div>
 <h3 id="build-the-infrastructure-as-code-using-bicep">Build the Infrastructure as Code Using Bicep<a class="headerlink" href="#build-the-infrastructure-as-code-using-bicep" title="Permanent link">¶</a></h3>
-<p>To begin, we need to define the Bicep modules that will be required to generate the Infrastructure code. Our goal for this module is to have a freshly created resource group that encompasses all the necessary resources and configurations - such as connection strings, secrets, environment variables, and Dapr components - which we utilized to construct our solution. By the end, we will have a new resource group that includes the following resources.
-<a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"><img alt="aca-resources" src="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"/></a></p>
+<p>To begin, we need to define the Bicep modules that will be required to generate the Infrastructure code. Our goal for this module is to have a freshly created resource group that encompasses all the necessary resources and configurations - such as connection strings, secrets, environment variables, and Dapr components - which we utilized to construct our solution. By the end, we will have a new resource group that includes the following resources.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"><img alt="aca-resources" src="../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"/></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To simplify the execution of the module, we will assume that you have already created latest images of three services and pushed them to a container registry. <a href="#deploy-the-infrastructure-and-create-the-components">This section</a> below guides you through
 different options of getting images pushed to either Azure Container Registry (ACR) or GitHub Container Registry (GHCR).</p>
-<p>If we created and deployed container registery as part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images.</p>
-<p>In a production setting, a DevOps pipeline would be in place to automate the whole process - commencing with ACR creation, followed by building and pushing docker images, and concluding with executing the 
-Bicep script to establish the remaining resources. As it is outside the scope of this workshop, we will not delve into the creation of a DevOps pipeline here.</p>
 </div>
 <h4 id="1-add-the-needed-extension-to-vs-code">1. Add the Needed Extension to VS Code<a class="headerlink" href="#1-add-the-needed-extension-to-vs-code" title="Permanent link">¶</a></h4>
 <p>To proceed, you must install an extension called <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep</a>. This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..</p>
@@ -2537,7 +2534,7 @@ This will result in creating a file named <code>main.parameters.json</code> simi
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values shown above in sample file. </p>
-<p>You only need to replace parameter values between the angle brackets <code>&lt;&gt;</code> with values related to your container registry and SendGrid. Values for container registry and container images can be dervied by following
+<p>You only need to replace parameter values between the angle brackets <code>&lt;&gt;</code> with values related to your container registry and SendGrid. Values for container registry and container images can be derived by following
 one of the three options in next step.</p>
 </div>
 <p>Next, we will prepare container images for the three container apps and update the values in <code>main.parameters.json</code> file. You can do so by any of the three options below:</p>
@@ -2549,35 +2546,36 @@ one of the three options in next step.</p>
 <p>Create an Azure Container Registry (ACR) inside the newly created Resource Group:</p>
 <div class="language-Powershell highlight"><pre><span></span><code><span id="__span-19-1"><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="p">=</span><span class="s2">"&lt;your ACR name&gt;"</span>
 </span><span id="__span-19-2"><a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a>
-</span><span id="__span-19-3"><a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-19-4"><a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-19-5"><a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-19-6"><a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a>    <span class="p">-</span><span class="n">-sku</span> <span class="n">Basic</span>
+</span><span id="__span-19-3"><a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-19-5"><a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-19-6"><a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
+</span><span id="__span-19-7"><a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a>    <span class="p">-</span><span class="n">-sku</span> <span class="n">Basic</span>
 </span></code></pre></div>
 </li>
 <li>
-<p>Build and push the images to ACR as guided in <a href="../08-aca-monitoring/#2-build-new-images-and-push-them-to-acr">this section</a>. Make sure you are at the root project directory when executing the following commands:</p>
+<p>Build and push the images to ACR. Make sure you are at the root project directory when executing the following commands:</p>
 <div class="language-Powershell highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c">## Build Backend API on ACR and Push to ACR</span>
 </span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a>
 </span><span id="__span-20-3"><a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-20-4"><a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/$BACKEND_API_NAME"</span> <span class="p">`</span>
+</span><span id="__span-20-4"><a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/tasksmanager-backend-api"</span> <span class="p">`</span>
 </span><span id="__span-20-5"><a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a>    <span class="p">-</span><span class="o">-file</span> <span class="s1">'TasksTracker.TasksManager.Backend.Api/Dockerfile'</span> <span class="p">.</span>
 </span><span id="__span-20-6"><a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a>
 </span><span id="__span-20-7"><a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="c">## Build Backend Service on ACR and Push to ACR</span>
 </span><span id="__span-20-8"><a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a>
 </span><span id="__span-20-9"><a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-20-10"><a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/$BACKEND_SVC_NAME"</span> <span class="p">`</span>
+</span><span id="__span-20-10"><a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/tasksmanager-backend-processor"</span> <span class="p">`</span>
 </span><span id="__span-20-11"><a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a>    <span class="p">-</span><span class="o">-file</span> <span class="s1">'TasksTracker.Processor.Backend.Svc/Dockerfile'</span> <span class="p">.</span>
 </span><span id="__span-20-12"><a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a>
 </span><span id="__span-20-13"><a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="c">## Build Frontend Web App on ACR and Push to ACR</span>
 </span><span id="__span-20-14"><a href="#__codelineno-20-14" id="__codelineno-20-14" name="__codelineno-20-14"></a>
 </span><span id="__span-20-15"><a href="#__codelineno-20-15" id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-20-16"><a href="#__codelineno-20-16" id="__codelineno-20-16" name="__codelineno-20-16"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/$FRONTEND_WEBAPP_NAME"</span> <span class="p">`</span>
+</span><span id="__span-20-16"><a href="#__codelineno-20-16" id="__codelineno-20-16" name="__codelineno-20-16"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">"tasksmanager/tasksmanager-frontend-webapp"</span> <span class="p">`</span>
 </span><span id="__span-20-17"><a href="#__codelineno-20-17" id="__codelineno-20-17" name="__codelineno-20-17"></a>    <span class="p">-</span><span class="o">-file</span> <span class="s1">'TasksTracker.WebPortal.Frontend.Ui/Dockerfile'</span> <span class="p">.</span>
 </span></code></pre></div>
 </li>
 <li>
-<p>Update the <code>main.parameters.jsonc</code> file with the container registry name and the container images names as shown below:</p>
+<p>Update the <code>main.parameters.json</code> file with the container registry name and the container images names as shown below:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-21-1"><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="p">{</span>
 </span><span id="__span-21-2"><a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="nt">"containerRegistryName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-21-3"><a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;"</span>
@@ -2613,23 +2611,23 @@ your private container instance as shown below.</p>
 <li>
 <p>Import the images to your private ACR as shown below:</p>
 <div class="language-Powershell highlight"><pre><span></span><code><span id="__span-23-1"><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a>    <span class="n">az</span> <span class="n">acr</span> <span class="n">import</span> <span class="p">`</span>
-</span><span id="__span-23-2"><a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span>  <span class="p">`</span>
-</span><span id="__span-23-3"><a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-backend-api</span>  <span class="p">`</span>
+</span><span id="__span-23-2"><a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
+</span><span id="__span-23-3"><a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-backend-api</span> <span class="p">`</span>
 </span><span id="__span-23-4"><a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a>    <span class="p">-</span><span class="n">-source</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">azure</span><span class="p">/</span><span class="n">tasksmanager-backend-api</span><span class="p">:</span><span class="n">latest</span>
 </span><span id="__span-23-5"><a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a>
 </span><span id="__span-23-6"><a href="#__codelineno-23-6" id="__codelineno-23-6" name="__codelineno-23-6"></a>    <span class="n">az</span> <span class="n">acr</span> <span class="n">import</span>  <span class="p">`</span>
-</span><span id="__span-23-7"><a href="#__codelineno-23-7" id="__codelineno-23-7" name="__codelineno-23-7"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span>  <span class="p">`</span>
-</span><span id="__span-23-8"><a href="#__codelineno-23-8" id="__codelineno-23-8" name="__codelineno-23-8"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-frontend-webapp</span>  <span class="p">`</span>
+</span><span id="__span-23-7"><a href="#__codelineno-23-7" id="__codelineno-23-7" name="__codelineno-23-7"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
+</span><span id="__span-23-8"><a href="#__codelineno-23-8" id="__codelineno-23-8" name="__codelineno-23-8"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-frontend-webapp</span> <span class="p">`</span>
 </span><span id="__span-23-9"><a href="#__codelineno-23-9" id="__codelineno-23-9" name="__codelineno-23-9"></a>    <span class="p">-</span><span class="n">-source</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">azure</span><span class="p">/</span><span class="n">tasksmanager-frontend-webapp</span><span class="p">:</span><span class="n">latest</span>
 </span><span id="__span-23-10"><a href="#__codelineno-23-10" id="__codelineno-23-10" name="__codelineno-23-10"></a>
 </span><span id="__span-23-11"><a href="#__codelineno-23-11" id="__codelineno-23-11" name="__codelineno-23-11"></a>    <span class="n">az</span> <span class="n">acr</span> <span class="n">import</span>  <span class="p">`</span>
-</span><span id="__span-23-12"><a href="#__codelineno-23-12" id="__codelineno-23-12" name="__codelineno-23-12"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span>  <span class="p">`</span>
-</span><span id="__span-23-13"><a href="#__codelineno-23-13" id="__codelineno-23-13" name="__codelineno-23-13"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-backend-processor</span>  <span class="p">`</span>
+</span><span id="__span-23-12"><a href="#__codelineno-23-12" id="__codelineno-23-12" name="__codelineno-23-12"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
+</span><span id="__span-23-13"><a href="#__codelineno-23-13" id="__codelineno-23-13" name="__codelineno-23-13"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-backend-processor</span> <span class="p">`</span>
 </span><span id="__span-23-14"><a href="#__codelineno-23-14" id="__codelineno-23-14" name="__codelineno-23-14"></a>    <span class="p">-</span><span class="n">-source</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">azure</span><span class="p">/</span><span class="n">tasksmanager-backend-processor</span><span class="p">:</span><span class="n">latest</span>
 </span></code></pre></div>
 </li>
 <li>
-<p>Update the <code>main.parameters.jsonc</code> file with the container registry name and the container images names as shown below:</p>
+<p>Update the <code>main.parameters.json</code> file with the container registry name and the container images names as shown below:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-24-1"><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="p">{</span>
 </span><span id="__span-24-2"><a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="w">    </span><span class="nt">"containerRegistryName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-24-3"><a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;"</span>
@@ -2650,7 +2648,7 @@ your private container instance as shown below.</p>
 </div>
 <div class="tabbed-block">
 <p>All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can use the pre-built images from the public repository as shown below.</p>
-<p>The public images can be set directly in the <code>main.parameters.jsonc</code> file:</p>
+<p>The public images can be set directly in the <code>main.parameters.json</code> file:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-25-1"><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="p">{</span>
 </span><span id="__span-25-2"><a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="w">    </span><span class="nt">"containerRegistryName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-25-3"><a href="#__codelineno-25-3" id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
@@ -2687,7 +2685,7 @@ your private container instance as shown below.</p>
 <small>
     
       Last update:
-      2023-04-14
+      2023-04-17
     
   </small>
 </div>
