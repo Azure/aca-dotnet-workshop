@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks.Models;
 
     namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
     {

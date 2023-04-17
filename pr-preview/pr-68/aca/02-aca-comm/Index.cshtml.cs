@@ -1,4 +1,8 @@
- namespace TasksTracker.WebPortal.Frontend.Ui.Pages
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks.Models;
+
+namespace TasksTracker.WebPortal.Frontend.Ui.Pages
     {
         [IgnoreAntiforgeryToken(Order = 1001)]
         public class IndexModel : PageModel
