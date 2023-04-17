@@ -461,8 +461,11 @@ to create service connection for GitHub.</p>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../../assets/gifs/azdo-github-connection.gif"><img alt="AZDO GitHub Connection" src="../../../assets/gifs/azdo-github-connection.gif"/></a></p>
 <h4 id="create-service-connection-for-azure-subscription">Create Service Connection for Azure Subscription<a class="headerlink" href="#create-service-connection-for-azure-subscription" title="Permanent link">¶</a></h4>
 <p>Create new service connection to your azure subscription by following steps at <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&amp;tabs=yaml#create-a-service-connection" target="_blank">this link</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Update the created service connection role to have <strong><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator">User Access Administrator</a></strong> role. 
 This is required for pipeline to be able to perform role assignments in the infrastructure components deployed.</p>
+</div>
 <h3 id="configure-variable-group-under-library">Configure Variable group under Library<a class="headerlink" href="#configure-variable-group-under-library" title="Permanent link">¶</a></h3>
 <p>Create a variable group named <strong>AcaApp</strong> under Library in your Azure Devops project. Make sure the pipeline has 
 permissions to access the created variable group under <strong>Pipeline permissions</strong>.</p>
