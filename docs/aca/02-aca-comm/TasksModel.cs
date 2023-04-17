@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
+namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks.Models
+{
     public class TaskModel
     {
         public Guid TaskId { get; set; }
@@ -44,3 +47,4 @@ using System.ComponentModel.DataAnnotations;
         [Required]
         public string TaskAssignedTo { get; set; } = string.Empty;
     }
+}
