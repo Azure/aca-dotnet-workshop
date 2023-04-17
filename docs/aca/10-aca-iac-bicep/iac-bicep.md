@@ -323,13 +323,13 @@ Next, we will prepare container images for the three container apps and update t
                 "value": "<CONTAINER_REGISTRY_NAME>"
             },
             "backendProcessorServiceImage": {
-                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<BACKEND_API_NAME>:latest"
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest"
             },
             "backendApiServiceImage": {
-                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<FRONTEND_WEBAPP_NAME>:latest"
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-api:latest"
             },
             "frontendWebAppServiceImage": {
-                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<BACKEND_SVC_NAME>:latest"
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest"
             }
         }
         ```
