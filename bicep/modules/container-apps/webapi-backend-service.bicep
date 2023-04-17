@@ -37,16 +37,8 @@ param cosmosDbCollectionName string
 @description('The name of the container registry.')
 param containerRegistryName string
 
-@description('The username of the container registry user.')
-param containerRegistryUsername string
-
-@description('The password name of the container registry.')
-// We disable lint of this line as it is not a secret
-#disable-next-line secure-secrets-in-params
-param containerRegistryPasswordRefName string
-
-@secure()
-param containerRegistryPassword string 
+@description('The resource ID of the user assigned managed identity for the container registry to be able to pull images from it.')
+param containerRegistryUserAssignedIdentityId string
 
 @description('The image for the backend api service.')
 param backendApiServiceImage string
@@ -87,7 +79,10 @@ resource backendApiService 'Microsoft.App/containerApps@2022-06-01-preview' = {
   location: location
   tags: tags
   identity: {
-    type: 'SystemAssigned'
+    type: 'SystemAssigned,UserAssigned'
+    userAssignedIdentities: {
+        '${containerRegistryUserAssignedIdentityId}': {}
+    }
   }
   properties: {
     managedEnvironmentId: containerAppsEnvironmentId
@@ -105,21 +100,16 @@ resource backendApiService 'Microsoft.App/containerApps@2022-06-01-preview' = {
         logLevel: 'info'
         enableApiLogging: true
       }
-      registries: [
+      registries: !empty(containerRegistryName) ? [
         {
           server: '${containerRegistryName}.azurecr.io'
-          username: containerRegistryUsername
-          passwordSecretRef: containerRegistryPasswordRefName
+          identity: containerRegistryUserAssignedIdentityId
         }
-      ]
+      ] : []
       secrets: [
         {
           name: 'appinsights-key'
           value: appInsightsInstrumentationKey
-        }
-        {
-          name: containerRegistryPasswordRefName
-          value: containerRegistryPassword
         }
       ]
     }

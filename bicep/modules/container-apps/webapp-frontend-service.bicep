@@ -20,16 +20,8 @@ param frontendWebAppServiceName string
 @description('The name of the container registry.')
 param containerRegistryName string
 
-@description('The username of the container registry user.')
-param containerRegistryUsername string
-
-@description('The password name of the container registry.')
-// We disable lint of this line as it is not a secret
-#disable-next-line secure-secrets-in-params
-param containerRegistryPasswordRefName string
-
-@secure()
-param containerRegistryPassword string
+@description('The resource ID of the user assigned managed identity for the container registry to be able to pull images from it.')
+param containerRegistryUserAssignedIdentityId string
 
 @description('The image for the frontend web app service.')
 param frontendWebAppServiceImage string
@@ -46,6 +38,12 @@ resource frontendWebAppService 'Microsoft.App/containerApps@2022-06-01-preview' 
   name: frontendWebAppServiceName
   location: location
   tags: tags
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+        '${containerRegistryUserAssignedIdentityId}': {}
+    }
+  }
   properties: {
     managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
@@ -67,18 +65,13 @@ resource frontendWebAppService 'Microsoft.App/containerApps@2022-06-01-preview' 
           name: 'appinsights-key'
           value: appInsightsInstrumentationKey
         }
-        {
-          name: containerRegistryPasswordRefName
-          value: containerRegistryPassword
-        }
       ]
-      registries: [
+      registries: !empty(containerRegistryName) ? [
         {
           server: '${containerRegistryName}.azurecr.io'
-          username: containerRegistryUsername
-          passwordSecretRef: containerRegistryPasswordRefName
+          identity: containerRegistryUserAssignedIdentityId
         }
-      ]
+      ] : []
     }
     template: {
       containers: [

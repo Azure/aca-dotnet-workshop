@@ -30,12 +30,13 @@ Within Azure there are two ways to create IaC. We can either use the [JSON ARM t
 ### Build the Infrastructure as Code Using Bicep
 
 To begin, we need to define the Bicep modules that will be required to generate the Infrastructure code. Our goal for this module is to have a freshly created resource group that encompasses all the necessary resources and configurations - such as connection strings, secrets, environment variables, and Dapr components - which we utilized to construct our solution. By the end, we will have a new resource group that includes the following resources.
+
 ![aca-resources](../../assets/images/10-aca-iac-bicep/aca-rescources.jpg)
 
 !!! note
-    To simplify the execution of the module, we will assume that the azure resource "Azure Container Registry" is already provisioned and it contains the latest images of the three services. If we deployed ACR part of the Bicep scripts, then we can't build and push images to the created ACR in an automated way because creating the three ACA container apps is reliant on ACR's images.
-  
-    In a production setting, a DevOps pipeline would be in place to automate the whole process - commencing with ACR creation, followed by building and pushing docker images, and concluding with executing the Bicep script to establish the remaining resources. As it is outside the scope of this workshop, we will not delve into the creation of a DevOps pipeline here.
+    To simplify the execution of the module, we will assume that you have already created latest images of three services and pushed them to a container registry. [This section](#deploy-the-infrastructure-and-create-the-components) below guides you through
+    different options of getting images pushed to either Azure Container Registry (ACR) or GitHub Container Registry (GHCR).
+
 #### 1. Add the Needed Extension to VS Code
 To proceed, you must install an extension called [Bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep). This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..
 
@@ -273,47 +274,174 @@ To achieve this, add a new file under the `bicep` directory as shown below:
 Start by creating a new resource group which will contain all the resources to be created by the Bicep scripts.
 
 ```Powershell
+$RESOURCE_GROUP="<your RG name>"
+$LOCATION="<your location>"
+
 az group create `
---name "<your RG name>" `
---location "eastus"  
+--name $RESOURCE_GROUP `
+--location $LOCATION
 ```
 
-Next create an ACR inside the newly created Resource Group:
+Create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file `main.bicep` and select **Generate Parameter File**. 
+This will result in creating a file named `main.parameters.json` similar to the file below:
 
-```Powershell
-az acr create `
-    --resource-group <your RG name> `
-    --name <your ACR name>`
-    --sku Basic `
-    --admin-enabled true
-```
+??? example
 
-!!! note
-    Once the RG and ACR are created you can check [this section](../../aca/08-aca-monitoring/index.md#2-build-new-images-and-push-them-to-acr) which shows the different commands to build and push the images to ACR. Make sure you are at the root project directory when executing the aforementioned commands. Finally run the bicep file against the newly created Resource Group as shown below.
-
-With the steps above completed we are ready to deploy all the different resources. We just need to create a parameters file which will simplify the invocation of the main bicep file. 
-
-To achieve this, right click on file `main.bicep` and select **Generate Parameter File**. This will result in creating a file named `main.parameters.json` similar to the file below:
-
-???+ example
     === "main.parameters.json"
     
         ```json
         --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/main.parameters.json"
         ```
-
 !!! note
-    
+
     To use this file, you need to edit this generated file and provide values for the parameters. You can use the same values shown above in sample file. 
-    
-    You only need to replace parameter values between the angle brackets `<>` with values related to your ACR resource and SendGrid.
+
+    You only need to replace parameter values between the angle brackets `<>` with values related to your container registry and SendGrid. Values for container registry and container images can be derived by following
+    one of the three options in next step.
+
+Next, we will prepare container images for the three container apps and update the values in `main.parameters.json` file. You can do so by any of the three options below:
+
+=== "Option 1: Build and Push the Images to Azure Container Registry (ACR)"
+
+    1. Create an Azure Container Registry (ACR) inside the newly created Resource Group:
+
+        ```Powershell
+        $CONTAINER_REGISTRY_NAME="<your ACR name>"
+        
+
+        az acr create `
+            --resource-group $RESOURCE_GROUP `
+            --name $CONTAINER_REGISTRY_NAME `
+            --sku Basic
+        ```
+
+    2. Build and push the images to ACR. Make sure you are at the root project directory when executing the following commands:
+
+        ```Powershell
+
+        ## Build Backend API on ACR and Push to ACR
+
+        az acr build --registry $CONTAINER_REGISTRY_NAME `
+            --image "tasksmanager/tasksmanager-backend-api" `
+            --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+        
+        ## Build Backend Service on ACR and Push to ACR
+
+        az acr build --registry $CONTAINER_REGISTRY_NAME `
+            --image "tasksmanager/tasksmanager-backend-processor" `
+            --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+
+        ## Build Frontend Web App on ACR and Push to ACR
+
+        az acr build --registry $CONTAINER_REGISTRY_NAME `
+            --image "tasksmanager/tasksmanager-frontend-webapp" `
+            --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+        ```
+
+    3. Update the `main.parameters.json` file with the container registry name and the container images names as shown below:
+
+        ```json hl_lines="3 6 9 12"
+        {
+            "containerRegistryName": {
+                "value": "<CONTAINER_REGISTRY_NAME>"
+            },
+            "backendProcessorServiceImage": {
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<BACKEND_API_NAME>:latest"
+            },
+            "backendApiServiceImage": {
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<FRONTEND_WEBAPP_NAME>:latest"
+            },
+            "frontendWebAppServiceImage": {
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<BACKEND_SVC_NAME>:latest"
+            }
+        }
+        ```
+
+
+=== "Option 2: Import pre-built public images to your private Azure Container Registry"
+        
+    All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can import it directly into 
+    your private container instance as shown below.
+
+    1. Create an Azure Container Registry (ACR) inside the newly created Resource Group:
+
+        ```Powershell
+        $CONTAINER_REGISTRY_NAME="<your ACR name>"
+
+        az acr create `
+            --resource-group $RESOURCE_GROUP `
+            --name $CONTAINER_REGISTRY_NAME `
+            --sku Basic
+        ```
+    2. Import the images to your private ACR as shown below:
+
+        ```Powershell 
+
+            az acr import `
+            --name $CONTAINER_REGISTRY_NAME `
+            --image tasksmanager/tasksmanager-backend-api `
+            --source ghcr.io/azure/tasksmanager-backend-api:latest
+            
+            az acr import  `
+            --name $CONTAINER_REGISTRY_NAME `
+            --image tasksmanager/tasksmanager-frontend-webapp `
+            --source ghcr.io/azure/tasksmanager-frontend-webapp:latest
+            
+            az acr import  `
+            --name $CONTAINER_REGISTRY_NAME `
+            --image tasksmanager/tasksmanager-backend-processor `
+            --source ghcr.io/azure/tasksmanager-backend-processor:latest
+
+        ```
+
+    3. Update the `main.parameters.json` file with the container registry name and the container images names as shown below:
+
+        ```json hl_lines="3 6 9 12"
+        {
+            "containerRegistryName": {
+                "value": "<CONTAINER_REGISTRY_NAME>"
+            },
+            "backendProcessorServiceImage": {
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest"
+            },
+            "backendApiServiceImage": {
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-api:latest"
+            },
+            "frontendWebAppServiceImage": {
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest"
+            }
+        }
+        ```
+
+=== "Option 3: Use the pre-built images from the public repository"
+
+    All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can use the pre-built images from the public repository as shown below.
+
+    The public images can be set directly in the `main.parameters.json` file:
+
+    ```json hl_lines="3 6 9 12"
+    {
+        "containerRegistryName": {
+            "value": ""
+        },
+        "backendProcessorServiceImage": {
+          "value": "ghcr.io/azure/tasksmanager-backend-processor:latest"
+        },
+        "backendApiServiceImage": {
+          "value": "ghcr.io/azure/tasksmanager-backend-api:latest"
+        },
+        "frontendWebAppServiceImage": {
+          "value": "ghcr.io/azure/tasksmanager-frontend-webapp:latest"
+        },
+    }   
+    ```
 
 Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below.
 
 
 ```Powershell
 az deployment group create `
---resource-group "<your RG name>" `
+--resource-group $RESOURCE_GROUP `
 --template-file "./bicep/main.bicep" `
 --parameters "./bicep/main.parameters.json"
 ```

@@ -1,0 +1,145 @@
+name: Create and publish a Docker images for apps
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'TasksTracker.Processor.Backend.Svc/**'
+      - 'TasksTracker.TasksManager.Backend.Api/**'
+      - 'TasksTracker.WebPortal.Frontend.Ui/**'
+  workflow_dispatch: {}
+
+env:
+  REGISTRY: ghcr.io
+  BACKEND_API_IMAGE_NAME: azure/tasksmanager-backend-api
+  FRONTEND_APP_IMAGE_NAME: azure/tasksmanager-frontend-webapp
+  BACKEND_PROCESSOR_IMAGE_NAME: azure/tasksmanager-backend-processor
+
+jobs:
+  detect-changes:
+    name: Detect apps which has changed to trigger image jobs conditionally
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+      processor: ${{ steps.filter.outputs.processor }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          backend:
+            - 'TasksTracker.TasksManager.Backend.Api/**'
+          frontend:
+            - 'TasksTracker.WebPortal.Frontend.Ui/**'
+          processor:
+            - 'TasksTracker.Processor.Backend.Svc/**'
+
+  build-and-push-backend-image:
+    needs: detect-changes
+    name: Build and push backend image
+    if: ${{ needs.detect-changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.BACKEND_API_IMAGE_NAME }}
+          tags: |
+              type=raw,value=latest,enable={{is_default_branch}}
+              type=ref,event=branch
+              type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          file: ./TasksTracker.TasksManager.Backend.Api/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  build-and-push-frontend-image:
+    needs: detect-changes
+    name: Build and push frontend image
+    if: ${{ needs.detect-changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.FRONTEND_APP_IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=branch
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          file: ./TasksTracker.WebPortal.Frontend.Ui/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  build-and-push-backend-processor-image:
+    needs: detect-changes
+    name: Build and push backend processor image
+    if: ${{ needs.detect-changes.outputs.processor == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.BACKEND_PROCESSOR_IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=branch
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          file: ./TasksTracker.Processor.Backend.Svc/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

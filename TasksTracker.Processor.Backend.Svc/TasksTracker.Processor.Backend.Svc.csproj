@@ -14,5 +14,4 @@
     <PackageReference Include="SendGrid" Version="9.28.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
   </ItemGroup>
-
 </Project>

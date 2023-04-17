@@ -100,17 +100,6 @@ param keyVaultName string = '${prefix}kv-${uniqueString(resourceGroup().id)}${su
 @description('The name of the container registry.')
 param containerRegistryName string
 
-@description('The username of the container registry user.')
-param containerRegistryUsername string
-
-@description('The password name of the container registry.')
-// We disable lint of this line as it is not a secret
-#disable-next-line secure-secrets-in-params
-param containerRegistryPasswordRefName string
-
-@secure()
-param containerRegistryPassword string
-
 @description('The image for the backend processor service.')
 param backendProcessorServiceImage string
 
@@ -212,9 +201,6 @@ module containerApps 'modules/container-apps.bicep' = {
     backendApiServiceName: backendApiServiceName
     frontendWebAppServiceName: frontendWebAppServiceName    
     containerAppsEnvironmentName: containerAppsEnvironmentName
-    containerRegistryUsername: containerRegistryUsername
-    containerRegistryPasswordRefName: containerRegistryPasswordRefName
-    containerRegistryPassword: containerRegistryPassword
     keyVaultId: keyVault.outputs.keyVaultId
     serviceBusName: serviceBus.outputs.serviceBusName
     serviceBusTopicName: serviceBus.outputs.serviceBusTopicName
