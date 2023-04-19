@@ -18,7 +18,7 @@
 <link href="../../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" rel="icon"/>
 <!-- Generator banner -->
 <meta content="mkdocs-1.4.2, $md-name$-$md-version$" name="generator"/>
-<title>Deploy infrastructure using GitHub Actions - Azure Container Apps - Workshop</title>
+<title>Deploy Infrastructure using Bicep via GitHub Actions - Azure Container Apps - Workshop</title>
 <link href="../../../assets/stylesheets/main.ded33207.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -68,7 +68,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Deploy infrastructure using GitHub Actions
+              Deploy Infrastructure using Bicep via GitHub Actions
             
           </span>
 </div>
@@ -224,7 +224,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../07-aca-cron-bindings/">
-        Module 7 - ACA scheduled jobs with Dapr Cron Binding
+        Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
       </a>
 </li>
 <li class="md-nav__item">
@@ -240,7 +240,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_12" type="checkbox"/>
 <div class="md-nav__link md-nav__link--index">
-<a href="../">Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA</a>
+<a href="../">Module 10 - Deployment Via Bicep and DevOps</a>
 <label for="__nav_12">
 <span class="md-nav__icon md-icon"></span>
 </label>
@@ -248,22 +248,22 @@
 <nav aria-expanded="true" aria-labelledby="__nav_12_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_12">
 <span class="md-nav__icon md-icon"></span>
-          Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA
+          Module 10 - Deployment Via Bicep and DevOps
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../iac-bicep/">
-        Build the Infrastructure as Code Using Bicep
+        Deploy Infrastructure using Bicep
       </a>
 </li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
-          Deploy infrastructure using GitHub Actions
+          Deploy Infrastructure using Bicep via GitHub Actions
           <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
-        Deploy infrastructure using GitHub Actions
+        Deploy Infrastructure using Bicep via GitHub Actions
       </a>
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">
@@ -331,12 +331,12 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../12-contributing/2-Submit-issue-suggestion/">
-        Submit an issue or suggestion
+        Submit An Issue or Suggestion
       </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../12-contributing/3-minor-update-fix/">
-        Minor update or fix, new challenge
+        Minor Update or fix, New Challenge
       </a>
 </li>
 </ul>
@@ -356,12 +356,12 @@
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../13-appendix/01-run-debug-dapr-app-vscode/">
-        Debug and launch Dapr applications in VSCode
+        Debug and Launch Dapr Applications in VSCode
       </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../13-appendix/02-github-local-codespaces/">
-        Testing changes locally or with GitHub Codespaces
+        Testing Changes Locally or with GitHub Codespaces
       </a>
 </li>
 </ul>
@@ -413,16 +413,13 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="deploy-infrastructure-using-github-actions">Deploy infrastructure using GitHub Actions<a class="headerlink" href="#deploy-infrastructure-using-github-actions" title="Permanent link">¶</a></h1>
+<h1 id="deploy-infrastructure-using-github-actions">Deploy Infrastructure Using GitHub Actions<a class="headerlink" href="#deploy-infrastructure-using-github-actions" title="Permanent link">¶</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Module Duration</p>
 <p>30 minutes</p>
 </div>
-<p>GitHub Actions is a great way to automate your workflow. In this section, we will create a GitHub Action workflow to 
-deploy the infrastructure components of our application.</p>
-<p>The workshop repository contains a GitHub Action workflow file that will be used to deploy the infrastructure 
-components of our application. Follow the steps below to create a GitHub Action workflow to deploy the 
-infrastructure components of our application.</p>
+<p>In the <a href="../iac-bicep/">previous section</a>, we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. GitHub Actions is a great solution for automating workflows, and in this section, we'll explain how to create a GitHub Action workflow for deploying the infrastructure components of our application.</p>
+<p>The workshop repository contains a GitHub Action workflow file that will be used to deploy the infrastructure components of our application. Follow the steps below to create a GitHub Action workflow to deploy the infrastructure components of our application.</p>
 <h3 id="fork-the-github-repository">Fork the GitHub repository<a class="headerlink" href="#fork-the-github-repository" title="Permanent link">¶</a></h3>
 <p>Start by forking the workshop repository to your GitHub account. Follow the steps below to fork the workshop:</p>
 <ol>
@@ -516,8 +513,7 @@ locally, follow the steps below to configure the repository for OIDC authenticat
 </div>
 </input></input></div>
 <h3 id="configure-github-repository-secrets">Configure GitHub Repository Secrets<a class="headerlink" href="#configure-github-repository-secrets" title="Permanent link">¶</a></h3>
-<p>Configure secrets details in GitHub repo as described here in <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets">create GitHub secrets</a>. 
-Use below values mapped to relevant secrets in GitHub. </p>
+<p>Configure secrets details in GitHub repo as described here in <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets">create GitHub secrets</a>. Use below values mapped to relevant secrets in GitHub. </p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># AZURE_SUBSCRIPTION_ID</span>
 </span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$SUBSCRIPTION_ID</span><span class="w"> </span>
 </span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1"># AZURE_TENANT_ID   </span>
@@ -526,9 +522,9 @@ Use below values mapped to relevant secrets in GitHub. </p>
 </span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APP_ID</span><span class="w">             </span>
 </span></code></pre></div>
 <h3 id="configure-github-repository-variables">Configure GitHub Repository Variables<a class="headerlink" href="#configure-github-repository-variables" title="Permanent link">¶</a></h3>
-<p>Configure repository variables as shown below:</p>
+<p>Configure repository variables in GitHub repo as described here in <a href="https://docs.github.com/en/actions/learn-github-actions/variables">create GitHub variables</a>. Use below values mapped to relevant variables in GitHub. </p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
-</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location&gt;
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location.<span class="w"> </span>e.g.<span class="w"> </span>eastus&gt;
 </span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
 </span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1"># RESOURCE_GROUP: Name of the resource group which will be created and resources will be deployed</span>
 </span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="nv">RESOURCE_GROUP</span><span class="o">=</span>&lt;resource<span class="w"> </span>group<span class="w"> </span>name&gt;
@@ -542,9 +538,7 @@ Use below values mapped to relevant secrets in GitHub. </p>
 <p>You may chose to skip defining this variable and the workflow will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop">public github container registry images</a> to deploy the images.</p>
 </div>
 <h3 id="trigger-github-actions-workflow">Trigger GitHub Actions Workflow<a class="headerlink" href="#trigger-github-actions-workflow" title="Permanent link">¶</a></h3>
-<p>With these steps completed, you are now ready to trigger the GitHub Actions workflow name <strong>Build and deploy 
-infrastructure as code to Azure</strong> using <strong>workflow dispatch</strong> to deploy the infrastructure components of our 
-application.</p>
+<p>With these steps completed, you are now ready to trigger the GitHub Actions workflow named <strong>Build and deploy infrastructure as code to Azure</strong> using <strong>workflow dispatch</strong> to deploy the infrastructure components of the application.</p>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
 <p>Your GitHub Actions workflow should be triggered and the infrastructure components of our application should be deployed successfully.</p>
@@ -560,7 +554,7 @@ application.</p>
 <small>
     
       Last update:
-      2023-04-18
+      2023-04-19
     
   </small>
 </div>
@@ -575,7 +569,7 @@ application.</p>
 </main>
 <footer class="md-footer">
 <nav aria-label="Footer" class="md-footer__inner md-grid">
-<a aria-label="Previous: Build the Infrastructure as Code Using Bicep" class="md-footer__link md-footer__link--prev" href="../iac-bicep/" rel="prev">
+<a aria-label="Previous: Deploy Infrastructure using Bicep" class="md-footer__link md-footer__link--prev" href="../iac-bicep/" rel="prev">
 <div class="md-footer__button md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </div>
@@ -584,7 +578,7 @@ application.</p>
                 Previous
               </span>
 <div class="md-ellipsis">
-                Build the Infrastructure as Code Using Bicep
+                Deploy Infrastructure using Bicep
               </div>
 </div>
 </a>
