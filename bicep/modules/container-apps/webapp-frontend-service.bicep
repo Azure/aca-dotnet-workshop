@@ -30,6 +30,9 @@ param frontendWebAppServiceImage string
 @description('The Application Insights Instrumentation.')
 param appInsightsInstrumentationKey string
 
+@description('The target and dapr port for the frontend web app service.')
+param frontendWebAppPortNumber int
+
 // ------------------
 // RESOURCES
 // ------------------
@@ -50,13 +53,13 @@ resource frontendWebAppService 'Microsoft.App/containerApps@2022-06-01-preview' 
       activeRevisionsMode: 'single'
       ingress: {
         external: true
-        targetPort: 80
+        targetPort: frontendWebAppPortNumber
       }
       dapr: {
         enabled: true
         appId: frontendWebAppServiceName
         appProtocol: 'http'
-        appPort: 80
+        appPort: frontendWebAppPortNumber
         logLevel: 'info'
         enableApiLogging: true
       }

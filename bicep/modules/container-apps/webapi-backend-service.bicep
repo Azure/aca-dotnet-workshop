@@ -47,6 +47,9 @@ param backendApiServiceImage string
 @description('The Application Insights Instrumentation.')
 param appInsightsInstrumentationKey string
 
+@description('The target and dapr port for the backend api service.')
+param backendApiPortNumber int
+
 // ------------------
 // RESOURCES
 // ------------------
@@ -90,13 +93,13 @@ resource backendApiService 'Microsoft.App/containerApps@2022-06-01-preview' = {
       activeRevisionsMode: 'single'
       ingress: {
         external: false
-        targetPort: 80
+        targetPort: backendApiPortNumber
       }
       dapr: {
         enabled: true
         appId: backendApiServiceName
         appProtocol: 'http'
-        appPort: 80
+        appPort: backendApiPortNumber
         logLevel: 'info'
         enableApiLogging: true
       }

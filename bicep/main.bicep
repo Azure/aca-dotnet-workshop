@@ -79,6 +79,10 @@ param sendGridEmailFrom string
 @description('The name of the Send Grid Email From Name.')
 param sendGridEmailFromName string
 
+// When set to 'true', Parameters 'sendGridKeySecretValue' and 'sendGridEmailFrom' should be provided
+@description('Set if integration with SendGrid is enabled.')
+param sendGridIntegrationEnabled string
+
 //Cron Shedule Jon
 @description('The cron settings for scheduled job.')
 param scheduledJobCron string
@@ -108,6 +112,16 @@ param backendApiServiceImage string
 
 @description('The image for the frontend web app service.')
 param frontendWebAppServiceImage string
+
+// App Ports
+@description('The target and dapr port for the frontend web app service.')
+param frontendWebAppPortNumber int = 80
+
+@description('The target and dapr port for the backend api service.')
+param backendApiPortNumber int = 80
+
+@description('The dapr port for the backend processor service.')
+param backendProcessorPortNumber int = 80
 
 // ------------------
 // RESOURCES
@@ -214,9 +228,13 @@ module containerApps 'modules/container-apps.bicep' = {
     frontendWebAppServiceImage: frontendWebAppServiceImage
     sendGridKeySecretName: sendGridKeySecretName
     sendGridKeySecretValue: sendGridKeySecretValue
+    sendGridIntegrationEnabled: sendGridIntegrationEnabled
     applicationInsightsName: containerAppsEnvironment.outputs.applicationInsightsName
     externalStorageAccountName: externalStorageAccount.outputs.storageAccountName
     externalStorageKeySecretName: externalStorageKeySecretName
+    frontendWebAppPortNumber: frontendWebAppPortNumber
+    backendApiPortNumber: backendApiPortNumber
+    backendProcessorPortNumber: backendProcessorPortNumber
   }
   dependsOn: [
     daprComponents

@@ -44,6 +44,9 @@
     "sendGridEmailFromName": {
       "value": "Tasks Tracker Notification"
     },
+    "sendGridIntegrationEnabled": {
+      "value": "false" 
+    },
     "externalTasksQueueName": {
       "value": "external-tasks-queue"
     },
@@ -70,6 +73,15 @@
     },
     "frontendWebAppServiceImage": {
       "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest"
+    },
+    "frontendWebAppPortNumber": {
+      "value": 80
+    },
+    "backendApiPortNumber": {
+      "value": 80
+    },
+    "backendProcessorPortNumber": {
+      "value": 80
     }
   }
 }

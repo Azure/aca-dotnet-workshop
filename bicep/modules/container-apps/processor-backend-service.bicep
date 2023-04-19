@@ -36,6 +36,9 @@ param externalStorageKeySecretName string
 @description('The Application Insights Instrumentation.')
 param appInsightsInstrumentationKey string
 
+@description('Set if integration with SendGrid is enabled.')
+param sendGridIntegrationEnabled string
+
 // Service Bus
 @description('The name of the service bus namespace.')
 param serviceBusName string
@@ -59,6 +62,9 @@ param containerRegistryUserAssignedIdentityId string
 
 @description('The image for the backend processor service.')
 param backendProcessorServiceImage string
+
+@description('The dapr port for the backend processor service.')
+param backendProcessorPortNumber int
 
 
 // ------------------
@@ -111,7 +117,7 @@ resource backendProcessorService 'Microsoft.App/containerApps@2022-06-01-preview
         enabled: true
         appId: backendProcessorServiceName
         appProtocol: 'http'
-        appPort: 80
+        appPort: backendProcessorPortNumber
         logLevel: 'info'
         enableApiLogging: true
       }
@@ -144,7 +150,7 @@ resource backendProcessorService 'Microsoft.App/containerApps@2022-06-01-preview
           env: [
             {
               name: 'SendGrid__IntegrationEnabled'
-              value: 'true'
+              value: sendGridIntegrationEnabled
             }
             {
               name: 'ApplicationInsights__InstrumentationKey'
