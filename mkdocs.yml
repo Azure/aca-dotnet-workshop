@@ -18,7 +18,10 @@ nav:
   - Module 7 - ACA scheduled jobs with Dapr Cron Binding: aca/07-aca-cron-bindings/index.md
   - Module 8 - ACA Monitoring and Observability with Application Insights: aca/08-aca-monitoring/index.md
   - Module 9 - ACA Auto Scaling with KEDA: aca/09-aca-autoscale-keda/index.md
-  - Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA: aca/10-aca-iac-bicep/index.md
+  - Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA:
+    - aca/10-aca-iac-bicep/index.md
+    - Build the Infrastructure as Code Using Bicep: aca/10-aca-iac-bicep/iac-bicep.md
+    - Deploy infrastructure using GitHub Actions: aca/10-aca-iac-bicep/ci-cd-git-action.md
   - About The Authors: aca/11-about-the-authors/index.md
   - Contributing:
     - Contribution Guide: aca/12-contributing/1-contribution-guide.md
