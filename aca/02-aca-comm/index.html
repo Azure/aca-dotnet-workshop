@@ -267,10 +267,32 @@
         Module 9 - ACA Auto Scaling with KEDA
       </a>
 </li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_12" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../10-aca-iac-bicep/">Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA</a>
+<label for="__nav_12">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_12_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_12">
+<span class="md-nav__icon md-icon"></span>
+          Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../10-aca-iac-bicep/">
-        Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA
+<a class="md-nav__link" href="../10-aca-iac-bicep/iac-bicep/">
+        Build the Infrastructure as Code Using Bicep
       </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10-aca-iac-bicep/ci-cd-git-action/">
+        Deploy infrastructure using GitHub Actions
+      </a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../11-about-the-authors/">
@@ -848,7 +870,7 @@ This variable will contain the Base URL for the backend API deployed in the prev
 <ul>
 <li>Lastly, we will update the web app landing page <code>Index.html</code> and <code>Index.cshtml.cs</code> inside <strong>Pages</strong> folder to capture the email of the tasks owner user and assign this email to a cookie named <code>TasksCreatedByCookie</code>. </li>
 </ul>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"/><input id="__tabbed_5_2" name="__tabbed_5" type="radio"/><div class="tabbed-labels"><label for="__tabbed_5_1">Index.cshtml</label><label for="__tabbed_5_2">Index.cshtml.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"><input id="__tabbed_5_2" name="__tabbed_5" type="radio"/><div class="tabbed-labels"><label for="__tabbed_5_1">Index.cshtml</label><label for="__tabbed_5_2">Index.cshtml.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-html highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>@page
@@ -921,7 +943,7 @@ This variable will contain the Base URL for the backend API deployed in the prev
 </span></code></pre></div>
 </div>
 </div>
-</div>
+</input></div>
 <ul>
 <li>
 <p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the frontend directory which hosts the <code>.csproj</code> project folder and build the project. </p>
@@ -1006,7 +1028,7 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
 <small>
     
       Last update:
-      2023-04-17
+      2023-04-19
     
   </small>
 </div>
