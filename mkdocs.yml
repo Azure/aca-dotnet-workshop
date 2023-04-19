@@ -15,22 +15,22 @@ nav:
   - Module 4 - ACA State Store With Dapr State Management API: aca/04-aca-dapr-stateapi/index.md
   - Module 5 - ACA Async Communication with Dapr Pub/Sub API: aca/05-aca-dapr-pubsubapi/index.md
   - Module 6 - ACA with Dapr Bindings Building Block: aca/06-aca-dapr-bindingsapi/index.md
-  - Module 7 - ACA scheduled jobs with Dapr Cron Binding: aca/07-aca-cron-bindings/index.md
+  - Module 7 - ACA Scheduled Jobs with Dapr Cron Binding: aca/07-aca-cron-bindings/index.md
   - Module 8 - ACA Monitoring and Observability with Application Insights: aca/08-aca-monitoring/index.md
   - Module 9 - ACA Auto Scaling with KEDA: aca/09-aca-autoscale-keda/index.md
-  - Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA:
+  - Module 10 - Deployment Via Bicep and DevOps:
     - aca/10-aca-iac-bicep/index.md
-    - Build the Infrastructure as Code Using Bicep: aca/10-aca-iac-bicep/iac-bicep.md
-    - Deploy infrastructure using GitHub Actions: aca/10-aca-iac-bicep/ci-cd-git-action.md
+    - Deploy Infrastructure using Bicep: aca/10-aca-iac-bicep/iac-bicep.md
+    - Deploy Infrastructure using Bicep via GitHub Actions: aca/10-aca-iac-bicep/ci-cd-git-action.md
     - Deploy infrastructure using Azure Devops Pipeline: aca/10-aca-iac-bicep/ci-cd-azdo.md
   - About The Authors: aca/11-about-the-authors/index.md
   - Contributing:
     - Contribution Guide: aca/12-contributing/1-contribution-guide.md
-    - Submit an issue or suggestion: aca/12-contributing/2-Submit-issue-suggestion.md
-    - Minor update or fix, new challenge: aca/12-contributing/3-minor-update-fix.md
+    - Submit An Issue or Suggestion: aca/12-contributing/2-Submit-issue-suggestion.md
+    - Minor Update or fix, New Challenge: aca/12-contributing/3-minor-update-fix.md
   - Appendix:
-    - Debug and launch Dapr applications in VSCode: aca/13-appendix/01-run-debug-dapr-app-vscode.md
-    - Testing changes locally or with GitHub Codespaces: aca/13-appendix/02-github-local-codespaces.md
+    - Debug and Launch Dapr Applications in VSCode: aca/13-appendix/01-run-debug-dapr-app-vscode.md
+    - Testing Changes Locally or with GitHub Codespaces: aca/13-appendix/02-github-local-codespaces.md
   
 theme:
   name: material
