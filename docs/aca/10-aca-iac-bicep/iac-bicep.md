@@ -7,6 +7,9 @@ canonical_url: https://bitoftech.net/2022/09/16/use-bicep-to-deploy-dapr-microse
 !!! info "Module Duration"
     30 minutes
 
+!!! note
+    If you're not interested in manually deploying the Bicep files or creating the container registry yourself, and prefer not to delve into the details of how they work, then you can skip this section and head directly to either [Build the Infrastructure as Code Using Bicep and Github](../../aca/10-aca-iac-bicep/ci-cd-git-action.md) or [Build the Infrastructure as Code Using Bicep and Azure DevOps](../../aca/10-aca-iac-bicep/ci-cd-azdo.md) depending on your DevOps tool of choice.
+
 To begin, we need to define the Bicep modules that will be required to generate the Infrastructure code. Our goal for this module is to have a freshly created resource group that encompasses all the necessary resources and configurations - such as connection strings, secrets, environment variables, and Dapr components - which we utilized to construct our solution. By the end, we will have a new resource group that includes the following resources.
 
 ![aca-resources](../../assets/images/10-aca-iac-bicep/aca-rescources.jpg)
@@ -323,13 +326,13 @@ Next, we will prepare container images for the three container apps and update t
                 "value": "<CONTAINER_REGISTRY_NAME>"
             },
             "backendProcessorServiceImage": {
-                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<BACKEND_API_NAME>:latest"
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest"
             },
             "backendApiServiceImage": {
-                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<FRONTEND_WEBAPP_NAME>:latest"
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-backend-api:latest"
             },
             "frontendWebAppServiceImage": {
-                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/<BACKEND_SVC_NAME>:latest"
+                "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest"
             }
         }
         ```

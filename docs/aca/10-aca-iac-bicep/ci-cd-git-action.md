@@ -1,15 +1,12 @@
 
-# Deploy infrastructure using GitHub Actions
+# Deploy Infrastructure Using GitHub Actions
 
 !!! info "Module Duration"
     30 minutes
 
-GitHub Actions is a great way to automate your workflow. In this section, we will create a GitHub Action workflow to 
-deploy the infrastructure components of our application.
+In the [previous section](../../aca/10-aca-iac-bicep/iac-bicep.md), we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. GitHub Actions is a great solution for automating workflows, and in this section, we'll explain how to create a GitHub Action workflow for deploying the infrastructure components of our application.
 
-The workshop repository contains a GitHub Action workflow file that will be used to deploy the infrastructure 
-components of our application. Follow the steps below to create a GitHub Action workflow to deploy the 
-infrastructure components of our application.
+The workshop repository contains a GitHub Action workflow file that will be used to deploy the infrastructure components of our application. Follow the steps below to create a GitHub Action workflow to deploy the infrastructure components of our application.
 
 ### Fork the GitHub repository
 
@@ -109,8 +106,7 @@ locally, follow the steps below to configure the repository for OIDC authenticat
 
 ### Configure GitHub Repository Secrets
 
-Configure secrets details in GitHub repo as described here in [create GitHub secrets](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets). 
-Use below values mapped to relevant secrets in GitHub. 
+Configure secrets details in GitHub repo as described here in [create GitHub secrets](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets). Use below values mapped to relevant secrets in GitHub. 
 
 ```bash
 # AZURE_SUBSCRIPTION_ID
@@ -123,11 +119,11 @@ echo $APP_ID
 
 ### Configure GitHub Repository Variables
 
-Configure repository variables as shown below:
+Configure repository variables in GitHub repo as described here in [create GitHub variables](https://docs.github.com/en/actions/learn-github-actions/variables). Use below values mapped to relevant variables in GitHub. 
 
 ```bash 
 # LOCATION: Azure region where resources will be deployed
-LOCATION=<location>
+LOCATION=<location. e.g. eastus>
 
 # RESOURCE_GROUP: Name of the resource group which will be created and resources will be deployed
 RESOURCE_GROUP=<resource group name>
@@ -144,9 +140,7 @@ CONTAINER_REGISTRY_NAME=<container registry name>
 
 ### Trigger GitHub Actions Workflow
 
-With these steps completed, you are now ready to trigger the GitHub Actions workflow name **Build and deploy 
-infrastructure as code to Azure** using **workflow dispatch** to deploy the infrastructure components of our 
-application.
+With these steps completed, you are now ready to trigger the GitHub Actions workflow named **Build and deploy infrastructure as code to Azure** using **workflow dispatch** to deploy the infrastructure components of the application.
 
 !!! success
     

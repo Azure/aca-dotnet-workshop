@@ -137,7 +137,7 @@ jobs:
             az acr import --name ${{ vars.CONTAINER_REGISTRY_NAME }} --source ${{ env.REGISTRY }}/${{ env.BACKEND_API_IMAGE_NAME }}:latest --image tasksmanager/tasksmanager-backend-api --force
             az acr import --name ${{ vars.CONTAINER_REGISTRY_NAME }} --source ${{ env.REGISTRY }}/${{ env.FRONTEND_APP_IMAGE_NAME }}:latest --image tasksmanager/tasksmanager-frontend-webapp --force
 
-  # This job deploys the bicep template to Azure subscription either using ACR images
+  # This job deploys the bicep template to Azure subscription using ACR images
   deploy-with-acr-images:
     runs-on: ubuntu-latest
     if : ${{ github.event.inputs.teardown != 'true' }}
