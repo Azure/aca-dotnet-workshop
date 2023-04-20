@@ -32,20 +32,14 @@
     "cosmosDbCollectionName": {
       "value": "taskscollection"
     },
-    "sendGridKeySecretName": {
-      "value": "sendgrid-api-key"
-    },
     "sendGridKeySecretValue": {
-      "value": "<SEND_GRID_API_KEY>"
+      "value": ""
     },
     "sendGridEmailFrom": {
       "value": "<SEND_GRID_FROM_EMAIL>"
     },
     "sendGridEmailFromName": {
       "value": "Tasks Tracker Notification"
-    },
-    "sendGridIntegrationEnabled": {
-      "value": "false" 
     },
     "externalTasksQueueName": {
       "value": "external-tasks-queue"

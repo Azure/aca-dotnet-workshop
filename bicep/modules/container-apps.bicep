@@ -54,9 +54,6 @@ param sendGridKeySecretName string
 @description('The SendGrid API key for for Backend Background Processor Service.')
 param sendGridKeySecretValue string
 
-@description('Set if integration with SendGrid is enabled.')
-param sendGridIntegrationEnabled string
-
 @description('The name of the secret containing the External Azure Storage Access key for the Backend Background Processor Service.')
 param externalStorageKeySecretName string
 
@@ -180,7 +177,6 @@ module backendProcessorService 'container-apps/processor-backend-service.bicep' 
     containerRegistryUserAssignedIdentityId: containerRegistryUserAssignedIdentity.id
     sendGridKeySecretName: sendGridKeySecretName
     sendGridKeySecretValue: sendGridKeySecretValue
-    sendGridIntegrationEnabled:sendGridIntegrationEnabled
     externalStorageAccountName: externalStorageAccountName
     externalStorageKeySecretName:externalStorageKeySecretName
     backendProcessorServiceImage: backendProcessorServiceImage

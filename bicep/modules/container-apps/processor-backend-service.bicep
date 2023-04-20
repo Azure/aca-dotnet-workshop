@@ -36,9 +36,6 @@ param externalStorageKeySecretName string
 @description('The Application Insights Instrumentation.')
 param appInsightsInstrumentationKey string
 
-@description('Set if integration with SendGrid is enabled.')
-param sendGridIntegrationEnabled string
-
 // Service Bus
 @description('The name of the service bus namespace.')
 param serviceBusName string
@@ -150,7 +147,7 @@ resource backendProcessorService 'Microsoft.App/containerApps@2022-06-01-preview
           env: [
             {
               name: 'SendGrid__IntegrationEnabled'
-              value: sendGridIntegrationEnabled
+              value: empty(sendGridKeySecretValue) ? 'false' : 'true'
             }
             {
               name: 'ApplicationInsights__InstrumentationKey'
