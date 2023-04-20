@@ -19,7 +19,7 @@
 <link href="../../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" rel="icon"/>
 <!-- Generator banner -->
 <meta content="mkdocs-1.4.2, $md-name$-$md-version$" name="generator"/>
-<title>Build the Infrastructure as Code Using Bicep - Azure Container Apps - Workshop</title>
+<title>Deploy Infrastructure using Bicep - Azure Container Apps - Workshop</title>
 <link href="../../../assets/stylesheets/main.ded33207.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -70,7 +70,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Build the Infrastructure as Code Using Bicep
+              Deploy Infrastructure using Bicep
             
           </span>
 </div>
@@ -226,7 +226,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../07-aca-cron-bindings/">
-        Module 7 - ACA scheduled jobs with Dapr Cron Binding
+        Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
       </a>
 </li>
 <li class="md-nav__item">
@@ -242,7 +242,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_12" type="checkbox"/>
 <div class="md-nav__link md-nav__link--index">
-<a href="../">Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA</a>
+<a href="../">Module 10 - Deployment Via Bicep and DevOps</a>
 <label for="__nav_12">
 <span class="md-nav__icon md-icon"></span>
 </label>
@@ -250,17 +250,17 @@
 <nav aria-expanded="true" aria-labelledby="__nav_12_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_12">
 <span class="md-nav__icon md-icon"></span>
-          Module 10 - Use Bicep to Deploy Dapr Microservices Apps to ACA
+          Module 10 - Deployment Via Bicep and DevOps
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
-          Build the Infrastructure as Code Using Bicep
+          Deploy Infrastructure using Bicep
           <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
-        Build the Infrastructure as Code Using Bicep
+        Deploy Infrastructure using Bicep
       </a>
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">
@@ -348,7 +348,12 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../ci-cd-git-action/">
-        Deploy infrastructure using GitHub Actions
+        Deploy Infrastructure using Bicep via GitHub Actions
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ci-cd-azdo/">
+        Deploy infrastructure using Azure Devops Pipeline
       </a>
 </li>
 </ul>
@@ -378,12 +383,12 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../12-contributing/2-Submit-issue-suggestion/">
-        Submit an issue or suggestion
+        Submit An Issue or Suggestion
       </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../12-contributing/3-minor-update-fix/">
-        Minor update or fix, new challenge
+        Minor Update or fix, New Challenge
       </a>
 </li>
 </ul>
@@ -403,12 +408,12 @@
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../13-appendix/01-run-debug-dapr-app-vscode/">
-        Debug and launch Dapr applications in VSCode
+        Debug and Launch Dapr Applications in VSCode
       </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../13-appendix/02-github-local-codespaces/">
-        Testing changes locally or with GitHub Codespaces
+        Testing Changes Locally or with GitHub Codespaces
       </a>
 </li>
 </ul>
@@ -514,6 +519,10 @@
 <div class="admonition info">
 <p class="admonition-title">Module Duration</p>
 <p>30 minutes</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you're not interested in manually deploying the Bicep files or creating the container registry yourself, and prefer not to delve into the details of how they work, then you can skip this section and head directly to either <a href="../ci-cd-git-action/">Build the Infrastructure as Code Using Bicep and Github</a> or <a href="../ci-cd-azdo/">Build the Infrastructure as Code Using Bicep and Azure DevOps</a> depending on your DevOps tool of choice.</p>
 </div>
 <p>To begin, we need to define the Bicep modules that will be required to generate the Infrastructure code. Our goal for this module is to have a freshly created resource group that encompasses all the necessary resources and configurations - such as connection strings, secrets, environment variables, and Dapr components - which we utilized to construct our solution. By the end, we will have a new resource group that includes the following resources.</p>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="100%" href="../../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"><img alt="aca-resources" src="../../../assets/images/10-aca-iac-bicep/aca-rescources.jpg"/></a></p>
@@ -2515,13 +2524,13 @@ one of the three options in next step.</p>
 </span><span id="__span-21-3"><a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;"</span>
 </span></span><span id="__span-21-4"><a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">    </span><span class="p">},</span>
 </span><span id="__span-21-5"><a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">    </span><span class="nt">"backendProcessorServiceImage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-6"><a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/&lt;BACKEND_API_NAME&gt;:latest"</span>
+</span><span id="__span-21-6"><a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest"</span>
 </span></span><span id="__span-21-7"><a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="p">},</span>
 </span><span id="__span-21-8"><a href="#__codelineno-21-8" id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="nt">"backendApiServiceImage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-9"><a href="#__codelineno-21-9" id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/&lt;FRONTEND_WEBAPP_NAME&gt;:latest"</span>
+</span><span id="__span-21-9"><a href="#__codelineno-21-9" id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-api:latest"</span>
 </span></span><span id="__span-21-10"><a href="#__codelineno-21-10" id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">    </span><span class="p">},</span>
 </span><span id="__span-21-11"><a href="#__codelineno-21-11" id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="nt">"frontendWebAppServiceImage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-12"><a href="#__codelineno-21-12" id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/&lt;BACKEND_SVC_NAME&gt;:latest"</span>
+</span><span id="__span-21-12"><a href="#__codelineno-21-12" id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest"</span>
 </span></span><span id="__span-21-13"><a href="#__codelineno-21-13" id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-21-14"><a href="#__codelineno-21-14" id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="p">}</span>
 </span></code></pre></div>
@@ -2619,7 +2628,7 @@ your private container instance as shown below.</p>
 <small>
     
       Last update:
-      2023-04-19
+      2023-04-20
     
   </small>
 </div>
@@ -2634,7 +2643,7 @@ your private container instance as shown below.</p>
 </main>
 <footer class="md-footer">
 <nav aria-label="Footer" class="md-footer__inner md-grid">
-<a aria-label="Previous: Module 10 - Deployment Via Bicep" class="md-footer__link md-footer__link--prev" href="../" rel="prev">
+<a aria-label="Previous: Module 10 - Deployment Via Bicep and DevOps" class="md-footer__link md-footer__link--prev" href="../" rel="prev">
 <div class="md-footer__button md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </div>
@@ -2643,17 +2652,17 @@ your private container instance as shown below.</p>
                 Previous
               </span>
 <div class="md-ellipsis">
-                Module 10 - Deployment Via Bicep
+                Module 10 - Deployment Via Bicep and DevOps
               </div>
 </div>
 </a>
-<a aria-label="Next: Deploy infrastructure using GitHub Actions" class="md-footer__link md-footer__link--next" href="../ci-cd-git-action/" rel="next">
+<a aria-label="Next: Deploy Infrastructure using Bicep via GitHub Actions" class="md-footer__link md-footer__link--next" href="../ci-cd-git-action/" rel="next">
 <div class="md-footer__title">
 <span class="md-footer__direction">
                 Next
               </span>
 <div class="md-ellipsis">
-                Deploy infrastructure using GitHub Actions
+                Deploy Infrastructure using Bicep via GitHub Actions
               </div>
 </div>
 <div class="md-footer__button md-icon">
