@@ -60,6 +60,9 @@ param containerRegistryUserAssignedIdentityId string
 @description('The image for the backend processor service.')
 param backendProcessorServiceImage string
 
+@description('The dapr port for the backend processor service.')
+param backendProcessorPortNumber int
+
 
 // ------------------
 // VARIABLES
@@ -111,7 +114,7 @@ resource backendProcessorService 'Microsoft.App/containerApps@2022-06-01-preview
         enabled: true
         appId: backendProcessorServiceName
         appProtocol: 'http'
-        appPort: 80
+        appPort: backendProcessorPortNumber
         logLevel: 'info'
         enableApiLogging: true
       }
@@ -144,7 +147,7 @@ resource backendProcessorService 'Microsoft.App/containerApps@2022-06-01-preview
           env: [
             {
               name: 'SendGrid__IntegrationEnabled'
-              value: 'true'
+              value: empty(sendGridKeySecretValue) ? 'false' : 'true'
             }
             {
               name: 'ApplicationInsights__InstrumentationKey'

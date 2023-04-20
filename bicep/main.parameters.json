@@ -32,11 +32,8 @@
     "cosmosDbCollectionName": {
       "value": "taskscollection"
     },
-    "sendGridKeySecretName": {
-      "value": "sendgrid-api-key"
-    },
     "sendGridKeySecretValue": {
-      "value": "<SEND_GRID_API_KEY>"
+      "value": ""
     },
     "sendGridEmailFrom": {
       "value": "<SEND_GRID_FROM_EMAIL>"
@@ -70,6 +67,15 @@
     },
     "frontendWebAppServiceImage": {
       "value": "<CONTAINER_REGISTRY_NAME>.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest"
+    },
+    "frontendWebAppPortNumber": {
+      "value": 80
+    },
+    "backendApiPortNumber": {
+      "value": 80
+    },
+    "backendProcessorPortNumber": {
+      "value": 80
     }
   }
 }

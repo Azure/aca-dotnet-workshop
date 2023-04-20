@@ -77,8 +77,21 @@ param frontendWebAppServiceImage string
 @description('The name of the application insights.')
 param applicationInsightsName string
 
-var containerRegistryPullRoleGuid='7f951dda-4ed3-4680-a7ca-43fe172d538d'
+// App Ports
+@description('The target and dapr port for the frontend web app service.')
+param frontendWebAppPortNumber int
 
+@description('The target and dapr port for the backend api service.')
+param backendApiPortNumber int
+
+@description('The dapr port for the backend processor service.')
+param backendProcessorPortNumber int
+
+// ------------------
+// VARIABLES
+// ------------------
+
+var containerRegistryPullRoleGuid='7f951dda-4ed3-4680-a7ca-43fe172d538d'
 
 // ------------------
 // RESOURCES
@@ -124,6 +137,7 @@ module frontendWebAppService 'container-apps/webapp-frontend-service.bicep' = {
     containerRegistryUserAssignedIdentityId: containerRegistryUserAssignedIdentity.id
     frontendWebAppServiceImage: frontendWebAppServiceImage
     appInsightsInstrumentationKey: applicationInsights.properties.InstrumentationKey
+    frontendWebAppPortNumber: frontendWebAppPortNumber
     
   }
 }
@@ -144,6 +158,7 @@ module backendApiService 'container-apps/webapi-backend-service.bicep' = {
     cosmosDbDatabaseName: cosmosDbDatabaseName
     cosmosDbCollectionName: cosmosDbCollectionName
     appInsightsInstrumentationKey: applicationInsights.properties.InstrumentationKey
+    backendApiPortNumber: backendApiPortNumber
   }
 }
 
@@ -166,6 +181,7 @@ module backendProcessorService 'container-apps/processor-backend-service.bicep' 
     externalStorageKeySecretName:externalStorageKeySecretName
     backendProcessorServiceImage: backendProcessorServiceImage
     appInsightsInstrumentationKey: applicationInsights.properties.InstrumentationKey
+    backendProcessorPortNumber: backendProcessorPortNumber
   }
 }
 

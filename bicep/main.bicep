@@ -66,26 +66,26 @@ param externalTasksQueueName string
 @description('The name of the external blob container in Azure Storage.')
 param externalTasksContainerBlobName string
 
-@description('The name of the secret containing the External Azure Storage Access key for the Backend Background Processor Service.')
+@description('The name of the secret containing the External Azure Storage Access key for the backend processor service.')
 param externalStorageKeySecretName string 
 
-//Send grid
-@description('The name of the secret containing the SendGrid API key value for the Backend Background Processor Service.')
-param sendGridKeySecretName string
+//SendGrid
+@description('The name of the secret containing the SendGrid API key value for the backend processor service.')
+param sendGridKeySecretName string = 'sendgrid-api-key'
 
-@description('The name of the Send Grid Email From.')
+@description('The name of the SendGrid Email From.')
 param sendGridEmailFrom string
 
-@description('The name of the Send Grid Email From Name.')
+@description('The name of the SendGrid Email From Name.')
 param sendGridEmailFromName string
+
+@secure()
+@description('The SendGrid API key for the backend processor service. If not provided, SendGrid integration will be disabled.')
+param sendGridKeySecretValue string
 
 //Cron Shedule Jon
 @description('The cron settings for scheduled job.')
 param scheduledJobCron string
-
-@secure()
-@description('The SendGrid API key for for Backend Background Processor Service.')
-param sendGridKeySecretValue string
 
 // Dapr components
 @description('The name of Dapr component for the secret store building block.')
@@ -108,6 +108,16 @@ param backendApiServiceImage string
 
 @description('The image for the frontend web app service.')
 param frontendWebAppServiceImage string
+
+// App Ports
+@description('The target and dapr port for the frontend web app service.')
+param frontendWebAppPortNumber int = 80
+
+@description('The target and dapr port for the backend api service.')
+param backendApiPortNumber int = 80
+
+@description('The dapr port for the backend processor service.')
+param backendProcessorPortNumber int = 80
 
 // ------------------
 // RESOURCES
@@ -217,6 +227,9 @@ module containerApps 'modules/container-apps.bicep' = {
     applicationInsightsName: containerAppsEnvironment.outputs.applicationInsightsName
     externalStorageAccountName: externalStorageAccount.outputs.storageAccountName
     externalStorageKeySecretName: externalStorageKeySecretName
+    frontendWebAppPortNumber: frontendWebAppPortNumber
+    backendApiPortNumber: backendApiPortNumber
+    backendProcessorPortNumber: backendProcessorPortNumber
   }
   dependsOn: [
     daprComponents
