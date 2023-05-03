@@ -33,6 +33,8 @@ param backendProcessorServicePrincipalId string
 
 var keyVaultSecretUserRoleGuid = '4633458b-17de-408a-b874-0445c86b69e6'
 
+var sendGridKey = empty(sendGridKeySecretValue) ? 'dummy' : sendGridKeySecretValue
+
 // ------------------
 // RESOURCES
 // ------------------
@@ -47,7 +49,7 @@ resource sendGridKeySecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
   tags: tags
   name: sendGridKeySecretName
   properties: {
-    value: sendGridKeySecretValue
+    value: sendGridKey
   }
 }
 
