@@ -110,6 +110,9 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Azure/aca-dotnet-workshop
+  analytics:
+    provider: google
+    property: G-ZB635RP321
 
 extra_css:
   - assets/stylesheets/extra.css
