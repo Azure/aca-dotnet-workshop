@@ -279,6 +279,8 @@ This will result in creating a file named `main.parameters.json` similar to the 
 
     You only need to replace parameter values between the angle brackets `<>` with values related to your container registry and SendGrid. Values for container registry and container images can be derived by following
     one of the three options in next step.
+    
+    In case you followed along with the whole workshop and would like to use your own sourcecode, make sure to replace the port numbers (80) by the port numbers that were generated when you created your docker files in vs code for your three applications (e.g., 5225). Make sure that the port numbers match the numbers in the respective docker files. If port numbers aren't matching, your deployment will work without errors, but the portal will report issues with the apps and calling one of the apps will result in a session timeout.
 
 Next, we will prepare container images for the three container apps and update the values in `main.parameters.json` file. You can do so by any of the three options below:
 
