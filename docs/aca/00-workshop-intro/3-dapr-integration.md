@@ -7,12 +7,14 @@ canonical_url: 'https://bitoftech.net/2022/08/25/tutorial-building-microservice-
 ---
 
 ## Dapr Overview
+
 As developers, we are often tasked with creating scalable, resilient, and distributed applications using microservices. But more often than not we face the same challenges:
+
 - Recovering state after failures
 - Services discovery and calling other microservices
 - Integration with external resources
 - Asynchronous communications between different services
-- Distributed tracing 
+- Distributed tracing
 - Measuring message calls and performance across components and networked services
 
 **Dapr (Distributed Application Runtime)** offers a solution for the common challenges that are faced in any distributed microservice application. Dapr can be used with any language (Go, .NET python, Node, Java, C++) and can run anywhere (On-premise, Kubernetes, and any public cloud (e.g. Azure)).
@@ -37,7 +39,7 @@ This pattern is named Sidecar because it resembles a sidecar attached to a motor
 
 We are going to enable Dapr for all Azure Container Apps in the solution, the Dapr APIs/Building Blocks used in this workshop are:
 
-* **Service to Service invocation**: "ACA Web App-Frontend" microservice invokes the "ACA WebAPI-Backend" microservice using Dapr sidecar via the Service-to-service invocation building block
-* **State Management**: "ACA WebAPI-Backend" stores data on Azure Cosmos DB and stores email logs on Azure Table Storage using Dapr State Management building blocks.
-* **Pub/Sub**: "ACA WebAPI-Backend" publishes messages to Azure Service Bus when a task is saved and the "ACA Processor-Backend" microservices consumes those messages and sends emails using SendGrid.
-* **Bindings**: "ACA Processor-Backend" is triggered based on an incoming event such as a Cron job.
+- **Service to Service invocation**: "ACA Web App-Frontend" microservice invokes the "ACA WebAPI-Backend" microservice using Dapr sidecar via the Service-to-service invocation building block
+- **State Management**: "ACA WebAPI-Backend" stores data on Azure Cosmos DB and stores email logs on Azure Table Storage using Dapr State Management building blocks.
+- **Pub/Sub**: "ACA WebAPI-Backend" publishes messages to Azure Service Bus when a task is saved and the "ACA Processor-Backend" microservices consumes those messages and sends emails using SendGrid.
+- **Bindings**: "ACA Processor-Backend" is triggered based on an incoming event such as a Cron job.
