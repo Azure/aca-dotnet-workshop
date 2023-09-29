@@ -3,13 +3,13 @@ canonical_url: https://bitoftech.net/2022/09/09/azure-container-apps-monitoring-
 ---
 
 # Module 8 - ACA Monitoring and Observability with Application Insights
+
 !!! info "Module Duration"
     60 minutes
 
 In this module, we will explore how we can configure ACA and ACA Environment with [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) which will provide a holistic
 view of our container apps health, performance metrics, logs data, various telemetries and traces.
-ACA do not support [Auto-Instrumentation](https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers) for Application Insights, 
-so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.
+ACA do not support [Auto-Instrumentation](https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers) for Application Insights, so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.
 
 ### Application Insights Overview
 
@@ -35,7 +35,7 @@ Our next step is to incorporate the Application Insights SDK into the **three se
 To incorporate the SDK, use the NuGet reference below in the `csproj` file of the Backend API project. You may locate the csproj file in the project directory **TasksTracker.TasksManager.Backend.Api**:
 
 === "TasksTracker.TasksManager.Backend.Api.csproj"
-    
+
     ```xml hl_lines="3"
       <ItemGroup>
         <!--Other packages are removed for brevity-->
@@ -54,7 +54,7 @@ For each project, we will add a new file on the root directory of the project **
     ```
 
 !!! important "RoleName property for three services"
-    
+
     The only difference between each file on the 3 projects is the **RoleName** property value. 
     
     
@@ -118,25 +118,25 @@ With this step completed, we have done all the changes needed. Let's now deploy 
 
 #### 1. Add Application Insights Instrumentation Key As a Secret
 
-Let's create a secret named `appinsights-key` on each Container App which contains the value of the Application Insights instrumentation key. 
+Let's create a secret named `appinsights-key` on each Container App which contains the value of the Application Insights instrumentation key.
 Remember that we can obtain this value from Azure Portal by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:
 
-```powershell
-az containerapp secret set `
---name $BACKEND_API_NAME `
---resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=<Application Insights Key Here>"
-
-az containerapp secret set `
---name $FRONTEND_WEBAPP_NAME `
---resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=<Application Insights Key Here>"
-
-az containerapp secret set `
---name $BACKEND_SVC_NAME `
---resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=<Application Insights Key Here>"
-```
+    ```powershell
+    az containerapp secret set `
+    --name $BACKEND_API_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --secrets "appinsights-key=<Application Insights Key Here>"
+    
+    az containerapp secret set `
+    --name $FRONTEND_WEBAPP_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --secrets "appinsights-key=<Application Insights Key Here>"
+    
+    az containerapp secret set `
+    --name $BACKEND_SVC_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --secrets "appinsights-key=<Application Insights Key Here>"
+    ```
 
 ##### 2. Build New Images and Push Them to ACR
 
@@ -144,50 +144,51 @@ As we did before, we are required to build and push the images of the three appl
 
 To accomplish this, continue using the same PowerShell console and paste the code below (make sure you are on the following directory **TasksTracker.ContainerApps**):
 
-```powershell
-## Build Backend API on ACR and Push to ACR
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
-## Build Backend Service on ACR and Push to ACR
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
-## Build Frontend Web App on ACR and Push to ACR
-az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
-```
+    ```powershell
+    ## Build Backend API on ACR and Push to ACR
+    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+    ## Build Backend Service on ACR and Push to ACR
+    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+    ## Build Frontend Web App on ACR and Push to ACR
+    az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+    ```
 
 #### 3. Deploy New Revisions of the Services to ACA and Set a New Environment Variable
 
 We need to update the ACA hosting the three services with a new revision so our code changes are available for end users. 
- 
+
 !!! tip
     Notice how we used the property `--set-env-vars` to set new environment variable named `ApplicationInsights__InstrumentationKey`. Its value is a secret reference obtained from the secret `appinsights-key` we added in [step 1](#1-add-application-insights-instrumentation-key-as-a-secret).
 
-```powershell
-## Update Backend API App container app and create a new revision 
-az containerapp update `
---name $BACKEND_API_NAME  `
---resource-group $RESOURCE_GROUP `
---revision-suffix v20230301-1 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    ```powershell
+    ## Update Backend API App container app and create a new revision 
+    az containerapp update `
+    --name $BACKEND_API_NAME  `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v20230301-1 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    
+    ## Update Frontend Web App container app and create a new revision 
+    az containerapp update `
+    --name $FRONTEND_WEBAPP_NAME  `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v20230301-1 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    
+    ## Update Backend Background Service container app and create a new revision 
+    az containerapp update `
+    --name $BACKEND_SVC_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v20230301-1 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    ```
 
-## Update Frontend Web App container app and create a new revision 
-az containerapp update `
---name $FRONTEND_WEBAPP_NAME  `
---resource-group $RESOURCE_GROUP `
---revision-suffix v20230301-1 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
-
-## Update Backend Background Service container app and create a new revision 
-az containerapp update `
---name $BACKEND_SVC_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v20230301-1 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
-```
 !!! success
     With those changes in place, you should start seeing telemetry coming to the Application Insights instance provisioned. Let's review Application Insights' key dashboards and panels in Azure Portal.
 
 ### Distributed Tracing Via Application Map
 
-Application Map will help us spot any performance bottlenecks or failure hotspots across all our services of our distributed microservice application. 
+Application Map will help us spot any performance bottlenecks or failure hotspots across all our services of our distributed microservice application.
 Each node on the map represents an application component (service) or its dependencies and has a health KPI and alerts status.
 
 ![distributed-tracing-ai](../../assets/images/08-aca-monitoring/distributed-tracing-ai.jpg)
@@ -201,7 +202,6 @@ For example, when we drill down into the Dapr State node to understand how many 
 !!! note
     It will take some time for the application map to fully populate.
 
-
 ### Monitor Production Application Using Live Metrics
 
 This is one of the key monitoring panels. It provides you with near real-time (1-second latency) status of your entire distributed application. We have the ability to observe both the successes and failures of our system, monitor any occurring exceptions and trace them in real-time. Additionally, we can monitor the live servers (including replicas) and track their CPU and memory usage, as well as the number of requests they are currently handling.
@@ -214,7 +214,7 @@ These live metrics provide very powerful diagnostics for our production microser
 
 Transaction search in Application Insights will help us find and explore individual telemetry items, such as exceptions, web requests, or dependencies as well as any log traces and events that we’ve added to the application.
 
-For example, if we want to see all the event types of type `Request` for the cloud RoleName `tasksmanager-backend-api` in the past 24 hours, we can use the transaction search dashboard to do this. 
+For example, if we want to see all the event types of type `Request` for the cloud RoleName `tasksmanager-backend-api` in the past 24 hours, we can use the transaction search dashboard to do this.
 See how the filters are set and the results are displayed nicely. We can drill down on each result to have more details and what telemetry was captured before and after. A very useful feature when troubleshooting exceptions and reading logs.
 
 ![transaction-search-ai](../../assets/images/08-aca-monitoring/transaction-search-ai.jpg)
