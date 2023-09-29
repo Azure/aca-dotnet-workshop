@@ -2,20 +2,20 @@
 
 - `docs/aca` folder , contains all the mark-down documentation files for all the modules
 - `docs/assets` folder, contains all the images, slides, and files used in the lab
-- This site uses, [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/). 
+- This site uses, [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/).
 Take some time to familiarize yourself with the theme and the features it provides.
 
 ### Locally
 
 Checkout the repo locally using below command:
 
-```bash 
+```bash
 git clone  https://github.com/Azure/aca-dotnet-workshop.git
 ```
 
 Using bash terminal or wsl terminal, navigate to the repo root folder and run the below command to build and run the website locally:
 
-```bash 
+```bash
 make docs-local
 ```
 
@@ -28,8 +28,9 @@ This repo has a github codespaces dev container defined. This container is based
 - Open the repo in github codespaces
 - Wait for the container to build and connect to it
 - Run the website in github codespaces using below command
-    
+
   ```bash
   make docs-local
   ```
+
 ![Enabling Codespace](../../assets/gifs/codespace.gif)
