@@ -5,11 +5,11 @@ First off, thanks for taking the time to contribute! ❤️
 
 All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The community looks forward to your contributions. 🎉
 
-> And if you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
+> And if you like the project, but just don't have time to contribute, there are other easy ways to support the project and show your appreciation, which we would also be very happy about:
 
 > - Star the project
 > - Tweet about it
-> - Refer this project in your project's readme
+> - Refer to this project in your project's readme
 > - Mention the project at local meetups and tell your friends/colleagues
 
 <!-- omit in toc -->
@@ -28,8 +28,9 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the
-[Azure Container Apps .NET Workshop Code of Conduct](https://github.com/Azure/aca-dotnet-workshopblob/CODE_OF_CONDUCT.md).
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## I Have a Question
 
@@ -45,8 +46,17 @@ If you then still feel the need to ask a question and need clarification, we rec
 
 ## I Want To Contribute
 
-> ### Legal Notice <!-- omit in toc -->
-> When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content and that the content you contribute may be provided under the [project license](https://github.com/Azure/aca-dotnet-workshop/LICENSE).
+> ### Contributor License Agreement <!-- omit in toc -->
+
+> This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+Please see the [project license](https://github.com/Azure/aca-dotnet-workshop/LICENSE) for further details.
 
 ### Reporting Bugs
 
@@ -112,6 +122,13 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/Azure/
 ### Making Contributions
 
 Please familiarize yourself with how to run this project [here](https://azure.github.io/aca-dotnet-workshop/aca/13-appendix/02-github-local-codespaces).
+
+Whenever you are submitting any changes to the guide, please follow these recommendations:
+
+- Always fork repository to your own account for applying modifications
+- Do not combine multiple changes to one pull request, please submit any challenges and documentation updates using separate PRs
+- If you are submitting multiple challenges, please create specific PR for each of them
+- If you are submitting typo or documentation fix, you can combine modifications to single PR where suitable
 
 <!-- omit in toc -->
 ## Attribution
