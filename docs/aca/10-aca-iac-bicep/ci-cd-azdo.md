@@ -26,14 +26,12 @@ Before we start with creating pipeline, we need to configure service connection 
 
 #### Create a Service Connection for GitHub
 
-Provide access to the repository forked above by creating a service connection to GitHub. You create a new pipeline by first selecting a GitHub repository and then a YAML file in repository at path [.ado/infra-deploy.yml](https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.ado/infra-deploy.yml){target=_blank}. 
+Provide access to the repository forked above by creating a service connection to GitHub. You create a new pipeline by first selecting a GitHub repository and then a YAML file in repository at path [.ado/infra-deploy.yml](https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.ado/infra-deploy.yml){target=_blank}.
 
 The repository in which the YAML file is present is called self repository. By default, this is the repository that your pipeline builds.
 
-There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating 
-a pipeline. Follow guide at [this link](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#access-to-github-repositories){target=_blank}
+There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating a pipeline. Follow guide at [this link](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#access-to-github-repositories){target=_blank}
 to create service connection for GitHub.
-
 
 ![AZDO GitHub Connection](../../assets/gifs/azdo-github-connection.gif)
 
@@ -64,19 +62,19 @@ Create a variable group named **AcaApp** under Library in your Azure Devops proj
 
 This variable group will be used to store below details:
 
-```bash
-# AZURE_SUBSCRIPTION: Name of the service connection created for Azure Subscription
-AZURE_SUBSCRIPTION=<service connection name>
-
-# LOCATION: Azure region where resources will be deployed
-LOCATION=<location>
-
-# RESOURCE_GROUP: Name of the resource group which will be created and where the resources will be deployed
-RESOURCE_GROUP=<resource group name>
-
-# (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported
-CONTAINER_REGISTRY_NAME=<container registry name>
-```
+    ```bash
+    # AZURE_SUBSCRIPTION: Name of the service connection created for Azure Subscription
+    AZURE_SUBSCRIPTION=<service connection name>
+    
+    # LOCATION: Azure region where resources will be deployed
+    LOCATION=<location>
+    
+    # RESOURCE_GROUP: Name of the resource group which will be created and where the resources will be deployed
+    RESOURCE_GROUP=<resource group name>
+    
+    # (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported
+    CONTAINER_REGISTRY_NAME=<container registry name>
+    ```
 
 !!! note
 
@@ -87,14 +85,13 @@ CONTAINER_REGISTRY_NAME=<container registry name>
 With these steps completed, you are now ready to trigger the Pipeline.
 
 !!! success
-    
+
     Your Pipeline should be triggered and the infrastructure components of our application should be deployed successfully.
 
     ![GitHub Actions Workflow](../../assets/gifs/azdo-trigger.gif)
 
-
 ??? info "Want to delete the resources deployed by the pipeline?"
-    
+
     Trigger the pipeline again select **checkbox** option named **Should teardown infrastructure?**.
 
     ![GitHub Actions Workflow](../../assets/gifs/azdo-delete.gif)
