@@ -15,7 +15,7 @@ The Tasks Tracker microservice application is composed of multiple microservices
 we need to account for failures, retries, and timeouts. While Container Apps features the building blocks for running microservices, the use of Dapr provides an even richer microservices programming model.
 
 Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more.
-Here is a good [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation) which touches on some benefits of the Dapr service invocation building block which we will be building upon in this module.
+Here is a good [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation){target=_blank} which touches on some benefits of the Dapr service invocation building block which we will be building upon in this module.
 Because the calls will flow through sidecars, Dapr can inject some useful cross-cutting behaviors.
 
 Although we won't tap into all these benefits in this workshop its worth keeping in mind that you will most probably need to rely on these features in production.
@@ -27,11 +27,11 @@ Although we won't tap into all these benefits in this workshop its worth keeping
 
 ### Configure Dapr on a Local Development Machine
 
-In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to [install](https://docs.dapr.io/getting-started/install-dapr-cli/) Dapr and then [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/) it.
+In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to [install](https://docs.dapr.io/getting-started/install-dapr-cli/){target=_blank} Dapr and then [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/){target=_blank} it.
 
 ### Run Backend API and Frontend Web App Locally Using Dapr
 
-You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called [Dapr](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.
+You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called [Dapr](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr){target=_blank} which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.
 
 - Let's start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, run the below commands in PS terminal based on your .NET version.
 
@@ -95,7 +95,7 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
       }
       ```
 
-- Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The [Dapr .NET SDK](https://github.com/dapr/dotnet-sdk) provides .NET developers with an intuitive and language-specific way to interact with Dapr.
+- Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The [Dapr .NET SDK](https://github.com/dapr/dotnet-sdk){target=_blank} provides .NET developers with an intuitive and language-specific way to interact with Dapr.
 The SDK offers developers three ways of making remote service invocation calls:
 
     1. Invoke HTTP services using HttpClient

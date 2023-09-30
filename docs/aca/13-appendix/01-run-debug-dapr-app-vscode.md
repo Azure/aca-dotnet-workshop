@@ -30,7 +30,7 @@ To accomplish this, open file `launch.json` and add the two configurations shown
 !!! note
     We have a `preLaunchTask` and a `postDebugTask` which we need to define right now. Those tasks are Dapr tasks.
 
-The [Dapr VSCode extension](https://docs.dapr.io/developing-applications/ides/vscode/vscode-dapr-extension/#scaffold-dapr-debugging-tasks) we have previously installed helps us to define those pre- and post-debug tasks.
+The [Dapr VSCode extension](https://docs.dapr.io/developing-applications/ides/vscode/vscode-dapr-extension/#scaffold-dapr-debugging-tasks){target=_blank} we have previously installed helps us to define those pre- and post-debug tasks.
 
 To accomplish this, open the file **tasks.json** and click ++ctrl+shift+p++, and type **Dapr: Scaffold Dapr Tasks**.
 
@@ -50,11 +50,11 @@ Now we will add 4 tasks, for each application, there will be a task to support t
 
     * The tasks with the label `backend-api-dapr-debug` will invoke the `daprd` task. This task is similar to calling dapr run from CLI.
     * We are setting the appPort, httpPort, and grpcPort properties (grpcPort is needed in future modules when we start using the state manager building block. 
-    If you didn't set it, you might face a similar [issue](https://github.com/dapr/dotnet-sdk/issues/609))
+    If you didn't set it, you might face a similar [issue](https://github.com/dapr/dotnet-sdk/issues/609){target=_blank})
     * We are setting the “componentsPath” property. This is needed when start working with the state manager, pub/sub, etc.
     * We are setting the dependsOn property, so this means this task will fire after the dependsOn tasks complete successfully. We need to add those dependsOn tasks.
     * The tasks with the label `daprd-down-backend-api` will terminate the Dapr Sidecar process. This will be used for the `postDebug` activity in configuration.json.
-    * For a complete list of available properties please check this [link.](https://docs.dapr.io/developing-applications/ides/vscode/vscode-how-to-debug-multiple-dapr-apps/#daprd-parameter-table)
+    * For a complete list of available properties please check this [link.](https://docs.dapr.io/developing-applications/ides/vscode/vscode-how-to-debug-multiple-dapr-apps/#daprd-parameter-table){target=_blank}
 
 Next let's add the dependsOn tasks. Open `tasks.json` and add the tasks below:
 

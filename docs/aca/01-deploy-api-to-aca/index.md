@@ -30,55 +30,56 @@ In this module, we will start by creating the first microservice named `ACA Web 
     - Use `.NET: ASP.NET Core` when prompted for application platform.
     - Choose `Linux` when prompted to choose the operating system.
     - You will be asked if you want to add Docker Compose files. Select `No`.
-    - Take a note of the provided **application port** as we will pass it later on as the --target-port for the `az containerapp create` command.
+    - Take a note of the provided **application port** as we will pass it later on as the `--target-port` for the `az containerapp create` command.
     - `Dockerfile` and `.dockerignore` files are added to the workspace.
 
 - Add a new folder named `Models` and create a new file with name below. These are the DTOs that will be used across the projects.
 
 === "TaskModel.cs"
 
-    ```csharp
-    --8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
-    ```
+```csharp
+--8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
+```
 
-- Create new folder named **Services** (make sure it is created at the same level as the models folder and not inside the models folder itself) and add **new files** as shown below. 
-   Add the Fake Tasks Manager service (In-memory),  this will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. 
+- Create new folder named **Services** (make sure it is created at the same level as the models folder and not inside the models folder itself) and add **new files** as shown below.
+   Add the Fake Tasks Manager service (In-memory),  this will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA.
    In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block
 
 === "ITasksManager.cs"
 
-    ```csharp
-    --8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
-    ```
+```csharp
+--8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
+```
 
 === "FakeTasksManager.cs"
 
-    ```csharp
-    --8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
-    ```
-      The code above is self-explanatory, it generates 10 tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.
+```csharp
+--8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
+```
+
+The code above is self-explanatory, it generates 10 tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.
 
 - Now we need to register FakeTasksManager on project startup. Open file `#!csharp Program.cs` and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required using statements for the task interface and class.
 
 === "Program.cs"
 
-    ```csharp hl_lines="1 5"
-    using TasksTracker.TasksManager.Backend.Api.Services;
+```csharp hl_lines="1 5"
+using TasksTracker.TasksManager.Backend.Api.Services;
 
-    var builder = WebApplication.CreateBuilder(args);
-    // Add services to the container.
-    builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
-    // Code removed for brevity
-    app.Run();
-    ```
+var builder = WebApplication.CreateBuilder(args);
+// Add services to the container.
+builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
+// Code removed for brevity
+app.Run();
+```
 
 - Add a new controller under the `Controllers` folder with name below. We need to create API endpoints to manage tasks.
 
 === "TasksController.cs"
 
-    ```csharp
-    --8<-- "docs/aca/01-deploy-api-to-aca/TasksController.cs"
-    ```
+```csharp
+--8<-- "docs/aca/01-deploy-api-to-aca/TasksController.cs"
+```
 
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
 
@@ -161,7 +162,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     -n $WORKSPACE_NAME -o tsv
     ```
 
-- Create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net) Instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing) between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
+- Create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net){target=_blank} Instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing){target=_blank} between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
 
     ```shell
     # Install the application-insights extension for the CLI
@@ -197,7 +198,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     - It creates an ACA environment and associates it with the Log Analytics Workspace created in the previous step.
     - We are setting the `--dapr-instrumentation-key` value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr in later modules and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.  
     > **_NOTE:_**
-    You can set the `--dapr-instrumentation-key` after you create the ACA environment but this is not possible via the AZ CLI right now. There is an [open issue](https://github.com/microsoft/azure-container-apps/issues/293) which is being tracked by the product group.
+    You can set the `--dapr-instrumentation-key` after you create the ACA environment but this is not possible via the AZ CLI right now. There is an [open issue](https://github.com/microsoft/azure-container-apps/issues/293){target=_blank} which is being tracked by the product group.
 
 - Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the `.csproj`.
 
@@ -226,20 +227,20 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
 
 ??? tip "Want to learn what above command does?"
-    - Ingress param is set to `external` which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to `Internal` or `External` it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found [here](https://learn.microsoft.com/en-us/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names).
+    - Ingress param is set to `external` which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to `Internal` or `External` it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found [here](https://learn.microsoft.com/en-us/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names){target=_blank}.
     - The target port param is set to 80, this is the port our Web API container listens to for incoming requests.
     - We didn't specify the ACR registry username and password, `az containerapp create` command was able to look up ACR username and password and add them as a secret under the created Azure container app for future container updates.
     - The minimum and the maximum number of replicas are set. More about this when we cover Autoscaling in later modules. For the time being, only a single instance of this container app will be provisioned as Auto scale is not configured.
-    - We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link [here](https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration).
+    - We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link [here](https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration){target=_blank}.
     - The `query` property will filter the response coming from the command and just return the FQDN. Take note of this FQDN as you will need it for the next step.
 
-For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create).  
+For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
 
 - You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 recourses created below.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)
 
 !!! success
-    To test the backend api service, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`. 
+    To test the backend api service, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`.
     Issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image.
 
 !!! tip

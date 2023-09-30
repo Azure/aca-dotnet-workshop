@@ -26,7 +26,7 @@ Put simply, the Dapr pub/sub building block provides a platform-agnostic API fra
 
 To try this out we can directly invoke the Pub/Sub API and publish a message to Redis locally. If you remember from [module 3](../../aca/03-aca-dapr-integration/index.md) once we initialized Dapr in a local development environment, it installed Redis container instance locally. So we can use Redis locally to publish and subscribe to a message.
 If you navigate to the path `%USERPROFILE%\.dapr\components (assuming you are using windows)` you will find a file named `pubsub.yaml`. Inside this file, you will see the properties needed to access the local Redis instance.
-The publisher/subscriber brokers template component file structure can be found [here](https://docs.dapr.io/operations/components/setup-pubsub/).
+The publisher/subscriber brokers template component file structure can be found [here](https://docs.dapr.io/operations/components/setup-pubsub/){target=_blank}.
 
 We want to have more control and provide our own component file, so let's create pub/sub component file in our **components** folder as shown below:
 
@@ -78,7 +78,7 @@ Now let's try to publish a message by sending a POST request to [http://localhos
     - The value `tasksavedtopic`: is the name of the topic to which the message is published.
 
 If all is configured correctly, you should receive HTTP response 204 from this endpoint which indicates that the message is published successfully by the service broker (Redis) into the topic named `tasksavedtopic`.
-You can also check that topic is created successfully by using the [Redis Xplorer extension](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer) in VS Code which should look like this:
+You can also check that topic is created successfully by using the [Redis Xplorer extension](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer){target=_blank} in VS Code which should look like this:
 
 ![redis-xplorer](../../assets/images/05-aca-dapr-pubsubapi/task-saved-topic-redis-xplorer.png)
 
@@ -175,7 +175,7 @@ In our case, a sample response will be as follows:
     ```
 
 !!! tip
-    Follow this [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works) to find a detailed diagram of how the consumers will discover and subscribe to
+    Follow this [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works){target=_blank} to find a detailed diagram of how the consumers will discover and subscribe to
     those endpoints.
 
 #### 5. Register Dapr and Subscribe Handler at the Consumer Startup
@@ -195,7 +195,7 @@ Update below file in **TasksTracker.Processor.Backend.Svc** project.
     We will see how we are injecting DaprClient in the controller constructor later on.
     - On line `app.UseCloudEvents();`, the extension method `UseCloudEvents` adds CloudEvents middleware into the ASP.NET Core middleware pipeline. 
     This middleware will unwrap requests that use the CloudEvents structured format, so the receiving method can read the event payload directly. 
-    You can read more about [CloudEvents](https://cloudevents.io/) here which includes specs for describing event data in a common and standard way.
+    You can read more about [CloudEvents](https://cloudevents.io/){target=_blank} here which includes specs for describing event data in a common and standard way.
     - On line `app.MapSubscribeHandler();`, we make the endpoint `http://localhost:<appPort>/dapr/subscribe` available for the consumer so it responds and returns available subscriptions. 
     When this endpoint is called, it will automatically find all WebAPI action methods decorated with the `Dapr.Topic` attribute and instruct Dapr to create subscriptions for them.
 
@@ -248,7 +248,7 @@ Now let's try to publish a message by sending a POST request to [http://localhos
 Keep an eye on the terminal logs of the Backend background processor as you will see that the message is received and consumed by the action method `api/tasksnotifier/tasksaved` and an information message is logged in the terminal to indicate the processing of the message.
 
 ??? tip "VS Code Dapr Extension"
-    You can use the VS Code [Dapr Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr) to publish the message directly. It will be similar to the below image:
+    You can use the VS Code [Dapr Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr){target=_blank} to publish the message directly. It will be similar to the below image:
 
     ![dapr-pub-sub-code-extension](../../assets/images/05-aca-dapr-pubsubapi/dapr-pub-sub-code-extension.jpg)
 
@@ -265,6 +265,7 @@ If you have followed the steps in the [appendix](../../aca/13-appendix/01-run-de
         ```json
         --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/3dafcc7b291590177f7ce3a8a629079076149863/.vscode/tasks.json"
         ```
+
     === "launch.json"
     
         ```json
@@ -366,7 +367,7 @@ Update the files below under the Backend Processor Project. We are installing th
     ```
 
 !!! tip
-    Follow this [link](https://signup.sendgrid.com/) to set up a SendGrid account. Also follow [these](https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key) instructions to fetch your SendGrid ApiKey.
+    Follow this [link](https://signup.sendgrid.com/) to set up a SendGrid account. Also follow [these](https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key){target=_blank} instructions to fetch your SendGrid ApiKey.
 
     Please note that the SendGrid API KEY is generated and displayed to you just once. So be sure to copy and save it somewhere. After that only the subset key is displayed.
 
@@ -408,7 +409,7 @@ Now we will switch our implementation to use Azure Service Bus as a message brok
 #### 1. Create Azure Service Bus Namespace and a Topic
 
 You can do this from Azure Portal or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values.
-You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters).
+You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
 
     ```powershell
     $NamespaceName="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
@@ -621,7 +622,7 @@ This command will create an Enterprise Application (basically a Service Principa
 
 We will be using a `system-assigned` identity with a role assignments to grant our Backend Processor App the `Azure Service Bus Data Receiver` role which will allow it to receive messages from Service Bus queues and subscriptions.
 
-You can read more about `Azure built-in roles for Azure Service Bus` [here](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-managed-service-identity#azure-built-in-roles-for-azure-service-bus).
+You can read more about `Azure built-in roles for Azure Service Bus` [here](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-managed-service-identity#azure-built-in-roles-for-azure-service-bus){target=_blank}.
 
 Run the command below to associate the `system-assigned` identity with the access-control role `Azure Service Bus Data Receiver`:
 

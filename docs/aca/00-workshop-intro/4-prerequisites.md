@@ -9,14 +9,14 @@ nav_order: 4
 
 Make sure you have your development environment setup and configured.
 
-1. An Azure account with an active subscription - [Create an account for free](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
-1. dotnet 6.0 or a higher version - [Install](https://dotnet.microsoft.com/download/dotnet/6.0)
-1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/)
-1. Visual Studio Code - [Install](https://code.visualstudio.com/)
-1. VS Code Docker extension - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
-1. Dapr CLI - [Install](https://docs.dapr.io/getting-started/install-dapr-cli/) and [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/)
-1. VS Code Dapr extension. Depends on Dapr CLI - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr)
-1. Azure CLI - [Install](https://docs.microsoft.com/cli/azure/install-azure-cli)
+1. An Azure account with an active subscription - [Create an account for free](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio){target=_blank}
+1. dotnet 6.0 or a higher version - [Install](https://dotnet.microsoft.com/download/dotnet/6.0){target=_blank}
+1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/){target=_blank}
+1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}
+1. VS Code Docker extension - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker){target=_blank}
+1. Dapr CLI - [Install](https://docs.dapr.io/getting-started/install-dapr-cli/){target=_blank} and [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/){target=_blank}
+1. VS Code Dapr extension. Depends on Dapr CLI - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr){target=_blank}
+1. Azure CLI - [Install](https://docs.microsoft.com/cli/azure/install-azure-cli){target=_blank}
 
 ## Workshop Instructions
 

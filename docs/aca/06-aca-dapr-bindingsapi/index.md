@@ -8,7 +8,7 @@ canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-b
     90 minutes
 
 In this module we are going to extend the backend background processor service  (`ACA-Processor Backend`) to interface with an external system which is outside our Tasks Tracker microservice application.
-To achieve this in a simple way we will utilize [Dapr Input and Output Bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/).
+To achieve this in a simple way we will utilize [Dapr Input and Output Bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/){target=_blank}.
 
 The external system owns an Azure Storage Queue which the Tasks Tracker microservice application **reacts** to through an event handler (aka **Input Binding**) that receives and processes the message coming to the storage queue. Once the processing of the message completes and stores the task into Cosmos DB, the system will **trigger** an event (aka **Output binding**) that invokes the external service which in
 turn stores the content of the message into an Azure Blob Storage container. Here it is important to emphasize that both the Azure Storage Queue and the Azure Storage Blob belong to the external system.
@@ -17,7 +17,7 @@ The rest of this module will implement the three scenarios mentioned below:
 
       - Trigger a process on the `ACA-Processor Backend` based on a **message sent to a specific Azure Storage Queue**. This scenario will assume that the Azure Storage Queue is an external system to which external clients can submit tasks.
       - From the service `ACA-Processor Backend` we will **invoke an external resource** that stores the content of the incoming task from the external queue as a JSON blob file on Azure Storage Blobs.
-      - Remove the SendGrid SDK as well as the custom code created in the previous module to send emails and replace it with [Dapr SendGrid output binding.](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/)
+      - Remove the SendGrid SDK as well as the custom code created in the previous module to send emails and replace it with [Dapr SendGrid output binding.](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/){target=_blank}
 
 Take a look at the high-level architecture diagram below to understand the flow of input and output bindings in Dapr:
 
@@ -29,7 +29,7 @@ Take a look at the high-level architecture diagram below to understand the flow 
     For simplicity of the workshop we are going to host those two supposedly external services in the same subscription of our 
     Tasks Tracker microservice application.
 
-If you look at Dapr Bindings Building Block, you will notice a lot of similarities with the Pub/Sub Building Block that we covered in the [previous module](../../aca/05-aca-dapr-pubsubapi/index.md). But remember that Pub/Sub Building Block is meant to be used for Async communication between services **within your solution**. The Binding Building Block has a wider scope and it mainly focuses on connectivity and interoperability across different systems, disparate applications, and services outside the boundaries of your own application. For a full list of [supported bindings](https://docs.dapr.io/reference/components-reference/supported-bindings/) visit this link.
+If you look at Dapr Bindings Building Block, you will notice a lot of similarities with the Pub/Sub Building Block that we covered in the [previous module](../../aca/05-aca-dapr-pubsubapi/index.md). But remember that Pub/Sub Building Block is meant to be used for Async communication between services **within your solution**. The Binding Building Block has a wider scope and it mainly focuses on connectivity and interoperability across different systems, disparate applications, and services outside the boundaries of your own application. For a full list of [supported bindings](https://docs.dapr.io/reference/components-reference/supported-bindings/){target=_blank} visit this link.
 
 ### Overview of Dapr Bindings Building Block
 
@@ -66,7 +66,7 @@ Run the PowerShell script below to create Azure Storage Account and get the mast
 
 !!! tip
     We will be retrieving the storage account key for local dev testing purposes. Note that the command below will return two keys. You will only need one of them for this exercise.
-    When deploying the changes to ACA, we are going to store the storage key securely into Azure Key Vault using [Dapr Secrets Store Building Block with AKV](https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/).
+    When deploying the changes to ACA, we are going to store the storage key securely into Azure Key Vault using [Dapr Secrets Store Building Block with AKV](https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/){target=_blank}.
 
     We didn't use Azure Manged Identity here because the assumption is that those services are not part of our solution and thus they could theoretically be a non AD compliant services or hosted on another cloud. 
     If these services where part of your application's ecosystem it is always recommended that you use Azure Managed Identity.
@@ -122,15 +122,14 @@ Now we need to create the component configuration file which will describe the c
 
 ??? tip "Curious to learn more about the specification of yaml file?"
 
-    The full specifications of yaml file with Azure Storage Queues can be found on [this link](https://docs.dapr.io/reference/components-reference/supported-bindings/storagequeues/), 
-    but let's go over the configuration we have added here:
+    The full specifications of yaml file with Azure Storage Queues can be found on [this link](https://docs.dapr.io/reference/components-reference/supported-bindings/storagequeues/){target=_blank}, but let's go over the configuration we have added here:
 
-    * The type of binding is `bindings.azure.storagequeues`.
-    * The name of this input binding is `externaltasksmanager`.
-    * We are setting the `storageAccount` name, `storageAccessKey` value, and the `queue` name. Those properties will describe how the event handler we added can connect to the external service.
+    - The type of binding is `bindings.azure.storagequeues`.
+    - The name of this input binding is `externaltasksmanager`.
+    - We are setting the `storageAccount` name, `storageAccessKey` value, and the `queue` name. Those properties will describe how the event handler we added can connect to the external service.
     You can create any queue you prefer on the Azure Storage Account we created to simulate an external system.
-    * We are setting the `route` property to the value `/externaltasksprocessor/process` which is the address of the endpoint we have just added so POST requests are sent to this endpoint.
-    * We are setting the property `decodeBase64` to `true` as the message queued in the Azure Storage Queue is Base64 encoded.
+    - We are setting the `route` property to the value `/externaltasksprocessor/process` which is the address of the endpoint we have just added so POST requests are sent to this endpoint.
+    - We are setting the property `decodeBase64` to `true` as the message queued in the Azure Storage Queue is Base64 encoded.
 
 !!! note
     The value of the Metadata `storageAccessKey` is used as plain text here for local dev scenario. We will see how we are going to store this key securely in Azure Key Vault and use Dapr Secrets Store API to read the access key.
@@ -149,17 +148,17 @@ To do so, add a new file folder **components**.
 
 ??? tip "Curious to learn more about the specification of yaml file?"
 
-    The full specifications of yaml file with Azure blob storage can be found on [this link](https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/), 
+    The full specifications of yaml file with Azure blob storage can be found on [this link](https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/){target=_blank}, 
     but let's go over the configuration we have added here:
 
-    * The type of binding is `bindings.azure.blobstorage`.
-    * The name of this output binding is `externaltasksblobstore`. We will use this name when we use the Dapr SDK to trigger the output binding.
-    * We are setting the `storageAccount` name, `storageAccessKey` value, and the `container` name. Those properties will describe how our backend background service will be able to connect to the external
+    - The type of binding is `bindings.azure.blobstorage`.
+    - The name of this output binding is `externaltasksblobstore`. We will use this name when we use the Dapr SDK to trigger the output binding.
+    - We are setting the `storageAccount` name, `storageAccessKey` value, and the `container` name. Those properties will describe how our backend background service will be able to connect to the external
     service and create a blob file. We will assume that there is a container already created on the external service and named `externaltaskscontainer` as shown in the image below
     
     ![Storage-Account-Container](../../assets/images/06-aca-dapr-bindingsapi/StorageAccountContainer.png)
 
-    * We are setting the property `decodeBase64`  to `false` as we don’t want to encode file content to base64 images, we need to store the file content as is.
+    - We are setting the property `decodeBase64`  to `false` as we don’t want to encode file content to base64 images, we need to store the file content as is.
 
 #### 5. Use Dapr client SDK to Invoke the Output Binding
 
@@ -178,7 +177,7 @@ Update and replace the code in the file with the code below. Pay close attention
     Looking at the `ProcessTaskAndStore` action method above, you will see that we are calling the method `InvokeBindingAsync` and we are passing the binding name `externaltasksblobstore` 
     defined in the configuration file, as well the second parameter `create` which is the action we need to carry against the external blob storage. 
 
-    You can for example delete or get a content of a certain file. For a full list of supported actions on Azure Blob Storage, [visit this link](https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/#binding-support).
+    You can for example delete or get a content of a certain file. For a full list of supported actions on Azure Blob Storage, [visit this link](https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/#binding-support){target=_blank}.
 
     Notice how are setting the file name we are storing at the external service. We need the file names to be created using the same Task Identifier, so we will pass the key `blobName` with the file name values 
     into the `metaData` dictionary.
@@ -187,7 +186,7 @@ Update and replace the code in the file with the code below. Pay close attention
 
 Now we are ready to give it an end-to-end test on our dev machines. Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together in this [section](../../aca/13-appendix/01-run-debug-dapr-app-vscode.md).
 
-Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from [here](https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview).
+Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from [here](https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview){target=_blank}.
 Login to your Azure Subscription and navigate to the storage account already created, create a queue, and use the same name you already used in the Dapr Input configuration file.
 In our case the name of the queue in the configuration file is `external-tasks-queue`.
 
@@ -213,7 +212,7 @@ If all is configured successfully you should be able to see a JSON file created 
 ### Use Dapr SendGrid Output Bindings
 
 In the previous module we've seen how we are sending notification emails when a task is assigned to a user by installing the SendGrid SDK NuGet package and writing some custom code to trigger sending emails.
-Dapr Can simplify this process by using the [Dapr SendGrid Output binding component](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/).
+Dapr Can simplify this process by using the [Dapr SendGrid Output binding component](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/){target=_blank}.
 
 So let's see how we can simplify this and by replacing the external SendGrid SDK with dapr output binding.
 
@@ -231,7 +230,7 @@ Add a new file under the **components** folder as shown below:
 
 ??? tip "Curious to learn more about the specification of yaml file?"
 
-    The full specifications of yaml file with SendGrid binding can be found on [this link](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/#component-format),
+    The full specifications of yaml file with SendGrid binding can be found on [this link](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/#component-format){target=_blank},
     but let's go over the configuration we have added here:
 
     * The type of binding is `bindings.twilio.sendgrid`.
@@ -276,7 +275,7 @@ Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. Re
     You will see that we calling the method `#!cs InvokeBindingAsync()` and we are passing the binding name `sendgrid` defined in the configuration file, 
     as well the second parameter `create` which is the action we need to carry to trigger email sending using SendGrid. 
 
-    For a full list of supported actions on SendGrid outbound binding spec, [visit this link](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/#binding-support).
+    For a full list of supported actions on SendGrid outbound binding spec, [visit this link](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/#binding-support){target=_blank}.
 
     Notice how are setting the recipient, display name, and email subject by passing the setting the keys `emailTo`, `emailToName`, and `subject` into the `metaData` dictionary.
 
@@ -285,8 +284,8 @@ Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. Re
 Currently, we have 3 Dapr components which are not Azure AD enabled services. As you may have noticed so far, the different component files are storing sensitive keys to access the different external services.
 The recommended approach for retrieving these secrets is to reference an existing Dapr secret store component that securely accesses the secrets.
 
-We need Create a [Dapr secret store component](https://docs.dapr.io/developing-applications/building-blocks/secrets/secrets-overview/) using the Container Apps schema. The Dapr secret store will be configured
-with [Azure Key Vault secret store](https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/).
+We need Create a [Dapr secret store component](https://docs.dapr.io/developing-applications/building-blocks/secrets/secrets-overview/){target=_blank} using the Container Apps schema. The Dapr secret store will be configured
+with [Azure Key Vault secret store](https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/){target=_blank}.
 
 #### 1. Create an Azure Key Vault resource
 
@@ -309,7 +308,7 @@ Create an Azure Key Vault which will be used to store securely any secret or key
 
 In the previous module we have configured the `system-assigned` identity for the service `ACA-Processor Backend`. Now we need to assign a role named `Key Vault Secrets User` to it, so it access and read secrets from Azure Key Vault.
 
-You can read more about [Azure built-in roles for Key Vault data plane operations](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations). 
+You can read more about [Azure built-in roles for Key Vault data plane operations](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations){target=_blank}.
 
     ```powershell
     $KV_SECRETSUSER_ROLEID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
@@ -427,7 +426,7 @@ With those changes in place, we are ready to rebuild the backend background proc
 
 #### 1. Build the Backend Background Processor Image and Push it To ACR
 
-As we have done previously we need to build and deploy the Backend Background Processor image to ACR, so it is ready to be deployed to ACA. 
+As we have done previously we need to build and deploy the Backend Background Processor image to ACR, so it is ready to be deployed to ACA.
 Continue using the same PowerShell console and paste the code below (make sure you are under the  **TasksTracker.ContainerApps** directory):
 
     ```powershell
@@ -490,14 +489,14 @@ Update the Azure Container App hosting the Backend Background Processor with a n
 !!! tip
     Notice how we are removing the environments variable named `SendGrid__ApiKey` as we are reading the key value from Dapr secret store.
 
-```powershell
-## Update Backend Background Processor container app and create a new revision 
-az containerapp update `
---name $BACKEND_SVC_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v20230224-1 `
---remove-env-vars "SendGrid__ApiKey"
-```
+    ```powershell
+    ## Update Backend Background Processor container app and create a new revision 
+    az containerapp update `
+    --name $BACKEND_SVC_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v20230224-1 `
+    --remove-env-vars "SendGrid__ApiKey"
+    ```
 
 #### 5. Remove SendGrid Secret from the Backend Background Processor App
 
@@ -506,11 +505,11 @@ Remove the secret stored in `Secrets` of the Backend Background Processor as thi
 !!! info
     You can skip executing the powershell script below if you opted not to set up a sendgrid account in module 5
 
-```powershell
-az containerapp secret remove --name $BACKEND_SVC_NAME `
---resource-group $RESOURCE_GROUP `
---secret-names "sendgrid-apikey"
-```
+    ```powershell
+    az containerapp secret remove --name $BACKEND_SVC_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --secret-names "sendgrid-apikey"
+    ```
 
 !!! success
     With those changes in place and deployed, from the Azure Portal you can open the log streams section of the container app hosting the `ACA-Processor-Backend` and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.

@@ -4,7 +4,7 @@ canonical_url: https://bitoftech.net/2022/08/25/tutorial-building-microservice-a
 
 ## Workshop Scenario
 
-In this workshop we will build a tasks management application following the microservices architecture pattern. This application will consist of 3 microservices where each microservice has certain capabilities to demonstrate how ACA and Dapr can simplify the building of a microservices application. Below is the architecture diagram of the application we are going to build in this workshop.
+In this workshop we will build a tasks management application following the microservices architecture pattern. This application will consist of three microservices where each microservice has certain capabilities to demonstrate how ACA and Dapr can simplify the building of a microservices application. Below is the architecture diagram of the application we are going to build in this workshop.
 
 ## Solution Architecture
 

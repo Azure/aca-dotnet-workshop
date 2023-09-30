@@ -15,7 +15,7 @@ The Environment is a secure boundary around several Container Apps. It contains 
 Used to provide monitoring and observability functionality. Each environment will have its own Log Analytic workspace and will be shared among all container apps within the environment.
 
 **3. Container Apps**
-Each container App represents a single deployable unit that can contain one or more related containers. More than one container is an advanced use case. For this workshop we will deploy a single container in each container app. More about multiple containers in the same single Azure Container App can be found [here](https://docs.microsoft.com/en-us/azure/container-apps/containers#multiple-containers).
+Each container App represents a single deployable unit that can contain one or more related containers. More than one container is an advanced use case. For this workshop we will deploy a single container in each container app. More about multiple containers in the same single Azure Container App can be found [here](https://docs.microsoft.com/en-us/azure/container-apps/containers#multiple-containers){target=_blank}.
 
 **4. Revisions**
 For each container app, you can create up to 100 revisions. Revisions are a way to deploy multiple versions of an app where you have the option to send the traffic to a certain revision. You can select if revision mode will support 1 active revision or multiple active revisions at the same time to support A/B testing scenarios or canary deployments. A container app running in single revision mode will have a single revision that is backed by zero-many Pods/replicas.

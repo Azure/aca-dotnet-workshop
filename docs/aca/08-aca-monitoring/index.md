@@ -7,9 +7,9 @@ canonical_url: https://bitoftech.net/2022/09/09/azure-container-apps-monitoring-
 !!! info "Module Duration"
     60 minutes
 
-In this module, we will explore how we can configure ACA and ACA Environment with [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) which will provide a holistic
+In this module, we will explore how we can configure ACA and ACA Environment with [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview){target=_blank} which will provide a holistic
 view of our container apps health, performance metrics, logs data, various telemetries and traces.
-ACA do not support [Auto-Instrumentation](https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers) for Application Insights, so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.
+ACA do not support [Auto-Instrumentation](https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers){target=_blank} for Application Insights, so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.
 
 ### Application Insights Overview
 
@@ -155,7 +155,7 @@ To accomplish this, continue using the same PowerShell console and paste the cod
 
 #### 3. Deploy New Revisions of the Services to ACA and Set a New Environment Variable
 
-We need to update the ACA hosting the three services with a new revision so our code changes are available for end users. 
+We need to update the ACA hosting the three services with a new revision so our code changes are available for end users.
 
 !!! tip
     Notice how we used the property `--set-env-vars` to set new environment variable named `ApplicationInsights__InstrumentationKey`. Its value is a secret reference obtained from the secret `appinsights-key` we added in [step 1](#1-add-application-insights-instrumentation-key-as-a-secret).

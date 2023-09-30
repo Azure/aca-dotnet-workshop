@@ -8,7 +8,7 @@ canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-b
     60 minutes
 
 In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources.
-In this module we will focus on a special type of Dapr input binding named [Cron Binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/).
+In this module we will focus on a special type of Dapr input binding named [Cron Binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/){target=_blank}.
 
 The Cron binding doesn't subscribe for events coming from an external system. Instead, this binding can be used to trigger application code in our service periodically based on a configurable interval.
 The binding provides a simple way to implement a background worker to wake up and do some work at a regular interval, without the need to implement an endless loop with a configurable delay.
@@ -38,11 +38,11 @@ Add new file under **components** as shown below:
     * Provided the name `ScheduledTasksManager` for this binding. This means that an HTTP POST endpoint on the URL `/ScheduledTasksManager` should be added as it will be invoked when the job is triggered based on 
     the Cron interval.
     * Setting the interval for this Cron job to be triggered once a day at 12:05am. For full details and available options on how to set this value, 
-    visit the [Cron binding specs.](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format).
+    visit the [Cron binding specs.](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format){target=_blank}.
 
 #### 2. Add the Endpoint Which Will be Invoked by Cron Binding
 
-Let's add an endpoint which will be triggered when the Cron configuration is met. This endpoint will contain the routine needed to run at a regular interval. 
+Let's add an endpoint which will be triggered when the Cron configuration is met. This endpoint will contain the routine needed to run at a regular interval.
 
 Add new file under **controllers** folder in the project **TasksTracker.Processor.Backend.Svc** as shown below:
 
@@ -51,7 +51,7 @@ Add new file under **controllers** folder in the project **TasksTracker.Processo
     ```csharp
     --8<-- "docs/aca/07-aca-cron-bindings/ScheduledTasksManagerController.cs"
     ```
-Here, we have added a new action method called `CheckOverDueTasksJob`, which includes the relevant business logic that will be executed by the Cron job configuration at specified intervals. 
+Here, we have added a new action method called `CheckOverDueTasksJob`, which includes the relevant business logic that will be executed by the Cron job configuration at specified intervals.
 This action method must be of the `POST` type, allowing it to be invoked when the job is triggered in accordance with the Cron interval.
 
 #### 3. Update the Backend Web API Project

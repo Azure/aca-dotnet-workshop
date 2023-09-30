@@ -12,8 +12,8 @@ Azure Container Apps support Horizontal Scaling (**Scaling Out**) by adding more
 
 Azure Container Apps supports different scaling triggers including:
 
-* [HTTP traffic](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#http): Scaling based on the number of concurrent HTTP requests to your revision.
-* [CPU](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#cpu) or [Memory](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#memory) usage: Scaling based on the amount of CPU utilized or memory consumed by a replica.
+* [HTTP traffic](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#http){target=_blank}: Scaling based on the number of concurrent HTTP requests to your revision.
+* [CPU](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#cpu){target=_blank} or [Memory](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#memory){target=_blank} usage: Scaling based on the amount of CPU utilized or memory consumed by a replica.
 * Azure Storage Queues: Scaling based on the number of messages in Azure Storage Queue.
 * Event-driven using [KEDA](https://keda.sh/): Scaling based on events triggers, such as the number of messages in Azure Service Bus Topic or the number of blobs in Azure Blob Storage container.
 
@@ -23,7 +23,7 @@ In this module, we will be focusing on event-driven autoscaling using KEDA.
 
 ### An Overview of KEDA
 
-KEDA stands for Kubernetes Event-Driven Autoscaler. It is an open-source project initially started by [Microsoft and Red Hat](https://cloudblogs.microsoft.com/opensource/2019/05/06/announcing-keda-kubernetes-event-driven-autoscaling-containers/) to allow any Kubernetes workload to benefit from the event-driven architecture model. Prior to KEDA, horizontally scaling Kubernetes deployment was achieved through the Horizontal Pod Autoscaler ([HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)). The HPA relies on resource metrics such as Memory and CPU to determine when additional replicas should be deployed. In an enterprise application, there may be additional external metrics that we want to use to scale our application, such as the length of a Kafka topic log, an Azure Service Bus Queue, or metrics obtained from a Prometheus query. KEDA offers more than [50 scalers](https://keda.sh/docs/2.8/scalers/) to pick from based on your business need. KEDA exists to fill this gap and provides a framework for scaling based on events in conjunction with HPA scaling based on CPU and Memory.
+KEDA stands for Kubernetes Event-Driven Autoscaler. It is an open-source project initially started by [Microsoft and Red Hat](https://cloudblogs.microsoft.com/opensource/2019/05/06/announcing-keda-kubernetes-event-driven-autoscaling-containers/){target=_blank} to allow any Kubernetes workload to benefit from the event-driven architecture model. Prior to KEDA, horizontally scaling Kubernetes deployment was achieved through the Horizontal Pod Autoscaler ([HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/){target=_blank}). The HPA relies on resource metrics such as Memory and CPU to determine when additional replicas should be deployed. In an enterprise application, there may be additional external metrics that we want to use to scale our application, such as the length of a Kafka topic log, an Azure Service Bus Queue, or metrics obtained from a Prometheus query. KEDA offers more than [50 scalers](https://keda.sh/docs/2.8/scalers/){target=_blank} to pick from based on your business need. KEDA exists to fill this gap and provides a framework for scaling based on events in conjunction with HPA scaling based on CPU and Memory.
 
 ### Configure Scaling Rule in Backend Background Processor Project
 
@@ -50,9 +50,9 @@ To achieve this, we will start looking into KEDA Azure Service Bus scaler. This 
     - The property `cloud` represents the name of the cloud environment that the service bus belongs to.
 
 !!! note
-    Note about authentication: KEDA scaler for Azure Service Bus supports different authentication mechanisms such as [Pod Managed Identity](https://learn.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity), [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/), and shared access policy (connection string). At the time of writing this workshop, when using KEDA with Azure Container Apps the only supported authentication mechanism is Connection Strings. There is a work item in the ACA product backlog that involves enabling [KEDA Scale with Managed Identity.](https://github.com/microsoft/azure-container-apps/issues/592)
+    Note about authentication: KEDA scaler for Azure Service Bus supports different authentication mechanisms such as [Pod Managed Identity](https://learn.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity){target=_blank}, [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/){target=_blank}, and shared access policy (connection string). At the time of writing this workshop, when using KEDA with Azure Container Apps the only supported authentication mechanism is Connection Strings. There is a work item in the ACA product backlog that involves enabling [KEDA Scale with Managed Identity.](https://github.com/microsoft/azure-container-apps/issues/592){target=_blank}
 
-Azure Container Apps has its own proprietary schema to map KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps [ARM templates](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples), [yaml manifest](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples), Azure CLI, or from the Azure Portal. In this module, we will cover how to do it from the Azure CLI.
+Azure Container Apps has its own proprietary schema to map KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps [ARM templates](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, [yaml manifest](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, Azure CLI, or from the Azure Portal. In this module, we will cover how to do it from the Azure CLI.
 
 #### 1. Create a New Secret In The Container App
 
@@ -112,7 +112,7 @@ Now we are ready to add a new custom scaling rule to match the business requirem
     **Note About Setting Minimum Replicas To 0:**
     * We can set the minimum number of replicas to `zero` to avoid any charges when the backend processor is not processing any message from Azure Service Bus Topic, but this will impact running the other features within this backend processor such as the periodic cron job as well as the external input bidding and output bindings. We are configuring the minimum number of replicas to one, ensuring that a backend processor instance is always running and capable of handling tasks, even if there are no messages being received by the Azure Service Bus Topic.
 
-    * When the single replica of the backend processor is not doing anything, it will be running in an `idle mode`. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit [the link.](https://azure.microsoft.com/en-us/pricing/details/container-apps/)
+    * When the single replica of the backend processor is not doing anything, it will be running in an `idle mode`. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit this [link](https://azure.microsoft.com/en-us/pricing/details/container-apps/){target=_blank}.
 
 #### 3. Run an End-to-End Test and Generate a Several Messages
 
@@ -157,8 +157,8 @@ The message structure our backend processor expects is similar to the JSON shown
 
 !!! note
     **Note About KEDA Scale In:**
-    Container Apps implements the [KEDA ScaledObject](https://keda.sh/docs/2.8/concepts/scaling-deployments/#scaledobject-spec) with the following default settings:
+    Container Apps implements the [KEDA ScaledObject](https://keda.sh/docs/2.8/concepts/scaling-deployments/#scaledobject-spec){target=_blank} with the following default settings:
 
     * pollingInterval: 30 seconds. This is the interval to check each trigger on. By default, KEDA will check each trigger source on every ScaledObject every 30 seconds.
     * cooldownPeriod: 300 seconds. The period to wait after the last trigger is reported active before scaling in the resource back to 0. By default, it’s 5 minutes (300 seconds).
-    Currently, there is no way to override this value, yet there is an [open issue](https://github.com/microsoft/azure-container-apps/issues/388) on the Container Apps repo and the PG is tracking it as 5 minutes might be a long period to wait for instances to be scaled in after they finish processing messages.
+    Currently, there is no way to override this value, yet there is an [open issue](https://github.com/microsoft/azure-container-apps/issues/388){target=_blank} on the Container Apps repo and the PG is tracking it as 5 minutes might be a long period to wait for instances to be scaled in after they finish processing messages.

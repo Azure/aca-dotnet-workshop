@@ -20,7 +20,7 @@ To begin, we need to define the Bicep modules that will be required to generate 
 
 #### 1. Add the Needed Extension to VS Code
 
-To proceed, you must install an extension called [Bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep). This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..
+To proceed, you must install an extension called [Bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep){target=_blank}. This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..
 
 #### 2. Define an Azure Container Apps Environment
 
@@ -423,7 +423,6 @@ Next, we will prepare container images for the three container apps and update t
     ```
 
 Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below.
-
 
     ```Powershell
     az deployment group create `
