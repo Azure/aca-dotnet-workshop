@@ -26,7 +26,7 @@
 
     <!-- Next page -->
     
-        <link rel="next" href="../../11-about-the-authors/" />
+        <link rel="next" href="../../11-aca-landing-zone/" />
     
 
     <!-- Favicon -->
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.a5377069.min.css">
@@ -845,7 +845,26 @@
   
   
     <li class="md-nav__item">
-      <a href="../../11-about-the-authors/" class="md-nav__link">
+      <a href="../../11-aca-landing-zone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 11 - Integration with Azure Container Apps landing zone accelerator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12-about-the-authors/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -854,6 +873,117 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Contributing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13-contributing/1-contribution-guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Submit An Issue or Suggestion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13-contributing/3-minor-update-fix.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Minor Update or fix, New Challenge
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -879,10 +1009,10 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
         
           
-          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -893,8 +1023,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_14">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Appendix
           </label>
@@ -906,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
+      <a href="../../14-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -926,7 +1056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-appendix/02-github-local-codespaces/" class="md-nav__link">
+      <a href="../../14-appendix/02-github-local-codespaces/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1098,20 +1228,18 @@ to create service connection for GitHub.</p>
 <h3 id="configure-variable-group-under-azure-devops-library-section">Configure Variable Group under Azure DevOps Library Section<a class="headerlink" href="#configure-variable-group-under-azure-devops-library-section" title="Permanent link">&para;</a></h3>
 <p>Create a variable group named <strong>AcaApp</strong> under Library in your Azure Devops project. Make sure the pipeline has permissions to access the created variable group under <strong>Pipeline permissions</strong>.</p>
 <p>This variable group will be used to store below details:</p>
-<div class="language-text highlight"><pre><span></span><code>```bash
-# AZURE_SUBSCRIPTION: Name of the service connection created for Azure Subscription
-AZURE_SUBSCRIPTION=&lt;service connection name&gt;
-
-# LOCATION: Azure region where resources will be deployed
-LOCATION=&lt;location&gt;
-
-# RESOURCE_GROUP: Name of the resource group which will be created and where the resources will be deployed
-RESOURCE_GROUP=&lt;resource group name&gt;
-
-# (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported
-CONTAINER_REGISTRY_NAME=&lt;container registry name&gt;
-```
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># AZURE_SUBSCRIPTION: Name of the service connection created for Azure Subscription</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">AZURE_SUBSCRIPTION</span><span class="o">=</span>&lt;service<span class="w"> </span>connection<span class="w"> </span>name&gt;
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location&gt;
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># RESOURCE_GROUP: Name of the resource group which will be created and where the resources will be deployed</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nv">RESOURCE_GROUP</span><span class="o">=</span>&lt;resource<span class="w"> </span>group<span class="w"> </span>name&gt;
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span>&lt;container<span class="w"> </span>registry<span class="w"> </span>name&gt;
+</span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Repository variable <code>CONTAINER_REGISTRY_NAME</code> is only needed by pipeline if you intend to deploy images from a private Azure Container Registry (ACR). You may chose to skip defining this variable and the pipeline will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop" target="_blank">public github container registry images</a> to deploy the images.</p>
@@ -1134,7 +1262,7 @@ CONTAINER_REGISTRY_NAME=&lt;container registry name&gt;
   <small>
     
       Last update:
-      2023-09-30
+      2023-10-02
     
   </small>
 </div>
@@ -1155,10 +1283,10 @@ CONTAINER_REGISTRY_NAME=&lt;container registry name&gt;
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1186,13 +1314,13 @@ CONTAINER_REGISTRY_NAME=&lt;container registry name&gt;
         
         
           
-          <a href="../../11-about-the-authors/" class="md-footer__link md-footer__link--next" aria-label="Next: About The Authors">
+          <a href="../../11-aca-landing-zone/" class="md-footer__link md-footer__link--next" aria-label="Next: Module 11 - Integration with Azure Container Apps landing zone accelerator">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                About The Authors
+                Module 11 - Integration with Azure Container Apps landing zone accelerator
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1244,10 +1372,11 @@ CONTAINER_REGISTRY_NAME=&lt;container registry name&gt;
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

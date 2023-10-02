@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a5377069.min.css">
@@ -874,7 +874,26 @@
   
   
     <li class="md-nav__item">
-      <a href="../11-about-the-authors/" class="md-nav__link">
+      <a href="../11-aca-landing-zone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 11 - Integration with Azure Container Apps landing zone accelerator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-about-the-authors/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -883,6 +902,117 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Contributing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-contributing/1-contribution-guide.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Submit An Issue or Suggestion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-contributing/3-minor-update-fix.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Minor Update or fix, New Challenge
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -908,10 +1038,10 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
         
           
-          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -922,8 +1052,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_14">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Appendix
           </label>
@@ -935,7 +1065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
+      <a href="../14-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -955,7 +1085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-appendix/02-github-local-codespaces/" class="md-nav__link">
+      <a href="../14-appendix/02-github-local-codespaces/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1394,38 +1524,32 @@ methods <code>api/overduetasks</code> and <code>api/overduetasks/markoverdue</co
 <h3 id="deploy-the-backend-background-processor-and-the-backend-api-projects-to-azure-container-apps">Deploy the Backend Background Processor and the Backend API Projects to Azure Container Apps<a class="headerlink" href="#deploy-the-backend-background-processor-and-the-backend-api-projects-to-azure-container-apps" title="Permanent link">&para;</a></h3>
 <h4 id="1-build-the-backend-background-processor-and-the-backend-api-app-images-and-push-them-to-acr">1. Build the Backend Background Processor and the Backend API App Images and Push them to ACR<a class="headerlink" href="#1-build-the-backend-background-processor-and-the-backend-api-app-images-and-push-them-to-acr" title="Permanent link">&para;</a></h4>
 <p>To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. We can use the same PowerShell console use the following code (make sure you are on directory <strong>TasksTracker.ContainerApps</strong>):</p>
-<div class="language-text highlight"><pre><span></span><code>```powershell
-az acr build --registry $ACR_NAME --image &quot;tasksmanager/$BACKEND_API_NAME&quot; --file &#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39; . 
-
-az acr build --registry $ACR_NAME --image &quot;tasksmanager/$BACKEND_SVC_NAME&quot; --file &#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39; .
-```
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_API_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span> 
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_SVC_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
+</span></code></pre></div>
 <h4 id="2-add-cron-dapr-component-to-aca-environment">2. Add Cron Dapr Component to ACA Environment<a class="headerlink" href="#2-add-cron-dapr-component-to-aca-environment" title="Permanent link">&para;</a></h4>
-<div class="language-text highlight"><pre><span></span><code>```powershell
-##Cron binding component
-az containerapp env dapr-component set `
-  --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-  --dapr-component-name scheduledtasksmanager `
-  --yaml &#39;.\aca-components\containerapps-scheduled-cron.yaml&#39;
-```
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c"># Cron binding component</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">scheduledtasksmanager</span> <span class="p">`</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-scheduled-cron.yaml&#39;</span>
+</span></code></pre></div>
 <h5 id="3-deploy-new-revisions-of-the-backend-api-and-backend-background-processor-to-aca">3. Deploy New Revisions of the Backend API and Backend Background Processor to ACA<a class="headerlink" href="#3-deploy-new-revisions-of-the-backend-api-and-backend-background-processor-to-aca" title="Permanent link">&para;</a></h5>
 <p>As we did before, we need to update the Azure Container App hosting the Backend API &amp; Backend Background Processor with a new revision so our code changes are available for the end users.
 To accomplish this run the PowerShell script below:</p>
-<div class="language-text highlight"><pre><span></span><code>```powershell
-## Update Backend API App container app and create a new revision 
-az containerapp update `
---name $BACKEND_API_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v20230227-1 
-
-## Update Backend Background Processor container app and create a new revision 
-az containerapp update `
---name $BACKEND_SVC_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v20230227-1 
-```
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># Update Backend API App container app and create a new revision </span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230227</span><span class="p">-</span><span class="n">1</span> 
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c"># Update Backend Background Processor container app and create a new revision </span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230227</span><span class="p">-</span><span class="n">1</span> 
+</span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The service <code>ScheduledTasksManager</code> which will be triggered by the Cron job on certain intervals is hosted in the ACA service <code>ACA-Processor Backend</code>. In the future module we are going to scale this ACA <code>ACA-Processor Backend</code> to multiple replicas/instances.</p>
@@ -1447,7 +1571,7 @@ you should see logs similar to the below image</p>
   <small>
     
       Last update:
-      2023-09-30
+      2023-10-02
     
   </small>
 </div>
@@ -1468,10 +1592,10 @@ you should see logs similar to the below image</p>
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1557,10 +1681,11 @@ you should see logs similar to the below image</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
