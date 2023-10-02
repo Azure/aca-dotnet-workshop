@@ -19,19 +19,17 @@ Start by forking the workshop repository to your GitHub account. Follow the step
 
 ### Configure Repository for OIDC Authentication with Azure AD
 
-In order to use the GitHub Actions workflow to deploy the infrastructure components of our application, we need to 
-log in to Azure using the Azure CLI with [Azure login](https://github.com/marketplace/actions/azure-login) action.
+In order to use the GitHub Actions workflow to deploy the infrastructure components of our application, we need to log in to Azure using the Azure CLI with [Azure login](https://github.com/marketplace/actions/azure-login){target=_blank} action.
 
 The Azure login action supports two different ways of authenticating with Azure:
 
-- [Service principal with secrets](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-a-service-principal-secret)
-- [OpenID Connect (OIDC) with a Azure service principal using a Federated Identity Credential](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-openid-connect)
+- [Service principal with secrets](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-a-service-principal-secret){target=_blank}
+- [OpenID Connect (OIDC) with a Azure service principal using a Federated Identity Credential](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-openid-connect){target=_blank}
 
-In this workshop, we will use the OIDC authentication method. Assuming you are already logged in using azure cli 
-locally, follow the steps below to configure the repository for OIDC authentication with Azure AD either using powershell or bash/wsl:
+In this workshop, we will use the OIDC authentication method. Assuming you are already logged in using azure cli locally, follow the steps below to configure the repository for OIDC authentication with Azure AD either using powershell or bash/wsl:
 
 === "PowerShell"
-    
+
     - Execute the following commands in PowerShell to create an Azure AD application and service principal.
 
     ```powershell
@@ -62,7 +60,7 @@ locally, follow the steps below to configure the repository for OIDC authenticat
     ```
 
 === "Bash/WSL"
-    
+
     - Execute the following commands in PowerShell to create an Azure AD application and service principal.
     
     ```bash
@@ -106,20 +104,20 @@ locally, follow the steps below to configure the repository for OIDC authenticat
 
 ### Configure GitHub Repository Secrets
 
-Configure secrets details in GitHub repo as described here in [create GitHub secrets](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets). Use below values mapped to relevant secrets in GitHub. 
+Configure secrets details in GitHub repo as described here in [create GitHub secrets](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets){target=_blank}. Use below values mapped to relevant secrets in GitHub.
 
 ```bash
 # AZURE_SUBSCRIPTION_ID
-echo $SUBSCRIPTION_ID 
-# AZURE_TENANT_ID   
-echo $AZURE_TENANT    
-# AZURE_CLIENT_ID      
-echo $APP_ID             
+echo $SUBSCRIPTION_ID
+# AZURE_TENANT_ID
+echo $AZURE_TENANT
+# AZURE_CLIENT_ID
+echo $APP_ID
 ```
 
 ### Configure GitHub Repository Variables
 
-Configure repository variables in GitHub repo as described here in [create GitHub variables](https://docs.github.com/en/actions/learn-github-actions/variables). Use below values mapped to relevant variables in GitHub. 
+Configure repository variables in GitHub repo as described here in [create GitHub variables](https://docs.github.com/en/actions/learn-github-actions/variables). Use below values mapped to relevant variables in GitHub.
 
 ```bash 
 # LOCATION: Azure region where resources will be deployed
@@ -136,21 +134,20 @@ CONTAINER_REGISTRY_NAME=<container registry name>
 
     Repository variables `CONTAINER_REGISTRY_NAME` is only needed by workflow, if you wish the images to be deployed from private ACR.
     
-    You may chose to skip defining this variable and the workflow will use the [public github container registry images](https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop) to deploy the images.
+    You may chose to skip defining this variable and the workflow will use the [public github container registry images](https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop){target=_blank} to deploy the images.
 
 ### Trigger GitHub Actions Workflow
 
 With these steps completed, you are now ready to trigger the GitHub Actions workflow named **Build and deploy infrastructure as code to Azure** using **workflow dispatch** to deploy the infrastructure components of the application.
 
 !!! success
-    
+
     Your GitHub Actions workflow should be triggered and the infrastructure components of our application should be deployed successfully.
 
     ![GitHub Actions Workflow](../../assets/gifs/github-action.gif)
 
-
 ??? info "Want to delete the resources deployed by the workflow?"
-    
+
     Trigger the workflow again using **workflow dispatch** and select **checkbox** option.
 
     ![GitHub Actions Workflow](../../assets/gifs/github-action-delete.gif)

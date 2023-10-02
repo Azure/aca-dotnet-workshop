@@ -26,23 +26,21 @@ Before we start with creating pipeline, we need to configure service connection 
 
 #### Create a Service Connection for GitHub
 
-Provide access to the repository forked above by creating a service connection to GitHub. You create a new pipeline by first selecting a GitHub repository and then a YAML file in repository at path [.ado/infra-deploy.yml](https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.ado/infra-deploy.yml){target=_blank}. 
+Provide access to the repository forked above by creating a service connection to GitHub. You create a new pipeline by first selecting a GitHub repository and then a YAML file in repository at path [.ado/infra-deploy.yml](https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.ado/infra-deploy.yml){target=_blank}.
 
 The repository in which the YAML file is present is called self repository. By default, this is the repository that your pipeline builds.
 
-There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating 
-a pipeline. Follow guide at [this link](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#access-to-github-repositories){target=_blank}
+There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating a pipeline. Follow guide at this [link](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#access-to-github-repositories){target=_blank}
 to create service connection for GitHub.
-
 
 ![AZDO GitHub Connection](../../assets/gifs/azdo-github-connection.gif)
 
 #### Create Service Connection for Azure Subscription
 
-Create a new service connection to your azure subscription by following the steps at [this link](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#create-a-service-connection){target=_blank}.
+Create a new service connection to your azure subscription by following the steps at this [link](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#create-a-service-connection){target=_blank}.
 
 !!! note
-    Update the created service connection role to have **[User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator)** role. This is required for pipeline to be able to perform role assignments in the infrastructure components deployed. To update the role of a service connection in Azure DevOps to have the User Access Administrator role, you can follow these steps:
+    Update the created service connection role to have **[User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator){target=_blank}** role. This is required for pipeline to be able to perform role assignments in the infrastructure components deployed. To update the role of a service connection in Azure DevOps to have the User Access Administrator role, you can follow these steps:
 
     - Navigate to the Azure portal and select the subscription where the service connection is created.
 
@@ -80,21 +78,20 @@ CONTAINER_REGISTRY_NAME=<container registry name>
 
 !!! note
 
-    Repository variable `CONTAINER_REGISTRY_NAME` is only needed by pipeline if you intend to deploy images from a private Azure Container Registry (ACR). You may chose to skip defining this variable and the pipeline will use the [public github container registry images](https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop) to deploy the images.
+    Repository variable `CONTAINER_REGISTRY_NAME` is only needed by pipeline if you intend to deploy images from a private Azure Container Registry (ACR). You may chose to skip defining this variable and the pipeline will use the [public github container registry images](https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop){target=_blank} to deploy the images.
 
 ### Trigger Azure Devops Pipeline
 
 With these steps completed, you are now ready to trigger the Pipeline.
 
 !!! success
-    
+
     Your Pipeline should be triggered and the infrastructure components of our application should be deployed successfully.
 
     ![GitHub Actions Workflow](../../assets/gifs/azdo-trigger.gif)
 
-
 ??? info "Want to delete the resources deployed by the pipeline?"
-    
+
     Trigger the pipeline again select **checkbox** option named **Should teardown infrastructure?**.
 
     ![GitHub Actions Workflow](../../assets/gifs/azdo-delete.gif)

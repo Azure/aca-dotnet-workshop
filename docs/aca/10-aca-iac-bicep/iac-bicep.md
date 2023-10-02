@@ -19,9 +19,11 @@ To begin, we need to define the Bicep modules that will be required to generate 
     different options of getting images pushed to either Azure Container Registry (ACR) or GitHub Container Registry (GHCR).
 
 #### 1. Add the Needed Extension to VS Code
-To proceed, you must install an extension called [Bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep). This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..
+
+To proceed, you must install an extension called [Bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep){target=_blank}. This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..
 
 #### 2. Define an Azure Container Apps Environment
+
 Add a new folder named `bicep` on the root project directory, then add another folder named `modules`. Add file as shown below:
 
 === "container-apps-environment.bicep"
@@ -31,7 +33,7 @@ Add a new folder named `bicep` on the root project directory, then add another f
     ```
 
 ??? tip "What we've added in the Bicep file above"
-    - The module takes multiple parameters, all of which are set to default values. This indicates that if no value is specified, the default value will be utilized. 
+    - The module takes multiple parameters, all of which are set to default values. This indicates that if no value is specified, the default value will be utilized.
     - The `location` parameter defaults to the location of the container resource group. Bicep has a function called `resourceGroup()`, which can be used to retrieve the location.
     - The parameters `prefix` and `suffix` could be used if you want to add a prefix or suffix to the resource names.
     - The parameter `tag` is used to tag the created resources. Tags are key-value pairs that help you identify resources based on settings that are relevant to your organization and deployment.
@@ -133,6 +135,7 @@ To achieve this, create a new directory called `container-apps\secrets` within t
     ```
 
 #### 9. Define the Frontend Service Azure Container App
+
 We will now begin defining the modules that are necessary for producing the container apps, starting with the Frontend App. To initiate this process, add a new file under the folder `bicep\modules\container-apps` as shown below:
 
 === "webapp-frontend-service.bicep"
@@ -146,6 +149,7 @@ We will now begin defining the modules that are necessary for producing the cont
     - The output parameters of this module will provide the fully qualified domain name (FQDN) for the frontend container application.
 
 #### 10. Define the Backend Api Service Azure Container App
+
 Add a new file under the folder `bicep\modules\container-apps` as shown below:
 
 === "webapi-backend-service.bicep"
@@ -221,9 +225,9 @@ Add a new file under the folder `bicep\modules\container-apps` as shown below:
         }
         ```
 
-#### 12. Define a Container Module For the Three Container Apps 
-This module will act as a container for the three Container Apps modules defined in the previous three steps. It is optional to create it, but it makes it easier when we invoke all the created modules as you 
-will see in the next step. 
+#### 12. Define a Container Module For the Three Container Apps
+
+This module will act as a container for the three Container Apps modules defined in the previous three steps. It is optional to create it, but it makes it easier when we invoke all the created modules as you will see in the next step.
 
 Add a new file under the folder `bicep\modules` as shown below:
 
@@ -233,7 +237,8 @@ Add a new file under the folder `bicep\modules` as shown below:
     --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/bicep/modules/container-apps.bicep"
     ```
 
-#### 13. Define the Main Module For the Solution 
+#### 13. Define the Main Module For the Solution
+
 Finally, we must specify the Main Bicep module that will connect all other modules together. This file will be referenced by the AZ CLI command when producing all resources.
 
 To achieve this, add a new file under the `bicep` directory as shown below:
@@ -263,7 +268,7 @@ az group create `
 --location $LOCATION
 ```
 
-Create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file `main.bicep` and select **Generate Parameter File**. 
+Create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file `main.bicep` and select **Generate Parameter File**.
 This will result in creating a file named `main.parameters.json` similar to the file below:
 
 ??? example
@@ -339,9 +344,8 @@ Next, we will prepare container images for the three container apps and update t
         }
         ```
 
-
 === "Option 2: Import pre-built public images to your private Azure Container Registry"
-        
+
     All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can import it directly into 
     your private container instance as shown below.
 
@@ -420,7 +424,6 @@ Next, we will prepare container images for the three container apps and update t
 
 Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below.
 
-
 ```Powershell
 az deployment group create `
 --resource-group $RESOURCE_GROUP `
@@ -431,6 +434,7 @@ az deployment group create `
 The Azure CLI will take the Bicep module and start creating the deployment in the resource group.
 
 ### Verify the Final Results
+
 !!! success
     Upon successful deployment, you should observe all resources generated within the designated resource group. Additionally, you may navigate to the `Deployments` section to confirm that the ARM templates have been deployed, which should resemble the image provided below:
 

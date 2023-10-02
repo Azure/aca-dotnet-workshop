@@ -3,23 +3,23 @@ canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-b
 ---
 
 # Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
+
 !!! info "Module Duration"
     60 minutes
 
-In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources. 
-In this module we will focus on a special type of Dapr input binding named [Cron Binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/).
+In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources.
+In this module we will focus on a special type of Dapr input binding named [Cron Binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/){target=_blank}.
 
-The Cron binding doesn't subscribe for events coming from an external system. Instead, this binding can be used to trigger application code in our service periodically based on a configurable interval. 
+The Cron binding doesn't subscribe for events coming from an external system. Instead, this binding can be used to trigger application code in our service periodically based on a configurable interval.
 The binding provides a simple way to implement a background worker to wake up and do some work at a regular interval, without the need to implement an endless loop with a configurable delay.
 
-We intend to utilize this binding for a specific use case, wherein it will be triggered once daily at a particular time (12:05 am), and search for tasks that have a due date matching the previous day of its 
-execution and are still pending. Once the service identifies tasks that meet these criteria, it will designate them as overdue tasks and save the revised status on Azure Cosmos DB.
+We intend to utilize this binding for a specific use case, wherein it will be triggered once daily at a particular time (12:05 am), and search for tasks that have a due date matching the previous day of its execution and are still pending. Once the service identifies tasks that meet these criteria, it will designate them as overdue tasks and save the revised status on Azure Cosmos DB.
 
 ### Updating the Backend Background Processor Project
 
 #### 1. Add Cron Binding Configuration
 
-To set up the Cron binding, the initial step involves adding a component file that specifies the location of the code that requires triggering and the intervals at which it should occur. 
+To set up the Cron binding, the initial step involves adding a component file that specifies the location of the code that requires triggering and the intervals at which it should occur.
 To accomplish this, create a new file called dapr-scheduled-cron.yaml within the components folder and insert the following code:
 
 Add new file under **components** as shown below:
@@ -38,25 +38,25 @@ Add new file under **components** as shown below:
     * Provided the name `ScheduledTasksManager` for this binding. This means that an HTTP POST endpoint on the URL `/ScheduledTasksManager` should be added as it will be invoked when the job is triggered based on 
     the Cron interval.
     * Setting the interval for this Cron job to be triggered once a day at 12:05am. For full details and available options on how to set this value, 
-    visit the [Cron binding specs.](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format).
+    visit the [Cron binding specs.](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format){target=_blank}.
 
 #### 2. Add the Endpoint Which Will be Invoked by Cron Binding
 
-Let's add an endpoint which will be triggered when the Cron configuration is met. This endpoint will contain the routine needed to run at a regular interval. 
+Let's add an endpoint which will be triggered when the Cron configuration is met. This endpoint will contain the routine needed to run at a regular interval.
 
 Add new file under **controllers** folder in the project **TasksTracker.Processor.Backend.Svc** as shown below:
 
 === "ScheduledTasksManagerController.cs"
-    
+
     ```csharp
     --8<-- "docs/aca/07-aca-cron-bindings/ScheduledTasksManagerController.cs"
     ```
-Here, we have added a new action method called `CheckOverDueTasksJob`, which includes the relevant business logic that will be executed by the Cron job configuration at specified intervals. 
+Here, we have added a new action method called `CheckOverDueTasksJob`, which includes the relevant business logic that will be executed by the Cron job configuration at specified intervals.
 This action method must be of the `POST` type, allowing it to be invoked when the job is triggered in accordance with the Cron interval.
 
 #### 3. Update the Backend Web API Project
 
-Now we need to add two new methods which are used by the scheduled job. 
+Now we need to add two new methods which are used by the scheduled job.
 
 Update below **files** under **services** folder in the project **TasksTracker.TasksManager.Backend.Api** as highlighted below:
 
@@ -69,6 +69,7 @@ Update below **files** under **services** folder in the project **TasksTracker.T
         Task<List<TaskModel>> GetYesterdaysDueTasks();
     }
     ```
+
 === "TasksStoreManager.cs"
 
     ```csharp hl_lines="1-3 6-37 39-47"
@@ -95,8 +96,6 @@ Update below **files** under **services** folder in the project **TasksTracker.T
         var yesterday = DateTime.Today.AddDays(-1);
     
         var jsonDate = JsonSerializer.Serialize(yesterday, options);
-        
-        
         
         _logger.LogInformation("Getting overdue tasks for yesterday date: '{0}'", jsonDate);
         
@@ -130,7 +129,7 @@ Add below **file** under **Utilities** folder in the project **TasksTracker.Task
     ```
 
 ??? tip "Curious to learn more about above code?"
-    
+
     What we've implemented here is the following:
 
     - Method `GetYesterdaysDueTasks` will query the Cosmos DB state store using Dapr State API to lookup all the yesterday's task which are not completed yet. Remember that Cron job is configured to run each day 
@@ -140,7 +139,7 @@ Add below **file** under **Utilities** folder in the project **TasksTracker.Task
 Do not forget to add fake implementation for class `FakeTasksManager.cs` so the project **TasksTracker.TasksManager.Backend.Api** builds successfully.
 
 === "FakeTasksManager.cs"
-    
+
     ```csharp hl_lines="1-4 6-11"
     public Task MarkOverdueTasks(List<TaskModel> overDueTasksList)
     {
@@ -163,10 +162,11 @@ methods `api/overduetasks` and `api/overduetasks/markoverdue` in the Backend Web
 Add below **file** under **controllers** folder in the project **TasksTracker.TasksManager.Backend.Api** as shown below:
 
 === "OverdueTasksController.cs"
-    
+
     ```csharp
     --8<-- "docs/aca/07-aca-cron-bindings/OverdueTasksController.cs"
     ```
+
 #### 5. Add Cron Binding Configuration Matching ACA Specs
 
 Add a new file folder **aca-components**. This file will be used when updating the Azure Container App Env and enable this binding.
@@ -183,8 +183,7 @@ Add a new file folder **aca-components**. This file will be used when updating t
 
 #### 1. Build the Backend Background Processor and the Backend API App Images and Push them to ACR
 
-To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. We can use the same PowerShell console use the 
-following code (make sure you are on directory **TasksTracker.ContainerApps**):
+To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. We can use the same PowerShell console use the following code (make sure you are on directory **TasksTracker.ContainerApps**):
 
 ```powershell
 az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
@@ -195,25 +194,26 @@ az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --fil
 #### 2. Add Cron Dapr Component to ACA Environment
 
 ```powershell
-##Cron binding component
+# Cron binding component
 az containerapp env dapr-component set `
-  --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-  --dapr-component-name scheduledtasksmanager `
-  --yaml '.\aca-components\containerapps-scheduled-cron.yaml'
+    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+    --dapr-component-name scheduledtasksmanager `
+    --yaml '.\aca-components\containerapps-scheduled-cron.yaml'
 ```
 
 ##### 3. Deploy New Revisions of the Backend API and Backend Background Processor to ACA
-As we did before, we need to update the Azure Container App hosting the Backend API & Backend Background Processor with a new revision so our code changes are available for the end users. 
+
+As we did before, we need to update the Azure Container App hosting the Backend API & Backend Background Processor with a new revision so our code changes are available for the end users.
 To accomplish this run the PowerShell script below:
 
 ```powershell
-## Update Backend API App container app and create a new revision 
+# Update Backend API App container app and create a new revision 
 az containerapp update `
 --name $BACKEND_API_NAME `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v20230227-1 
 
-## Update Backend Background Processor container app and create a new revision 
+# Update Backend Background Processor container app and create a new revision 
 az containerapp update `
 --name $BACKEND_SVC_NAME `
 --resource-group $RESOURCE_GROUP `
@@ -221,15 +221,14 @@ az containerapp update `
 ```
 
 !!! note
-    The service `ScheduledTasksManager` which will be triggered by the Cron job on certain intervals is hosted in the ACA service `ACA-Processor Backend`. In the future module we are going to scale this 
-    ACA `ACA-Processor Backend` to multiple replicas/instances. 
+    The service `ScheduledTasksManager` which will be triggered by the Cron job on certain intervals is hosted in the ACA service `ACA-Processor Backend`. In the future module we are going to scale this ACA `ACA-Processor Backend` to multiple replicas/instances.
 
     It is highly recommended that background periodic jobs are hosted in a container app with **one single replica**, you don't want your background periodic job to run on multiple replicas trying to do the same thing.
 
 !!! success
     With those changes in place and deployed, from the Azure Portal, you can open the log streams of the container app hosting the `ACA-Processor-Backend` and check the logs generated when the Cron job is triggered,
     you should see logs similar to the below image
-    
+
     ![app-logs](../../assets/images/07-aca-cron-bindings/cron-logs.jpg)
     
     !!! note
