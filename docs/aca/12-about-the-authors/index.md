@@ -10,7 +10,7 @@ He frequently publishes articles on his [blog](https://bitoftech.net){target=_bl
 
 ### [:material-github: Wael Kdouh](https://github.com/waelkdouh){target=_blank}
 
-Wael is a Principal Cloud Solution Architect at Microsoft with over 20 years of experience developing innovative solutions for leading software companies. He has successfully led the completion of several mission-critical projects in multiple sectors such Airline Solutions and Retail to name a few. 
+Wael is a Principal Cloud Solution Architect at Microsoft with over 20 years of experience developing innovative solutions for leading software companies. He has successfully led the completion of several mission-critical projects in multiple sectors such Airline Solutions and Retail to name a few.
 
 You will find him actively blogging on [:simple-medium: Medium](https://waelkdouh.medium.com/){target=_blank} and occasionally tweeting on [:material-twitter: Twitter](https://twitter.com/waelkdouh){target=_blank}. Connect with Wael on [:material-linkedin: LinkedIn](https://www.linkedin.com/in/waelkdouh/){target=_blank}.
 
