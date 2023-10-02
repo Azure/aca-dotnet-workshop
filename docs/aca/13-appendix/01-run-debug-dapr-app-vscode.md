@@ -58,57 +58,57 @@ Now we will add 4 tasks, for each application, there will be a task to support t
 
 Next let's add the dependsOn tasks. Open `tasks.json` and add the tasks below:
 
-    ```json title="tasks.json"
-    {
-        "label": "build-backend-api",
-        "command": "dotnet",
-        "type": "process",
-        "args": [
-            "build",
-            "${workspaceFolder}/TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj",
-            "/property:GenerateFullPaths=true",
-            "/consoleloggerparameters:NoSummary"
-        ],
-        "problemMatcher": "$msCompile"
-    },
-    {
-        "label": "build-webapp-ui",
-        "command": "dotnet",
-        "type": "process",
-        "args": [
-            "build",
-            "${workspaceFolder}/TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj",
-            "/property:GenerateFullPaths=true",
-            "/consoleloggerparameters:NoSummary"
-        ],
-        "problemMatcher": "$msCompile"
-    }
-    ```
+```json title="tasks.json"
+{
+    "label": "build-backend-api",
+    "command": "dotnet",
+    "type": "process",
+    "args": [
+        "build",
+        "${workspaceFolder}/TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+    ],
+    "problemMatcher": "$msCompile"
+},
+{
+    "label": "build-webapp-ui",
+    "command": "dotnet",
+    "type": "process",
+    "args": [
+        "build",
+        "${workspaceFolder}/TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+    ],
+    "problemMatcher": "$msCompile"
+}
+```
 
 ??? example "Looking for complete tasks.json?"
 
     === "tasks.json"
         
-        ```json
-        --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.vscode/tasks.json"
-        ```
+    ```json
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.vscode/tasks.json"
+    ```
 
 Lastly, we need to add a `compound launch` property, so we launch and debug both applications together.
 
 To accomplish this, open the file `launch.json` again and add the below array after the `configuration` array.
 
-    ```json title="launch.json"
-    "compounds": [
-        {
-            "name": "RunAll with Dapr",
-            "configurations": [
-                "Launch (backend api) with Dapr",
-                "Launch (web app) with Dapr"
-            ],
-            "stopAll": true
-        }
-    ]
-    ```
+```json title="launch.json"
+"compounds": [
+    {
+        "name": "RunAll with Dapr",
+        "configurations": [
+            "Launch (backend api) with Dapr",
+            "Launch (web app) with Dapr"
+        ],
+        "stopAll": true
+    }
+]
+```
 
 !!! success
     If all is done correctly, you should be able to see a debug configuration named `RunAll with Dapr` and you should be able to just hit ++F5++, sit breakpoints and debug both applications locally in VS Code.

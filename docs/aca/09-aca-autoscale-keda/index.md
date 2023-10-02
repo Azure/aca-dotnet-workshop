@@ -15,7 +15,7 @@ Azure Container Apps supports different scaling triggers including:
 * [HTTP traffic](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#http){target=_blank}: Scaling based on the number of concurrent HTTP requests to your revision.
 * [CPU](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#cpu){target=_blank} or [Memory](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#memory){target=_blank} usage: Scaling based on the amount of CPU utilized or memory consumed by a replica.
 * Azure Storage Queues: Scaling based on the number of messages in Azure Storage Queue.
-* Event-driven using [KEDA](https://keda.sh/): Scaling based on events triggers, such as the number of messages in Azure Service Bus Topic or the number of blobs in Azure Blob Storage container.
+* Event-driven using [KEDA](https://keda.sh/){target=_blank}: Scaling based on events triggers, such as the number of messages in Azure Service Bus Topic or the number of blobs in Azure Blob Storage container.
 
 As we previously covered in the introductory module, Azure Container Apps utilize different open source technologies, including KEDA, which facilitates event-driven autoscaling. KEDA is installed by default when you provision your Container App so you don't need to worry about installing it. All we need to focus on is enabling and configuring our Container App scaling rules.
 
@@ -37,9 +37,9 @@ So our requirements for scaling the backend processor are as follows:
 
 To achieve this, we will start looking into KEDA Azure Service Bus scaler. This specification describes the `azure-servicebus` trigger for Azure Service Bus Queue or Topic. Let's take a look at the yaml file below which contains a generic template for the KEDA specification:
 
-    ```yaml
-    --8<-- "docs/aca/09-aca-autoscale-keda/KEDA_Azure_Service_Bus scaler.yaml"
-    ```
+```yaml
+--8<-- "docs/aca/09-aca-autoscale-keda/KEDA_Azure_Service_Bus scaler.yaml"
+```
 
 ??? info "Curious to learn more about the contents of the yaml file?"
     - The property `type` is set to `azure-servicebus`. Each KEDA scaler specification file has a unique type.
@@ -58,21 +58,21 @@ Azure Container Apps has its own proprietary schema to map KEDA Scaler template 
 
 Let's now create a secret named `svcbus-connstring` in our `tasksmanager-backend-processor` Container App. This secret will contain the value of Azure Service Bus shared access policy (connection string) with `Manage` policy. To accomplish this, run the following commands in the Azure CLI to get the connection string, and then add this secret using the second command:
 
-    ```powershell
-    ##List Service Bus Access Policy RootManageSharedAccessKey
-    $ServiceBusConnectionString = az servicebus namespace authorization-rule keys list `
-    --resource-group $RESOURCE_GROUP `
-    --namespace-name $NamespaceName `
-    --name RootManageSharedAccessKey `
-    --query primaryConnectionString `
-    --output tsv
-    
-    ##Create a new secret named 'svcbus-connstring' in backend processer container app
-    az containerapp secret set `
-    --name $BACKEND_SVC_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --secrets "svcbus-connstring=$ServiceBusConnectionString"
-    ```
+```powershell
+# List Service Bus Access Policy RootManageSharedAccessKey
+$ServiceBusConnectionString = az servicebus namespace authorization-rule keys list `
+--resource-group $RESOURCE_GROUP `
+--namespace-name $NamespaceName `
+--name RootManageSharedAccessKey `
+--query primaryConnectionString `
+--output tsv
+
+# Create a new secret named 'svcbus-connstring' in backend processer container app
+az containerapp secret set `
+--name $BACKEND_SVC_NAME `
+--resource-group $RESOURCE_GROUP `
+--secrets "svcbus-connstring=$ServiceBusConnectionString"
+```
 
 #### 2. Create a Custom Scaling Rule from Azure CLI
 
@@ -81,23 +81,23 @@ Now we are ready to add a new custom scaling rule to match the business requirem
 !!! note
     You might need to upgrade the extension if you are on an older version of `az containerapp` which didn't allow you to create a scaling rule from CLI. To update the extension you can run the following command `az extension update --name containerapp` inside your powershell terminal.
 
-    ```powershell
-    az containerapp update `
-    --name $BACKEND_SVC_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --min-replicas 1 `
-    --max-replicas 5 `
-    --revision-suffix v20230227-3 `
-    --set-env-vars "SendGrid__IntegrationEnabled=false" `
-    --scale-rule-name "topic-msgs-length" `
-    --scale-rule-type "azure-servicebus" `
-    --scale-rule-auth "connection=svcbus-connstring" `
-    --scale-rule-metadata "topicName=<Your topic name>" `
-                            "subscriptionName=<Your topic subscription name>" `
-                            "namespace=$NamespaceName" `
-                            "messageCount=10" `
-                            "connectionFromEnv=svcbus-connstring"
-    ```
+```powershell
+az containerapp update `
+--name $BACKEND_SVC_NAME `
+--resource-group $RESOURCE_GROUP `
+--min-replicas 1 `
+--max-replicas 5 `
+--revision-suffix v20230227-3 `
+--set-env-vars "SendGrid__IntegrationEnabled=false" `
+--scale-rule-name "topic-msgs-length" `
+--scale-rule-type "azure-servicebus" `
+--scale-rule-auth "connection=svcbus-connstring" `
+--scale-rule-metadata "topicName=<Your topic name>" `
+                        "subscriptionName=<Your topic subscription name>" `
+                        "namespace=$NamespaceName" `
+                        "messageCount=10" `
+                        "connectionFromEnv=svcbus-connstring"
+```
 
 ??? info "Curious to learn more about the different parameters passed to the `az containerapp update` command?"
     - Setting the minimum number of replicas to `1`. This means that this Container App could be scaled-in to a single replica if there are no new messages on the topic.
@@ -120,29 +120,29 @@ Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a hi
 
 To get the number of current replicas of service `tasksmanager-backend-processor` we could run the command below, this should run single replica as we didn't load the service bus topic yet.
 
-    ```powershell
-    az containerapp replica list `
-    --name $BACKEND_SVC_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --query [].name
-    ```
+```powershell
+az containerapp replica list `
+--name $BACKEND_SVC_NAME `
+--resource-group $RESOURCE_GROUP `
+--query [].name
+```
 
 The message structure our backend processor expects is similar to the JSON shown below. So copy this message and click on Send messages button, paste the message content, set the content type to `application/json`, check the `Repeat Send` check box, select `500` messages and put an interval of `5ms` between them. Finally click `Send` when you are ready.
 
-    ```json
-    {
-        "data": {
-            "isCompleted": false,
-            "isOverDue": true,
-            "taskAssignedTo": "temp@mail.com",
-            "taskCreatedBy": "someone@mail.com",
-            "taskCreatedOn": "2022-08-18T12:45:22.0984036Z",
-            "taskDueDate": "2023-02-24T12:45:22.0983978Z",
-            "taskId": "6a051aeb-f567-40dd-a434-39927f2b93c5",
-            "taskName": "Auto scale Task"
-        }
+```json
+{
+    "data": {
+        "isCompleted": false,
+        "isOverDue": true,
+        "taskAssignedTo": "temp@mail.com",
+        "taskCreatedBy": "someone@mail.com",
+        "taskCreatedOn": "2022-08-18T12:45:22.0984036Z",
+        "taskDueDate": "2023-02-24T12:45:22.0983978Z",
+        "taskId": "6a051aeb-f567-40dd-a434-39927f2b93c5",
+        "taskName": "Auto scale Task"
     }
-    ```
+}
+```
 
 ![svcbus-send](../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg)
 

@@ -106,29 +106,29 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
 
 Configure secrets details in GitHub repo as described here in [create GitHub secrets](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets){target=_blank}. Use below values mapped to relevant secrets in GitHub.
 
-    ```bash
-    # AZURE_SUBSCRIPTION_ID
-    echo $SUBSCRIPTION_ID
-    # AZURE_TENANT_ID
-    echo $AZURE_TENANT
-    # AZURE_CLIENT_ID
-    echo $APP_ID
-    ```
+```bash
+# AZURE_SUBSCRIPTION_ID
+echo $SUBSCRIPTION_ID
+# AZURE_TENANT_ID
+echo $AZURE_TENANT
+# AZURE_CLIENT_ID
+echo $APP_ID
+```
 
 ### Configure GitHub Repository Variables
 
 Configure repository variables in GitHub repo as described here in [create GitHub variables](https://docs.github.com/en/actions/learn-github-actions/variables). Use below values mapped to relevant variables in GitHub.
 
-    ```bash 
-    # LOCATION: Azure region where resources will be deployed
-    LOCATION=<location. e.g. eastus>
-    
-    # RESOURCE_GROUP: Name of the resource group which will be created and resources will be deployed
-    RESOURCE_GROUP=<resource group name>
-    
-    # (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported
-    CONTAINER_REGISTRY_NAME=<container registry name>
-    ```
+```bash 
+# LOCATION: Azure region where resources will be deployed
+LOCATION=<location. e.g. eastus>
+
+# RESOURCE_GROUP: Name of the resource group which will be created and resources will be deployed
+RESOURCE_GROUP=<resource group name>
+
+# (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported
+CONTAINER_REGISTRY_NAME=<container registry name>
+```
 
 !!! note
 

@@ -7,7 +7,7 @@ canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application
 !!! info "Module Duration"
     60 minutes
 
-In this module, we will start by creating the first microservice named `ACA Web API – Backend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). Followed by that we will provision the  Azure resources needed to deploy the service to Azure Container Apps using the Azure CLI.
+In this module, we will start by creating the first microservice named `ACA Web API – Backend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg){target=_blank}. Followed by that we will provision the  Azure resources needed to deploy the service to Azure Container Apps using the Azure CLI.
 
 ### 1. Create the backend API project (Web API)
 
@@ -43,19 +43,16 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
 - Create new folder named **Services** (make sure it is created at the same level as the models folder and not inside the models folder itself) and add **new files** as shown below.
    Add the Fake Tasks Manager service (In-memory),  this will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA.
-   In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block
+   In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.
 
 === "ITasksManager.cs"
-
-```csharp
---8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
-```
-
+    ```csharp
+    --8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
+    ```
 === "FakeTasksManager.cs"
-
-```csharp
---8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
-```
+    ```csharp
+    --8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
+    ```
 
 The code above is self-explanatory, it generates 10 tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.
 
@@ -233,8 +230,8 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     - The minimum and the maximum number of replicas are set. More about this when we cover Autoscaling in later modules. For the time being, only a single instance of this container app will be provisioned as Auto scale is not configured.
     - We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link [here](https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration){target=_blank}.
     - The `query` property will filter the response coming from the command and just return the FQDN. Take note of this FQDN as you will need it for the next step.
-
-For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
+    
+    For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
 
 - You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 recourses created below.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)
@@ -243,9 +240,9 @@ For full details on all available parameters for this command, please visit this
     To test the backend api service, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`.
     Issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image.
 
-!!! tip
-    You can find your azure container app application url on the azure portal overview tab.
-
-![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
+    !!! tip
+        You can find your azure container app application url on the azure portal overview tab.
+    
+        ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
 
 In the next module, we will see how we will add a new Frontend Web App as a microservice and how it will communicate with the backend API.

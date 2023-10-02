@@ -259,14 +259,14 @@ To achieve this, add a new file under the `bicep` directory as shown below:
 
 Start by creating a new resource group which will contain all the resources to be created by the Bicep scripts.
 
-    ```Powershell
-    $RESOURCE_GROUP="<your RG name>"
-    $LOCATION="<your location>"
-    
-    az group create `
-    --name $RESOURCE_GROUP `
-    --location $LOCATION
-    ```
+```Powershell
+$RESOURCE_GROUP="<your RG name>"
+$LOCATION="<your location>"
+
+az group create `
+--name $RESOURCE_GROUP `
+--location $LOCATION
+```
 
 Create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file `main.bicep` and select **Generate Parameter File**.
 This will result in creating a file named `main.parameters.json` similar to the file below:
@@ -424,12 +424,12 @@ Next, we will prepare container images for the three container apps and update t
 
 Start the deployment by calling `az deployment group create`. To accomplish this, open the PowerShell console and use the content below.
 
-    ```Powershell
-    az deployment group create `
-    --resource-group $RESOURCE_GROUP `
-    --template-file "./bicep/main.bicep" `
-    --parameters "./bicep/main.parameters.json"
-    ```
+```Powershell
+az deployment group create `
+--resource-group $RESOURCE_GROUP `
+--template-file "./bicep/main.bicep" `
+--parameters "./bicep/main.parameters.json"
+```
 
 The Azure CLI will take the Bicep module and start creating the deployment in the resource group.
 

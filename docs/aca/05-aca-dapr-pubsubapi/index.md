@@ -59,16 +59,16 @@ To try out the Pub/Sub API, run the Backend API from VS Code by running the belo
 
 Now let's try to publish a message by sending a POST request to [http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic](http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic) with the below request body, don't forget to set the `Content-Type` header to `application/json`
 
-    ```json
-    {
-        "taskId": "fbc55b2c-d9fa-405e-aec8-22e53f4306dd",
-        "taskName": "Testing Pub Sub Publisher",
-        "taskCreatedBy": "user@mail.net",
-        "taskCreatedOn": "2023-02-12T00:24:37.7361348Z",
-        "taskDueDate": "2023-02-20T00:00:00",
-        "taskAssignedTo": "user2@mail.com"
-    }
-    ```
+```json
+{
+    "taskId": "fbc55b2c-d9fa-405e-aec8-22e53f4306dd",
+    "taskName": "Testing Pub Sub Publisher",
+    "taskCreatedBy": "user@mail.net",
+    "taskCreatedOn": "2023-02-12T00:24:37.7361348Z",
+    "taskDueDate": "2023-02-20T00:00:00",
+    "taskAssignedTo": "user2@mail.com"
+}
+```
 
 ??? tip "Curious about the details of the endpoint"
     We can break endpoint into the following:
@@ -93,18 +93,18 @@ Right now those published messages are stored in the message broker topic doing 
 
 Now we will add a new ASP.NET Core Web API project named **TasksTracker.Processor.Backend.Svc**. Open a command-line terminal and navigate to **root folder** of your project.
 
-    ```powershell
-    dotnet new webapi -o TasksTracker.Processor.Backend.Svc
-    ```
+```powershell
+dotnet new webapi -o TasksTracker.Processor.Backend.Svc
+```
 
 We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA.
 To do so Open the VS Code Command Palette (++ctrl+shift+p++) and select **Docker: Add Docker Files to Workspace...**
 
-    - Use `.NET: ASP.NET Core` when prompted for application platform.
-    - Choose `Linux` when prompted to choose the operating system.
-      - You will be asked if you want to add Docker Compose files. Select `No`.
-      - Take a note of the provided **application port** as we will be using later on. You can always find it again inside the designated `DockerFile` inside the newly created project's directory.
-      - `Dockerfile` and `.dockerignore` files are added to the workspace.
+- Use `.NET: ASP.NET Core` when prompted for application platform.
+- Choose `Linux` when prompted to choose the operating system.
+    - You will be asked if you want to add Docker Compose files. Select `No`.
+    - Take a note of the provided **application port** as we will be using later on. You can always find it again inside the designated `DockerFile` inside the newly created project's directory.
+    - `Dockerfile` and `.dockerignore` files are added to the workspace.
 
 #### 2. Add Models
 
@@ -164,15 +164,15 @@ That means when a message is published on the PubSubname `taskspubsub` on the to
 
 In our case, a sample response will be as follows:
 
-    ```json
-    [
-      {
-        "pubsubname": "taskspubsub",
-        "topic": "tasksavedtopic",
-        "route": "/api/tasksnotifier/tasksaved"
-      }
-    ]
-    ```
+```json
+[
+    {
+    "pubsubname": "taskspubsub",
+    "topic": "tasksavedtopic",
+    "route": "/api/tasksnotifier/tasksaved"
+    }
+]
+```
 
 !!! tip
     Follow this [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works){target=_blank} to find a detailed diagram of how the consumers will discover and subscribe to
@@ -230,20 +230,20 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
 
 Now let's try to publish a message by sending a POST request to [http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic](http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic) with the below request body, don't forget to set the `Content-Type` header to `application/json`
 
-    ```json
-    POST /v1.0/publish/taskspubsub/tasksavedtopic HTTP/1.1
-    Host: localhost:3500
-    Content-Type: application/json
-            
-    {
-        "taskId": "fbc55b2c-d9fa-405e-aec8-22e53f4306dd",
-        "taskName": "Testing Pub Sub Publisher",
-        "taskCreatedBy": "user@mail.net",
-        "taskCreatedOn": "2023-02-12T00:24:37.7361348Z",
-        "taskDueDate": "2023-02-20T00:00:00",
-        "taskAssignedTo": "user2@mail.com"
-    }
-    ```
+```json
+POST /v1.0/publish/taskspubsub/tasksavedtopic HTTP/1.1
+Host: localhost:3500
+Content-Type: application/json
+        
+{
+    "taskId": "fbc55b2c-d9fa-405e-aec8-22e53f4306dd",
+    "taskName": "Testing Pub Sub Publisher",
+    "taskCreatedBy": "user@mail.net",
+    "taskCreatedOn": "2023-02-12T00:24:37.7361348Z",
+    "taskDueDate": "2023-02-20T00:00:00",
+    "taskAssignedTo": "user2@mail.com"
+}
+```
 
 Keep an eye on the terminal logs of the Backend background processor as you will see that the message is received and consumed by the action method `api/tasksnotifier/tasksaved` and an information message is logged in the terminal to indicate the processing of the message.
 
@@ -367,12 +367,12 @@ Update the files below under the Backend Processor Project. We are installing th
     ```
 
 !!! tip
-    Follow this [link](https://signup.sendgrid.com/) to set up a SendGrid account. Also follow [these](https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key){target=_blank} instructions to fetch your SendGrid ApiKey.
+    Follow this [link](https://signup.sendgrid.com/){target=_blank} to set up a SendGrid account. Also follow [these](https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key){target=_blank} instructions to fetch your SendGrid ApiKey.
 
     Please note that the SendGrid API KEY is generated and displayed to you just once. So be sure to copy and save it somewhere. After that only the subset key is displayed.
 
 !!! tip
-    In the [next module](/aca/06-aca-dapr-bindingsapi/index.md/#1-create-dapr-sendgrid-output-binding-component-file) we will be using a new type of Dapr components to send emails using SendGrid.
+    In the [next module](/aca/06-aca-dapr-bindingsapi) we will be using a new type of Dapr components to send emails using SendGrid.
 
     If you don't want to bother with signing up for a SendGrid account to send emails, you can just simulate sending emails by returning always `ok` from the `TaskSaved` method as shown below. 
 
@@ -411,32 +411,32 @@ Now we will switch our implementation to use Azure Service Bus as a message brok
 You can do this from Azure Portal or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values.
 You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
 
-    ```powershell
-    $NamespaceName="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
-    $TopicName="tasksavedtopic"
-    $TopicSubscription="tasks-processor-subscription"
-    
-    ##Create servicebus namespace
-    az servicebus namespace create --resource-group $RESOURCE_GROUP --name $NamespaceName --location $LOCATION --sku Standard
-    
-    ##Create a topic under the namespace
-    az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $NamespaceName --name $TopicName
-    
-    ##Create a topic subscription
-    az servicebus topic subscription create `
-    --resource-group $RESOURCE_GROUP `
-    --namespace-name $NamespaceName `
-    --topic-name $TopicName `
-    --name $TopicSubscription
-    
-    ##List connection string
-    az servicebus namespace authorization-rule keys list `
-    --resource-group $RESOURCE_GROUP `
-    --namespace-name $NamespaceName `
-    --name RootManageSharedAccessKey `
-    --query primaryConnectionString `
-    --output tsv
-    ```
+```powershell
+$NamespaceName="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
+$TopicName="tasksavedtopic"
+$TopicSubscription="tasks-processor-subscription"
+
+# Create servicebus namespace
+az servicebus namespace create --resource-group $RESOURCE_GROUP --name $NamespaceName --location $LOCATION --sku Standard
+
+# Create a topic under the namespace
+az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $NamespaceName --name $TopicName
+
+# Create a topic subscription
+az servicebus topic subscription create `
+--resource-group $RESOURCE_GROUP `
+--namespace-name $NamespaceName `
+--topic-name $TopicName `
+--name $TopicSubscription
+
+# List connection string
+az servicebus namespace authorization-rule keys list `
+--resource-group $RESOURCE_GROUP `
+--namespace-name $NamespaceName `
+--name RootManageSharedAccessKey `
+--query primaryConnectionString `
+--output tsv
+```
 
 !!! note
     Primary connection string is only needed for local dev testing. We will be using Managed Identities when publishing container apps to ACA.
@@ -445,9 +445,9 @@ You need to change the namespace variable as this one should be unique globally 
 
 Add a new files **components** as shown below:
 
-    ```yaml title="dapr-pubsub-svcbus.yaml"
-    --8<-- "docs/aca/05-aca-dapr-pubsubapi/dapr-pubsub-svcbus.yaml"
-    ```
+```yaml title="dapr-pubsub-svcbus.yaml"
+--8<-- "docs/aca/05-aca-dapr-pubsubapi/dapr-pubsub-svcbus.yaml"
+```
 
 !!! note
     We used the name `dapr-pubsub-servicebus` which should match the name of Pub/Sub component we've used earlier in the [TasksNotifierController.cs](#4-create-an-api-endpoint-for-the-consumer-to-subscribe-to-the-topic) controller on the action method with the attribute `Topic`.
@@ -464,10 +464,10 @@ Add a new files **aca-components** as shown below:
 !!! note
     Remember to replace the namespace placeholder with the unique global name you chose earlier
 
-    ```yaml title="containerapps-pubsub-svcbus.yaml"
-    # pubsub.yaml for Azure Service Bus component
-    --8<-- "docs/aca/05-aca-dapr-pubsubapi/containerapps-pubsub-svcbus.yaml"
-    ```
+```yaml title="containerapps-pubsub-svcbus.yaml"
+# pubsub.yaml for Azure Service Bus component
+--8<-- "docs/aca/05-aca-dapr-pubsubapi/containerapps-pubsub-svcbus.yaml"
+```
 
 ???+ note "Things to note here"
      - We didn't specify the component name `dapr-pubsub-servicebus` when we created this component file. We are going to specify it once we add this dapr component to Azure Container Apps Environment via CLI.
@@ -506,19 +506,19 @@ With all those bits in place, we are ready to run the publisher service `Backend
 Now let's try to publish a message by sending a POST request to [http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic](http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic) with the below request body, don't forget to set the `Content-Type`
 header to `application/json`
 
-    ```json
-    POST /v1.0/publish/taskspubsub/tasksavedtopic HTTP/1.1
-    Host: localhost:3500
-    Content-Type: application/json
-    {
-        "taskId": "fbc55b2c-d9fa-405e-aec8-22e53f4306dd",
-        "taskName": "Testing Pub Sub Publisher",
-        "taskCreatedBy": "user@mail.net",
-        "taskCreatedOn": "2023-02-12T00:24:37.7361348Z",
-        "taskDueDate": "2023-02-20T00:00:00",
-        "taskAssignedTo": "user2@mail.com"
-    }
-    ```
+```json
+POST /v1.0/publish/taskspubsub/tasksavedtopic HTTP/1.1
+Host: localhost:3500
+Content-Type: application/json
+{
+    "taskId": "fbc55b2c-d9fa-405e-aec8-22e53f4306dd",
+    "taskName": "Testing Pub Sub Publisher",
+    "taskCreatedBy": "user@mail.net",
+    "taskCreatedOn": "2023-02-12T00:24:37.7361348Z",
+    "taskDueDate": "2023-02-20T00:00:00",
+    "taskAssignedTo": "user2@mail.com"
+}
+```
 
 ### Deploy the Backend Background Processor and the Backend API Projects to Azure Container Apps
 
@@ -529,66 +529,66 @@ As we have done previously we need to build and deploy both app images to ACR, s
 !!! note
     Make sure you are in root directory of the project, i.e. **TasksTracker.ContainerApps**
 
-    ```powershell
-    $BACKEND_SVC_NAME="tasksmanager-backend-processor"
-    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
-    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
-    ```
+```powershell
+$BACKEND_SVC_NAME="tasksmanager-backend-processor"
+az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+```
 
 #### 2. Create a new Azure Container App to host the new Backend Background Processor
 
 Now we need to create a new Azure Container App. We need to have this new container app with those capabilities in place:
 
-    - Ingress for this container app should be disabled (no access via HTTP at all as this is a background processor responsible to process published messages).
-    - Dapr needs to be enabled.
-    - **Optional** (only if you activated your SendGrid account and received an api key. Otherwise, remove the `--secrets` and `--env-var` from the powershell command below). 
-  Setting the value of SendGrid API in the secrets store and referencing it in the environment variables, as well setting the flag `IntegrationEnabled` to `true` so it will send actual emails.
+- Ingress for this container app should be disabled (no access via HTTP at all as this is a background processor responsible to process published messages).
+- Dapr needs to be enabled.
+- **Optional** (only if you activated your SendGrid account and received an api key. Otherwise, remove the `--secrets` and `--env-var` from the powershell command below). 
+Setting the value of SendGrid API in the secrets store and referencing it in the environment variables, as well setting the flag `IntegrationEnabled` to `true` so it will send actual emails.
 
 To achieve the above, run the PowerShell script below.
 
 !!! note
     Notice how we removed the Ingress property totally which disables the Ingress for this Container App. Remember to replace the placeholders with your own values:
 
-    ```powershell
-    az containerapp create `
-    --name "$BACKEND_SVC_NAME"  `
-    --resource-group $RESOURCE_GROUP `
-    --environment $ENVIRONMENT `
-    --image "$ACR_NAME.azurecr.io/tasksmanager/$BACKEND_SVC_NAME" `
-    --registry-server "$ACR_NAME.azurecr.io" `
-    --min-replicas 1 `
-    --max-replicas 1 `
-    --cpu 0.25 --memory 0.5Gi `
-    --enable-dapr `
-    --dapr-app-id  $BACKEND_SVC_NAME `
-    --dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5071> `
-    #comment out these two lines if you are not using sendgrid
-    --secrets "sendgrid-apikey=<Replace with your SendGrid API Key>" `
-    --env-vars "SendGrid__ApiKey=secretref:sendgrid-apikey" "SendGrid__IntegrationEnabled=true"
-    ```
+```powershell
+az containerapp create `
+--name "$BACKEND_SVC_NAME"  `
+--resource-group $RESOURCE_GROUP `
+--environment $ENVIRONMENT `
+--image "$ACR_NAME.azurecr.io/tasksmanager/$BACKEND_SVC_NAME" `
+--registry-server "$ACR_NAME.azurecr.io" `
+--min-replicas 1 `
+--max-replicas 1 `
+--cpu 0.25 --memory 0.5Gi `
+--enable-dapr `
+--dapr-app-id  $BACKEND_SVC_NAME `
+--dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5071> `
+# comment out these two lines if you are not using sendgrid
+--secrets "sendgrid-apikey=<Replace with your SendGrid API Key>" `
+--env-vars "SendGrid__ApiKey=secretref:sendgrid-apikey" "SendGrid__IntegrationEnabled=true"
+```
 
 #### 3. Deploy New Revisions of the Backend API to Azure Container Apps
 
 We need to update the Azure Container App hosting the Backend API with a new revision so our code changes for publishing messages after a task is saved is available for users.
 
-    ```powershell
-    ## Update Backend API App container app and create a new revision 
-    az containerapp update `
-    --name $BACKEND_API_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --revision-suffix v20230220-1 
-    ```
+```powershell
+# Update Backend API App container app and create a new revision 
+az containerapp update `
+--name $BACKEND_API_NAME `
+--resource-group $RESOURCE_GROUP `
+--revision-suffix v20230220-1 
+```
 
 #### 4. Add Azure Service Bus Dapr Pub/Sub Component to Azure Container Apps Environment
 
 Deploy the Dapr Pub/Sub Component to the Azure Container Apps Environment using the following command:
 
-    ```powershell
-    az containerapp env dapr-component set `
-    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-    --dapr-component-name dapr-pubsub-servicebus `
-    --yaml '.\aca-components\containerapps-pubsub-svcbus.yaml'
-    ```
+```powershell
+az containerapp env dapr-component set `
+--name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+--dapr-component-name dapr-pubsub-servicebus `
+--yaml '.\aca-components\containerapps-pubsub-svcbus.yaml'
+```
 
 !!! note
     Notice that we set the component name `dapr-pubsub-servicebus` when we added it to the Container Apps Environment.
@@ -601,22 +601,22 @@ In the previous module we have [already configured](../04-aca-dapr-stateapi/inde
 
 Run the command below to create `system-assigned` identity for our Backend Processor App:
 
-    ```powershell
-    az containerapp identity assign `
-      --resource-group $RESOURCE_GROUP `
-      --name $BACKEND_SVC_NAME `
-      --system-assigned
-    ```
+```powershell
+az containerapp identity assign `
+    --resource-group $RESOURCE_GROUP `
+    --name $BACKEND_SVC_NAME `
+    --system-assigned
+```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be as the below, keep a note of the property `principalId` as we are going to use it in the next step.
 
-    ```json
-    {
-      "principalId": "<your principal id will be displayed here>",
-      "tenantId": "<your tenant id will be displayed here>",
-      "type": "SystemAssigned"
-    }
-    ```
+```json
+{
+    "principalId": "<your principal id will be displayed here>",
+    "tenantId": "<your tenant id will be displayed here>",
+    "type": "SystemAssigned"
+}
+```
 
 #### 2. Grant Backend Processor App the Azure Service Bus Data Receiver Role
 
@@ -626,60 +626,60 @@ You can read more about `Azure built-in roles for Azure Service Bus` [here](http
 
 Run the command below to associate the `system-assigned` identity with the access-control role `Azure Service Bus Data Receiver`:
 
-    ```powershell
-    $subscriptionID = "<Your Azure Subscription ID>" ## Your Azure Subscription id which you can find on the azure portal
-    $principalId = "<your principal id which was generated above>" ## Principal Id after creating system identity for Backend Processor Container app 
-    $roleNameOrId =  "Azure Service Bus Data Receiver" ## Built in role name
-    
-    az role assignment create `
-    --assignee $principalId `
-    --role $roleNameOrId `
-    --scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
-    ```
+```powershell
+$subscriptionID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
+$principalId = "<your principal id which was generated above>" # Principal Id after creating system identity for Backend Processor Container app 
+$roleNameOrId =  "Azure Service Bus Data Receiver" # Built in role name
+
+az role assignment create `
+--assignee $principalId `
+--role $roleNameOrId `
+--scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+```
 
 #### 3. Grant Backend API App the Azure Service Bus Data Sender Role
 
 We'll do the same with Backend API container app, but we will use a different Azure built-in roles for Azure Service Bus which is the role `Azure Service Bus Data Sender` as the Backend API is a publisher of the messages. Run the command below to associate the `system-assigned` with access-control role `Azure Service Bus Data Sender`:
 
-    ```powershell
-    $subscriptionID = "<Your Azure Subscription ID>" ## Your Azure Subscription
-    $principalId = "<your principal id which was generated in module 4. You can find it on the azure portal under the specific container identity section>" ## Principal Id after creating system identity for Backend API Container app
-    $roleNameOrId =  "Azure Service Bus Data Sender" ## Built in role name
-    
-    az role assignment create `
-    --assignee $principalId `
-    --role $roleNameOrId `
-    --scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
-    ```
+```powershell
+$subscriptionID = "<Your Azure Subscription ID>" # Your Azure Subscription
+$principalId = "<your principal id which was generated in module 4. You can find it on the azure portal under the specific container identity section>" # Principal Id after creating system identity for Backend API Container app
+$roleNameOrId =  "Azure Service Bus Data Sender" # Built in role name
+
+az role assignment create `
+--assignee $principalId `
+--role $roleNameOrId `
+--scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+```
 
 #### 4. Restart Container Apps
 
 Lastly, we need to restart both container apps revisions to pick up the role assignment.
 
-    ```powershell
-    ##Get revision name and assign it to a variable
-    $REVISION_NAME = (az containerapp revision list `
-            --name $BACKEND_SVC_NAME  `
-            --resource-group $RESOURCE_GROUP `
-            --query [0].name)
-    
-    ##Restart revision by name
-    az containerapp revision restart `
-    --resource-group $RESOURCE_GROUP `
-    --name $BACKEND_SVC_NAME  `
-    --revision $REVISION_NAME
-    
-    $REVISION_NAME = (az containerapp revision list `
-            --name $BACKEND_API_NAME  `
-            --resource-group $RESOURCE_GROUP `
-            --query [0].name)
-    
-    ##Restart revision by name
-    az containerapp revision restart `
-    --resource-group $RESOURCE_GROUP `
-    --name $BACKEND_API_NAME  `
-    --revision $REVISION_NAME
-    ```
+```powershell
+# Get revision name and assign it to a variable
+$REVISION_NAME = (az containerapp revision list `
+        --name $BACKEND_SVC_NAME  `
+        --resource-group $RESOURCE_GROUP `
+        --query [0].name)
+
+# Restart revision by name
+az containerapp revision restart `
+--resource-group $RESOURCE_GROUP `
+--name $BACKEND_SVC_NAME  `
+--revision $REVISION_NAME
+
+$REVISION_NAME = (az containerapp revision list `
+        --name $BACKEND_API_NAME  `
+        --resource-group $RESOURCE_GROUP `
+        --query [0].name)
+
+# Restart revision by name
+az containerapp revision restart `
+--resource-group $RESOURCE_GROUP `
+--name $BACKEND_API_NAME  `
+--revision $REVISION_NAME
+```
 
 !!! Success
     With this in place, you should be able to test the 3 services end to end and should receive a notification email to the task assignee email, the email will look like the below.

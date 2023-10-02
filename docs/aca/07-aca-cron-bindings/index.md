@@ -185,40 +185,40 @@ Add a new file folder **aca-components**. This file will be used when updating t
 
 To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. We can use the same PowerShell console use the following code (make sure you are on directory **TasksTracker.ContainerApps**):
 
-    ```powershell
-    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
-    
-    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
-    ```
+```powershell
+az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+
+az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+```
 
 #### 2. Add Cron Dapr Component to ACA Environment
 
-    ```powershell
-    ##Cron binding component
-    az containerapp env dapr-component set `
-      --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-      --dapr-component-name scheduledtasksmanager `
-      --yaml '.\aca-components\containerapps-scheduled-cron.yaml'
-    ```
+```powershell
+# Cron binding component
+az containerapp env dapr-component set `
+    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+    --dapr-component-name scheduledtasksmanager `
+    --yaml '.\aca-components\containerapps-scheduled-cron.yaml'
+```
 
 ##### 3. Deploy New Revisions of the Backend API and Backend Background Processor to ACA
 
 As we did before, we need to update the Azure Container App hosting the Backend API & Backend Background Processor with a new revision so our code changes are available for the end users.
 To accomplish this run the PowerShell script below:
 
-    ```powershell
-    ## Update Backend API App container app and create a new revision 
-    az containerapp update `
-    --name $BACKEND_API_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --revision-suffix v20230227-1 
-    
-    ## Update Backend Background Processor container app and create a new revision 
-    az containerapp update `
-    --name $BACKEND_SVC_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --revision-suffix v20230227-1 
-    ```
+```powershell
+# Update Backend API App container app and create a new revision 
+az containerapp update `
+--name $BACKEND_API_NAME `
+--resource-group $RESOURCE_GROUP `
+--revision-suffix v20230227-1 
+
+# Update Backend Background Processor container app and create a new revision 
+az containerapp update `
+--name $BACKEND_SVC_NAME `
+--resource-group $RESOURCE_GROUP `
+--revision-suffix v20230227-1 
+```
 
 !!! note
     The service `ScheduledTasksManager` which will be triggered by the Cron job on certain intervals is hosted in the ACA service `ACA-Processor Backend`. In the future module we are going to scale this ACA `ACA-Processor Backend` to multiple replicas/instances.

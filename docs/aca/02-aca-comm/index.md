@@ -7,7 +7,7 @@ canonical_url: https://bitoftech.net/2022/08/25/communication-microservices-azur
 !!! info "Module Duration"
     60 minutes
 
-In this module, we will add a service named `ACA Web API – Frontend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). This service will host a simple ASP.NET Razor pages web app which allows the end users to manage their tasks. After that we will provision Azure resources needed to deploy the service to ACA using Azure CLI.
+In this module, we will add a service named `ACA Web API – Frontend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg){target=_blank}. This service will host a simple ASP.NET Razor pages web app which allows the end users to manage their tasks. After that we will provision Azure resources needed to deploy the service to ACA using Azure CLI.
 
 ### 1. Create the Frontend Web App project (Web APP)
 
@@ -48,78 +48,78 @@ By looking at the cshtml content notice that the page is expecting a query strin
 
 === "Index.cshtml"
 
-```html
---8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Index.cshtml"
-```
+    ```html
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Index.cshtml"
+    ```
 
 === "Index.cshtml.cs"
 
-```csharp
---8<-- "docs/aca/02-aca-comm/Tasks.Index.cshtml.cs"
-```
+    ```csharp
+    --8<-- "docs/aca/02-aca-comm/Tasks.Index.cshtml.cs"
+    ```
 
-!!! tip "What does this code do?"
-    In the code above we've injected named HttpClientFactory which is responsible to call the Backend API service as HTTP request. The index page supports deleting and marking tasks as completed along with listing tasks for certain users based on the `createdBy` property stored in a cookie named `TasksCreatedByCookie`.
-    More about populating this property later in the workshop.
+    !!! tip "What does this code do?"
+        In the code above we've injected named HttpClientFactory which is responsible to call the Backend API service as HTTP request. The index page supports deleting and marking tasks as completed along with listing tasks for certain users based on the `createdBy` property stored in a cookie named `TasksCreatedByCookie`.
+        More about populating this property later in the workshop.
 
 === "Create.cshtml"
 
-```html
---8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Create.cshtml"
-```
+    ```html
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Create.cshtml"
+    ```
 
 === "Create.cshtml.cs"
 
-```csharp
---8<-- "docs/aca/02-aca-comm/Create.cshtml.cs"
-```
-
-!!! tip "What does this code do?"
-    The code is self-explanatory here. We just injected the type HttpClientFactory in order to issue a POST request and create a new task.
+    ```csharp
+    --8<-- "docs/aca/02-aca-comm/Create.cshtml.cs"
+    ```
+    
+    !!! tip "What does this code do?"
+        The code is self-explanatory here. We just injected the type HttpClientFactory in order to issue a POST request and create a new task.
 
 === "Edit.cshtml"
 
-```html
---8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Edit.cshtml"
-```
+    ```html
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Edit.cshtml"
+    ```
 
 === "Edit.cshtml.cs"
 
-```csharp
---8<-- "docs/aca/02-aca-comm/Edit.cshtml.cs"
-```
-
-!!! tip "What does this code do?"
-    The code added is similar to the create operation. The Edit page accepts the TaskId as a Guid, loads the task, and then updates the task by sending an HTTP PUT operation.
+    ```csharp
+    --8<-- "docs/aca/02-aca-comm/Edit.cshtml.cs"
+    ```
+    
+    !!! tip "What does this code do?"
+        The code added is similar to the create operation. The Edit page accepts the TaskId as a Guid, loads the task, and then updates the task by sending an HTTP PUT operation.
 
 - Now we will inject an HTTP client factory and define environment variables. To do so we will register the HttpClientFactory named `BackEndApiExternal` to make it available for injection in controllers. Open the `Program.cs` file and update it with highlighted code below:
 
 === "Program.cs"
 
-```csharp hl_lines="12 13 14 15"
-namespace TasksTracker.WebPortal.Frontend.Ui
-{
-    public class Program
+    ```csharp hl_lines="12 13 14 15"
+    namespace TasksTracker.WebPortal.Frontend.Ui
     {
-        public static void Main(string[] args)
+        public class Program
         {
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            builder.Services.AddRazorPages();
-
-            builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
+            public static void Main(string[] args)
             {
-                httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp"));
-            });
-
-            var app = builder.Build();
-
-            // Code removed for brevity 
+                var builder = WebApplication.CreateBuilder(args);
+    
+                // Add services to the container.
+                builder.Services.AddRazorPages();
+    
+                builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
+                {
+                    httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp"));
+                });
+    
+                var app = builder.Build();
+    
+                // Code removed for brevity 
+            }
         }
     }
-}
-```
+    ```
 
 - Next, we will add a new environment variable named `BackendApiConfig:BaseUrlExternalHttp` into `appsettings.json` file.
 This variable will contain the Base URL for the backend API deployed in the previous module to ACA. Later on in the workshop, we will see how we can set the environment variable once we deploy it to ACA.
@@ -134,15 +134,15 @@ This variable will contain the Base URL for the backend API deployed in the prev
 
 === "Index.cshtml"
 
-```html
---8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Index.cshtml"
-```
+    ```html
+    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Index.cshtml"
+    ```
 
 === "Index.cshtml.cs"
 
-```csharp
---8<-- "docs/aca/02-aca-comm/Index.cshtml.cs"
-```
+    ```csharp
+    --8<-- "docs/aca/02-aca-comm/Index.cshtml.cs"
+    ```
 
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the frontend directory which hosts the `.csproj` project folder and build the project.
 
@@ -212,10 +212,10 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
 ??? tip "Want to know more about the command?"
     When you do this change, the FQDN (Application URL) will change, and it will be similar to the one shown below. Notice how there is an `Internal` part of the URL. `https://tasksmanager-backend-api.internal.[Environment unique identifier].eastus.azurecontainerapps.io/api/tasks/`
 
-If you try to invoke the URL from the browser directly it will return 404 as this Internal Url can only be accessed from container apps within the container environment.
-
-The FQDN consists of multiple parts. For example, all our Container Apps will be under a specific Environment unique identifier (e.g. `agreeablestone-8c14c04c`) and the Container App will vary based on the name provided, check the image below for a better explanation.
-![Container Apps FQDN](../../assets/images/02-aca-comm/container-apps-fqdn.jpg)
+    If you try to invoke the URL from the browser directly it will return 404 as this Internal Url can only be accessed from container apps within the container environment.
+    
+    The FQDN consists of multiple parts. For example, all our Container Apps will be under a specific Environment unique identifier (e.g. `agreeablestone-8c14c04c`) and the Container App will vary based on the name provided, check the image below for a better explanation.
+    ![Container Apps FQDN](../../assets/images/02-aca-comm/container-apps-fqdn.jpg)
 
 - Now we will need to update the Frontend Web App environment variable to point to the internal backend Web API FQDN. The last thing we need to do here is to update the Frontend WebApp environment variable named `BackendApiConfig_BaseUrlExternalHttp` with the new value of the internal Backend Web API base URL, to do so we need to update the Web App container app and it will create a new revision implicitly (more about revisions in the upcoming modules). The following command will update the container app with the changes:
 

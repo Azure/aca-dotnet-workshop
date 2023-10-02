@@ -62,19 +62,19 @@ Create a variable group named **AcaApp** under Library in your Azure Devops proj
 
 This variable group will be used to store below details:
 
-    ```bash
-    # AZURE_SUBSCRIPTION: Name of the service connection created for Azure Subscription
-    AZURE_SUBSCRIPTION=<service connection name>
-    
-    # LOCATION: Azure region where resources will be deployed
-    LOCATION=<location>
-    
-    # RESOURCE_GROUP: Name of the resource group which will be created and where the resources will be deployed
-    RESOURCE_GROUP=<resource group name>
-    
-    # (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported
-    CONTAINER_REGISTRY_NAME=<container registry name>
-    ```
+```bash
+# AZURE_SUBSCRIPTION: Name of the service connection created for Azure Subscription
+AZURE_SUBSCRIPTION=<service connection name>
+
+# LOCATION: Azure region where resources will be deployed
+LOCATION=<location>
+
+# RESOURCE_GROUP: Name of the resource group which will be created and where the resources will be deployed
+RESOURCE_GROUP=<resource group name>
+
+# (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported
+CONTAINER_REGISTRY_NAME=<container registry name>
+```
 
 !!! note
 

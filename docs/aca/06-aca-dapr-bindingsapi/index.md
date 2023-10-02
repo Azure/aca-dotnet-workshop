@@ -15,9 +15,9 @@ turn stores the content of the message into an Azure Blob Storage container. Her
 
 The rest of this module will implement the three scenarios mentioned below:
 
-      - Trigger a process on the `ACA-Processor Backend` based on a **message sent to a specific Azure Storage Queue**. This scenario will assume that the Azure Storage Queue is an external system to which external clients can submit tasks.
-      - From the service `ACA-Processor Backend` we will **invoke an external resource** that stores the content of the incoming task from the external queue as a JSON blob file on Azure Storage Blobs.
-      - Remove the SendGrid SDK as well as the custom code created in the previous module to send emails and replace it with [Dapr SendGrid output binding.](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/){target=_blank}
+- Trigger a process on the `ACA-Processor Backend` based on a **message sent to a specific Azure Storage Queue**. This scenario will assume that the Azure Storage Queue is an external system to which external clients can submit tasks.
+- From the service `ACA-Processor Backend` we will **invoke an external resource** that stores the content of the incoming task from the external queue as a JSON blob file on Azure Storage Blobs.
+- Remove the SendGrid SDK as well as the custom code created in the previous module to send emails and replace it with [Dapr SendGrid output binding.](https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/){target=_blank}
 
 Take a look at the high-level architecture diagram below to understand the flow of input and output bindings in Dapr:
 
@@ -47,17 +47,17 @@ Looking at the diagram we notice the following:
 * Once the Dapr sidecar reads the binding configuration file, our service can trigger an event that invokes the output binding API on the Dapr sidecar. In our case, the event will be creating a new blob file containing the content of the message we read earlier from the Azure Storage Queue.
 * With this in place, our service `ACA-Processor Backend` will be ready to invoke the external resource by sending a POST operation to the endpoint `http://localhost:3502/v1.0/bindings/ExternalTasksBlobstore` and the JSON payload will contain the content below. Alternatively, we can use the Dapr client SDK to invoke this output biding to invoke the external service and store the file in Azure Blob Storage.
 
-    ```json
-    {
-        "data": "{
-            "taskName": "Task Coming from External System",
-            "taskAssignedTo": "user1@hotmail.com",
-            "taskCreatedBy": "tjoudeh@bitoftech.net",
-            "taskDueDate": "2022-08-19T12:45:22.0983978Z"
-        }",
-        "operation": "create"
-    }
-    ```
+```json
+{
+    "data": "{
+        "taskName": "Task Coming from External System",
+        "taskAssignedTo": "user1@hotmail.com",
+        "taskCreatedBy": "tjoudeh@bitoftech.net",
+        "taskDueDate": "2022-08-19T12:45:22.0983978Z"
+    }",
+    "operation": "create"
+}
+```
 
 Let's start by updating our Backend Background Processor project and define the input and output bindings configuration files and event handlers.
 
@@ -71,19 +71,19 @@ Run the PowerShell script below to create Azure Storage Account and get the mast
     We didn't use Azure Manged Identity here because the assumption is that those services are not part of our solution and thus they could theoretically be a non AD compliant services or hosted on another cloud. 
     If these services where part of your application's ecosystem it is always recommended that you use Azure Managed Identity.
 
-    ```powershell
-    $STORAGE_ACCOUNT_NAME = "<replace with a globally unique storage name.The field can contain only lowercase letters and numbers. Name must be between 3 and 24 characters.>"
-      
-    az storage account create `
-    --name $STORAGE_ACCOUNT_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --location $LOCATION `
-    --sku Standard_LRS `
-    --kind StorageV2
-      
-    # list azure storage keys
-    az storage account keys list -g $RESOURCE_GROUP -n $STORAGE_ACCOUNT_NAME
-    ```
+```powershell
+$STORAGE_ACCOUNT_NAME = "<replace with a globally unique storage name.The field can contain only lowercase letters and numbers. Name must be between 3 and 24 characters.>"
+    
+az storage account create `
+--name $STORAGE_ACCOUNT_NAME `
+--resource-group $RESOURCE_GROUP `
+--location $LOCATION `
+--sku Standard_LRS `
+--kind StorageV2
+    
+# list azure storage keys
+az storage account keys list -g $RESOURCE_GROUP -n $STORAGE_ACCOUNT_NAME
+```
 
 ### Updating the Backend Background Processor Project
 
@@ -194,14 +194,14 @@ In our case the name of the queue in the configuration file is `external-tasks-q
 
 The content of the message that Azure Storage Queue excepts should be as below, so try to queue a new message using the tool as the image below:
 
-    ```json
-    {
-      "taskName": "Task from External System",
-      "taskAssignedTo": "user1@hotmail.com",
-      "taskCreatedBy": "tjoudeh@bitoftech.net",
-      "taskDueDate": "2022-08-19T12:45:22.0983978Z"
-    }
-    ```
+```json
+{
+    "taskName": "Task from External System",
+    "taskAssignedTo": "user1@hotmail.com",
+    "taskCreatedBy": "tjoudeh@bitoftech.net",
+    "taskDueDate": "2022-08-19T12:45:22.0983978Z"
+}
+```
 
 ![storage-queue](../../assets/images/06-aca-dapr-bindingsapi/storage-queue.jpg)
 
@@ -239,13 +239,13 @@ Add a new file under the **components** folder as shown below:
 
 #### 2. Remove SendGrid package reference
 
-    - Update file **TasksTracker.Processor.Backend.Svc.csproj** and remove the NuGet package reference **PackageReference Include="SendGrid" Version="9.28.1"**. With the introduction of Dapr SendGrid Output bindings there is no need to include the external SDKs.
+- Update file **TasksTracker.Processor.Backend.Svc.csproj** and remove the NuGet package reference **PackageReference Include="SendGrid" Version="9.28.1"**. With the introduction of Dapr SendGrid Output bindings there is no need to include the external SDKs.
 
-    ```csharp
-    // delete these using statements
-    using SendGrid;
-    using SendGrid.Helpers.Mail;
-    ```
+```csharp
+// delete these using statements
+using SendGrid;
+using SendGrid.Helpers.Mail;
+```
 
 #### 3. Update SendEmail Code to Use Output Bindings Instead of SendGrid SDK
 
@@ -291,15 +291,15 @@ with [Azure Key Vault secret store](https://docs.dapr.io/reference/components-re
 
 Create an Azure Key Vault which will be used to store securely any secret or key used in our application.
 
-    ```powershell
-    $KEYVAULTNAME = "<your akv name. Should be globally unique. 
-    Vault name must only contain alphanumeric characters and dashes and cannot start with a number.>"
-    az keyvault create `
-    --name $KEYVAULTNAME `
-    --resource-group $RESOURCE_GROUP `
-    --enable-rbac-authorization true `
-    --location $LOCATION
-    ```
+```powershell
+$KEYVAULTNAME = "<your akv name. Should be globally unique. 
+Vault name must only contain alphanumeric characters and dashes and cannot start with a number.>"
+az keyvault create `
+--name $KEYVAULTNAME `
+--resource-group $RESOURCE_GROUP `
+--enable-rbac-authorization true `
+--location $LOCATION
+```
 
 !!! note
     It is important to create the Azure Key Vault with Azure RBAC for authorization by setting `--enable-rbac-authorization true` because the role we are going to assign to the Azure AD application will work only when RBAC authorization is enabled.
@@ -310,51 +310,51 @@ In the previous module we have configured the `system-assigned` identity for the
 
 You can read more about [Azure built-in roles for Key Vault data plane operations](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations){target=_blank}.
 
-    ```powershell
-    $KV_SECRETSUSER_ROLEID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
-    $subscriptionID= az account show --query id -o tsv
-    
-    # Get PRINCIPALID of BACKEND Processor Service
-    $BACKEND_SVC_PRINCIPALID = az containerapp show `
-    -n $BACKEND_SVC_NAME `
-    -g $RESOURCE_GROUP `
-    --query identity.principalId
-    
-    az role assignment create `
-    --role $KV_SECRETSUSER_ROLEID `
-    --assignee $BACKEND_SVC_PRINCIPALID `
-    --scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
-    ```
+```powershell
+$KV_SECRETSUSER_ROLEID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
+$subscriptionID= az account show --query id -o tsv
+
+# Get PRINCIPALID of BACKEND Processor Service
+$BACKEND_SVC_PRINCIPALID = az containerapp show `
+-n $BACKEND_SVC_NAME `
+-g $RESOURCE_GROUP `
+--query identity.principalId
+
+az role assignment create `
+--role $KV_SECRETSUSER_ROLEID `
+--assignee $BACKEND_SVC_PRINCIPALID `
+--scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
+```
 
 #### 3. Create Secrets in the Azure Key Vault
 
 To create a secret in Azure Key Vault you need to have a role which allows you to create secrets. From the Azure CLI we will assign the role `Key Vault Secrets Officer` to the user signed in to AZ CLI to
 be able to create secrets. To do so use the script below:
 
-    ```powershell
-    $SIGNEDIN_UERID =  az ad signed-in-user show --query id
-    $KV_SECRETSOFFICER_ROLEID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID for 'Key Vault Secrets Office' Role 
-    
-    az role assignment create --role $KV_SECRETSOFFICER_ROLEID `
-    --assignee $SIGNEDIN_UERID `
-    --scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
-    ```
+```powershell
+$SIGNEDIN_UERID =  az ad signed-in-user show --query id
+$KV_SECRETSOFFICER_ROLEID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID for 'Key Vault Secrets Office' Role 
+
+az role assignment create --role $KV_SECRETSOFFICER_ROLEID `
+--assignee $SIGNEDIN_UERID `
+--scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
+```
 
 Now we will create 2 secrets in the Azure Key Vault using the commands below:
 
-    ```powershell
-    # Set SendGrid API Key as a secret named 'sendgrid-api-key'
-    az keyvault secret set `
-    --vault-name $KEYVAULTNAME `
-    --name "sendgrid-api-key" `
-    --value "<Send Grid API Key>.leave this empty if you opted not to register with the sendgrip api"
-    
-    # Set External Azure Storage Access Key as a secret named 'external-azure-storage-key'
-    az keyvault secret set `
-    --vault-name $KEYVAULTNAME `
-    --name "external-azure-storage-key" `
-    --value "<Your Storage Account Key>"
-    ```
+```powershell
+# Set SendGrid API Key as a secret named 'sendgrid-api-key'
+az keyvault secret set `
+--vault-name $KEYVAULTNAME `
+--name "sendgrid-api-key" `
+--value "<Send Grid API Key>.leave this empty if you opted not to register with the sendgrip api"
+
+# Set External Azure Storage Access Key as a secret named 'external-azure-storage-key'
+az keyvault secret set `
+--vault-name $KEYVAULTNAME `
+--name "external-azure-storage-key" `
+--value "<Your Storage Account Key>"
+```
 
 #### 4. Create a ACA Dapr Secrets Store Component file
 
@@ -429,20 +429,20 @@ With those changes in place, we are ready to rebuild the backend background proc
 As we have done previously we need to build and deploy the Backend Background Processor image to ACR, so it is ready to be deployed to ACA.
 Continue using the same PowerShell console and paste the code below (make sure you are under the  **TasksTracker.ContainerApps** directory):
 
-    ```powershell
-    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
-    ```
+```powershell
+az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+```
 
 #### 2. Add Dapr Secret Store Component to ACA Environment
 
 We need to run the command below to create the Dapr secret store component:
 
-    ```powershell
-    az containerapp env dapr-component set `
-    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-    --dapr-component-name secretstoreakv `
-    --yaml '.\aca-components\containerapps-secretstore-kv.yaml'
-    ```
+```powershell
+az containerapp env dapr-component set `
+--name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+--dapr-component-name secretstoreakv `
+--yaml '.\aca-components\containerapps-secretstore-kv.yaml'
+```
 
 #### 3. Add three Bindings Dapr Components to ACA Environment
 
@@ -453,25 +453,25 @@ Next, we will add create the three Dapr bindings components using the component 
 
     You can attempt to execute these commands but if the error still persists at the time you are consuming this workshop you can create the 3 components from the Azure Portal as shown below.
 
-    ```powershell
-    ##Input binding component for Azure Storage Queue
-    az containerapp env dapr-component set `
-      --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-      --dapr-component-name externaltasksmanager `
-      --yaml '.\aca-components\containerapps-bindings-in-storagequeue.yaml'
-     
-    ##Output binding component for Azure Blob Storage
-    az containerapp env dapr-component set `
-     --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-      --dapr-component-name externaltasksblobstore `
-     --yaml '.\aca-components\containerapps-bindings-out-blobstorage.yaml'
+```powershell
+# Input binding component for Azure Storage Queue
+az containerapp env dapr-component set `
+    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+    --dapr-component-name externaltasksmanager `
+    --yaml '.\aca-components\containerapps-bindings-in-storagequeue.yaml'
     
-    ##Output binding component for SendGrid
-    az containerapp env dapr-component set `
-     --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-      --dapr-component-name sendgrid `
-     --yaml '.\aca-components\containerapps-bindings-out-sendgrid.yaml'
-    ```
+# Output binding component for Azure Blob Storage
+az containerapp env dapr-component set `
+    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+    --dapr-component-name externaltasksblobstore `
+    --yaml '.\aca-components\containerapps-bindings-out-blobstorage.yaml'
+
+# Output binding component for SendGrid
+az containerapp env dapr-component set `
+    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+    --dapr-component-name sendgrid `
+    --yaml '.\aca-components\containerapps-bindings-out-sendgrid.yaml'
+```
 
 ???+ example "CLI issue still exits?"
 
@@ -489,14 +489,14 @@ Update the Azure Container App hosting the Backend Background Processor with a n
 !!! tip
     Notice how we are removing the environments variable named `SendGrid__ApiKey` as we are reading the key value from Dapr secret store.
 
-    ```powershell
-    ## Update Backend Background Processor container app and create a new revision 
-    az containerapp update `
-    --name $BACKEND_SVC_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --revision-suffix v20230224-1 `
-    --remove-env-vars "SendGrid__ApiKey"
-    ```
+```powershell
+# Update Backend Background Processor container app and create a new revision 
+az containerapp update `
+--name $BACKEND_SVC_NAME `
+--resource-group $RESOURCE_GROUP `
+--revision-suffix v20230224-1 `
+--remove-env-vars "SendGrid__ApiKey"
+```
 
 #### 5. Remove SendGrid Secret from the Backend Background Processor App
 
@@ -505,11 +505,11 @@ Remove the secret stored in `Secrets` of the Backend Background Processor as thi
 !!! info
     You can skip executing the powershell script below if you opted not to set up a sendgrid account in module 5
 
-    ```powershell
-    az containerapp secret remove --name $BACKEND_SVC_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --secret-names "sendgrid-apikey"
-    ```
+```powershell
+az containerapp secret remove --name $BACKEND_SVC_NAME `
+--resource-group $RESOURCE_GROUP `
+--secret-names "sendgrid-apikey"
+```
 
 !!! success
     With those changes in place and deployed, from the Azure Portal you can open the log streams section of the container app hosting the `ACA-Processor-Backend` and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.
