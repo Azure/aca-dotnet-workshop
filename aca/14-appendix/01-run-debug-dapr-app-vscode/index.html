@@ -21,7 +21,7 @@
 
     <!-- Previous page -->
     
-        <link rel="prev" href="../../13-contributing/3-minor-update-fix/" />
+        <link rel="prev" href="../../12-about-the-authors/" />
     
 
     <!-- Next page -->
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.a5377069.min.css">
@@ -837,7 +837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -857,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -877,7 +877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1085,13 +1085,12 @@
 
 <p>This page shows you how to configure VSCode to run and debug multiple Dapr applications at same time.</p>
 <h3 id="debug-and-launch-dapr-applications-in-vscode">Debug and launch Dapr applications in VSCode<a class="headerlink" href="#debug-and-launch-dapr-applications-in-vscode" title="Permanent link">&para;</a></h3>
-<p>We need to update VS code <code>tasks.json</code> and <code>launch.json</code> configuration files included in your workspace. Once completed you should be able to use the Run and Debug button on the activity bar within 
-VS Code to launch all services to be able to debug them locally.</p>
-<p>First we need to add a new launch configuration for the Backend Web API and Frontend Web App projects. 
-To accomplish this, open file <code>launch.json</code> and add the two configurations shown below. </p>
+<p>We need to update VS code <code>tasks.json</code> and <code>launch.json</code> configuration files included in your workspace. Once completed you should be able to use the Run and Debug button on the activity bar within VS Code to launch all services to be able to debug them locally.</p>
+<p>First we need to add a new launch configuration for the Backend Web API and Frontend Web App projects.
+To accomplish this, open file <code>launch.json</code> and add the two configurations shown below.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Make sure you append the configurations below to the existing array instead of replacing what you have. This way you will preserve your existing configuration and simply add two new ones. </p>
+<p>Make sure you append the configurations below to the existing array instead of replacing what you have. This way you will preserve your existing configuration and simply add two new ones.</p>
 <details class="example">
 <summary>Looking for complete launch.json?</summary>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">launch.json</label></div>
@@ -1250,7 +1249,7 @@ To accomplish this, open file <code>launch.json</code> and add the two configura
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The configuration below assumes that you are using <strong>.net 6</strong>. If you are using a different .net version make sure you update the paths to use the correct version. 
+<p>The configuration below assumes that you are using <strong>.net 6</strong>. If you are using a different .net version make sure you update the paths to use the correct version.
 For example if using .net 7 then change the path to say net7.0 instead of net6.0.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">launch.json</label></div>
@@ -1309,9 +1308,8 @@ For example if using .net 7 then change the path to say net7.0 instead of net6.0
 <p class="admonition-title">Note</p>
 <p>We have a <code>preLaunchTask</code> and a <code>postDebugTask</code> which we need to define right now. Those tasks are Dapr tasks.</p>
 </div>
-<p>The <a href="https://docs.dapr.io/developing-applications/ides/vscode/vscode-dapr-extension/#scaffold-dapr-debugging-tasks">Dapr VSCode extension</a> we have previously installed helps us to define those pre- and post-debug 
-tasks. </p>
-<p>To accomplish this, open the file <strong>tasks.json</strong> and click <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span>, and type <strong>Dapr: Scaffold Dapr Tasks</strong>. </p>
+<p>The <a href="https://docs.dapr.io/developing-applications/ides/vscode/vscode-dapr-extension/#scaffold-dapr-debugging-tasks" target="_blank">Dapr VSCode extension</a> we have previously installed helps us to define those pre- and post-debug tasks.</p>
+<p>To accomplish this, open the file <strong>tasks.json</strong> and click <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span>, and type <strong>Dapr: Scaffold Dapr Tasks</strong>.</p>
 <p>The Dapr VS Code extension will allow us to manage Dapr application and test it out in an easier way, the below image shows a full list of helper commands.</p>
 <p><a class="glightbox" href="../../../assets/images/appendix/dapr-vscode-extension.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-vscode-extension" src="../../../assets/images/appendix/dapr-vscode-extension.jpg" /></a></p>
 <p>Now we will add 4 tasks, for each application, there will be a task to support the <code>preLaunch</code> activity and the <code>postDebug</code> activity (Terminate/Exit Dapr Sidecar process), so open file tasks.json and add the tasks below:</p>
@@ -1362,11 +1360,11 @@ tasks. </p>
 <ul>
 <li>The tasks with the label <code>backend-api-dapr-debug</code> will invoke the <code>daprd</code> task. This task is similar to calling dapr run from CLI.</li>
 <li>We are setting the appPort, httpPort, and grpcPort properties (grpcPort is needed in future modules when we start using the state manager building block. 
-If you didn't set it, you might face a similar <a href="https://github.com/dapr/dotnet-sdk/issues/609">issue</a>)</li>
+If you didn't set it, you might face a similar <a href="https://github.com/dapr/dotnet-sdk/issues/609" target="_blank">issue</a>)</li>
 <li>We are setting the “componentsPath” property. This is needed when start working with the state manager, pub/sub, etc.</li>
 <li>We are setting the dependsOn property, so this means this task will fire after the dependsOn tasks complete successfully. We need to add those dependsOn tasks.</li>
 <li>The tasks with the label <code>daprd-down-backend-api</code> will terminate the Dapr Sidecar process. This will be used for the <code>postDebug</code> activity in configuration.json.</li>
-<li>For a complete list of available properties please check this <a href="https://docs.dapr.io/developing-applications/ides/vscode/vscode-how-to-debug-multiple-dapr-apps/#daprd-parameter-table">link.</a></li>
+<li>For a complete list of available properties please check this <a href="https://docs.dapr.io/developing-applications/ides/vscode/vscode-how-to-debug-multiple-dapr-apps/#daprd-parameter-table" target="_blank">link.</a></li>
 </ul>
 </details>
 <p>Next let's add the dependsOn tasks. Open <code>tasks.json</code> and add the tasks below:</p>
@@ -1399,7 +1397,9 @@ If you didn't set it, you might face a similar <a href="https://github.com/dapr/
 <summary>Looking for complete tasks.json?</summary>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">tasks.json</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
+<div class="tabbed-block"></div>
+</div>
+</div>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -1574,11 +1574,8 @@ If you didn't set it, you might face a similar <a href="https://github.com/dapr/
 </span><span id="__span-4-172"><a id="__codelineno-4-172" name="__codelineno-4-172" href="#__codelineno-4-172"></a><span class="w">    </span><span class="p">]</span>
 </span><span id="__span-4-173"><a id="__codelineno-4-173" name="__codelineno-4-173" href="#__codelineno-4-173"></a><span class="p">}</span>
 </span></code></pre></div>
-</div>
-</div>
-</div>
 </details>
-<p>Lastly, we need to add a <code>compound launch</code> property, so we launch and debug both applications together. </p>
+<p>Lastly, we need to add a <code>compound launch</code> property, so we launch and debug both applications together.</p>
 <p>To accomplish this, open the file <code>launch.json</code> again and add the below array after the <code>configuration</code> array.</p>
 <div class="language-json highlight"><span class="filename">launch.json</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">&quot;compounds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="p">{</span>
@@ -1623,10 +1620,10 @@ If you didn't set it, you might face a similar <a href="https://github.com/dapr/
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1637,7 +1634,7 @@ If you didn't set it, you might face a similar <a href="https://github.com/dapr/
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../13-contributing/3-minor-update-fix/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Minor Update or fix, New Challenge">
+          <a href="../../12-about-the-authors/" class="md-footer__link md-footer__link--prev" aria-label="Previous: About The Authors">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1647,7 +1644,7 @@ If you didn't set it, you might face a similar <a href="https://github.com/dapr/
                 Previous
               </span>
               <div class="md-ellipsis">
-                Minor Update or fix, New Challenge
+                About The Authors
               </div>
             </div>
           </a>
@@ -1712,10 +1709,11 @@ If you didn't set it, you might face a similar <a href="https://github.com/dapr/
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

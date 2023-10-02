@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.a5377069.min.css">
@@ -927,7 +927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -947,7 +947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -967,7 +967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1191,17 +1191,16 @@
 <h3 id="configure-a-service-connection-for-github-and-azure-subscription">Configure a Service Connection for GitHub and Azure Subscription<a class="headerlink" href="#configure-a-service-connection-for-github-and-azure-subscription" title="Permanent link">&para;</a></h3>
 <p>Before we start with creating pipeline, we need to configure service connection for GitHub and Azure Subscription. You can do this in either existing or new project.</p>
 <h4 id="create-a-service-connection-for-github">Create a Service Connection for GitHub<a class="headerlink" href="#create-a-service-connection-for-github" title="Permanent link">&para;</a></h4>
-<p>Provide access to the repository forked above by creating a service connection to GitHub. You create a new pipeline by first selecting a GitHub repository and then a YAML file in repository at path <a href="https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.ado/infra-deploy.yml" target="_blank">.ado/infra-deploy.yml</a>. </p>
+<p>Provide access to the repository forked above by creating a service connection to GitHub. You create a new pipeline by first selecting a GitHub repository and then a YAML file in repository at path <a href="https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.ado/infra-deploy.yml" target="_blank">.ado/infra-deploy.yml</a>.</p>
 <p>The repository in which the YAML file is present is called self repository. By default, this is the repository that your pipeline builds.</p>
-<p>There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating 
-a pipeline. Follow guide at <a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&amp;tabs=yaml#access-to-github-repositories" target="_blank">this link</a>
+<p>There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating a pipeline. Follow guide at this <a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&amp;tabs=yaml#access-to-github-repositories" target="_blank">link</a>
 to create service connection for GitHub.</p>
 <p><a class="glightbox" href="../../../assets/gifs/azdo-github-connection.gif" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="AZDO GitHub Connection" src="../../../assets/gifs/azdo-github-connection.gif" /></a></p>
 <h4 id="create-service-connection-for-azure-subscription">Create Service Connection for Azure Subscription<a class="headerlink" href="#create-service-connection-for-azure-subscription" title="Permanent link">&para;</a></h4>
-<p>Create a new service connection to your azure subscription by following the steps at <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&amp;tabs=yaml#create-a-service-connection" target="_blank">this link</a>.</p>
+<p>Create a new service connection to your azure subscription by following the steps at this <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&amp;tabs=yaml#create-a-service-connection" target="_blank">link</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Update the created service connection role to have <strong><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator">User Access Administrator</a></strong> role. This is required for pipeline to be able to perform role assignments in the infrastructure components deployed. To update the role of a service connection in Azure DevOps to have the User Access Administrator role, you can follow these steps:</p>
+<p>Update the created service connection role to have <strong><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator" target="_blank">User Access Administrator</a></strong> role. This is required for pipeline to be able to perform role assignments in the infrastructure components deployed. To update the role of a service connection in Azure DevOps to have the User Access Administrator role, you can follow these steps:</p>
 <ul>
 <li>
 <p>Navigate to the Azure portal and select the subscription where the service connection is created.</p>
@@ -1243,7 +1242,7 @@ to create service connection for GitHub.</p>
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Repository variable <code>CONTAINER_REGISTRY_NAME</code> is only needed by pipeline if you intend to deploy images from a private Azure Container Registry (ACR). You may chose to skip defining this variable and the pipeline will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop">public github container registry images</a> to deploy the images.</p>
+<p>Repository variable <code>CONTAINER_REGISTRY_NAME</code> is only needed by pipeline if you intend to deploy images from a private Azure Container Registry (ACR). You may chose to skip defining this variable and the pipeline will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop" target="_blank">public github container registry images</a> to deploy the images.</p>
 </div>
 <h3 id="trigger-azure-devops-pipeline">Trigger Azure Devops Pipeline<a class="headerlink" href="#trigger-azure-devops-pipeline" title="Permanent link">&para;</a></h3>
 <p>With these steps completed, you are now ready to trigger the Pipeline.</p>
@@ -1284,10 +1283,10 @@ to create service connection for GitHub.</p>
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1373,10 +1372,11 @@ to create service connection for GitHub.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

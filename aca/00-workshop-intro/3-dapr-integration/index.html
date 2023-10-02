@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.a5377069.min.css">
@@ -900,7 +900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -920,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -940,7 +940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1116,17 +1116,19 @@
   <h1>Dapr Integration in ACA</h1>
 
 <h2 id="dapr-overview">Dapr Overview<a class="headerlink" href="#dapr-overview" title="Permanent link">&para;</a></h2>
-<p>As developers, we are often tasked with creating scalable, resilient, and distributed applications using microservices. But more often than not we face the same challenges:
-- Recovering state after failures
-- Services discovery and calling other microservices
-- Integration with external resources
-- Asynchronous communications between different services
-- Distributed tracing 
-- Measuring message calls and performance across components and networked services</p>
+<p>As developers, we are often tasked with creating scalable, resilient, and distributed applications using microservices. But more often than not we face the same challenges:</p>
+<ul>
+<li>Recovering state after failures</li>
+<li>Services discovery and calling other microservices</li>
+<li>Integration with external resources</li>
+<li>Asynchronous communications between different services</li>
+<li>Distributed tracing</li>
+<li>Measuring message calls and performance across components and networked services</li>
+</ul>
 <p><strong>Dapr (Distributed Application Runtime)</strong> offers a solution for the common challenges that are faced in any distributed microservice application. Dapr can be used with any language (Go, .NET python, Node, Java, C++) and can run anywhere (On-premise, Kubernetes, and any public cloud (e.g. Azure)).</p>
-<p>Dapr's core component is the concept of a <a href="https://docs.dapr.io/concepts/building-blocks-concept/">Building Block</a>. So far Dapr supports 9 Building Blocks. Simply put, a Building Block is a modular component which encapsulates best practices and can be accessed over standard HTTP or gRPC APIs.</p>
+<p>Dapr's core component is the concept of a <a href="https://docs.dapr.io/concepts/building-blocks-concept" target="_blank">Building Block</a>. So far Dapr supports 9 Building Blocks. Simply put, a Building Block is a modular component which encapsulates best practices and can be accessed over standard HTTP or gRPC APIs.</p>
 <p>Building Blocks address common challenges faced in building resilient microservices applications and implement best practices and patterns. Building Blocks provide consistent APIs and abstract away the implementation details to keep your code simple and portable.</p>
-<p>The diagram below shows the 9 Building Blocks which expose public APIs that can be called from your code, and can be configured using <a href="https://docs.dapr.io/concepts/components-concept/">components</a> to implement the building blocks’ capability. Remember that you can pick whatever building block that suites your distributed microservice application and you can incorporate other building blocks as needed.</p>
+<p>The diagram below shows the 9 Building Blocks which expose public APIs that can be called from your code, and can be configured using <a href="https://docs.dapr.io/concepts/components-concept" target="_blank">components</a> to implement the building blocks’ capability. Remember that you can pick whatever building block that suites your distributed microservice application and you can incorporate other building blocks as needed.</p>
 <p><a class="glightbox" href="../../../assets/images/00-workshop-intro/DaprBuildingBlocks.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Dapr Building Blocks" src="../../../assets/images/00-workshop-intro/DaprBuildingBlocks.jpg" /></a></p>
 <h2 id="dapr-microservices">Dapr &amp; Microservices<a class="headerlink" href="#dapr-microservices" title="Permanent link">&para;</a></h2>
 <p>Dapr exposes its Building Blocks and components through a <strong>sidecar architecture</strong>. A sidecar enables Dapr to run in a separate memory process or separate container alongside your service. Sidecars provide isolation and encapsulation as they aren't part of the service, but connected to it. This separation enables each service to have its own runtime environment and be built upon different programming platforms.</p>
@@ -1167,10 +1169,10 @@
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1256,10 +1258,11 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a5377069.min.css">
@@ -956,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -976,7 +976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -996,7 +996,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1230,15 +1230,14 @@
 <p class="admonition-title">Module Duration</p>
 <p>60 minutes</p>
 </div>
-<p>In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources. 
-In this module we will focus on a special type of Dapr input binding named <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/cron/">Cron Binding</a>.</p>
-<p>The Cron binding doesn't subscribe for events coming from an external system. Instead, this binding can be used to trigger application code in our service periodically based on a configurable interval. 
+<p>In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources.
+In this module we will focus on a special type of Dapr input binding named <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/cron/" target="_blank">Cron Binding</a>.</p>
+<p>The Cron binding doesn't subscribe for events coming from an external system. Instead, this binding can be used to trigger application code in our service periodically based on a configurable interval.
 The binding provides a simple way to implement a background worker to wake up and do some work at a regular interval, without the need to implement an endless loop with a configurable delay.</p>
-<p>We intend to utilize this binding for a specific use case, wherein it will be triggered once daily at a particular time (12:05 am), and search for tasks that have a due date matching the previous day of its 
-execution and are still pending. Once the service identifies tasks that meet these criteria, it will designate them as overdue tasks and save the revised status on Azure Cosmos DB.</p>
+<p>We intend to utilize this binding for a specific use case, wherein it will be triggered once daily at a particular time (12:05 am), and search for tasks that have a due date matching the previous day of its execution and are still pending. Once the service identifies tasks that meet these criteria, it will designate them as overdue tasks and save the revised status on Azure Cosmos DB.</p>
 <h3 id="updating-the-backend-background-processor-project">Updating the Backend Background Processor Project<a class="headerlink" href="#updating-the-backend-background-processor-project" title="Permanent link">&para;</a></h3>
 <h4 id="1-add-cron-binding-configuration">1. Add Cron Binding Configuration<a class="headerlink" href="#1-add-cron-binding-configuration" title="Permanent link">&para;</a></h4>
-<p>To set up the Cron binding, the initial step involves adding a component file that specifies the location of the code that requires triggering and the intervals at which it should occur. 
+<p>To set up the Cron binding, the initial step involves adding a component file that specifies the location of the code that requires triggering and the intervals at which it should occur.
 To accomplish this, create a new file called dapr-scheduled-cron.yaml within the components folder and insert the following code:</p>
 <p>Add new file under <strong>components</strong> as shown below:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">dapr-scheduled-cron.yaml</label></div>
@@ -1269,11 +1268,11 @@ To accomplish this, create a new file called dapr-scheduled-cron.yaml within the
 <li>Provided the name <code>ScheduledTasksManager</code> for this binding. This means that an HTTP POST endpoint on the URL <code>/ScheduledTasksManager</code> should be added as it will be invoked when the job is triggered based on 
 the Cron interval.</li>
 <li>Setting the interval for this Cron job to be triggered once a day at 12:05am. For full details and available options on how to set this value, 
-visit the <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format">Cron binding specs.</a>.</li>
+visit the <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format" target="_blank">Cron binding specs.</a>.</li>
 </ul>
 </details>
 <h4 id="2-add-the-endpoint-which-will-be-invoked-by-cron-binding">2. Add the Endpoint Which Will be Invoked by Cron Binding<a class="headerlink" href="#2-add-the-endpoint-which-will-be-invoked-by-cron-binding" title="Permanent link">&para;</a></h4>
-<p>Let's add an endpoint which will be triggered when the Cron configuration is met. This endpoint will contain the routine needed to run at a regular interval. </p>
+<p>Let's add an endpoint which will be triggered when the Cron configuration is met. This endpoint will contain the routine needed to run at a regular interval.</p>
 <p>Add new file under <strong>controllers</strong> folder in the project <strong>TasksTracker.Processor.Backend.Svc</strong> as shown below:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">ScheduledTasksManagerController.cs</label></div>
 <div class="tabbed-content">
@@ -1331,10 +1330,10 @@ visit the <a href="https://docs.dapr.io/reference/components-reference/supported
 </div>
 </div>
 </div>
-<p>Here, we have added a new action method called <code>CheckOverDueTasksJob</code>, which includes the relevant business logic that will be executed by the Cron job configuration at specified intervals. 
+<p>Here, we have added a new action method called <code>CheckOverDueTasksJob</code>, which includes the relevant business logic that will be executed by the Cron job configuration at specified intervals.
 This action method must be of the <code>POST</code> type, allowing it to be invoked when the job is triggered in accordance with the Cron interval.</p>
 <h4 id="3-update-the-backend-web-api-project">3. Update the Backend Web API Project<a class="headerlink" href="#3-update-the-backend-web-api-project" title="Permanent link">&para;</a></h4>
-<p>Now we need to add two new methods which are used by the scheduled job. </p>
+<p>Now we need to add two new methods which are used by the scheduled job.</p>
 <p>Update below <strong>files</strong> under <strong>services</strong> folder in the project <strong>TasksTracker.TasksManager.Backend.Api</strong> as highlighted below:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">ITasksManager.cs</label><label for="__tabbed_3_2">TasksStoreManager.cs</label></div>
 <div class="tabbed-content">
@@ -1371,29 +1370,27 @@ This action method must be of the <code>POST</code> type, allowing it to be invo
 </span></span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="hll">
 </span></span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">jsonDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Serialize</span><span class="p">(</span><span class="n">yesterday</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
 </span></span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="hll">
-</span></span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="hll">
+</span></span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="hll"><span class="w">    </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Getting overdue tasks for yesterday date: &#39;{0}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jsonDate</span><span class="p">);</span>
 </span></span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="hll">
-</span></span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="hll"><span class="w">    </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Getting overdue tasks for yesterday date: &#39;{0}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jsonDate</span><span class="p">);</span>
-</span></span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="hll">
-</span></span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;{&quot;</span><span class="w"> </span><span class="o">+</span>
-</span></span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="hll"><span class="w">            </span><span class="s">&quot;\&quot;filter\&quot;: {&quot;</span><span class="w"> </span><span class="o">+</span>
-</span></span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="hll"><span class="w">                </span><span class="s">&quot;\&quot;EQ\&quot;: { \&quot;taskDueDate\&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">jsonDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; }&quot;</span><span class="w"> </span><span class="o">+</span>
-</span></span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="hll"><span class="w">            </span><span class="s">&quot;}}&quot;</span><span class="p">;</span>
-</span></span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="hll">
-</span></span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">queryResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">QueryStateAsync</span><span class="o">&lt;</span><span class="n">TaskModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">STORE_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="p">);</span>
-</span></span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">tasksList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queryResponse</span><span class="p">.</span><span class="n">Results</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">q</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">Data</span><span class="p">).</span><span class="n">Where</span><span class="p">(</span><span class="n">q</span><span class="o">=&gt;</span><span class="n">q</span><span class="p">.</span><span class="n">IsCompleted</span><span class="o">==</span><span class="k">false</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">IsOverDue</span><span class="o">==</span><span class="k">false</span><span class="p">).</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">o</span><span class="o">=&gt;</span><span class="n">o</span><span class="p">.</span><span class="n">TaskCreatedOn</span><span class="p">);</span>
-</span></span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tasksList</span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
-</span></span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="hll"><span class="p">}</span>
-</span></span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>
-</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="hll"><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">MarkOverdueTasks</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">TaskModel</span><span class="o">&gt;</span><span class="w"> </span><span class="n">overDueTasksList</span><span class="p">)</span>
-</span></span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="hll"><span class="p">{</span>
-</span></span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="hll"><span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">taskModel</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">overDueTasksList</span><span class="p">)</span>
-</span></span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="hll"><span class="w">    </span><span class="p">{</span>
-</span></span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="hll"><span class="w">        </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Mark task with Id: &#39;{0}&#39; as OverDue task&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="p">);</span>
-</span></span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="hll"><span class="w">        </span><span class="n">taskModel</span><span class="p">.</span><span class="n">IsOverDue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
-</span></span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="hll"><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">SaveStateAsync</span><span class="o">&lt;</span><span class="n">TaskModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">STORE_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="p">.</span><span class="n">ToString</span><span class="p">(),</span><span class="w"> </span><span class="n">taskModel</span><span class="p">);</span>
-</span></span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="hll"><span class="w">    </span><span class="p">}</span>
-</span></span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="hll"><span class="p">}</span>
+</span></span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;{&quot;</span><span class="w"> </span><span class="o">+</span>
+</span></span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="hll"><span class="w">            </span><span class="s">&quot;\&quot;filter\&quot;: {&quot;</span><span class="w"> </span><span class="o">+</span>
+</span></span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="hll"><span class="w">                </span><span class="s">&quot;\&quot;EQ\&quot;: { \&quot;taskDueDate\&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">jsonDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; }&quot;</span><span class="w"> </span><span class="o">+</span>
+</span></span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="hll"><span class="w">            </span><span class="s">&quot;}}&quot;</span><span class="p">;</span>
+</span></span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="hll">
+</span></span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">queryResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">QueryStateAsync</span><span class="o">&lt;</span><span class="n">TaskModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">STORE_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="p">);</span>
+</span></span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">tasksList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queryResponse</span><span class="p">.</span><span class="n">Results</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">q</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">Data</span><span class="p">).</span><span class="n">Where</span><span class="p">(</span><span class="n">q</span><span class="o">=&gt;</span><span class="n">q</span><span class="p">.</span><span class="n">IsCompleted</span><span class="o">==</span><span class="k">false</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">IsOverDue</span><span class="o">==</span><span class="k">false</span><span class="p">).</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">o</span><span class="o">=&gt;</span><span class="n">o</span><span class="p">.</span><span class="n">TaskCreatedOn</span><span class="p">);</span>
+</span></span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="hll"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tasksList</span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+</span></span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="hll"><span class="p">}</span>
+</span></span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="hll">
+</span></span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="hll"><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">MarkOverdueTasks</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">TaskModel</span><span class="o">&gt;</span><span class="w"> </span><span class="n">overDueTasksList</span><span class="p">)</span>
+</span></span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="p">{</span>
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="hll"><span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">taskModel</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">overDueTasksList</span><span class="p">)</span>
+</span></span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="hll"><span class="w">    </span><span class="p">{</span>
+</span></span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="hll"><span class="w">        </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Mark task with Id: &#39;{0}&#39; as OverDue task&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="p">);</span>
+</span></span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="hll"><span class="w">        </span><span class="n">taskModel</span><span class="p">.</span><span class="n">IsOverDue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+</span></span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="hll"><span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">SaveStateAsync</span><span class="o">&lt;</span><span class="n">TaskModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">STORE_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="p">.</span><span class="n">ToString</span><span class="p">(),</span><span class="w"> </span><span class="n">taskModel</span><span class="p">);</span>
+</span></span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="hll"><span class="w">    </span><span class="p">}</span>
+</span></span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="hll"><span class="p">}</span>
 </span></span></code></pre></div>
 </div>
 </div>
@@ -1526,29 +1523,28 @@ methods <code>api/overduetasks</code> and <code>api/overduetasks/markoverdue</co
 </div>
 <h3 id="deploy-the-backend-background-processor-and-the-backend-api-projects-to-azure-container-apps">Deploy the Backend Background Processor and the Backend API Projects to Azure Container Apps<a class="headerlink" href="#deploy-the-backend-background-processor-and-the-backend-api-projects-to-azure-container-apps" title="Permanent link">&para;</a></h3>
 <h4 id="1-build-the-backend-background-processor-and-the-backend-api-app-images-and-push-them-to-acr">1. Build the Backend Background Processor and the Backend API App Images and Push them to ACR<a class="headerlink" href="#1-build-the-backend-background-processor-and-the-backend-api-app-images-and-push-them-to-acr" title="Permanent link">&para;</a></h4>
-<p>To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. We can use the same PowerShell console use the 
-following code (make sure you are on directory <strong>TasksTracker.ContainerApps</strong>):</p>
+<p>To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. We can use the same PowerShell console use the following code (make sure you are on directory <strong>TasksTracker.ContainerApps</strong>):</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_API_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span> 
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_SVC_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
 </span></code></pre></div>
 <h4 id="2-add-cron-dapr-component-to-aca-environment">2. Add Cron Dapr Component to ACA Environment<a class="headerlink" href="#2-add-cron-dapr-component-to-aca-environment" title="Permanent link">&para;</a></h4>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c">##Cron binding component</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c"># Cron binding component</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  <span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  <span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">scheduledtasksmanager</span> <span class="p">`</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  <span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-scheduled-cron.yaml&#39;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">scheduledtasksmanager</span> <span class="p">`</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-scheduled-cron.yaml&#39;</span>
 </span></code></pre></div>
 <h5 id="3-deploy-new-revisions-of-the-backend-api-and-backend-background-processor-to-aca">3. Deploy New Revisions of the Backend API and Backend Background Processor to ACA<a class="headerlink" href="#3-deploy-new-revisions-of-the-backend-api-and-backend-background-processor-to-aca" title="Permanent link">&para;</a></h5>
-<p>As we did before, we need to update the Azure Container App hosting the Backend API &amp; Backend Background Processor with a new revision so our code changes are available for the end users. 
+<p>As we did before, we need to update the Azure Container App hosting the Backend API &amp; Backend Background Processor with a new revision so our code changes are available for the end users.
 To accomplish this run the PowerShell script below:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c">## Update Backend API App container app and create a new revision </span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># Update Backend API App container app and create a new revision </span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230227</span><span class="p">-</span><span class="n">1</span> 
 </span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c">## Update Backend Background Processor container app and create a new revision </span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c"># Update Backend Background Processor container app and create a new revision </span>
 </span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
 </span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
 </span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
@@ -1556,8 +1552,7 @@ To accomplish this run the PowerShell script below:</p>
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The service <code>ScheduledTasksManager</code> which will be triggered by the Cron job on certain intervals is hosted in the ACA service <code>ACA-Processor Backend</code>. In the future module we are going to scale this 
-ACA <code>ACA-Processor Backend</code> to multiple replicas/instances. </p>
+<p>The service <code>ScheduledTasksManager</code> which will be triggered by the Cron job on certain intervals is hosted in the ACA service <code>ACA-Processor Backend</code>. In the future module we are going to scale this ACA <code>ACA-Processor Backend</code> to multiple replicas/instances.</p>
 <p>It is highly recommended that background periodic jobs are hosted in a container app with <strong>one single replica</strong>, you don't want your background periodic job to run on multiple replicas trying to do the same thing.</p>
 </div>
 <div class="admonition success">
@@ -1597,10 +1592,10 @@ you should see logs similar to the below image</p>
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1686,10 +1681,11 @@ you should see logs similar to the below image</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.a5377069.min.css">
@@ -988,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1008,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1028,7 +1028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1304,7 +1304,7 @@
 different options of getting images pushed to either Azure Container Registry (ACR) or GitHub Container Registry (GHCR).</p>
 </div>
 <h4 id="1-add-the-needed-extension-to-vs-code">1. Add the Needed Extension to VS Code<a class="headerlink" href="#1-add-the-needed-extension-to-vs-code" title="Permanent link">&para;</a></h4>
-<p>To proceed, you must install an extension called <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep</a>. This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..</p>
+<p>To proceed, you must install an extension called <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep" target="_blank">Bicep</a>. This extension will simplify building Bicep files as it offers IntelliSense, Validation, listing all available resource types, etc..</p>
 <h4 id="2-define-an-azure-container-apps-environment">2. Define an Azure Container Apps Environment<a class="headerlink" href="#2-define-an-azure-container-apps-environment" title="Permanent link">&para;</a></h4>
 <p>Add a new folder named <code>bicep</code> on the root project directory, then add another folder named <code>modules</code>. Add file as shown below:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">container-apps-environment.bicep</label></div>
@@ -1392,7 +1392,7 @@ different options of getting images pushed to either Azure Container Registry (A
 <details class="tip">
 <summary>What we've added in the Bicep file above</summary>
 <ul>
-<li>The module takes multiple parameters, all of which are set to default values. This indicates that if no value is specified, the default value will be utilized. </li>
+<li>The module takes multiple parameters, all of which are set to default values. This indicates that if no value is specified, the default value will be utilized.</li>
 <li>The <code>location</code> parameter defaults to the location of the container resource group. Bicep has a function called <code>resourceGroup()</code>, which can be used to retrieve the location.</li>
 <li>The parameters <code>prefix</code> and <code>suffix</code> could be used if you want to add a prefix or suffix to the resource names.</li>
 <li>The parameter <code>tag</code> is used to tag the created resources. Tags are key-value pairs that help you identify resources based on settings that are relevant to your organization and deployment.</li>
@@ -2695,8 +2695,7 @@ different options of getting images pushed to either Azure Container Registry (A
 </ul>
 </details>
 <h4 id="12-define-a-container-module-for-the-three-container-apps">12. Define a Container Module For the Three Container Apps<a class="headerlink" href="#12-define-a-container-module-for-the-three-container-apps" title="Permanent link">&para;</a></h4>
-<p>This module will act as a container for the three Container Apps modules defined in the previous three steps. It is optional to create it, but it makes it easier when we invoke all the created modules as you 
-will see in the next step. </p>
+<p>This module will act as a container for the three Container Apps modules defined in the previous three steps. It is optional to create it, but it makes it easier when we invoke all the created modules as you will see in the next step.</p>
 <p>Add a new file under the folder <code>bicep\modules</code> as shown below:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">container-apps.bicep</label></div>
 <div class="tabbed-content">
@@ -3196,7 +3195,7 @@ will see in the next step. </p>
 </span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">-</span><span class="n">-location</span> <span class="nv">$LOCATION</span>
 </span></code></pre></div>
-<p>Create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file <code>main.bicep</code> and select <strong>Generate Parameter File</strong>. 
+<p>Create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file <code>main.bicep</code> and select <strong>Generate Parameter File</strong>.
 This will result in creating a file named <code>main.parameters.json</code> similar to the file below:</p>
 <details class="example">
 <summary>Example</summary>
@@ -3465,10 +3464,10 @@ your private container instance as shown below.</p>
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -3554,10 +3553,11 @@ your private container instance as shown below.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

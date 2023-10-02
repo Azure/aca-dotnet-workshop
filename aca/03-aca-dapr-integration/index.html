@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a5377069.min.css">
@@ -902,7 +902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -922,7 +922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -942,7 +942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1124,24 +1124,24 @@
 </div>
 <p>In this module, we will start integrating Dapr into both services and see how Dapr with ACA will simplify complex microservices scenarios such as service discovery, service-to-service invocation, calling services asynchronously via pub/sub patterns, auto-scaling for overloaded services, etc..</p>
 <h3 id="benefits-of-integrating-dapr-in-azure-container-apps">Benefits of Integrating Dapr in Azure Container Apps<a class="headerlink" href="#benefits-of-integrating-dapr-in-azure-container-apps" title="Permanent link">&para;</a></h3>
-<p>The Tasks Tracker microservice application is composed of multiple microservices (2 microservices so far), and function calls are spread across the network. To support the distributed nature of microservices, 
-we need to account for failures, retries, and timeouts. While Container Apps features the building blocks for running microservices, the use of Dapr provides an even richer microservices programming model. </p>
-<p>Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more. 
-Here is a good <a href="https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation">link</a> which touches on some benefits of the Dapr service invocation building block which we will be building upon in this module. 
-Because the calls will flow through sidecars, Dapr can inject some useful cross-cutting behaviors. </p>
+<p>The Tasks Tracker microservice application is composed of multiple microservices (2 microservices so far), and function calls are spread across the network. To support the distributed nature of microservices,
+we need to account for failures, retries, and timeouts. While Container Apps features the building blocks for running microservices, the use of Dapr provides an even richer microservices programming model.</p>
+<p>Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more.
+Here is a good <a href="https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation" target="_blank">link</a> which touches on some benefits of the Dapr service invocation building block which we will be building upon in this module.
+Because the calls will flow through sidecars, Dapr can inject some useful cross-cutting behaviors.</p>
 <p>Although we won't tap into all these benefits in this workshop its worth keeping in mind that you will most probably need to rely on these features in production.</p>
 <ul>
 <li>Automatically retry calls upon failure.</li>
 <li>Make calls between services secure with mutual (mTLS) authentication, including automatic certificate rollover.</li>
 <li>Control what operations clients can do using access control policies.</li>
-<li>Capture traces and metrics for all calls between services to provide insights and diagnostics. </li>
+<li>Capture traces and metrics for all calls between services to provide insights and diagnostics.</li>
 </ul>
 <h3 id="configure-dapr-on-a-local-development-machine">Configure Dapr on a Local Development Machine<a class="headerlink" href="#configure-dapr-on-a-local-development-machine" title="Permanent link">&para;</a></h3>
-<p>In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to <a href="https://docs.dapr.io/getting-started/install-dapr-cli/">install</a> Dapr and then <a href="https://docs.dapr.io/getting-started/install-dapr-selfhost/">Initialize</a> it.</p>
+<p>In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to <a href="https://docs.dapr.io/getting-started/install-dapr-cli/" target="_blank">install</a> Dapr and then <a href="https://docs.dapr.io/getting-started/install-dapr-selfhost/" target="_blank">Initialize</a> it.</p>
 <h3 id="run-backend-api-and-frontend-web-app-locally-using-dapr">Run Backend API and Frontend Web App Locally Using Dapr<a class="headerlink" href="#run-backend-api-and-frontend-web-app-locally-using-dapr" title="Permanent link">&para;</a></h3>
-<p>You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr">Dapr</a> which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.</p>
+<p>You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr" target="_blank">Dapr</a> which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.</p>
 <ul>
-<li>Let's start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, run the below commands in PS terminal based on your .NET version. </li>
+<li>Let's start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, run the below commands in PS terminal based on your .NET version.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1201,7 +1201,7 @@ Because the calls will flow through sidecars, Dapr can inject some useful cross-
 </details>
 <ul>
 <li>
-<p>Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The <a href="https://github.com/dapr/dotnet-sdk">Dapr .NET SDK</a> provides .NET developers with an intuitive and language-specific way to interact with Dapr.
+<p>Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The <a href="https://github.com/dapr/dotnet-sdk" target="_blank">Dapr .NET SDK</a> provides .NET developers with an intuitive and language-specific way to interact with Dapr.
 The SDK offers developers three ways of making remote service invocation calls:</p>
 <ol>
 <li>Invoke HTTP services using HttpClient</li>
@@ -1223,7 +1223,7 @@ The SDK offers developers three ways of making remote service invocation calls:<
 </div>
 </div>
 <ul>
-<li>Next, open the file <code>Programs.cs</code> of the Frontend Web App and register the DaprClient as the highlighted below. </li>
+<li>Next, open the file <code>Programs.cs</code> of the Frontend Web App and register the DaprClient as the highlighted below.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Program.cs</label></div>
 <div class="tabbed-content">
@@ -1237,7 +1237,7 @@ The SDK offers developers three ways of making remote service invocation calls:<
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebApplication</span><span class="p">.</span><span class="n">CreateBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">            </span><span class="c1">// Add services to the container.</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddRazorPages</span><span class="p">();</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">            </span><span class="c1">// Code removed for brevity     </span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">            </span><span class="c1">// Code removed for brevity</span>
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="hll"><span class="w">            </span><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddDaprClient</span><span class="p">();</span>
 </span></span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="n">Build</span><span class="p">();</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">            </span><span class="c1">// Code removed for brevity </span>
@@ -1505,8 +1505,8 @@ The SDK offers developers three ways of making remote service invocation calls:<
 </div>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
-<p>Now both Applications are running using Dapr sidecar. Open your browser and browse for <code>https://localhost:{localwebappport}</code>. E.g. <code>https://localhost:7000</code> and provide an email to load the tasks for the user (e.g. tjoudeh@bitoftech.net).
-If the application is working as expected you should see tasks list associated with the email you provided (e.g. tjoudeh@bitoftech.net).</p>
+<p>Now both Applications are running using Dapr sidecar. Open your browser and browse for <code>https://localhost:{localwebappport}</code>. E.g. <code>https://localhost:7000</code> and provide an email to load the tasks for the user (e.g. [tjoudeh@bitoftech.net]).
+If the application is working as expected you should see tasks list associated with the email you provided (e.g. [tjoudeh@bitoftech.net]).</p>
 </div>
 <p>In the next module, we will integrate the Dapr state store building block by saving tasks to Azure Cosmos DB. We will also deploy the updated applications to Azure Container Apps.</p>
 
@@ -1536,10 +1536,10 @@ If the application is working as expected you should see tasks list associated w
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1625,10 +1625,11 @@ If the application is working as expected you should see tasks list associated w
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

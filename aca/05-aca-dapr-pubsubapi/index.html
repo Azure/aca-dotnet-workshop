@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a5377069.min.css">
@@ -1079,7 +1079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1099,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1119,7 +1119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1478,22 +1478,18 @@
 </div>
 <p>In this module, we will introduce a new background service which is named <code>ACA-Processer Backend</code> according to our <a href="../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg">architecture diagram</a>. This new service will be responsible for sending notification emails (simulated) to the task owners to notify them that a new task has been assigned to them. We can do this in the Backend API and send the email right after saving the task, but we want to offload this process to another service and keep the Backend API service responsible for managing tasks data only.</p>
 <p>As a best practice, it is recommended that we decouple the two services from each other. So this means we are going to rely on the Publisher-Subscriber pattern (Pub/Sub Pattern).
-The main advantage of this pattern is that it offers loose coupling between services, where the sender/publisher of the message doesn't know anything about the receiver/consumers. 
-You can even have multiple consumers consuming a copy of the message in a totally different way. You can imagine adding another consumer which is responsible to send push notification for the 
-task owner (e.g. if we had a mobile app channel).</p>
-<p>The publisher/subscriber pattern relies on a message broker which is responsible for receiving the message from the publisher, storing the message to ensure durability, and delivering this message to the interested 
-consumer(s) to process it. There is no need for the consumers to be available when the message is stored in the message broker. Consumers can process the messages at a later time in an async fashion. 
+The main advantage of this pattern is that it offers loose coupling between services, where the sender/publisher of the message doesn't know anything about the receiver/consumers.
+You can even have multiple consumers consuming a copy of the message in a totally different way. You can imagine adding another consumer which is responsible to send push notification for the task owner (e.g. if we had a mobile app channel).</p>
+<p>The publisher/subscriber pattern relies on a message broker which is responsible for receiving the message from the publisher, storing the message to ensure durability, and delivering this message to the interested
+consumer(s) to process it. There is no need for the consumers to be available when the message is stored in the message broker. Consumers can process the messages at a later time in an async fashion.
 The below diagram gives a high-level overview of how the pub/sub pattern works:</p>
 <p><a class="glightbox" href="../../assets/images/05-aca-dapr-pubsubapi/tutorial-pubsub-arch.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="pubsub-arch" src="../../assets/images/05-aca-dapr-pubsubapi/tutorial-pubsub-arch.jpg" /></a></p>
-<p>If you implemented the Pub/Sub pattern before, you already know that there is a lot of plumbing needed on the publisher and subscriber components in order to publish and consume messages. 
-In addition, each message broker has its own SDK and implementation. So you need to write your code in an abstracted way to hide the specific implementation details for each message broker SDK and make it easier 
-for the publisher and consumers to re-use this functionality. What Dapr offers here is a building block that significantly simplifies implementing pub/sub functionality.</p>
-<p>Put simply, the Dapr pub/sub building block provides a platform-agnostic API framework to send and receive messages. Your producer/publisher services publish messages to a named topic. 
-Your consumer services subscribe to a topic to consume messages.</p>
-<p>To try this out we can directly invoke the Pub/Sub API and publish a message to Redis locally. If you remember from <a href="../03-aca-dapr-integration/">module 3</a> once we initialized Dapr in a 
-local development environment, it installed Redis container instance locally. So we can use Redis locally to publish and subscribe to a message. 
-If you navigate to the path <code>%USERPROFILE%\.dapr\components (assuming you are using windows)</code> you will find a file named <code>pubsub.yaml</code>. Inside this file, you will see the properties needed to access the local Redis instance. 
-The publisher/subscriber brokers template component file structure can be found <a href="https://docs.dapr.io/operations/components/setup-pubsub/">here</a>.</p>
+<p>If you implemented the Pub/Sub pattern before, you already know that there is a lot of plumbing needed on the publisher and subscriber components in order to publish and consume messages.
+In addition, each message broker has its own SDK and implementation. So you need to write your code in an abstracted way to hide the specific implementation details for each message broker SDK and make it easier for the publisher and consumers to re-use this functionality. What Dapr offers here is a building block that significantly simplifies implementing pub/sub functionality.</p>
+<p>Put simply, the Dapr pub/sub building block provides a platform-agnostic API framework to send and receive messages. Your producer/publisher services publish messages to a named topic. Your consumer services subscribe to a topic to consume messages.</p>
+<p>To try this out we can directly invoke the Pub/Sub API and publish a message to Redis locally. If you remember from <a href="../03-aca-dapr-integration/">module 3</a> once we initialized Dapr in a local development environment, it installed Redis container instance locally. So we can use Redis locally to publish and subscribe to a message.
+If you navigate to the path <code>%USERPROFILE%\.dapr\components (assuming you are using windows)</code> you will find a file named <code>pubsub.yaml</code>. Inside this file, you will see the properties needed to access the local Redis instance.
+The publisher/subscriber brokers template component file structure can be found <a href="https://docs.dapr.io/operations/components/setup-pubsub/" target="_blank">here</a>.</p>
 <p>We want to have more control and provide our own component file, so let's create pub/sub component file in our <strong>components</strong> folder as shown below:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">dapr-pubsub-redis.yaml</label></div>
 <div class="tabbed-content">
@@ -1531,8 +1527,7 @@ The publisher/subscriber brokers template component file structure can be found 
 </div>
 </div>
 </div>
-<p>Now let's try to publish a message by sending a POST request to <a href="http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic">http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic</a> with the below request body, 
-don't forget to set the <code>Content-Type</code> header to <code>application/json</code></p>
+<p>Now let's try to publish a message by sending a POST request to <a href="http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic">http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic</a> with the below request body, don't forget to set the <code>Content-Type</code> header to <code>application/json</code></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;taskId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fbc55b2c-d9fa-405e-aec8-22e53f4306dd&quot;</span><span class="p">,</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Testing Pub Sub Publisher&quot;</span><span class="p">,</span>
@@ -1552,27 +1547,28 @@ don't forget to set the <code>Content-Type</code> header to <code>application/js
 </ul>
 </details>
 <p>If all is configured correctly, you should receive HTTP response 204 from this endpoint which indicates that the message is published successfully by the service broker (Redis) into the topic named <code>tasksavedtopic</code>.
-You can also check that topic is created successfully by using the <a href="https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer">Redis Xplorer extension</a> in VS Code which should look like this:</p>
+You can also check that topic is created successfully by using the <a href="https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer" target="_blank">Redis Xplorer extension</a> in VS Code which should look like this:</p>
 <p><a class="glightbox" href="../../assets/images/05-aca-dapr-pubsubapi/task-saved-topic-redis-xplorer.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="redis-xplorer" src="../../assets/images/05-aca-dapr-pubsubapi/task-saved-topic-redis-xplorer.png" /></a></p>
 <p>Right now those published messages are stored in the message broker topic doing nothing as we don't have any subscribers bound to the service broker on the topic <code>tasksavedtopic</code> which are interested in consuming and processing those messages. So let`s add a consumer to consume the message.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Some Service Brokers allow the creation of topics automatically when sending a message to a topic which has not been created before. That's the reason why the topic <code>tasksavedtopic</code> was created automatically 
-here for us.</p>
+<p>Some Service Brokers allow the creation of topics automatically when sending a message to a topic which has not been created before. That's the reason why the topic <code>tasksavedtopic</code> was created automatically here for us.</p>
 </div>
 <h3 id="setting-up-the-backend-background-processor-project">Setting up the Backend Background Processor Project<a class="headerlink" href="#setting-up-the-backend-background-processor-project" title="Permanent link">&para;</a></h3>
 <h4 id="1-create-the-backend-service-project">1. Create the Backend Service Project<a class="headerlink" href="#1-create-the-backend-service-project" title="Permanent link">&para;</a></h4>
 <p>Now we will add a new ASP.NET Core Web API project named <strong>TasksTracker.Processor.Backend.Svc</strong>. Open a command-line terminal and navigate to <strong>root folder</strong> of your project.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">dotnet</span> <span class="n">new</span> <span class="n">webapi</span> <span class="n">-o</span> <span class="n">TasksTracker</span><span class="p">.</span><span class="n">Processor</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Svc</span>
 </span></code></pre></div>
-<p>We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA. 
+<p>We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA.
 To do so Open the VS Code Command Palette (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span>) and select <strong>Docker: Add Docker Files to Workspace...</strong></p>
 <ul>
 <li>Use <code>.NET: ASP.NET Core</code> when prompted for application platform.</li>
-<li>Choose <code>Linux</code> when prompted to choose the operating system.</li>
+<li>Choose <code>Linux</code> when prompted to choose the operating system.<ul>
 <li>You will be asked if you want to add Docker Compose files. Select <code>No</code>.</li>
 <li>Take a note of the provided <strong>application port</strong> as we will be using later on. You can always find it again inside the designated <code>DockerFile</code> inside the newly created project's directory.</li>
 <li><code>Dockerfile</code> and <code>.dockerignore</code> files are added to the workspace.</li>
+</ul>
+</li>
 </ul>
 <h4 id="2-add-models">2. Add Models<a class="headerlink" href="#2-add-models" title="Permanent link">&para;</a></h4>
 <p>Now we will add the model which will be used to deserialize the published message. Add below file under new folder named <strong>Models</strong>.</p>
@@ -1599,9 +1595,7 @@ To do so Open the VS Code Command Palette (<span class="keys"><kbd class="key-co
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>For sake of simplicity we are recreating the same model <code>TaskModel.cs</code> under each project. For production purposes it is recommended to 
-place the <code>TaskModel.cs</code> in a common project that can be referenced by all the projects and thus avoid code repetition which increases the 
-maintenance cost.</p>
+<p>For sake of simplicity we are recreating the same model <code>TaskModel.cs</code> under each project. For production purposes it is recommended to place the <code>TaskModel.cs</code> in a common project that can be referenced by all the projects and thus avoid code repetition which increases the maintenance cost.</p>
 </div>
 <h4 id="3install-dapr-sdk-client-nuget-package">3.Install Dapr SDK Client NuGet package<a class="headerlink" href="#3install-dapr-sdk-client-nuget-package" title="Permanent link">&para;</a></h4>
 <p>Now we will install Dapr SDK to be able to subscribe to the service broker topic in a programmatic way. To do so, add the highlighted NuGet package to the file shown below:</p>
@@ -1701,24 +1695,22 @@ which will inform the message broker that the message needs to be retired based 
 This will tell the message broker to drop the message and move it to dead-letter or poison queue.</li>
 </ul>
 </details>
-<p>Now you are probably wondering how the consumer was able to identify what are the subscriptions available and on which route they can be found at. 
-The answer for this is that at startup on the consumer service (more on that below after we add app.MapSubscribeHandler()), the Dapr runtime will call the application on a well-known endpoint to identify and create 
-the required subscriptions. </p>
-<p>The well-known endpoint can be reached on this endpoint: <code>http://localhost:&lt;appPort&gt;/dapr/subscribe</code>. When you invoke this endpoint, the response will contain an array of all available topics for which the 
-applications will subscribe. Each includes a route to call when the topic receives a message. This was generated as we used the attribute <code>Dapr.Topic</code> on the action method <code>api/tasksnotifier/tasksaved</code>. </p>
+<p>Now you are probably wondering how the consumer was able to identify what are the subscriptions available and on which route they can be found at.
+The answer for this is that at startup on the consumer service (more on that below after we add app.MapSubscribeHandler()), the Dapr runtime will call the application on a well-known endpoint to identify and create the required subscriptions.</p>
+<p>The well-known endpoint can be reached on this endpoint: <code>http://localhost:&lt;appPort&gt;/dapr/subscribe</code>. When you invoke this endpoint, the response will contain an array of all available topics for which the applications will subscribe. Each includes a route to call when the topic receives a message. This was generated as we used the attribute <code>Dapr.Topic</code> on the action method <code>api/tasksnotifier/tasksaved</code>.</p>
 <p>That means when a message is published on the PubSubname <code>taskspubsub</code> on the topic <code>tasksavedtopic</code>, it will be routed to the action method <code>/api/tasksnotifier/tasksaved</code> and will be consumed in this action method.</p>
 <p>In our case, a sample response will be as follows:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">[</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="p">{</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">&quot;pubsubname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;taskspubsub&quot;</span><span class="p">,</span>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">&quot;topic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksavedtopic&quot;</span><span class="p">,</span>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">&quot;route&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/tasksnotifier/tasksaved&quot;</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">]</span>
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Follow this <a href="https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works">link</a> to find a detailed diagram of how the consumers will discover and subscribe to
+<p>Follow this <a href="https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works" target="_blank">link</a> to find a detailed diagram of how the consumers will discover and subscribe to
 those endpoints.</p>
 </div>
 <h4 id="5-register-dapr-and-subscribe-handler-at-the-consumer-startup">5. Register Dapr and Subscribe Handler at the Consumer Startup<a class="headerlink" href="#5-register-dapr-and-subscribe-handler-at-the-consumer-startup" title="Permanent link">&para;</a></h4>
@@ -1757,13 +1749,13 @@ It also registers a <code>DaprClient</code> instance into the dependency injecti
 We will see how we are injecting DaprClient in the controller constructor later on.</li>
 <li>On line <code>app.UseCloudEvents();</code>, the extension method <code>UseCloudEvents</code> adds CloudEvents middleware into the ASP.NET Core middleware pipeline. 
 This middleware will unwrap requests that use the CloudEvents structured format, so the receiving method can read the event payload directly. 
-You can read more about <a href="https://cloudevents.io/">CloudEvents</a> here which includes specs for describing event data in a common and standard way.</li>
+You can read more about <a href="https://cloudevents.io/" target="_blank">CloudEvents</a> here which includes specs for describing event data in a common and standard way.</li>
 <li>On line <code>app.MapSubscribeHandler();</code>, we make the endpoint <code>http://localhost:&lt;appPort&gt;/dapr/subscribe</code> available for the consumer so it responds and returns available subscriptions. 
 When this endpoint is called, it will automatically find all WebAPI action methods decorated with the <code>Dapr.Topic</code> attribute and instruct Dapr to create subscriptions for them.</li>
 </ul>
 </details>
-<p>With all those bits in place, we are ready to run the publisher service <code>Backend API</code> and the consumer service <code>Backend Background Service</code> and test pub/sub pattern end to end. </p>
-<p>To do so, run the below commands in PowerShell console, ensure you are on the right root folder of each respective project. </p>
+<p>With all those bits in place, we are ready to run the publisher service <code>Backend API</code> and the consumer service <code>Backend Background Service</code> and test pub/sub pattern end to end.</p>
+<p>To do so, run the below commands in PowerShell console, ensure you are on the right root folder of each respective project.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>Remember to replace the placeholders with your own values.</p>
@@ -1788,8 +1780,7 @@ When this endpoint is called, it will automatically find all WebAPI action metho
 <p class="admonition-title">Note</p>
 <p>Notice that we gave the new Backend background service a Dapr App Id with the name <code>tasksmanager-backend-processor</code> and a Dapr HTTP port with the value <code>3502</code>.</p>
 </div>
-<p>Now let's try to publish a message by sending a POST request to <a href="http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic">http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic</a> with the below request body, 
-don't forget to set the <code>Content-Type</code> header to <code>application/json</code></p>
+<p>Now let's try to publish a message by sending a POST request to <a href="http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic">http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic</a> with the below request body, don't forget to set the <code>Content-Type</code> header to <code>application/json</code></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="err">POST</span><span class="w"> </span><span class="err">/v</span><span class="mf">1.0</span><span class="err">/publish/</span><span class="kc">tas</span><span class="err">kspubsub/</span><span class="kc">tas</span><span class="err">ksaved</span><span class="kc">t</span><span class="err">opic</span><span class="w"> </span><span class="err">HTTP/</span><span class="mf">1.1</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="err">Hos</span><span class="kc">t</span><span class="p">:</span><span class="w"> </span><span class="err">localhos</span><span class="kc">t</span><span class="p">:</span><span class="mi">3500</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
@@ -1803,11 +1794,10 @@ don't forget to set the <code>Content-Type</code> header to <code>application/js
 </span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user2@mail.com&quot;</span>
 </span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Keep an eye on the terminal logs of the Backend background processor as you will see that the message is received and consumed by the action method <code>api/tasksnotifier/tasksaved</code> and an information message is logged 
-in the terminal to indicate the processing of the message.</p>
+<p>Keep an eye on the terminal logs of the Backend background processor as you will see that the message is received and consumed by the action method <code>api/tasksnotifier/tasksaved</code> and an information message is logged in the terminal to indicate the processing of the message.</p>
 <details class="tip">
 <summary>VS Code Dapr Extension</summary>
-<p>You can use the VS Code <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr">Dapr Extension</a> to publish the message directly. It will be similar to the below image:</p>
+<p>You can use the VS Code <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr" target="_blank">Dapr Extension</a> to publish the message directly. It will be similar to the below image:</p>
 <p><a class="glightbox" href="../../assets/images/05-aca-dapr-pubsubapi/dapr-pub-sub-code-extension.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-pub-sub-code-extension" src="../../assets/images/05-aca-dapr-pubsubapi/dapr-pub-sub-code-extension.jpg" /></a></p>
 </details>
 <h4 id="6-optional-update-vs-code-tasks-and-launch-configuration-files">6. Optional: Update VS Code Tasks and Launch Configuration Files<a class="headerlink" href="#6-optional-update-vs-code-tasks-and-launch-configuration-files" title="Permanent link">&para;</a></h4>
@@ -2205,12 +2195,11 @@ and debug them in VS Code, we need to update the files <code>tasks.json</code> a
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Notice the new method <code>PublishTaskSavedEvent</code> added to the class. All we have to do is to call the method <code>PublishTaskSavedEvent</code> and pass the Pub/Sub name. In our case we named it <code>dapr-pubsub-servicebus</code> 
-as we are going to use Azure Service Bus as a message broker in the next step. </p>
+<p>Notice the new method <code>PublishTaskSavedEvent</code> added to the class. All we have to do is to call the method <code>PublishTaskSavedEvent</code> and pass the Pub/Sub name. In our case we named it <code>dapr-pubsub-servicebus</code> as we are going to use Azure Service Bus as a message broker in the next step.</p>
 <p>The second parameter <code>tasksavedtopic</code> is the topic name the publisher going to send the task model to. That's all the changes required to start publishing async messages from the Backend API.</p>
 </div>
 <h4 id="2-update-backend-background-processor-to-consume-messages-and-simulate-sending-emails">2. Update Backend Background Processor to Consume Messages and Simulate Sending Emails<a class="headerlink" href="#2-update-backend-background-processor-to-consume-messages-and-simulate-sending-emails" title="Permanent link">&para;</a></h4>
-<p>Update the files below under the Backend Processor Project. We are installing the NuGet package named <code>SendGrid</code> to the Backend processor project which will allow us to send emails. </p>
+<p>Update the files below under the Backend Processor Project. We are installing the NuGet package named <code>SendGrid</code> to the Backend processor project which will allow us to send emails.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">TasksNotifierController.cs</label><label for="__tabbed_10_2">TasksTracker.Processor.Backend.Svc.csproj</label><label for="__tabbed_10_3">appsettings.json</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2296,13 +2285,12 @@ as we are going to use Azure Service Bus as a message broker in the next step. <
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Follow this <a href="https://signup.sendgrid.com/">link</a> to set up a SendGrid account. Also follow <a href="https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key">these</a> instructions to fetch your 
-SendGrid ApiKey. </p>
+<p>Follow this <a href="https://signup.sendgrid.com/" target="_blank">link</a> to set up a SendGrid account. Also follow <a href="https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key" target="_blank">these</a> instructions to fetch your SendGrid ApiKey.</p>
 <p>Please note that the SendGrid API KEY is generated and displayed to you just once. So be sure to copy and save it somewhere. After that only the subset key is displayed.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>In the <a href="/aca/06-aca-dapr-bindingsapi/index.md/#1-create-dapr-sendgrid-output-binding-component-file">next module</a> we will be using a new type of Dapr components to send emails using SendGrid.</p>
+<p>In the <a href="/aca/06-aca-dapr-bindingsapi">next module</a> we will be using a new type of Dapr components to send emails using SendGrid.</p>
 <p>If you don't want to bother with signing up for a SendGrid account to send emails, you can just simulate sending emails by returning always <code>ok</code> from the <code>TaskSaved</code> method as shown below. </p>
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">// If you prefer not to deal with setting up a SendGrid account then simply always return OK from the TaskSaved method</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="na">[Dapr.Topic(&quot;dapr-pubsub-servicebus&quot;, &quot;tasksavedtopic&quot;)]</span>
@@ -2332,30 +2320,28 @@ This will allow the consumer service to re-try processing the message again on f
 </ul>
 </details>
 <h3 id="use-azure-service-bus-as-a-service-broker-for-dapr-pubsub-api">Use Azure Service Bus as a Service Broker for Dapr Pub/Sub API<a class="headerlink" href="#use-azure-service-bus-as-a-service-broker-for-dapr-pubsub-api" title="Permanent link">&para;</a></h3>
-<p>Now we will switch our implementation to use Azure Service Bus as a message broker. Redis worked perfectly for local development and testing, but we need to prepare ourselves for the cloud deployment. 
-To do so we need to create Service Bus Namespace followed by a Topic. A namespace provides a scoping container for Service Bus resources within your application.</p>
+<p>Now we will switch our implementation to use Azure Service Bus as a message broker. Redis worked perfectly for local development and testing, but we need to prepare ourselves for the cloud deployment. To do so we need to create Service Bus Namespace followed by a Topic. A namespace provides a scoping container for Service Bus resources within your application.</p>
 <h4 id="1-create-azure-service-bus-namespace-and-a-topic">1. Create Azure Service Bus Namespace and a Topic<a class="headerlink" href="#1-create-azure-service-bus-namespace-and-a-topic" title="Permanent link">&para;</a></h4>
 <p>You can do this from Azure Portal or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values.
-You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only 
-available on the standard tier not and not on the basic tier. More details can be found <a href="https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters">here</a>.</p>
+You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found <a href="https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters" target="_blank">here</a>.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nv">$NamespaceName</span><span class="p">=</span><span class="s2">&quot;[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]&quot;</span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nv">$TopicName</span><span class="p">=</span><span class="s2">&quot;tasksavedtopic&quot;</span>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="nv">$TopicSubscription</span><span class="p">=</span><span class="s2">&quot;tasks-processor-subscription&quot;</span>
 </span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="c">##Create servicebus namespace</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="c"># Create servicebus namespace</span>
 </span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="n">az</span> <span class="n">servicebus</span> <span class="n">namespace</span> <span class="n">create</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$NamespaceName</span> <span class="p">-</span><span class="n">-location</span> <span class="nv">$LOCATION</span> <span class="p">-</span><span class="n">-sku</span> <span class="n">Standard</span>
 </span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
-</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="c">##Create a topic under the namespace</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="c"># Create a topic under the namespace</span>
 </span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="n">az</span> <span class="n">servicebus</span> <span class="n">topic</span> <span class="n">create</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">-</span><span class="n">-namespace-name</span> <span class="nv">$NamespaceName</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$TopicName</span>
 </span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>
-</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="c">##Create a topic subscription</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="c"># Create a topic subscription</span>
 </span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="n">az</span> <span class="n">servicebus</span> <span class="n">topic</span> <span class="n">subscription</span> <span class="n">create</span> <span class="p">`</span>
 </span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="p">-</span><span class="n">-namespace-name</span> <span class="nv">$NamespaceName</span> <span class="p">`</span>
 </span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="p">-</span><span class="n">-topic-name</span> <span class="nv">$TopicName</span> <span class="p">`</span>
 </span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$TopicSubscription</span>
 </span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>
-</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="c">##List connection string</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="c"># List connection string</span>
 </span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="n">az</span> <span class="n">servicebus</span> <span class="n">namespace</span> <span class="n">authorization-rule</span> <span class="n">keys</span> <span class="n">list</span> <span class="p">`</span>
 </span><span id="__span-20-20"><a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-20-21"><a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a><span class="p">-</span><span class="n">-namespace-name</span> <span class="nv">$NamespaceName</span> <span class="p">`</span>
@@ -2387,14 +2373,13 @@ available on the standard tier not and not on the basic tier. More details can b
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We used the name <code>dapr-pubsub-servicebus</code> which should match the name of Pub/Sub component we've used earlier in the <a href="#4-create-an-api-endpoint-for-the-consumer-to-subscribe-to-the-topic">TasksNotifierController.cs</a> 
-controller on the action method with the attribute <code>Topic</code>. </p>
+<p>We used the name <code>dapr-pubsub-servicebus</code> which should match the name of Pub/Sub component we've used earlier in the <a href="#4-create-an-api-endpoint-for-the-consumer-to-subscribe-to-the-topic">TasksNotifierController.cs</a> controller on the action method with the attribute <code>Topic</code>.</p>
 <p>We set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata <code>consumerID</code> value should match the topic subscription name <code>tasks-processor-subscription</code>. </p>
 <p>We have set the scopes section to include the <code>tasksmanager-backend-api</code> and <code>tasksmanager-backend-processor</code> app ids, as those will be the Dapr apps that need access to Azure Service Bus for publishing and 
 consuming the messages.</p>
 </div>
 <h4 id="3-create-an-aca-dapr-component-file-for-pubsub-api-using-azure-service-bus">3. Create an ACA Dapr Component file for Pub/Sub API Using Azure Service Bus<a class="headerlink" href="#3-create-an-aca-dapr-component-file-for-pubsub-api-using-azure-service-bus" title="Permanent link">&para;</a></h4>
-<p>Add a new files <strong>aca-components</strong> as shown below: </p>
+<p>Add a new files <strong>aca-components</strong> as shown below:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Remember to replace the namespace placeholder with the unique global name you chose earlier</p>
@@ -2416,13 +2401,12 @@ consuming the messages.</p>
 <summary>Things to note here</summary>
 <ul>
 <li>We didn't specify the component name <code>dapr-pubsub-servicebus</code> when we created this component file. We are going to specify it once we add this dapr component to Azure Container Apps Environment via CLI.</li>
-<li>We are not referencing any service bus connection strings as the authentication between Dapr and Azure Service Bus will be configured using Managed Identities. </li>
+<li>We are not referencing any service bus connection strings as the authentication between Dapr and Azure Service Bus will be configured using Managed Identities.</li>
 <li>The metadata <code>namespaceName</code> value is set to the address of the Service Bus namespace as a fully qualified domain name. The <code>namespaceName</code> key is mandatory when using Managed Identities for authentication.</li>
-<li>We are setting the metadata <code>consumerID</code> value to match the topic subscription name <code>tasks-processor-subscription</code>. If you didn't set this metadata, dapr runtime will try to create a subscription using the 
- dapr application ID.</li>
+<li>We are setting the metadata <code>consumerID</code> value to match the topic subscription name <code>tasks-processor-subscription</code>. If you didn't set this metadata, dapr runtime will try to create a subscription using the dapr application ID.</li>
 </ul>
 </details>
-<p>With all those bits in place, we are ready to run the publisher service <code>Backend API</code> and the consumer service <code>Backend Background Service</code> and test pub/sub pattern end to end. </p>
+<p>With all those bits in place, we are ready to run the publisher service <code>Backend API</code> and the consumer service <code>Backend Background Service</code> and test pub/sub pattern end to end.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Ensure you are on the right root folder of each respective project. Remember to replace the placeholders with your own values.</p>
@@ -2447,7 +2431,7 @@ consuming the messages.</p>
 <p class="admonition-title">Note</p>
 <p>We gave the new Backend background service a Dapr App Id with the name <code>tasksmanager-backend-processor</code> and a Dapr HTTP port with the value <strong>3502</strong>.</p>
 </div>
-<p>Now let's try to publish a message by sending a POST request to <a href="http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic">http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic</a> with the below request body, don't forget to set the <code>Content-Type</code> 
+<p>Now let's try to publish a message by sending a POST request to <a href="http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic">http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic</a> with the below request body, don't forget to set the <code>Content-Type</code>
 header to <code>application/json</code></p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="err">POST</span><span class="w"> </span><span class="err">/v</span><span class="mf">1.0</span><span class="err">/publish/</span><span class="kc">tas</span><span class="err">kspubsub/</span><span class="kc">tas</span><span class="err">ksaved</span><span class="kc">t</span><span class="err">opic</span><span class="w"> </span><span class="err">HTTP/</span><span class="mf">1.1</span>
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="err">Hos</span><span class="kc">t</span><span class="p">:</span><span class="w"> </span><span class="err">localhos</span><span class="kc">t</span><span class="p">:</span><span class="mi">3500</span>
@@ -2478,9 +2462,9 @@ header to <code>application/json</code></p>
 <li>Ingress for this container app should be disabled (no access via HTTP at all as this is a background processor responsible to process published messages).</li>
 <li>Dapr needs to be enabled.</li>
 <li><strong>Optional</strong> (only if you activated your SendGrid account and received an api key. Otherwise, remove the <code>--secrets</code> and <code>--env-var</code> from the powershell command below). 
-  Setting the value of SendGrid API in the secrets store and referencing it in the environment variables, as well setting the flag <code>IntegrationEnabled</code> to <code>true</code> so it will send actual emails.</li>
+Setting the value of SendGrid API in the secrets store and referencing it in the environment variables, as well setting the flag <code>IntegrationEnabled</code> to <code>true</code> so it will send actual emails.</li>
 </ul>
-<p>To achieve the above, run the PowerShell script below. </p>
+<p>To achieve the above, run the PowerShell script below.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Notice how we removed the Ingress property totally which disables the Ingress for this Container App. Remember to replace the placeholders with your own values:</p>
@@ -2497,13 +2481,13 @@ header to <code>application/json</code></p>
 </span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="p">-</span><span class="n">-enable-dapr</span> <span class="p">`</span>
 </span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="p">-</span><span class="n">-dapr-app-id</span>  <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
 </span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="p">-</span><span class="n">-dapr-app-port</span>  <span class="p">&lt;</span><span class="n">web</span> <span class="n">api</span> <span class="n">application</span> <span class="n">port</span> <span class="n">number</span> <span class="n">found</span> <span class="n">under</span> <span class="n">Dockerfile</span> <span class="k">for</span> <span class="n">the</span> <span class="n">web</span> <span class="n">api</span> <span class="n">project</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">5071</span><span class="p">&gt;</span> <span class="p">`</span>
-</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a><span class="c">#comment out these two lines if you are not using sendgrid</span>
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a><span class="c"># comment out these two lines if you are not using sendgrid</span>
 </span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">&quot;sendgrid-apikey=&lt;Replace with your SendGrid API Key&gt;&quot;</span> <span class="p">`</span>
 </span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="p">-</span><span class="n">-env-vars</span> <span class="s2">&quot;SendGrid__ApiKey=secretref:sendgrid-apikey&quot;</span> <span class="s2">&quot;SendGrid__IntegrationEnabled=true&quot;</span>
 </span></code></pre></div>
 <h4 id="3-deploy-new-revisions-of-the-backend-api-to-azure-container-apps">3. Deploy New Revisions of the Backend API to Azure Container Apps<a class="headerlink" href="#3-deploy-new-revisions-of-the-backend-api-to-azure-container-apps" title="Permanent link">&para;</a></h4>
-<p>We need to update the Azure Container App hosting the Backend API with a new revision so our code changes for publishing messages after a task is saved is available for users. </p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c">## Update Backend API App container app and create a new revision </span>
+<p>We need to update the Azure Container App hosting the Backend API with a new revision so our code changes for publishing messages after a task is saved is available for users.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c"># Update Backend API App container app and create a new revision </span>
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
 </span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
 </span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
@@ -2521,59 +2505,54 @@ header to <code>application/json</code></p>
 <p>Notice that we set the component name <code>dapr-pubsub-servicebus</code> when we added it to the Container Apps Environment.</p>
 </div>
 <h3 id="configure-managed-identities-for-both-container-apps">Configure Managed Identities for Both Container Apps<a class="headerlink" href="#configure-managed-identities-for-both-container-apps" title="Permanent link">&para;</a></h3>
-<p>In the previous module we have <a href="../04-aca-dapr-stateapi/#configure-managed-identities-in-container-app">already configured</a> and used system-assigned identity for the Backend API container app. 
-We follow the same steps here to create an association between the backend processor container app and Azure Service Bus.</p>
+<p>In the previous module we have <a href="../04-aca-dapr-stateapi/#configure-managed-identities-in-container-app">already configured</a> and used system-assigned identity for the Backend API container app. We follow the same steps here to create an association between the backend processor container app and Azure Service Bus.</p>
 <h4 id="1-create-system-assigned-identity-for-backend-processor-app">1. Create system-assigned identity for Backend Processor App<a class="headerlink" href="#1-create-system-assigned-identity-for-backend-processor-app" title="Permanent link">&para;</a></h4>
 <p>Run the command below to create <code>system-assigned</code> identity for our Backend Processor App:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">identity</span> <span class="n">assign</span> <span class="p">`</span>
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>  <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>  <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
-</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>  <span class="p">-</span><span class="n">-system-assigned</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>    <span class="p">-</span><span class="n">-system-assigned</span>
 </span></code></pre></div>
 <p>This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be as the below, keep a note of the property <code>principalId</code> as we are going to use it in the next step.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">{</span>
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="nt">&quot;principalId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;your principal id will be displayed here&gt;&quot;</span><span class="p">,</span>
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">  </span><span class="nt">&quot;tenantId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;your tenant id will be displayed here&gt;&quot;</span><span class="p">,</span>
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SystemAssigned&quot;</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="nt">&quot;principalId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;your principal id will be displayed here&gt;&quot;</span><span class="p">,</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nt">&quot;tenantId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;your tenant id will be displayed here&gt;&quot;</span><span class="p">,</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SystemAssigned&quot;</span>
 </span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="p">}</span>
 </span></code></pre></div>
 <h4 id="2-grant-backend-processor-app-the-azure-service-bus-data-receiver-role">2. Grant Backend Processor App the Azure Service Bus Data Receiver Role<a class="headerlink" href="#2-grant-backend-processor-app-the-azure-service-bus-data-receiver-role" title="Permanent link">&para;</a></h4>
-<p>We will be using a <code>system-assigned</code> identity with a role assignments to grant our Backend Processor App the <code>Azure Service Bus Data Receiver</code> role which will allow it to receive messages from Service Bus queues 
-and subscriptions.</p>
-<p>You can read more about <code>Azure built-in roles for Azure Service Bus</code> <a href="https://learn.microsoft.com/azure/service-bus-messaging/service-bus-managed-service-identity#azure-built-in-roles-for-azure-service-bus">here</a>. </p>
+<p>We will be using a <code>system-assigned</code> identity with a role assignments to grant our Backend Processor App the <code>Azure Service Bus Data Receiver</code> role which will allow it to receive messages from Service Bus queues and subscriptions.</p>
+<p>You can read more about <code>Azure built-in roles for Azure Service Bus</code> <a href="https://learn.microsoft.com/azure/service-bus-messaging/service-bus-managed-service-identity#azure-built-in-roles-for-azure-service-bus" target="_blank">here</a>.</p>
 <p>Run the command below to associate the <code>system-assigned</code> identity with the access-control role <code>Azure Service Bus Data Receiver</code>:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nv">$subscriptionID</span> <span class="p">=</span> <span class="s2">&quot;&lt;Your Azure Subscription ID&gt;&quot;</span> <span class="c">## Your Azure Subscription id which you can find on the azure portal</span>
-</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nv">$principalId</span> <span class="p">=</span> <span class="s2">&quot;&lt;your principal id which was generated above&gt;&quot;</span> <span class="c">## Principal Id after creating system identity for Backend Processor Container app </span>
-</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nv">$roleNameOrId</span> <span class="p">=</span>  <span class="s2">&quot;Azure Service Bus Data Receiver&quot;</span> <span class="c">## Built in role name</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nv">$subscriptionID</span> <span class="p">=</span> <span class="s2">&quot;&lt;Your Azure Subscription ID&gt;&quot;</span> <span class="c"># Your Azure Subscription id which you can find on the azure portal</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nv">$principalId</span> <span class="p">=</span> <span class="s2">&quot;&lt;your principal id which was generated above&gt;&quot;</span> <span class="c"># Principal Id after creating system identity for Backend Processor Container app </span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nv">$roleNameOrId</span> <span class="p">=</span>  <span class="s2">&quot;Azure Service Bus Data Receiver&quot;</span> <span class="c"># Built in role name</span>
 </span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>
-</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>
-</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$principalId</span> <span class="p">`</span>
-</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$roleNameOrId</span> <span class="p">`</span>
-</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="p">-</span><span class="n">-scope</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/</span><span class="nv">$subscriptionID</span><span class="p">/</span><span class="n">resourcegroups</span><span class="p">/</span><span class="nv">$RESOURCE_GROUP</span><span class="p">/</span><span class="n">providers</span><span class="p">/</span><span class="n">Microsoft</span><span class="p">.</span><span class="n">ServiceBus</span><span class="p">/</span><span class="n">namespaces</span><span class="p">/</span><span class="nv">$NamespaceName</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$principalId</span> <span class="p">`</span>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$roleNameOrId</span> <span class="p">`</span>
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="p">-</span><span class="n">-scope</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/</span><span class="nv">$subscriptionID</span><span class="p">/</span><span class="n">resourcegroups</span><span class="p">/</span><span class="nv">$RESOURCE_GROUP</span><span class="p">/</span><span class="n">providers</span><span class="p">/</span><span class="n">Microsoft</span><span class="p">.</span><span class="n">ServiceBus</span><span class="p">/</span><span class="n">namespaces</span><span class="p">/</span><span class="nv">$NamespaceName</span>
 </span></code></pre></div>
 <h4 id="3-grant-backend-api-app-the-azure-service-bus-data-sender-role">3. Grant Backend API App the Azure Service Bus Data Sender Role<a class="headerlink" href="#3-grant-backend-api-app-the-azure-service-bus-data-sender-role" title="Permanent link">&para;</a></h4>
-<p>We'll do the same with Backend API container app, but we will use a different Azure built-in roles for Azure Service Bus which is the role <code>Azure Service Bus Data Sender</code> as the Backend API is a publisher of the 
-messages. Run the command below to associate the <code>system-assigned</code> with access-control role <code>Azure Service Bus Data Sender</code>:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nv">$subscriptionID</span> <span class="p">=</span> <span class="s2">&quot;&lt;Your Azure Subscription ID&gt;&quot;</span> <span class="c">## Your Azure Subscription</span>
-</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nv">$principalId</span> <span class="p">=</span> <span class="s2">&quot;&lt;your principal id which was generated in module 4. You can find it on the azure portal under the specific container identity section&gt;&quot;</span> <span class="c">## Principal Id after creating system identity for Backend API Container app</span>
-</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="nv">$roleNameOrId</span> <span class="p">=</span>  <span class="s2">&quot;Azure Service Bus Data Sender&quot;</span> <span class="c">## Built in role name</span>
+<p>We'll do the same with Backend API container app, but we will use a different Azure built-in roles for Azure Service Bus which is the role <code>Azure Service Bus Data Sender</code> as the Backend API is a publisher of the messages. Run the command below to associate the <code>system-assigned</code> with access-control role <code>Azure Service Bus Data Sender</code>:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nv">$subscriptionID</span> <span class="p">=</span> <span class="s2">&quot;&lt;Your Azure Subscription ID&gt;&quot;</span> <span class="c"># Your Azure Subscription</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nv">$principalId</span> <span class="p">=</span> <span class="s2">&quot;&lt;your principal id which was generated in module 4. You can find it on the azure portal under the specific container identity section&gt;&quot;</span> <span class="c"># Principal Id after creating system identity for Backend API Container app</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="nv">$roleNameOrId</span> <span class="p">=</span>  <span class="s2">&quot;Azure Service Bus Data Sender&quot;</span> <span class="c"># Built in role name</span>
 </span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>
-</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>
-</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$principalId</span> <span class="p">`</span>
-</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$roleNameOrId</span> <span class="p">`</span>
-</span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="p">-</span><span class="n">-scope</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/</span><span class="nv">$subscriptionID</span><span class="p">/</span><span class="n">resourcegroups</span><span class="p">/</span><span class="nv">$RESOURCE_GROUP</span><span class="p">/</span><span class="n">providers</span><span class="p">/</span><span class="n">Microsoft</span><span class="p">.</span><span class="n">ServiceBus</span><span class="p">/</span><span class="n">namespaces</span><span class="p">/</span><span class="nv">$NamespaceName</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$principalId</span> <span class="p">`</span>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$roleNameOrId</span> <span class="p">`</span>
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="p">-</span><span class="n">-scope</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/</span><span class="nv">$subscriptionID</span><span class="p">/</span><span class="n">resourcegroups</span><span class="p">/</span><span class="nv">$RESOURCE_GROUP</span><span class="p">/</span><span class="n">providers</span><span class="p">/</span><span class="n">Microsoft</span><span class="p">.</span><span class="n">ServiceBus</span><span class="p">/</span><span class="n">namespaces</span><span class="p">/</span><span class="nv">$NamespaceName</span>
 </span></code></pre></div>
 <h4 id="4-restart-container-apps">4. Restart Container Apps<a class="headerlink" href="#4-restart-container-apps" title="Permanent link">&para;</a></h4>
 <p>Lastly, we need to restart both container apps revisions to pick up the role assignment.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c">##Get revision name and assign it to a variable</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c"># Get revision name and assign it to a variable</span>
 </span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nv">$REVISION_NAME</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">containerapp</span> <span class="n">revision</span> <span class="n">list</span> <span class="p">`</span>
 </span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>        <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span>  <span class="p">`</span>
 </span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>        <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>        <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">name</span><span class="p">)</span>
 </span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>
-</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="c">##Restart revision by name                            </span>
+</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="c"># Restart revision by name</span>
 </span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">revision</span> <span class="n">restart</span> <span class="p">`</span>
 </span><span id="__span-34-9"><a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-34-10"><a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span>  <span class="p">`</span>
@@ -2584,7 +2563,7 @@ messages. Run the command below to associate the <code>system-assigned</code> wi
 </span><span id="__span-34-15"><a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a>        <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-34-16"><a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a>        <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">name</span><span class="p">)</span>
 </span><span id="__span-34-17"><a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a>
-</span><span id="__span-34-18"><a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a><span class="c">##Restart revision by name                            </span>
+</span><span id="__span-34-18"><a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a><span class="c"># Restart revision by name</span>
 </span><span id="__span-34-19"><a id="__codelineno-34-19" name="__codelineno-34-19" href="#__codelineno-34-19"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">revision</span> <span class="n">restart</span> <span class="p">`</span>
 </span><span id="__span-34-20"><a id="__codelineno-34-20" name="__codelineno-34-20" href="#__codelineno-34-20"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-34-21"><a id="__codelineno-34-21" name="__codelineno-34-21" href="#__codelineno-34-21"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span>  <span class="p">`</span>
@@ -2592,7 +2571,7 @@ messages. Run the command below to associate the <code>system-assigned</code> wi
 </span></code></pre></div>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
-<p>With this in place, you should be able to test the 3 services end to end and should receive a notification email to the task assignee email, the email will look like the below. </p>
+<p>With this in place, you should be able to test the 3 services end to end and should receive a notification email to the task assignee email, the email will look like the below.</p>
 <p><a class="glightbox" href="../../assets/images/05-aca-dapr-pubsubapi/email-log.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="email-log" src="../../assets/images/05-aca-dapr-pubsubapi/email-log.jpg" /></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -2633,10 +2612,10 @@ application and start creating new tasks. You should start seeing logs similar t
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -2722,10 +2701,11 @@ application and start creating new tasks. You should start seeing logs similar t
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

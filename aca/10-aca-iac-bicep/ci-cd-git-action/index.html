@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.a5377069.min.css">
@@ -914,7 +914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -934,7 +934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -954,7 +954,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1159,15 +1159,13 @@
 <li>Wait for the repository to be forked.</li>
 </ol>
 <h3 id="configure-repository-for-oidc-authentication-with-azure-ad">Configure Repository for OIDC Authentication with Azure AD<a class="headerlink" href="#configure-repository-for-oidc-authentication-with-azure-ad" title="Permanent link">&para;</a></h3>
-<p>In order to use the GitHub Actions workflow to deploy the infrastructure components of our application, we need to 
-log in to Azure using the Azure CLI with <a href="https://github.com/marketplace/actions/azure-login">Azure login</a> action.</p>
+<p>In order to use the GitHub Actions workflow to deploy the infrastructure components of our application, we need to log in to Azure using the Azure CLI with <a href="https://github.com/marketplace/actions/azure-login" target="_blank">Azure login</a> action.</p>
 <p>The Azure login action supports two different ways of authenticating with Azure:</p>
 <ul>
-<li><a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-a-service-principal-secret">Service principal with secrets</a></li>
-<li><a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-openid-connect">OpenID Connect (OIDC) with a Azure service principal using a Federated Identity Credential</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-a-service-principal-secret" target="_blank">Service principal with secrets</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-openid-connect" target="_blank">OpenID Connect (OIDC) with a Azure service principal using a Federated Identity Credential</a></li>
 </ul>
-<p>In this workshop, we will use the OIDC authentication method. Assuming you are already logged in using azure cli 
-locally, follow the steps below to configure the repository for OIDC authentication with Azure AD either using powershell or bash/wsl:</p>
+<p>In this workshop, we will use the OIDC authentication method. Assuming you are already logged in using azure cli locally, follow the steps below to configure the repository for OIDC authentication with Azure AD either using powershell or bash/wsl:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell</label><label for="__tabbed_1_2">Bash/WSL</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1243,16 +1241,16 @@ locally, follow the steps below to configure the repository for OIDC authenticat
 </div>
 </div>
 <h3 id="configure-github-repository-secrets">Configure GitHub Repository Secrets<a class="headerlink" href="#configure-github-repository-secrets" title="Permanent link">&para;</a></h3>
-<p>Configure secrets details in GitHub repo as described here in <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets">create GitHub secrets</a>. Use below values mapped to relevant secrets in GitHub. </p>
+<p>Configure secrets details in GitHub repo as described here in <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets" target="_blank">create GitHub secrets</a>. Use below values mapped to relevant secrets in GitHub.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># AZURE_SUBSCRIPTION_ID</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$SUBSCRIPTION_ID</span><span class="w"> </span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># AZURE_TENANT_ID   </span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$AZURE_TENANT</span><span class="w">    </span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># AZURE_CLIENT_ID      </span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APP_ID</span><span class="w">             </span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$SUBSCRIPTION_ID</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># AZURE_TENANT_ID</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$AZURE_TENANT</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># AZURE_CLIENT_ID</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APP_ID</span>
 </span></code></pre></div>
 <h3 id="configure-github-repository-variables">Configure GitHub Repository Variables<a class="headerlink" href="#configure-github-repository-variables" title="Permanent link">&para;</a></h3>
-<p>Configure repository variables in GitHub repo as described here in <a href="https://docs.github.com/en/actions/learn-github-actions/variables">create GitHub variables</a>. Use below values mapped to relevant variables in GitHub. </p>
+<p>Configure repository variables in GitHub repo as described here in <a href="https://docs.github.com/en/actions/learn-github-actions/variables">create GitHub variables</a>. Use below values mapped to relevant variables in GitHub.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location.<span class="w"> </span>e.g.<span class="w"> </span>eastus&gt;
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
@@ -1265,7 +1263,7 @@ locally, follow the steps below to configure the repository for OIDC authenticat
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Repository variables <code>CONTAINER_REGISTRY_NAME</code> is only needed by workflow, if you wish the images to be deployed from private ACR.</p>
-<p>You may chose to skip defining this variable and the workflow will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop">public github container registry images</a> to deploy the images.</p>
+<p>You may chose to skip defining this variable and the workflow will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop" target="_blank">public github container registry images</a> to deploy the images.</p>
 </div>
 <h3 id="trigger-github-actions-workflow">Trigger GitHub Actions Workflow<a class="headerlink" href="#trigger-github-actions-workflow" title="Permanent link">&para;</a></h3>
 <p>With these steps completed, you are now ready to trigger the GitHub Actions workflow named <strong>Build and deploy infrastructure as code to Azure</strong> using <strong>workflow dispatch</strong> to deploy the infrastructure components of the application.</p>
@@ -1306,10 +1304,10 @@ locally, follow the steps below to configure the repository for OIDC authenticat
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1395,10 +1393,11 @@ locally, follow the steps below to configure the repository for OIDC authenticat
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

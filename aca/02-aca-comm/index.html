@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a5377069.min.css">
@@ -902,7 +902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -922,7 +922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -942,7 +942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1122,18 +1122,18 @@
 <p class="admonition-title">Module Duration</p>
 <p>60 minutes</p>
 </div>
-<p>In this module, we will add a service named <code>ACA Web API – Frontend</code> as illustrated in the <a href="../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg">architecture diagram</a>. This service will host a simple ASP.NET Razor pages web app which allows the end users to manage their tasks. After that we will provision Azure resources needed to deploy the service to ACA using Azure CLI.</p>
+<p>In this module, we will add a service named <code>ACA Web API – Frontend</code> as illustrated in the <a href="../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg" target="_blank">architecture diagram</a>. This service will host a simple ASP.NET Razor pages web app which allows the end users to manage their tasks. After that we will provision Azure resources needed to deploy the service to ACA using Azure CLI.</p>
 <h3 id="1-create-the-frontend-web-app-project-web-app">1. Create the Frontend Web App project (Web APP)<a class="headerlink" href="#1-create-the-frontend-web-app-project-web-app" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>Open a command-line terminal and navigate to root folder of your project. 
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div></p>
+<p>Open a command-line terminal and navigate to root folder of your project.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div>
 </li>
 <li>
-<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> and initialize the project. This will create and ASP.NET Razor Pages web app project.
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapp<span class="w">  </span>-o<span class="w"> </span>TasksTracker.WebPortal.Frontend.Ui
-</span></code></pre></div></p>
+<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> and initialize the project. This will create and ASP.NET Razor Pages web app project.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapp<span class="w">  </span>-o<span class="w"> </span>TasksTracker.WebPortal.Frontend.Ui
+</span></code></pre></div>
 </li>
 <li>
 <p>We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA. Open the VS Code Command Palette (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span>) and select <code>Docker: Add Docker Files to Workspace...</code></p>
@@ -1152,7 +1152,9 @@
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TasksModel.cs</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
+<div class="tabbed-block"></div>
+</div>
+</div>
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">System.ComponentModel.DataAnnotations</span><span class="p">;</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
@@ -1204,12 +1206,9 @@
 </span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="p">}</span>
 </span></code></pre></div>
-</div>
-</div>
-</div>
 <ul>
 <li>Now, in the <strong>Tasks</strong> folder, we will add 3 Razor pages for CRUD operations which will be responsible for listing all the tasks, creating a new task, and updating existing tasks.
-By looking at the cshtml content notice that the page is expecting a query string named <code>createdBy</code> which will be used to group tasks for application users. </li>
+By looking at the cshtml content notice that the page is expecting a query string named <code>createdBy</code> which will be used to group tasks for application users.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1309,7 +1308,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">What does this code do?</p>
-<p>In the code above we've injected named HttpClientFactory which is responsible to call the Backend API service as HTTP request. The index page supports deleting and marking tasks as completed along with listing tasks for certain users based on the <code>createdBy</code> property stored in a cookie named <code>TasksCreatedByCookie</code>. 
+<p>In the code above we've injected named HttpClientFactory which is responsible to call the Backend API service as HTTP request. The index page supports deleting and marking tasks as completed along with listing tasks for certain users based on the <code>createdBy</code> property stored in a cookie named <code>TasksCreatedByCookie</code>.
 More about populating this property later in the workshop.</p>
 </div>
 </div>
@@ -1572,30 +1571,29 @@ More about populating this property later in the workshop.</p>
 </div>
 </div>
 <ul>
-<li>Next, we will add a new environment variable named <code>BackendApiConfig:BaseUrlExternalHttp</code> into <code>appsettings.json</code> file. 
+<li>Next, we will add a new environment variable named <code>BackendApiConfig:BaseUrlExternalHttp</code> into <code>appsettings.json</code> file.
 This variable will contain the Base URL for the backend API deployed in the previous module to ACA. Later on in the workshop, we will see how we can set the environment variable once we deploy it to ACA.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">appsettings.json</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">   </span><span class="p">{</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">     </span><span class="nt">&quot;Logging&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">       </span><span class="nt">&quot;LogLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">         </span><span class="nt">&quot;Default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information&quot;</span><span class="p">,</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">         </span><span class="nt">&quot;Microsoft.AspNetCore&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Warning&quot;</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">       </span><span class="p">}</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">     </span><span class="p">},</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">     </span><span class="nt">&quot;AllowedHosts&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">     </span><span class="nt">&quot;BackendApiConfig&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">       </span><span class="nt">&quot;BaseUrlExternalHttp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;url to your backend api goes here. You can find this on the azure portal overview tab. Look for the Application url property there.&quot;</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">     </span><span class="p">}</span>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">   </span><span class="p">}</span>
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">      </span><span class="nt">&quot;Logging&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="nt">&quot;LogLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">          </span><span class="nt">&quot;Default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information&quot;</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">          </span><span class="nt">&quot;Microsoft.AspNetCore&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Warning&quot;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">      </span><span class="p">},</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">      </span><span class="nt">&quot;AllowedHosts&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">      </span><span class="nt">&quot;BackendApiConfig&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="nt">&quot;BaseUrlExternalHttp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;url to your backend api goes here. You can find this on the azure portal overview tab. Look for the Application url property there.&quot;</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
-</div>
-</div>
-</div>
 <ul>
-<li>Lastly, we will update the web app landing page <code>Index.html</code> and <code>Index.cshtml.cs</code> inside <strong>Pages</strong> folder to capture the email of the tasks owner user and assign this email to a cookie named <code>TasksCreatedByCookie</code>. </li>
+<li>Lastly, we will update the web app landing page <code>Index.html</code> and <code>Index.cshtml.cs</code> inside <strong>Pages</strong> folder to capture the email of the tasks owner user and assign this email to a cookie named <code>TasksCreatedByCookie</code>.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Index.cshtml</label><label for="__tabbed_5_2">Index.cshtml.cs</label></div>
 <div class="tabbed-content">
@@ -1673,7 +1671,7 @@ This variable will contain the Base URL for the backend API deployed in the prev
 </div>
 <ul>
 <li>
-<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the frontend directory which hosts the <code>.csproj</code> project folder and build the project. </p>
+<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the frontend directory which hosts the <code>.csproj</code> project folder and build the project.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>dotnet<span class="w"> </span>build
 </span></code></pre></div>
@@ -1685,13 +1683,15 @@ This variable will contain the Base URL for the backend API deployed in the prev
 </div>
 <h3 id="2-deploy-razor-pages-web-app-frontend-project-to-aca">2. Deploy Razor Pages Web App Frontend Project to ACA<a class="headerlink" href="#2-deploy-razor-pages-web-app-frontend-project-to-aca" title="Permanent link">&para;</a></h3>
 <p>We will assume that you still have the same PowerShell console session opened from the last module which has all the powershell variables defined from module 1. We need to add the below PS variables:</p>
-<p><div class="language-powershell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">$FRONTEND_WEBAPP_NAME</span><span class="p">=</span><span class="s2">&quot;tasksmanager-frontend-webapp&quot;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">$FRONTEND_WEBAPP_NAME</span><span class="p">=</span><span class="s2">&quot;tasksmanager-frontend-webapp&quot;</span>
 </span></code></pre></div>
-- Now we will build and push the Web App project docker image to ACR. Use the below command to initiate the image build and push process using ACR. The <code>.</code> at the end of the command represents the docker build context. In our case, we need to be on the parent directory which hosts the .csproject.</p>
-<p><div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span> 
+<ul>
+<li>Now we will build and push the Web App project docker image to ACR. Use the below command to initiate the image build and push process using ACR. The <code>.</code> at the end of the command represents the docker build context. In our case, we need to be on the parent directory which hosts the .csproject.</li>
+</ul>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span> 
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
 </span></code></pre></div>
-Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named <code>tasksmanager/tasksmanager-frontend-webapp</code> has been created and there is a new docker image with a <code>latest</code> tag is created.</p>
+<p>Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named <code>tasksmanager/tasksmanager-frontend-webapp</code> has been created and there is a new docker image with a <code>latest</code> tag is created.</p>
 <ul>
 <li>Next, we will create and deploy the Web App to ACA using the following command. Remember to replace the placeholders with your own values:</li>
 </ul>
@@ -1777,10 +1777,10 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1866,10 +1866,11 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

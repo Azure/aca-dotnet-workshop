@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.d451bc0e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.79e020e9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a5377069.min.css">
@@ -124,7 +124,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-1-deploy-backend-api-to-aca" class="md-skip">
+        <a href="#module-1-deploy-backend-api-to-aca-1223" class="md-skip">
           Skip to content
         </a>
       
@@ -895,7 +895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/1-contribution-guide/" class="md-nav__link">
+      <a href="../13-contributing/1-contribution-guide.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -915,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/2-Submit-issue-suggestion/" class="md-nav__link">
+      <a href="../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -935,7 +935,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-contributing/3-minor-update-fix/" class="md-nav__link">
+      <a href="../13-contributing/3-minor-update-fix.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1103,25 +1103,25 @@
   
 
 
-<h1 id="module-1-deploy-backend-api-to-aca">Module 1 - Deploy Backend API to ACA<a class="headerlink" href="#module-1-deploy-backend-api-to-aca" title="Permanent link">&para;</a></h1>
+<h1 id="module-1-deploy-backend-api-to-aca-1223">Module 1 - Deploy Backend API to ACA 1223<a class="headerlink" href="#module-1-deploy-backend-api-to-aca-1223" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Module Duration</p>
 <p>60 minutes</p>
 </div>
-<p>In this module, we will start by creating the first microservice named <code>ACA Web API – Backend</code> as illustrated in the <a href="../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg">architecture diagram</a>. Followed by that we will provision the  Azure resources needed to deploy the service to Azure Container Apps using the Azure CLI.</p>
+<p>In this module, we will start by creating the first microservice named <code>ACA Web API – Backend</code> as illustrated in the <a href="../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg" target="_blank">architecture diagram</a>. Followed by that we will provision the  Azure resources needed to deploy the service to Azure Container Apps using the Azure CLI.</p>
 <h3 id="1-create-the-backend-api-project-web-api">1. Create the backend API project (Web API)<a class="headerlink" href="#1-create-the-backend-api-project-web-api" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>Open a command-line terminal and create a folder for your project. Use the <code>code</code> command to launch Visual Studio Code from that directory as shown:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir<span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+<p>Open a command-line terminal and create a folder for your project. Use the <code>code</code> command to launch Visual Studio Code from that directory as shown:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir<span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>code<span class="w"> </span>.
-</span></code></pre></div></p>
+</span></code></pre></div>
 </li>
 <li>
-<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> and initialize the project. This will create and ASP.NET Web API project scaffolded with a single controller.
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapi<span class="w"> </span>-o<span class="w"> </span>TasksTracker.TasksManager.Backend.Api
-</span></code></pre></div></p>
+<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> and initialize the project. This will create and ASP.NET Web API project scaffolded with a single controller.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapi<span class="w"> </span>-o<span class="w"> </span>TasksTracker.TasksManager.Backend.Api
+</span></code></pre></div>
 </li>
 <li>
 <p>Next we need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span>) and select <code>Docker: Add Docker Files to Workspace...</code></p>
@@ -1129,7 +1129,7 @@
 <li>Use <code>.NET: ASP.NET Core</code> when prompted for application platform.</li>
 <li>Choose <code>Linux</code> when prompted to choose the operating system.</li>
 <li>You will be asked if you want to add Docker Compose files. Select <code>No</code>.</li>
-<li>Take a note of the provided <strong>application port</strong> as we will pass it later on as the --target-port for the <code>az containerapp create</code> command.</li>
+<li>Take a note of the provided <strong>application port</strong> as we will pass it later on as the <code>--target-port</code> for the <code>az containerapp create</code> command.</li>
 <li><code>Dockerfile</code> and <code>.dockerignore</code> files are added to the workspace.</li>
 </ul>
 </li>
@@ -1139,7 +1139,9 @@
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TaskModel.cs</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
+<div class="tabbed-block"></div>
+</div>
+</div>
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Models</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="p">{</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">TaskModel</span>
@@ -1171,13 +1173,10 @@
 </span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
-</div>
-</div>
-</div>
 <ul>
-<li>Create new folder named <strong>Services</strong> (make sure it is created at the same level as the models folder and not inside the models folder itself) and add <strong>new files</strong> as shown below. 
-   Add the Fake Tasks Manager service (In-memory),  this will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. 
-   In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block</li>
+<li>Create new folder named <strong>Services</strong> (make sure it is created at the same level as the models folder and not inside the models folder itself) and add <strong>new files</strong> as shown below.
+   Add the Fake Tasks Manager service (In-memory),  this will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA.
+   In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">ITasksManager.cs</label><label for="__tabbed_2_2">FakeTasksManager.cs</label></div>
 <div class="tabbed-content">
@@ -1198,7 +1197,7 @@
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<p><div class="language-csharp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Models</span><span class="p">;</span>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Models</span><span class="p">;</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Services</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="p">{</span>
@@ -1293,16 +1292,18 @@
 </span><span id="__span-4-93"><a id="__codelineno-4-93" name="__codelineno-4-93" href="#__codelineno-4-93"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-4-94"><a id="__codelineno-4-94" name="__codelineno-4-94" href="#__codelineno-4-94"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
-  The code above is self-explanatory, it generates 10 tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.</p>
 </div>
 </div>
 </div>
+<p>The code above is self-explanatory, it generates 10 tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.</p>
 <ul>
 <li>Now we need to register FakeTasksManager on project startup. Open file <code class="language-csharp highlight"><span class="n">Program</span><span class="p">.</span><span class="n">cs</span></code> and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required using statements for the task interface and class.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Program.cs</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
+<div class="tabbed-block"></div>
+</div>
+</div>
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="hll"><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Services</span><span class="p">;</span>
 </span></span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kt">var</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebApplication</span><span class="p">.</span><span class="n">CreateBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
@@ -1311,15 +1312,14 @@
 </span></span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1">// Code removed for brevity</span>
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">app</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span>
 </span></code></pre></div>
-</div>
-</div>
-</div>
 <ul>
 <li>Add a new controller under the <code>Controllers</code> folder with name below. We need to create API endpoints to manage tasks.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">TasksController.cs</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
+<div class="tabbed-block"></div>
+</div>
+</div>
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Models</span><span class="p">;</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Services</span><span class="p">;</span>
@@ -1407,12 +1407,9 @@
 </span><span id="__span-6-85"><a id="__codelineno-6-85" name="__codelineno-6-85" href="#__codelineno-6-85"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-6-86"><a id="__codelineno-6-86" name="__codelineno-6-86" href="#__codelineno-6-86"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div>
-</div>
-</div>
-</div>
 <ul>
 <li>
-<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the <code>.csproj</code> project folder and build the project. </p>
+<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the <code>.csproj</code> project folder and build the project.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>dotnet<span class="w"> </span>build
 </span></code></pre></div>
@@ -1420,15 +1417,15 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Throughout the documentation, we will use the the tilde character [~] to represent the base / parent folder where you chose to install the workshop assets. </p>
+<p>Throughout the documentation, we will use the the tilde character [~] to represent the base / parent folder where you chose to install the workshop assets.</p>
 </div>
 <p>Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.</p>
 <h3 id="2-deploy-web-api-backend-project-to-aca">2. Deploy Web API Backend Project to ACA<a class="headerlink" href="#2-deploy-web-api-backend-project-to-aca" title="Permanent link">&para;</a></h3>
 <p>We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the following steps:</p>
 <ul>
 <li>
-<p>We will start with Installing/Upgrading the Azure Container Apps Extension.
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Upgrade Azure CLI</span>
+<p>We will start with Installing/Upgrading the Azure Container Apps Extension.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Upgrade Azure CLI</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>az<span class="w"> </span>upgrade
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Login to Azure</span>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>az<span class="w"> </span>login<span class="w"> </span>
@@ -1436,28 +1433,28 @@
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>az<span class="w"> </span>account<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--subscription<span class="w"> </span>&lt;name<span class="w"> </span>or<span class="w"> </span>id&gt;
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># Install/Upgrade Azure Container Apps Extension</span>
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>az<span class="w"> </span>extension<span class="w"> </span>add<span class="w"> </span>--name<span class="w"> </span>containerapp<span class="w"> </span>--upgrade
-</span></code></pre></div></p>
+</span></code></pre></div>
 </li>
 <li>
-<p>Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">$RESOURCE_GROUP</span><span class="o">=</span><span class="s2">&quot;tasks-tracker-rg&quot;</span>
+<p>Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">$RESOURCE_GROUP</span><span class="o">=</span><span class="s2">&quot;tasks-tracker-rg&quot;</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">$LOCATION</span><span class="o">=</span><span class="s2">&quot;eastus&quot;</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">$ENVIRONMENT</span><span class="o">=</span><span class="s2">&quot;tasks-tracker-containerapps-env&quot;</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nv">$WORKSPACE_NAME</span><span class="o">=</span><span class="s2">&quot;&lt;replace this with your unique app log analytics workspace name&gt;&quot;</span>
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">$APPINSIGHTS_NAME</span><span class="o">=</span><span class="s2">&quot;&lt;replace this with your unique app insights name&gt;&quot;</span>
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nv">$BACKEND_API_NAME</span><span class="o">=</span><span class="s2">&quot;tasksmanager-backend-api&quot;</span>
 </span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nv">$ACR_NAME</span><span class="o">=</span><span class="s2">&quot;&lt;replace this with your unique acr name&gt;&quot;</span>
-</span></code></pre></div></p>
+</span></code></pre></div>
 </li>
 <li>
-<p>Create a <code>resource group</code> to organize the services related to the application, run the below command:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>az<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+<p>Create a <code>resource group</code> to organize the services related to the application, run the below command:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>az<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>--name<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>--location<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOCATION</span><span class="s2">&quot;</span>
-</span></code></pre></div></p>
+</span></code></pre></div>
 </li>
 <li>
-<p>Create an Azure Container Registry (ACR) instance in the resource group to store images of all Microservices we are going to build during this workshop. Make sure that you set the <code>admin-enabled</code> flag to true in order to seamlessly authenticate the Azure container app when trying to create the container app using the image stored in ACR</p>
+<p>Create an Azure Container Registry (ACR) instance in the resource group to store images of all Microservices we are going to build during this workshop. Make sure that you set the <code>admin-enabled</code> flag to true in order to seamlessly authenticate the Azure container app when trying to create the container app using the image stored in ACR.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span><span class="sb">`</span>
@@ -1471,8 +1468,9 @@
 <p>Notice that we create the registry with admin rights <code>--admin-enabled</code> flag set to <code>true</code> which is not suited for real production, but good for our workshop.</p>
 </div>
 <ul>
-<li>Create an Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace. To create it, run the command below:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># create the log analytics workspace</span>
+<li>
+<p>Create an Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace. To create it, run the command below:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># create the log analytics workspace</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>--workspace-name<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span>
@@ -1486,10 +1484,11 @@
 </span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="nv">$WORKSPACE_SECRET</span><span class="o">=</span>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>get-shared-keys<span class="w"> </span>--query<span class="w"> </span>primarySharedKey<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>-g<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>-n<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span><span class="w"> </span>-o<span class="w"> </span>tsv
-</span></code></pre></div></li>
+</span></code></pre></div>
+</li>
 <li>
-<p>Create an <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net">Application Insights</a> Instance which will be used mainly for <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing">distributed tracing</a> between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Install the application-insights extension for the CLI</span>
+<p>Create an <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net" target="_blank">Application Insights</a> Instance which will be used mainly for <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing" target="_blank">distributed tracing</a> between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Install the application-insights extension for the CLI</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>az<span class="w"> </span>extension<span class="w"> </span>add<span class="w"> </span>-n<span class="w"> </span>application-insights
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># Create application-insights instance</span>
@@ -1503,11 +1502,11 @@
 </span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="o">=(</span><span class="k">$(</span>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>show<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>--app<span class="w"> </span><span class="nv">$APPINSIGHTS_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>-g<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="k">)</span><span class="w">  </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)</span>.instrumentationKey
-</span></code></pre></div></p>
+</span></code></pre></div>
 </li>
 <li>
-<p>Now we will create an Azure Container Apps Environment. As a reminder of the different ACA component <a href="../00-workshop-intro/1-aca-core-components/">check this link in the workshop introduction</a>. The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Create the ACA environment</span>
+<p>Now we will create an Azure Container Apps Environment. As a reminder of the different ACA component <a href="../00-workshop-intro/1-aca-core-components/">check this link in the workshop introduction</a>. The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Create the ACA environment</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>--name<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
@@ -1515,7 +1514,7 @@
 </span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>--logs-workspace-key<span class="w"> </span><span class="nv">$WORKSPACE_SECRET</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>--dapr-instrumentation-key<span class="w"> </span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>--location<span class="w"> </span><span class="nv">$LOCATION</span>
-</span></code></pre></div></p>
+</span></code></pre></div>
 </li>
 </ul>
 <details class="tip">
@@ -1524,7 +1523,7 @@
 <li>It creates an ACA environment and associates it with the Log Analytics Workspace created in the previous step.</li>
 <li>We are setting the <code>--dapr-instrumentation-key</code> value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr in later modules and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.  <blockquote>
 <p><strong><em>NOTE:</em></strong>
-You can set the <code>--dapr-instrumentation-key</code> after you create the ACA environment but this is not possible via the AZ CLI right now. There is an <a href="https://github.com/microsoft/azure-container-apps/issues/293">open issue</a> which is being tracked by the product group.</p>
+You can set the <code>--dapr-instrumentation-key</code> after you create the ACA environment but this is not possible via the AZ CLI right now. There is an <a href="https://github.com/microsoft/azure-container-apps/issues/293" target="_blank">open issue</a> which is being tracked by the product group.</p>
 </blockquote>
 </li>
 </ul>
@@ -1532,10 +1531,10 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <ul>
 <li>
 <p>Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The <code>.</code> at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the <code>.csproj</code>.</p>
-<p><div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
 </span></code></pre></div>
-Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named <code>tasksmanager/tasksmanager-backend-api</code> has been created and there is a new docker image with a <code>latest</code> tag is created.</p>
+<p>Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named <code>tasksmanager/tasksmanager-backend-api</code> has been created and there is a new docker image with a <code>latest</code> tag is created.</p>
 </li>
 <li>
 <p>The last step here is to create and deploy the Web API to ACA following the below command. Remember to replace the place holders with your own values:</p>
@@ -1557,14 +1556,14 @@ Once this step is completed you can verify the results by going to the Azure por
 <details class="tip">
 <summary>Want to learn what above command does?</summary>
 <ul>
-<li>Ingress param is set to <code>external</code> which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to <code>Internal</code> or <code>External</code> it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found <a href="https://learn.microsoft.com/en-us/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names">here</a>.</li>
+<li>Ingress param is set to <code>external</code> which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to <code>Internal</code> or <code>External</code> it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found <a href="https://learn.microsoft.com/en-us/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names" target="_blank">here</a>.</li>
 <li>The target port param is set to 80, this is the port our Web API container listens to for incoming requests.</li>
 <li>We didn't specify the ACR registry username and password, <code>az containerapp create</code> command was able to look up ACR username and password and add them as a secret under the created Azure container app for future container updates.</li>
 <li>The minimum and the maximum number of replicas are set. More about this when we cover Autoscaling in later modules. For the time being, only a single instance of this container app will be provisioned as Auto scale is not configured.</li>
-<li>We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link <a href="https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration">here</a>.</li>
+<li>We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link <a href="https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration" target="_blank">here</a>.</li>
 <li>The <code>query</code> property will filter the response coming from the command and just return the FQDN. Take note of this FQDN as you will need it for the next step.</li>
 </ul>
-<p>For full details on all available parameters for this command, please visit this <a href="https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create">page</a>.  </p>
+<p>For full details on all available parameters for this command, please visit this <a href="https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create" target="_blank">page</a>.</p>
 </details>
 <ul>
 <li>You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named <code>tasks-tracker-rg</code> that you created earlier. You should see the 5 recourses created below.
@@ -1572,13 +1571,13 @@ Once this step is completed you can verify the results by going to the Azure por
 </ul>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
-<p>To test the backend api service, copy the FQDN (Application URL) of the Azure container app named <code>tasksmanager-backend-api</code>. 
+<p>To test the backend api service, copy the FQDN (Application URL) of the Azure container app named <code>tasksmanager-backend-api</code>.
 Issue a <code>GET</code> request similar to this one: <code>https://tasksmanager-backend-api.&lt;your-aca-env-unique-id&gt;.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net</code> and you should receive an array of the 10 tasks similar to the below image.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can find your azure container app application url on the azure portal overview tab.</p>
-</div>
 <p><a class="glightbox" href="../../assets/images/01-deploy-api-to-aca/Response.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Web API Response" src="../../assets/images/01-deploy-api-to-aca/Response.jpg" /></a></p>
+</div>
 </div>
 <p>In the next module, we will see how we will add a new Frontend Web App as a microservice and how it will communicate with the backend API.</p>
 
@@ -1608,10 +1607,10 @@ Issue a <code>GET</code> request similar to this one: <code>https://tasksmanager
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
-            Back to top
-          </button>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -1697,10 +1696,11 @@ Issue a <code>GET</code> request similar to this one: <code>https://tasksmanager
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+    
     <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.726fbb30.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6eac0284.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
