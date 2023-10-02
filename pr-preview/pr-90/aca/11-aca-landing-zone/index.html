@@ -764,6 +764,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Module 11 - Integration with Azure Container Apps landing zone accelerator
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -773,6 +784,32 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-landing-zone" class="md-nav__link">
+    Deploy the landing zone
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1017,6 +1054,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-landing-zone" class="md-nav__link">
+    Deploy the landing zone
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1034,21 +1086,14 @@
 
 
 <h1 id="module-11-integration-with-azure-container-apps-landing-zone-accelerator">Module 11 - Integration with Azure Container Apps landing zone accelerator<a class="headerlink" href="#module-11-integration-with-azure-container-apps-landing-zone-accelerator" title="Permanent link">&para;</a></h1>
-<p>Azure landing zone accelerators provide architectural guidance, reference architectures, reference implementations, and 
-automation to deploy workload platforms on Azure at scale. They are aligned with industry proven practices, such as 
-those presented in Azure landing zones guidance in the Cloud Adoption Framework.</p>
-<p>This Azure Container Apps landing zone accelerator represents the strategic design path and target technical state for 
-an Azure Container Apps deployment, owned and operated by a workload team.</p>
+<p>Azure landing zone accelerators provide architectural guidance, reference architectures, reference implementations, and automation to deploy workload platforms on Azure at scale. They are aligned with industry proven practices, such as those presented in Azure landing zones guidance in the Cloud Adoption Framework.</p>
+<p>This Azure Container Apps landing zone accelerator represents the strategic design path and target technical state for an Azure Container Apps deployment, owned and operated by a workload team.</p>
 <p>The application created as part of the workshop is integrated with the Azure Container Apps landing zone accelerator.</p>
-<h1 id="deploy-the-landing-zone">Deploy the landing zone<a class="headerlink" href="#deploy-the-landing-zone" title="Permanent link">&para;</a></h1>
-<p>To deploy the landing zone, you can follow the complete guide in <a href="https://github.com/Azure/aca-landing-zone-accelerator/blob/main/scenarios/aca-internal/bicep/README.md">Azure Container Apps - Internal environment secure baseline [Bicep]</a>.</p>
+<h2 id="deploy-the-landing-zone">Deploy the landing zone<a class="headerlink" href="#deploy-the-landing-zone" title="Permanent link">&para;</a></h2>
+<p>To deploy the landing zone, you can follow the complete guide in <a href="https://github.com/Azure/aca-landing-zone-accelerator/blob/main/scenarios/aca-internal/bicep/README.md" target="_blank">Azure Container Apps - Internal environment secure baseline [Bicep]</a>.</p>
 <p>The deployment of the sample app deploys also an application gateway with the same name as the one of the landing zone.
-It is recommended to deploy only the first four building blocks of the landing zone and then deploy this sample app, 
-i.e. do not deploy hello world sample app and application gateway. 
-To do so, you can set the attribute <code>deployHelloWorldSampleApp</code> to <code>false</code> in the parameters file of the landing zone.</p>
-<p>To have Dapr observability in Application Insights, you need to set the attributes <code>enableApplicationInsights</code> and 
-<code>enableDaprInstrumentation</code> to <code>true</code> in the parameters file of the landing zone. To know more about monitoring and 
-observability, you can follow this documentation <a href="https://github.com/Azure/aca-landing-zone-accelerator/blob/main/docs/design-areas/management.md">Operations management considerations for Azure Container Apps</a>.</p>
+It is recommended to deploy only the first four building blocks of the landing zone and then deploy this sample app, i.e. do not deploy hello world sample app and application gateway. To do so, you can set the attribute <code>deployHelloWorldSampleApp</code> to <code>false</code> in the parameters file of the landing zone.</p>
+<p>To have Dapr observability in Application Insights, you need to set the attributes <code>enableApplicationInsights</code> and <code>enableDaprInstrumentation</code> to <code>true</code> in the parameters file of the landing zone. To know more about monitoring and observability, you can follow this documentation <a href="https://github.com/Azure/aca-landing-zone-accelerator/blob/main/docs/design-areas/management.md" target="_blank">Operations management considerations for Azure Container Apps</a>.</p>
 <h1 id="deploy-the-container-apps">Deploy the Container Apps<a class="headerlink" href="#deploy-the-container-apps" title="Permanent link">&para;</a></h1>
 <p>Once the landing zone is deployed, the container apps and their dependencies can be deployed. </p>
 <h2 id="build-the-container-images">Build the container images<a class="headerlink" href="#build-the-container-images" title="Permanent link">&para;</a></h2>
