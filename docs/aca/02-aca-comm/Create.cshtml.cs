@@ -18,7 +18,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
         }
 
         [BindProperty]
-        public TaskAddModel TaskAdd { get; set; }
+        public TaskAddModel? TaskAdd { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -31,11 +31,13 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
             {
                 var createdBy = Request.Cookies["TasksCreatedByCookie"];
 
-                TaskAdd.TaskCreatedBy = createdBy;
+                if (!string.IsNullOrEmpty(createdBy)) {
+                    TaskAdd.TaskCreatedBy = createdBy;
 
-                // direct svc to svc http request
-                var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
-                var result = await httpClient.PostAsJsonAsync("api/tasks/", TaskAdd);
+                    // direct svc to svc http request
+                    var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
+                    var result = await httpClient.PostAsJsonAsync("api/tasks/", TaskAdd);
+                }
 
             }
             return RedirectToPage("./Index");

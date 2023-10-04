@@ -9,7 +9,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         [BindProperty]
-        public string TasksCreatedBy { get; set; }
+        public string? TasksCreatedBy { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
