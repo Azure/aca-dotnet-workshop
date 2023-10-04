@@ -64,14 +64,14 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
     - Execute the following commands in PowerShell to create an Azure AD application and service principal.
     
     ```bash
-    AZURE_TENANT = $(az account show -o tsv --query tenantId)
-    SUBSCRIPTION_ID = $(az account show -o tsv --query id)
+    AZURE_TENANT=$(az account show -o tsv --query tenantId)
+    SUBSCRIPTION_ID=$(az account show -o tsv --query id)
 
-    APP_ID = $(az ad app create --display-name serverless-webapp-kotlin-oidc --query appId -otsv)
+    APP_ID=$(az ad app create --display-name aca-dotnet-workshop-oidc --query appId -otsv)
 
     az ad sp create --id $APP_ID --query appId -otsv
 
-    OBJECT_ID = $(az ad app show --id $APP_ID --query id -otsv)
+    OBJECT_ID=$(az ad app show --id $APP_ID --query id -otsv)
     ```
 
     - Execute below command to create a federated identity credential for the Azure AD application.
