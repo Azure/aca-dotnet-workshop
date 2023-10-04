@@ -1201,14 +1201,14 @@
 <ul>
 <li>Execute the following commands in PowerShell to create an Azure AD application and service principal.</li>
 </ul>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">AZURE_TENANT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>tenantId<span class="k">)</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">SUBSCRIPTION_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>id<span class="k">)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">AZURE_TENANT</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>tenantId<span class="k">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">SUBSCRIPTION_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>id<span class="k">)</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">APP_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>create<span class="w"> </span>--display-name<span class="w"> </span>serverless-webapp-kotlin-oidc<span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv<span class="k">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">APP_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>create<span class="w"> </span>--display-name<span class="w"> </span>aca-dotnet-workshop-oidc<span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv<span class="k">)</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>az<span class="w"> </span>ad<span class="w"> </span>sp<span class="w"> </span>create<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nv">OBJECT_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>show<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-otsv<span class="k">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nv">OBJECT_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>show<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-otsv<span class="k">)</span>
 </span></code></pre></div>
 <ul>
 <li>Execute below command to create a federated identity credential for the Azure AD application.</li>
@@ -1283,7 +1283,7 @@
   <small>
     
       Last update:
-      2023-10-02
+      2023-10-04
     
   </small>
 </div>
