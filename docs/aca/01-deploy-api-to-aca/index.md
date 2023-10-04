@@ -45,7 +45,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
     - Use `.NET: ASP.NET Core` when prompted for application platform.
     - Choose `Linux` when prompted to choose the operating system.
-    - Take a note of the provided **application port** as we will pass it later on as the `--target-port` for the `az containerapp create` command.
+    - Take note of the provided **application port** as we will pass it later on as the `--target-port` for the `az containerapp create` command.
     - You will be asked if you want to add Docker Compose files. Select `No`.
     - `Dockerfile` and `.dockerignore` files are added to the workspace.
 
