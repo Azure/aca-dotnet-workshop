@@ -28,13 +28,13 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
     - Use `.NET: ASP.NET Core` when prompted for application platform.
     - Choose `TasksTracker.WebPortal.Frontend.Ui\TasksTracker.WebPortal.Fortend.Ui.csproj` when prompted to choose a project file.
     - Choose `Linux` when prompted to choose the operating system.
-    - Use the same **application port** as you used for the backend API. This allows us to reuse `$TARGET_PORT` later on.
+    - Use the **same application port** as you used for the backend API. This allows us to reuse `$TARGET_PORT` later on.
     - You will be asked if you want to add Docker Compose files. Select `No`.
     - `Dockerfile` and `.dockerignore` files are added to the workspace.
 
 - Open `Dockerfile` and replace `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build` with `FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build`.
 
-- Add a new folder named **Tasks** under the **Pages** folder. Then add a new folder named **Models** under the **Tasks** folder and create file as shown below.
+- From inside the **Pages** folder, add a new folder named **Tasks**. Within that folder, add a new folder named **Models**, then create file as shown below.
 
 === "TasksModel.cs"
 
@@ -179,10 +179,10 @@ az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" -
 $BACKEND_API_BASE_URL="<url to your backend api goes here. You can find this on the Azure portal overview tab. Look for the Application url property there.>"
 ```
 
-- Next, we will create and deploy the Web App to ACA using the following command. Remember to replace the placeholders with your own values:
+- Next, we will create and deploy the Web App to ACA using the following command:
 
 ```powershell
-az containerapp create `
+$fqdn=(az containerapp create `
 --name "$FRONTEND_WEBAPP_NAME"  `
 --resource-group $RESOURCE_GROUP `
 --environment $ENVIRONMENT `
@@ -194,7 +194,11 @@ az containerapp create `
 --min-replicas 1 `
 --max-replicas 1 `
 --cpu 0.25 --memory 0.5Gi `
---query configuration.ingress.fqdn
+--query properties.configuration.ingress.fqdn `
+--output tsv)
+
+echo "See the frontend web app at this URL:"
+echo "https://$fqdn"
 ```
 
 !!! tip
