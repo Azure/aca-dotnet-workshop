@@ -98,7 +98,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 
 === "Program.cs"
 
-    ```csharp hl_lines="12 13 14 15"
+    ```csharp hl_lines="12-21"
     namespace TasksTracker.WebPortal.Frontend.Ui
     {
         public class Program
@@ -112,7 +112,13 @@ By looking at the cshtml content notice that the page is expecting a query strin
     
                 builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
                 {
-                    httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp"));
+                    var backendApiBaseUrlExternalHttp = builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp");
+
+                    if (!string.IsNullOrEmpty(backendApiBaseUrlExternalHttp)) {
+                        httpClient.BaseAddress = new Uri(backendApiBaseUrlExternalHttp);
+                    } else {
+                        throw new("BackendApiConfig:BaseUrlExternalHttp is not defined in App Settings.");
+                    }
                 });
     
                 var app = builder.Build();
