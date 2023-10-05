@@ -39,7 +39,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
     dotnet new webapi -o TasksTracker.TasksManager.Backend.Api
     ```
 
-- Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files.
+- Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files in the new project folder.
 
 - Next, we need to containerize this application, so we can push it to Azure Container Registry as a docker image, then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
 
@@ -51,7 +51,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
 - Open `Dockerfile` and replace `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build` with `FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build`.
 
-- Add a new folder named `Models` and create a new file with name below. These are the DTOs that will be used across the projects.
+- Add a new folder named **Models** and create a new file with name below. These are the DTOs that will be used across the projects.
 
     === "TaskModel.cs"
     ```csharp
