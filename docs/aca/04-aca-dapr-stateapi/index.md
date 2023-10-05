@@ -14,7 +14,7 @@ Moreover, we will use Redis to store tasks when we are running the application l
 
 ### Overview of Dapr State Management API
 
-Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out and without doing any code changes or installing any NuGet packages we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path `%USERPROFILE%\.dapr\components (assuming you are using windows)` you will find a file named `statestore.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. The [state store template component file structure](https://docs.dapr.io/operations/components/setup-state-store/){target=_blank} can be found on this link.
+Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out, and without doing any code changes or installing any NuGet packages, we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path `%USERPROFILE%\.dapr\components` (assuming you are using Windows) you will find a file named `statestore.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. The [state store template component file structure](https://docs.dapr.io/operations/components/setup-state-store/){target=_blank} can be found on this link.
 
 To try out the State Management APIs, run the Backend API from VS Code by running the following command. Remember to replace the place holders with your own values:
 
@@ -22,50 +22,50 @@ To try out the State Management APIs, run the Backend API from VS Code by runnin
 
     ```powershell
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run
     ```
 
 === ".NET 7 or above"
 
     ```powershell
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
     ```
 
-Now from any rest client, invoke the below POST request to the endpoint: [http://localhost:3500/v1.0/state/statestore](http://localhost:3500/v1.0/state/statestore)
+Now from any rest client, invoke the below POST request to the endpoint: [http://localhost:3500/v1.0/state/statestore](http://localhost:3500/v1.0/state/statestore){target=_blank}
 
-    ```http
-    POST /v1.0/state/statestore HTTP/1.1
-    Host: localhost:3500
-    Content-Type: application/json
-    [
-        {
-            "key": "Book1",
-            "value": {
-                "title": "Parallel and High Performance Computing",
-                "author": "Robert Robey",
-                "genre": "Technical"
-            }
-        },
-        {
-            "key": "Book2",
-            "value": {
-                "title": "Software Engineering Best Practices",
-                "author": "Capers Jones",
-                "genre": "Technical"
-            }
-        },
-        {
-            "key": "Book3",
-            "value": {
-                "title": "The Unstoppable Mindset",
-                "author": "Jessica Marks",
-                "genre": "Self Improvement",
-                "formats":["kindle", "audiobook", "papercover"]
-            }
+```http
+POST /v1.0/state/statestore HTTP/1.1
+Host: localhost:3500
+Content-Type: application/json
+[
+    {
+        "key": "Book1",
+        "value": {
+            "title": "Parallel and High Performance Computing",
+            "author": "Robert Robey",
+            "genre": "Technical"
         }
-    ]
-    ```
+    },
+    {
+        "key": "Book2",
+        "value": {
+            "title": "Software Engineering Best Practices",
+            "author": "Capers Jones",
+            "genre": "Technical"
+        }
+    },
+    {
+        "key": "Book3",
+        "value": {
+            "title": "The Unstoppable Mindset",
+            "author": "Jessica Marks",
+            "genre": "Self Improvement",
+            "formats":["kindle", "audiobook", "papercover"]
+        }
+    }
+]
+```
 
 What we've done here is the following:
 
@@ -81,7 +81,7 @@ This will ask you to enter the nickname (e.g. dapr_redis) as well as the hostnam
 docker ps
 ```
 
-Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal.
+Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal. Leave the password empty for now.
 
 ![dapr-stateapi-redis](../../assets/images/04-aca-dapr-stateapi/docker_redis.png)
 
@@ -148,7 +148,7 @@ Add below file under the folder named **Services**. This file will implement the
 Now we need to register the new service named `TasksStoreManager` and `DaprClient` when the Backend API app starts up. Update the below file with the highlighted text as shown below.
 
 !!! note
-    Do not forget to comment out the registration of the `FakeTasksManager` service as we don’t want to store tasks in memory anymore.
+    Do not forget to comment out the registration of the `FakeTasksManager` service as we don't want to store tasks in memory anymore.
 
 === "Program.cs"
 
@@ -159,6 +159,13 @@ Now we need to register the new service named `TasksStoreManager` and `DaprClien
     builder.Services.AddSingleton<ITasksManager, TasksStoreManager>();
     //builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
     //Code removed for brevity
+    ```
+
+- Let's verify that the Dapr dependency is restored properly and that the project compiles. From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
+
+    ```shell
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+    dotnet build
     ```
 
 Now you are ready to run both applications and debug them. You can store new tasks, update them, delete existing tasks and mark them as completed. The data should be stored on your local Redis instance.
@@ -173,38 +180,38 @@ Now you are ready to run both applications and debug them. You can store new tas
 You can use the PowerShell script below to create the Cosmos DB resources on the same resource group we used in the previous module.
 You need to set the variable name of the `$COSMOS_DB_ACCOUNT` to a unique name as it needs to be unique globally. Remember to replace the placeholders with your own values:
 
-    ```powershell
-    $COSMOS_DB_ACCOUNT="<choose a unique cosmos db account name e.g. taskstracker-state-store-your initials here>" `
-    $COSMOS_DB_DBNAME="tasksmanagerdb" `
-    $COSMOS_DB_CONTAINER="taskscollection" 
-    
-    # Check if Cosmos account name already exists globally
-    az cosmosdb check-name-exists `
-    --name $COSMOS_DB_ACCOUNT
-    
-    # if it returns false continue with the next command 
-    # else try a new unique name
-    
-    # Create a Cosmos account for SQL API
-    az cosmosdb create `
-    --name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP
-    
-    # Create a SQL API database
-    az cosmosdb sql database create `
-    --account-name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP `
-    --name $COSMOS_DB_DBNAME
-    
-    # Create a SQL API container
-    az cosmosdb sql container create `
-    --account-name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP `
-    --database-name $COSMOS_DB_DBNAME `
-    --name $COSMOS_DB_CONTAINER `
-    --partition-key-path "/id" `
-    --throughput 400
-    ```
+```powershell
+$COSMOS_DB_ACCOUNT="cosmos-tasks-tracker-state-store-$RANDOM_STRING"
+$COSMOS_DB_DBNAME="tasksmanagerdb"
+$COSMOS_DB_CONTAINER="taskscollection" 
+
+# Check if Cosmos account name already exists globally
+az cosmosdb check-name-exists `
+--name $COSMOS_DB_ACCOUNT
+
+# if it returns false continue with the next command 
+# else try a new unique name
+
+# Create a Cosmos account for SQL API
+az cosmosdb create `
+--name $COSMOS_DB_ACCOUNT `
+--resource-group $RESOURCE_GROUP
+
+# Create a SQL API database
+az cosmosdb sql database create `
+--account-name $COSMOS_DB_ACCOUNT `
+--resource-group $RESOURCE_GROUP `
+--name $COSMOS_DB_DBNAME
+
+# Create a SQL API container
+az cosmosdb sql container create `
+--account-name $COSMOS_DB_ACCOUNT `
+--resource-group $RESOURCE_GROUP `
+--database-name $COSMOS_DB_DBNAME `
+--name $COSMOS_DB_CONTAINER `
+--partition-key-path "/id" `
+--throughput 400
+```
 
 !!! note
     The `primaryMasterKey` connection string is only needed for our local testing on the development machine, we'll be using a different approach (**Managed Identities**) when deploying Dapr component to Azure Container Apps Environment.
@@ -212,12 +219,12 @@ You need to set the variable name of the `$COSMOS_DB_ACCOUNT` to a unique name a
 Once the scripts execution is completed, we need to get the `primaryMasterKey` of the CosmosDB account next. You can do this using the PowerShell script below.
 Copy the value of `primaryMasterKey` as we will use it in the next step.
 
-    ```powershell
-    # List Azure CosmosDB keys
-    az cosmosdb keys list `
-    --name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP
-    ```
+```powershell
+# List Azure CosmosDB keys
+az cosmosdb keys list `
+--name $COSMOS_DB_ACCOUNT `
+--resource-group $RESOURCE_GROUP
+```
 
 **2. Create a Component File for State Store Management:** Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.
 All the components are pluggable so that you can swap out one component with the same interface for another
@@ -226,7 +233,7 @@ Components are configured at design-time with a YAML file which is stored in eit
 These YAML files adhere to the generic [Dapr component schema](https://docs.dapr.io/operations/components/component-schema/){target=_blank}, but each is specific to the component specification.
 
 It is important to understand that the component spec values, particularly the spec `metadata`, can change between components of the same component type.
-As a result, it is strongly recommended to review a component’s specs, paying particular attention to the sample payloads for requests to set the metadata used to interact with the component.
+As a result, it is strongly recommended to review a component's specs, paying particular attention to the sample payloads for requests to set the metadata used to interact with the component.
 
 The diagram below is from Dapr official documentation which shows some examples of the components for each component type. We are now looking at the State Stores components. Specifically the [Azure Cosmos DB](https://docs.dapr.io/reference/components-reference/supported-state-stores/setup-azure-cosmosdb/){target=_blank}.
 
@@ -275,13 +282,13 @@ If you have been using the dapr cli commands instead of the aforementioned debug
 
     ```powershell
      
-    dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run
+    dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run
     ```
 === ".NET 7 or above"
 
     ```powershell
     
-    dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
     ```
 
 !!! note "Deprecation Warning"
@@ -359,11 +366,10 @@ az cosmosdb sql role assignment create `
 
 ### Deploy the Backend API and Frontend Web App Projects to ACA
 
-Now we are ready to deploy all local changes from this module and the previous module to ACA. But before we do that, we need to do one more addition before deploying.
+Now we are ready to deploy all local changes from this module and the previous module to ACA. But before we do that, we need to do one more addition..
 
 We have to create a [dapr component schema file](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview?tabs=bicep1%2Cyaml#component-schema){target=_blank} for Azure Cosmos DB which meets the specs defined by
-Azure Container Apps. Reason for this variance is that ACA Dapr schema is slightly simplified to support Dapr components and removes unnecessary fields, including `apiVersion`, `kind`, and redundant metadata and
-spec properties.
+Azure Container Apps. The reason for this variance is that ACA Dapr schema is slightly simplified to support Dapr components and removes unnecessary fields, including `apiVersion`, `kind`, and redundant metadata and spec properties.
 
 #### 1. Create an ACA-Dapr Component File For State Store Management
 
@@ -418,12 +424,12 @@ Until this moment Dapr was not enabled on the Container Apps we have provisioned
 az containerapp dapr enable --name $BACKEND_API_NAME `
                             --resource-group $RESOURCE_GROUP `
                             --dapr-app-id  $BACKEND_API_NAME `
-                            --dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5160>
+                            --dapr-app-port $API_APP_PORT
 
 az containerapp dapr enable --name $FRONTEND_WEBAPP_NAME `
                             --resource-group $RESOURCE_GROUP `
                             --dapr-app-id  $FRONTEND_WEBAPP_NAME `
-                            --dapr-app-port  <front end web application port number found under Dockerfile for the web api project. e.g. 5071>
+                            --dapr-app-port $UI_APP_PORT
 ```
 
 ??? tip "Curious to learn more about the command above?"
@@ -438,18 +444,20 @@ az containerapp dapr enable --name $FRONTEND_WEBAPP_NAME `
 The last thing we need to do here is to update both container apps and deploy the new images from ACR. To do so we need to run the commands found below.
 
 ```powershell
+$TODAY=Get-Date -Format "yyyyMMdd"
+
 # Update Frontend web app container app and create a new revision 
 az containerapp update `
 --name $FRONTEND_WEBAPP_NAME  `
 --resource-group $RESOURCE_GROUP `
---revision-suffix v20230218
+--revision-suffix v$TODAY
     
 
 # Update Backend API App container app and create a new revision 
 az containerapp update `
 --name $BACKEND_API_NAME  `
 --resource-group $RESOURCE_GROUP `
---revision-suffix v20230218-1
+--revision-suffix v$TODAY-1
 ```
 
 !!! tip
