@@ -182,7 +182,7 @@ az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" -
 - We need to capture the backend API url as we will use it repeatedly:
 
 ```powershell
-$BACKEND_API_BASE_URL="<url to your backend api goes here. You can find this on the Azure portal overview tab. Look for the Application url property there.>"
+$BACKEND_API_EXTERNAL_BASE_URL="<url to your external backend API goes here. You can find this on the Azure portal overview tab. Look for the Application url property there.>"
 ```
 
 - Next, we will create and deploy the Web App to ACA using the following command:
@@ -194,7 +194,7 @@ $fqdn=(az containerapp create `
 --environment $ENVIRONMENT `
 --image "$ACR_NAME.azurecr.io/tasksmanager/$FRONTEND_WEBAPP_NAME" `
 --registry-server "$ACR_NAME.azurecr.io" `
---env-vars "BackendApiConfig__BaseUrlExternalHttp=$BACKEND_API_BASE_URL/" `
+--env-vars "BackendApiConfig__BaseUrlExternalHttp=$BACKEND_API_EXTERNAL_BASE_URL/" `
 --target-port $TARGET_PORT `
 --ingress 'external' `
 --min-replicas 1 `
@@ -235,13 +235,17 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
     The FQDN consists of multiple parts. For example, all our Container Apps will be under a specific Environment unique identifier (e.g. `agreeablestone-8c14c04c`) and the Container App will vary based on the name provided, check the image below for a better explanation.
     ![Container Apps FQDN](../../assets/images/02-aca-comm/container-apps-fqdn.jpg)
 
-- Now we will need to update the Frontend Web App environment variable to point to the internal backend Web API FQDN. The last thing we need to do here is to update the Frontend WebApp environment variable named `BackendApiConfig_BaseUrlExternalHttp` with the new value of the internal Backend Web API base URL, to do so we need to update the Web App container app and it will create a new revision implicitly (more about revisions in the upcoming modules). The following command will update the container app with the changes:
+- Now we will need to update the Frontend Web App environment variable to point to the internal backend Web API FQDN. The last thing we need to do here is to update the Frontend WebApp environment variable named `BackendApiConfig_BaseUrlExternalHttp` with the new value of the _internal_ Backend Web API base URL, to do so we need to update the Web App container app and it will create a new revision implicitly (more about revisions in the upcoming modules). The following command will update the container app with the changes:
+
+    ```powershell
+    $BACKEND_API_INTERNAL_BASE_URL="<url to your internal backend API goes here. You can find this on the Azure portal overview tab. Look for the now-updated internal Application url property there.>"
+    ```
 
     ```powershell
     az containerapp update `
     --name "$FRONTEND_WEBAPP_NAME"  `
     --resource-group $RESOURCE_GROUP `
-    --set-env-vars "BackendApiConfig__BaseUrlExternalHttp=$BACKEND_API_BASE_URL/"
+    --set-env-vars "BackendApiConfig__BaseUrlExternalHttp=$BACKEND_API_INTERNAL_BASE_URL/"
     ```
 
 !!! success
