@@ -36,8 +36,8 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 - Let's start by capturing the UI and API localhost ports:
 
 ```powershell
-$API_APP_PORT=<web api application https port number found under properties->launchSettings.json. e.g. 7112>
-$UI_APP_PORT=<web frontend ui application https port found under properties->launchSettings.json. e.g. 7000>
+$API_APP_PORT=<web api application https port number found under Properties->launchSettings.json. e.g. 7112>
+$UI_APP_PORT=<web frontend ui application https port found under Properties->launchSettings.json. e.g. 7000>
 ```
 
 - Next, start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, run the below commands in PS terminal based on your .NET version.
@@ -65,7 +65,7 @@ $UI_APP_PORT=<web frontend ui application https port found under properties->lau
     When using Dapr run command you are running a dapr process as a sidecar next to the Web API application. The properties you have configured are as follows:
 
       - app-id: The unique identifier of the application. Used for service discovery, state encapsulation, and the pub/sub consumer identifier.
-      - app-port: This parameter tells Dapr which port your application is listening on. You can get the app port from `properties->launchSettings.json` file in the Web API Project as shown in the image above. Make sure you use the https port listed within the `properties->launchSettings.json` as we are using the --app-ssl when running the dapr cli locally. Don't use the port inside the DockerFile. The DockerFile port will come in handy when you deploy to ACA at which point the application would be running inside a container.
+      - app-port: This parameter tells Dapr which port your application is listening on. You can get the app port from `Properties->launchSettings.json` file in the Web API Project as shown in the image above. Make sure you use the https port listed within the `Properties->launchSettings.json` as we are using the --app-ssl when running the dapr cli locally. Don't use the port inside the DockerFile. The DockerFile port will come in handy when you deploy to ACA at which point the application would be running inside a container.
       - dapr-http-port: The HTTP port for Dapr to listen on.
       - app-ssl: Sets the URI scheme of the app to https and attempts an SSL connection.
 
@@ -144,7 +144,7 @@ The SDK offers developers three ways of making remote service invocation calls:
     }
     ```
 
-- Now, we will inject the DaprClient into the `.cshtml` pages to use the method `InvokeMethodAsync` (second approach). Update file under folder **Pages\Tasks** and use the code below for different files.
+- Now, we will inject the DaprClient into the `.cshtml` pages to use the method `InvokeMethodAsync` (second approach). Update files under folder **Pages\Tasks** and use the code below for different files.
 
 === "Index.cshtml.cs"
 
