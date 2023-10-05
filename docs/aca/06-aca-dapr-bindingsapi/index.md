@@ -158,7 +158,7 @@ To do so, add a new file folder **components**.
     
     ![Storage-Account-Container](../../assets/images/06-aca-dapr-bindingsapi/StorageAccountContainer.png)
 
-    - We are setting the property `decodeBase64`  to `false` as we don’t want to encode file content to base64 images, we need to store the file content as is.
+    - We are setting the property `decodeBase64`  to `false` as we don't want to encode file content to base64 images, we need to store the file content as is.
 
 #### 5. Use Dapr client SDK to Invoke the Output Binding
 
