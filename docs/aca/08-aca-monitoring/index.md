@@ -135,7 +135,7 @@ az containerapp secret set `
 --secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 
 az containerapp secret set `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 ```
@@ -150,7 +150,7 @@ To accomplish this, continue using the same PowerShell console and paste the cod
 # Build Backend API on ACR and Push to ACR
 az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
 # Build Backend Service on ACR and Push to ACR
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 # Build Frontend Web App on ACR and Push to ACR
 az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
 ```
@@ -179,7 +179,7 @@ az containerapp update `
 
 # Update Backend Background Service container app and create a new revision 
 az containerapp update `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v20230301-1 `
 --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"

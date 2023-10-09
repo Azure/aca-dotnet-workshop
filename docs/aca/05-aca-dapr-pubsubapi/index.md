@@ -531,9 +531,9 @@ As we have done previously we need to build and deploy both app images to ACR, s
     Make sure you are in root directory of the project, i.e. **TasksTracker.ContainerApps**
 
 ```powershell
-$BACKEND_SVC_NAME="tasksmanager-backend-processor"
+$BACKEND_SERVICE_NAME="tasksmanager-backend-processor"
 az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 ```
 
 #### 2. Create a new Azure Container App to host the new Backend Background Processor
@@ -552,16 +552,16 @@ To achieve the above, run the PowerShell script below.
 
 ```powershell
 az containerapp create `
---name "$BACKEND_SVC_NAME"  `
+--name "$BACKEND_SERVICE_NAME"  `
 --resource-group $RESOURCE_GROUP `
 --environment $ENVIRONMENT `
---image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SVC_NAME" `
+--image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
 --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
 --min-replicas 1 `
 --max-replicas 1 `
 --cpu 0.25 --memory 0.5Gi `
 --enable-dapr `
---dapr-app-id  $BACKEND_SVC_NAME `
+--dapr-app-id  $BACKEND_SERVICE_NAME `
 --dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5071> `
 # comment out these two lines if you are not using sendgrid
 --secrets "sendgrid-apikey=<Replace with your SendGrid API Key>" `
@@ -605,7 +605,7 @@ Run the command below to create `system-assigned` identity for our Backend Proce
 ```powershell
 az containerapp identity assign `
     --resource-group $RESOURCE_GROUP `
-    --name $BACKEND_SVC_NAME `
+    --name $BACKEND_SERVICE_NAME `
     --system-assigned
 ```
 
@@ -660,14 +660,14 @@ Lastly, we need to restart both container apps revisions to pick up the role ass
 ```powershell
 # Get revision name and assign it to a variable
 $REVISION_NAME = (az containerapp revision list `
-        --name $BACKEND_SVC_NAME  `
+        --name $BACKEND_SERVICE_NAME  `
         --resource-group $RESOURCE_GROUP `
         --query [0].name)
 
 # Restart revision by name
 az containerapp revision restart `
 --resource-group $RESOURCE_GROUP `
---name $BACKEND_SVC_NAME  `
+--name $BACKEND_SERVICE_NAME  `
 --revision $REVISION_NAME
 
 $REVISION_NAME = (az containerapp revision list `
@@ -694,7 +694,7 @@ az containerapp revision restart `
     
         ```powershell
         az containerapp logs show --follow `
-        -n $BACKEND_SVC_NAME `
+        -n $BACKEND_SERVICE_NAME `
         -g $RESOURCE_GROUP
         ```
     

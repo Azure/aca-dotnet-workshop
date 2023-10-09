@@ -317,7 +317,7 @@ $subscriptionID= az account show --query id -o tsv
 
 # Get PRINCIPALID of BACKEND Processor Service
 $BACKEND_SVC_PRINCIPALID = az containerapp show `
--n $BACKEND_SVC_NAME `
+-n $BACKEND_SERVICE_NAME `
 -g $RESOURCE_GROUP `
 --query identity.principalId
 
@@ -431,7 +431,7 @@ As we have done previously we need to build and deploy the Backend Background Pr
 Continue using the same PowerShell console and paste the code below (make sure you are under the  **TasksTracker.ContainerApps** directory):
 
 ```powershell
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 ```
 
 #### 2. Add Dapr Secret Store Component to ACA Environment
@@ -493,7 +493,7 @@ Update the Azure Container App hosting the Backend Background Processor with a n
 ```powershell
 # Update Backend Background Processor container app and create a new revision 
 az containerapp update `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v20230224-1 `
 --remove-env-vars "SendGrid__ApiKey"
@@ -507,7 +507,7 @@ Remove the secret stored in `Secrets` of the Backend Background Processor as thi
     You can skip executing the powershell script below if you opted not to set up a sendgrid account in module 5
 
 ```powershell
-az containerapp secret remove --name $BACKEND_SVC_NAME `
+az containerapp secret remove --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --secret-names "sendgrid-apikey"
 ```

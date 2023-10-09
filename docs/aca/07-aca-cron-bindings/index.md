@@ -188,7 +188,7 @@ To prepare for deployment to Azure Container Apps, we must build and deploy both
 ```powershell
 az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
 
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 ```
 
 #### 2. Add Cron Dapr Component to ACA Environment
@@ -215,7 +215,7 @@ az containerapp update `
 
 # Update Backend Background Processor container app and create a new revision 
 az containerapp update `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v20230227-1 
 ```
