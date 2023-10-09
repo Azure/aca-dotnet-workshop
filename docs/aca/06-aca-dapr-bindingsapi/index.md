@@ -334,9 +334,9 @@ be able to create secrets. To do so use the script below:
 
 ```powershell
 $SIGNEDIN_UERID =  az ad signed-in-user show --query id
-$KV_SECRETSOFFICER_ROLEID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID for 'Key Vault Secrets Office' Role 
+$KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID for 'Key Vault Secrets Office' Role 
 
-az role assignment create --role $KV_SECRETSOFFICER_ROLEID `
+az role assignment create --role $KEYVAULT_SECRETS_OFFICER_ROLE_ID `
 --assignee $SIGNEDIN_UERID `
 --scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
