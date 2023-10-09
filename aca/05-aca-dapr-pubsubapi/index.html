@@ -1041,8 +1041,6 @@
       
         
       
-        
-      
     
     
     
@@ -1059,7 +1057,7 @@
             
   
   <span class="md-ellipsis">
-    Contributing
+    Appendix
   </span>
   
 
@@ -1068,115 +1066,6 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_15">
-            <span class="md-nav__icon md-icon"></span>
-            Contributing
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13-contributing/1-contribution-guide.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Contribution Guide
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Submit An Issue or Suggestion
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13-contributing/3-minor-update-fix.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Minor Update or fix, New Challenge
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
-        
-          
-          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Appendix
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Appendix
           </label>
@@ -1188,7 +1077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../14-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
+      <a href="../13-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1208,7 +1097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../14-appendix/02-github-local-codespaces/" class="md-nav__link">
+      <a href="../13-appendix/02-github-local-codespaces/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1510,7 +1399,7 @@ The publisher/subscriber brokers template component file structure can be found 
 </div>
 </div>
 </div>
-<p>To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the <a href="../14-appendix/01-run-debug-dapr-app-vscode/">appendix</a>. </p>
+<p>To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the <a href="../13-appendix/01-run-debug-dapr-app-vscode/">appendix</a>. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Don't forget to include the property <code>--resources-path</code>.  Remember to replace the placeholders with your own values</p>
@@ -1801,7 +1690,7 @@ When this endpoint is called, it will automatically find all WebAPI action metho
 <p><a class="glightbox" href="../../assets/images/05-aca-dapr-pubsubapi/dapr-pub-sub-code-extension.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-pub-sub-code-extension" src="../../assets/images/05-aca-dapr-pubsubapi/dapr-pub-sub-code-extension.jpg" /></a></p>
 </details>
 <h4 id="6-optional-update-vs-code-tasks-and-launch-configuration-files">6. Optional: Update VS Code Tasks and Launch Configuration Files<a class="headerlink" href="#6-optional-update-vs-code-tasks-and-launch-configuration-files" title="Permanent link">&para;</a></h4>
-<p>If you have followed the steps in the <a href="../14-appendix/01-run-debug-dapr-app-vscode/">appendix</a> so far in order to be able to run the three services together (frontend, backend api, and backend processor) 
+<p>If you have followed the steps in the <a href="../13-appendix/01-run-debug-dapr-app-vscode/">appendix</a> so far in order to be able to run the three services together (frontend, backend api, and backend processor) 
 and debug them in VS Code, we need to update the files <code>tasks.json</code> and <code>launch.json</code> to include the new service we have added. </p>
 <details class="example">
 <summary>Click to expand the files to update</summary>
@@ -2290,7 +2179,7 @@ and debug them in VS Code, we need to update the files <code>tasks.json</code> a
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>In the <a href="/aca/06-aca-dapr-bindingsapi">next module</a> we will be using a new type of Dapr components to send emails using SendGrid.</p>
+<p>In the <a href="../06-aca-dapr-bindingsapi/">next module</a> we will be using a new type of Dapr components to send emails using SendGrid.</p>
 <p>If you don't want to bother with signing up for a SendGrid account to send emails, you can just simulate sending emails by returning always <code>ok</code> from the <code>TaskSaved</code> method as shown below. </p>
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">// If you prefer not to deal with setting up a SendGrid account then simply always return OK from the TaskSaved method</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="na">[Dapr.Topic(&quot;dapr-pubsub-servicebus&quot;, &quot;tasksavedtopic&quot;)]</span>
