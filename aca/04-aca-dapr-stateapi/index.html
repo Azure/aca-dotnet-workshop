@@ -46,10 +46,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.79e020e9.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bd3936ea.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a5377069.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.356b1318.min.css">
       
       
 
@@ -1344,54 +1344,52 @@
 Moreover, we will use Redis to store tasks when we are running the application locally. You will see that we can switch between different stores without any code changes, thanks to the <a href="https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/#pluggable-state-stores" target="_blank">Dapr pluggable state stores feature</a>. It is a matter of adding new Dapr Component files and the underlying store will be changed. This page shows the <a href="https://docs.dapr.io/reference/components-reference/supported-state-stores/" target="_blank">supported state stores</a> in Dapr.</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/dapr-stateapi-cosmosdb.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-stateapi-cosmosdb" src="../../assets/images/04-aca-dapr-stateapi/dapr-stateapi-cosmosdb.jpg" /></a></p>
 <h3 id="overview-of-dapr-state-management-api">Overview of Dapr State Management API<a class="headerlink" href="#overview-of-dapr-state-management-api" title="Permanent link">&para;</a></h3>
-<p>Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out and without doing any code changes or installing any NuGet packages we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path <code>%USERPROFILE%\.dapr\components (assuming you are using windows)</code> you will find a file named <code>statestore.yaml</code>. Inside this file, you will see the properties needed to access the local Redis instance. The <a href="https://docs.dapr.io/operations/components/setup-state-store/" target="_blank">state store template component file structure</a> can be found on this link.</p>
+<p>Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out, and without doing any code changes or installing any NuGet packages, we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path <code>%USERPROFILE%\.dapr\components</code> (assuming you are using Windows) you will find a file named <code>statestore.yaml</code>. Inside this file, you will see the properties needed to access the local Redis instance. The <a href="https://docs.dapr.io/operations/components/setup-state-store/" target="_blank">state store template component file structure</a> can be found on this link.</p>
 <p>To try out the State Management APIs, run the Backend API from VS Code by running the following command. Remember to replace the place holders with your own values:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">.NET 6 or below</label><label for="__tabbed_1_2">.NET 7 or above</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">TasksManager</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Api</span><span class="p">&gt;</span> <span class="n">dapr</span> <span class="n">run</span> <span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">-</span><span class="n">-app-port</span> <span class="p">&lt;</span><span class="n">web</span> <span class="n">api</span> <span class="n">application</span> <span class="n">https</span> <span class="n">port</span> <span class="n">number</span> <span class="n">found</span> <span class="n">under</span> <span class="n">properties</span><span class="p">-&gt;</span><span class="n">launchSettings</span><span class="p">.</span><span class="n">json</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">7112</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">-</span><span class="n">-app-ssl</span> <span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">TasksManager</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Api</span><span class="p">&gt;</span> <span class="n">dapr</span> <span class="n">run</span> <span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">-</span><span class="n">-app-port</span> <span class="nv">$API_APP_PORT</span> <span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">-</span><span class="n">-app-ssl</span> <span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">TasksManager</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Api</span><span class="p">&gt;</span> <span class="n">dapr</span> <span class="n">run</span> <span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">-</span><span class="n">-app-port</span> <span class="p">&lt;</span><span class="n">web</span> <span class="n">api</span> <span class="n">application</span> <span class="n">https</span> <span class="n">port</span> <span class="n">number</span> <span class="n">found</span> <span class="n">under</span> <span class="n">properties</span><span class="p">-&gt;</span><span class="n">launchSettings</span><span class="p">.</span><span class="n">json</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">7112</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">-</span><span class="n">-app-ssl</span> <span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span> <span class="p">-</span><span class="n">-launch-profile</span> <span class="n">https</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">TasksManager</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Api</span><span class="p">&gt;</span> <span class="n">dapr</span> <span class="n">run</span> <span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">-</span><span class="n">-app-port</span> <span class="nv">$API_APP_PORT</span> <span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">-</span><span class="n">-app-ssl</span> <span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span> <span class="p">-</span><span class="n">-launch-profile</span> <span class="n">https</span>
 </span></code></pre></div>
 </div>
 </div>
 </div>
-<p>Now from any rest client, invoke the below POST request to the endpoint: <a href="http://localhost:3500/v1.0/state/statestore">http://localhost:3500/v1.0/state/statestore</a></p>
-<div class="language-text highlight"><pre><span></span><code>```http
-POST /v1.0/state/statestore HTTP/1.1
-Host: localhost:3500
-Content-Type: application/json
-[
-    {
-        &quot;key&quot;: &quot;Book1&quot;,
-        &quot;value&quot;: {
-            &quot;title&quot;: &quot;Parallel and High Performance Computing&quot;,
-            &quot;author&quot;: &quot;Robert Robey&quot;,
-            &quot;genre&quot;: &quot;Technical&quot;
-        }
-    },
-    {
-        &quot;key&quot;: &quot;Book2&quot;,
-        &quot;value&quot;: {
-            &quot;title&quot;: &quot;Software Engineering Best Practices&quot;,
-            &quot;author&quot;: &quot;Capers Jones&quot;,
-            &quot;genre&quot;: &quot;Technical&quot;
-        }
-    },
-    {
-        &quot;key&quot;: &quot;Book3&quot;,
-        &quot;value&quot;: {
-            &quot;title&quot;: &quot;The Unstoppable Mindset&quot;,
-            &quot;author&quot;: &quot;Jessica Marks&quot;,
-            &quot;genre&quot;: &quot;Self Improvement&quot;,
-            &quot;formats&quot;:[&quot;kindle&quot;, &quot;audiobook&quot;, &quot;papercover&quot;]
-        }
-    }
-]
-```
-</code></pre></div>
+<p>Now from any rest client, invoke the below POST request to the endpoint: <a href="http://localhost:3500/v1.0/state/statestore" target="_blank">http://localhost:3500/v1.0/state/statestore</a></p>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">POST</span> <span class="nn">/v1.0/state/statestore</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">Host</span><span class="o">:</span> <span class="l">localhost:3500</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">[</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Book1&quot;</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Parallel and High Performance Computing&quot;</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">            </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Robert Robey&quot;</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">            </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Technical&quot;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Book2&quot;</span><span class="p">,</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Software Engineering Best Practices&quot;</span><span class="p">,</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">            </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Capers Jones&quot;</span><span class="p">,</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">            </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Technical&quot;</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">        </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Book3&quot;</span><span class="p">,</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The Unstoppable Mindset&quot;</span><span class="p">,</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">            </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jessica Marks&quot;</span><span class="p">,</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">            </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Self Improvement&quot;</span><span class="p">,</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">            </span><span class="nt">&quot;formats&quot;</span><span class="p">:[</span><span class="s2">&quot;kindle&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;audiobook&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;papercover&quot;</span><span class="p">]</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="p">]</span>
+</span></code></pre></div>
 <p>What we've done here is the following:</p>
 <ul>
 <li>The value <code>statestore</code> in the endpoint should match the <code>name</code> value in the global component file <code>statestore.yaml</code></li>
@@ -1402,7 +1400,7 @@ Content-Type: application/json
 This will ask you to enter the nickname (e.g. dapr_redis) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">docker</span> <span class="nb">ps</span>
 </span></code></pre></div>
-<p>Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal.</p>
+<p>Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal. Leave the password empty for now.</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/docker_redis.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-stateapi-redis" src="../../assets/images/04-aca-dapr-stateapi/docker_redis.png" /></a></p>
 <p>After you connect to Redis locally, you should see the 3 entries similar to the ones shown in the image below. Notice how each entry key is prefixed by the Dapr App Id. In our case it is <code>tasksmanager-backend-api</code>. More about <a href="#key-prefix-strategies">key prefix strategy</a> in later sections in this module.</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/dapr-api-redis.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-stateapi-redis" src="../../assets/images/04-aca-dapr-stateapi/dapr-api-redis.jpg" /></a></p>
@@ -1551,7 +1549,7 @@ It will work locally once we switch to Azure Cosmos DB.</p>
 <p>Now we need to register the new service named <code>TasksStoreManager</code> and <code>DaprClient</code> when the Backend API app starts up. Update the below file with the highlighted text as shown below.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Do not forget to comment out the registration of the <code>FakeTasksManager</code> service as we don’t want to store tasks in memory anymore.</p>
+<p>Do not forget to comment out the registration of the <code>FakeTasksManager</code> service as we don't want to store tasks in memory anymore.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Program.cs</label></div>
 <div class="tabbed-content">
@@ -1566,6 +1564,14 @@ It will work locally once we switch to Azure Cosmos DB.</p>
 </div>
 </div>
 </div>
+<ul>
+<li>
+<p>Let's verify that the Dapr dependency is restored properly and that the project compiles. From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the <code>.csproj</code> project folder and build the project.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>dotnet<span class="w"> </span>build
+</span></code></pre></div>
+</li>
+</ul>
 <p>Now you are ready to run both applications and debug them. You can store new tasks, update them, delete existing tasks and mark them as completed. The data should be stored on your local Redis instance.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -1576,58 +1582,54 @@ Instead, we will focus on wiring the Azure Cosmos DB as the store for our tasks.
 <p><strong>1. Provision Cosmos DB Resources:</strong> Now we will create an Azure Cosmos DB account, Database, and a new container that will store our tasks.
 You can use the PowerShell script below to create the Cosmos DB resources on the same resource group we used in the previous module.
 You need to set the variable name of the <code>$COSMOS_DB_ACCOUNT</code> to a unique name as it needs to be unique globally. Remember to replace the placeholders with your own values:</p>
-<div class="language-text highlight"><pre><span></span><code>```powershell
-$COSMOS_DB_ACCOUNT=&quot;&lt;choose a unique cosmos db account name e.g. taskstracker-state-store-your initials here&gt;&quot; `
-$COSMOS_DB_DBNAME=&quot;tasksmanagerdb&quot; `
-$COSMOS_DB_CONTAINER=&quot;taskscollection&quot; 
-
-# Check if Cosmos account name already exists globally
-az cosmosdb check-name-exists `
---name $COSMOS_DB_ACCOUNT
-
-# if it returns false continue with the next command 
-# else try a new unique name
-
-# Create a Cosmos account for SQL API
-az cosmosdb create `
---name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP
-
-# Create a SQL API database
-az cosmosdb sql database create `
---account-name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---name $COSMOS_DB_DBNAME
-
-# Create a SQL API container
-az cosmosdb sql container create `
---account-name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---database-name $COSMOS_DB_DBNAME `
---name $COSMOS_DB_CONTAINER `
---partition-key-path &quot;/id&quot; `
---throughput 400
-```
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="p">=</span><span class="s2">&quot;cosmos-tasks-tracker-state-store-$RANDOM_STRING&quot;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">$COSMOS_DB_DBNAME</span><span class="p">=</span><span class="s2">&quot;tasksmanagerdb&quot;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">$COSMOS_DB_CONTAINER</span><span class="p">=</span><span class="s2">&quot;taskscollection&quot;</span> 
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c"># Check if Cosmos account name already exists globally</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">az</span> <span class="n">cosmosdb</span> <span class="n">check-name-exists</span> <span class="p">`</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$COSMOS_DB_ACCOUNT</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c"># if it returns false continue with the next command </span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c"># else try a new unique name</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="c"># Create a Cosmos account for SQL API</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">az</span> <span class="n">cosmosdb</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$COSMOS_DB_ACCOUNT</span> <span class="p">`</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="c"># Create a SQL API database</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="n">az</span> <span class="n">cosmosdb</span> <span class="n">sql</span> <span class="n">database</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="p">-</span><span class="n">-account-name</span> <span class="nv">$COSMOS_DB_ACCOUNT</span> <span class="p">`</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$COSMOS_DB_DBNAME</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="c"># Create a SQL API container</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="n">az</span> <span class="n">cosmosdb</span> <span class="n">sql</span> <span class="n">container</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="p">-</span><span class="n">-account-name</span> <span class="nv">$COSMOS_DB_ACCOUNT</span> <span class="p">`</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="p">-</span><span class="n">-database-name</span> <span class="nv">$COSMOS_DB_DBNAME</span> <span class="p">`</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$COSMOS_DB_CONTAINER</span> <span class="p">`</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="p">-</span><span class="n">-partition-key-path</span> <span class="s2">&quot;/id&quot;</span> <span class="p">`</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="p">-</span><span class="n">-throughput</span> <span class="n">400</span>
+</span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <code>primaryMasterKey</code> connection string is only needed for our local testing on the development machine, we'll be using a different approach (<strong>Managed Identities</strong>) when deploying Dapr component to Azure Container Apps Environment.</p>
 </div>
 <p>Once the scripts execution is completed, we need to get the <code>primaryMasterKey</code> of the CosmosDB account next. You can do this using the PowerShell script below.
 Copy the value of <code>primaryMasterKey</code> as we will use it in the next step.</p>
-<div class="language-text highlight"><pre><span></span><code>```powershell
-# List Azure CosmosDB keys
-az cosmosdb keys list `
---name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP
-```
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># List Azure CosmosDB keys</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">az</span> <span class="n">cosmosdb</span> <span class="n">keys</span> <span class="n">list</span> <span class="p">`</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$COSMOS_DB_ACCOUNT</span> <span class="p">`</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span>
+</span></code></pre></div>
 <p><strong>2. Create a Component File for State Store Management:</strong> Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.
 All the components are pluggable so that you can swap out one component with the same interface for another</p>
 <p>Components are configured at design-time with a YAML file which is stored in either a components/local folder within your solution, or globally in the <code>.dapr</code> folder created when invoking <code>dapr init</code>.
 These YAML files adhere to the generic <a href="https://docs.dapr.io/operations/components/component-schema/" target="_blank">Dapr component schema</a>, but each is specific to the component specification.</p>
 <p>It is important to understand that the component spec values, particularly the spec <code>metadata</code>, can change between components of the same component type.
-As a result, it is strongly recommended to review a component’s specs, paying particular attention to the sample payloads for requests to set the metadata used to interact with the component.</p>
+As a result, it is strongly recommended to review a component's specs, paying particular attention to the sample payloads for requests to set the metadata used to interact with the component.</p>
 <p>The diagram below is from Dapr official documentation which shows some examples of the components for each component type. We are now looking at the State Stores components. Specifically the <a href="https://docs.dapr.io/reference/components-reference/supported-state-stores/setup-azure-cosmosdb/" target="_blank">Azure Cosmos DB</a>.</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/dapr-components.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-components" src="../../assets/images/04-aca-dapr-stateapi/dapr-components.jpg" /></a></p>
 <p>To add the component file state store, add a new folder named <strong>components</strong> under the directory <strong>TasksTracker.ContainerApps</strong> and add a new yaml file as show below:</p>
@@ -1640,24 +1642,24 @@ Basically the uri should have the following structure. <a href="https://COSMOS_D
 <div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">dapr-statestore-cosmos.yaml</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dapr.io/v1alpha1</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Component</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">statestore</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state.azure.cosmosdb</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">url</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;value&gt;</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">masterKey</span>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;value&gt;&quot;</span>
-</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanagerdb</span>
-</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">collection</span>
-</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">taskscollection</span>
-</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="nt">scopes</span><span class="p">:</span>
-</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-api</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dapr.io/v1alpha1</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Component</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">statestore</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state.azure.cosmosdb</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">url</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;value&gt;</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">masterKey</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;value&gt;&quot;</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanagerdb</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">collection</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">taskscollection</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-api</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -1678,9 +1680,9 @@ Using scopes is recommended for production workloads. In our case, we have set t
 <p>Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned.</p>
 <p>If you have been running the different microservices using the <a href="../14-appendix/01-run-debug-dapr-app-vscode/">debug and launch Dapr applications in VSCode</a> then remember to uncomment the following line inside tasks.json file. 
 This will instruct dapr to load the local projects components located at <strong>./components</strong> instead of the global components' folder.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="hll"><span class="w">    </span><span class="nt">&quot;componentsPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./components&quot;</span>
-</span></span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="hll"><span class="w">    </span><span class="nt">&quot;componentsPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./components&quot;</span>
+</span></span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>If you have been using the dapr cli commands instead of the aforementioned debugging then you will need to execute the backend api with the resources-path property as follows.</p>
 <div class="admonition note">
@@ -1690,11 +1692,11 @@ This will instruct dapr to load the local projects components located at <strong
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">.NET 6 or below</label><label for="__tabbed_6_2">.NET 7 or above</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">-</span><span class="n">-app-port</span> <span class="p">&lt;</span><span class="n">web</span> <span class="n">api</span> <span class="n">application</span> <span class="n">https</span> <span class="n">port</span> <span class="n">number</span> <span class="n">found</span> <span class="n">under</span> <span class="n">properties</span><span class="p">-&gt;</span><span class="n">launchSettings</span><span class="p">.</span><span class="n">json</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">7112</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">-</span><span class="n">-app-ssl</span> <span class="p">-</span><span class="n">-resources-path</span> <span class="s2">&quot;../components&quot;</span> <span class="n">dotnet</span> <span class="n">run</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">-</span><span class="n">-app-port</span> <span class="nv">$API_APP_PORT</span> <span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">-</span><span class="n">-app-ssl</span> <span class="p">-</span><span class="n">-resources-path</span> <span class="s2">&quot;../components&quot;</span> <span class="n">dotnet</span> <span class="n">run</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">-</span><span class="n">-app-port</span> <span class="p">&lt;</span><span class="n">web</span> <span class="n">api</span> <span class="n">application</span> <span class="n">https</span> <span class="n">port</span> <span class="n">number</span> <span class="n">found</span> <span class="n">under</span> <span class="n">properties</span><span class="p">-&gt;</span><span class="n">launchSettings</span><span class="p">.</span><span class="n">json</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">7112</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">-</span><span class="n">-app-ssl</span> <span class="p">-</span><span class="n">-resources-path</span> <span class="s2">&quot;../components&quot;</span> <span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span> <span class="p">-</span><span class="n">-launch-profile</span> <span class="n">https</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">-</span><span class="n">-app-port</span> <span class="nv">$API_APP_PORT</span> <span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">-</span><span class="n">-app-ssl</span> <span class="p">-</span><span class="n">-resources-path</span> <span class="s2">&quot;../components&quot;</span> <span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span> <span class="p">-</span><span class="n">-launch-profile</span> <span class="n">https</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -1709,10 +1711,10 @@ This will instruct dapr to load the local projects components located at <strong
 <p>When you look at the key stored per entry and for example <code>tasksmanager-backend-api||aa3eb856-8309-4e68-93af-119be0d400e8</code>, you will notice that the key is prefixed with the Dapr application App Id responsible
 to store this entry which in our case is <code>tasksmanager-backend-api</code>. There might be some scenarios which you need to have another service to access the same data store (not recommended as each service should be responsible about its own data store), in which case you can change the default behavior.</p>
 <p>This can be done by adding the meta tag below to the component file. For example, if we need to set the value of the prefix to a constant value such as <code>TaskId</code> we can do the following:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keyPrefix</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TaskId</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keyPrefix</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TaskId</span>
 </span></code></pre></div>
 <p>If we need to totally omit the key prefix, so it is accessed across multiple Dapr applications, we can set the value to <code>none</code>.</p>
 <h3 id="configure-managed-identities-in-container-app">Configure Managed Identities in Container App<a class="headerlink" href="#configure-managed-identities-in-container-app" title="Permanent link">&para;</a></h3>
@@ -1720,18 +1722,18 @@ to store this entry which in our case is <code>tasksmanager-backend-api</code>. 
 <p>We will be using a <code>system-assigned</code> identity with a role assignment to grant our Backend API container app permissions to access data stored in Cosmos DB. We need to assign it a custom role for the Cosmos DB data plane. In this example ae are going to use a <a href="https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac#built-in-role-definitions" target="_blank">built-in role</a>, named <code>Cosmos DB Built-in Data Contributor</code>, which grants our application full read-write access to the data. You can optionally create custom, fine-tuned roles following the instructions in the <a href="https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac" target="_blank">official docs</a>.</p>
 <h4 id="1-create-system-assigned-identity-for-our-container-app">1. Create system-assigned identity for our container app<a class="headerlink" href="#1-create-system-assigned-identity-for-our-container-app" title="Permanent link">&para;</a></h4>
 <p>Run the command below to create <code>system-assigned</code> identity for our container app:</p>
-<div class="language-Powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">identity</span> <span class="n">assign</span> <span class="p">`</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="p">-</span><span class="n">-system-assigned</span>
+<div class="language-Powershell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">identity</span> <span class="n">assign</span> <span class="p">`</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="p">-</span><span class="n">-system-assigned</span>
 </span></code></pre></div>
 <p>This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be similar to the one shown below.
 Keep a note of the property <code>principalId</code> as we are going to use it in the next step.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="nt">&quot;principalId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[your principal id will be displayed here]&quot;</span><span class="p">,</span>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="nt">&quot;tenantId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[your tenant id will be displayed here]&quot;</span><span class="p">,</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SystemAssigned&quot;</span>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="nt">&quot;principalId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[your principal id will be displayed here]&quot;</span><span class="p">,</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="nt">&quot;tenantId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[your tenant id will be displayed here]&quot;</span><span class="p">,</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SystemAssigned&quot;</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">}</span>
 </span></code></pre></div>
 <h4 id="2-assign-the-container-app-system-identity-to-the-built-in-cosmos-db-role">2. Assign the Container App System-Identity To the Built-in Cosmos DB Role<a class="headerlink" href="#2-assign-the-container-app-system-identity-to-the-built-in-cosmos-db-role" title="Permanent link">&para;</a></h4>
 <p>Next, we need to associate the container app system-identity with the target Cosmos DB resource.
@@ -1742,21 +1744,20 @@ Run the command below to associate the container app <code>system-assigned</code
 <p>Make sure you save this principal id somewhere as you will need it in later modules. You can't rely on having it saved in powershell under <code>$PRINCIPAL_ID</code> as this variable could replace later on.
 Remember to replace the placeholders with your own values:</p>
 </div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nv">$PRINCIPAL_ID</span> <span class="p">=</span> <span class="s2">&quot;&lt;your principal id goes here&gt;&quot;</span> <span class="c"># Principal Id after creating system identity for container app </span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nv">$ROLE_ID</span> <span class="p">=</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000002&quot;</span> <span class="c">#&quot;Cosmos DB Built-in Data Contributor&quot; </span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">az</span> <span class="n">cosmosdb</span> <span class="n">sql</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">-</span><span class="n">-account-name</span>  <span class="nv">$COSMOS_DB_ACCOUNT</span> <span class="p">`</span>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/&quot;</span> <span class="p">`</span>
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="p">-</span><span class="n">-principal-id</span> <span class="nv">$PRINCIPAL_ID</span> <span class="p">`</span>
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="p">-</span><span class="n">-role-definition-id</span> <span class="nv">$ROLE_ID</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">$PRINCIPAL_ID</span> <span class="p">=</span> <span class="s2">&quot;&lt;your principal id goes here&gt;&quot;</span> <span class="c"># Principal Id after creating system identity for container app </span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nv">$ROLE_ID</span> <span class="p">=</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000002&quot;</span> <span class="c">#&quot;Cosmos DB Built-in Data Contributor&quot; </span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">az</span> <span class="n">cosmosdb</span> <span class="n">sql</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">-</span><span class="n">-account-name</span>  <span class="nv">$COSMOS_DB_ACCOUNT</span> <span class="p">`</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/&quot;</span> <span class="p">`</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">-</span><span class="n">-principal-id</span> <span class="nv">$PRINCIPAL_ID</span> <span class="p">`</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="p">-</span><span class="n">-role-definition-id</span> <span class="nv">$ROLE_ID</span>
 </span></code></pre></div>
 <h3 id="deploy-the-backend-api-and-frontend-web-app-projects-to-aca">Deploy the Backend API and Frontend Web App Projects to ACA<a class="headerlink" href="#deploy-the-backend-api-and-frontend-web-app-projects-to-aca" title="Permanent link">&para;</a></h3>
-<p>Now we are ready to deploy all local changes from this module and the previous module to ACA. But before we do that, we need to do one more addition before deploying.</p>
+<p>Now we are ready to deploy all local changes from this module and the previous module to ACA. But before we do that, we need to do one more addition..</p>
 <p>We have to create a <a href="https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview?tabs=bicep1%2Cyaml#component-schema" target="_blank">dapr component schema file</a> for Azure Cosmos DB which meets the specs defined by
-Azure Container Apps. Reason for this variance is that ACA Dapr schema is slightly simplified to support Dapr components and removes unnecessary fields, including <code>apiVersion</code>, <code>kind</code>, and redundant metadata and
-spec properties.</p>
+Azure Container Apps. The reason for this variance is that ACA Dapr schema is slightly simplified to support Dapr components and removes unnecessary fields, including <code>apiVersion</code>, <code>kind</code>, and redundant metadata and spec properties.</p>
 <h4 id="1-create-an-aca-dapr-component-file-for-state-store-management">1. Create an ACA-Dapr Component File For State Store Management<a class="headerlink" href="#1-create-an-aca-dapr-component-file-for-state-store-management" title="Permanent link">&para;</a></h4>
 <p>Here it is recommended to separate the component files that will be used when deploying to Azure Container Apps from the ones which we will use when running our application locally (Dapr self-hosted).</p>
 <p>Create a new folder named <strong>aca-components</strong> under the directory <strong>TasksTracker.ContainerApps</strong>, then add a new file as shown below:</p>
@@ -1768,17 +1769,17 @@ Basically the uri should have the following structure <code>https://COSMOS_DB_AC
 <div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">containerapps-statestore-cosmos.yaml</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state.azure.cosmosdb</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">url</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;The URI value of your cosmos database account&gt;</span>
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanagerdb</span>
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">collection</span>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">taskscollection</span>
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="nt">scopes</span><span class="p">:</span>
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-api</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state.azure.cosmosdb</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">url</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;The URI value of your cosmos database account&gt;</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanagerdb</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">collection</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">taskscollection</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-api</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -1794,16 +1795,16 @@ Basically the uri should have the following structure <code>https://COSMOS_DB_AC
 <h4 id="2-build-frontend-web-app-and-backend-api-app-images-and-push-them-to-acr">2. Build Frontend Web App and Backend API App Images and Push Them to ACR<a class="headerlink" href="#2-build-frontend-web-app-and-backend-api-app-images-and-push-them-to-acr" title="Permanent link">&para;</a></h4>
 <p>As we have done previously we need to build and deploy both app images to ACR, so they are ready to be deployed to Azure Container Apps.
 To do so, continue using the same PowerShell console and paste the code below (Make sure you are on the following directory <strong>TasksTracker.ContainerApps</strong>):</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_API_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_API_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
 </span></code></pre></div>
 <h4 id="3-add-cosmos-db-dapr-state-store-to-azure-container-apps-environment">3. Add Cosmos DB Dapr State Store to Azure Container Apps Environment<a class="headerlink" href="#3-add-cosmos-db-dapr-state-store-to-azure-container-apps-environment" title="Permanent link">&para;</a></h4>
 <p>We need to run the command below to add the yaml file <code>.\aca-components\containerapps-statestore-cosmos.yaml</code> to Azure Container Apps Environment.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">statestore</span> <span class="p">`</span>
-</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-statestore-cosmos.yaml&#39;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">statestore</span> <span class="p">`</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-statestore-cosmos.yaml&#39;</span>
 </span></code></pre></div>
 <h4 id="4-enable-dapr-for-the-frontend-web-app-and-backend-api-container-apps">4. Enable Dapr for the Frontend Web App and Backend API Container Apps<a class="headerlink" href="#4-enable-dapr-for-the-frontend-web-app-and-backend-api-container-apps" title="Permanent link">&para;</a></h4>
 <p>Until this moment Dapr was not enabled on the Container Apps we have provisioned. Enable Dapr for both Container Apps by running the two commands below in the PowerShell console.</p>
@@ -1811,15 +1812,15 @@ To do so, continue using the same PowerShell console and paste the code below (M
 <p class="admonition-title">Info</p>
 <p>Remember to replace the placeholders with your own values.</p>
 </div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">dapr</span> <span class="n">enable</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>                            <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>                            <span class="p">-</span><span class="n">-dapr-app-id</span>  <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>                            <span class="p">-</span><span class="n">-dapr-app-port</span>  <span class="p">&lt;</span><span class="n">web</span> <span class="n">api</span> <span class="n">application</span> <span class="n">port</span> <span class="n">number</span> <span class="n">found</span> <span class="n">under</span> <span class="n">Dockerfile</span> <span class="k">for</span> <span class="n">the</span> <span class="n">web</span> <span class="n">api</span> <span class="n">project</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">5160</span><span class="p">&gt;</span>
-</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
-</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">dapr</span> <span class="n">enable</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$FRONTEND_WEBAPP_NAME</span> <span class="p">`</span>
-</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>                            <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>                            <span class="p">-</span><span class="n">-dapr-app-id</span>  <span class="nv">$FRONTEND_WEBAPP_NAME</span> <span class="p">`</span>
-</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>                            <span class="p">-</span><span class="n">-dapr-app-port</span>  <span class="p">&lt;</span><span class="n">front</span> <span class="k">end</span> <span class="n">web</span> <span class="n">application</span> <span class="n">port</span> <span class="n">number</span> <span class="n">found</span> <span class="n">under</span> <span class="n">Dockerfile</span> <span class="k">for</span> <span class="n">the</span> <span class="n">web</span> <span class="n">api</span> <span class="n">project</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">5071</span><span class="p">&gt;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">dapr</span> <span class="n">enable</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>                            <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>                            <span class="p">-</span><span class="n">-dapr-app-id</span>  <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>                            <span class="p">-</span><span class="n">-dapr-app-port</span> <span class="nv">$API_APP_PORT</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">dapr</span> <span class="n">enable</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$FRONTEND_WEBAPP_NAME</span> <span class="p">`</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>                            <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>                            <span class="p">-</span><span class="n">-dapr-app-id</span>  <span class="nv">$FRONTEND_WEBAPP_NAME</span> <span class="p">`</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>                            <span class="p">-</span><span class="n">-dapr-app-port</span> <span class="nv">$UI_APP_PORT</span>
 </span></code></pre></div>
 <details class="tip">
 <summary>Curious to learn more about the command above?</summary>
@@ -1832,18 +1833,20 @@ This <code>dapr-app-id</code> will be used for service discovery, state encapsul
 </details>
 <h4 id="5-deploy-new-revisions-of-the-frontend-web-app-and-backend-api-to-container-apps">5. Deploy New Revisions of the Frontend Web App and Backend API to Container Apps<a class="headerlink" href="#5-deploy-new-revisions-of-the-frontend-web-app-and-backend-api-to-container-apps" title="Permanent link">&para;</a></h4>
 <p>The last thing we need to do here is to update both container apps and deploy the new images from ACR. To do so we need to run the commands found below.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c"># Update Frontend web app container app and create a new revision </span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$FRONTEND_WEBAPP_NAME</span>  <span class="p">`</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230218</span>
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="c"># Update Backend API App container app and create a new revision </span>
-</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
-</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span>  <span class="p">`</span>
-</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230218</span><span class="p">-</span><span class="n">1</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">$TODAY</span><span class="p">=</span><span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">&quot;yyyyMMdd&quot;</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="c"># Update Frontend web app container app and create a new revision </span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$FRONTEND_WEBAPP_NAME</span>  <span class="p">`</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v</span><span class="nv">$TODAY</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="c"># Update Backend API App container app and create a new revision </span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span>  <span class="p">`</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v</span><span class="nv">$TODAY</span><span class="p">-</span><span class="n">1</span>
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1860,7 +1863,7 @@ This <code>dapr-app-id</code> will be used for service discovery, state encapsul
   <small>
     
       Last update:
-      2023-10-04
+      2023-10-09
     
   </small>
 </div>
@@ -1971,10 +1974,10 @@ This <code>dapr-app-id</code> will be used for service discovery, state encapsul
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a264c092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6eac0284.min.js"></script>
+      <script src="../../assets/javascripts/bundle.94c44541.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

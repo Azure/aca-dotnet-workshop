@@ -2,43 +2,45 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks.Models;
 
-    namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
+namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
+{
+    public class CreateModel : PageModel
     {
-        public class CreateModel : PageModel
+        private readonly IHttpClientFactory _httpClientFactory;
+        public CreateModel(IHttpClientFactory httpClientFactory)
         {
-            private readonly IHttpClientFactory _httpClientFactory;
-            public CreateModel(IHttpClientFactory httpClientFactory)
-            {
-                _httpClientFactory = httpClientFactory;
-            }
+            _httpClientFactory = httpClientFactory;
+        }
 
-            public IActionResult OnGet()
+        public IActionResult OnGet()
+        {
+            return Page();
+        }
+
+        [BindProperty]
+        public TaskAddModel? TaskAdd { get; set; }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            [BindProperty]
-            public TaskAddModel TaskAdd { get; set; }
-
-            public async Task<IActionResult> OnPostAsync()
+            if (TaskAdd != null)
             {
-                if (!ModelState.IsValid)
-                {
-                    return Page();
-                }
+                var createdBy = Request.Cookies["TasksCreatedByCookie"];
 
-                if (TaskAdd != null)
-                {
-                    var createdBy = Request.Cookies["TasksCreatedByCookie"];
-
+                if (!string.IsNullOrEmpty(createdBy)) {
                     TaskAdd.TaskCreatedBy = createdBy;
 
                     // direct svc to svc http request
                     var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
                     var result = await httpClient.PostAsJsonAsync("api/tasks/", TaskAdd);
-
                 }
-                return RedirectToPage("./Index");
+
             }
+            return RedirectToPage("./Index");
         }
     }
+}
