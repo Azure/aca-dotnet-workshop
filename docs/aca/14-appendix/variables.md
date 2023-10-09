@@ -17,7 +17,7 @@ Write-Host "COSMOS_DB_CONTAINER             :" $COSMOS_DB_CONTAINER
 Write-Host "COSMOS_DB_DBNAME                :" $COSMOS_DB_DBNAME
 Write-Host "ENVIRONMENT                     :" $ENVIRONMENT
 Write-Host "FRONTEND_WEBAPP_NAME            :" $FRONTEND_WEBAPP_NAME
-Write-Host "KEYVAULTNAME                    :" $KEYVAULTNAME
+Write-Host "KEYVAULT_NAME                    :" $KEYVAULT_NAME
 Write-Host "KV_SECRETSOFFICER_ROLEID        :" $KV_SECRETSOFFICER_ROLEID
 Write-Host "KV_SECRETSUSER_ROLEID           :" $KV_SECRETSUSER_ROLEID
 Write-Host "LOCATION                        :" $LOCATION

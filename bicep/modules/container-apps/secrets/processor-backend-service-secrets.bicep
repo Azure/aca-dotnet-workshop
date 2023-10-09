@@ -8,7 +8,7 @@ targetScope = 'resourceGroup'
 param tags object = {}
 
 @description('The name of the Key Vault.')
-param keyVaultName string
+param KEYVAULT_NAME string
 
 @description('The name of the secret containing the SendGrid API key value for the Backend Background Processor Service.')
 param sendGridKeySecretName string
@@ -40,7 +40,7 @@ var sendGridKey = empty(sendGridKeySecretValue) ? 'dummy' : sendGridKeySecretVal
 // ------------------
 
 resource keyVault 'Microsoft.KeyVault/vaults@2021-04-01-preview' existing = {
-  name: keyVaultName
+  name: KEYVAULT_NAME
 }
 
 // Send Grid API key secret used by Backend Background Processor Service.

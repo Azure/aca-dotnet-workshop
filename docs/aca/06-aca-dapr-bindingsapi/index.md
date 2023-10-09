@@ -293,10 +293,10 @@ with [Azure Key Vault secret store](https://docs.dapr.io/reference/components-re
 Create an Azure Key Vault which will be used to store securely any secret or key used in our application.
 
 ```powershell
-$KEYVAULTNAME = "<your akv name. Should be globally unique. 
+$KEYVAULT_NAME = "<your akv name. Should be globally unique. 
 Vault name must only contain alphanumeric characters and dashes and cannot start with a number.>"
 az keyvault create `
---name $KEYVAULTNAME `
+--name $KEYVAULT_NAME `
 --resource-group $RESOURCE_GROUP `
 --enable-rbac-authorization true `
 --location $LOCATION
@@ -324,7 +324,7 @@ $BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
 az role assignment create `
 --role $KV_SECRETSUSER_ROLEID `
 --assignee $BACKEND_SERVICE_PRINCIPAL_ID `
---scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
+--scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
 
 #### 3. Create Secrets in the Azure Key Vault
@@ -338,7 +338,7 @@ $KV_SECRETSOFFICER_ROLEID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID for 'Key 
 
 az role assignment create --role $KV_SECRETSOFFICER_ROLEID `
 --assignee $SIGNEDIN_UERID `
---scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
+--scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
 
 Now we will create 2 secrets in the Azure Key Vault using the commands below:
@@ -346,13 +346,13 @@ Now we will create 2 secrets in the Azure Key Vault using the commands below:
 ```powershell
 # Set SendGrid API Key as a secret named 'sendgrid-api-key'
 az keyvault secret set `
---vault-name $KEYVAULTNAME `
+--vault-name $KEYVAULT_NAME `
 --name "sendgrid-api-key" `
 --value "<Send Grid API Key>.leave this empty if you opted not to register with the sendgrip api"
 
 # Set External Azure Storage Access Key as a secret named 'external-azure-storage-key'
 az keyvault secret set `
---vault-name $KEYVAULTNAME `
+--vault-name $KEYVAULT_NAME `
 --name "external-azure-storage-key" `
 --value "<Your Storage Account Key>"
 ```
