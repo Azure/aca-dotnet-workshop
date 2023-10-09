@@ -19,7 +19,7 @@ Write-Host "ENVIRONMENT                     :" $ENVIRONMENT
 Write-Host "FRONTEND_WEBAPP_NAME            :" $FRONTEND_WEBAPP_NAME
 Write-Host "KEYVAULT_NAME                    :" $KEYVAULT_NAME
 Write-Host "KEYVAULT_SECRETS_OFFICER_ROLE_ID        :" $KEYVAULT_SECRETS_OFFICER_ROLE_ID
-Write-Host "KV_SECRETSUSER_ROLEID           :" $KV_SECRETSUSER_ROLEID
+Write-Host "KEYVAULT_SECRETS_USER_ROLE_ID           :" $KEYVAULT_SECRETS_USER_ROLE_ID
 Write-Host "LOCATION                        :" $LOCATION
 Write-Host "NamespaceName                   :" $NamespaceName
 Write-Host "PRINCIPAL_ID                    :" $PRINCIPAL_ID

@@ -312,7 +312,7 @@ In the previous module we have configured the `system-assigned` identity for the
 You can read more about [Azure built-in roles for Key Vault data plane operations](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations){target=_blank}.
 
 ```powershell
-$KV_SECRETSUSER_ROLEID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
+$KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
 $subscriptionID= az account show --query id -o tsv
 
 # Get PRINCIPALID of BACKEND Processor Service
@@ -322,7 +322,7 @@ $BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
 --query identity.principalId
 
 az role assignment create `
---role $KV_SECRETSUSER_ROLEID `
+--role $KEYVAULT_SECRETS_USER_ROLE_ID `
 --assignee $BACKEND_SERVICE_PRINCIPAL_ID `
 --scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
