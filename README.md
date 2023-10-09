@@ -8,6 +8,12 @@ Whereas building cloud-native apps on Azure Kubernetes Service (AKS) is powerful
 
 In this workshop, we will be focusing on a new containerization service offered by Microsoft called Azure Container Apps (ACA). Microsoft announced the public preview of Azure Container Apps in November 2021, and in May 2022 it announced the General Availability of Azure Container Apps. In brief, Azure Container Apps is a fully managed, serverless, Kubernetes-based container runtime for building and running cloud-native applications which focuses on the business logic of the apps rather than on cloud infrastructure management.
 
+##### Delivery Instructions
+
+This workshop is intended to be completed by going through the different modules which are hosted under our Github page located [here](https://azure.github.io/aca-dotnet-workshop/).
+
+We also include an optional [slides](https://github.com/Azure/aca-dotnet-workshop/tree/main/slides) folder which includes supporting material for those delivering the content. You can think about the slides as supporting material for an instructor but are not required for the attendees to complete the workshop. 
+
 ##### Contributions
 
 We are most grateful for community involvement. Please see [CONTRIBUTING.md](https://github.com/Azure/aca-dotnet-workshop/blob/main/CONTRIBUTING.md) for details. Thank you!
