@@ -864,8 +864,6 @@
       
         
       
-        
-      
     
     
     
@@ -882,7 +880,7 @@
             
   
   <span class="md-ellipsis">
-    Contributing
+    Appendix
   </span>
   
 
@@ -891,115 +889,6 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_15">
-            <span class="md-nav__icon md-icon"></span>
-            Contributing
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13-contributing/1-contribution-guide.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Contribution Guide
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13-contributing/2-Submit-issue-suggestion.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Submit An Issue or Suggestion
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13-contributing/3-minor-update-fix.md" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Minor Update or fix, New Challenge
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
-        
-          
-          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Appendix
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Appendix
           </label>
@@ -1011,7 +900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../14-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
+      <a href="../13-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1031,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../14-appendix/02-github-local-codespaces/" class="md-nav__link">
+      <a href="../13-appendix/02-github-local-codespaces/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1762,7 +1651,7 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
 </details>
 <ul>
 <li>
-<p>Now we will need to update the Frontend Web App environment variable to point to the internal backend Web API FQDN. The last thing we need to do here is to update the Frontend WebApp environment variable named <code>BackendApiConfig_BaseUrlExternalHttp</code> with the new value of the <em>internal</em> Backend Web API base URL, to do so we need to update the Web App container app and it will create a new revision implicitly (more about revisions in the upcoming modules). The following command will update the container app with the changes:</p>
+<p>Now we will need to update the Frontend Web App environment variable to point to the <strong>internal</strong> backend Web API FQDN. The last thing we need to do here is to update the Frontend WebApp environment variable named <code>BackendApiConfig_BaseUrlExternalHttp</code> with the new value of the <em>internal</em> Backend Web API base URL, to do so we need to update the Web App container app and it will create a new revision implicitly (more about revisions in the upcoming modules). The following command will update the container app with the changes:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nv">$BACKEND_API_INTERNAL_BASE_URL</span><span class="p">=</span><span class="s2">&quot;&lt;url to your internal backend API goes here. You can find this on the Azure portal overview tab. Look for the now-updated internal Application url property there.&gt;&quot;</span>
 </span></code></pre></div>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
