@@ -33,13 +33,13 @@ In this module, we will start by creating the first microservice named `ACA Web 
     }
     ```
 
-- From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps` and initialize the project. This will create and ASP.NET Web API project scaffolded with a single controller.
+- Initialize the project in the terminal. This will create and ASP.NET Web API project scaffolded with a single controller.
 
     ```shell
     dotnet new webapi -o TasksTracker.TasksManager.Backend.Api
     ```
 
-- Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files in the new project folder.
+- Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files from the new `TasksTracker.TasksManager.Backend.Api` project folder.
 
 - Next, we need to containerize this application, so we can push it to Azure Container Registry as a docker image, then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
 
@@ -51,14 +51,14 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
 - Open `Dockerfile` and replace `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build` with `FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build`.
 
-- Add a new folder named **Models** and create a new file with name below. These are the DTOs that will be used across the projects.
+- In the new project folder, add a new folder named **Models** and create a new file with name below. These are the DTOs that will be used across the projects.
 
     === "TaskModel.cs"
     ```csharp
     --8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
     ```
 
-- Create a new folder named **Services** (make sure it is created at the same level as the models folder and not inside the models folder itself) and add **new files** as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.
+- In the new project folder, create a new folder named **Services** (make sure it is created at the same level as the models folder and not inside the models folder itself) and add **new files** as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.
 
     === "ITasksManager.cs"
         ```csharp

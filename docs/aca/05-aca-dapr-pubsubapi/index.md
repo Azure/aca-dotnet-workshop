@@ -36,7 +36,7 @@ We want to have more control and provide our own component file, so let's create
     --8<-- "docs/aca/05-aca-dapr-pubsubapi/dapr-pubsub-redis.yaml"
     ```
 
-To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../14-appendix/01-run-debug-dapr-app-vscode.md). 
+To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md). 
 
 !!! note
     Don't forget to include the property `--resources-path`.  Remember to replace the placeholders with your own values
@@ -254,7 +254,7 @@ Keep an eye on the terminal logs of the Backend background processor as you will
 
 #### 6. Optional: Update VS Code Tasks and Launch Configuration Files
 
-If you have followed the steps in the [appendix](../14-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) 
+If you have followed the steps in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) 
 and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added. 
 
 ??? example "Click to expand the files to update"
@@ -373,7 +373,7 @@ Update the files below under the Backend Processor Project. We are installing th
     Please note that the SendGrid API KEY is generated and displayed to you just once. So be sure to copy and save it somewhere. After that only the subset key is displayed.
 
 !!! tip
-    In the [next module](/aca/06-aca-dapr-bindingsapi) we will be using a new type of Dapr components to send emails using SendGrid.
+    In the [next module](../06-aca-dapr-bindingsapi/index.md) we will be using a new type of Dapr components to send emails using SendGrid.
 
     If you don't want to bother with signing up for a SendGrid account to send emails, you can just simulate sending emails by returning always `ok` from the `TaskSaved` method as shown below. 
 
