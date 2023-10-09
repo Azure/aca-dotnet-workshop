@@ -3,7 +3,7 @@
 The following variables are declared along the way in this tutorial. You can always execute this Powershell to get an updated, comprehensive list:
 
 ```powershell
-Write-Host "ACR_NAME                        :" $ACR_NAME
+Write-Host "AZURE_CONTAINER_REGISTRY_NAME                        :" $AZURE_CONTAINER_REGISTRY_NAME
 Write-Host "API_APP_PORT                    :" $API_APP_PORT
 Write-Host "APPINSIGHTS_NAME                :" $APPINSIGHTS_NAME
 Write-Host "APPINSIGHTS_INSTRUMENTATIONKEY  :" $APPINSIGHTS_INSTRUMENTATIONKEY

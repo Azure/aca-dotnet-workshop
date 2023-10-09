@@ -532,8 +532,8 @@ As we have done previously we need to build and deploy both app images to ACR, s
 
 ```powershell
 $BACKEND_SVC_NAME="tasksmanager-backend-processor"
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 ```
 
 #### 2. Create a new Azure Container App to host the new Backend Background Processor
@@ -555,8 +555,8 @@ az containerapp create `
 --name "$BACKEND_SVC_NAME"  `
 --resource-group $RESOURCE_GROUP `
 --environment $ENVIRONMENT `
---image "$ACR_NAME.azurecr.io/tasksmanager/$BACKEND_SVC_NAME" `
---registry-server "$ACR_NAME.azurecr.io" `
+--image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SVC_NAME" `
+--registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
 --min-replicas 1 `
 --max-replicas 1 `
 --cpu 0.25 --memory 0.5Gi `

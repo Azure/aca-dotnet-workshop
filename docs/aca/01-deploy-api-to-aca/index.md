@@ -134,7 +134,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     $WORKSPACE_NAME="log-tasks-tracker-$RANDOM_STRING"
     $APPINSIGHTS_NAME="appi-tasks-tracker-$RANDOM_STRING"
     $BACKEND_API_NAME="api-tasksmanager-backend"
-    $ACR_NAME="crtaskstracker$RANDOM_STRING"
+    $AZURE_CONTAINER_REGISTRY_NAME="crtaskstracker$RANDOM_STRING"
     ```
 
 - Also assign the target port from when you created the Dockerfile:
@@ -159,7 +159,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```shell
     az acr create `
     --resource-group $RESOURCE_GROUP `
-    --name $ACR_NAME `
+    --name $AZURE_CONTAINER_REGISTRY_NAME `
     --sku Basic `
     --admin-enabled true
     ```
@@ -228,7 +228,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
     ```shell
     cd ~\TasksTracker.ContainerApps
-    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+    az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
     ```
 
     Once this step is completed, you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created, and that there is a new Docker image with a `latest` tag.
@@ -240,8 +240,8 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --name $BACKEND_API_NAME `
     --resource-group $RESOURCE_GROUP `
     --environment $ENVIRONMENT `
-    --image "$ACR_NAME.azurecr.io/tasksmanager/$BACKEND_API_NAME" `
-    --registry-server "$ACR_NAME.azurecr.io" `
+    --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_API_NAME" `
+    --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
     --target-port $TARGET_PORT `
     --ingress 'external' `
     --min-replicas 1 `
