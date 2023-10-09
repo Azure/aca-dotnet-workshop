@@ -415,7 +415,7 @@ You need to change the namespace variable as this one should be unique globally 
 ```powershell
 $SERVICE_BUS_NAMESPACE_NAME="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
 $SERVICE_BUS_TOPIC_NAME="tasksavedtopic"
-$TopicSubscription="tasks-processor-subscription"
+$SERVICE_BUS_TOPIC_SUBSCRIPTION="tasks-processor-subscription"
 
 # Create servicebus namespace
 az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICE_BUS_NAMESPACE_NAME --location $LOCATION --sku Standard
@@ -428,7 +428,7 @@ az servicebus topic subscription create `
 --resource-group $RESOURCE_GROUP `
 --namespace-name $SERVICE_BUS_NAMESPACE_NAME `
 --topic-name $SERVICE_BUS_TOPIC_NAME `
---name $TopicSubscription
+--name $SERVICE_BUS_TOPIC_SUBSCRIPTION
 
 # List connection string
 az servicebus namespace authorization-rule keys list `
