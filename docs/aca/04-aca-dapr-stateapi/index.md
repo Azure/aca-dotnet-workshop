@@ -397,9 +397,9 @@ As we have done previously we need to build and deploy both app images to ACR, s
 To do so, continue using the same PowerShell console and paste the code below (Make sure you are on the following directory **TasksTracker.ContainerApps**):
 
 ```powershell
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
 
-az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
 ```
 
 #### 3. Add Cosmos DB Dapr State Store to Azure Container Apps Environment

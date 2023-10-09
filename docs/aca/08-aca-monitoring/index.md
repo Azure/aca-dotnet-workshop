@@ -122,22 +122,22 @@ Let's create a secret named `appinsights-key` on each Container App which contai
 Remember that we can obtain this value from Azure Portal by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:
 
 ```powershell
-$AppInsightsKey = "<Application Insights Key Here>"
+$APPINSIGHTS_INSTRUMENTATIONKEY = "<Application Insights Key Here>"
 
 az containerapp secret set `
 --name $BACKEND_API_NAME `
 --resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$AppInsightsKey "
+--secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 
 az containerapp secret set `
 --name $FRONTEND_WEBAPP_NAME `
 --resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$AppInsightsKey "
+--secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 
 az containerapp secret set `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$AppInsightsKey "
+--secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 ```
 
 ##### 2. Build New Images and Push Them to ACR
@@ -148,11 +148,11 @@ To accomplish this, continue using the same PowerShell console and paste the cod
 
 ```powershell
 # Build Backend API on ACR and Push to ACR
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
 # Build Backend Service on ACR and Push to ACR
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 # Build Frontend Web App on ACR and Push to ACR
-az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
 ```
 
 #### 3. Deploy New Revisions of the Services to ACA and Set a New Environment Variable
@@ -179,7 +179,7 @@ az containerapp update `
 
 # Update Backend Background Service container app and create a new revision 
 az containerapp update `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v20230301-1 `
 --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"

@@ -214,7 +214,7 @@ Add a new file under the folder `bicep\modules\container-apps` as shown below:
         module backendProcessorKeySecret 'secrets/processor-backend-service-secrets.bicep' = {
         name: 'backendProcessorKeySecret-${uniqueString(resourceGroup().id)}'
         params: {
-            keyVaultName: keyVaultName
+            KEYVAULT_NAME: KEYVAULT_NAME
             sendGridKeySecretName: sendGridKeySecretName
             sendGridKeySecretValue: sendGridKeySecretValue
             externalAzureStorageKeySecretName: externalStorageKeySecretName

@@ -13,7 +13,7 @@ param containerAppsEnvironmentName string
 param secretStoreComponentName string
 
 @description('The name of the key vault resource.')
-param keyVaultName string
+param KEYVAULT_NAME string
 
 @description('The name of the service bus namespace.')
 param serviceBusName string
@@ -79,7 +79,7 @@ resource secretstoreComponent 'Microsoft.App/managedEnvironments/daprComponents@
     metadata: [
       {
         name: 'vaultName'
-        value: keyVaultName
+        value: KEYVAULT_NAME
       }
     ]
     scopes: [

@@ -174,7 +174,7 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
 
 ```powershell
 cd ~\TasksTracker.ContainerApps 
-az acr build --registry $ACR_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
 ```
 
 - Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-frontend-webapp` has been created and there is a new docker image with a `latest` tag is created.
@@ -192,8 +192,8 @@ $fqdn=(az containerapp create `
 --name "$FRONTEND_WEBAPP_NAME"  `
 --resource-group $RESOURCE_GROUP `
 --environment $ENVIRONMENT `
---image "$ACR_NAME.azurecr.io/tasksmanager/$FRONTEND_WEBAPP_NAME" `
---registry-server "$ACR_NAME.azurecr.io" `
+--image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$FRONTEND_WEBAPP_NAME" `
+--registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
 --env-vars "BackendApiConfig__BaseUrlExternalHttp=$BACKEND_API_EXTERNAL_BASE_URL/" `
 --target-port $TARGET_PORT `
 --ingress 'external' `

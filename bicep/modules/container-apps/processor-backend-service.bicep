@@ -71,7 +71,7 @@ param backendProcessorPortNumber int
 var keyVaultIdTokens = split(keyVaultId, '/')
 var keyVaultSubscriptionId = keyVaultIdTokens[2]
 var keyVaultResourceGroupName = keyVaultIdTokens[4]
-var keyVaultName = keyVaultIdTokens[8]
+var KEYVAULT_NAME = keyVaultIdTokens[8]
 
 // ------------------
 // RESOURCES
@@ -201,7 +201,7 @@ resource backendProcessorService_sb_role_assignment 'Microsoft.Authorization/rol
 module backendProcessorKeySecret 'secrets/processor-backend-service-secrets.bicep' = {
   name: 'backendProcessorKeySecret-${uniqueString(resourceGroup().id)}'
   params: {
-    keyVaultName: keyVaultName
+    KEYVAULT_NAME: KEYVAULT_NAME
     sendGridKeySecretName: sendGridKeySecretName
     sendGridKeySecretValue: sendGridKeySecretValue
     externalAzureStorageKeySecretName: externalStorageKeySecretName

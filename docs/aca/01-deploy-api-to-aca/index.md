@@ -134,7 +134,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     $WORKSPACE_NAME="log-tasks-tracker-$RANDOM_STRING"
     $APPINSIGHTS_NAME="appi-tasks-tracker-$RANDOM_STRING"
     $BACKEND_API_NAME="api-tasksmanager-backend"
-    $ACR_NAME="crtaskstracker$RANDOM_STRING"
+    $AZURE_CONTAINER_REGISTRY_NAME="crtaskstracker$RANDOM_STRING"
     ```
 
 - Also assign the target port from when you created the Dockerfile:
@@ -142,6 +142,9 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```shell
     $TARGET_PORT=[exposed Docker target port from Dockerfile]
     ```
+
+??? tip "List of Variables"
+    As you progress through the different modules it may be hard to keep track of the variables that you have set so far. You can retrieve a list of all the variables that you have set throughout this workshop by executing the [variables script](../../aca/13-appendix/03-variables.md) in the same terminal where you are executing the scripts.
 
 ??? tip "Cloud Adoption Framework Abbreviations"
     Unless you have your own naming convention, we suggest to use [Cloud Adoption Framework (CAF) abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations){target=_blank} for resource prefixes.
@@ -159,7 +162,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```shell
     az acr create `
     --resource-group $RESOURCE_GROUP `
-    --name $ACR_NAME `
+    --name $AZURE_CONTAINER_REGISTRY_NAME `
     --sku Basic `
     --admin-enabled true
     ```
@@ -228,7 +231,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
     ```shell
     cd ~\TasksTracker.ContainerApps
-    az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+    az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
     ```
 
     Once this step is completed, you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created, and that there is a new Docker image with a `latest` tag.
@@ -240,8 +243,8 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --name $BACKEND_API_NAME `
     --resource-group $RESOURCE_GROUP `
     --environment $ENVIRONMENT `
-    --image "$ACR_NAME.azurecr.io/tasksmanager/$BACKEND_API_NAME" `
-    --registry-server "$ACR_NAME.azurecr.io" `
+    --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_API_NAME" `
+    --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
     --target-port $TARGET_PORT `
     --ingress 'external' `
     --min-replicas 1 `
@@ -261,7 +264,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     - The minimum and the maximum number of replicas are set. More about this when we cover Autoscaling in later modules. For the time being, only a single instance of this container app will be provisioned as Auto scale is not configured.
     - We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link [here](https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration){target=_blank}.
     - The `query` property will filter the response coming from the command and just return the FQDN. Take note of this FQDN as you will need it for the next step.
-    
+
     For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
 
 - You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 resourses created below.

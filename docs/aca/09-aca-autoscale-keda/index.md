@@ -60,18 +60,18 @@ Let's now create a secret named `svcbus-connstring` in our `tasksmanager-backend
 
 ```powershell
 # List Service Bus Access Policy RootManageSharedAccessKey
-$ServiceBusConnectionString = az servicebus namespace authorization-rule keys list `
+$SERVICE_BUS_CONNECTION_STRING = az servicebus namespace authorization-rule keys list `
 --resource-group $RESOURCE_GROUP `
---namespace-name $NamespaceName `
+--namespace-name $SERVICE_BUS_NAMESPACE_NAME `
 --name RootManageSharedAccessKey `
 --query primaryConnectionString `
 --output tsv
 
 # Create a new secret named 'svcbus-connstring' in backend processer container app
 az containerapp secret set `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
---secrets "svcbus-connstring=$ServiceBusConnectionString"
+--secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
 ```
 
 #### 2. Create a Custom Scaling Rule from Azure CLI
@@ -83,7 +83,7 @@ Now we are ready to add a new custom scaling rule to match the business requirem
 
 ```powershell
 az containerapp update `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --min-replicas 1 `
 --max-replicas 5 `
@@ -94,7 +94,7 @@ az containerapp update `
 --scale-rule-auth "connection=svcbus-connstring" `
 --scale-rule-metadata "topicName=<Your topic name>" `
                         "subscriptionName=<Your topic subscription name>" `
-                        "namespace=$NamespaceName" `
+                        "namespace=$SERVICE_BUS_NAMESPACE_NAME" `
                         "messageCount=10" `
                         "connectionFromEnv=svcbus-connstring"
 ```
@@ -122,7 +122,7 @@ To get the number of current replicas of service `tasksmanager-backend-processor
 
 ```powershell
 az containerapp replica list `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --query [].name
 ```

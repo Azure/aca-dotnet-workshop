@@ -293,10 +293,10 @@ with [Azure Key Vault secret store](https://docs.dapr.io/reference/components-re
 Create an Azure Key Vault which will be used to store securely any secret or key used in our application.
 
 ```powershell
-$KEYVAULTNAME = "<your akv name. Should be globally unique. 
+$KEYVAULT_NAME = "<your akv name. Should be globally unique. 
 Vault name must only contain alphanumeric characters and dashes and cannot start with a number.>"
 az keyvault create `
---name $KEYVAULTNAME `
+--name $KEYVAULT_NAME `
 --resource-group $RESOURCE_GROUP `
 --enable-rbac-authorization true `
 --location $LOCATION
@@ -312,19 +312,19 @@ In the previous module we have configured the `system-assigned` identity for the
 You can read more about [Azure built-in roles for Key Vault data plane operations](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations){target=_blank}.
 
 ```powershell
-$KV_SECRETSUSER_ROLEID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
-$subscriptionID= az account show --query id -o tsv
+$KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
+$AZURE_SUBSCRIPTION_ID= az account show --query id -o tsv
 
 # Get PRINCIPALID of BACKEND Processor Service
-$BACKEND_SVC_PRINCIPALID = az containerapp show `
--n $BACKEND_SVC_NAME `
+$BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
+-n $BACKEND_SERVICE_NAME `
 -g $RESOURCE_GROUP `
 --query identity.principalId
 
 az role assignment create `
---role $KV_SECRETSUSER_ROLEID `
---assignee $BACKEND_SVC_PRINCIPALID `
---scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
+--role $KEYVAULT_SECRETS_USER_ROLE_ID `
+--assignee $BACKEND_SERVICE_PRINCIPAL_ID `
+--scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
 
 #### 3. Create Secrets in the Azure Key Vault
@@ -334,11 +334,11 @@ be able to create secrets. To do so use the script below:
 
 ```powershell
 $SIGNEDIN_UERID =  az ad signed-in-user show --query id
-$KV_SECRETSOFFICER_ROLEID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID for 'Key Vault Secrets Office' Role 
+$KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID for 'Key Vault Secrets Office' Role 
 
-az role assignment create --role $KV_SECRETSOFFICER_ROLEID `
+az role assignment create --role $KEYVAULT_SECRETS_OFFICER_ROLE_ID `
 --assignee $SIGNEDIN_UERID `
---scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME"
+--scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
 
 Now we will create 2 secrets in the Azure Key Vault using the commands below:
@@ -346,13 +346,13 @@ Now we will create 2 secrets in the Azure Key Vault using the commands below:
 ```powershell
 # Set SendGrid API Key as a secret named 'sendgrid-api-key'
 az keyvault secret set `
---vault-name $KEYVAULTNAME `
+--vault-name $KEYVAULT_NAME `
 --name "sendgrid-api-key" `
 --value "<Send Grid API Key>.leave this empty if you opted not to register with the sendgrip api"
 
 # Set External Azure Storage Access Key as a secret named 'external-azure-storage-key'
 az keyvault secret set `
---vault-name $KEYVAULTNAME `
+--vault-name $KEYVAULT_NAME `
 --name "external-azure-storage-key" `
 --value "<Your Storage Account Key>"
 ```
@@ -431,7 +431,7 @@ As we have done previously we need to build and deploy the Backend Background Pr
 Continue using the same PowerShell console and paste the code below (make sure you are under the  **TasksTracker.ContainerApps** directory):
 
 ```powershell
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 ```
 
 #### 2. Add Dapr Secret Store Component to ACA Environment
@@ -493,7 +493,7 @@ Update the Azure Container App hosting the Backend Background Processor with a n
 ```powershell
 # Update Backend Background Processor container app and create a new revision 
 az containerapp update `
---name $BACKEND_SVC_NAME `
+--name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v20230224-1 `
 --remove-env-vars "SendGrid__ApiKey"
@@ -507,7 +507,7 @@ Remove the secret stored in `Secrets` of the Backend Background Processor as thi
     You can skip executing the powershell script below if you opted not to set up a sendgrid account in module 5
 
 ```powershell
-az containerapp secret remove --name $BACKEND_SVC_NAME `
+az containerapp secret remove --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
 --secret-names "sendgrid-apikey"
 ```

@@ -94,7 +94,7 @@ param scheduledJobCron string
 param secretStoreComponentName string
 
 @description('The key vault name store secrets')
-param keyVaultName string = '${prefix}kv-${uniqueString(resourceGroup().id)}${suffix}'
+param KEYVAULT_NAME string = '${prefix}kv-${uniqueString(resourceGroup().id)}${suffix}'
 
 // Container Registry & Images
 @description('The name of the container registry.')
@@ -137,7 +137,7 @@ module containerAppsEnvironment 'modules/container-apps-environment.bicep' ={
 module keyVault 'modules/key-vault.bicep' = {
   name: 'keyVault-${uniqueString(resourceGroup().id)}'
   params: {
-    keyVaultName: keyVaultName
+    KEYVAULT_NAME: KEYVAULT_NAME
     location: location
     tags: tags
   }
@@ -181,7 +181,7 @@ module daprComponents 'modules/dapr-components.bicep' = {
   params: {
     secretStoreComponentName: secretStoreComponentName 
     containerAppsEnvironmentName: containerAppsEnvironmentName    
-    keyVaultName: keyVaultName    
+    KEYVAULT_NAME: KEYVAULT_NAME    
     serviceBusName: serviceBus.outputs.serviceBusName
     cosmosDbName: cosmosDb.outputs.cosmosDbName
     cosmosDbDatabaseName: cosmosDb.outputs.cosmosDbDatabaseName

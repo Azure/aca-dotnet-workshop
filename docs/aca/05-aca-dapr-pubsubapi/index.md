@@ -413,27 +413,27 @@ You can do this from Azure Portal or use the below PowerShell command to create 
 You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
 
 ```powershell
-$NamespaceName="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
-$TopicName="tasksavedtopic"
-$TopicSubscription="tasks-processor-subscription"
+$SERVICE_BUS_NAMESPACE_NAME="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
+$SERVICE_BUS_TOPIC_NAME="tasksavedtopic"
+$SERVICE_BUS_TOPIC_SUBSCRIPTION="tasks-processor-subscription"
 
 # Create servicebus namespace
-az servicebus namespace create --resource-group $RESOURCE_GROUP --name $NamespaceName --location $LOCATION --sku Standard
+az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICE_BUS_NAMESPACE_NAME --location $LOCATION --sku Standard
 
 # Create a topic under the namespace
-az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $NamespaceName --name $TopicName
+az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $SERVICE_BUS_NAMESPACE_NAME --name $SERVICE_BUS_TOPIC_NAME
 
 # Create a topic subscription
 az servicebus topic subscription create `
 --resource-group $RESOURCE_GROUP `
---namespace-name $NamespaceName `
---topic-name $TopicName `
---name $TopicSubscription
+--namespace-name $SERVICE_BUS_NAMESPACE_NAME `
+--topic-name $SERVICE_BUS_TOPIC_NAME `
+--name $SERVICE_BUS_TOPIC_SUBSCRIPTION
 
 # List connection string
 az servicebus namespace authorization-rule keys list `
 --resource-group $RESOURCE_GROUP `
---namespace-name $NamespaceName `
+--namespace-name $SERVICE_BUS_NAMESPACE_NAME `
 --name RootManageSharedAccessKey `
 --query primaryConnectionString `
 --output tsv
@@ -531,9 +531,9 @@ As we have done previously we need to build and deploy both app images to ACR, s
     Make sure you are in root directory of the project, i.e. **TasksTracker.ContainerApps**
 
 ```powershell
-$BACKEND_SVC_NAME="tasksmanager-backend-processor"
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
-az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_SVC_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+$BACKEND_SERVICE_NAME="tasksmanager-backend-processor"
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 ```
 
 #### 2. Create a new Azure Container App to host the new Backend Background Processor
@@ -552,16 +552,16 @@ To achieve the above, run the PowerShell script below.
 
 ```powershell
 az containerapp create `
---name "$BACKEND_SVC_NAME"  `
+--name "$BACKEND_SERVICE_NAME"  `
 --resource-group $RESOURCE_GROUP `
 --environment $ENVIRONMENT `
---image "$ACR_NAME.azurecr.io/tasksmanager/$BACKEND_SVC_NAME" `
---registry-server "$ACR_NAME.azurecr.io" `
+--image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
+--registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
 --min-replicas 1 `
 --max-replicas 1 `
 --cpu 0.25 --memory 0.5Gi `
 --enable-dapr `
---dapr-app-id  $BACKEND_SVC_NAME `
+--dapr-app-id  $BACKEND_SERVICE_NAME `
 --dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5071> `
 # comment out these two lines if you are not using sendgrid
 --secrets "sendgrid-apikey=<Replace with your SendGrid API Key>" `
@@ -605,7 +605,7 @@ Run the command below to create `system-assigned` identity for our Backend Proce
 ```powershell
 az containerapp identity assign `
     --resource-group $RESOURCE_GROUP `
-    --name $BACKEND_SVC_NAME `
+    --name $BACKEND_SERVICE_NAME `
     --system-assigned
 ```
 
@@ -628,14 +628,14 @@ You can read more about `Azure built-in roles for Azure Service Bus` [here](http
 Run the command below to associate the `system-assigned` identity with the access-control role `Azure Service Bus Data Receiver`:
 
 ```powershell
-$subscriptionID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
+$AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
 $principalId = "<your principal id which was generated above>" # Principal Id after creating system identity for Backend Processor Container app 
 $roleNameOrId =  "Azure Service Bus Data Receiver" # Built in role name
 
 az role assignment create `
 --assignee $principalId `
 --role $roleNameOrId `
---scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+--scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
 ```
 
 #### 3. Grant Backend API App the Azure Service Bus Data Sender Role
@@ -643,14 +643,14 @@ az role assignment create `
 We'll do the same with Backend API container app, but we will use a different Azure built-in roles for Azure Service Bus which is the role `Azure Service Bus Data Sender` as the Backend API is a publisher of the messages. Run the command below to associate the `system-assigned` with access-control role `Azure Service Bus Data Sender`:
 
 ```powershell
-$subscriptionID = "<Your Azure Subscription ID>" # Your Azure Subscription
+$AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription
 $principalId = "<your principal id which was generated in module 4. You can find it on the azure portal under the specific container identity section>" # Principal Id after creating system identity for Backend API Container app
 $roleNameOrId =  "Azure Service Bus Data Sender" # Built in role name
 
 az role assignment create `
 --assignee $principalId `
 --role $roleNameOrId `
---scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+--scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
 ```
 
 #### 4. Restart Container Apps
@@ -660,14 +660,14 @@ Lastly, we need to restart both container apps revisions to pick up the role ass
 ```powershell
 # Get revision name and assign it to a variable
 $REVISION_NAME = (az containerapp revision list `
-        --name $BACKEND_SVC_NAME  `
+        --name $BACKEND_SERVICE_NAME  `
         --resource-group $RESOURCE_GROUP `
         --query [0].name)
 
 # Restart revision by name
 az containerapp revision restart `
 --resource-group $RESOURCE_GROUP `
---name $BACKEND_SVC_NAME  `
+--name $BACKEND_SERVICE_NAME  `
 --revision $REVISION_NAME
 
 $REVISION_NAME = (az containerapp revision list `
@@ -694,7 +694,7 @@ az containerapp revision restart `
     
         ```powershell
         az containerapp logs show --follow `
-        -n $BACKEND_SVC_NAME `
+        -n $BACKEND_SERVICE_NAME `
         -g $RESOURCE_GROUP
         ```
     
