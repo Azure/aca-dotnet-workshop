@@ -27,12 +27,12 @@ Write-Host "REVISION_NAME                       :" $REVISION_NAME
 Write-Host "ROLE_ID                             :" $ROLE_ID
 Write-Host "SERVICE_BUS_CONNECTION_STRING       :" $SERVICE_BUS_CONNECTION_STRING
 Write-Host "SERVICE_BUS_NAMESPACE_NAME          :" $SERVICE_BUS_NAMESPACE_NAME
+Write-Host "SERVICE_BUS_TOPIC_NAME              :" $SERVICE_BUS_TOPIC_NAME
 Write-Host "SIGNEDIN_UERID                      :" $SIGNEDIN_UERID
 Write-Host "STORAGE_ACCOUNT_NAME                :" $STORAGE_ACCOUNT_NAME
 Write-Host "AZURE_SUBSCRIPTION_ID               :" $AZURE_SUBSCRIPTION_ID
 Write-Host "TARGET_PORT                         :" $TARGET_PORT
 Write-Host "TODAY                               :" $TODAY
-Write-Host "TopicName                           :" $TopicName
 Write-Host "TopicSubscription                   :" $TopicSubscription
 Write-Host "UI_APP_PORT                         :" $UI_APP_PORT
 Write-Host "WORKSPACE_ID                        :" $WORKSPACE_ID
