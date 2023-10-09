@@ -32,7 +32,7 @@ To try out the State Management APIs, run the Backend API from VS Code by runnin
     ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
     ```
 
-Now from any rest client, invoke the below POST request to the endpoint: [http://localhost:3500/v1.0/state/statestore](http://localhost:3500/v1.0/state/statestore){target=_blank}
+Now from any rest client, invoke the below **POST** request to the endpoint: [http://localhost:3500/v1.0/state/statestore](http://localhost:3500/v1.0/state/statestore){target=_blank}
 
 ```http
 POST /v1.0/state/statestore HTTP/1.1
@@ -90,7 +90,7 @@ After you connect to Redis locally, you should see the 3 entries similar to the 
 ![dapr-stateapi-redis](../../assets/images/04-aca-dapr-stateapi/dapr-api-redis.jpg)
 
 To get the value of a key, you need to issue a GET request to the endpoint `http://localhost:3500/v1.0/state/statestore/{YourKey}`. This will return the value from the key store.
-For example if you execute the following GET [http://localhost:3500/v1.0/state/statestore/Book3](http://localhost:3500/v1.0/state/statestore/Book3) the results will be the below object:
+For example if you execute the following GET [http://localhost:3500/v1.0/state/statestore/Book3](http://localhost:3500/v1.0/state/statestore/Book3){target=_blank} the results will be the below object:
 
 ```JSON
 {
@@ -408,7 +408,8 @@ We need to run the command below to add the yaml file `.\aca-components\containe
 
 ```powershell
 az containerapp env dapr-component set `
-    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+    --name $ENVIRONMENT `
+    --resource-group $RESOURCE_GROUP `
     --dapr-component-name statestore `
     --yaml '.\aca-components\containerapps-statestore-cosmos.yaml'
 ```
@@ -424,12 +425,12 @@ Until this moment Dapr was not enabled on the Container Apps we have provisioned
 az containerapp dapr enable --name $BACKEND_API_NAME `
                             --resource-group $RESOURCE_GROUP `
                             --dapr-app-id  $BACKEND_API_NAME `
-                            --dapr-app-port $API_APP_PORT
+                            --dapr-app-port $TARGET_PORT
 
 az containerapp dapr enable --name $FRONTEND_WEBAPP_NAME `
                             --resource-group $RESOURCE_GROUP `
                             --dapr-app-id  $FRONTEND_WEBAPP_NAME `
-                            --dapr-app-port $UI_APP_PORT
+                            --dapr-app-port $TARGET_PORT
 ```
 
 ??? tip "Curious to learn more about the command above?"
@@ -451,7 +452,6 @@ az containerapp update `
 --name $FRONTEND_WEBAPP_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY
-    
 
 # Update Backend API App container app and create a new revision 
 az containerapp update `
