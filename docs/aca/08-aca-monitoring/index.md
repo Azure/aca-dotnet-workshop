@@ -122,22 +122,22 @@ Let's create a secret named `appinsights-key` on each Container App which contai
 Remember that we can obtain this value from Azure Portal by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:
 
 ```powershell
-$AppInsightsKey = "<Application Insights Key Here>"
+$APPINSIGHTS_INSTRUMENTATIONKEY = "<Application Insights Key Here>"
 
 az containerapp secret set `
 --name $BACKEND_API_NAME `
 --resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$AppInsightsKey "
+--secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 
 az containerapp secret set `
 --name $FRONTEND_WEBAPP_NAME `
 --resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$AppInsightsKey "
+--secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 
 az containerapp secret set `
 --name $BACKEND_SVC_NAME `
 --resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$AppInsightsKey "
+--secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 ```
 
 ##### 2. Build New Images and Push Them to ACR
