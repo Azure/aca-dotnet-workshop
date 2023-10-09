@@ -143,6 +143,9 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     $TARGET_PORT=[exposed Docker target port from Dockerfile]
     ```
 
+??? tip "List of Variables"
+    You can retrieve a list of variables that are set throughout this workshop by executing the [variables script](../../aca/13-appendix/03-variables.md) in the same terminal where you are executing the scripts.
+
 ??? tip "Cloud Adoption Framework Abbreviations"
     Unless you have your own naming convention, we suggest to use [Cloud Adoption Framework (CAF) abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations){target=_blank} for resource prefixes.
 
@@ -261,7 +264,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     - The minimum and the maximum number of replicas are set. More about this when we cover Autoscaling in later modules. For the time being, only a single instance of this container app will be provisioned as Auto scale is not configured.
     - We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link [here](https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration){target=_blank}.
     - The `query` property will filter the response coming from the command and just return the FQDN. Take note of this FQDN as you will need it for the next step.
-    
+
     For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
 
 - You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 resourses created below.
