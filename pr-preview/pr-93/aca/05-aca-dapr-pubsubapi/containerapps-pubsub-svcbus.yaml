@@ -1,0 +1,11 @@
+componentType: pubsub.azure.servicebus
+version: v1
+metadata:
+  - name: namespaceName
+    value: "<your globally unique namespace>.servicebus.windows.net"
+  - name: consumerID
+    value: "tasks-processor-subscription"
+# Application scopes
+scopes:
+  - tasksmanager-backend-api
+  - tasksmanager-backend-processor
