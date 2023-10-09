@@ -973,6 +973,8 @@
       
         
       
+        
+      
     
     
     
@@ -1034,6 +1036,26 @@
   
   <span class="md-ellipsis">
     Testing Changes Locally or with GitHub Codespaces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-appendix/03-variables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Variables
   </span>
   
 
@@ -1684,9 +1706,9 @@ Basically the uri should have the following structure <code>https://COSMOS_DB_AC
 <h4 id="2-build-frontend-web-app-and-backend-api-app-images-and-push-them-to-acr">2. Build Frontend Web App and Backend API App Images and Push Them to ACR<a class="headerlink" href="#2-build-frontend-web-app-and-backend-api-app-images-and-push-them-to-acr" title="Permanent link">&para;</a></h4>
 <p>As we have done previously we need to build and deploy both app images to ACR, so they are ready to be deployed to Azure Container Apps.
 To do so, continue using the same PowerShell console and paste the code below (Make sure you are on the following directory <strong>TasksTracker.ContainerApps</strong>):</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_API_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_API_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
 </span></code></pre></div>
 <h4 id="3-add-cosmos-db-dapr-state-store-to-azure-container-apps-environment">3. Add Cosmos DB Dapr State Store to Azure Container Apps Environment<a class="headerlink" href="#3-add-cosmos-db-dapr-state-store-to-azure-container-apps-environment" title="Permanent link">&para;</a></h4>
 <p>We need to run the command below to add the yaml file <code>.\aca-components\containerapps-statestore-cosmos.yaml</code> to Azure Container Apps Environment.</p>

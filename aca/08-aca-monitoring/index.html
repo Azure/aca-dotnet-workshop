@@ -939,6 +939,8 @@
       
         
       
+        
+      
     
     
     
@@ -1000,6 +1002,26 @@
   
   <span class="md-ellipsis">
     Testing Changes Locally or with GitHub Codespaces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-appendix/03-variables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Variables
   </span>
   
 
@@ -1311,32 +1333,32 @@ ACA do not support <a href="https://learn.microsoft.com/en-us/azure/azure-monito
 <h4 id="1-add-application-insights-instrumentation-key-as-a-secret">1. Add Application Insights Instrumentation Key As a Secret<a class="headerlink" href="#1-add-application-insights-instrumentation-key-as-a-secret" title="Permanent link">&para;</a></h4>
 <p>Let's create a secret named <code>appinsights-key</code> on each Container App which contains the value of the Application Insights instrumentation key.
 Remember that we can obtain this value from Azure Portal by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">$AppInsightsKey</span> <span class="p">=</span> <span class="s2">&quot;&lt;Application Insights Key Here&gt;&quot;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span> <span class="p">=</span> <span class="s2">&quot;&lt;Application Insights Key Here&gt;&quot;</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">&quot;appinsights-key=$AppInsightsKey &quot;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">&quot;appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY &quot;</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
 </span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$FRONTEND_WEBAPP_NAME</span> <span class="p">`</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">&quot;appinsights-key=$AppInsightsKey &quot;</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">&quot;appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY &quot;</span>
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
 </span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
 </span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">&quot;appinsights-key=$AppInsightsKey &quot;</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">&quot;appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY &quot;</span>
 </span></code></pre></div>
 <h5 id="2-build-new-images-and-push-them-to-acr">2. Build New Images and Push Them to ACR<a class="headerlink" href="#2-build-new-images-and-push-them-to-acr" title="Permanent link">&para;</a></h5>
 <p>As we did before, we are required to build and push the images of the three applications to ACR. By doing so, they will be prepared to be deployed in ACA.</p>
 <p>To accomplish this, continue using the same PowerShell console and paste the code below (make sure you are on the following directory <strong>TasksTracker.ContainerApps</strong>):</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c"># Build Backend API on ACR and Push to ACR</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_API_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span> 
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_API_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span> 
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c"># Build Backend Service on ACR and Push to ACR</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_SVC_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_SERVICE_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c"># Build Frontend Web App on ACR and Push to ACR</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
 </span></code></pre></div>
 <h4 id="3-deploy-new-revisions-of-the-services-to-aca-and-set-a-new-environment-variable">3. Deploy New Revisions of the Services to ACA and Set a New Environment Variable<a class="headerlink" href="#3-deploy-new-revisions-of-the-services-to-aca-and-set-a-new-environment-variable" title="Permanent link">&para;</a></h4>
 <p>We need to update the ACA hosting the three services with a new revision so our code changes are available for end users.</p>
@@ -1360,7 +1382,7 @@ Remember that we can obtain this value from Azure Portal by going to Application
 </span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
 </span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="c"># Update Backend Background Service container app and create a new revision </span>
 </span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
 </span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230301</span><span class="p">-</span><span class="n">1</span> <span class="p">`</span>
 </span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="p">-</span><span class="n">-set-env-vars</span> <span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>

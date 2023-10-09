@@ -1041,6 +1041,8 @@
       
         
       
+        
+      
     
     
     
@@ -1102,6 +1104,26 @@
   
   <span class="md-ellipsis">
     Testing Changes Locally or with GitHub Codespaces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-appendix/03-variables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Variables
   </span>
   
 
@@ -1842,10 +1864,10 @@ The recommended approach for retrieving these secrets is to reference an existin
 with <a href="https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/" target="_blank">Azure Key Vault secret store</a>.</p>
 <h4 id="1-create-an-azure-key-vault-resource">1. Create an Azure Key Vault resource<a class="headerlink" href="#1-create-an-azure-key-vault-resource" title="Permanent link">&para;</a></h4>
 <p>Create an Azure Key Vault which will be used to store securely any secret or key used in our application.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">$KEYVAULTNAME</span> <span class="p">=</span> <span class="s2">&quot;&lt;your akv name. Should be globally unique. </span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">$KEYVAULT_NAME</span> <span class="p">=</span> <span class="s2">&quot;&lt;your akv name. Should be globally unique. </span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="s2">Vault name must only contain alphanumeric characters and dashes and cannot start with a number.&gt;&quot;</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$KEYVAULTNAME</span> <span class="p">`</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">-</span><span class="n">-enable-rbac-authorization</span> <span class="n">true</span> <span class="p">`</span>
 </span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="p">-</span><span class="n">-location</span> <span class="nv">$LOCATION</span>
@@ -1857,40 +1879,40 @@ with <a href="https://docs.dapr.io/reference/components-reference/supported-secr
 <h4 id="2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault">2. Grant Backend Processor App a Role To Read Secrets from Azure Key Vault<a class="headerlink" href="#2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" title="Permanent link">&para;</a></h4>
 <p>In the previous module we have configured the <code>system-assigned</code> identity for the service <code>ACA-Processor Backend</code>. Now we need to assign a role named <code>Key Vault Secrets User</code> to it, so it access and read secrets from Azure Key Vault.</p>
 <p>You can read more about <a href="https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations" target="_blank">Azure built-in roles for Key Vault data plane operations</a>.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">$KV_SECRETSUSER_ROLEID</span> <span class="p">=</span> <span class="s2">&quot;4633458b-17de-408a-b874-0445c86b69e6&quot;</span> <span class="c"># ID for &#39;Key Vault Secrets User&#39; Role</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">$subscriptionID</span><span class="p">=</span> <span class="n">az</span> <span class="n">account</span> <span class="n">show</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span> <span class="n">-o</span> <span class="n">tsv</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">$KEYVAULT_SECRETS_USER_ROLE_ID</span> <span class="p">=</span> <span class="s2">&quot;4633458b-17de-408a-b874-0445c86b69e6&quot;</span> <span class="c"># ID for &#39;Key Vault Secrets User&#39; Role</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">$AZURE_SUBSCRIPTION_ID</span><span class="p">=</span> <span class="n">az</span> <span class="n">account</span> <span class="n">show</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span> <span class="n">-o</span> <span class="n">tsv</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c"># Get PRINCIPALID of BACKEND Processor Service</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nv">$BACKEND_SVC_PRINCIPALID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">containerapp</span> <span class="n">show</span> <span class="p">`</span>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">-n</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nv">$BACKEND_SERVICE_PRINCIPAL_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">containerapp</span> <span class="n">show</span> <span class="p">`</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">-n</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
 </span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">-g</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">-</span><span class="n">-query</span> <span class="n">identity</span><span class="p">.</span><span class="n">principalId</span>
 </span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
 </span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$KV_SECRETSUSER_ROLEID</span> <span class="p">`</span>
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$BACKEND_SVC_PRINCIPALID</span> <span class="p">`</span>
-</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME&quot;</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$KEYVAULT_SECRETS_USER_ROLE_ID</span> <span class="p">`</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$BACKEND_SERVICE_PRINCIPAL_ID</span> <span class="p">`</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME&quot;</span>
 </span></code></pre></div>
 <h4 id="3-create-secrets-in-the-azure-key-vault">3. Create Secrets in the Azure Key Vault<a class="headerlink" href="#3-create-secrets-in-the-azure-key-vault" title="Permanent link">&para;</a></h4>
 <p>To create a secret in Azure Key Vault you need to have a role which allows you to create secrets. From the Azure CLI we will assign the role <code>Key Vault Secrets Officer</code> to the user signed in to AZ CLI to
 be able to create secrets. To do so use the script below:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">$SIGNEDIN_UERID</span> <span class="p">=</span>  <span class="n">az</span> <span class="n">ad</span> <span class="n">signed-in-user</span> <span class="n">show</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">$KV_SECRETSOFFICER_ROLEID</span> <span class="p">=</span> <span class="s2">&quot;b86a8fe4-44ce-4948-aee5-eccb2c155cd7&quot;</span> <span class="c">#ID for &#39;Key Vault Secrets Office&#39; Role </span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">$KEYVAULT_SECRETS_OFFICER_ROLE_ID</span> <span class="p">=</span> <span class="s2">&quot;b86a8fe4-44ce-4948-aee5-eccb2c155cd7&quot;</span> <span class="c">#ID for &#39;Key Vault Secrets Office&#39; Role </span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">-</span><span class="n">-role</span> <span class="nv">$KV_SECRETSOFFICER_ROLEID</span> <span class="p">`</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">-</span><span class="n">-role</span> <span class="nv">$KEYVAULT_SECRETS_OFFICER_ROLE_ID</span> <span class="p">`</span>
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$SIGNEDIN_UERID</span> <span class="p">`</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULTNAME&quot;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME&quot;</span>
 </span></code></pre></div>
 <p>Now we will create 2 secrets in the Azure Key Vault using the commands below:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c"># Set SendGrid API Key as a secret named &#39;sendgrid-api-key&#39;</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">-</span><span class="n">-vault-name</span> <span class="nv">$KEYVAULTNAME</span> <span class="p">`</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">-</span><span class="n">-vault-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">&quot;sendgrid-api-key&quot;</span> <span class="p">`</span>
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">-</span><span class="n">-value</span> <span class="s2">&quot;&lt;Send Grid API Key&gt;.leave this empty if you opted not to register with the sendgrip api&quot;</span>
 </span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
 </span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c"># Set External Azure Storage Access Key as a secret named &#39;external-azure-storage-key&#39;</span>
 </span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">-</span><span class="n">-vault-name</span> <span class="nv">$KEYVAULTNAME</span> <span class="p">`</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">-</span><span class="n">-vault-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
 </span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">&quot;external-azure-storage-key&quot;</span> <span class="p">`</span>
 </span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="p">-</span><span class="n">-value</span> <span class="s2">&quot;&lt;Your Storage Account Key&gt;&quot;</span>
 </span></code></pre></div>
@@ -2014,7 +2036,7 @@ the name of the secret in AKV that holds SendGrid API key.</p>
 <h4 id="1-build-the-backend-background-processor-image-and-push-it-to-acr">1. Build the Backend Background Processor Image and Push it To ACR<a class="headerlink" href="#1-build-the-backend-background-processor-image-and-push-it-to-acr" title="Permanent link">&para;</a></h4>
 <p>As we have done previously we need to build and deploy the Backend Background Processor image to ACR, so it is ready to be deployed to ACA.
 Continue using the same PowerShell console and paste the code below (make sure you are under the  <strong>TasksTracker.ContainerApps</strong> directory):</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$ACR_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_SVC_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_SERVICE_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
 </span></code></pre></div>
 <h4 id="2-add-dapr-secret-store-component-to-aca-environment">2. Add Dapr Secret Store Component to ACA Environment<a class="headerlink" href="#2-add-dapr-secret-store-component-to-aca-environment" title="Permanent link">&para;</a></h4>
 <p>We need to run the command below to create the Dapr secret store component:</p>
@@ -2065,7 +2087,7 @@ Continue using the same PowerShell console and paste the code below (make sure y
 </div>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c"># Update Backend Background Processor container app and create a new revision </span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
 </span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230224</span><span class="p">-</span><span class="n">1</span> <span class="p">`</span>
 </span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">-</span><span class="n">-remove-env-vars</span> <span class="s2">&quot;SendGrid__ApiKey&quot;</span>
@@ -2076,7 +2098,7 @@ Continue using the same PowerShell console and paste the code below (make sure y
 <p class="admonition-title">Info</p>
 <p>You can skip executing the powershell script below if you opted not to set up a sendgrid account in module 5</p>
 </div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="n">remove</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="n">remove</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="p">-</span><span class="n">-secret-names</span> <span class="s2">&quot;sendgrid-apikey&quot;</span>
 </span></code></pre></div>

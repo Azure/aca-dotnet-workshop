@@ -18,17 +18,13 @@
 
     <!-- Canonical -->
     
-        <link rel="canonical" href="https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/">
-    
 
     <!-- Previous page -->
     
-        <link rel="prev" href="../2-scenario-architecture/" />
+        <link rel="prev" href="../02-github-local-codespaces/" />
     
 
     <!-- Next page -->
-    
-        <link rel="next" href="../4-prerequisites/" />
     
 
     <!-- Favicon -->
@@ -42,7 +38,7 @@
 
     
       
-        <title>Dapr Integration in ACA - Azure Container Apps - Workshop</title>
+        <title>Variables - Azure Container Apps - Workshop</title>
       
     
     
@@ -88,8 +84,6 @@
     
     
     
-        <meta name="og:url" content="https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/" />
-    
 
    <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
         html.glightbox-open { overflow: initial; height: 100%; }
@@ -124,7 +118,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#dapr-overview" class="md-skip">
+        <a href="#variables" class="md-skip">
           Skip to content
         </a>
       
@@ -159,7 +153,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Dapr Integration in ACA
+              Variables
             
           </span>
         </div>
@@ -314,8 +308,6 @@
       
   
   
-    
-  
   
     
     
@@ -336,17 +328,17 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../00-workshop-intro/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -363,7 +355,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Workshop Introduction
@@ -378,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../1-aca-core-components/" class="md-nav__link">
+      <a href="../../00-workshop-intro/1-aca-core-components/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -398,7 +390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2-scenario-architecture/" class="md-nav__link">
+      <a href="../../00-workshop-intro/2-scenario-architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -416,27 +408,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Dapr Integration in ACA
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../00-workshop-intro/3-dapr-integration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -445,45 +419,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#dapr-overview" class="md-nav__link">
-    Dapr Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dapr-microservices" class="md-nav__link">
-    Dapr &amp; Microservices
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dapr-usage-in-the-workshop" class="md-nav__link">
-    Dapr usage in the workshop
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -495,7 +430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../4-prerequisites/" class="md-nav__link">
+      <a href="../../00-workshop-intro/4-prerequisites/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -854,6 +789,8 @@
       
   
   
+    
+  
   
     
     
@@ -868,12 +805,12 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
         
           
           <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
@@ -887,7 +824,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             Appendix
@@ -900,7 +837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
+      <a href="../01-run-debug-dapr-app-vscode/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -920,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-appendix/02-github-local-codespaces/" class="md-nav__link">
+      <a href="../02-github-local-codespaces/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -938,9 +875,18 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../13-appendix/03-variables/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -949,6 +895,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -978,35 +925,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#dapr-overview" class="md-nav__link">
-    Dapr Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dapr-microservices" class="md-nav__link">
-    Dapr &amp; Microservices
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dapr-usage-in-the-workshop" class="md-nav__link">
-    Dapr usage in the workshop
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -1024,35 +944,48 @@
   
 
 
-  <h1>Dapr Integration in ACA</h1>
-
-<h2 id="dapr-overview">Dapr Overview<a class="headerlink" href="#dapr-overview" title="Permanent link">&para;</a></h2>
-<p>As developers, we are often tasked with creating scalable, resilient, and distributed applications using microservices. But more often than not we face the same challenges:</p>
-<ul>
-<li>Recovering state after failures</li>
-<li>Services discovery and calling other microservices</li>
-<li>Integration with external resources</li>
-<li>Asynchronous communications between different services</li>
-<li>Distributed tracing</li>
-<li>Measuring message calls and performance across components and networked services</li>
-</ul>
-<p><strong>Dapr (Distributed Application Runtime)</strong> offers a solution for the common challenges that are faced in any distributed microservice application. Dapr can be used with any language (Go, .NET python, Node, Java, C++) and can run anywhere (On-premise, Kubernetes, and any public cloud (e.g. Azure)).</p>
-<p>Dapr's core component is the concept of a <a href="https://docs.dapr.io/concepts/building-blocks-concept" target="_blank">Building Block</a>. So far, Dapr supports nine Building Blocks. Simply put, a Building Block is a modular component which encapsulates best practices and can be accessed over standard HTTP or gRPC APIs.</p>
-<p>Building Blocks address common challenges faced in building resilient microservices applications and implement best practices and patterns. Building Blocks provide consistent APIs and abstract the implementation details to keep your code simple and portable.</p>
-<p>The diagram below shows the nine Building Blocks which expose public APIs that can be called from your code and can be configured using <a href="https://docs.dapr.io/concepts/components-concept" target="_blank">components</a> to implement the building block's capability. Remember that you can pick whatever building block suites your distributed microservice application, and you can incorporate other building blocks as needed.</p>
-<p><a class="glightbox" href="../../../assets/images/00-workshop-intro/DaprBuildingBlocks.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Dapr Building Blocks" src="../../../assets/images/00-workshop-intro/DaprBuildingBlocks.jpg" /></a></p>
-<h2 id="dapr-microservices">Dapr &amp; Microservices<a class="headerlink" href="#dapr-microservices" title="Permanent link">&para;</a></h2>
-<p>Dapr exposes its Building Blocks and components through a <strong>sidecar architecture</strong>. A sidecar enables Dapr to run in a separate memory process or separate container alongside your service. Sidecars provide isolation and encapsulation as they aren't part of the service, but connected to it. This separation enables each service to have its own runtime environment and be built upon different programming platforms.</p>
-<p><a class="glightbox" href="../../../assets/images/00-workshop-intro/ACA-Tutorial-DaprSidecar-s.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Dapr SideCar" src="../../../assets/images/00-workshop-intro/ACA-Tutorial-DaprSidecar-s.jpg" /></a></p>
-<p>This pattern is named Sidecar because it resembles a sidecar attached to a motorcycle. In the previous figure, note how the Dapr sidecar is attached to your service to provide distributed application capabilities.</p>
-<h2 id="dapr-usage-in-the-workshop">Dapr usage in the workshop<a class="headerlink" href="#dapr-usage-in-the-workshop" title="Permanent link">&para;</a></h2>
-<p>We are going to enable Dapr for all Azure Container Apps in the solution. The Dapr APIs/Building Blocks used in this workshop are:</p>
-<ul>
-<li><strong>Service to Service invocation</strong>: "ACA Web App-Frontend" microservice invokes the "ACA WebAPI-Backend" microservice using Dapr sidecar via the Service-to-service invocation building block</li>
-<li><strong>State Management</strong>: "ACA WebAPI-Backend" stores data on Azure Cosmos DB and stores email logs on Azure Table Storage using Dapr State Management building blocks.</li>
-<li><strong>Pub/Sub</strong>: "ACA WebAPI-Backend" publishes messages to Azure Service Bus when a task is saved and the "ACA Processor-Backend" microservices consumes those messages and sends emails using SendGrid.</li>
-<li><strong>Bindings</strong>: "ACA Processor-Backend" is triggered based on an incoming event such as a Cron job.</li>
-</ul>
+<h1 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h1>
+<p>The following variables are declared along the way in this tutorial. You can always execute this Powershell command to get an updated, comprehensive list in the same terminal where you have been executing scripts:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Write-Host</span> <span class="sh">@&quot;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sh">API_APP_PORT                        : $API_APP_PORT</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sh">APPINSIGHTS_NAME                    : $APPINSIGHTS_NAME</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sh">APPINSIGHTS_INSTRUMENTATIONKEY      : $APPINSIGHTS_INSTRUMENTATIONKEY</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sh">AZURE_CONTAINER_REGISTRY_NAME       : $AZURE_CONTAINER_REGISTRY_NAME</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sh">AZURE_SUBSCRIPTION_ID               : $AZURE_SUBSCRIPTION_ID</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sh">BACKEND_API_EXTERNAL_BASE_URL       : $BACKEND_API_EXTERNAL_BASE_URL</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sh">BACKEND_API_INTERNAL_BASE_URL       : $BACKEND_API_INTERNAL_BASE_URL</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sh">BACKEND_API_NAME                    : $BACKEND_API_NAME</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sh">BACKEND_SERVICE_NAME                : $BACKEND_SERVICE_NAME</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sh">BACKEND_SERVICE_PRINCIPAL_ID        : $BACKEND_SERVICE_PRINCIPAL_ID</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sh">COSMOS_DB_ACCOUNT                   : $COSMOS_DB_ACCOUNT</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sh">COSMOS_DB_CONTAINER                 : $COSMOS_DB_CONTAINER</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sh">COSMOS_DB_DBNAME                    : $COSMOS_DB_DBNAME</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sh">ENVIRONMENT                         : $ENVIRONMENT</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sh">FRONTEND_WEBAPP_NAME                : $FRONTEND_WEBAPP_NAME</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sh">KEYVAULT_NAME                       : $KEYVAULT_NAME</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="sh">KEYVAULT_SECRETS_OFFICER_ROLE_ID    : $KEYVAULT_SECRETS_OFFICER_ROLE_ID</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sh">KEYVAULT_SECRETS_USER_ROLE_ID       : $KEYVAULT_SECRETS_USER_ROLE_ID</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sh">LOCATION                            : $LOCATION</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="sh">RANDOM_STRING                       : $RANDOM_STRING</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="sh">RESOURCE_GROUP                      : $RESOURCE_GROUP</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="sh">REVISION_NAME                       : $REVISION_NAME</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="sh">ROLE_ID                             : $ROLE_ID</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="sh">SERVICE_BUS_CONNECTION_STRING       : $SERVICE_BUS_CONNECTION_STRING</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="sh">SERVICE_BUS_NAMESPACE_NAME          : $SERVICE_BUS_NAMESPACE_NAME</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="sh">SERVICE_BUS_TOPIC_NAME              : $SERVICE_BUS_TOPIC_NAME</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="sh">SERVICE_BUS_TOPIC_SUBSCRIPTION      : $SERVICE_BUS_TOPIC_SUBSCRIPTION</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="sh">SIGNEDIN_UERID                      : $SIGNEDIN_UERID</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="sh">STORAGE_ACCOUNT_NAME                : $STORAGE_ACCOUNT_NAME</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="sh">TARGET_PORT                         : $TARGET_PORT</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="sh">TODAY                               : $TODAY</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="sh">UI_APP_PORT                         : $UI_APP_PORT</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="sh">WORKSPACE_ID                        : $WORKSPACE_ID</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="sh">WORKSPACE_NAME                      : $WORKSPACE_NAME</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="sh">WORKSPACE_SECRET                    : $WORKSPACE_SECRET</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="sh">&quot;@</span>
+</span></code></pre></div>
 
   <hr>
 <div class="md-source-file">
@@ -1094,7 +1027,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../2-scenario-architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Scenario and Solution Architecture">
+          <a href="../02-github-local-codespaces/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Testing Changes Locally or with GitHub Codespaces">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1104,27 +1037,11 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Scenario and Solution Architecture
+                Testing Changes Locally or with GitHub Codespaces
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../4-prerequisites/" class="md-footer__link md-footer__link--next" aria-label="Next: Prerequisites">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Prerequisites
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
