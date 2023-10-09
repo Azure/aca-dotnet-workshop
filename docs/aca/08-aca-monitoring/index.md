@@ -214,7 +214,7 @@ These live metrics provide very powerful diagnostics for our production microser
 
 ### Logs Search Using Transaction Search
 
-Transaction search in Application Insights will help us find and explore individual telemetry items, such as exceptions, web requests, or dependencies as well as any log traces and events that we’ve added to the application.
+Transaction search in Application Insights will help us find and explore individual telemetry items, such as exceptions, web requests, or dependencies as well as any log traces and events that we've added to the application.
 
 For example, if we want to see all the event types of type `Request` for the cloud RoleName `tasksmanager-backend-api` in the past 24 hours, we can use the transaction search dashboard to do this.
 See how the filters are set and the results are displayed nicely. We can drill down on each result to have more details and what telemetry was captured before and after. A very useful feature when troubleshooting exceptions and reading logs.

@@ -21,9 +21,9 @@ As developers, we are often tasked with creating scalable, resilient, and distri
 
 Dapr's core component is the concept of a [Building Block](https://docs.dapr.io/concepts/building-blocks-concept){target=_blank}. So far Dapr supports 9 Building Blocks. Simply put, a Building Block is a modular component which encapsulates best practices and can be accessed over standard HTTP or gRPC APIs.
 
-Building Blocks address common challenges faced in building resilient microservices applications and implement best practices and patterns. Building Blocks provide consistent APIs and abstract away the implementation details to keep your code simple and portable.
+Building Blocks address common challenges faced in building resilient microservices applications and implement best practices and patterns. Building Blocks provide consistent APIs and abstract the implementation details to keep your code simple and portable.
 
-The diagram below shows the 9 Building Blocks which expose public APIs that can be called from your code, and can be configured using [components](https://docs.dapr.io/concepts/components-concept){target=_blank} to implement the building blocks’ capability. Remember that you can pick whatever building block that suites your distributed microservice application and you can incorporate other building blocks as needed.
+The diagram below shows the 9 Building Blocks which expose public APIs that can be called from your code and can be configured using [components](https://docs.dapr.io/concepts/components-concept){target=_blank} to implement the building block's capability. Remember that you can pick whatever building block suites your distributed microservice application, and you can incorporate other building blocks as needed.
 
 ![Dapr Building Blocks](../../assets/images/00-workshop-intro/DaprBuildingBlocks.jpg)
 
@@ -37,7 +37,7 @@ This pattern is named Sidecar because it resembles a sidecar attached to a motor
 
 ## Dapr usage in the workshop
 
-We are going to enable Dapr for all Azure Container Apps in the solution, the Dapr APIs/Building Blocks used in this workshop are:
+We are going to enable Dapr for all Azure Container Apps in the solution. The Dapr APIs/Building Blocks used in this workshop are:
 
 - **Service to Service invocation**: "ACA Web App-Frontend" microservice invokes the "ACA WebAPI-Backend" microservice using Dapr sidecar via the Service-to-service invocation building block
 - **State Management**: "ACA WebAPI-Backend" stores data on Azure Cosmos DB and stores email logs on Azure Table Storage using Dapr State Management building blocks.

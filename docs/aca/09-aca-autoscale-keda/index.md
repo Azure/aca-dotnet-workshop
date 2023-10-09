@@ -160,5 +160,5 @@ The message structure our backend processor expects is similar to the JSON shown
     Container Apps implements the [KEDA ScaledObject](https://keda.sh/docs/2.8/concepts/scaling-deployments/#scaledobject-spec){target=_blank} with the following default settings:
 
     * pollingInterval: 30 seconds. This is the interval to check each trigger on. By default, KEDA will check each trigger source on every ScaledObject every 30 seconds.
-    * cooldownPeriod: 300 seconds. The period to wait after the last trigger is reported active before scaling in the resource back to 0. By default, it’s 5 minutes (300 seconds).
+    * cooldownPeriod: 300 seconds. The period to wait after the last trigger is reported active before scaling in the resource back to 0. By default, it's 5 minutes (300 seconds).
     Currently, there is no way to override this value, yet there is an [open issue](https://github.com/microsoft/azure-container-apps/issues/388){target=_blank} on the Container Apps repo and the PG is tracking it as 5 minutes might be a long period to wait for instances to be scaled in after they finish processing messages.

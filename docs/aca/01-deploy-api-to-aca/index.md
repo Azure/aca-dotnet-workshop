@@ -2,7 +2,7 @@
 canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application-azure-container-apps/'
 ---
 
-# Module 1 - Deploy Backend API to ACA 1223
+# Module 1 - Deploy Backend API to ACA
 
 !!! info "Module Duration"
     60 minutes
@@ -19,42 +19,57 @@ In this module, we will start by creating the first microservice named `ACA Web 
     code .
     ```
 
+- From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps` and execute `dotnet --info`. Take note of the intalled .NET SDK versions.
+
+- Inside the `TasksTracker.ContainerApps` project folder create a new file and set the .NET SDK version from the above command:
+
+    === "global.json"
+    ```json
+    {
+        "sdk": {
+            "version": "7.0.401",
+            "rollForward": "latestFeature"
+        }
+    }
+    ```
+
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps` and initialize the project. This will create and ASP.NET Web API project scaffolded with a single controller.
 
     ```shell
     dotnet new webapi -o TasksTracker.TasksManager.Backend.Api
     ```
 
-- Next we need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
+- Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files in the new project folder.
+
+- Next, we need to containerize this application, so we can push it to Azure Container Registry as a docker image, then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
 
     - Use `.NET: ASP.NET Core` when prompted for application platform.
     - Choose `Linux` when prompted to choose the operating system.
+    - Take note of the provided **application port** as we will pass it later on as the `--target-port` for the `az containerapp create` command.
     - You will be asked if you want to add Docker Compose files. Select `No`.
-    - Take a note of the provided **application port** as we will pass it later on as the `--target-port` for the `az containerapp create` command.
     - `Dockerfile` and `.dockerignore` files are added to the workspace.
 
-- Add a new folder named `Models` and create a new file with name below. These are the DTOs that will be used across the projects.
+- Open `Dockerfile` and replace `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build` with `FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build`.
 
-=== "TaskModel.cs"
+- Add a new folder named **Models** and create a new file with name below. These are the DTOs that will be used across the projects.
 
-```csharp
---8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
-```
-
-- Create new folder named **Services** (make sure it is created at the same level as the models folder and not inside the models folder itself) and add **new files** as shown below.
-   Add the Fake Tasks Manager service (In-memory),  this will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA.
-   In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.
-
-=== "ITasksManager.cs"
+    === "TaskModel.cs"
     ```csharp
-    --8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
-    ```
-=== "FakeTasksManager.cs"
-    ```csharp
-    --8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
+    --8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
     ```
 
-The code above is self-explanatory, it generates 10 tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.
+- Create a new folder named **Services** (make sure it is created at the same level as the models folder and not inside the models folder itself) and add **new files** as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.
+
+    === "ITasksManager.cs"
+        ```csharp
+        --8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
+        ```
+    === "FakeTasksManager.cs"
+        ```csharp
+        --8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
+        ```
+
+The code above generates ten tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.
 
 - Now we need to register FakeTasksManager on project startup. Open file `#!csharp Program.cs` and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required using statements for the task interface and class.
 
@@ -66,11 +81,12 @@ using TasksTracker.TasksManager.Backend.Api.Services;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
+
 // Code removed for brevity
 app.Run();
 ```
 
-- Add a new controller under the `Controllers` folder with name below. We need to create API endpoints to manage tasks.
+- Inside the **Controllers** folder create a new controller with the below filename. We need to create API endpoints to manage tasks.
 
 === "TasksController.cs"
 
@@ -110,14 +126,25 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 - Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:
 
     ```shell
-    $RESOURCE_GROUP="tasks-tracker-rg"
+    # Create a random, 6-digit, Azure safe string
+    $RANDOM_STRING=-join ((97..122) + (48..57) | Get-Random -Count 6 | ForEach-Object { [char]$_})
+    $RESOURCE_GROUP="rg-tasks-tracker-$RANDOM_STRING"
     $LOCATION="eastus"
-    $ENVIRONMENT="tasks-tracker-containerapps-env"
-    $WORKSPACE_NAME="<replace this with your unique app log analytics workspace name>"
-    $APPINSIGHTS_NAME="<replace this with your unique app insights name>"
-    $BACKEND_API_NAME="tasksmanager-backend-api"
-    $ACR_NAME="<replace this with your unique acr name>"
+    $ENVIRONMENT="cae-tasks-tracker"
+    $WORKSPACE_NAME="log-tasks-tracker-$RANDOM_STRING"
+    $APPINSIGHTS_NAME="appi-tasks-tracker-$RANDOM_STRING"
+    $BACKEND_API_NAME="api-tasksmanager-backend"
+    $ACR_NAME="crtaskstracker$RANDOM_STRING"
     ```
+
+- Also assign the target port from when you created the Dockerfile:
+
+    ```shell
+    $TARGET_PORT=[exposed Docker target port from Dockerfile]
+    ```
+
+??? tip "Cloud Adoption Framework Abbreviations"
+    Unless you have your own naming convention, we suggest to use [Cloud Adoption Framework (CAF) abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations){target=_blank} for resource prefixes.
 
 - Create a `resource group` to organize the services related to the application, run the below command:
 
@@ -143,17 +170,17 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 - Create an Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace. To create it, run the command below:
 
     ```shell
-    # create the log analytics workspace
+    # Create the log analytics workspace
     az monitor log-analytics workspace create `
     --resource-group $RESOURCE_GROUP `
     --workspace-name $WORKSPACE_NAME
 
-    # retrieve workspace ID
+    # Retrieve workspace ID
     $WORKSPACE_ID=az monitor log-analytics workspace show --query customerId `
     -g $RESOURCE_GROUP `
     -n $WORKSPACE_NAME -o tsv
 
-    # retrieve workspace secret
+    # Retrieve workspace secret
     $WORKSPACE_SECRET=az monitor log-analytics workspace get-shared-keys --query primarySharedKey `
     -g $RESOURCE_GROUP `
     -n $WORKSPACE_NAME -o tsv
@@ -204,23 +231,27 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     az acr build --registry $ACR_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
     ```
 
-    Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created and there is a new docker image with a `latest` tag is created.
+    Once this step is completed, you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created, and that there is a new Docker image with a `latest` tag.
 
-- The last step here is to create and deploy the Web API to ACA following the below command. Remember to replace the place holders with your own values:
+- The last step here is to create and deploy the Web API to ACA following the below command:
 
     ```shell
-    az containerapp create `
-    --name $BACKEND_API_NAME  `
+    $fqdn=(az containerapp create `
+    --name $BACKEND_API_NAME `
     --resource-group $RESOURCE_GROUP `
     --environment $ENVIRONMENT `
     --image "$ACR_NAME.azurecr.io/tasksmanager/$BACKEND_API_NAME" `
     --registry-server "$ACR_NAME.azurecr.io" `
-    --target-port [port number that was generated when you created your docker file in vs code] `
+    --target-port $TARGET_PORT `
     --ingress 'external' `
     --min-replicas 1 `
     --max-replicas 1 `
     --cpu 0.25 --memory 0.5Gi `
-    --query configuration.ingress.fqdn
+    --query properties.configuration.ingress.fqdn `
+    --output tsv)
+
+    echo "See a listing of tasks created by the author at this URL:"
+    echo "https://$fqdn/api/tasks/?createdby=tjoudeh@bitoftech.net"
     ```
 
 ??? tip "Want to learn what above command does?"
@@ -233,12 +264,13 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     
     For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
 
-- You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 recourses created below.
+- You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 resourses created below.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)
 
 !!! success
-    To test the backend api service, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`.
-    Issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image.
+    To test the backend api service, either click on the URL output by the last command or copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`, then issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image. 
+
+    Note that the specific query string matters as you may otherwise get an empty result back. 
 
     !!! tip
         You can find your azure container app application url on the azure portal overview tab.
