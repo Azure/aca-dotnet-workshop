@@ -133,7 +133,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     $ENVIRONMENT="cae-tasks-tracker"
     $WORKSPACE_NAME="log-tasks-tracker-$RANDOM_STRING"
     $APPINSIGHTS_NAME="appi-tasks-tracker-$RANDOM_STRING"
-    $BACKEND_API_NAME="api-tasksmanager-backend"
+    $BACKEND_API_NAME="tasksmanager-backend-api"
     $AZURE_CONTAINER_REGISTRY_NAME="crtaskstracker$RANDOM_STRING"
     ```
 
