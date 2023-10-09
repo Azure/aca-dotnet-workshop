@@ -1243,7 +1243,7 @@ Azure Container Apps support Horizontal Scaling (<strong>Scaling Out</strong>) b
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c"># Create a new secret named &#39;svcbus-connstring&#39; in backend processer container app</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">-</span><span class="n">-secrets</span> <span class="s2">&quot;svcbus-connstring=$ServiceBusConnectionString&quot;</span>
 </span></code></pre></div>
@@ -1254,7 +1254,7 @@ Azure Container Apps support Horizontal Scaling (<strong>Scaling Out</strong>) b
 <p>You might need to upgrade the extension if you are on an older version of <code>az containerapp</code> which didn't allow you to create a scaling rule from CLI. To update the extension you can run the following command <code>az extension update --name containerapp</code> inside your powershell terminal.</p>
 </div>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">-</span><span class="n">-min-replicas</span> <span class="n">1</span> <span class="p">`</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">-</span><span class="n">-max-replicas</span> <span class="n">5</span> <span class="p">`</span>
@@ -1293,7 +1293,7 @@ Azure Container Apps support Horizontal Scaling (<strong>Scaling Out</strong>) b
 <p>Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.</p>
 <p>To get the number of current replicas of service <code>tasksmanager-backend-processor</code> we could run the command below, this should run single replica as we didn't load the service bus topic yet.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">replica</span> <span class="n">list</span> <span class="p">`</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SVC_NAME</span> <span class="p">`</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">-</span><span class="n">-query</span> <span class="p">[].</span><span class="n">name</span>
 </span></code></pre></div>
