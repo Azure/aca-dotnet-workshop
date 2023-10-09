@@ -413,27 +413,27 @@ You can do this from Azure Portal or use the below PowerShell command to create 
 You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
 
 ```powershell
-$NamespaceName="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
+$SERVICE_BUS_NAMESPACE_NAME="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
 $TopicName="tasksavedtopic"
 $TopicSubscription="tasks-processor-subscription"
 
 # Create servicebus namespace
-az servicebus namespace create --resource-group $RESOURCE_GROUP --name $NamespaceName --location $LOCATION --sku Standard
+az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICE_BUS_NAMESPACE_NAME --location $LOCATION --sku Standard
 
 # Create a topic under the namespace
-az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $NamespaceName --name $TopicName
+az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $SERVICE_BUS_NAMESPACE_NAME --name $TopicName
 
 # Create a topic subscription
 az servicebus topic subscription create `
 --resource-group $RESOURCE_GROUP `
---namespace-name $NamespaceName `
+--namespace-name $SERVICE_BUS_NAMESPACE_NAME `
 --topic-name $TopicName `
 --name $TopicSubscription
 
 # List connection string
 az servicebus namespace authorization-rule keys list `
 --resource-group $RESOURCE_GROUP `
---namespace-name $NamespaceName `
+--namespace-name $SERVICE_BUS_NAMESPACE_NAME `
 --name RootManageSharedAccessKey `
 --query primaryConnectionString `
 --output tsv
@@ -635,7 +635,7 @@ $roleNameOrId =  "Azure Service Bus Data Receiver" # Built in role name
 az role assignment create `
 --assignee $principalId `
 --role $roleNameOrId `
---scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+--scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
 ```
 
 #### 3. Grant Backend API App the Azure Service Bus Data Sender Role
@@ -650,7 +650,7 @@ $roleNameOrId =  "Azure Service Bus Data Sender" # Built in role name
 az role assignment create `
 --assignee $principalId `
 --role $roleNameOrId `
---scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+--scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
 ```
 
 #### 4. Restart Container Apps

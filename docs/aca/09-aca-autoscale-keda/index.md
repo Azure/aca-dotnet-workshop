@@ -62,7 +62,7 @@ Let's now create a secret named `svcbus-connstring` in our `tasksmanager-backend
 # List Service Bus Access Policy RootManageSharedAccessKey
 $ServiceBusConnectionString = az servicebus namespace authorization-rule keys list `
 --resource-group $RESOURCE_GROUP `
---namespace-name $NamespaceName `
+--namespace-name $SERVICE_BUS_NAMESPACE_NAME `
 --name RootManageSharedAccessKey `
 --query primaryConnectionString `
 --output tsv
@@ -94,7 +94,7 @@ az containerapp update `
 --scale-rule-auth "connection=svcbus-connstring" `
 --scale-rule-metadata "topicName=<Your topic name>" `
                         "subscriptionName=<Your topic subscription name>" `
-                        "namespace=$NamespaceName" `
+                        "namespace=$SERVICE_BUS_NAMESPACE_NAME" `
                         "messageCount=10" `
                         "connectionFromEnv=svcbus-connstring"
 ```

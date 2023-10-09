@@ -21,7 +21,7 @@ Write-Host "KEYVAULT_NAME                    :" $KEYVAULT_NAME
 Write-Host "KEYVAULT_SECRETS_OFFICER_ROLE_ID        :" $KEYVAULT_SECRETS_OFFICER_ROLE_ID
 Write-Host "KEYVAULT_SECRETS_USER_ROLE_ID           :" $KEYVAULT_SECRETS_USER_ROLE_ID
 Write-Host "LOCATION                        :" $LOCATION
-Write-Host "NamespaceName                   :" $NamespaceName
+Write-Host "SERVICE_BUS_NAMESPACE_NAME                   :" $SERVICE_BUS_NAMESPACE_NAME
 Write-Host "PRINCIPAL_ID                    :" $PRINCIPAL_ID
 Write-Host "principalId                     :" $principalId
 Write-Host "RANDOM_STRING                   :" $RANDOM_STRING
