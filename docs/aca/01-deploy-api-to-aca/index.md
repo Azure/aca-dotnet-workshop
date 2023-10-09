@@ -144,7 +144,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
 
 ??? tip "List of Variables"
-    You can retrieve a list of variables that are set throughout this workshop by executing the [variables script](../../aca/13-appendix/03-variables.md) in the same terminal where you are executing the scripts.
+    As you progress through the different modules it may be hard to keep track of the variables that you have set so far. You can retrieve a list of all the variables that you have set throughout this workshop by executing the [variables script](../../aca/13-appendix/03-variables.md) in the same terminal where you are executing the scripts.
 
 ??? tip "Cloud Adoption Framework Abbreviations"
     Unless you have your own naming convention, we suggest to use [Cloud Adoption Framework (CAF) abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations){target=_blank} for resource prefixes.
