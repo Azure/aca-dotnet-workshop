@@ -1269,7 +1269,7 @@ Moreover, we will use Redis to store tasks when we are running the application l
 </div>
 </div>
 </div>
-<p>Now from any rest client, invoke the below POST request to the endpoint: <a href="http://localhost:3500/v1.0/state/statestore" target="_blank">http://localhost:3500/v1.0/state/statestore</a></p>
+<p>Now from any rest client, invoke the below <strong>POST</strong> request to the endpoint: <a href="http://localhost:3500/v1.0/state/statestore" target="_blank">http://localhost:3500/v1.0/state/statestore</a></p>
 <div class="language-http highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">POST</span> <span class="nn">/v1.0/state/statestore</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">Host</span><span class="o">:</span> <span class="l">localhost:3500</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
@@ -1316,7 +1316,7 @@ This will ask you to enter the nickname (e.g. dapr_redis) as well as the hostnam
 <p>After you connect to Redis locally, you should see the 3 entries similar to the ones shown in the image below. Notice how each entry key is prefixed by the Dapr App Id. In our case it is <code>tasksmanager-backend-api</code>. More about <a href="#key-prefix-strategies">key prefix strategy</a> in later sections in this module.</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/dapr-api-redis.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-stateapi-redis" src="../../assets/images/04-aca-dapr-stateapi/dapr-api-redis.jpg" /></a></p>
 <p>To get the value of a key, you need to issue a GET request to the endpoint <code>http://localhost:3500/v1.0/state/statestore/{YourKey}</code>. This will return the value from the key store.
-For example if you execute the following GET <a href="http://localhost:3500/v1.0/state/statestore/Book3">http://localhost:3500/v1.0/state/statestore/Book3</a> the results will be the below object:</p>
+For example if you execute the following GET <a href="http://localhost:3500/v1.0/state/statestore/Book3" target="_blank">http://localhost:3500/v1.0/state/statestore/Book3</a> the results will be the below object:</p>
 <div class="language-JSON highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">&quot;formats&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="s2">&quot;kindle&quot;</span><span class="p">,</span>
@@ -1713,9 +1713,10 @@ To do so, continue using the same PowerShell console and paste the code below (M
 <h4 id="3-add-cosmos-db-dapr-state-store-to-azure-container-apps-environment">3. Add Cosmos DB Dapr State Store to Azure Container Apps Environment<a class="headerlink" href="#3-add-cosmos-db-dapr-state-store-to-azure-container-apps-environment" title="Permanent link">&para;</a></h4>
 <p>We need to run the command below to add the yaml file <code>.\aca-components\containerapps-statestore-cosmos.yaml</code> to Azure Container Apps Environment.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">statestore</span> <span class="p">`</span>
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-statestore-cosmos.yaml&#39;</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">statestore</span> <span class="p">`</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-statestore-cosmos.yaml&#39;</span>
 </span></code></pre></div>
 <h4 id="4-enable-dapr-for-the-frontend-web-app-and-backend-api-container-apps">4. Enable Dapr for the Frontend Web App and Backend API Container Apps<a class="headerlink" href="#4-enable-dapr-for-the-frontend-web-app-and-backend-api-container-apps" title="Permanent link">&para;</a></h4>
 <p>Until this moment Dapr was not enabled on the Container Apps we have provisioned. Enable Dapr for both Container Apps by running the two commands below in the PowerShell console.</p>
@@ -1726,12 +1727,12 @@ To do so, continue using the same PowerShell console and paste the code below (M
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">dapr</span> <span class="n">enable</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>                            <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>                            <span class="p">-</span><span class="n">-dapr-app-id</span>  <span class="nv">$BACKEND_API_NAME</span> <span class="p">`</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>                            <span class="p">-</span><span class="n">-dapr-app-port</span> <span class="nv">$API_APP_PORT</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>                            <span class="p">-</span><span class="n">-dapr-app-port</span> <span class="nv">$TARGET_PORT</span>
 </span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
 </span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">dapr</span> <span class="n">enable</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$FRONTEND_WEBAPP_NAME</span> <span class="p">`</span>
 </span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>                            <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>                            <span class="p">-</span><span class="n">-dapr-app-id</span>  <span class="nv">$FRONTEND_WEBAPP_NAME</span> <span class="p">`</span>
-</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>                            <span class="p">-</span><span class="n">-dapr-app-port</span> <span class="nv">$UI_APP_PORT</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>                            <span class="p">-</span><span class="n">-dapr-app-port</span> <span class="nv">$TARGET_PORT</span>
 </span></code></pre></div>
 <details class="tip">
 <summary>Curious to learn more about the command above?</summary>
@@ -1752,12 +1753,11 @@ This <code>dapr-app-id</code> will be used for service discovery, state encapsul
 </span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v</span><span class="nv">$TODAY</span>
 </span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>
-</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>
-</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="c"># Update Backend API App container app and create a new revision </span>
-</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
-</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span>  <span class="p">`</span>
-</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v</span><span class="nv">$TODAY</span><span class="p">-</span><span class="n">1</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="c"># Update Backend API App container app and create a new revision </span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span>  <span class="p">`</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v</span><span class="nv">$TODAY</span><span class="p">-</span><span class="n">1</span>
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
