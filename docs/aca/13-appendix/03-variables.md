@@ -4,6 +4,7 @@ The following variables are declared along the way in this tutorial. You can alw
 
 ```powershell
 Write-Host @"
+
 API_APP_PORT                        : $API_APP_PORT
 APPINSIGHTS_NAME                    : $APPINSIGHTS_NAME
 APPINSIGHTS_INSTRUMENTATIONKEY      : $APPINSIGHTS_INSTRUMENTATIONKEY
@@ -39,5 +40,6 @@ UI_APP_PORT                         : $UI_APP_PORT
 WORKSPACE_ID                        : $WORKSPACE_ID
 WORKSPACE_NAME                      : $WORKSPACE_NAME
 WORKSPACE_SECRET                    : $WORKSPACE_SECRET
+
 "@
 ```
