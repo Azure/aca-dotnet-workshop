@@ -25,13 +25,9 @@ nav:
     - Deploy infrastructure using Azure Devops Pipeline: aca/10-aca-iac-bicep/ci-cd-azdo.md
   - Module 11 - Integration with Azure Container Apps landing zone accelerator: aca/11-aca-landing-zone/index.md
   - About The Authors: aca/12-about-the-authors/index.md
-  - Contributing:
-    - Contribution Guide: aca/13-contributing/1-contribution-guide.md
-    - Submit An Issue or Suggestion: aca/13-contributing/2-Submit-issue-suggestion.md
-    - Minor Update or fix, New Challenge: aca/13-contributing/3-minor-update-fix.md
   - Appendix:
-    - Debug and Launch Dapr Applications in VSCode: aca/14-appendix/01-run-debug-dapr-app-vscode.md
-    - Testing Changes Locally or with GitHub Codespaces: aca/14-appendix/02-github-local-codespaces.md
+    - Debug and Launch Dapr Applications in VSCode: aca/13-appendix/01-run-debug-dapr-app-vscode.md
+    - Testing Changes Locally or with GitHub Codespaces: aca/13-appendix/02-github-local-codespaces.md    
   
 theme:
   name: material
