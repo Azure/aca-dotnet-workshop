@@ -60,7 +60,7 @@ Let's now create a secret named `svcbus-connstring` in our `tasksmanager-backend
 
 ```powershell
 # List Service Bus Access Policy RootManageSharedAccessKey
-$ServiceBusConnectionString = az servicebus namespace authorization-rule keys list `
+$SERVICE_BUS_CONNECTION_STRING = az servicebus namespace authorization-rule keys list `
 --resource-group $RESOURCE_GROUP `
 --namespace-name $SERVICE_BUS_NAMESPACE_NAME `
 --name RootManageSharedAccessKey `
@@ -71,7 +71,7 @@ $ServiceBusConnectionString = az servicebus namespace authorization-rule keys li
 az containerapp secret set `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
---secrets "svcbus-connstring=$ServiceBusConnectionString"
+--secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
 ```
 
 #### 2. Create a Custom Scaling Rule from Azure CLI
