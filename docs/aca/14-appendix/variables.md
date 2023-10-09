@@ -25,12 +25,11 @@ Write-Host "RANDOM_STRING                       :" $RANDOM_STRING
 Write-Host "RESOURCE_GROUP                      :" $RESOURCE_GROUP
 Write-Host "REVISION_NAME                       :" $REVISION_NAME
 Write-Host "ROLE_ID                             :" $ROLE_ID
-Write-Host "roleNameOrId                        :" $roleNameOrId
-Write-Host "SERVICE_BUS_CONNECTION_STRING          :" $SERVICE_BUS_CONNECTION_STRING
+Write-Host "SERVICE_BUS_CONNECTION_STRING       :" $SERVICE_BUS_CONNECTION_STRING
 Write-Host "SERVICE_BUS_NAMESPACE_NAME          :" $SERVICE_BUS_NAMESPACE_NAME
 Write-Host "SIGNEDIN_UERID                      :" $SIGNEDIN_UERID
 Write-Host "STORAGE_ACCOUNT_NAME                :" $STORAGE_ACCOUNT_NAME
-Write-Host "subscriptionID                      :" $subscriptionID
+Write-Host "AZURE_SUBSCRIPTION_ID               :" $AZURE_SUBSCRIPTION_ID
 Write-Host "TARGET_PORT                         :" $TARGET_PORT
 Write-Host "TODAY                               :" $TODAY
 Write-Host "TopicName                           :" $TopicName

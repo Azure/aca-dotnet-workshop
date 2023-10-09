@@ -313,7 +313,7 @@ You can read more about [Azure built-in roles for Key Vault data plane operation
 
 ```powershell
 $KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
-$subscriptionID= az account show --query id -o tsv
+$AZURE_SUBSCRIPTION_ID= az account show --query id -o tsv
 
 # Get PRINCIPALID of BACKEND Processor Service
 $BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
@@ -324,7 +324,7 @@ $BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
 az role assignment create `
 --role $KEYVAULT_SECRETS_USER_ROLE_ID `
 --assignee $BACKEND_SERVICE_PRINCIPAL_ID `
---scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
+--scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
 
 #### 3. Create Secrets in the Azure Key Vault
@@ -338,7 +338,7 @@ $KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID f
 
 az role assignment create --role $KEYVAULT_SECRETS_OFFICER_ROLE_ID `
 --assignee $SIGNEDIN_UERID `
---scope "/subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
+--scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
 
 Now we will create 2 secrets in the Azure Key Vault using the commands below:

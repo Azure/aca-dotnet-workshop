@@ -628,14 +628,14 @@ You can read more about `Azure built-in roles for Azure Service Bus` [here](http
 Run the command below to associate the `system-assigned` identity with the access-control role `Azure Service Bus Data Receiver`:
 
 ```powershell
-$subscriptionID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
+$AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
 $principalId = "<your principal id which was generated above>" # Principal Id after creating system identity for Backend Processor Container app 
 $roleNameOrId =  "Azure Service Bus Data Receiver" # Built in role name
 
 az role assignment create `
 --assignee $principalId `
 --role $roleNameOrId `
---scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
+--scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
 ```
 
 #### 3. Grant Backend API App the Azure Service Bus Data Sender Role
@@ -643,14 +643,14 @@ az role assignment create `
 We'll do the same with Backend API container app, but we will use a different Azure built-in roles for Azure Service Bus which is the role `Azure Service Bus Data Sender` as the Backend API is a publisher of the messages. Run the command below to associate the `system-assigned` with access-control role `Azure Service Bus Data Sender`:
 
 ```powershell
-$subscriptionID = "<Your Azure Subscription ID>" # Your Azure Subscription
+$AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription
 $principalId = "<your principal id which was generated in module 4. You can find it on the azure portal under the specific container identity section>" # Principal Id after creating system identity for Backend API Container app
 $roleNameOrId =  "Azure Service Bus Data Sender" # Built in role name
 
 az role assignment create `
 --assignee $principalId `
 --role $roleNameOrId `
---scope /subscriptions/$subscriptionID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
+--scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
 ```
 
 #### 4. Restart Container Apps
