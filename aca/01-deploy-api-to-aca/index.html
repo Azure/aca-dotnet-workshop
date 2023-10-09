@@ -1137,12 +1137,12 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> and initialize the project. This will create and ASP.NET Web API project scaffolded with a single controller.</p>
+<p>Initialize the project in the terminal. This will create and ASP.NET Web API project scaffolded with a single controller.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapi<span class="w"> </span>-o<span class="w"> </span>TasksTracker.TasksManager.Backend.Api
 </span></code></pre></div>
 </li>
 <li>
-<p>Delete the boilerplate <code>WeatherForecast.cs</code> and <code>Controllers\WeatherForecastController.cs</code> files in the new project folder.</p>
+<p>Delete the boilerplate <code>WeatherForecast.cs</code> and <code>Controllers\WeatherForecastController.cs</code> files from the new <code>TasksTracker.TasksManager.Backend.Api</code> project folder.</p>
 </li>
 <li>
 <p>Next, we need to containerize this application, so we can push it to Azure Container Registry as a docker image, then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span>) and select <code>Docker: Add Docker Files to Workspace...</code></p>
@@ -1158,7 +1158,7 @@
 <p>Open <code>Dockerfile</code> and replace <code>FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build</code> with <code>FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build</code>.</p>
 </li>
 <li>
-<p>Add a new folder named <strong>Models</strong> and create a new file with name below. These are the DTOs that will be used across the projects.</p>
+<p>In the new project folder, add a new folder named <strong>Models</strong> and create a new file with name below. These are the DTOs that will be used across the projects.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TaskModel.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
@@ -1197,7 +1197,7 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>Create a new folder named <strong>Services</strong> (make sure it is created at the same level as the models folder and not inside the models folder itself) and add <strong>new files</strong> as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.</p>
+<p>In the new project folder, create a new folder named <strong>Services</strong> (make sure it is created at the same level as the models folder and not inside the models folder itself) and add <strong>new files</strong> as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">ITasksManager.cs</label><label for="__tabbed_3_2">FakeTasksManager.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
