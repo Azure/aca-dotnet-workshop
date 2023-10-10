@@ -45,7 +45,7 @@ To try out the Pub/Sub API, run the Backend API from VS Code by running the belo
 
     ```powershell   
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run
 
     ```
 
@@ -53,11 +53,11 @@ To try out the Pub/Sub API, run the Backend API from VS Code by running the belo
 
     ```powershell
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
 
     ```
 
-Now let's try to publish a message by sending a POST request to [http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic](http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic) with the below request body, don't forget to set the `Content-Type` header to `application/json`
+Now let's try to publish a message by sending a **POST** request to [http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic](http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic) with the below request body, don't forget to set the `Content-Type` header to `application/json`
 
 ```json
 {
@@ -97,6 +97,8 @@ Now we will add a new ASP.NET Core Web API project named **TasksTracker.Processo
 dotnet new webapi -o TasksTracker.Processor.Backend.Svc
 ```
 
+- Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files from the new `TasksTracker.Processor.Backend.Svc` project folder.
+
 We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA.
 To do so Open the VS Code Command Palette (++ctrl+shift+p++) and select **Docker: Add Docker Files to Workspace...**
 
@@ -105,6 +107,8 @@ To do so Open the VS Code Command Palette (++ctrl+shift+p++) and select **Docker
     - You will be asked if you want to add Docker Compose files. Select `No`.
     - Take a note of the provided **application port** as we will be using later on. You can always find it again inside the designated `DockerFile` inside the newly created project's directory.
     - `Dockerfile` and `.dockerignore` files are added to the workspace.
+
+- Open `Dockerfile` and replace `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build` with `FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build`.
 
 #### 2. Add Models
 
@@ -201,6 +205,10 @@ Update below file in **TasksTracker.Processor.Backend.Svc** project.
 
 With all those bits in place, we are ready to run the publisher service `Backend API` and the consumer service `Backend Background Service` and test pub/sub pattern end to end.
 
+```powershell
+$BACKEND_SERVICE_APP_PORT=<backend service application https port number found under properties->launchSettings.json. e.g. 7051>
+```
+
 To do so, run the below commands in PowerShell console, ensure you are on the right root folder of each respective project.
 
 !!! info
@@ -210,9 +218,9 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
 
     ```powershell
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
 
-    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application https port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run
+    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port $BACKEND_SERVICE_APP_PORT --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run
 
     ```
 
@@ -220,9 +228,9 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
 
     ```powershell   
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
 
-    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application https port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port $BACKEND_SERVICE_APP_PORT --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
     ```
 
 !!! note
@@ -345,7 +353,7 @@ Update the files below under the Backend Processor Project. We are installing th
 === "TasksNotifierController.cs"
 
     ```csharp
-    --8<-- "docs/aca/05-aca-dapr-pubsubapi/TasksNotifierController.cs"
+    --8<-- "docs/aca/05-aca-dapr-pubsubapi/TasksNotifierController-SendGrid.cs"
     ```
 
 === "TasksTracker.Processor.Backend.Svc.csproj"
