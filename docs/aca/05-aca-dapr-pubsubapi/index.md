@@ -261,7 +261,7 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
 !!! note
     Notice that we gave the new Backend background service a Dapr App Id with the name `tasksmanager-backend-processor` and a Dapr HTTP port with the value `3502`.
 
-Now let's try to publish a message by sending a POST request to [http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic](http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic) with the below request body, don't forget to set the `Content-Type` header to `application/json`
+Now let's try to publish a message by sending a **POST** request to [http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic](http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic) with the below request body, don't forget to set the `Content-Type` header to `application/json`
 
 ```json
 POST /v1.0/publish/taskspubsub/tasksavedtopic HTTP/1.1
@@ -312,11 +312,11 @@ and debug them in VS Code, we need to update the files `tasks.json` and `launch.
 
 Now we need to update our Backend API to publish a message to the message broker when a task is saved (either due to a new task being added or an existing task assignee being updated).
 
-To do this update below file under the project **TasksTracker.TasksManager.Backend.Api** and update the file as highlighted below:
+To do this, update below file under the project **TasksTracker.TasksManager.Backend.Api** and update the file in the **Services** folder as highlighted below:
 
 === "TasksStoreManager.cs"
 
-    ```csharp hl_lines="1-7 24 40-44"
+    ```csharp hl_lines="1-7 24 40-43"
     //Add new private method
     private async Task PublishTaskSavedEvent(TaskModel taskModel)
     {
@@ -373,7 +373,7 @@ To do this update below file under the project **TasksTracker.TasksManager.Backe
 
 #### 2. Update Backend Background Processor to Consume Messages and Simulate Sending Emails
 
-Update the files below under the Backend Processor Project. We are installing the NuGet package named `SendGrid` to the Backend processor project which will allow us to send emails.
+Update the files below under the project **TasksTracker.Processor.Backend.Svc**. We are installing the NuGet package named `SendGrid` to the Backend processor project which will allow us to send emails.
 
 === "TasksNotifierController.cs"
 
@@ -391,8 +391,15 @@ Update the files below under the Backend Processor Project. We are installing th
 
 === "appsettings.json"
 
-    ```json
-      {
+    ```json hl_lines="8-12"
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft.AspNetCore": "Warning"
+        }
+      },
+      "AllowedHosts": "*",
       "SendGrid": {
         "ApiKey": "",
         "IntegrationEnabled":false
@@ -410,11 +417,11 @@ Update the files below under the Backend Processor Project. We are installing th
 
     If you don't want to bother with signing up for a SendGrid account to send emails, you can just simulate sending emails by returning always `ok` from the `TaskSaved` method as shown below. 
 
-    ```csharp hl_lines="7-14"
-    // If you prefer not to deal with setting up a SendGrid account then simply always return OK from the TaskSaved method
+    ```csharp hl_lines="4 7-14"
+      // If you prefer not to deal with setting up a SendGrid account then simply always return OK from the TaskSaved method
       [Dapr.Topic("dapr-pubsub-servicebus", "tasksavedtopic")]
       [HttpPost("tasksaved")]
-      public async Task<IActionResult> TaskSaved([FromBody] TaskModel taskModel)
+      public IActionResult TaskSaved([FromBody] TaskModel taskModel)
       {
           _logger.LogInformation("Started processing message with Task Name '{0}'", taskModel.TaskName);
           // I decided to simulate a call
@@ -446,9 +453,9 @@ You can do this from Azure Portal or use the below PowerShell command to create 
 You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
 
 ```powershell
-$SERVICE_BUS_NAMESPACE_NAME="[your globally unique namespace goes here. e.g. taskstracker-wk-42 where wk are your initials and 42 is the year you were born]"
+$SERVICE_BUS_NAMESPACE_NAME="sbns-taskstracker-$RANDOM_STRING"
 $SERVICE_BUS_TOPIC_NAME="tasksavedtopic"
-$SERVICE_BUS_TOPIC_SUBSCRIPTION="tasks-processor-subscription"
+$SERVICE_BUS_TOPIC_SUBSCRIPTION="sbts-tasks-processor"
 
 # Create servicebus namespace
 az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICE_BUS_NAMESPACE_NAME --location $LOCATION --sku Standard
@@ -518,9 +525,9 @@ With all those bits in place, we are ready to run the publisher service `Backend
 
     ```powershell
     
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
     
-    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application https port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run
+    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port $BACKEND_SERVICE_APP_PORT --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run
       
     ```
 
@@ -528,20 +535,20 @@ With all those bits in place, we are ready to run the publisher service `Backend
 
     ````powershell
     
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port <web api application https port number found under properties->launchSettings.json. e.g. 7112> --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
     
-    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port <backend service application https port number found under properties->launchSettings.json. e.g. 7051> --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port $BACKEND_SERVICE_APP_PORT --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
     
     ````
 
 !!! note
     We gave the new Backend background service a Dapr App Id with the name `tasksmanager-backend-processor` and a Dapr HTTP port with the value **3502**.
 
-Now let's try to publish a message by sending a POST request to [http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic](http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic) with the below request body, don't forget to set the `Content-Type`
+Now let's try to publish a message by sending a **POST** request to [http://localhost:3500/v1.0/publish/**dapr-pubsub-servicebus**/tasksavedtopic](http://localhost:3500/v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic) with the below request body, don't forget to set the `Content-Type`
 header to `application/json`
 
 ```json
-POST /v1.0/publish/taskspubsub/tasksavedtopic HTTP/1.1
+POST /v1.0/publish/dapr-pubsub-servicebus/tasksavedtopic HTTP/1.1
 Host: localhost:3500
 Content-Type: application/json
 {
@@ -553,6 +560,8 @@ Content-Type: application/json
     "taskAssignedTo": "user2@mail.com"
 }
 ```
+
+You should see console messages from APP in the backend service console as you send requests.
 
 ### Deploy the Backend Background Processor and the Backend API Projects to Azure Container Apps
 
@@ -594,9 +603,9 @@ az containerapp create `
 --max-replicas 1 `
 --cpu 0.25 --memory 0.5Gi `
 --enable-dapr `
---dapr-app-id  $BACKEND_SERVICE_NAME `
---dapr-app-port  <web api application port number found under Dockerfile for the web api project. e.g. 5071> `
-# comment out these two lines if you are not using sendgrid
+--dapr-app-id $BACKEND_SERVICE_NAME `
+--dapr-app-port $TARGET_PORT `
+# comment out - or don't copy - these two lines if you are not using SendGrid
 --secrets "sendgrid-apikey=<Replace with your SendGrid API Key>" `
 --env-vars "SendGrid__ApiKey=secretref:sendgrid-apikey" "SendGrid__IntegrationEnabled=true"
 ```
@@ -610,7 +619,7 @@ We need to update the Azure Container App hosting the Backend API with a new rev
 az containerapp update `
 --name $BACKEND_API_NAME `
 --resource-group $RESOURCE_GROUP `
---revision-suffix v20230220-1 
+--revision-suffix v$TODAY-2
 ```
 
 #### 4. Add Azure Service Bus Dapr Pub/Sub Component to Azure Container Apps Environment
@@ -619,7 +628,8 @@ Deploy the Dapr Pub/Sub Component to the Azure Container Apps Environment using 
 
 ```powershell
 az containerapp env dapr-component set `
---name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+--name $ENVIRONMENT `
+--resource-group $RESOURCE_GROUP `
 --dapr-component-name dapr-pubsub-servicebus `
 --yaml '.\aca-components\containerapps-pubsub-svcbus.yaml'
 ```
@@ -732,5 +742,10 @@ az containerapp revision restart `
         ```
     
         ![email-log](../../assets/images/05-aca-dapr-pubsubapi/az_containerapp_logs.png)
+
+??? tip "What to do if you do not see messages?"
+    Sometimes, the revision creation right after creating the managed identity results in the identity not yet being picked up properly. This becomes evident when we look at the Backend Service's Container App's `Log stream` blade in the Azure Portal. Specifically, the `daprd` sidecar container will show HTTP 401 errors.
+
+    Should this be the case, you can navigate to the `Revisions` blade, click on the active revision, then press `Restart`. Going back to the `daprd` sidecar in the `Log Stream` should now reveal processing of messages.
 
 The next module will delve into the implementation of Dapr bindings with ACA.
