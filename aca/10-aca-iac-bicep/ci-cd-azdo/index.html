@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.bd3936ea.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6a10b989.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.356b1318.min.css">
@@ -1088,8 +1088,9 @@
 <p>In the <a href="../iac-bicep/">previous section</a>, we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. Azure DevOps is a great solution for automating workflows, and in this section, we'll explain how to create a Azure DevOps pipeline for deploying the infrastructure components of our application.</p>
 <p>The workshop repository contains a Azure Devops Pipeline yaml file that will be used to deploy the infrastructure components of our application. Follow the steps below to create a devops pipeline to deploy the infrastructure components of our application.</p>
 <div class="admonition note">
-<p class="admonition-title">Note<p>The following instructions assume that you will utilize the forked Github repository both as the host for your YAML pipeline and the source code. However, it is possible to host the same assets in your Azure DevOps repository instead, if that is your preference. It is important to remember that if you choose to store your assets in your Azure DevOps repository, you will have to direct your Azure DevOps pipeline towards the Azure DevOps repository instead of the Github repository.</p>
-</p>
+<p class="admonition-title">Note</p>
+<div class="language-text highlight"><pre><span></span><code>The following instructions assume that you will utilize the forked Github repository both as the host for your YAML pipeline and the source code. However, it is possible to host the same assets in your Azure DevOps repository instead, if that is your preference. It is important to remember that if you choose to store your assets in your Azure DevOps repository, you will have to direct your Azure DevOps pipeline towards the Azure DevOps repository instead of the Github repository.
+</code></pre></div>
 </div>
 <h3 id="fork-the-github-repository">Fork the GitHub repository<a class="headerlink" href="#fork-the-github-repository" title="Permanent link">&para;</a></h3>
 <p>Start by forking the workshop repository to your GitHub account. Follow the steps below to fork the workshop:</p>
@@ -1173,7 +1174,7 @@ to create service connection for GitHub.</p>
   <small>
     
       Last update:
-      2023-10-09
+      2023-10-10
     
   </small>
 </div>
@@ -1287,7 +1288,7 @@ to create service connection for GitHub.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.94c44541.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.aecac24b.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
