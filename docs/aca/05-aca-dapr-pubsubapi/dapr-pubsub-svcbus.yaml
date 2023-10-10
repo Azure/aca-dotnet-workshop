@@ -7,9 +7,9 @@ spec:
   version: v1
   metadata:
     - name: connectionString # Used for local dev testing.
-      value: "<connection string from step 1>"
+      value: "<connection string from step 1 starting with Endpoint=sb://...>"
     - name: consumerID
-      value: "tasks-processor-subscription"
+      value: "sbts-tasks-processor"
 scopes:
   - tasksmanager-backend-api
   - tasksmanager-backend-processor
