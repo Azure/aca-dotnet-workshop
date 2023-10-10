@@ -21,7 +21,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
         }
 
         //[Topic("dapr-pubsub-servicebus", "tasksavedtopic")]  //Dapr Pub Sub Service Bus
-        [Topic("taskspubsub", "tasksavedtopid")]               //Redis
+        [Topic("taskspubsub", "tasksavedtopic")]               //Redis
         [HttpPost("tasksaved")]
         public IActionResult TaskSaved([FromBody] TaskModel taskModel)
         {
