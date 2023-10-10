@@ -23,7 +23,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
         //[Topic("dapr-pubsub-servicebus", "tasksavedtopic")]  //Dapr Pub Sub Service Bus
         [Topic("taskspubsub", "tasksavedtopid")]               //Redis
         [HttpPost("tasksaved")]
-        public Task<IActionResult> TaskSaved([FromBody] TaskModel taskModel)
+        public IActionResult TaskSaved([FromBody] TaskModel taskModel)
         {
             var msg = string.Format("Started processing message with Task Name '{0}'", taskModel.TaskName);
             _logger.LogInformation("Started processing message with Task Name '{0}'", taskModel.TaskName);
