@@ -210,6 +210,13 @@ Update below file in **TasksTracker.Processor.Backend.Svc** project.
     }
     ```
 
+- Let's verify that the Dapr dependency is restored properly and that the project compiles. From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
+
+    ```shell
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Svc
+    dotnet build
+    ```
+
 ??? tip "Curious about the code above?"
 
     - On line `builder.Services.AddControllers().AddDapr();`, the extension method `AddDapr` registers the necessary services to integrate Dapr into the MVC pipeline. 
