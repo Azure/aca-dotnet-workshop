@@ -1,3 +1,4 @@
+using Dapr;
 using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
 using SendGrid;
@@ -21,7 +22,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
             _daprClient = daprClient;
         }
 
-        [Dapr.Topic("dapr-pubsub-servicebus", "tasksavedtopic")]
+        [Topic("dapr-pubsub-servicebus", "tasksavedtopic")]  //Dapr Pub Sub Service Bus
         [HttpPost("tasksaved")]
         public async Task<IActionResult> TaskSaved([FromBody] TaskModel taskModel)
         {

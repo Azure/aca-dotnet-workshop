@@ -1,3 +1,4 @@
+using Dapr;
 using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
 using TasksTracker.Processor.Backend.Svc.Models;
@@ -19,7 +20,8 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
             _daprClient = daprClient;
         }
 
-        [Dapr.Topic("dapr-pubsub-servicebus", "tasksavedtopic")]
+        //[Topic("dapr-pubsub-servicebus", "tasksavedtopic")]  //Dapr Pub Sub Service Bus
+        [Topic("taskspubsub", "tasksavedtopid")]               //Redis
         [HttpPost("tasksaved")]
         public Task<IActionResult> TaskSaved([FromBody] TaskModel taskModel)
         {
