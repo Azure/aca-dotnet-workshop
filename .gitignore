@@ -351,3 +351,5 @@ MigrationBackup/
 .idea/
 dist/
 site/
+
+variables.ps1
