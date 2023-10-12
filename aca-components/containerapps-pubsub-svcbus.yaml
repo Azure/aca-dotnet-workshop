@@ -5,8 +5,8 @@ metadata:
 - name: namespaceName
   value: "taskstracker.servicebus.windows.net"
 - name: consumerID
-  value: "tasks-processor-subscription"  
-# Application scopes  
+  value: "sbts-tasks-processor"
+# Application scopes
 scopes:
 - tasksmanager-backend-api
 - tasksmanager-backend-processor

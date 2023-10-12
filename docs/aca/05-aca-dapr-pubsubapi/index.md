@@ -493,7 +493,7 @@ Add a new files **components** as shown below:
 !!! note
     We used the name `dapr-pubsub-servicebus` which should match the name of Pub/Sub component we've used earlier in the [TasksNotifierController.cs](#4-create-an-api-endpoint-for-the-consumer-to-subscribe-to-the-topic) controller on the action method with the attribute `Topic`.
 
-    We set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata `consumerID` value should match the topic subscription name `tasks-processor-subscription`. 
+    We set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata `consumerID` value should match the topic subscription name `sbts-tasks-processor`. 
 
     We have set the scopes section to include the `tasksmanager-backend-api` and `tasksmanager-backend-processor` app ids, as those will be the Dapr apps that need access to Azure Service Bus for publishing and 
     consuming the messages.
@@ -514,7 +514,7 @@ Add a new files **aca-components** as shown below:
      - We didn't specify the component name `dapr-pubsub-servicebus` when we created this component file. We are going to specify it once we add this dapr component to Azure Container Apps Environment via CLI.
      - We are not referencing any service bus connection strings as the authentication between Dapr and Azure Service Bus will be configured using Managed Identities.
      - The metadata `namespaceName` value is set to the address of the Service Bus namespace as a fully qualified domain name. The `namespaceName` key is mandatory when using Managed Identities for authentication.
-     - We are setting the metadata `consumerID` value to match the topic subscription name `tasks-processor-subscription`. If you didn't set this metadata, dapr runtime will try to create a subscription using the dapr application ID.
+     - We are setting the metadata `consumerID` value to match the topic subscription name `sbts-tasks-processor`. If you didn't set this metadata, dapr runtime will try to create a subscription using the dapr application ID.
 
 With all those bits in place, we are ready to run the publisher service `Backend API` and the consumer service `Backend Background Service` and test pub/sub pattern end to end.
 
