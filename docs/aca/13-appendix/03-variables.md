@@ -1,46 +1,24 @@
 # Variables
 
-The following variables are declared along the way in this tutorial. You can always execute this Powershell command to get an updated, comprehensive list in the same terminal where you have been executing scripts:
+We declare numerous variables throughout this workshop. As these modules are lengthy, you will likely complete them over multiple sessions. However, as sessions are additive, they require previously-set variables.
 
-```powershell
-Write-Host @"
 
-API_APP_PORT                        : $API_APP_PORT
-APPINSIGHTS_NAME                    : $APPINSIGHTS_NAME
-APPINSIGHTS_INSTRUMENTATIONKEY      : $APPINSIGHTS_INSTRUMENTATIONKEY
-AZURE_CONTAINER_REGISTRY_NAME       : $AZURE_CONTAINER_REGISTRY_NAME
-AZURE_SUBSCRIPTION_ID               : $AZURE_SUBSCRIPTION_ID
-BACKEND_API_EXTERNAL_BASE_URL       : $BACKEND_API_EXTERNAL_BASE_URL
-BACKEND_API_INTERNAL_BASE_URL       : $BACKEND_API_INTERNAL_BASE_URL
-BACKEND_API_NAME                    : $BACKEND_API_NAME
-BACKEND_SERVICE_APP_PORT            : $BACKEND_SERVICE_APP_PORT
-BACKEND_SERVICE_NAME                : $BACKEND_SERVICE_NAME
-BACKEND_SERVICE_PRINCIPAL_ID        : $BACKEND_SERVICE_PRINCIPAL_ID
-COSMOS_DB_ACCOUNT                   : $COSMOS_DB_ACCOUNT
-COSMOS_DB_CONTAINER                 : $COSMOS_DB_CONTAINER
-COSMOS_DB_DBNAME                    : $COSMOS_DB_DBNAME
-ENVIRONMENT                         : $ENVIRONMENT
-FRONTEND_WEBAPP_NAME                : $FRONTEND_WEBAPP_NAME
-KEYVAULT_NAME                       : $KEYVAULT_NAME
-KEYVAULT_SECRETS_OFFICER_ROLE_ID    : $KEYVAULT_SECRETS_OFFICER_ROLE_ID
-KEYVAULT_SECRETS_USER_ROLE_ID       : $KEYVAULT_SECRETS_USER_ROLE_ID
-LOCATION                            : $LOCATION
-RANDOM_STRING                       : $RANDOM_STRING
-RESOURCE_GROUP                      : $RESOURCE_GROUP
-REVISION_NAME                       : $REVISION_NAME
-ROLE_ID                             : $ROLE_ID
-SERVICE_BUS_CONNECTION_STRING       : $SERVICE_BUS_CONNECTION_STRING
-SERVICE_BUS_NAMESPACE_NAME          : $SERVICE_BUS_NAMESPACE_NAME
-SERVICE_BUS_TOPIC_NAME              : $SERVICE_BUS_TOPIC_NAME
-SERVICE_BUS_TOPIC_SUBSCRIPTION      : $SERVICE_BUS_TOPIC_SUBSCRIPTION
-SIGNEDIN_UERID                      : $SIGNEDIN_UERID
-STORAGE_ACCOUNT_NAME                : $STORAGE_ACCOUNT_NAME
-TARGET_PORT                         : $TARGET_PORT
-TODAY                               : $TODAY
-UI_APP_PORT                         : $UI_APP_PORT
-WORKSPACE_ID                        : $WORKSPACE_ID
-WORKSPACE_NAME                      : $WORKSPACE_NAME
-WORKSPACE_SECRET                    : $WORKSPACE_SECRET
+!!! info "Shell Support"
+    Presently, this supports PowerShell only, and we would like to see community contributions for shell scripts, please. Please see [GitHub Issue #111](https://github.com/Azure/aca-dotnet-workshop/issues/111){target=_blank}.
 
-"@
-```
+## Setting Variables
+
+### PowerShell
+
+Execute this script to persist all variables in the current session at any time. We recommend you do this after you complete each module or any other time you are taking a break from the workshop.
+
+=== "Set-Variables.ps1"
+    ```powershell
+    --8<-- "docs/aca/13-appendix/Set-Variables.ps1"
+    ```
+
+## Restoring Variables
+
+### PowerShell
+
+The output of the `Set-Variables.ps1` script is stored in the same directory where you execute that script. You can quickly apply those variables and get back to a working state by executing `.\Variables.ps1` in your PowerShell console. This is useful after having taken a break from the workshop and losing the session or when you are asked to open a second session such as when you are running multiple microservices locally with dapr.
