@@ -26,11 +26,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
                 return NotFound();
             }
 
-            // direct svc to svc http request
-            // var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
-            // var Task = await httpClient.GetFromJsonAsync<TaskModel>($"api/tasks/{id}");
-
-            //Dapr SideCar Invocation
+            // Dapr SideCar Invocation
             var Task = await _daprClient.InvokeMethodAsync<TaskModel>(HttpMethod.Get, "tasksmanager-backend-api", $"api/tasks/{id}");
 
             if (Task == null)
@@ -59,11 +55,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
 
             if (TaskUpdate != null)
             {
-                // direct svc to svc http request
-                // var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
-                // var result = await httpClient.PutAsJsonAsync($"api/tasks/{TaskUpdate.TaskId}", TaskUpdate);
-
-                //Dapr SideCar Invocation
+                // Dapr SideCar Invocation
                 await _daprClient.InvokeMethodAsync<TaskUpdateModel>(HttpMethod.Put, "tasksmanager-backend-api", $"api/tasks/{TaskUpdate.TaskId}", TaskUpdate);
 
             }
