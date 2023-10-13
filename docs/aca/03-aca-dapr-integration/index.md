@@ -148,18 +148,20 @@ The SDK offers developers three ways of making remote service invocation calls:
 
 === "Index.cshtml.cs"
 
-    ```csharp
-    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/5dc6b68dcf118440df4c96c14dd538d4d69f80f4/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Index.cshtml.cs"
+    ```csharp    
+    --8<-- "docs/aca/03-aca-comm/Tasks.Index.cshtml.cs"
     ```
+
 === "Create.cshtml.cs"
 
     ```csharp
-    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/5dc6b68dcf118440df4c96c14dd538d4d69f80f4/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Create.cshtml.cs"
+    --8<-- "docs/aca/03-aca-comm/Create.cshtml.cs"
     ```
+
 === "Edit.cshtml.cs"
 
     ```csharp
-    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/5dc6b68dcf118440df4c96c14dd538d4d69f80f4/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Edit.cshtml.cs"
+    --8<-- "docs/aca/03-aca-comm/Edit.cshtml.cs"
     ``` 
 
 ???+ tip
