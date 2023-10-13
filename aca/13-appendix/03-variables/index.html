@@ -886,6 +886,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Variables
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -895,6 +906,65 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-variables" class="md-nav__link">
+    Setting Variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell" class="md-nav__link">
+    PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restoring-variables" class="md-nav__link">
+    Restoring Variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Restoring Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell_1" class="md-nav__link">
+    PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -928,6 +998,54 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-variables" class="md-nav__link">
+    Setting Variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell" class="md-nav__link">
+    PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restoring-variables" class="md-nav__link">
+    Restoring Variables
+  </a>
+  
+    <nav class="md-nav" aria-label="Restoring Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell_1" class="md-nav__link">
+    PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -945,48 +1063,77 @@
 
 
 <h1 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h1>
-<p>The following variables are declared along the way in this tutorial. You can always execute this Powershell command to get an updated, comprehensive list in the same terminal where you have been executing scripts:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Write-Host</span> <span class="sh">@&quot;</span>
+<p>We declare numerous variables throughout this workshop. As these modules are lengthy, you will likely complete them over multiple sessions. However, as sessions are additive, they require previously-set variables.</p>
+<div class="admonition info">
+<p class="admonition-title">Shell Support</p>
+<p>Presently, this supports PowerShell only, and we would like to see community contributions for shell scripts, please. Please see <a href="https://github.com/Azure/aca-dotnet-workshop/issues/111" target="_blank">GitHub Issue #111</a>.</p>
+</div>
+<h2 id="setting-variables">Setting Variables<a class="headerlink" href="#setting-variables" title="Permanent link">&para;</a></h2>
+<h3 id="powershell">PowerShell<a class="headerlink" href="#powershell" title="Permanent link">&para;</a></h3>
+<p>Execute this script to persist all variables in the current session at any time. We recommend you do this after you complete each module or any other time you are taking a break from the workshop.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Set-Variables.ps1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$file</span> <span class="p">=</span> <span class="s2">&quot;./Variables.ps1&quot;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sh">API_APP_PORT                        : $API_APP_PORT</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sh">APPINSIGHTS_NAME                    : $APPINSIGHTS_NAME</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sh">APPINSIGHTS_INSTRUMENTATIONKEY      : $APPINSIGHTS_INSTRUMENTATIONKEY</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sh">AZURE_CONTAINER_REGISTRY_NAME       : $AZURE_CONTAINER_REGISTRY_NAME</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sh">AZURE_SUBSCRIPTION_ID               : $AZURE_SUBSCRIPTION_ID</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sh">BACKEND_API_EXTERNAL_BASE_URL       : $BACKEND_API_EXTERNAL_BASE_URL</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sh">BACKEND_API_INTERNAL_BASE_URL       : $BACKEND_API_INTERNAL_BASE_URL</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sh">BACKEND_API_NAME                    : $BACKEND_API_NAME</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sh">BACKEND_SERVICE_APP_PORT            : $BACKEND_SERVICE_APP_PORT</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sh">BACKEND_SERVICE_NAME                : $BACKEND_SERVICE_NAME</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sh">BACKEND_SERVICE_PRINCIPAL_ID        : $BACKEND_SERVICE_PRINCIPAL_ID</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sh">COSMOS_DB_ACCOUNT                   : $COSMOS_DB_ACCOUNT</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sh">COSMOS_DB_CONTAINER                 : $COSMOS_DB_CONTAINER</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sh">COSMOS_DB_DBNAME                    : $COSMOS_DB_DBNAME</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sh">ENVIRONMENT                         : $ENVIRONMENT</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sh">FRONTEND_WEBAPP_NAME                : $FRONTEND_WEBAPP_NAME</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="sh">KEYVAULT_NAME                       : $KEYVAULT_NAME</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sh">KEYVAULT_SECRETS_OFFICER_ROLE_ID    : $KEYVAULT_SECRETS_OFFICER_ROLE_ID</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sh">KEYVAULT_SECRETS_USER_ROLE_ID       : $KEYVAULT_SECRETS_USER_ROLE_ID</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="sh">LOCATION                            : $LOCATION</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="sh">RANDOM_STRING                       : $RANDOM_STRING</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="sh">RESOURCE_GROUP                      : $RESOURCE_GROUP</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="sh">REVISION_NAME                       : $REVISION_NAME</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="sh">ROLE_ID                             : $ROLE_ID</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="sh">SERVICE_BUS_CONNECTION_STRING       : $SERVICE_BUS_CONNECTION_STRING</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="sh">SERVICE_BUS_NAMESPACE_NAME          : $SERVICE_BUS_NAMESPACE_NAME</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="sh">SERVICE_BUS_TOPIC_NAME              : $SERVICE_BUS_TOPIC_NAME</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="sh">SERVICE_BUS_TOPIC_SUBSCRIPTION      : $SERVICE_BUS_TOPIC_SUBSCRIPTION</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="sh">SIGNEDIN_UERID                      : $SIGNEDIN_UERID</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="sh">STORAGE_ACCOUNT_NAME                : $STORAGE_ACCOUNT_NAME</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="sh">TARGET_PORT                         : $TARGET_PORT</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="sh">TODAY                               : $TODAY</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="sh">UI_APP_PORT                         : $UI_APP_PORT</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="sh">WORKSPACE_ID                        : $WORKSPACE_ID</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="sh">WORKSPACE_NAME                      : $WORKSPACE_NAME</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="sh">WORKSPACE_SECRET                    : $WORKSPACE_SECRET</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="sh">&quot;@</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c"># Create a new or replace any existing file (note how we do not use -Append in the first line).</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s2">&quot;# Execute with </span><span class="se">`&quot;</span><span class="s2">$file</span><span class="se">`&quot;</span><span class="s2"> to restore previously-saved variables.&quot;</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="nv">$file</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nv">$vars</span> <span class="p">=</span> <span class="p">@(</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="s2">&quot;API_APP_PORT&quot;</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="s2">&quot;APPINSIGHTS_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="s2">&quot;APPINSIGHTS_INSTRUMENTATIONKEY&quot;</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="s2">&quot;AZURE_CONTAINER_REGISTRY_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="s2">&quot;AZURE_SUBSCRIPTION_ID&quot;</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="s2">&quot;BACKEND_API_EXTERNAL_BASE_URL&quot;</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="s2">&quot;BACKEND_API_INTERNAL_BASE_URL&quot;</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="s2">&quot;BACKEND_API_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="s2">&quot;BACKEND_SERVICE_APP_PORT&quot;</span><span class="p">,</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="s2">&quot;BACKEND_SERVICE_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="s2">&quot;BACKEND_SERVICE_PRINCIPAL_ID&quot;</span><span class="p">,</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="s2">&quot;COSMOS_DB_ACCOUNT&quot;</span><span class="p">,</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="s2">&quot;COSMOS_DB_CONTAINER&quot;</span><span class="p">,</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="s2">&quot;COSMOS_DB_DBNAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="s2">&quot;ENVIRONMENT&quot;</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="s2">&quot;FRONTEND_WEBAPP_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="s2">&quot;KEYVAULT_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="s2">&quot;KEYVAULT_SECRETS_OFFICER_ROLE_ID&quot;</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="s2">&quot;KEYVAULT_SECRETS_USER_ROLE_ID&quot;</span><span class="p">,</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="s2">&quot;LOCATION&quot;</span><span class="p">,</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="s2">&quot;RANDOM_STRING&quot;</span><span class="p">,</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="s2">&quot;RESOURCE_GROUP&quot;</span><span class="p">,</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="s2">&quot;REVISION_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="s2">&quot;ROLE_ID&quot;</span><span class="p">,</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="s2">&quot;SERVICE_BUS_CONNECTION_STRING&quot;</span><span class="p">,</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="s2">&quot;SERVICE_BUS_NAMESPACE_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="s2">&quot;SERVICE_BUS_TOPIC_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="s2">&quot;SERVICE_BUS_TOPIC_SUBSCRIPTION&quot;</span><span class="p">,</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="s2">&quot;SIGNEDIN_USERID&quot;</span><span class="p">,</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="s2">&quot;STORAGE_ACCOUNT_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="s2">&quot;TARGET_PORT&quot;</span><span class="p">,</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    <span class="s2">&quot;TODAY&quot;</span><span class="p">,</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="s2">&quot;UI_APP_PORT&quot;</span><span class="p">,</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="s2">&quot;WORKSPACE_ID&quot;</span><span class="p">,</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="s2">&quot;WORKSPACE_NAME&quot;</span><span class="p">,</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="s2">&quot;WORKSPACE_SECRET&quot;</span>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="p">);</span>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="k">foreach</span> <span class="p">(</span><span class="nv">$var</span> <span class="k">in</span> <span class="nv">$vars</span><span class="p">)</span> <span class="p">{</span> 
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    <span class="c"># Ensure the variable exists. If not, don&#39;t attempt to get it and don&#39;t write out a blank value.</span>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="n">variable</span><span class="p">:</span><span class="nv">$var</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="nb">Write-Host</span> <span class="s2">&quot;$var exists.&quot;</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>        <span class="nv">$val</span> <span class="p">=</span> <span class="nb">Get-Variable</span> <span class="n">-Name</span> <span class="nv">$var</span> <span class="n">-ValueOnly</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="s2">&quot;Set-Variable -Name $var -Value $val -Scope Global&quot;</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="nv">$file</span> <span class="n">-Append</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="p">}</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="restoring-variables">Restoring Variables<a class="headerlink" href="#restoring-variables" title="Permanent link">&para;</a></h2>
+<h3 id="powershell_1">PowerShell<a class="headerlink" href="#powershell_1" title="Permanent link">&para;</a></h3>
+<p>The output of the <code>Set-Variables.ps1</code> script is stored in the same directory where you execute that script. You can quickly apply those variables and get back to a working state by executing <code>.\Variables.ps1</code> in your PowerShell console. This is useful after having taken a break from the workshop and losing the session or when you are asked to open a second session such as when you are running multiple microservices locally with dapr.</p>
 
   <hr>
 <div class="md-source-file">
