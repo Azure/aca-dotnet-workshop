@@ -1,4 +1,5 @@
 $file = "./Variables.ps1"
+$i = 0
 
 # Create a new or replace any existing file (note how we do not use -Append in the first line).
 "# Execute with `"$file`" to restore previously-saved variables." | Out-File -FilePath $file
@@ -46,8 +47,10 @@ foreach ($var in $vars) {
     # Ensure the variable exists. If not, don't attempt to get it and don't write out a blank value.
 
     if (Test-Path variable:$var) {
-        Write-Host "$var exists."
         $val = Get-Variable -Name $var -ValueOnly
-        "Set-Variable -Name $var -Value $val -Scope Global" | Out-File -FilePath $file -Append
+        "Set-Variable -Scope Global -Name $var -Value $val" | Out-File -FilePath $file -Append
+        $i++
     }
 }
+
+Write-Host "`nWrote $i variable$($i -eq 1 ? '' : 's') to $file.`n"
