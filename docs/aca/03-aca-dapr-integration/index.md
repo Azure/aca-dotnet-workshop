@@ -149,19 +149,19 @@ The SDK offers developers three ways of making remote service invocation calls:
 === "Index.cshtml.cs"
 
     ```csharp    
-    --8<-- "docs/aca/03-aca-comm/Tasks.Index.cshtml.cs"
+    --8<-- "docs/aca/03-aca-dapr-integration/Tasks.Index.cshtml.cs"
     ```
 
 === "Create.cshtml.cs"
 
     ```csharp
-    --8<-- "docs/aca/03-aca-comm/Create.cshtml.cs"
+    --8<-- "docs/aca/03-aca-dapr-integration/Create.cshtml.cs"
     ```
 
 === "Edit.cshtml.cs"
 
     ```csharp
-    --8<-- "docs/aca/03-aca-comm/Edit.cshtml.cs"
+    --8<-- "docs/aca/03-aca-dapr-integration/Edit.cshtml.cs"
     ``` 
 
 ???+ tip
