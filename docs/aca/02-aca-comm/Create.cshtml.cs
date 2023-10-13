@@ -31,15 +31,16 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
             {
                 var createdBy = Request.Cookies["TasksCreatedByCookie"];
 
-                if (!string.IsNullOrEmpty(createdBy)) {
+                if (!string.IsNullOrEmpty(createdBy))
+                {
                     TaskAdd.TaskCreatedBy = createdBy;
 
                     // direct svc to svc http request
                     var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
                     var result = await httpClient.PostAsJsonAsync("api/tasks/", TaskAdd);
                 }
-
             }
+            
             return RedirectToPage("./Index");
         }
     }
