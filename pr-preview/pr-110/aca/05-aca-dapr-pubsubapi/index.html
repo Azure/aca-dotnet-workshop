@@ -2283,7 +2283,7 @@ You need to change the namespace variable as this one should be unique globally 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We used the name <code>dapr-pubsub-servicebus</code> which should match the name of Pub/Sub component we've used earlier in the <a href="#4-create-an-api-endpoint-for-the-consumer-to-subscribe-to-the-topic">TasksNotifierController.cs</a> controller on the action method with the attribute <code>Topic</code>.</p>
-<p>We set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata <code>consumerID</code> value should match the topic subscription name <code>tasks-processor-subscription</code>. </p>
+<p>We set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata <code>consumerID</code> value should match the topic subscription name <code>sbts-tasks-processor</code>. </p>
 <p>We have set the scopes section to include the <code>tasksmanager-backend-api</code> and <code>tasksmanager-backend-processor</code> app ids, as those will be the Dapr apps that need access to Azure Service Bus for publishing and 
 consuming the messages.</p>
 </div>
@@ -2312,7 +2312,7 @@ consuming the messages.</p>
 <li>We didn't specify the component name <code>dapr-pubsub-servicebus</code> when we created this component file. We are going to specify it once we add this dapr component to Azure Container Apps Environment via CLI.</li>
 <li>We are not referencing any service bus connection strings as the authentication between Dapr and Azure Service Bus will be configured using Managed Identities.</li>
 <li>The metadata <code>namespaceName</code> value is set to the address of the Service Bus namespace as a fully qualified domain name. The <code>namespaceName</code> key is mandatory when using Managed Identities for authentication.</li>
-<li>We are setting the metadata <code>consumerID</code> value to match the topic subscription name <code>tasks-processor-subscription</code>. If you didn't set this metadata, dapr runtime will try to create a subscription using the dapr application ID.</li>
+<li>We are setting the metadata <code>consumerID</code> value to match the topic subscription name <code>sbts-tasks-processor</code>. If you didn't set this metadata, dapr runtime will try to create a subscription using the dapr application ID.</li>
 </ul>
 </details>
 <p>With all those bits in place, we are ready to run the publisher service <code>Backend API</code> and the consumer service <code>Backend Background Service</code> and test pub/sub pattern end to end.</p>
@@ -2507,7 +2507,7 @@ application and start creating new tasks. You should start seeing logs similar t
   <small>
     
       Last update:
-      2023-10-12
+      2023-10-13
     
   </small>
 </div>

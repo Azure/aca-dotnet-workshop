@@ -927,12 +927,38 @@
     Setting Variables
   </a>
   
+    <nav class="md-nav" aria-label="Setting Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell" class="md-nav__link">
+    PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
   <a href="#restoring-variables" class="md-nav__link">
     Restoring Variables
   </a>
+  
+    <nav class="md-nav" aria-label="Restoring Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell_1" class="md-nav__link">
+    PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -983,12 +1009,38 @@
     Setting Variables
   </a>
   
+    <nav class="md-nav" aria-label="Setting Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell" class="md-nav__link">
+    PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
   <a href="#restoring-variables" class="md-nav__link">
     Restoring Variables
   </a>
+  
+    <nav class="md-nav" aria-label="Restoring Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell_1" class="md-nav__link">
+    PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1011,8 +1063,10 @@
 
 
 <h1 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h1>
-<p>We declare numerous variables throughout this workshop. As these modules are lengthy, you will likely complete them over multiple sessions. However, as sessions are additive, they require previously-set variables.</p>
+<p>We declare numerous variables throughout this workshop. As these modules are lengthy, you will likely complete them over multiple sessions. However, as sessions are additive, they require previously-set variables. </p>
+<p>Presently, this supports PowerShell only, but we would like to see community contributions for shell scripts.</p>
 <h2 id="setting-variables">Setting Variables<a class="headerlink" href="#setting-variables" title="Permanent link">&para;</a></h2>
+<h3 id="powershell">PowerShell<a class="headerlink" href="#powershell" title="Permanent link">&para;</a></h3>
 <p>Execute this script to persist all variables in the current session at any time. We recommend you do this after you complete each module or any other time you are taking a break from the workshop.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Set-Variables.ps1</label></div>
 <div class="tabbed-content">
@@ -1075,6 +1129,7 @@
 </div>
 </div>
 <h2 id="restoring-variables">Restoring Variables<a class="headerlink" href="#restoring-variables" title="Permanent link">&para;</a></h2>
+<h3 id="powershell_1">PowerShell<a class="headerlink" href="#powershell_1" title="Permanent link">&para;</a></h3>
 <p>The output of the <code>Set-Variables.ps1</code> script is stored in the same directory where you execute that script. You can quickly apply those variables and get back to a working state by executing <code>.\Variables.ps1</code> in your PowerShell console. This is useful after having taken a break from the workshop and losing the session or when you are asked to open a second session such as when you are running multiple microservices locally with dapr.</p>
 
   <hr>
@@ -1082,7 +1137,7 @@
   <small>
     
       Last update:
-      2023-10-12
+      2023-10-13
     
   </small>
 </div>
