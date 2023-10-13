@@ -7,7 +7,6 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
 {
     public class IndexModel : PageModel
     {
-
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly DaprClient _daprClient;
         public List<TaskModel>? TasksList { get; set; }
