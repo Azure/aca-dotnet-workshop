@@ -1,8 +1,10 @@
 # Variables
 
-We declare numerous variables throughout this workshop. As these modules are lengthy, you will likely complete them over multiple sessions. However, as sessions are additive, they require previously-set variables. 
+We declare numerous variables throughout this workshop. As these modules are lengthy, you will likely complete them over multiple sessions. However, as sessions are additive, they require previously-set variables.
 
-Presently, this supports PowerShell only, but we would like to see community contributions for shell scripts.
+
+!!! info "Shell Support"
+    Presently, this supports PowerShell only, and we would like to see community contributions for shell scripts, please. Please see [GitHub Issue #111](https://github.com/Azure/aca-dotnet-workshop/issues/111){target=_blank}.
 
 ## Setting Variables
 
