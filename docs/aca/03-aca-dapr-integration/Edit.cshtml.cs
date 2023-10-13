@@ -57,7 +57,6 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
             {
                 // Dapr SideCar Invocation
                 await _daprClient.InvokeMethodAsync<TaskUpdateModel>(HttpMethod.Put, "tasksmanager-backend-api", $"api/tasks/{TaskUpdate.TaskId}", TaskUpdate);
-
             }
 
             return RedirectToPage("./Index");
