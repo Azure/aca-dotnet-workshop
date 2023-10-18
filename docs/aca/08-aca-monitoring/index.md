@@ -67,13 +67,13 @@ For each project, we will add a new file on the root directory of the project **
         === "TasksTracker.WebPortal.Frontend.Ui"
             
             ```csharp hl_lines="13"
-            --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/a642c296d8f35b9c81a17e63c11797aee9066f5a/TasksTracker.WebPortal.Frontend.Ui/AppInsightsTelemetryInitializer.cs"
+            --8<-- "docs/aca/08-aca-monitoring/Frontend.Ui.AppInsightsTelemetryInitializer.cs"
             ```
 
         === "TasksTracker.Processor.Backend.Svc"
             
             ```csharp hl_lines="13"
-            --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/a642c296d8f35b9c81a17e63c11797aee9066f5a/TasksTracker.Processor.Backend.Svc/AppInsightsTelemetryInitializer.cs"
+            --8<-- "docs/aca/08-aca-monitoring/Backend.Svc.AppInsightsTelemetryInitializer.cs"
             ```
 
 Next, we need to register this `AppInsightsTelemetryInitializer` class. Update the Program.cs file located under **TasksTracker.TasksManager.Backend.Api** as highlighted below:

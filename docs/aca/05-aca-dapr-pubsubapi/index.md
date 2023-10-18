@@ -297,13 +297,13 @@ and debug them in VS Code, we need to update the files `tasks.json` and `launch.
     === "tasks.json"
     
         ```json
-        --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/3dafcc7b291590177f7ce3a8a629079076149863/.vscode/tasks.json"
+        --8<-- "docs/aca/05-aca-dapr-pubsubapi/tasks.json"
         ```
 
     === "launch.json"
     
         ```json
-        --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/3dafcc7b291590177f7ce3a8a629079076149863/.vscode/launch.json"
+        --8<-- "docs/aca/05-aca-dapr-pubsubapi/launch.json"
         ```
 
 ### Use the Dapr .NET Client SDK to Publish Messages

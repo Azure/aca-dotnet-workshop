@@ -51,7 +51,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 === "Index.cshtml"
 
     ```html
-    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Index.cshtml"
+    --8<-- "docs/aca/02-aca-comm/Tasks.Index.cshtml"
     ```
 
 === "Index.cshtml.cs"
@@ -67,7 +67,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 === "Create.cshtml"
 
     ```html
-    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Create.cshtml"
+    --8<-- "docs/aca/02-aca-comm/Create.cshtml"
     ```
 
 === "Create.cshtml.cs"
@@ -82,7 +82,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 === "Edit.cshtml"
 
     ```html
-    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Tasks/Edit.cshtml"
+    --8<-- "docs/aca/02-aca-comm/Edit.cshtml"
     ```
 
 === "Edit.cshtml.cs"
@@ -143,7 +143,7 @@ This variable will contain the Base URL for the backend API deployed in the prev
 === "Index.cshtml"
 
     ```html
-    --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/c3783f3b23818615f298d52ce9595a059e22d8f6/TasksTracker.WebPortal.Frontend.Ui/Pages/Index.cshtml"
+    --8<-- "docs/aca/02-aca-comm/Index.cshtml"
     ```
 
 === "Index.cshtml.cs"
