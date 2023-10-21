@@ -1129,7 +1129,10 @@
 </span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="p">}</span>
 </span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="p">}</span>
 </span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">Wrote $i variable</span><span class="p">$(</span><span class="nv">$i</span> <span class="o">-eq</span> <span class="n">1</span> <span class="p">?</span> <span class="s1">&#39;&#39;</span> <span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span><span class="s2"> to $file.</span><span class="se">`n</span><span class="s2">&quot;</span>
+</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="c"># When the Variables.ps1 script executes, the following line will inform how many variables were set in the current session.</span>
+</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="s2">&quot;Write-Host </span><span class="se">`&quot;</span><span class="s2">Set $i variable</span><span class="p">$(</span><span class="nv">$i</span> <span class="o">-eq</span> <span class="n">1</span> <span class="p">?</span> <span class="s1">&#39;&#39;</span> <span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span><span class="s2">.</span><span class="se">`&quot;</span><span class="s2">&quot;</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="nv">$file</span> <span class="n">-Append</span>
+</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>
+</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">Wrote $i variable</span><span class="p">$(</span><span class="nv">$i</span> <span class="o">-eq</span> <span class="n">1</span> <span class="p">?</span> <span class="s1">&#39;&#39;</span> <span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span><span class="s2"> to $file.</span><span class="se">`n</span><span class="s2">&quot;</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -1143,7 +1146,7 @@
   <small>
     
       Last update:
-      2023-10-18
+      2023-10-20
     
   </small>
 </div>

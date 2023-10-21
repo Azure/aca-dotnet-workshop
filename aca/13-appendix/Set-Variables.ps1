@@ -53,4 +53,7 @@ foreach ($var in $vars) {
     }
 }
 
+# When the Variables.ps1 script executes, the following line will inform how many variables were set in the current session.
+"Write-Host `"Set $i variable$($i -eq 1 ? '' : 's').`"" | Out-File -FilePath $file -Append
+
 Write-Host "`nWrote $i variable$($i -eq 1 ? '' : 's') to $file.`n"
