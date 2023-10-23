@@ -1380,32 +1380,37 @@
 <ul>
 <li>
 <p>We will start with Installing/Upgrading the Azure Container Apps Extension.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Upgrade Azure CLI</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>az<span class="w"> </span>upgrade
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># Login to Azure</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>az<span class="w"> </span>login<span class="w"> </span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># Only required if you have multiple subscriptions</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>az<span class="w"> </span>account<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--subscription<span class="w"> </span>&lt;name<span class="w"> </span>or<span class="w"> </span>id&gt;
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># Install/Upgrade Azure Container Apps Extension</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>az<span class="w"> </span>extension<span class="w"> </span>add<span class="w"> </span>--name<span class="w"> </span>containerapp<span class="w"> </span>--upgrade
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">$AZURE_SUBSCRIPTION_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;Your Azure Subscription ID&gt;&quot;</span><span class="w"> </span><span class="c1"># Your Azure Subscription id which you can find on the azure portal</span>
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Upgrade Azure CLI</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>az<span class="w"> </span>upgrade
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Login to Azure</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>az<span class="w"> </span>login<span class="w"> </span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># Only required if you have multiple subscriptions</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>az<span class="w"> </span>account<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--subscription<span class="w"> </span><span class="nv">$AZURE_SUBSCRIPTION_ID</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c1"># Install/Upgrade Azure Container Apps Extension</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>az<span class="w"> </span>extension<span class="w"> </span>add<span class="w"> </span>--name<span class="w"> </span>containerapp<span class="w"> </span>--upgrade
 </span></code></pre></div>
 </li>
 <li>
 <p>Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Create a random, 6-digit, Azure safe string</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nv">$RANDOM_STRING</span><span class="o">=</span>-join<span class="w"> </span><span class="o">((</span><span class="m">97</span>..122<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="o">(</span><span class="m">48</span>..57<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Get-Random<span class="w"> </span>-Count<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ForEach-Object<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">[</span>char<span class="o">]</span><span class="nv">$_</span><span class="o">})</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nv">$RESOURCE_GROUP</span><span class="o">=</span><span class="s2">&quot;rg-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nv">$LOCATION</span><span class="o">=</span><span class="s2">&quot;eastus&quot;</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nv">$ENVIRONMENT</span><span class="o">=</span><span class="s2">&quot;cae-tasks-tracker&quot;</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nv">$WORKSPACE_NAME</span><span class="o">=</span><span class="s2">&quot;log-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="nv">$APPINSIGHTS_NAME</span><span class="o">=</span><span class="s2">&quot;appi-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nv">$BACKEND_API_NAME</span><span class="o">=</span><span class="s2">&quot;tasksmanager-backend-api&quot;</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="s2">&quot;crtaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Create a random, 6-digit, Azure safe string</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">$RANDOM_STRING</span><span class="o">=</span>-join<span class="w"> </span><span class="o">((</span><span class="m">97</span>..122<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="o">(</span><span class="m">48</span>..57<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Get-Random<span class="w"> </span>-Count<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ForEach-Object<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">[</span>char<span class="o">]</span><span class="nv">$_</span><span class="o">})</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nv">$RESOURCE_GROUP</span><span class="o">=</span><span class="s2">&quot;rg-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nv">$LOCATION</span><span class="o">=</span><span class="s2">&quot;eastus&quot;</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nv">$ENVIRONMENT</span><span class="o">=</span><span class="s2">&quot;cae-tasks-tracker&quot;</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nv">$WORKSPACE_NAME</span><span class="o">=</span><span class="s2">&quot;log-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nv">$APPINSIGHTS_NAME</span><span class="o">=</span><span class="s2">&quot;appi-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nv">$BACKEND_API_NAME</span><span class="o">=</span><span class="s2">&quot;tasksmanager-backend-api&quot;</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="s2">&quot;crtaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>Also assign the target port from when you created the Dockerfile:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">$TARGET_PORT</span><span class="o">=[</span>exposed<span class="w"> </span>Docker<span class="w"> </span>target<span class="w"> </span>port<span class="w"> </span>from<span class="w"> </span>Dockerfile<span class="o">]</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">$TARGET_PORT</span><span class="o">=[</span>exposed<span class="w"> </span>Docker<span class="w"> </span>target<span class="w"> </span>port<span class="w"> </span>from<span class="w"> </span>Dockerfile<span class="o">]</span>
 </span></code></pre></div>
 </li>
 </ul>
@@ -1420,18 +1425,18 @@
 <ul>
 <li>
 <p>Create a <code>resource group</code> to organize the services related to the application, run the below command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>az<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>--name<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>--location<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOCATION</span><span class="s2">&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>az<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>--name<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>--location<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOCATION</span><span class="s2">&quot;</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>Create an Azure Container Registry (ACR) instance in the resource group to store images of all Microservices we are going to build during this workshop. Make sure that you set the <code>admin-enabled</code> flag to true in order to seamlessly authenticate the Azure container app when trying to create the container app using the image stored in ACR.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>--name<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>--sku<span class="w"> </span>Basic<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>--admin-enabled<span class="w"> </span><span class="nb">true</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>--name<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>--sku<span class="w"> </span>Basic<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>--admin-enabled<span class="w"> </span><span class="nb">true</span>
 </span></code></pre></div>
 </li>
 </ul>
@@ -1442,50 +1447,54 @@
 <ul>
 <li>
 <p>Create an Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace. To create it, run the command below:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Create the log analytics workspace</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>--workspace-name<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1"># Retrieve workspace ID</span>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="nv">$WORKSPACE_ID</span><span class="o">=</span>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>show<span class="w"> </span>--query<span class="w"> </span>customerId<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>-g<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>-n<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span><span class="w"> </span>-o<span class="w"> </span>tsv
-</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
-</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="c1"># Retrieve workspace secret</span>
-</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="nv">$WORKSPACE_SECRET</span><span class="o">=</span>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>get-shared-keys<span class="w"> </span>--query<span class="w"> </span>primarySharedKey<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>-g<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>-n<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span><span class="w"> </span>-o<span class="w"> </span>tsv
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Create the log analytics workspace</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>--workspace-name<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># Retrieve workspace ID</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nv">$WORKSPACE_ID</span><span class="o">=</span>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>show<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>--workspace-name<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>--query<span class="w"> </span>customerId<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>--output<span class="w"> </span>tsv
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="c1"># Retrieve workspace secret</span>
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="nv">$WORKSPACE_SECRET</span><span class="o">=</span>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>get-shared-keys<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>--workspace-name<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>--query<span class="w"> </span>primarySharedKey<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>--output<span class="w"> </span>tsv
 </span></code></pre></div>
 </li>
 <li>
 <p>Create an <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net" target="_blank">Application Insights</a> Instance which will be used mainly for <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing" target="_blank">distributed tracing</a> between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Install the application-insights extension for the CLI</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>az<span class="w"> </span>extension<span class="w"> </span>add<span class="w"> </span>-n<span class="w"> </span>application-insights
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># Create application-insights instance</span>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>-g<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>-l<span class="w"> </span><span class="nv">$LOCATION</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>--app<span class="w"> </span><span class="nv">$APPINSIGHTS_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>--workspace<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span>
-</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
-</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="c1"># Get Application Insights Instrumentation Key</span>
-</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="o">=(</span><span class="k">$(</span>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>show<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>--app<span class="w"> </span><span class="nv">$APPINSIGHTS_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>-g<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="k">)</span><span class="w">  </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)</span>.instrumentationKey
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Install the application-insights extension for the CLI</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>az<span class="w"> </span>extension<span class="w"> </span>add<span class="w"> </span>-n<span class="w"> </span>application-insights
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Create application-insights instance</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>--location<span class="w"> </span><span class="nv">$LOCATION</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>--app<span class="w"> </span><span class="nv">$APPINSIGHTS_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>--workspace<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="c1"># Get Application Insights Instrumentation Key</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="o">=(</span><span class="k">$(</span>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>show<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>--app<span class="w"> </span><span class="nv">$APPINSIGHTS_NAME</span><span class="w"> </span><span class="k">)</span><span class="w">  </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)</span>.instrumentationKey
 </span></code></pre></div>
 </li>
 <li>
 <p>Now we will create an Azure Container Apps Environment. As a reminder of the different ACA component <a href="../00-workshop-intro/1-aca-core-components/">check this link in the workshop introduction</a>. The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Create the ACA environment</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>--name<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>--logs-workspace-id<span class="w"> </span><span class="nv">$WORKSPACE_ID</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>--logs-workspace-key<span class="w"> </span><span class="nv">$WORKSPACE_SECRET</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>--dapr-instrumentation-key<span class="w"> </span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>--location<span class="w"> </span><span class="nv">$LOCATION</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Create the ACA environment</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>--name<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>--location<span class="w"> </span><span class="nv">$LOCATION</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>--logs-workspace-id<span class="w"> </span><span class="nv">$WORKSPACE_ID</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>--logs-workspace-key<span class="w"> </span><span class="nv">$WORKSPACE_SECRET</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>--dapr-instrumentation-key<span class="w"> </span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span>
 </span></code></pre></div>
 </li>
 </ul>
@@ -1503,29 +1512,33 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <ul>
 <li>
 <p>Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The <code>.</code> at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the <code>.csproj</code>.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
 </span></code></pre></div>
 <p>Once this step is completed, you can verify the results by going to the Azure portal and checking that a new repository named <code>tasksmanager/tasksmanager-backend-api</code> has been created, and that there is a new Docker image with a <code>latest</code> tag.</p>
 </li>
 <li>
 <p>The last step here is to create and deploy the Web API to ACA following the below command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">$fqdn</span><span class="o">=(</span>az<span class="w"> </span>containerapp<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>--environment<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>--image<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io/tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>--registry-server<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>--target-port<span class="w"> </span><span class="nv">$TARGET_PORT</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>--ingress<span class="w"> </span><span class="s1">&#39;external&#39;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>--min-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>--max-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>--cpu<span class="w"> </span><span class="m">0</span>.25<span class="w"> </span>--memory<span class="w"> </span><span class="m">0</span>.5Gi<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>--query<span class="w"> </span>properties.configuration.ingress.fqdn<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>--output<span class="w"> </span>tsv<span class="o">)</span>
-</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>
-</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;See a listing of tasks created by the author at this URL:&quot;</span>
-</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">/api/tasks/?createdby=tjoudeh@bitoftech.net&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nv">$fqdn</span><span class="o">=(</span>az<span class="w"> </span>containerapp<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>--environment<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>--image<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io/tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>--registry-server<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>--target-port<span class="w"> </span><span class="nv">$TARGET_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>--ingress<span class="w"> </span><span class="s1">&#39;external&#39;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>--min-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>--max-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>--cpu<span class="w"> </span><span class="m">0</span>.25<span class="w"> </span>--memory<span class="w"> </span><span class="m">0</span>.5Gi<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>--query<span class="w"> </span>properties.configuration.ingress.fqdn<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>--output<span class="w"> </span>tsv<span class="o">)</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;See a listing of tasks created by the author at this URL:&quot;</span>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">/api/tasks/?createdby=tjoudeh@bitoftech.net&quot;</span>
 </span></code></pre></div>
 </li>
 </ul>
@@ -1542,12 +1555,12 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <p>For full details on all available parameters for this command, please visit this <a href="https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create" target="_blank">page</a>.</p>
 </details>
 <ul>
-<li>You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named <code>tasks-tracker-rg</code> that you created earlier. You should see the 5 resourses created below.
+<li>You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the Azure Portal and selecting the resource group named <code>tasks-tracker-rg</code> that you created earlier. You should see the 5 resourses created below.
 <a class="glightbox" href="../../assets/images/01-deploy-api-to-aca/Resources.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Azure Resources" src="../../assets/images/01-deploy-api-to-aca/Resources.jpg" /></a></li>
 </ul>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
-<p>To test the backend api service, either click on the URL output by the last command or copy the FQDN (Application URL) of the Azure container app named <code>tasksmanager-backend-api</code>, then issue a <code>GET</code> request similar to this one: <code>https://tasksmanager-backend-api.&lt;your-aca-env-unique-id&gt;.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net</code> and you should receive an array of the 10 tasks similar to the below image. </p>
+<p>To test the backend api service, either click on the URL output by the last command or copy the FQDN (Application URL) of the Azure container app named <code>tasksmanager-backend-api</code>, then issue a <code>GET</code> request similar to this one: <code>https://tasksmanager-backend-api.&lt;your-aca-env-unique-id&gt;.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net</code> and you should receive an array of the 10 tasks similar to the below image.</p>
 <p>Note that the specific query string matters as you may otherwise get an empty result back. </p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1562,7 +1575,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
   <small>
     
       Last update:
-      2023-10-20
+      2023-10-23
     
   </small>
 </div>

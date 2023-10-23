@@ -1456,7 +1456,7 @@ More about populating this property later in the workshop.</p>
 </div>
 </div>
 <ul>
-<li>Now we will inject an HTTP client factory and define environment variables. To do so we will register the HttpClientFactory named <code>BackEndApiExternal</code> to make it available for injection in controllers. Open the <code>Program.cs</code> file and update it with highlighted code below:</li>
+<li>Now we will inject an HTTP client factory and define environment variables. To do so we will register the HttpClientFactory named <code>BackEndApiExternal</code> to make it available for injection in controllers. Open the <code>Program.cs</code> file and update it with highlighted code below. Your file may be flattened rather than indented and not contain some of the below elements. Don't worry. Just place the highlighted lines in the right spot:</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Program.cs</label></div>
 <div class="tabbed-content">
@@ -1611,8 +1611,12 @@ This variable will contain the Base URL for the backend API deployed in the prev
 <ul>
 <li>Now we will build and push the Web App project docker image to ACR. Use the below command to initiate the image build and push process using ACR. The <code>.</code> at the end of the command represents the docker build context. In our case, we need to be on the parent directory which hosts the .csproject.</li>
 </ul>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span> 
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">`</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">`</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
 </span></code></pre></div>
 <ul>
 <li>
@@ -1657,8 +1661,8 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
 <li>
 <p>To change the settings of the Backend API, execute the following command:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">ingress</span> <span class="n">enable</span> <span class="p">`</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">-</span><span class="n">-name</span>  <span class="nv">$BACKEND_API_NAME</span>  <span class="p">`</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">-</span><span class="n">-resource-group</span>  <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_API_NAME</span>  <span class="p">`</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">-</span><span class="n">-target-port</span> <span class="nv">$TARGET_PORT</span> <span class="p">`</span>
 </span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">-</span><span class="n">-type</span> <span class="s2">&quot;internal&quot;</span>
 </span></code></pre></div>
@@ -1677,7 +1681,7 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nv">$BACKEND_API_INTERNAL_BASE_URL</span><span class="p">=</span><span class="s2">&quot;&lt;url to your internal backend API goes here. You can find this on the Azure portal overview tab. Look for the now-updated internal Application url property there.&gt;&quot;</span>
 </span></code></pre></div>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">&quot;$FRONTEND_WEBAPP_NAME&quot;</span>  <span class="p">`</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">&quot;$FRONTEND_WEBAPP_NAME&quot;</span> <span class="p">`</span>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
 </span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="p">-</span><span class="n">-set-env-vars</span> <span class="s2">&quot;BackendApiConfig__BaseUrlExternalHttp=$BACKEND_API_INTERNAL_BASE_URL/&quot;</span>
 </span></code></pre></div>
@@ -1694,7 +1698,7 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
   <small>
     
       Last update:
-      2023-10-20
+      2023-10-23
     
   </small>
 </div>
