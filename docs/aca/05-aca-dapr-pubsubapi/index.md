@@ -717,6 +717,8 @@ az containerapp identity assign `
 --resource-group $RESOURCE_GROUP `
 --name $BACKEND_SERVICE_NAME `
 --system-assigned
+
+$BACKEND_SVC_PRINCIPAL_ID = az containerapp job identity show --name $BACKEND_SERVICE_NAME --resource-group $RESOURCE_GROUP --query principalId
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be as the below, keep a note of the property `principalId` as we are going to use it in the next step.
@@ -738,12 +740,8 @@ You can read more about `Azure built-in roles for Azure Service Bus` [here](http
 Run the command below to associate the `system-assigned` identity with the access-control role `Azure Service Bus Data Receiver`:
 
 ```powershell
-$AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
-$BACKEND_SVC_PRINCIPAL_ID = "<your principal id which was generated above>" # Principal Id after creating system identity for Backend Processor Container app 
 $SVC_BUS_DATA_RECEIVER_ROLE = "Azure Service Bus Data Receiver" # Built in role name
-```
 
-```powershell
 az role assignment create `
 --assignee $BACKEND_SVC_PRINCIPAL_ID `
 --role $SVC_BUS_DATA_RECEIVER_ROLE `

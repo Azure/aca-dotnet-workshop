@@ -352,6 +352,8 @@ az containerapp identity assign `
 --resource-group $RESOURCE_GROUP `
 --name $BACKEND_API_NAME `
 --system-assigned
+
+$BACKEND_API_PRINCIPAL_ID = az containerapp job identity show --name $BACKEND_API_NAME --resource-group $RESOURCE_GROUP --query principalId
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be similar to the one shown below.
@@ -374,10 +376,6 @@ Run the command below to associate the container app `system-assigned` identity 
 !!! note
     Make sure you save this principal id somewhere as you will need it in later modules. You can't rely on having it saved in powershell under `$BACKEND_API_PRINCIPAL_ID` as this variable could replace later on.
     Remember to replace the placeholders with your own values:
-
-```powershell
-$BACKEND_API_PRINCIPAL_ID = "<your principal id goes here>" # Principal Id after creating system identity for container app 
-```
 
 ```powershell
 $ROLE_ID = "00000000-0000-0000-0000-000000000002" #"Cosmos DB Built-in Data Contributor" 

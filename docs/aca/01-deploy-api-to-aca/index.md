@@ -113,12 +113,19 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 - We will start with Installing/Upgrading the Azure Container Apps Extension.
 
     ```shell
+    $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
+    ```
+
+    ```shell
     # Upgrade Azure CLI
     az upgrade
+
     # Login to Azure
     az login 
+
     # Only required if you have multiple subscriptions
-    az account set --subscription <name or id>
+    az account set --subscription $AZURE_SUBSCRIPTION_ID
+
     # Install/Upgrade Azure Container Apps Extension
     az extension add --name containerapp --upgrade
     ```
