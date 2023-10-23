@@ -10,7 +10,7 @@ We declare numerous variables throughout this workshop. As these modules are len
 
 ### PowerShell
 
-Execute this script to persist all variables in the current session at any time. We recommend you do this after you complete each module or any other time you are taking a break from the workshop.
+Execute this script to persist all variables in the current session at any time. We recommend you do this after you complete each module or any other time you are taking a break from the workshop. Execute it in the root (e.g. `~\TasksTracker.ContainerApps`) to keep setting and updating the same `Variables.ps1` file.
 
 === "Set-Variables.ps1"
     ```powershell
