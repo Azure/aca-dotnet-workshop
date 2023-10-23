@@ -21,15 +21,28 @@ To try out the State Management APIs, run the Backend API from VS Code by runnin
 === ".NET 6 or below"
 
     ```powershell
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 ` 
+    --app-ssl `
+    -- dotnet run
     ```
 
 === ".NET 7 or above"
 
     ```powershell
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    -- dotnet run --launch-profile https
     ```
 
 Now from any rest client, invoke the below **POST** request to the endpoint: [http://localhost:3500/v1.0/state/statestore](http://localhost:3500/v1.0/state/statestore){target=_blank}
@@ -281,14 +294,24 @@ If you have been using the dapr cli commands instead of the aforementioned debug
 === ".NET 6 or below"
 
     ```powershell
-     
-    dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    --resources-path "../components" `
+    dotnet run
     ```
 === ".NET 7 or above"
 
     ```powershell
-    
-    dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    --resources-path "../components" `
+    -- dotnet run --launch-profile https
     ```
 
 !!! note "Deprecation Warning"
@@ -320,15 +343,17 @@ As we highlighted earlier, we'll not use a connection strings to establish the r
 
 We will be using a `system-assigned` identity with a role assignment to grant our Backend API container app permissions to access data stored in Cosmos DB. We need to assign it a custom role for the Cosmos DB data plane. In this example ae are going to use a [built-in role](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac#built-in-role-definitions){target=_blank}, named `Cosmos DB Built-in Data Contributor`, which grants our application full read-write access to the data. You can optionally create custom, fine-tuned roles following the instructions in the [official docs](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac){target=_blank}.
 
-#### 1. Create system-assigned identity for our container app
+#### 1. Create system-assigned identity for our Backend API Container App
 
-Run the command below to create `system-assigned` identity for our container app:
+Run the command below to create `system-assigned` identity for our Backend API container app:
 
 ```Powershell
 az containerapp identity assign `
-    --resource-group $RESOURCE_GROUP `
-    --name $BACKEND_API_NAME `
-    --system-assigned
+--resource-group $RESOURCE_GROUP `
+--name $BACKEND_API_NAME `
+--system-assigned
+
+$BACKEND_API_PRINCIPAL_ID = az containerapp job identity show --name $BACKEND_API_NAME --resource-group $RESOURCE_GROUP --query principalId
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be similar to the one shown below.
@@ -349,18 +374,17 @@ You can read more about Azure built-in roles for Cosmos DB or how to create cust
 Run the command below to associate the container app `system-assigned` identity with `Cosmos DB Built-in Data Contributor` role.
 
 !!! note
-    Make sure you save this principal id somewhere as you will need it in later modules. You can't rely on having it saved in powershell under `$PRINCIPAL_ID` as this variable could replace later on.
+    Make sure you save this principal id somewhere as you will need it in later modules. You can't rely on having it saved in powershell under `$BACKEND_API_PRINCIPAL_ID` as this variable could replace later on.
     Remember to replace the placeholders with your own values:
 
 ```powershell
-$PRINCIPAL_ID = "<your principal id goes here>" # Principal Id after creating system identity for container app 
 $ROLE_ID = "00000000-0000-0000-0000-000000000002" #"Cosmos DB Built-in Data Contributor" 
 
 az cosmosdb sql role assignment create `
 --account-name  $COSMOS_DB_ACCOUNT `
 --resource-group $RESOURCE_GROUP `
 --scope "/" `
---principal-id $PRINCIPAL_ID `
+--principal-id $BACKEND_API_PRINCIPAL_ID `
 --role-definition-id $ROLE_ID
 ```
 
@@ -397,9 +421,15 @@ As we have done previously we need to build and deploy both app images to ACR, s
 To do so, continue using the same PowerShell console and paste the code below (Make sure you are on the following directory **TasksTracker.ContainerApps**):
 
 ```powershell
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+az acr build `
+--registry $AZURE_CONTAINER_REGISTRY_NAME `
+--image "tasksmanager/$BACKEND_API_NAME" `
+--file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
 
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+az acr build `
+--registry $AZURE_CONTAINER_REGISTRY_NAME `
+--image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
+--file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
 ```
 
 #### 3. Add Cosmos DB Dapr State Store to Azure Container Apps Environment
@@ -408,10 +438,10 @@ We need to run the command below to add the yaml file `.\aca-components\containe
 
 ```powershell
 az containerapp env dapr-component set `
-    --name $ENVIRONMENT `
-    --resource-group $RESOURCE_GROUP `
-    --dapr-component-name statestore `
-    --yaml '.\aca-components\containerapps-statestore-cosmos.yaml'
+--name $ENVIRONMENT `
+--resource-group $RESOURCE_GROUP `
+--dapr-component-name statestore `
+--yaml '.\aca-components\containerapps-statestore-cosmos.yaml'
 ```
 
 #### 4. Enable Dapr for the Frontend Web App and Backend API Container Apps
@@ -422,15 +452,17 @@ Until this moment Dapr was not enabled on the Container Apps we have provisioned
     Remember to replace the placeholders with your own values.
 
 ```powershell
-az containerapp dapr enable --name $BACKEND_API_NAME `
-                            --resource-group $RESOURCE_GROUP `
-                            --dapr-app-id  $BACKEND_API_NAME `
-                            --dapr-app-port $TARGET_PORT
+az containerapp dapr enable `
+--name $BACKEND_API_NAME `
+--resource-group $RESOURCE_GROUP `
+--dapr-app-id  $BACKEND_API_NAME `
+--dapr-app-port $TARGET_PORT
 
-az containerapp dapr enable --name $FRONTEND_WEBAPP_NAME `
-                            --resource-group $RESOURCE_GROUP `
-                            --dapr-app-id  $FRONTEND_WEBAPP_NAME `
-                            --dapr-app-port $TARGET_PORT
+az containerapp dapr enable `
+--name $FRONTEND_WEBAPP_NAME `
+--resource-group $RESOURCE_GROUP `
+--dapr-app-id  $FRONTEND_WEBAPP_NAME `
+--dapr-app-port $TARGET_PORT
 ```
 
 ??? tip "Curious to learn more about the command above?"

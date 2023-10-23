@@ -113,12 +113,19 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 - We will start with Installing/Upgrading the Azure Container Apps Extension.
 
     ```shell
+    $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
+    ```
+
+    ```shell
     # Upgrade Azure CLI
     az upgrade
+
     # Login to Azure
     az login 
+
     # Only required if you have multiple subscriptions
-    az account set --subscription <name or id>
+    az account set --subscription $AZURE_SUBSCRIPTION_ID
+
     # Install/Upgrade Azure Container Apps Extension
     az extension add --name containerapp --upgrade
     ```
@@ -179,14 +186,18 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --workspace-name $WORKSPACE_NAME
 
     # Retrieve workspace ID
-    $WORKSPACE_ID=az monitor log-analytics workspace show --query customerId `
-    -g $RESOURCE_GROUP `
-    -n $WORKSPACE_NAME -o tsv
+    $WORKSPACE_ID=az monitor log-analytics workspace show `
+    --resource-group $RESOURCE_GROUP `
+    --workspace-name $WORKSPACE_NAME `
+    --query customerId `
+    --output tsv
 
     # Retrieve workspace secret
-    $WORKSPACE_SECRET=az monitor log-analytics workspace get-shared-keys --query primarySharedKey `
-    -g $RESOURCE_GROUP `
-    -n $WORKSPACE_NAME -o tsv
+    $WORKSPACE_SECRET=az monitor log-analytics workspace get-shared-keys `
+    --resource-group $RESOURCE_GROUP `
+    --workspace-name $WORKSPACE_NAME `
+    --query primarySharedKey `
+    --output tsv
     ```
 
 - Create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net){target=_blank} Instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing){target=_blank} between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
@@ -197,15 +208,15 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     
     # Create application-insights instance
     az monitor app-insights component create `
-    -g $RESOURCE_GROUP `
-    -l $LOCATION `
+    --resource-group $RESOURCE_GROUP `
+    --location $LOCATION `
     --app $APPINSIGHTS_NAME `
     --workspace $WORKSPACE_NAME
     
     # Get Application Insights Instrumentation Key
     $APPINSIGHTS_INSTRUMENTATIONKEY=($(az monitor app-insights component show `
-    --app $APPINSIGHTS_NAME `
-    -g $RESOURCE_GROUP)  | ConvertFrom-Json).instrumentationKey
+    --resource-group $RESOURCE_GROUP `
+    --app $APPINSIGHTS_NAME )  | ConvertFrom-Json).instrumentationKey
     ```
 
 - Now we will create an Azure Container Apps Environment. As a reminder of the different ACA component [check this link in the workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
@@ -215,10 +226,10 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     az containerapp env create `
     --name $ENVIRONMENT `
     --resource-group $RESOURCE_GROUP `
+    --location $LOCATION `
     --logs-workspace-id $WORKSPACE_ID `
     --logs-workspace-key $WORKSPACE_SECRET `
-    --dapr-instrumentation-key $APPINSIGHTS_INSTRUMENTATIONKEY `
-    --location $LOCATION
+    --dapr-instrumentation-key $APPINSIGHTS_INSTRUMENTATIONKEY
     ```
 
 ??? tip "Want to learn what above command does?"
@@ -231,7 +242,11 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
     ```shell
     cd ~\TasksTracker.ContainerApps
-    az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_API_NAME" `
+    --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
     ```
 
     Once this step is completed, you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created, and that there is a new Docker image with a `latest` tag.
@@ -267,11 +282,11 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
     For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
 
-- You can now verify the deployment of the first ACA by navigating to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 resourses created below.
+- You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 resourses created below.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)
 
 !!! success
-    To test the backend api service, either click on the URL output by the last command or copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`, then issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image. 
+    To test the backend api service, either click on the URL output by the last command or copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`, then issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image.
 
     Note that the specific query string matters as you may otherwise get an empty result back. 
 
