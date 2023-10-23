@@ -94,7 +94,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
     !!! tip "What does this code do?"
         The code added is similar to the create operation. The Edit page accepts the TaskId as a Guid, loads the task, and then updates the task by sending an HTTP PUT operation.
 
-- Now we will inject an HTTP client factory and define environment variables. To do so we will register the HttpClientFactory named `BackEndApiExternal` to make it available for injection in controllers. Open the `Program.cs` file and update it with highlighted code below:
+- Now we will inject an HTTP client factory and define environment variables. To do so we will register the HttpClientFactory named `BackEndApiExternal` to make it available for injection in controllers. Open the `Program.cs` file and update it with highlighted code below. Your file may be flattened rather than indented and not contain some of the below elements. Don't worry. Just place the highlighted lines in the right spot:
 
 === "Program.cs"
 
@@ -173,8 +173,12 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
 - Now we will build and push the Web App project docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context. In our case, we need to be on the parent directory which hosts the .csproject.
 
 ```powershell
-cd ~\TasksTracker.ContainerApps 
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$FRONTEND_WEBAPP_NAME" --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+cd ~\TasksTracker.ContainerApps
+
+az acr build `
+--registry $AZURE_CONTAINER_REGISTRY_NAME `
+--image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
+--file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
 ```
 
 - Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-frontend-webapp` has been created and there is a new docker image with a `latest` tag is created.
@@ -221,8 +225,8 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
 
     ```powershell
     az containerapp ingress enable `
-    --name  $BACKEND_API_NAME  `
-    --resource-group  $RESOURCE_GROUP `
+    --name $BACKEND_API_NAME  `
+    --resource-group $RESOURCE_GROUP `
     --target-port $TARGET_PORT `
     --type "internal"
     ```
@@ -243,7 +247,7 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
 
     ```powershell
     az containerapp update `
-    --name "$FRONTEND_WEBAPP_NAME"  `
+    --name "$FRONTEND_WEBAPP_NAME" `
     --resource-group $RESOURCE_GROUP `
     --set-env-vars "BackendApiConfig__BaseUrlExternalHttp=$BACKEND_API_INTERNAL_BASE_URL/"
     ```

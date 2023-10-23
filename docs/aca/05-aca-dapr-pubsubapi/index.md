@@ -43,18 +43,28 @@ To try out the Pub/Sub API, run the Backend API from VS Code by running the belo
 
 === ".NET 6 or below"
 
-    ```powershell   
-
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run
-
+    ```powershell
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    --resources-path "../components" `
+    -- dotnet run
     ```
 
 === ".NET 7 or above"
 
     ```powershell
-
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
-
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    --resources-path "../components" `
+    -- dotnet run --launch-profile https
     ```
 
 Now let's try to publish a message by sending a **POST** request to [http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic](http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic) with the below request body, don't forget to set the `Content-Type` header to `application/json`
@@ -242,20 +252,45 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
 === ".NET 6 or below"
 
     ```powershell
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    --resources-path "../components" `
+    dotnet run 
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
-
-    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port $BACKEND_SERVICE_APP_PORT --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run
-
+    cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+    dapr run `
+    --app-id tasksmanager-backend-processor `
+    --app-port $BACKEND_SERVICE_APP_PORT `
+    --dapr-http-port 3502 `
+    --app-ssl `
+    --resources-path "../components" `
+    dotnet run
     ```
 
 === ".NET 7 or above"
 
-    ```powershell   
+    ```powershell
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    --resources-path "../components" `
+    -- dotnet run --launch-profile https
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
-
-    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port $BACKEND_SERVICE_APP_PORT --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
+    cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+    dapr run `
+    --app-id tasksmanager-backend-processor `
+    --app-port $BACKEND_SERVICE_APP_PORT `
+    --dapr-http-port 3502 `
+    --app-ssl `
+    --resources-path "../components" `
+    -- dotnet run --launch-profile https
     ```
 
 !!! note
@@ -524,21 +559,45 @@ With all those bits in place, we are ready to run the publisher service `Backend
 === ".NET 6 or below"
 
     ```powershell
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    --resources-path "../components" `
+    dotnet run 
     
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" dotnet run 
-    
-    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port $BACKEND_SERVICE_APP_PORT --dapr-http-port 3502 --app-ssl --resources-path "../components" dotnet run
-      
+    cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+    dapr run `
+    --app-id tasksmanager-backend-processor `
+    --app-port $BACKEND_SERVICE_APP_PORT `
+    --dapr-http-port 3502 `
+    --app-ssl `
+    --resources-path "../components" `
+    dotnet run
     ```
 
 === ".NET 7 or above"
 
     ````powershell
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    --resources-path "../components" `
+    -- dotnet run --launch-profile https
     
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
-    
-    ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc> dapr run --app-id tasksmanager-backend-processor --app-port $BACKEND_SERVICE_APP_PORT --dapr-http-port 3502 --app-ssl --resources-path "../components" -- dotnet run --launch-profile https
-    
+    cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+    dapr run `
+    --app-id tasksmanager-backend-processor `
+    --app-port $BACKEND_SERVICE_APP_PORT `
+    --dapr-http-port 3502 `
+    --app-ssl `
+    --resources-path "../components" `
+    -- dotnet run --launch-profile https
     ````
 
 !!! note
@@ -574,8 +633,16 @@ As we have done previously we need to build and deploy both app images to ACR, s
 
 ```powershell
 $BACKEND_SERVICE_NAME="tasksmanager-backend-processor"
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+
+az acr build `
+--registry $AZURE_CONTAINER_REGISTRY_NAME `
+--image "tasksmanager/$BACKEND_API_NAME" `
+--file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+
+az acr build `
+--registry $AZURE_CONTAINER_REGISTRY_NAME `
+--image "tasksmanager/$BACKEND_SERVICE_NAME" `
+--file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 ```
 
 #### 2. Create a new Azure Container App to host the new Backend Background Processor
@@ -647,9 +714,9 @@ Run the command below to create `system-assigned` identity for our Backend Proce
 
 ```powershell
 az containerapp identity assign `
-    --resource-group $RESOURCE_GROUP `
-    --name $BACKEND_SERVICE_NAME `
-    --system-assigned
+--resource-group $RESOURCE_GROUP `
+--name $BACKEND_SERVICE_NAME `
+--system-assigned
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be as the below, keep a note of the property `principalId` as we are going to use it in the next step.
@@ -672,12 +739,14 @@ Run the command below to associate the `system-assigned` identity with the acces
 
 ```powershell
 $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
-$principalId = "<your principal id which was generated above>" # Principal Id after creating system identity for Backend Processor Container app 
-$roleNameOrId =  "Azure Service Bus Data Receiver" # Built in role name
+$BACKEND_SVC_PRINCIPAL_ID = "<your principal id which was generated above>" # Principal Id after creating system identity for Backend Processor Container app 
+$SVC_BUS_DATA_RECEIVER_ROLE = "Azure Service Bus Data Receiver" # Built in role name
+```
 
+```powershell
 az role assignment create `
---assignee $principalId `
---role $roleNameOrId `
+--assignee $BACKEND_SVC_PRINCIPAL_ID `
+--role $SVC_BUS_DATA_RECEIVER_ROLE `
 --scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
 ```
 
@@ -686,13 +755,13 @@ az role assignment create `
 We'll do the same with Backend API container app, but we will use a different Azure built-in roles for Azure Service Bus which is the role `Azure Service Bus Data Sender` as the Backend API is a publisher of the messages. Run the command below to associate the `system-assigned` with access-control role `Azure Service Bus Data Sender`:
 
 ```powershell
-$AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription
-$principalId = "<your principal id which was generated in module 4. You can find it on the azure portal under the specific container identity section>" # Principal Id after creating system identity for Backend API Container app
-$roleNameOrId =  "Azure Service Bus Data Sender" # Built in role name
+$SVC_BUS_DATA_SENDER_ROLE = "Azure Service Bus Data Sender" # Built in role name
+```
 
+```powershell
 az role assignment create `
---assignee $principalId `
---role $roleNameOrId `
+--assignee $BACKEND_API_PRINCIPAL_ID `
+--role $SVC_BUS_DATA_SENDER_ROLE `
 --scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
 ```
 

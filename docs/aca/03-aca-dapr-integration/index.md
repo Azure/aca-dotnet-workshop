@@ -49,14 +49,26 @@ $UI_APP_PORT=<web frontend ui application https port found under Properties->lau
 
     ```powershell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-    dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run
+
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    -- dotnet run
     ```
 
 === ".NET 7 or above"
 
     ```powershell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-    dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
+
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    -- dotnet run --launch-profile https
     ```
 
  ![app-port](../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png)
@@ -75,7 +87,7 @@ $UI_APP_PORT=<web frontend ui application https port found under Properties->lau
 
  ![dapr-logs](../../assets/images/03-aca-dapr-integration/dapr-logs.jpg)
 
- Now to test invoking the Web API using Dapr sidecar, you can issue HTTP GET request to the following URL: [http://localhost:3500/v1.0/invoke/tasksmanager-backend-api/method/api/tasks?createdBy=tjoudeh@bitoftech.net](http://localhost:3500/v1.0/invoke/tasksmanager-backend-api/method/api/tasks?createdBy=tjoudeh@bitoftech.net){target=_blank}
+ Now to test invoking the Web API using Dapr sidecar, you can issue an **GET** request to the following URL: [http://localhost:3500/v1.0/invoke/tasksmanager-backend-api/method/api/tasks?createdBy=tjoudeh@bitoftech.net](http://localhost:3500/v1.0/invoke/tasksmanager-backend-api/method/api/tasks?createdBy=tjoudeh@bitoftech.net){target=_blank}
 
 ??? info "Want to learn more about what is happening here?"
     What happened here is that Dapr exposes its HTTP and gRPC APIs as a sidecar process which can access our Backend Web API. We didn't do any changes to the application code to include any Dapr runtime code. We also ensured separation of the application logic for improved supportability.
@@ -173,7 +185,7 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     In both options, the final request will be rewritten by the Dapr .NET SDK before it gets executed. In our case and for the GET operation it will be written to this request: `http://127.0.0.1:3500/v1/invoke/tasksmanager-backend-api/method/api/tasks?createdBy=tjoudeh@bitoftech.net`
 
-- We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected. To do so run the two commands commands shown below (ensure that you are on the right project directory when running each command). 
+- We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected. To do so run the two commands commands shown below (ensure that you are on the right project directory when running each command).
 
 !!! note
     You will need a second terminal, which will not have the same environment variables for the API and UI ports. Set the ports in that new terminal just like you did earlier in this module.
@@ -181,16 +193,43 @@ The SDK offers developers three ways of making remote service invocation calls:
 === ".NET 6 or below"
 
     ```powershell
-    ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui> dapr run --app-id tasksmanager-frontend-webapp --app-port $UI_APP_PORT --dapr-http-port 3501 --app-ssl -- dotnet run 
+    cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui 
+    dapr run `
+    --app-id tasksmanager-frontend-webapp `
+    --app-port $UI_APP_PORT `
+    --dapr-http-port 3501 `
+    --app-ssl `
+    -- dotnet run 
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    -- dotnet run
     ```
+
 === ".NET 7 or above"
 
     ```powershell
-    ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui> dapr run --app-id tasksmanager-frontend-webapp --app-port $UI_APP_PORT --dapr-http-port 3501 --app-ssl -- dotnet run --launch-profile https
+    cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui
 
-    ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api> dapr run --app-id tasksmanager-backend-api --app-port $API_APP_PORT --dapr-http-port 3500 --app-ssl -- dotnet run --launch-profile https
+    dapr run `
+    --app-id tasksmanager-frontend-webapp `
+    --app-port $UI_APP_PORT `
+    --dapr-http-port 3501 `
+    --app-ssl `
+    -- dotnet run --launch-profile https
+
+    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+
+    dapr run `
+    --app-id tasksmanager-backend-api `
+    --app-port $API_APP_PORT `
+    --dapr-http-port 3500 `
+    --app-ssl `
+    -- dotnet run --launch-profile https
     ```
 
  Notice how we assigned the Dapr App Id “tasksmanager-frontend-webapp” to the Frontend WebApp.
