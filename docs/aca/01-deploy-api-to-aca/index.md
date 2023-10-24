@@ -113,21 +113,24 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 - We will start with Installing/Upgrading the Azure Container Apps Extension.
 
     ```shell
-    $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
-    ```
-
-    ```shell
     # Upgrade Azure CLI
     az upgrade
 
-    # Login to Azure
-    az login 
-
-    # Only required if you have multiple subscriptions
-    az account set --subscription $AZURE_SUBSCRIPTION_ID
-
     # Install/Upgrade Azure Container Apps Extension
     az extension add --name containerapp --upgrade
+
+    # Login to Azure
+    az login 
+    ```
+
+- You may be able to use the queried Azure subscription ID or you may need to set it manually depending on your setup.
+
+    ```shell
+    # Get/Set the Azure Subscription ID. 
+    # $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
+    $AZURE_SUBSCRIPTION_ID = az account show --query id --output tsv
+    # Only required if you have multiple subscriptions
+    #az account set --subscription $AZURE_SUBSCRIPTION_ID
     ```
 
 - Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:
@@ -216,7 +219,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     # Get Application Insights Instrumentation Key
     $APPINSIGHTS_INSTRUMENTATIONKEY=($(az monitor app-insights component show `
     --resource-group $RESOURCE_GROUP `
-    --app $APPINSIGHTS_NAME )  | ConvertFrom-Json).instrumentationKey
+    --app $APPINSIGHTS_NAME ) | ConvertFrom-Json).instrumentationKey
     ```
 
 - Now we will create an Azure Container Apps Environment. As a reminder of the different ACA component [check this link in the workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
