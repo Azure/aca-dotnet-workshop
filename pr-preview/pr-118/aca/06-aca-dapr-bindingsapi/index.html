@@ -1,0 +1,2256 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Page description -->
+    
+        <meta name="description" content="Azure Container Apps - Workshop" />
+    
+
+    <!-- Page author -->
+    
+        <meta name="author" content="Microsoft" />
+    
+
+    <!-- Canonical -->
+    
+        <link rel="canonical" href="https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-bindings-building-block/">
+    
+
+    <!-- Previous page -->
+    
+        <link rel="prev" href="../05-aca-dapr-pubsubapi/" />
+    
+
+    <!-- Next page -->
+    
+        <link rel="next" href="../07-aca-cron-bindings/" />
+    
+
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" />
+
+    <!-- Generator banner -->
+    <meta
+            name="generator"
+            content="mkdocs-1.5.3, $md-name$-$md-version$"
+    />
+
+    
+      
+        <title>Module 6 - ACA with Dapr Bindings Building Block - Azure Container Apps - Workshop</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.35e1ed30.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Ubuntu";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-ZB635RP321"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-ZB635RP321",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-ZB635RP321",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+    
+        <meta name="og:url" content="https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-bindings-building-block/" />
+    
+
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-6-aca-with-dapr-bindings-building-block" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Azure Container Apps - Workshop" class="md-header__button md-logo" aria-label="Azure Container Apps - Workshop" data-md-component="logo">
+      
+  <img src="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Azure Container Apps - Workshop
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Module 6 - ACA with Dapr Bindings Building Block
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Azure Container Apps - Workshop" class="md-nav__button md-logo" aria-label="Azure Container Apps - Workshop" data-md-component="logo">
+      
+  <img src="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" alt="logo">
+
+    </a>
+    Azure Container Apps - Workshop
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homepage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../00-workshop-intro/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Workshop Introduction
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Workshop Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-workshop-intro/1-aca-core-components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ACA Core Components Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-workshop-intro/2-scenario-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scenario and Solution Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-workshop-intro/3-dapr-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dapr Integration in ACA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-workshop-intro/4-prerequisites/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prerequisites
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-deploy-api-to-aca/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 1 - Deploy Backend API to ACA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-aca-comm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 2 - Communication between Microservices in ACA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-aca-dapr-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 3 - Dapr Integration with ACA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-aca-dapr-stateapi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 4 - ACA State Store With Dapr State Management API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-aca-dapr-pubsubapi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 5 - ACA Async Communication with Dapr Pub/Sub API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Module 6 - ACA with Dapr Bindings Building Block
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Module 6 - ACA with Dapr Bindings Building Block
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-dapr-bindings-building-block" class="md-nav__link">
+    Overview of Dapr Bindings Building Block
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-the-backend-background-processor-project" class="md-nav__link">
+    Updating the Backend Background Processor Project
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating the Backend Background Processor Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" class="md-nav__link">
+    1. Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-dapr-input-binding-component-file" class="md-nav__link">
+    2. Create Dapr Input Binding Component File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-create-dapr-output-binding-component-file" class="md-nav__link">
+    3. Create Dapr Output Binding Component File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-use-dapr-client-sdk-to-invoke-the-output-binding" class="md-nav__link">
+    4. Use Dapr client SDK to Invoke the Output Binding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-test-dapr-bindings-locally" class="md-nav__link">
+    5. Test Dapr Bindings Locally
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-dapr-sendgrid-output-bindings" class="md-nav__link">
+    Use Dapr SendGrid Output Bindings
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Dapr SendGrid Output Bindings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-dapr-sendgrid-output-binding-component-file" class="md-nav__link">
+    1. Create Dapr SendGrid Output Binding Component file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-remove-sendgrid-package-reference" class="md-nav__link">
+    2. Remove SendGrid package reference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-update-sendemail-code-to-use-output-bindings-instead-of-sendgrid-sdk" class="md-nav__link">
+    3. Update SendEmail Code to Use Output Bindings Instead of SendGrid SDK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-dapr-secret-store-component-with-azure-key-vault" class="md-nav__link">
+    Configure Dapr Secret Store Component with Azure Key Vault
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Dapr Secret Store Component with Azure Key Vault">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-an-azure-key-vault-resource" class="md-nav__link">
+    1. Create an Azure Key Vault resource
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" class="md-nav__link">
+    2. Grant Backend Processor App a Role To Read Secrets from Azure Key Vault
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-create-secrets-in-the-azure-key-vault" class="md-nav__link">
+    3. Create Secrets in the Azure Key Vault
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-create-a-aca-dapr-secrets-store-component-file" class="md-nav__link">
+    4. Create a ACA Dapr Secrets Store Component file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" class="md-nav__link">
+    5. Create Input and Output Binding Component Files Matching Azure Container Apps Specs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-create-sendgrid-output-binding-component-file-matching-azure-container-apps-specs" class="md-nav__link">
+    6. Create SendGrid Output Binding Component File Matching Azure Container Apps Specs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" class="md-nav__link">
+    Deploy a New Revision of the Backend Background Processor App to ACA
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy a New Revision of the Backend Background Processor App to ACA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-build-the-backend-background-processor-image-and-push-it-to-acr" class="md-nav__link">
+    1. Build the Backend Background Processor Image and Push it To ACR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-dapr-secret-store-component-to-aca-environment" class="md-nav__link">
+    2. Add Dapr Secret Store Component to ACA Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-add-three-bindings-dapr-components-to-aca-environment" class="md-nav__link">
+    3. Add three Bindings Dapr Components to ACA Environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy-new-revisions-of-the-backend-background-processor-to-aca" class="md-nav__link">
+    4. Deploy new revisions of the Backend Background Processor to ACA
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Deploy new revisions of the Backend Background Processor to ACA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-remove-sendgrid-secret-from-the-backend-background-processor-app" class="md-nav__link">
+    5. Remove SendGrid Secret from the Backend Background Processor App
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-aca-cron-bindings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-aca-monitoring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 8 - ACA Monitoring and Observability with Application Insights
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-aca-autoscale-keda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 9 - ACA Auto Scaling with KEDA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../10-aca-iac-bicep/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Module 10 - Deployment Via Bicep and DevOps
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_12" id="__nav_12_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            Module 10 - Deployment Via Bicep and DevOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-aca-iac-bicep/iac-bicep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploy Infrastructure using Bicep
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-aca-iac-bicep/ci-cd-git-action/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploy Infrastructure using Bicep via GitHub Actions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-aca-iac-bicep/ci-cd-azdo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploy infrastructure using Azure Devops Pipeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-aca-landing-zone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module 11 - Integration with Azure Container Apps landing zone accelerator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-about-the-authors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About The Authors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Appendix
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            Appendix
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Debug and Launch Dapr Applications in VSCode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-appendix/02-github-local-codespaces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing Changes Locally or with GitHub Codespaces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-appendix/03-variables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Variables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-dapr-bindings-building-block" class="md-nav__link">
+    Overview of Dapr Bindings Building Block
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-the-backend-background-processor-project" class="md-nav__link">
+    Updating the Backend Background Processor Project
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating the Backend Background Processor Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" class="md-nav__link">
+    1. Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-dapr-input-binding-component-file" class="md-nav__link">
+    2. Create Dapr Input Binding Component File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-create-dapr-output-binding-component-file" class="md-nav__link">
+    3. Create Dapr Output Binding Component File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-use-dapr-client-sdk-to-invoke-the-output-binding" class="md-nav__link">
+    4. Use Dapr client SDK to Invoke the Output Binding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-test-dapr-bindings-locally" class="md-nav__link">
+    5. Test Dapr Bindings Locally
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-dapr-sendgrid-output-bindings" class="md-nav__link">
+    Use Dapr SendGrid Output Bindings
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Dapr SendGrid Output Bindings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-dapr-sendgrid-output-binding-component-file" class="md-nav__link">
+    1. Create Dapr SendGrid Output Binding Component file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-remove-sendgrid-package-reference" class="md-nav__link">
+    2. Remove SendGrid package reference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-update-sendemail-code-to-use-output-bindings-instead-of-sendgrid-sdk" class="md-nav__link">
+    3. Update SendEmail Code to Use Output Bindings Instead of SendGrid SDK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-dapr-secret-store-component-with-azure-key-vault" class="md-nav__link">
+    Configure Dapr Secret Store Component with Azure Key Vault
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Dapr Secret Store Component with Azure Key Vault">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-an-azure-key-vault-resource" class="md-nav__link">
+    1. Create an Azure Key Vault resource
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" class="md-nav__link">
+    2. Grant Backend Processor App a Role To Read Secrets from Azure Key Vault
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-create-secrets-in-the-azure-key-vault" class="md-nav__link">
+    3. Create Secrets in the Azure Key Vault
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-create-a-aca-dapr-secrets-store-component-file" class="md-nav__link">
+    4. Create a ACA Dapr Secrets Store Component file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" class="md-nav__link">
+    5. Create Input and Output Binding Component Files Matching Azure Container Apps Specs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-create-sendgrid-output-binding-component-file-matching-azure-container-apps-specs" class="md-nav__link">
+    6. Create SendGrid Output Binding Component File Matching Azure Container Apps Specs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" class="md-nav__link">
+    Deploy a New Revision of the Backend Background Processor App to ACA
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy a New Revision of the Backend Background Processor App to ACA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-build-the-backend-background-processor-image-and-push-it-to-acr" class="md-nav__link">
+    1. Build the Backend Background Processor Image and Push it To ACR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-dapr-secret-store-component-to-aca-environment" class="md-nav__link">
+    2. Add Dapr Secret Store Component to ACA Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-add-three-bindings-dapr-components-to-aca-environment" class="md-nav__link">
+    3. Add three Bindings Dapr Components to ACA Environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy-new-revisions-of-the-backend-background-processor-to-aca" class="md-nav__link">
+    4. Deploy new revisions of the Backend Background Processor to ACA
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Deploy new revisions of the Backend Background Processor to ACA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-remove-sendgrid-secret-from-the-backend-background-processor-app" class="md-nav__link">
+    5. Remove SendGrid Secret from the Backend Background Processor App
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="module-6-aca-with-dapr-bindings-building-block">Module 6 - ACA with Dapr Bindings Building Block<a class="headerlink" href="#module-6-aca-with-dapr-bindings-building-block" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Module Duration</p>
+<p>90 minutes</p>
+</div>
+<p>In this module we are going to extend the backend background processor service  (<code>ACA-Processor Backend</code>) to interface with an external system which is outside our Tasks Tracker microservice application.
+To achieve this in a simple way we will utilize <a href="https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/" target="_blank">Dapr Input and Output Bindings</a>.</p>
+<p>The external system owns an Azure Storage Queue which the Tasks Tracker microservice application <strong>reacts</strong> to through an event handler (aka <strong>Input Binding</strong>) that receives and processes the message coming to the storage queue. Once the processing of the message completes and stores the task into Cosmos DB, the system will <strong>trigger</strong> an event (aka <strong>Output binding</strong>) that invokes the external service which in
+turn stores the content of the message into an Azure Blob Storage container. Here it is important to emphasize that both the Azure Storage Queue and the Azure Storage Blob belong to the external system.</p>
+<p>The rest of this module will implement the three scenarios mentioned below:</p>
+<ul>
+<li>Trigger a process on the <code>ACA-Processor Backend</code> based on a <strong>message sent to a specific Azure Storage Queue</strong>. This scenario will assume that the Azure Storage Queue is an external system to which external clients can submit tasks.</li>
+<li>From the service <code>ACA-Processor Backend</code> we will <strong>invoke an external resource</strong> that stores the content of the incoming task from the external queue as a JSON blob file on Azure Storage Blobs.</li>
+<li>Remove the SendGrid SDK as well as the custom code created in the previous module to send emails and replace it with <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/" target="_blank">Dapr SendGrid output binding.</a></li>
+</ul>
+<p>Take a look at the high-level architecture diagram below to understand the flow of input and output bindings in Dapr:</p>
+<p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/simple-binding.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="simple-binding-arch" src="../../assets/images/06-aca-dapr-bindingsapi/simple-binding.jpg" /></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Those 3rd party external services could be services hosted on another cloud provider, different Azure subscription, or even on premise. Dapr bindings are usually used to trigger an application with events coming in from external systems as well as interface with external systems.</p>
+<p>For simplicity of the workshop we are going to host those two supposedly external services in the same subscription of our Tasks Tracker microservice application.</p>
+</div>
+<p>If you look at Dapr Bindings Building Block, you will notice a lot of similarities with the Pub/Sub Building Block that we covered in the <a href="../05-aca-dapr-pubsubapi/">previous module</a>. But remember that Pub/Sub Building Block is meant to be used for async communication between services <strong>within your solution</strong>. The Binding Building Block has a wider scope and it mainly focuses on connectivity and interoperability across different systems, disparate applications, and services outside the boundaries of your own application. For a full list of <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/" target="_blank">supported bindings</a> visit this link.</p>
+<h3 id="overview-of-dapr-bindings-building-block">Overview of Dapr Bindings Building Block<a class="headerlink" href="#overview-of-dapr-bindings-building-block" title="Permanent link">&para;</a></h3>
+<p>Let's take a look at the detailed Dapr Bindings Building Block architecture diagram that we are going to implement in this module to fulfill the use case we discussed earlier:
+<a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/detailed-binding.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="detailed-binding-arch" src="../../assets/images/06-aca-dapr-bindingsapi/detailed-binding.jpg" /></a></p>
+<p>Looking at the diagram we notice the following:</p>
+<ul>
+<li>In order to receive events and data from the external resource (Azure Storage Queue) our <code>ACA-Processor Backend</code> service needs to register a public endpoint that will become an event handler.</li>
+<li>This binding configuration between the external resource and our service will be configured by using the <code>Input Binding Configuration Yaml</code> file. The Dapr sidecar of the background service will read the configuration and subscribe to the endpoint defined for the external resource. In our case, it will be a specific Azure Storage Queue.</li>
+<li>When a message is published to the storage queue, the input binding component running in the Dapr sidecar picks it up and triggers the event.</li>
+<li>The Dapr sidecar invokes the endpoint (event handler defined in the <code>ACA-Processor Backend</code> Service) configured for the binding. In our case, it will be an endpoint that can be reached by invoking a <code>POST</code> operation <code>http://localhost:3502/ExternalTasksProcessor/Process</code> and the request body content will be the JSON payload of the published message to the Azure Storage Queue.</li>
+<li>When the event is handled in our <code>ACA-Processor Backend</code> and the business logic is completed, this endpoint needs to return an HTTP response with a <code>200 OK</code> status to acknowledge that processing is complete. If the event handling is not completed or there is an error, this endpoint should return an HTTP 4xx or 5xx status code.</li>
+<li>In order to enable the service <code>ACA-Processor Backend</code> to trigger an event that invokes an external resource, we need to use the <code>Output Binding Configuration Yaml</code> file to configure the binding between our service and the external resource (Azure Blob Storage) and how to connect to it.</li>
+<li>Once the Dapr sidecar reads the binding configuration file, our service can trigger an event that invokes the output binding API on the Dapr sidecar. In our case, the event will be creating a new blob file containing the content of the message we read earlier from the Azure Storage Queue.</li>
+<li>With this in place, our service <code>ACA-Processor Backend</code> will be ready to invoke the external resource by sending a <strong>POST</strong> operation to the endpoint <code>http://localhost:3502/v1.0/bindings/ExternalTasksBlobstore</code> and the JSON payload will contain the content below. Alternatively, we can use the Dapr client SDK to invoke this output biding to invoke the external service and store the file in Azure Blob Storage.</li>
+</ul>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kName</span><span class="s2">&quot;: &quot;</span><span class="err">Task</span><span class="w"> </span><span class="err">Comi</span><span class="kc">n</span><span class="err">g</span><span class="w"> </span><span class="kc">fr</span><span class="err">om</span><span class="w"> </span><span class="err">Ex</span><span class="kc">ternal</span><span class="w"> </span><span class="err">Sys</span><span class="kc">te</span><span class="err">m</span><span class="s2">&quot;,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kAssig</span><span class="kc">ne</span><span class="err">dTo</span><span class="s2">&quot;: &quot;</span><span class="err">user</span><span class="mi">1</span><span class="err">@ho</span><span class="kc">t</span><span class="err">mail.com</span><span class="s2">&quot;,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kCrea</span><span class="kc">te</span><span class="err">dBy</span><span class="s2">&quot;: &quot;</span><span class="kc">t</span><span class="err">joudeh@bi</span><span class="kc">t</span><span class="err">o</span><span class="kc">fte</span><span class="err">ch.</span><span class="kc">net</span><span class="s2">&quot;,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kDueDa</span><span class="kc">te</span><span class="s2">&quot;: &quot;</span><span class="mi">2022-08-19</span><span class="err">T</span><span class="mi">12</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mf">22.0983978</span><span class="err">Z</span><span class="s2">&quot;</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="s2">    }&quot;</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&quot;operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;create&quot;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Let's start by updating our Backend Background Processor project and define the input and output bindings configuration files and event handlers.</p>
+<p>To proceed with this workshop, we need to provision the Azure Storage Account to start responding to messages published to a queue and then later use the same storage account to store blob files as an external event.
+Run the PowerShell script below to create Azure Storage Account and get the master key.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We will be retrieving the storage account key for local dev testing purposes. Note that the command below will return two keys. You will only need one of them for this exercise.
+When deploying the changes to ACA, we are going to store the storage key securely into Azure Key Vault using <a href="https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/" target="_blank">Dapr Secrets Store Building Block with AKV</a>.</p>
+<p>We didn't use Azure Manged Identity here because the assumption is that those services are not part of our solution and thus they could theoretically be a non AD compliant services or hosted on another cloud. 
+If these services where part of your application's ecosystem it is always recommended that you use Azure Managed Identity.</p>
+</div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$STORAGE_ACCOUNT_NAME</span> <span class="p">=</span> <span class="s2">&quot;sttaskstracker$RANDOM_STRING&quot;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$STORAGE_ACCOUNT_NAME</span> <span class="p">`</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">-</span><span class="n">-location</span> <span class="nv">$LOCATION</span> <span class="p">`</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">-</span><span class="n">-sku</span> <span class="n">Standard_LRS</span> <span class="p">`</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">-</span><span class="n">-kind</span> <span class="n">StorageV2</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c"># List Azure storage keys</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">keys</span> <span class="n">list</span> <span class="p">`</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">-</span><span class="n">-account-name</span> <span class="nv">$STORAGE_ACCOUNT_NAME</span> <span class="p">`</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c"># Get the primary storage account key</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nv">$STORAGE_ACCOUNT_KEY</span><span class="p">=($(</span><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">keys</span> <span class="n">list</span> <span class="p">`</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">-</span><span class="n">-account-name</span> <span class="nv">$STORAGE_ACCOUNT_NAME</span> <span class="p">`</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">)</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span><span class="p">)[</span><span class="n">0</span><span class="p">].</span><span class="n">value</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nb">echo </span><span class="s2">&quot;Storage Account Name: $STORAGE_ACCOUNT_NAME&quot;</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nb">echo </span><span class="s2">&quot;Storage Account Key: $STORAGE_ACCOUNT_KEY&quot;</span>
+</span></code></pre></div>
+<h3 id="updating-the-backend-background-processor-project">Updating the Backend Background Processor Project<a class="headerlink" href="#updating-the-backend-background-processor-project" title="Permanent link">&para;</a></h3>
+<h4 id="1-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue">1. Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue<a class="headerlink" href="#1-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" title="Permanent link">&para;</a></h4>
+<p>Let's add an endpoint that will be responsible to handle the event when a message is published to Azure Storage Queue. This endpoint will start receiving the message published from the external service.</p>
+<p>Start by adding a new controller <strong>Controllers</strong> folder under the <strong>TasksTracker.Processor.Backend.Svc</strong> project:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">ExternalTasksProcessorController.cs</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Dapr.Client</span><span class="p">;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc.Models</span><span class="p">;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc.Controllers</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">{</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="na">[Route(&quot;ExternalTasksProcessor&quot;)]</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="na">[ApiController]</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ExternalTasksProcessorController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ExternalTasksProcessorController</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">DaprClient</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nf">ExternalTasksProcessorController</span><span class="p">(</span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ExternalTasksProcessorController</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">DaprClient</span><span class="w"> </span><span class="n">daprClient</span><span class="p">)</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">            </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">            </span><span class="n">_daprClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">daprClient</span><span class="p">;</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">        </span><span class="na">[HttpPost(&quot;process&quot;)]</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ProcessTaskAndStore</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">TaskModel</span><span class="w"> </span><span class="n">taskModel</span><span class="p">)</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">            </span><span class="k">try</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">                </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Started processing external task message from storage queue. Task Name: &#39;{0}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskName</span><span class="p">);</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">                </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">                </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskCreatedOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">;</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">                </span><span class="c1">//Dapr SideCar Invocation (save task to a state store)</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">                </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">InvokeMethodAsync</span><span class="p">(</span><span class="n">HttpMethod</span><span class="p">.</span><span class="n">Post</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tasksmanager-backend-api&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">$&quot;api/tasks&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">);</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w">                </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Saved external task to the state store successfully. Task name: &#39;{0}&#39;, Task Id: &#39;{1}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskName</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="p">);</span>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">                </span><span class="c1">//ToDo: code to invoke external binding and store queue message content into blob file in Azure storage</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nf">Ok</span><span class="p">();</span>
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w">            </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="p">)</span>
+</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="w">                </span><span class="k">throw</span><span class="p">;</span>
+</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="tip">
+<summary>Curious to know more about the code?</summary>
+<ul>
+<li>
+<p>We defined an action method named <code>ProcessTaskAndStore</code> which can be accessed by sending HTTP POST operation on the 
+endpoint <code>ExternalTasksProcessor/Process</code>. </p>
+</li>
+<li>
+<p>This action method accepts the TaskModel in the request body as JSON payload.This is what will be received from the external service (Azure Storage Queue). </p>
+</li>
+<li>
+<p>Within this action method, we are going to store the received task by sending a POST request to <code>/api/tasks</code> which is part of the backend api named <code>tasksmanager-backend-api</code>.</p>
+</li>
+<li>
+<p>Then we return <code>200 OK</code> to acknowledge that message received is processed successfully and should be removed from the external service queue.</p>
+</li>
+</ul>
+</details>
+<h4 id="2-create-dapr-input-binding-component-file">2. Create Dapr Input Binding Component File<a class="headerlink" href="#2-create-dapr-input-binding-component-file" title="Permanent link">&para;</a></h4>
+<p>Now we need to create the component configuration file which will describe the configuration as well as how our backend background processor will start handling events coming from the external service (Azure Storage Queues). To do so, add a new file under <strong>components</strong> folder.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">dapr-bindings-in-storagequeue.yaml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dapr.io/v1alpha1</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Component</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">externaltasksmanager</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.azure.storagequeues</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccount</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Name&gt;&quot;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccessKey</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Key&gt;&quot;</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;external-tasks-queue&quot;</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodeBase64</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">route</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/externaltasksprocessor/process</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="tip">
+<summary>Curious to learn more about the specification of yaml file?</summary>
+<p>The full specifications of yaml file with Azure Storage Queues can be found on <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/storagequeues/" target="_blank">this link</a>, but let's go over the configuration we have added here:</p>
+<ul>
+<li>The type of binding is <code>bindings.azure.storagequeues</code>.</li>
+<li>The name of this input binding is <code>externaltasksmanager</code>.</li>
+<li>We are setting the <code>storageAccount</code> name, <code>storageAccessKey</code> value, and the <code>queue</code> name. Those properties will describe how the event handler we added can connect to the external service.
+You can create any queue you prefer on the Azure Storage Account we created to simulate an external system.</li>
+<li>We are setting the <code>route</code> property to the value <code>/externaltasksprocessor/process</code> which is the address of the endpoint we have just added so POST requests are sent to this endpoint.</li>
+<li>We are setting the property <code>decodeBase64</code> to <code>true</code> as the message queued in the Azure Storage Queue is Base64 encoded.</li>
+</ul>
+</details>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The value of the Metadata <code>storageAccessKey</code> is used as plain text here for local dev scenario. We will see how we are going to store this key securely in Azure Key Vault and use Dapr Secrets Store API to read the access key.</p>
+</div>
+<h4 id="3-create-dapr-output-binding-component-file">3. Create Dapr Output Binding Component File<a class="headerlink" href="#3-create-dapr-output-binding-component-file" title="Permanent link">&para;</a></h4>
+<p>Now we need to create the component configuration file which will describe the configuration and how our service <code>ACA-Processor Backend</code> will be able to invoke the external service (Azure Blob Storage) and be able to create and store a JSON blob file that contains the content of the message received from Azure Storage Queues.</p>
+<p>To do so, add a new file folder <strong>components</strong>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">dapr-bindings-out-blobstorage.yaml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dapr.io/v1alpha1</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Component</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">externaltasksblobstore</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.azure.blobstorage</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccount</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Name&gt;&quot;</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccessKey</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Key&gt;&quot;</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">container</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;externaltaskscontainer&quot;</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodeBase64</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="tip">
+<summary>Curious to learn more about the specification of yaml file?</summary>
+<p>The full specifications of yaml file with Azure blob storage can be found on <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/" target="_blank">this link</a>, 
+but let's go over the configuration we have added here:</p>
+<ul>
+<li>The type of binding is <code>bindings.azure.blobstorage</code>.</li>
+<li>The name of this output binding is <code>externaltasksblobstore</code>. We will use this name when we use the Dapr SDK to trigger the output binding.</li>
+<li>We are setting the <code>storageAccount</code> name, <code>storageAccessKey</code> value, and the <code>container</code> name. Those properties will describe how our backend background service will be able to connect to the external
+service and create a blob file. We will assume that there is a container already created on the external service and named <code>externaltaskscontainer</code> as shown in the image below</li>
+</ul>
+<p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/StorageAccountContainer.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Storage-Account-Container" src="../../assets/images/06-aca-dapr-bindingsapi/StorageAccountContainer.png" /></a></p>
+<ul>
+<li>We are setting the property <code>decodeBase64</code>  to <code>false</code> as we don't want to encode file content to base64 images, we need to store the file content as is.</li>
+</ul>
+</details>
+<h4 id="4-use-dapr-client-sdk-to-invoke-the-output-binding">4. Use Dapr client SDK to Invoke the Output Binding<a class="headerlink" href="#4-use-dapr-client-sdk-to-invoke-the-output-binding" title="Permanent link">&para;</a></h4>
+<p>Now we need to invoke the output binding by using the .NET SDK.</p>
+<p>Update and replace the code in the file with the code below. Pay close attention to the updated <strong>ProcessTaskAndStore</strong> action method:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">ExternalTasksProcessorController.cs</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Dapr.Client</span><span class="p">;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc.Models</span><span class="p">;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc.Controllers</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">{</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="na">[Route(&quot;ExternalTasksProcessor&quot;)]</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="na">[ApiController]</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ExternalTasksProcessorController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ExternalTasksProcessorController</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">DaprClient</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="hll"><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">OUTPUT_BINDING_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;externaltasksblobstore&quot;</span><span class="p">;</span>
+</span></span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="hll"><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">OUTPUT_BINDING_OPERATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;create&quot;</span><span class="p">;</span>
+</span></span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nf">ExternalTasksProcessorController</span><span class="p">(</span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">ExternalTasksProcessorController</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">DaprClient</span><span class="w"> </span><span class="n">daprClient</span><span class="p">)</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">            </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">            </span><span class="n">_daprClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">daprClient</span><span class="p">;</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">        </span><span class="na">[HttpPost(&quot;process&quot;)]</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ProcessTaskAndStore</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">TaskModel</span><span class="w"> </span><span class="n">taskModel</span><span class="p">)</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">            </span><span class="k">try</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">                </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Started processing external task message from storage queue. Task Name: &#39;{0}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskName</span><span class="p">);</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">                </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">                </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskCreatedOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">;</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">                </span><span class="c1">//Dapr SideCar Invocation (save task to a state store)</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="w">                </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">InvokeMethodAsync</span><span class="p">(</span><span class="n">HttpMethod</span><span class="p">.</span><span class="n">Post</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tasksmanager-backend-api&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">$&quot;api/tasks&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">);</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">                </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Saved external task to the state store successfully. Task name: &#39;{0}&#39;, Task Id: &#39;{1}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskName</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="p">);</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">                </span><span class="c1">//code to invoke external binding and store queue message content into blob file in Azure storage</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="hll"><span class="w">                </span><span class="n">IReadOnlyDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">metaData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">()</span>
+</span></span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="hll"><span class="w">                    </span><span class="p">{</span>
+</span></span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="hll"><span class="w">                        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;blobName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">$&quot;{taskModel.TaskId}.json&quot;</span><span class="w"> </span><span class="p">},</span>
+</span></span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="hll"><span class="w">                    </span><span class="p">};</span>
+</span></span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="hll">
+</span></span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="hll">
+</span></span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="hll"><span class="w">                 </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">InvokeBindingAsync</span><span class="p">(</span><span class="n">OUTPUT_BINDING_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT_BINDING_OPERATION</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">,</span><span class="w"> </span><span class="n">metaData</span><span class="p">);</span>
+</span></span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a><span class="hll">
+</span></span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a><span class="hll"><span class="w">                </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Invoked output binding &#39;{0}&#39; for external task. Task name: &#39;{1}&#39;, Task Id: &#39;{2}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT_BINDING_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskName</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="p">);</span>
+</span></span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>
+</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nf">Ok</span><span class="p">();</span>
+</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a><span class="w">            </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="p">)</span>
+</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a><span class="w">                </span><span class="k">throw</span><span class="p">;</span>
+</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-56"><a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="tip">
+<summary>Curious to know more about the code?</summary>
+<p>Looking at the <code>ProcessTaskAndStore</code> action method above, you will see that we are calling the method <code>InvokeBindingAsync</code> and we are passing the binding name <code>externaltasksblobstore</code> 
+defined in the configuration file, as well the second parameter <code>create</code> which is the action we need to carry against the external blob storage. </p>
+<p>You can for example delete or get a content of a certain file. For a full list of supported actions on Azure Blob Storage, <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/#binding-support" target="_blank">visit this link</a>.</p>
+<p>Notice how are setting the file name we are storing at the external service. We need the file names to be created using the same Task Identifier, so we will pass the key <code>blobName</code> with the file name values 
+into the <code>metaData</code> dictionary.</p>
+</details>
+<h4 id="5-test-dapr-bindings-locally">5. Test Dapr Bindings Locally<a class="headerlink" href="#5-test-dapr-bindings-locally" title="Permanent link">&para;</a></h4>
+<p>Now we are ready to give it an end-to-end test on our dev machines. Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together
+in this <a href="../13-appendix/01-run-debug-dapr-app-vscode/">section</a>.</p>
+<p>Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from <a href="https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview" target="_blank">here</a>.
+Login to your Azure Subscription and navigate to the storage account already created, create a queue, and use the same name you already used in the Dapr Input configuration file.
+In our case the name of the queue in the configuration file is <code>external-tasks-queue</code>.</p>
+<p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/Azure_Storage_Explorer.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Azure-storage-explorer" src="../../assets/images/06-aca-dapr-bindingsapi/Azure_Storage_Explorer.png" /></a></p>
+<p>The content of the message that Azure Storage Queue excepts should be as below, so try to queue a new message using the tool as the image below:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Task from External System&quot;</span><span class="p">,</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user1@hotmail.com&quot;</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tjoudeh@bitoftech.net&quot;</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-19T12:45:22.0983978Z&quot;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/storage-queue.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="storage-queue" src="../../assets/images/06-aca-dapr-bindingsapi/storage-queue.jpg" /></a></p>
+<p>If all is configured successfully you should be able to see a JSON file created as a blob in the Azure Storage Container named <code>externaltaskscontainer</code> based on your configuration.</p>
+<p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/blob-storage.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="storage-queue" src="../../assets/images/06-aca-dapr-bindingsapi/blob-storage.jpg" /></a></p>
+<h3 id="use-dapr-sendgrid-output-bindings">Use Dapr SendGrid Output Bindings<a class="headerlink" href="#use-dapr-sendgrid-output-bindings" title="Permanent link">&para;</a></h3>
+<p>In the previous module we've seen how we are sending notification emails when a task is assigned to a user by installing the SendGrid SDK NuGet package and writing some custom code to trigger sending emails.
+Dapr Can simplify this process by using the <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/" target="_blank">Dapr SendGrid Output binding component</a>.</p>
+<p>So let's see how we can simplify this and by replacing the external SendGrid SDK with dapr output binding.</p>
+<h4 id="1-create-dapr-sendgrid-output-binding-component-file">1. Create Dapr SendGrid Output Binding Component file<a class="headerlink" href="#1-create-dapr-sendgrid-output-binding-component-file" title="Permanent link">&para;</a></h4>
+<p>We need to create the component configuration file which will describe the configuration and how our service <code>ACA-Processor Backend</code> will be able to invoke SendGrid service and notify the task owner by email.</p>
+<p>Add a new file under the <strong>components</strong> folder as shown below:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">dapr-bindings-out-sendgrid.yaml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dapr.io/v1alpha1</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Component</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sendgrid</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.twilio.sendgrid</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emailFrom</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">white</span><span class="nv"> </span><span class="s">listed</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">SendGrid</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">obtained</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">API</span><span class="nv"> </span><span class="s">Key&gt;&quot;</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emailFromName</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Tasks</span><span class="nv"> </span><span class="s">Tracker</span><span class="nv"> </span><span class="s">Notification&quot;</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apiKey</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Send</span><span class="nv"> </span><span class="s">Grid</span><span class="nv"> </span><span class="s">API</span><span class="nv"> </span><span class="s">Key&gt;&quot;</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="tip">
+<summary>Curious to learn more about the specification of yaml file?</summary>
+<p>The full specifications of yaml file with SendGrid binding can be found on <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/#component-format" target="_blank">this link</a>,
+but let's go over the configuration we have added here:</p>
+<ul>
+<li>The type of binding is <code>bindings.twilio.sendgrid</code>.</li>
+<li>The name of this output binding is <code>sendgrid</code>. We will use this name when we use the Dapr SDK to trigger the output binding.</li>
+<li>We are setting the metadata <code>emailFrom</code>, <code>emailFromName</code>, and the <code>apiKey</code>. Those properties will describe how our backend background service will be able to connect to SendGrid API and send the email.</li>
+</ul>
+</details>
+<h4 id="2-remove-sendgrid-package-reference">2. Remove SendGrid package reference<a class="headerlink" href="#2-remove-sendgrid-package-reference" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Update file <strong>TasksTracker.Processor.Backend.Svc.csproj</strong> and remove the NuGet package reference <strong>PackageReference Include="SendGrid" Version="9.28.1"</strong>. With the introduction of Dapr SendGrid Output bindings there is no need to include the external SDKs.</li>
+</ul>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// delete these using statements</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">SendGrid</span><span class="p">;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">using</span><span class="w"> </span><span class="nn">SendGrid.Helpers.Mail</span><span class="p">;</span>
+</span></code></pre></div>
+<h4 id="3-update-sendemail-code-to-use-output-bindings-instead-of-sendgrid-sdk">3. Update SendEmail Code to Use Output Bindings Instead of SendGrid SDK<a class="headerlink" href="#3-update-sendemail-code-to-use-output-bindings-instead-of-sendgrid-sdk" title="Permanent link">&para;</a></h4>
+<p>Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. Replace the content of the <code class="language-csharp highlight"><span class="n">TasksNotifierController</span><span class="p">.</span><span class="n">cs</span></code> file with the code below. Also its very important that you open the <code>appsettings.json</code> file and set the <code>IntegrationEnabled</code> to false to avoid sending any emails. This is important as we don't want to send several emails later on when simulate high load in module 9 while demonstrating autoscaling with KEDA.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">TasksNotifierController.cs</label><label for="__tabbed_6_2">appsettings.json</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Dapr.Client</span><span class="p">;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Http</span><span class="p">;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc.Models</span><span class="p">;</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc.Controllers</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">{</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="na">[Route(&quot;api/tasksnotifier&quot;)]</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="na">[ApiController]</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">TasksNotifierController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IConfiguration</span><span class="w"> </span><span class="n">_config</span><span class="p">;</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">DaprClient</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">;</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nf">TasksNotifierController</span><span class="p">(</span><span class="n">IConfiguration</span><span class="w"> </span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">TasksNotifierController</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">DaprClient</span><span class="w"> </span><span class="n">daprClient</span><span class="p">)</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">            </span><span class="n">_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">;</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">            </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">            </span><span class="n">_daprClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">daprClient</span><span class="p">;</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">        </span><span class="na">[Dapr.Topic(&quot;dapr-pubsub-servicebus&quot;, &quot;tasksavedtopic&quot;)]</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">        </span><span class="na">[HttpPost(&quot;tasksaved&quot;)]</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TaskSaved</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">TaskModel</span><span class="w"> </span><span class="n">taskModel</span><span class="p">)</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">            </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Started processing message with Task Name &#39;{0}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskName</span><span class="p">);</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">sendGridResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">SendEmail</span><span class="p">(</span><span class="n">taskModel</span><span class="p">);</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sendGridResponse</span><span class="p">)</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nf">Ok</span><span class="p">();</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">BadRequest</span><span class="p">(</span><span class="s">&quot;Failed to send an email&quot;</span><span class="p">);</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">SendEmail</span><span class="p">(</span><span class="n">TaskModel</span><span class="w"> </span><span class="n">taskModel</span><span class="p">)</span>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">integrationEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_config</span><span class="p">.</span><span class="n">GetValue</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;SendGrid:IntegrationEnabled&quot;</span><span class="p">);</span>
+</span><span id="__span-9-41"><a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">sendEmailResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+</span><span id="__span-9-42"><a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;Task &#39;{taskModel.TaskName}&#39; is assigned to you!&quot;</span><span class="p">;</span>
+</span><span id="__span-9-43"><a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">plainTextContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;Task &#39;{taskModel.TaskName}&#39; is assigned to you. Task should be completed by the end of: {taskModel.TaskDueDate.ToString(&quot;</span><span class="n">dd</span><span class="o">/</span><span class="n">MM</span><span class="o">/</span><span class="n">yyyy</span><span class="s">&quot;)}&quot;</span><span class="p">;</span>
+</span><span id="__span-9-44"><a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>
+</span><span id="__span-9-45"><a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a><span class="w">            </span><span class="k">try</span>
+</span><span id="__span-9-46"><a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-9-47"><a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a><span class="w">                </span><span class="c1">//Send actual email using Dapr SendGrid Outbound Binding (Disabled when running load test)</span>
+</span><span id="__span-9-48"><a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">integrationEnabled</span><span class="p">)</span>
+</span><span id="__span-9-49"><a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a><span class="w">                </span><span class="p">{</span>
+</span><span id="__span-9-50"><a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a><span class="w">                    </span><span class="n">IReadOnlyDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">metaData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">()</span>
+</span><span id="__span-9-51"><a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a><span class="w">                </span><span class="p">{</span>
+</span><span id="__span-9-52"><a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a><span class="w">                    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;emailTo&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-9-53"><a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a><span class="w">                    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;emailToName&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-9-54"><a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a><span class="w">                    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;subject&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-9-55"><a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a><span class="w">                </span><span class="p">};</span>
+</span><span id="__span-9-56"><a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a><span class="w">                    </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">InvokeBindingAsync</span><span class="p">(</span><span class="s">&quot;sendgrid&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;create&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plainTextContent</span><span class="p">,</span><span class="w"> </span><span class="n">metaData</span><span class="p">);</span>
+</span><span id="__span-9-57"><a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-9-58"><a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a><span class="w">                </span><span class="k">else</span>
+</span><span id="__span-9-59"><a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a><span class="w">                </span><span class="p">{</span>
+</span><span id="__span-9-60"><a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a><span class="w">                    </span><span class="c1">//Introduce artificial delay to slow down message processing</span>
+</span><span id="__span-9-61"><a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a><span class="w">                    </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Simulate slow processing for email sending for Email with Email subject &#39;{0}&#39; Email to: &#39;{1}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="p">);</span>
+</span><span id="__span-9-62"><a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a><span class="w">                    </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="m">1000</span><span class="p">);</span>
+</span><span id="__span-9-63"><a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-9-64"><a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a>
+</span><span id="__span-9-65"><a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sendEmailResponse</span><span class="p">)</span>
+</span><span id="__span-9-66"><a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a><span class="w">                </span><span class="p">{</span>
+</span><span id="__span-9-67"><a id="__codelineno-9-67" name="__codelineno-9-67" href="#__codelineno-9-67"></a><span class="w">                    </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Email with subject &#39;{0}&#39; sent to: &#39;{1}&#39; successfully&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="p">);</span>
+</span><span id="__span-9-68"><a id="__codelineno-9-68" name="__codelineno-9-68" href="#__codelineno-9-68"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-9-69"><a id="__codelineno-9-69" name="__codelineno-9-69" href="#__codelineno-9-69"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-9-70"><a id="__codelineno-9-70" name="__codelineno-9-70" href="#__codelineno-9-70"></a><span class="w">            </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span>
+</span><span id="__span-9-71"><a id="__codelineno-9-71" name="__codelineno-9-71" href="#__codelineno-9-71"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-9-72"><a id="__codelineno-9-72" name="__codelineno-9-72" href="#__codelineno-9-72"></a><span class="w">                </span><span class="n">sendEmailResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+</span><span id="__span-9-73"><a id="__codelineno-9-73" name="__codelineno-9-73" href="#__codelineno-9-73"></a><span class="w">                </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Failed to send email with subject &#39;{0}&#39; To: &#39;{1}&#39;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="p">);</span>
+</span><span id="__span-9-74"><a id="__codelineno-9-74" name="__codelineno-9-74" href="#__codelineno-9-74"></a><span class="w">                </span><span class="k">throw</span><span class="p">;</span>
+</span><span id="__span-9-75"><a id="__codelineno-9-75" name="__codelineno-9-75" href="#__codelineno-9-75"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-9-76"><a id="__codelineno-9-76" name="__codelineno-9-76" href="#__codelineno-9-76"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">sendEmailResponse</span><span class="p">;</span>
+</span><span id="__span-9-77"><a id="__codelineno-9-77" name="__codelineno-9-77" href="#__codelineno-9-77"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-9-78"><a id="__codelineno-9-78" name="__codelineno-9-78" href="#__codelineno-9-78"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-79"><a id="__codelineno-9-79" name="__codelineno-9-79" href="#__codelineno-9-79"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nt">&quot;SendGrid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="hll"><span class="w">    </span><span class="nt">&quot;IntegrationEnabled&quot;</span><span class="p">:</span><span class="kc">false</span>
+</span></span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even though we restored the code to send emails it won't actually trigger sending emails as we set the <code>IntegrationEnabled</code> flag to false. Also notice that we introduced a Thread.Sleep(1000) statement. This will come in handy in module 9 where it will be used to simulate artificial delay within the <code>ACA-Processor Backend</code> service to demonstrate autoscaling with KEDA.</p>
+</div>
+<details class="tip">
+<summary>Curious to learn more about the code above?</summary>
+<p>You will see that we calling the method <code class="language-cs highlight"><span class="n">InvokeBindingAsync</span><span class="p">()</span></code> and we are passing the binding name <code>sendgrid</code> defined in the configuration file, 
+as well the second parameter <code>create</code> which is the action we need to carry to trigger email sending using SendGrid. </p>
+<p>For a full list of supported actions on SendGrid outbound binding spec, <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/#binding-support" target="_blank">visit this link</a>.</p>
+<p>Notice how are setting the recipient, display name, and email subject by passing the setting the keys <code>emailTo</code>, <code>emailToName</code>, and <code>subject</code> into the <code>metaData</code> dictionary.</p>
+</details>
+<h3 id="configure-dapr-secret-store-component-with-azure-key-vault">Configure Dapr Secret Store Component with Azure Key Vault<a class="headerlink" href="#configure-dapr-secret-store-component-with-azure-key-vault" title="Permanent link">&para;</a></h3>
+<p>Currently, we have 3 Dapr components which are not Azure AD enabled services. As you may have noticed so far, the different component files are storing sensitive keys to access the different external services.
+The recommended approach for retrieving these secrets is to reference an existing Dapr secret store component that securely accesses the secrets.</p>
+<p>We need Create a <a href="https://docs.dapr.io/developing-applications/building-blocks/secrets/secrets-overview/" target="_blank">Dapr secret store component</a> using the Container Apps schema. The Dapr secret store will be configured
+with <a href="https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/" target="_blank">Azure Key Vault secret store</a>.</p>
+<h4 id="1-create-an-azure-key-vault-resource">1. Create an Azure Key Vault resource<a class="headerlink" href="#1-create-an-azure-key-vault-resource" title="Permanent link">&para;</a></h4>
+<p>Create an Azure Key Vault which will be used to store securely any secret or key used in our application.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">$KEYVAULT_NAME</span> <span class="p">=</span> <span class="s2">&quot;kv-tasks-tracker-$RANDOM_STRING&quot;</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">-</span><span class="n">-location</span> <span class="nv">$LOCATION</span> <span class="p">`</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="p">-</span><span class="n">-enable-rbac-authorization</span> <span class="n">true</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important to create the Azure Key Vault with Azure RBAC for authorization by setting <code>--enable-rbac-authorization true</code> because the role we are going to assign to the Azure AD application will work only when RBAC authorization is enabled.</p>
+</div>
+<h4 id="2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault">2. Grant Backend Processor App a Role To Read Secrets from Azure Key Vault<a class="headerlink" href="#2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" title="Permanent link">&para;</a></h4>
+<p>In the previous module we have configured the <code>system-assigned</code> identity for the service <code>ACA-Processor Backend</code>. Now we need to assign a role named <code>Key Vault Secrets User</code> to it, so it access and read secrets from Azure Key Vault.</p>
+<p>You can read more about <a href="https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations" target="_blank">Azure built-in roles for Key Vault data plane operations</a>.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">$KEYVAULT_SECRETS_USER_ROLE_ID</span> <span class="p">=</span> <span class="s2">&quot;4633458b-17de-408a-b874-0445c86b69e6&quot;</span> <span class="c"># ID for &#39;Key Vault Secrets User&#39; Role</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c"># Get PRINCIPAL ID of BACKEND Processor Service</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nv">$BACKEND_SERVICE_PRINCIPAL_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">containerapp</span> <span class="n">show</span> <span class="p">`</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">-</span><span class="n">-query</span> <span class="n">identity</span><span class="p">.</span><span class="n">principalId</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$KEYVAULT_SECRETS_USER_ROLE_ID</span> <span class="p">`</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$BACKEND_SERVICE_PRINCIPAL_ID</span> <span class="p">`</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME&quot;</span>
+</span></code></pre></div>
+<h4 id="3-create-secrets-in-the-azure-key-vault">3. Create Secrets in the Azure Key Vault<a class="headerlink" href="#3-create-secrets-in-the-azure-key-vault" title="Permanent link">&para;</a></h4>
+<p>To create a secret in Azure Key Vault you need to have a role which allows you to create secrets. From the Azure CLI we will assign the role <code>Key Vault Secrets Officer</code> to the user signed in to AZ CLI to
+be able to create secrets. To do so use the script below:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">$SIGNEDIN_USERID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">ad</span> <span class="n">signed-in-user</span> <span class="n">show</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">$KEYVAULT_SECRETS_OFFICER_ROLE_ID</span> <span class="p">=</span> <span class="s2">&quot;b86a8fe4-44ce-4948-aee5-eccb2c155cd7&quot;</span> <span class="c"># ID for &#39;Key Vault Secrets Office&#39; Role </span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$KEYVAULT_SECRETS_OFFICER_ROLE_ID</span> <span class="p">`</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$SIGNEDIN_USERID</span> <span class="p">`</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME&quot;</span>
+</span></code></pre></div>
+<p>Now we will create 2 secrets in the Azure Key Vault using the commands below:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c"># Set SendGrid API Key as a secret named &#39;sendgrid-api-key&#39;</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">-</span><span class="n">-vault-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">&quot;sendgrid-api-key&quot;</span> <span class="p">`</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">-</span><span class="n">-value</span> <span class="s2">&quot;&lt;Send Grid API Key&gt;.leave this empty if you opted not to register with the sendgrip api&quot;</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c"># Set External Azure Storage Access Key as a secret named &#39;external-azure-storage-key&#39;</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">-</span><span class="n">-vault-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">&quot;external-azure-storage-key&quot;</span> <span class="p">`</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="p">-</span><span class="n">-value</span> <span class="nv">$STORAGE_ACCOUNT_KEY</span>
+</span></code></pre></div>
+<h4 id="4-create-a-aca-dapr-secrets-store-component-file">4. Create a ACA Dapr Secrets Store Component file<a class="headerlink" href="#4-create-a-aca-dapr-secrets-store-component-file" title="Permanent link">&para;</a></h4>
+<p>Create a new yaml file under the <strong>aca-components</strong> folder.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">containerapps-secretstore-kv.yaml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secretstores.azure.keyvault</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vaultName</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;Your keyvault name from $KEYVAULT_NAME goes here&gt;</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="tip">
+<summary>Curious to learn more about the yaml file?</summary>
+<ul>
+<li>We didn't specify the component name <code>secretstoreakv</code> in the metadata of the this component yaml file. We are going to specify it once we add this dapr component to Azure Container Apps Environment 
+via CLI similar to what we did in earlier modules.</li>
+<li>We are not referencing any service bus connection strings as the authentication between Dapr and Azure Service Bus will be configured using Managed Identities. </li>
+<li>The metadata <code>vaultName</code> value is set to the name of the Azure Key Vault we've just created. </li>
+<li>We are allowing this component only to be accessed by the dapr with application id <code>tasksmanager-backend-processor</code>. This means that our Backend API or Frontend Web App services will not be able
+to access the Dapr secret store. If we want to allow them to access the secrets we need to update this component file and grant the system-identity of those services a <code>Key Vault Secrets User</code> role.</li>
+</ul>
+</details>
+<h4 id="5-create-input-and-output-binding-component-files-matching-azure-container-apps-specs">5. Create Input and Output Binding Component Files Matching Azure Container Apps Specs<a class="headerlink" href="#5-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" title="Permanent link">&para;</a></h4>
+<p>Add new files under the <strong>aca-components</strong> use the yaml below:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">containerapps-bindings-in-storagequeue.yaml</label><label for="__tabbed_8_2">containerapps-bindings-out-blobstorage.yaml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.azure.storagequeues</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nt">secretStoreComponent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secretstoreakv&quot;</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccount</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Name&gt;&quot;</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccessKey</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="nt">secretRef</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external-azure-storage-key</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;external-tasks-queue&quot;</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodeBase64</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">route</span>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/externaltasksprocessor/process</span>
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
+</span></code></pre></div>
+<details class="tip">
+<summary>Curious to learn more about the yaml file?</summary>
+<p>The properties of this file are matching the ones used in Dapr component-specific file. It is a component of type <code>bindings.azure.storagequeues</code>. 
+The only differences are the following: </p>
+<ul>
+<li>We are setting the property <code>secretStoreComponent</code> value to <code>secretstoreakv</code> which is the name of Dapr secret store component.</li>
+<li>We are using <code>secretRef</code> when setting the metadata <code>storageAccessKey</code>. The value <code>external-azure-storage-key</code> represents the AKV secret created earlier.</li>
+</ul>
+</details>
+</div>
+<div class="tabbed-block">
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.azure.blobstorage</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nt">secretStoreComponent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secretstoreakv&quot;</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccount</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Name&gt;&quot;</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccessKey</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">    </span><span class="nt">secretRef</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external-azure-storage-key</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">container</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;externaltaskscontainer&quot;</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodeBase64</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;false&quot;</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">publicAccessLevel</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;none&quot;</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
+</span></code></pre></div>
+<details class="tip">
+<summary>Curious to learn more about the yaml file?</summary>
+<p>The properties of this file are matching the ones used in Dapr component-specific file. It is a component of type <code>bindings.azure.blobstorage</code>. 
+The only differences are the following:</p>
+<ul>
+<li>We are setting the property <code>secretStoreComponent</code> value to <code>secretstoreakv</code> which is the name of Dapr secret store component.</li>
+<li>We are using <code>secretRef</code> when setting the metadata <code>storageAccessKey</code>. The value <code>external-azure-storage-key</code> represents the AKV secret created earlier</li>
+</ul>
+</details>
+</div>
+</div>
+</div>
+<h4 id="6-create-sendgrid-output-binding-component-file-matching-azure-container-apps-specs">6. Create SendGrid Output Binding Component File Matching Azure Container Apps Specs<a class="headerlink" href="#6-create-sendgrid-output-binding-component-file-matching-azure-container-apps-specs" title="Permanent link">&para;</a></h4>
+<p>If you set up SendGrid integration, add a new file under the <strong>aca-components</strong> use the yaml below:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">containerapps-bindings-out-sendgrid.yaml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.twilio.sendgrid</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nt">secretStoreComponent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secretstoreakv&quot;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emailFrom</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mail@gmail.com&quot;</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emailFromName</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Tasks</span><span class="nv"> </span><span class="s">Tracker</span><span class="nv"> </span><span class="s">Notification&quot;</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apiKey</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">    </span><span class="nt">secretRef</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sendgrid-api-key</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="tip">
+<summary>Curious to learn more about the yaml file?</summary>
+<p>The properties of this file are similar to the previous ones. The difference is that the metadata 'apiKey' value is set to <code>sendgrid-api-key</code> which is
+the name of the secret in AKV that holds SendGrid API key.</p>
+</details>
+<p>With those changes in place, we are ready to rebuild the backend background processor container image, update Azure Container Apps Env, and redeploy a new revision.</p>
+<h3 id="deploy-a-new-revision-of-the-backend-background-processor-app-to-aca">Deploy a New Revision of the Backend Background Processor App to ACA<a class="headerlink" href="#deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" title="Permanent link">&para;</a></h3>
+<h4 id="1-build-the-backend-background-processor-image-and-push-it-to-acr">1. Build the Backend Background Processor Image and Push it To ACR<a class="headerlink" href="#1-build-the-backend-background-processor-image-and-push-it-to-acr" title="Permanent link">&para;</a></h4>
+<p>As we have done previously we need to build and deploy the Backend Background Processor image to ACR, so it is ready to be deployed to ACA.
+Continue using the same PowerShell console and paste the code below (make sure you are under the  <strong>TasksTracker.ContainerApps</strong> directory):</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_SERVICE_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
+</span></code></pre></div>
+<h4 id="2-add-dapr-secret-store-component-to-aca-environment">2. Add Dapr Secret Store Component to ACA Environment<a class="headerlink" href="#2-add-dapr-secret-store-component-to-aca-environment" title="Permanent link">&para;</a></h4>
+<p>We need to run the command below from the root to create the Dapr secret store component:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">secretstoreakv</span> <span class="p">`</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-secretstore-kv.yaml&#39;</span>
+</span></code></pre></div>
+<h4 id="3-add-three-bindings-dapr-components-to-aca-environment">3. Add three Bindings Dapr Components to ACA Environment<a class="headerlink" href="#3-add-three-bindings-dapr-components-to-aca-environment" title="Permanent link">&para;</a></h4>
+<p>Next, we will add create the three Dapr bindings components using the component files created.</p>
+<!-- 10/23/2023 - Simon Kurtz - Commenting out as the current AZ CLI version does not error, but I am not yet ready to remove it (even though it is in source control history) -->
+<!--!!! warning "Important"
+    At the time of producing this workshop, executing the commands below was throwing an error due an [issue on the CLI](https://github.com/microsoft/azure-container-apps/issues/643) when trying to create a component file which contains reference to a `secretStoreComponent` via CLI.
+
+    You can attempt to execute these commands but if the error still persists at the time you are consuming this workshop you can create the 3 components from the Azure Portal as shown below. -->
+
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c"># Input binding component for Azure Storage Queue</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">externaltasksmanager</span> <span class="p">`</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-bindings-in-storagequeue.yaml&#39;</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="c"># Output binding component for Azure Blob Storage</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">externaltasksblobstore</span> <span class="p">`</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-bindings-out-blobstorage.yaml&#39;</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="c"># Output binding component for SendGrid, if you are using SendGrid</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">sendgrid</span> <span class="p">`</span>
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-bindings-out-sendgrid.yaml&#39;</span>
+</span></code></pre></div>
+<!-- 10/23/2023 - Simon Kurtz - Commenting out as the current AZ CLI version does not error, but I am not yet ready to remove it (even though it is in source control history) -->
+<!-- ???+ example "CLI issue still exits?"
+
+    From Azure Portal, navigate to your Container Apps Environment, select `Dapr Components`, then click on `Add` component, and provide the values of the component as shown in the image below.
+
+    !!! note
+        Image shown is for `externaltasksmanager` and you can do the other 2 components (`externaltasksblobstore` and `sendgrid`) using the values in the yaml file for each component.
+
+    ![binding-portal](../../assets/images/06-aca-dapr-bindingsapi/bindings-portal.jpg) -->
+
+<h3 id="4-deploy-new-revisions-of-the-backend-background-processor-to-aca">4. Deploy new revisions of the Backend Background Processor to ACA<a class="headerlink" href="#4-deploy-new-revisions-of-the-backend-background-processor-to-aca" title="Permanent link">&para;</a></h3>
+<p>Update the Azure Container App hosting the Backend Background Processor with a new revision so our code changes are available for end users.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Notice how we are removing the environments variable named <code>SendGrid__ApiKey</code> as we are reading the key value from Dapr secret store.</p>
+</div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c"># Update Backend Background Processor container app and create a new revision </span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v20230224</span><span class="p">-</span><span class="n">1</span> <span class="p">`</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">-</span><span class="n">-remove-env-vars</span> <span class="s2">&quot;SendGrid__ApiKey&quot;</span>
+</span></code></pre></div>
+<h4 id="5-remove-sendgrid-secret-from-the-backend-background-processor-app">5. Remove SendGrid Secret from the Backend Background Processor App<a class="headerlink" href="#5-remove-sendgrid-secret-from-the-backend-background-processor-app" title="Permanent link">&para;</a></h4>
+<p>Remove the secret stored in <code>Secrets</code> of the Backend Background Processor as this secret is not used anymore.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can skip executing the powershell script below if you opted not to set up a sendgrid account in module 5</p>
+</div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="n">remove</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="p">-</span><span class="n">-secret-names</span> <span class="s2">&quot;sendgrid-apikey&quot;</span>
+</span></code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>With those changes in place and deployed, from the Azure Portal you can open the log streams section of the container app hosting the <code>ACA-Processor-Backend</code> and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">{</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Task from External System&quot;</span><span class="p">,</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user42@hotmail.com&quot;</span><span class="p">,</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">  </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tjoudeh@bitoftech.net&quot;</span><span class="p">,</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">  </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-19T12:45:22.0983978Z&quot;</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>You should receive logs similar to the below:</p>
+<p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/app-logs.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="app-logs" src="../../assets/images/06-aca-dapr-bindingsapi/app-logs.png" /></a></p>
+</div>
+<p>In the next module, we will cover a special type of Dapr input binding named Cron Binding.</p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      2023-10-24
+    
+  </small>
+</div>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../05-aca-dapr-pubsubapi/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Module 5 - ACA Async Communication with Dapr Pub/Sub API">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Module 5 - ACA Async Communication with Dapr Pub/Sub API
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../07-aca-cron-bindings/" class="md-footer__link md-footer__link--next" aria-label="Next: Module 7 - ACA Scheduled Jobs with Dapr Cron Binding">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 Microsoft
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Azure/aca-dotnet-workshop" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
