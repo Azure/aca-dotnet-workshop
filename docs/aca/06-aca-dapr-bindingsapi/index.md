@@ -24,28 +24,27 @@ Take a look at the high-level architecture diagram below to understand the flow 
 ![simple-binding-arch](../../assets/images/06-aca-dapr-bindingsapi/simple-binding.jpg)
 
 !!! note
-    Those 3rd party external services could be a services hosted on another cloud provider, different Azure subscription or even on premise. Dapr bindings are usually used to trigger an application with events coming in from external systems as well as interface with external systems.
+    Those 3rd party external services could be services hosted on another cloud provider, different Azure subscription, or even on premise. Dapr bindings are usually used to trigger an application with events coming in from external systems as well as interface with external systems.
 
-    For simplicity of the workshop we are going to host those two supposedly external services in the same subscription of our 
-    Tasks Tracker microservice application.
+    For simplicity of the workshop we are going to host those two supposedly external services in the same subscription of our Tasks Tracker microservice application.
 
-If you look at Dapr Bindings Building Block, you will notice a lot of similarities with the Pub/Sub Building Block that we covered in the [previous module](../../aca/05-aca-dapr-pubsubapi/index.md). But remember that Pub/Sub Building Block is meant to be used for Async communication between services **within your solution**. The Binding Building Block has a wider scope and it mainly focuses on connectivity and interoperability across different systems, disparate applications, and services outside the boundaries of your own application. For a full list of [supported bindings](https://docs.dapr.io/reference/components-reference/supported-bindings/){target=_blank} visit this link.
+If you look at Dapr Bindings Building Block, you will notice a lot of similarities with the Pub/Sub Building Block that we covered in the [previous module](../../aca/05-aca-dapr-pubsubapi/index.md). But remember that Pub/Sub Building Block is meant to be used for async communication between services **within your solution**. The Binding Building Block has a wider scope and it mainly focuses on connectivity and interoperability across different systems, disparate applications, and services outside the boundaries of your own application. For a full list of [supported bindings](https://docs.dapr.io/reference/components-reference/supported-bindings/){target=_blank} visit this link.
 
 ### Overview of Dapr Bindings Building Block
 
-Let's take a look at the detailed Dapr Binding Building Block architecture diagram that we are going to implement in this module to fulfill the use case we discussed earlier:
+Let's take a look at the detailed Dapr Bindings Building Block architecture diagram that we are going to implement in this module to fulfill the use case we discussed earlier:
 ![detailed-binding-arch](../../assets/images/06-aca-dapr-bindingsapi/detailed-binding.jpg)
 
 Looking at the diagram we notice the following:
 
-* In order to receive events and data from the external resource (Azure Storage Queue) our `ACA-Processor Backend` service needs to register a public endpoint that will become an event handler.
-* This binding configuration between the external resource and our service will be configured by using the `Input Binding Configuration yaml` file. The Dapr sidecar of the background service will read the configuration and subscribe to the endpoint defined for the external resource. In our case, it will be a specific Azure Storage Queue.
-* When a message is published to the storage queue, the input binding component running in the Dapr sidecar picks it up and triggers the event.
-* The Dapr sidecar invokes the endpoint (event handler defined in the `ACA-Processor Backend` Service) configured for the binding. In our case, it will be an endpoint that can be reached by invoking a `POST` operation `http://localhost:3502/ExternalTasksProcessor/Process` and the request body content will be the JSON payload of the published message to the Azure Storage Queue.
-* When the event is handled in our `ACA-Processor Backend` and the business logic is completed, this endpoint needs to return an HTTP response with a `200 ok` status to acknowledge that processing is complete. If the event handling is not completed or there is an error, this endpoint should return HTTP 400 or 500 status code.
-* In order to enable the service `ACA-Processor Backend` to trigger an event that invokes an external resource, we need to use the `Output Binding Configuration Yaml` file to configure the binding between our service and the external resource (Azure Blob Storage) and how to connect to it.
-* Once the Dapr sidecar reads the binding configuration file, our service can trigger an event that invokes the output binding API on the Dapr sidecar. In our case, the event will be creating a new blob file containing the content of the message we read earlier from the Azure Storage Queue.
-* With this in place, our service `ACA-Processor Backend` will be ready to invoke the external resource by sending a POST operation to the endpoint `http://localhost:3502/v1.0/bindings/ExternalTasksBlobstore` and the JSON payload will contain the content below. Alternatively, we can use the Dapr client SDK to invoke this output biding to invoke the external service and store the file in Azure Blob Storage.
+- In order to receive events and data from the external resource (Azure Storage Queue) our `ACA-Processor Backend` service needs to register a public endpoint that will become an event handler.
+- This binding configuration between the external resource and our service will be configured by using the `Input Binding Configuration Yaml` file. The Dapr sidecar of the background service will read the configuration and subscribe to the endpoint defined for the external resource. In our case, it will be a specific Azure Storage Queue.
+- When a message is published to the storage queue, the input binding component running in the Dapr sidecar picks it up and triggers the event.
+- The Dapr sidecar invokes the endpoint (event handler defined in the `ACA-Processor Backend` Service) configured for the binding. In our case, it will be an endpoint that can be reached by invoking a `POST` operation `http://localhost:3502/ExternalTasksProcessor/Process` and the request body content will be the JSON payload of the published message to the Azure Storage Queue.
+- When the event is handled in our `ACA-Processor Backend` and the business logic is completed, this endpoint needs to return an HTTP response with a `200 OK` status to acknowledge that processing is complete. If the event handling is not completed or there is an error, this endpoint should return an HTTP 4xx or 5xx status code.
+- In order to enable the service `ACA-Processor Backend` to trigger an event that invokes an external resource, we need to use the `Output Binding Configuration Yaml` file to configure the binding between our service and the external resource (Azure Blob Storage) and how to connect to it.
+- Once the Dapr sidecar reads the binding configuration file, our service can trigger an event that invokes the output binding API on the Dapr sidecar. In our case, the event will be creating a new blob file containing the content of the message we read earlier from the Azure Storage Queue.
+- With this in place, our service `ACA-Processor Backend` will be ready to invoke the external resource by sending a **POST** operation to the endpoint `http://localhost:3502/v1.0/bindings/ExternalTasksBlobstore` and the JSON payload will contain the content below. Alternatively, we can use the Dapr client SDK to invoke this output biding to invoke the external service and store the file in Azure Blob Storage.
 
 ```json
 {
@@ -61,7 +60,7 @@ Looking at the diagram we notice the following:
 
 Let's start by updating our Backend Background Processor project and define the input and output bindings configuration files and event handlers.
 
-To proceed with this workshop we need to provision the Azure Storage Account to start responding to messages published to a queue and then later use the same storage account to store blob files as an external event.
+To proceed with this workshop, we need to provision the Azure Storage Account to start responding to messages published to a queue and then later use the same storage account to store blob files as an external event.
 Run the PowerShell script below to create Azure Storage Account and get the master key.
 
 !!! tip
@@ -72,7 +71,7 @@ Run the PowerShell script below to create Azure Storage Account and get the mast
     If these services where part of your application's ecosystem it is always recommended that you use Azure Managed Identity.
 
 ```powershell
-$STORAGE_ACCOUNT_NAME = "<replace with a globally unique storage name.The field can contain only lowercase letters and numbers. Name must be between 3 and 24 characters.>"
+$STORAGE_ACCOUNT_NAME = "sttaskstracker$RANDOM_STRING"
     
 az storage account create `
 --name $STORAGE_ACCOUNT_NAME `
@@ -81,8 +80,18 @@ az storage account create `
 --sku Standard_LRS `
 --kind StorageV2
     
-# list azure storage keys
-az storage account keys list -g $RESOURCE_GROUP -n $STORAGE_ACCOUNT_NAME
+# List Azure storage keys
+az storage account keys list `
+--account-name $STORAGE_ACCOUNT_NAME `
+--resource-group $RESOURCE_GROUP
+
+# Get the primary storage account key
+$STORAGE_ACCOUNT_KEY=($(az storage account keys list `
+--account-name $STORAGE_ACCOUNT_NAME `
+--resource-group $RESOURCE_GROUP ) | ConvertFrom-Json)[0].value
+
+echo "Storage Account Name: $STORAGE_ACCOUNT_NAME"
+echo "Storage Account Key: $STORAGE_ACCOUNT_KEY"
 ```
 
 ### Updating the Backend Background Processor Project
@@ -160,7 +169,7 @@ To do so, add a new file folder **components**.
 
     - We are setting the property `decodeBase64`  to `false` as we don't want to encode file content to base64 images, we need to store the file content as is.
 
-#### 5. Use Dapr client SDK to Invoke the Output Binding
+#### 4. Use Dapr client SDK to Invoke the Output Binding
 
 Now we need to invoke the output binding by using the .NET SDK.
 
@@ -168,7 +177,7 @@ Update and replace the code in the file with the code below. Pay close attention
 
 === "ExternalTasksProcessorController.cs"
 
-    ```csharp hl_lines="39-47"
+    ```csharp hl_lines="13-14 38-46"
     --8<-- "docs/aca/06-aca-dapr-bindingsapi/Update.ExternalTasksProcessorController.cs"
     ```
 
@@ -182,9 +191,9 @@ Update and replace the code in the file with the code below. Pay close attention
     Notice how are setting the file name we are storing at the external service. We need the file names to be created using the same Task Identifier, so we will pass the key `blobName` with the file name values 
     into the `metaData` dictionary.
 
-#### 6. Test Dapr Bindings Locally
+#### 5. Test Dapr Bindings Locally
 
-Now we are ready to give it an end-to-end test on our dev machines. Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together 
+Now we are ready to give it an end-to-end test on our dev machines. Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together
 in this [section](../13-appendix/01-run-debug-dapr-app-vscode.md).
 
 Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from [here](https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview){target=_blank}.
@@ -293,13 +302,13 @@ with [Azure Key Vault secret store](https://docs.dapr.io/reference/components-re
 Create an Azure Key Vault which will be used to store securely any secret or key used in our application.
 
 ```powershell
-$KEYVAULT_NAME = "<your akv name. Should be globally unique. 
-Vault name must only contain alphanumeric characters and dashes and cannot start with a number.>"
+$KEYVAULT_NAME = "kv-tasks-tracker-$RANDOM_STRING"
+
 az keyvault create `
 --name $KEYVAULT_NAME `
 --resource-group $RESOURCE_GROUP `
---enable-rbac-authorization true `
---location $LOCATION
+--location $LOCATION `
+--enable-rbac-authorization true
 ```
 
 !!! note
@@ -313,12 +322,11 @@ You can read more about [Azure built-in roles for Key Vault data plane operation
 
 ```powershell
 $KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
-$AZURE_SUBSCRIPTION_ID= az account show --query id -o tsv
 
-# Get PRINCIPALID of BACKEND Processor Service
+# Get PRINCIPAL ID of BACKEND Processor Service
 $BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
--n $BACKEND_SERVICE_NAME `
--g $RESOURCE_GROUP `
+--name $BACKEND_SERVICE_NAME `
+--resource-group $RESOURCE_GROUP `
 --query identity.principalId
 
 az role assignment create `
@@ -333,11 +341,12 @@ To create a secret in Azure Key Vault you need to have a role which allows you t
 be able to create secrets. To do so use the script below:
 
 ```powershell
-$SIGNEDIN_UERID =  az ad signed-in-user show --query id
-$KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" #ID for 'Key Vault Secrets Office' Role 
+$SIGNEDIN_USERID = az ad signed-in-user show --query id
+$KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" # ID for 'Key Vault Secrets Office' Role 
 
-az role assignment create --role $KEYVAULT_SECRETS_OFFICER_ROLE_ID `
---assignee $SIGNEDIN_UERID `
+az role assignment create `
+--role $KEYVAULT_SECRETS_OFFICER_ROLE_ID `
+--assignee $SIGNEDIN_USERID `
 --scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
 ```
 
@@ -354,7 +363,7 @@ az keyvault secret set `
 az keyvault secret set `
 --vault-name $KEYVAULT_NAME `
 --name "external-azure-storage-key" `
---value "<Your Storage Account Key>"
+--value $STORAGE_ACCOUNT_KEY
 ```
 
 #### 4. Create a ACA Dapr Secrets Store Component file
@@ -408,7 +417,7 @@ Add new files under the **aca-components** use the yaml below:
 
 #### 6. Create SendGrid Output Binding Component File Matching Azure Container Apps Specs
 
-Add a new file under the **aca-components** use the yaml below:
+If you set up SendGrid integration, add a new file under the **aca-components** use the yaml below:
 
 === "containerapps-bindings-out-sendgrid.yaml"
 
@@ -436,11 +445,12 @@ az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BA
 
 #### 2. Add Dapr Secret Store Component to ACA Environment
 
-We need to run the command below to create the Dapr secret store component:
+We need to run the command below from the root to create the Dapr secret store component:
 
 ```powershell
 az containerapp env dapr-component set `
---name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+--name $ENVIRONMENT `
+--resource-group $RESOURCE_GROUP `
 --dapr-component-name secretstoreakv `
 --yaml '.\aca-components\containerapps-secretstore-kv.yaml'
 ```
@@ -449,39 +459,44 @@ az containerapp env dapr-component set `
 
 Next, we will add create the three Dapr bindings components using the component files created.
 
-!!! warning "Important"
+<!-- 10/23/2023 - Simon Kurtz - Commenting out as the current AZ CLI version does not error, but I am not yet ready to remove it (even though it is in source control history) -->
+<!--!!! warning "Important"
     At the time of producing this workshop, executing the commands below was throwing an error due an [issue on the CLI](https://github.com/microsoft/azure-container-apps/issues/643) when trying to create a component file which contains reference to a `secretStoreComponent` via CLI.
 
-    You can attempt to execute these commands but if the error still persists at the time you are consuming this workshop you can create the 3 components from the Azure Portal as shown below.
+    You can attempt to execute these commands but if the error still persists at the time you are consuming this workshop you can create the 3 components from the Azure Portal as shown below. -->
 
 ```powershell
 # Input binding component for Azure Storage Queue
 az containerapp env dapr-component set `
-    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-    --dapr-component-name externaltasksmanager `
-    --yaml '.\aca-components\containerapps-bindings-in-storagequeue.yaml'
+--name $ENVIRONMENT `
+--resource-group $RESOURCE_GROUP `
+--dapr-component-name externaltasksmanager `
+--yaml '.\aca-components\containerapps-bindings-in-storagequeue.yaml'
     
 # Output binding component for Azure Blob Storage
 az containerapp env dapr-component set `
-    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-    --dapr-component-name externaltasksblobstore `
-    --yaml '.\aca-components\containerapps-bindings-out-blobstorage.yaml'
+--name $ENVIRONMENT `
+--resource-group $RESOURCE_GROUP `
+--dapr-component-name externaltasksblobstore `
+--yaml '.\aca-components\containerapps-bindings-out-blobstorage.yaml'
 
-# Output binding component for SendGrid
+# Output binding component for SendGrid, if you are using SendGrid
 az containerapp env dapr-component set `
-    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-    --dapr-component-name sendgrid `
-    --yaml '.\aca-components\containerapps-bindings-out-sendgrid.yaml'
+--name $ENVIRONMENT `
+--resource-group $RESOURCE_GROUP `
+--dapr-component-name sendgrid `
+--yaml '.\aca-components\containerapps-bindings-out-sendgrid.yaml'
 ```
 
-???+ example "CLI issue still exits?"
+<!-- 10/23/2023 - Simon Kurtz - Commenting out as the current AZ CLI version does not error, but I am not yet ready to remove it (even though it is in source control history) -->
+<!-- ???+ example "CLI issue still exits?"
 
     From Azure Portal, navigate to your Container Apps Environment, select `Dapr Components`, then click on `Add` component, and provide the values of the component as shown in the image below.
 
     !!! note
         Image shown is for `externaltasksmanager` and you can do the other 2 components (`externaltasksblobstore` and `sendgrid`) using the values in the yaml file for each component.
 
-    ![binding-portal](../../assets/images/06-aca-dapr-bindingsapi/bindings-portal.jpg)
+    ![binding-portal](../../assets/images/06-aca-dapr-bindingsapi/bindings-portal.jpg) -->
 
 ### 4. Deploy new revisions of the Backend Background Processor to ACA
 

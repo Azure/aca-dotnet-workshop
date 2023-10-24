@@ -13,8 +13,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
         private const string OUTPUT_BINDING_NAME = "externaltasksblobstore";
         private const string OUTPUT_BINDING_OPERATION = "create";
 
-        public ExternalTasksProcessorController(ILogger<ExternalTasksProcessorController> logger,
-                                                DaprClient daprClient)
+        public ExternalTasksProcessorController(ILogger<ExternalTasksProcessorController> logger, DaprClient daprClient)
         {
             _logger = logger;
             _daprClient = daprClient;

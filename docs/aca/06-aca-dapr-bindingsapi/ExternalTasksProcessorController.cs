@@ -11,8 +11,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
         private readonly ILogger<ExternalTasksProcessorController> _logger;
         private readonly DaprClient _daprClient;
 
-        public ExternalTasksProcessorController(ILogger<ExternalTasksProcessorController> logger,
-                                                DaprClient daprClient)
+        public ExternalTasksProcessorController(ILogger<ExternalTasksProcessorController> logger, DaprClient daprClient)
         {
             _logger = logger;
             _daprClient = daprClient;
