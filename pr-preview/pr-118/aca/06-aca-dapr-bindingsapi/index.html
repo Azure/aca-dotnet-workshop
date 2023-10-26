@@ -2055,12 +2055,6 @@ Continue using the same PowerShell console and paste the code below (make sure y
 </span></code></pre></div>
 <h4 id="3-add-three-bindings-dapr-components-to-aca-environment">3. Add three Bindings Dapr Components to ACA Environment<a class="headerlink" href="#3-add-three-bindings-dapr-components-to-aca-environment" title="Permanent link">&para;</a></h4>
 <p>Next, we will add create the three Dapr bindings components using the component files created.</p>
-<!-- 10/23/2023 - Simon Kurtz - Commenting out as the current AZ CLI version does not error, but I am not yet ready to remove it (even though it is in source control history) -->
-<!--!!! warning "Important"
-    At the time of producing this workshop, executing the commands below was throwing an error due an [issue on the CLI](https://github.com/microsoft/azure-container-apps/issues/643) when trying to create a component file which contains reference to a `secretStoreComponent` via CLI.
-
-    You can attempt to execute these commands but if the error still persists at the time you are consuming this workshop you can create the 3 components from the Azure Portal as shown below. -->
-
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c"># Input binding component for Azure Storage Queue</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
@@ -2082,16 +2076,6 @@ Continue using the same PowerShell console and paste the code below (make sure y
 </span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">sendgrid</span> <span class="p">`</span>
 </span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-bindings-out-sendgrid.yaml&#39;</span>
 </span></code></pre></div>
-<!-- 10/23/2023 - Simon Kurtz - Commenting out as the current AZ CLI version does not error, but I am not yet ready to remove it (even though it is in source control history) -->
-<!-- ???+ example "CLI issue still exits?"
-
-    From Azure Portal, navigate to your Container Apps Environment, select `Dapr Components`, then click on `Add` component, and provide the values of the component as shown in the image below.
-
-    !!! note
-        Image shown is for `externaltasksmanager` and you can do the other 2 components (`externaltasksblobstore` and `sendgrid`) using the values in the yaml file for each component.
-
-    ![binding-portal](../../assets/images/06-aca-dapr-bindingsapi/bindings-portal.jpg) -->
-
 <h3 id="4-deploy-new-revisions-of-the-backend-background-processor-to-aca">4. Deploy new revisions of the Backend Background Processor to ACA<a class="headerlink" href="#4-deploy-new-revisions-of-the-backend-background-processor-to-aca" title="Permanent link">&para;</a></h3>
 <p>Update the Azure Container App hosting the Backend Background Processor with a new revision so our code changes are available for end users.</p>
 <div class="admonition tip">
@@ -2135,7 +2119,7 @@ Continue using the same PowerShell console and paste the code below (make sure y
   <small>
     
       Last update:
-      2023-10-24
+      2023-10-26
     
   </small>
 </div>
