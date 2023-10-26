@@ -7,6 +7,10 @@ canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-b
 !!! info "Module Duration"
     60 minutes
 
+??? tip "Curious about Azure Container Apps jobs?"
+
+    There is a new kid on the block. [Azure Container Apps jobs](https://learn.microsoft.com/en-us/azure/container-apps/jobs){target=_blank} became generally available in late August 2023. This workshop is not yet updated to account for this new type of container app. Stay tuned for updates!
+
 In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources.
 In this module we will focus on a special type of Dapr input binding named [Cron Binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/){target=_blank}.
 
@@ -44,7 +48,7 @@ Add new file under **components** as shown below:
 
 Let's add an endpoint which will be triggered when the Cron configuration is met. This endpoint will contain the routine needed to run at a regular interval.
 
-Add new file under **controllers** folder in the project **TasksTracker.Processor.Backend.Svc** as shown below:
+Add new file under the **Controllers** folder in the project **TasksTracker.Processor.Backend.Svc** as shown below:
 
 === "ScheduledTasksManagerController.cs"
 
@@ -58,7 +62,7 @@ This action method must be of the `POST` type, allowing it to be invoked when th
 
 Now we need to add two new methods which are used by the scheduled job.
 
-Update below **files** under **services** folder in the project **TasksTracker.TasksManager.Backend.Api** as highlighted below:
+Update below **files** under the **Services** folder in the project **TasksTracker.TasksManager.Backend.Api** as highlighted below:
 
 === "ITasksManager.cs"
 
@@ -72,7 +76,7 @@ Update below **files** under **services** folder in the project **TasksTracker.T
 
 === "TasksStoreManager.cs"
 
-    ```csharp hl_lines="1-3 6-37 39-47"
+    ```csharp hl_lines="1-3 6-47"
     using System.Text.Json;
     using System.Text.Encodings.Web;
     using System.Text.Json.Serialization;
@@ -120,7 +124,7 @@ Update below **files** under **services** folder in the project **TasksTracker.T
     }
     ```
 
-Add below **file** under **Utilities** folder in the project **TasksTracker.TasksManager.Backend.Api** as shown below:
+Add below **file** under a new **Utilities** folder in the project **TasksTracker.TasksManager.Backend.Api** as shown below:
 
 === "DateTimeConverter.cs"
 
@@ -140,7 +144,7 @@ Do not forget to add fake implementation for class `FakeTasksManager.cs` so the 
 
 === "FakeTasksManager.cs"
 
-    ```csharp hl_lines="1-4 6-11"
+    ```csharp hl_lines="1-11"
     public Task MarkOverdueTasks(List<TaskModel> overDueTasksList)
     {
         throw new NotImplementedException();
@@ -159,7 +163,7 @@ Do not forget to add fake implementation for class `FakeTasksManager.cs` so the 
 As you've seen in the [previous step](#2-add-the-endpoint-which-will-be-invoked-by-cron-binding), we are using Dapr Service to Service invocation API to call
 methods `api/overduetasks` and `api/overduetasks/markoverdue` in the Backend Web API from the Backend Background Processor.
 
-Add below **file** under **controllers** folder in the project **TasksTracker.TasksManager.Backend.Api** as shown below:
+Add below **file** under the **Controllers** folder in the project **TasksTracker.TasksManager.Backend.Api** as shown below:
 
 === "OverdueTasksController.cs"
 
@@ -186,9 +190,15 @@ Add a new file folder **aca-components**. This file will be used when updating t
 To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. We can use the same PowerShell console use the following code (make sure you are on directory **TasksTracker.ContainerApps**):
 
 ```powershell
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_API_NAME" --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+az acr build `
+--registry $AZURE_CONTAINER_REGISTRY_NAME `
+--image "tasksmanager/$BACKEND_API_NAME" `
+--file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
 
-az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BACKEND_SERVICE_NAME" --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+az acr build `
+--registry $AZURE_CONTAINER_REGISTRY_NAME `
+--image "tasksmanager/$BACKEND_SERVICE_NAME" `
+--file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
 ```
 
 #### 2. Add Cron Dapr Component to ACA Environment
@@ -196,9 +206,9 @@ az acr build --registry $AZURE_CONTAINER_REGISTRY_NAME --image "tasksmanager/$BA
 ```powershell
 # Cron binding component
 az containerapp env dapr-component set `
-    --name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
-    --dapr-component-name scheduledtasksmanager `
-    --yaml '.\aca-components\containerapps-scheduled-cron.yaml'
+--name $ENVIRONMENT --resource-group $RESOURCE_GROUP `
+--dapr-component-name scheduledtasksmanager `
+--yaml '.\aca-components\containerapps-scheduled-cron.yaml'
 ```
 
 ##### 3. Deploy New Revisions of the Backend API and Backend Background Processor to ACA
@@ -211,13 +221,13 @@ To accomplish this run the PowerShell script below:
 az containerapp update `
 --name $BACKEND_API_NAME `
 --resource-group $RESOURCE_GROUP `
---revision-suffix v20230227-1 
+--revision-suffix v$TODAY-4
 
 # Update Backend Background Processor container app and create a new revision 
 az containerapp update `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
---revision-suffix v20230227-1 
+--revision-suffix v$TODAY-4
 ```
 
 !!! note
