@@ -14,7 +14,13 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
 
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return DateTime.ParseExact(reader.GetString(), _dateFormatString, System.Globalization.CultureInfo.InvariantCulture);
+            var dateString = reader.GetString();
+
+            if (dateString != null) {
+                return DateTime.ParseExact(dateString, _dateFormatString, System.Globalization.CultureInfo.InvariantCulture);
+            } else {
+                throw new("Date string from reader is null.");
+            }
         }
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
