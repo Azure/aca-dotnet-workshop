@@ -459,12 +459,6 @@ az containerapp env dapr-component set `
 
 Next, we will add create the three Dapr bindings components using the component files created.
 
-<!-- 10/23/2023 - Simon Kurtz - Commenting out as the current AZ CLI version does not error, but I am not yet ready to remove it (even though it is in source control history) -->
-<!--!!! warning "Important"
-    At the time of producing this workshop, executing the commands below was throwing an error due an [issue on the CLI](https://github.com/microsoft/azure-container-apps/issues/643) when trying to create a component file which contains reference to a `secretStoreComponent` via CLI.
-
-    You can attempt to execute these commands but if the error still persists at the time you are consuming this workshop you can create the 3 components from the Azure Portal as shown below. -->
-
 ```powershell
 # Input binding component for Azure Storage Queue
 az containerapp env dapr-component set `
@@ -487,16 +481,6 @@ az containerapp env dapr-component set `
 --dapr-component-name sendgrid `
 --yaml '.\aca-components\containerapps-bindings-out-sendgrid.yaml'
 ```
-
-<!-- 10/23/2023 - Simon Kurtz - Commenting out as the current AZ CLI version does not error, but I am not yet ready to remove it (even though it is in source control history) -->
-<!-- ???+ example "CLI issue still exits?"
-
-    From Azure Portal, navigate to your Container Apps Environment, select `Dapr Components`, then click on `Add` component, and provide the values of the component as shown in the image below.
-
-    !!! note
-        Image shown is for `externaltasksmanager` and you can do the other 2 components (`externaltasksblobstore` and `sendgrid`) using the values in the yaml file for each component.
-
-    ![binding-portal](../../assets/images/06-aca-dapr-bindingsapi/bindings-portal.jpg) -->
 
 ### 4. Deploy new revisions of the Backend Background Processor to ACA
 
