@@ -494,7 +494,7 @@ Update the Azure Container App hosting the Backend Background Processor with a n
 az containerapp update `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
---revision-suffix v20230224-1 `
+--revision-suffix v$TODAY-3 `
 --remove-env-vars "SendGrid__ApiKey"
 ```
 
