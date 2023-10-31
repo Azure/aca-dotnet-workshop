@@ -9,21 +9,7 @@ canonical_url: https://bitoftech.net/2022/08/25/communication-microservices-azur
 
 In this module, we will add a service named `ACA Web API – Frontend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg){target=_blank}. This service will host a simple ASP.NET Razor pages web app which allows the end users to manage their tasks. After that we will provision Azure resources needed to deploy the service to ACA using Azure CLI.
 
-### 1. Restore Variables
-
-- Open a command-line terminal and navigate to root folder of your project.
-
-    ```shell
-    cd ~\TasksTracker.ContainerApps
-    ```
-
-- From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps`.
-
-- Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.
-
-    ```shell
-    .\Variables.ps1
-    ```
+--8<-- "snippets/restore-variables.md"
 
 ### 2. Create the Frontend Web App project (Web APP)
 
