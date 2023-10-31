@@ -9,13 +9,51 @@ canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application
 
 In this module, we will start by creating the first microservice named `ACA Web API – Backend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg){target=_blank}. Followed by that we will provision the  Azure resources needed to deploy the service to Azure Container Apps using the Azure CLI.
 
-### 1. Create the backend API project (Web API)
+### 1. Set up Git Repository
 
-- Open a command-line terminal and create a folder for your project. Use the `code` command to launch Visual Studio Code from that directory as shown:
+This workshop spans several days. As such, you may close your tools, CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.
+
+- Open a command-line terminal and create a folder for your project, then switch to that folder.
+
+    === "Windows"
+        ```shell
+        md TasksTracker.ContainerApps
+        cd TasksTracker.ContainerApps
+        ```
+    === "Linux"
+        ```shell
+        mkdir ~\TasksTracker.ContainerApps
+        cd ~\TasksTracker.ContainerApps
+        ```
+
+- Initialize the git repository.
 
     ```shell
-    mkdir ~\TasksTracker.ContainerApps
-    cd ~\TasksTracker.ContainerApps
+    git init
+    ```
+
+- Create a `.gitignore` file in the `TasksTracker.ContainerApps` directory. This ensures we keep our git repo clean of build assets and other artifacts.
+
+    === ".gitignore"
+        ```shell
+        # Exclude build artifacts
+        **/obj/
+        **/bin/
+        **/dist/
+        ```
+
+- Commit the `.gitignore` file.
+
+    ```shell
+    git commit -a -m "Add .gitignore"
+    ```
+
+### 2. Create the backend API project (Web API)
+
+- Use the `code` command to launch Visual Studio Code from that directory as shown:
+
+    ```shell
+    
     code .
     ```
 
@@ -71,7 +109,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
 The code above generates ten tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.
 
-- Now we need to register FakeTasksManager on project startup. Open file `#!csharp Program.cs` and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required using statements for the task interface and class.
+- Now we need to register `FakeTasksManager` on project startup. Open file `#!csharp Program.cs` and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required using statements for the task interface and class.
 
 === "Program.cs"
 
@@ -106,7 +144,7 @@ app.Run();
 
 Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.
 
-### 2. Deploy Web API Backend Project to ACA
+### 3. Deploy Web API Backend Project to ACA
 
 We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the following steps:
 
@@ -297,5 +335,23 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
         You can find your azure container app application url on the azure portal overview tab.
     
         ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
+
+### 4. Persist State
+
+- Persist Module 1 to Git.
+
+    ```shell
+    git add .
+    git commit -m "Add Module 1"
+    ```
+
+- Execute the [Set-Variables.ps1 script](../../aca/13-appendix/03-variables.md){target=_blank} in the console to create a `variables.ps1` file with all current variables. The output of the script will inform you how many variables are written out.
+
+- Persist a list of all current variables.
+
+    ```shell
+    git add .\Variables.ps1
+    git commit -m "Add Variables.ps1"
+    ```
 
 In the next module, we will see how we will add a new Frontend Web App as a microservice and how it will communicate with the backend API.
