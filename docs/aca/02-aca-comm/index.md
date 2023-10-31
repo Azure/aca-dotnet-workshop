@@ -9,7 +9,7 @@ canonical_url: https://bitoftech.net/2022/08/25/communication-microservices-azur
 
 In this module, we will add a service named `ACA Web API – Frontend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg){target=_blank}. This service will host a simple ASP.NET Razor pages web app which allows the end users to manage their tasks. After that we will provision Azure resources needed to deploy the service to ACA using Azure CLI.
 
-### 1. Create the Frontend Web App project (Web APP)
+### 1. Restore Variables
 
 - Open a command-line terminal and navigate to root folder of your project.
 
@@ -17,7 +17,17 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
     cd ~\TasksTracker.ContainerApps
     ```
 
-- From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps` and initialize the project. This will create and ASP.NET Razor Pages web app project.
+- From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps`.
+
+- Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.
+
+    ```shell
+    .\Variables.ps1
+    ```
+
+### 2. Create the Frontend Web App project (Web APP)
+
+- Initialize the web project. This will create and ASP.NET Razor Pages web app project.
 
     ```shell
     dotnet new webapp -o TasksTracker.WebPortal.Frontend.Ui
@@ -162,9 +172,9 @@ This variable will contain the Base URL for the backend API deployed in the prev
 !!! note
     Make sure that the build is successful and that there are no build errors. Usually you should see a **Build succeeded** message in the terminal upon a successful build.
 
-### 2. Deploy Razor Pages Web App Frontend Project to ACA
+### 3. Deploy Razor Pages Web App Frontend Project to ACA
 
-We will assume that you still have the same PowerShell console session opened from the last module which has all the powershell variables defined from module 1. We need to add the below PS variables:
+We need to add the below PS variables:
 
 ```powershell
 $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
@@ -217,7 +227,7 @@ echo "https://$fqdn"
 
 After your run the command, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-frontend-webapp` and open it in your browser, and you should be able to browse the frontend web app and manage your tasks.
 
-### 3. Update Backend Web API Container App Ingress property
+### 4. Update Backend Web API Container App Ingress property
 
 So far the Frontend App is sending HTTP requests to publicly exposed Web API which means that any REST client can invoke this API. We need to change the Web API ingress settings and make it only accessible for applications deployed within our Azure Container Environment only. Any application outside the Azure Container Environment will not be able to access the Web API.
 
@@ -254,5 +264,23 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
 
 !!! success
     Browse the web app again, and you should be able to see the same results and access the backend API endpoints from the Web App.
+
+### 5. Persist State
+
+- Persist Module 2 to Git.
+
+    ```shell
+    git add .
+    git commit -m "Add Module 2"
+    ```
+
+- Execute the [Set-Variables.ps1 script](../../aca/13-appendix/03-variables.md){target=_blank} in the console to create a `variables.ps1` file with all current variables. The output of the script will inform you how many variables are written out.
+
+- Persist a list of all current variables.
+
+    ```shell
+    git add .\Variables.ps1
+    git commit -m "Update Variables.ps1"
+    ```
 
 In the next module, we will start integrating Dapr and use the service to service Building block for services discovery and invocation.
