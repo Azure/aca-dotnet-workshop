@@ -87,16 +87,16 @@ What we've done here is the following:
 - The value `statestore` in the endpoint should match the `name` value in the global component file `statestore.yaml`
 - We have sent a request to store 3 entries of books, you can put any JSON representation in the value property
 
-To see the results visually, you can install a VS Code extension to connect to Redis DB and see the results. There are several redis extensions available for VS Code. For this workshop we will use an extension named ["Redis Xplorer"](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer){target=_blank}.
+To see the results visually, you can install a VS Code extension to connect to Redis DB and see the results. There are several Redis extensions available for VS Code. For this workshop we will use an extension named ["Redis Xplorer"](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer){target=_blank}.
 
-Once you install the extension it will add a tab under the explorer section of VS Code called "REDIS XPLORER". Next you will need to connect to the redis server locally by adding a new "REDIS XPLORER" profile. Click on the + sign in the "REDIS XPLORER" section in VS Code.
-This will ask you to enter the nickname (e.g. dapr_redis) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:
+Once you install the extension it will add a tab under the explorer section of VS Code called "REDIS XPLORER". Next you will need to connect to the Redis server locally by adding a new "REDIS XPLORER" profile. Click on the + sign in the "REDIS XPLORER" section in VS Code.
+This will ask you to enter the nickname (e.g. _dapr_redis_) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:
 
 ```powershell
 docker ps
 ```
 
-Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal. Leave the password empty for now.
+Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal. Leave the password empty.
 
 ![dapr-stateapi-redis](../../assets/images/04-aca-dapr-stateapi/docker_redis.png)
 
@@ -139,8 +139,7 @@ Similar to what we have done in the Frontend Web App, we need to use Dapr Client
 
 #### 2. Create a New Concrete Implementation to Manage Tasks Persistence
 
-As you recall from the previous module, we were storing the tasks in memory. Now we need to store them in Redis and later on Azure Cosmos DB.
-The key thing to keep in mind here is that switching from redis to Azure Cosmos DB won't require changing the code below which is a huge advantage of using Dapr.
+As you recall from the previous module, we were storing the tasks in memory. Now we need to store them in Redis and, later on, Azure Cosmos DB. The key thing to keep in mind here is that switching from Redis to Azure Cosmos DB won't require changing the code below which is a huge advantage of using Dapr.
 
 Add below file under the folder named **Services**. This file will implement the interface `ITasksManager`.
 
@@ -186,7 +185,7 @@ Now we need to register the new service named `TasksStoreManager` and `DaprClien
 Now you are ready to run both applications and debug them. You can store new tasks, update them, delete existing tasks and mark them as completed. The data should be stored on your local Redis instance.
 
 !!! info
-    For now don't try running the application as you will get an error running the query against the local redis. As mentioned earlier setting up the local redis store is out of scope for this workshop.
+    For now don't try running the application as you will get an error running the query against the local Redis. As mentioned earlier setting up the local Redis store is out of scope for this workshop.
     Instead, we will focus on wiring the Azure Cosmos DB as the store for our tasks.
 
 ### Use Azure Cosmos DB with Dapr State Store Management API
@@ -226,6 +225,15 @@ az cosmosdb sql container create `
 --name $COSMOS_DB_CONTAINER `
 --partition-key-path "/id" `
 --throughput 400
+
+$COSMOS_DB_ENDPOINT=(az cosmosdb show `
+--name $COSMOS_DB_ACCOUNT `
+--resource-group $RESOURCE_GROUP `
+--query documentEndpoint `
+--output tsv)
+
+echo "CosmosDB Endpoint: "
+echo $COSMOS_DB_ENDPOINT
 ```
 
 !!! note
@@ -236,9 +244,14 @@ Copy the value of `primaryMasterKey` as we will use it in the next step.
 
 ```powershell
 # List Azure CosmosDB keys
-az cosmosdb keys list `
+$COSMOS_DB_PRIMARY_MASTER_KEY=(az cosmosdb keys list `
 --name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP
+--resource-group $RESOURCE_GROUP `
+--query primaryMasterKey `
+--output tsv)
+
+echo "CosmosDB Primary Master Key:"
+echo $COSMOS_DB_PRIMARY_MASTER_KEY
 ```
 
 **2. Create a Component File for State Store Management:** Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.
@@ -289,9 +302,6 @@ This will instruct dapr to load the local projects components located at **./com
 ```
 
 If you have been using the dapr cli commands instead of the aforementioned debugging then you will need to execute the backend api with the resources-path property as follows.
-
-!!! note
-    Remember to replace the placeholders. Remember to use https port number for the Web API application.
 
 === ".NET 6 or below"
 
@@ -355,7 +365,17 @@ az containerapp identity assign `
 --name $BACKEND_API_NAME `
 --system-assigned
 
-$BACKEND_API_PRINCIPAL_ID = az containerapp identity show --name $BACKEND_API_NAME --resource-group $RESOURCE_GROUP --query principalId
+$COSMOS_DB_PRIMARY_MASTER_KEY=(az cosmosdb keys list `
+--name $COSMOS_DB_ACCOUNT `
+--resource-group $RESOURCE_GROUP `
+--query primaryMasterKey `
+--output tsv)
+
+$BACKEND_API_PRINCIPAL_ID=(az containerapp identity show `
+--name $BACKEND_API_NAME `
+--resource-group $RESOURCE_GROUP `
+--query principalId `
+--output tsv)
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be similar to the one shown below.
@@ -392,7 +412,7 @@ az cosmosdb sql role assignment create `
 
 ### Deploy the Backend API and Frontend Web App Projects to ACA
 
-Now we are ready to deploy all local changes from this module and the previous module to ACA. But before we do that, we need to do one more addition..
+We are almost ready to deploy all local changes from this module and the previous module to ACA. But before we do that, we need one last addition.
 
 We have to create a [dapr component schema file](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview?tabs=bicep1%2Cyaml#component-schema){target=_blank} for Azure Cosmos DB which meets the specs defined by
 Azure Container Apps. The reason for this variance is that ACA Dapr schema is slightly simplified to support Dapr components and removes unnecessary fields, including `apiVersion`, `kind`, and redundant metadata and spec properties.
@@ -450,9 +470,6 @@ az containerapp env dapr-component set `
 
 Until this moment Dapr was not enabled on the Container Apps we have provisioned. Enable Dapr for both Container Apps by running the two commands below in the PowerShell console.
 
-!!! info
-    Remember to replace the placeholders with your own values.
-
 ```powershell
 az containerapp dapr enable `
 --name $BACKEND_API_NAME `
@@ -492,6 +509,9 @@ az containerapp update `
 --name $BACKEND_API_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY-1
+
+echo "Azure Frontend UI URL:" 
+echo $FRONTEND_UI_BASE_URL
 ```
 
 !!! tip
