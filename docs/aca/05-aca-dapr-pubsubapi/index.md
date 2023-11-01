@@ -36,7 +36,9 @@ We want to have more control and provide our own component file, so let's create
     --8<-- "docs/aca/05-aca-dapr-pubsubapi/dapr-pubsub-redis.yaml"
     ```
 
-To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md). 
+--8<-- "snippets/restore-variables.md"
+
+To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md).
 
 !!! note
     Don't forget to include the property `--resources-path`.  Remember to replace the placeholders with your own values
@@ -45,6 +47,7 @@ To try out the Pub/Sub API, run the Backend API from VS Code by running the belo
 
     ```powershell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -58,6 +61,7 @@ To try out the Pub/Sub API, run the Backend API from VS Code by running the belo
 
     ```powershell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -244,15 +248,17 @@ With all those bits in place, we are ready to run the publisher service `Backend
 $BACKEND_SERVICE_APP_PORT=<backend service application https port number found under properties->launchSettings.json. e.g. 7051>
 ```
 
-To do so, run the below commands in PowerShell console, ensure you are on the right root folder of each respective project.
+--8<-- "snippets/update-variables.md::5"
 
-!!! info
-    Remember to replace the placeholders with your own values.
+To do so, run the below commands in two separate PowerShell console, ensure you are on the right root folder of each respective project.
+
+--8<-- "snippets/restore-variables.md:9:14"
 
 === ".NET 6 or below"
 
     ```powershell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -262,6 +268,7 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
     dotnet run 
 
     cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+
     dapr run `
     --app-id tasksmanager-backend-processor `
     --app-port $BACKEND_SERVICE_APP_PORT `
@@ -275,6 +282,7 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
 
     ```powershell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -284,6 +292,7 @@ To do so, run the below commands in PowerShell console, ensure you are on the ri
     -- dotnet run --launch-profile https
 
     cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+
     dapr run `
     --app-id tasksmanager-backend-processor `
     --app-port $BACKEND_SERVICE_APP_PORT `
@@ -322,8 +331,7 @@ Keep an eye on the terminal logs of the Backend background processor as you will
 
 #### 6. Optional: Update VS Code Tasks and Launch Configuration Files
 
-If you have followed the steps in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) 
-and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added. 
+If you have followed the steps in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added.
 
 ??? example "Click to expand the files to update"
 
@@ -560,6 +568,7 @@ With all those bits in place, we are ready to run the publisher service `Backend
 
     ```powershell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -569,6 +578,7 @@ With all those bits in place, we are ready to run the publisher service `Backend
     dotnet run 
     
     cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+
     dapr run `
     --app-id tasksmanager-backend-processor `
     --app-port $BACKEND_SERVICE_APP_PORT `
@@ -582,6 +592,7 @@ With all those bits in place, we are ready to run the publisher service `Backend
 
     ````powershell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -591,6 +602,7 @@ With all those bits in place, we are ready to run the publisher service `Backend
     -- dotnet run --launch-profile https
     
     cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+
     dapr run `
     --app-id tasksmanager-backend-processor `
     --app-port $BACKEND_SERVICE_APP_PORT `
@@ -718,7 +730,7 @@ az containerapp identity assign `
 --name $BACKEND_SERVICE_NAME `
 --system-assigned
 
-$BACKEND_SVC_PRINCIPAL_ID = az containerapp job identity show --name $BACKEND_SERVICE_NAME --resource-group $RESOURCE_GROUP --query principalId
+$BACKEND_SVC_PRINCIPAL_ID = az containerapp identity show --name $BACKEND_SERVICE_NAME --resource-group $RESOURCE_GROUP --query principalId
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be as the below, keep a note of the property `principalId` as we are going to use it in the next step.
@@ -754,9 +766,7 @@ We'll do the same with Backend API container app, but we will use a different Az
 
 ```powershell
 $SVC_BUS_DATA_SENDER_ROLE = "Azure Service Bus Data Sender" # Built in role name
-```
 
-```powershell
 az role assignment create `
 --assignee $BACKEND_API_PRINCIPAL_ID `
 --role $SVC_BUS_DATA_SENDER_ROLE `
@@ -814,5 +824,8 @@ az containerapp revision restart `
     Sometimes, the revision creation right after creating the managed identity results in the identity not yet being picked up properly. This becomes evident when we look at the Backend Service's Container App's `Log stream` blade in the Azure Portal. Specifically, the `daprd` sidecar container will show HTTP 401 errors.
 
     Should this be the case, you can navigate to the `Revisions` blade, click on the active revision, then press `Restart`. Going back to the `daprd` sidecar in the `Log Stream` should now reveal processing of messages.
+
+--8<-- "snippets/update-variables.md"
+--8<-- "snippets/persist-state.md:module5"
 
 The next module will delve into the implementation of Dapr bindings with ACA.
