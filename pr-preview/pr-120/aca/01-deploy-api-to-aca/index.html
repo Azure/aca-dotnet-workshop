@@ -1090,7 +1090,7 @@
 <p>In this module, we will start by creating the first microservice named <code>ACA Web API – Backend</code> as illustrated in the <a href="../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg" target="_blank">architecture diagram</a>. Followed by that we will provision the  Azure resources needed to deploy the service to Azure Container Apps using the Azure CLI.</p>
 <h3 id="1-set-up-git-repository-variable-scripts">1. Set up Git Repository &amp; Variable Scripts<a class="headerlink" href="#1-set-up-git-repository-variable-scripts" title="Permanent link">&para;</a></h3>
 <h4 id="git-repository">Git Repository<a class="headerlink" href="#git-repository" title="Permanent link">&para;</a></h4>
-<p>This workshop typically spans several days. As such, you may close your tools, CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.</p>
+<p>This workshop typically spans several days. As such, you may close your tools, end CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.</p>
 <ul>
 <li>
 <p>Open a command-line terminal and create a folder for your project, then switch to that folder.</p>
@@ -1122,6 +1122,12 @@
 <li>
 <p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <em>TasksTracker.ContainerApps</em>.</p>
 </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Throughout the documentation, we may refer to the <em>TasksTracker.ContainerApps</em> directory as <em>root</em> to keep documentation simpler.</p>
+</div>
+<ul>
 <li>
 <p>Create a <code>.gitignore</code> file in the <code>TasksTracker.ContainerApps</code> directory. This ensures we keep our git repo clean of build assets and other artifacts.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">.gitignore</label></div>
@@ -1250,7 +1256,7 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>In the new project folder, create a new folder named <strong>Services</strong> (make sure it is created at the same level as the models folder and not inside the models folder itself) and add <strong>new files</strong> as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.</p>
+<p>In the new project folder, create a new folder named <strong>Services</strong> (make sure it is created at the same level as the <em>Models</em> folder and not inside the <em>Models</em> folder itself) and add <strong>new files</strong> as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">ITasksManager.cs</label><label for="__tabbed_5_2">FakeTasksManager.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1462,7 +1468,7 @@
 </span><span id="__span-15-55"><a id="__codelineno-15-55" name="__codelineno-15-55" href="#__codelineno-15-55"></a><span class="w">                </span><span class="n">taskUpdateModel</span><span class="p">.</span><span class="n">TaskDueDate</span>
 </span><span id="__span-15-56"><a id="__codelineno-15-56" name="__codelineno-15-56" href="#__codelineno-15-56"></a><span class="w">            </span><span class="p">);</span>
 </span><span id="__span-15-57"><a id="__codelineno-15-57" name="__codelineno-15-57" href="#__codelineno-15-57"></a>
-</span><span id="__span-15-58"><a id="__codelineno-15-58" name="__codelineno-15-58" href="#__codelineno-15-58"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">updated</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BadRequest</span><span class="p">();</span>
+</span><span id="__span-15-58"><a id="__codelineno-15-58" name="__codelineno-15-58" href="#__codelineno-15-58"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BadRequest</span><span class="p">();</span>
 </span><span id="__span-15-59"><a id="__codelineno-15-59" name="__codelineno-15-59" href="#__codelineno-15-59"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-15-60"><a id="__codelineno-15-60" name="__codelineno-15-60" href="#__codelineno-15-60"></a>
 </span><span id="__span-15-61"><a id="__codelineno-15-61" name="__codelineno-15-61" href="#__codelineno-15-61"></a><span class="w">        </span><span class="na">[HttpPut(&quot;{taskId}/markcomplete&quot;)]</span>
@@ -1470,7 +1476,7 @@
 </span><span id="__span-15-63"><a id="__codelineno-15-63" name="__codelineno-15-63" href="#__codelineno-15-63"></a><span class="w">        </span><span class="p">{</span>
 </span><span id="__span-15-64"><a id="__codelineno-15-64" name="__codelineno-15-64" href="#__codelineno-15-64"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_tasksManager</span><span class="p">.</span><span class="n">MarkTaskCompleted</span><span class="p">(</span><span class="n">taskId</span><span class="p">);</span>
 </span><span id="__span-15-65"><a id="__codelineno-15-65" name="__codelineno-15-65" href="#__codelineno-15-65"></a>
-</span><span id="__span-15-66"><a id="__codelineno-15-66" name="__codelineno-15-66" href="#__codelineno-15-66"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">updated</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BadRequest</span><span class="p">();</span>
+</span><span id="__span-15-66"><a id="__codelineno-15-66" name="__codelineno-15-66" href="#__codelineno-15-66"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BadRequest</span><span class="p">();</span>
 </span><span id="__span-15-67"><a id="__codelineno-15-67" name="__codelineno-15-67" href="#__codelineno-15-67"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-15-68"><a id="__codelineno-15-68" name="__codelineno-15-68" href="#__codelineno-15-68"></a>
 </span><span id="__span-15-69"><a id="__codelineno-15-69" name="__codelineno-15-69" href="#__codelineno-15-69"></a><span class="w">        </span><span class="na">[HttpDelete(&quot;{taskId}&quot;)]</span>
@@ -1478,7 +1484,7 @@
 </span><span id="__span-15-71"><a id="__codelineno-15-71" name="__codelineno-15-71" href="#__codelineno-15-71"></a><span class="w">        </span><span class="p">{</span>
 </span><span id="__span-15-72"><a id="__codelineno-15-72" name="__codelineno-15-72" href="#__codelineno-15-72"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">deleted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_tasksManager</span><span class="p">.</span><span class="n">DeleteTask</span><span class="p">(</span><span class="n">taskId</span><span class="p">);</span>
 </span><span id="__span-15-73"><a id="__codelineno-15-73" name="__codelineno-15-73" href="#__codelineno-15-73"></a>
-</span><span id="__span-15-74"><a id="__codelineno-15-74" name="__codelineno-15-74" href="#__codelineno-15-74"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">deleted</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NotFound</span><span class="p">();</span>
+</span><span id="__span-15-74"><a id="__codelineno-15-74" name="__codelineno-15-74" href="#__codelineno-15-74"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">deleted</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NotFound</span><span class="p">();</span>
 </span><span id="__span-15-75"><a id="__codelineno-15-75" name="__codelineno-15-75" href="#__codelineno-15-75"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-15-76"><a id="__codelineno-15-76" name="__codelineno-15-76" href="#__codelineno-15-76"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-15-77"><a id="__codelineno-15-77" name="__codelineno-15-77" href="#__codelineno-15-77"></a><span class="p">}</span>
@@ -1661,8 +1667,10 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 </span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>--query<span class="w"> </span>properties.configuration.ingress.fqdn<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>--output<span class="w"> </span>tsv<span class="o">)</span>
 </span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>
-</span><span id="__span-28-15"><a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;See a listing of tasks created by the author at this URL:&quot;</span>
-</span><span id="__span-28-16"><a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">/api/tasks/?createdby=tjoudeh@bitoftech.net&quot;</span>
+</span><span id="__span-28-15"><a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a><span class="nv">$BACKEND_API_EXTERNAL_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">&quot;</span>
+</span><span id="__span-28-16"><a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>
+</span><span id="__span-28-17"><a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;See a listing of tasks created by the author at this URL:&quot;</span>
+</span><span id="__span-28-18"><a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">/api/tasks/?createdby=tjoudeh@bitoftech.net&quot;</span>
 </span></code></pre></div>
 </li>
 </ul>
