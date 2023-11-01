@@ -46,13 +46,24 @@
 
 --8<-- [end:module4]
 
---8<-- [start:module5]
+--8<-- [start:module51]
 
 - Persist the module to Git.
 
     ```shell
     git add .
-    git commit -m "Add Module 5"
+    git commit -m "Add Module 5.1"
     ```
 
---8<-- [end:module5]
+--8<-- [end:module51]
+
+--8<-- [start:module52]
+
+- Persist the module to Git.
+
+    ```shell
+    git add .
+    git commit -m "Add Module 5.2"
+    ```
+
+--8<-- [end:module52]
