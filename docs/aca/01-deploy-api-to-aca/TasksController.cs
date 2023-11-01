@@ -28,13 +28,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
         {
             var task = await _tasksManager.GetTaskById(taskId);
 
-            if (task != null)
-            {
-                return Ok(task);
-            }
-
-            return NotFound();
-
+            return (task != null) ? Ok(task) : NotFound();
         }
 
         [HttpPost]
@@ -61,12 +55,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
                 taskUpdateModel.TaskDueDate
             );
 
-            if (updated)
-            {
-                return Ok();
-            }
-
-            return BadRequest();
+            return (updated) ? Ok() : BadRequest();
         }
 
         [HttpPut("{taskId}/markcomplete")]
@@ -74,12 +63,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
         {
             var updated = await _tasksManager.MarkTaskCompleted(taskId);
 
-            if (updated)
-            {
-                return Ok();
-            }
-
-            return BadRequest();
+            return (updated) ? Ok() : BadRequest();
         }
 
         [HttpDelete("{taskId}")]
@@ -87,12 +71,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
         {
             var deleted = await _tasksManager.DeleteTask(taskId);
 
-            if (deleted)
-            {
-                return Ok();
-            }
-
-            return NotFound();
+            return (deleted) ? Ok() : NotFound();
         }
     }
 }

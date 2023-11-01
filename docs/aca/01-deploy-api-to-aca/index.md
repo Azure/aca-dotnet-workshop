@@ -9,9 +9,11 @@ canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application
 
 In this module, we will start by creating the first microservice named `ACA Web API – Backend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg){target=_blank}. Followed by that we will provision the  Azure resources needed to deploy the service to Azure Container Apps using the Azure CLI.
 
-### 1. Set up Git Repository
+### 1. Set up Git Repository & Variable Scripts
 
-This workshop spans several days. As such, you may close your tools, CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.
+#### Git Repository
+
+This workshop typically spans several days. As such, you may close your tools, CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.
 
 - Open a command-line terminal and create a folder for your project, then switch to that folder.
 
@@ -32,6 +34,14 @@ This workshop spans several days. As such, you may close your tools, CLI session
     git init
     ```
 
+- Use the `code` command to launch Visual Studio Code from that directory as shown:
+
+    ```shell
+    code .
+    ```
+
+- From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder _TasksTracker.ContainerApps_.
+
 - Create a `.gitignore` file in the `TasksTracker.ContainerApps` directory. This ensures we keep our git repo clean of build assets and other artifacts.
 
     === ".gitignore"
@@ -45,19 +55,39 @@ This workshop spans several days. As such, you may close your tools, CLI session
 - Commit the `.gitignore` file.
 
     ```shell
-    git commit -a -m "Add .gitignore"
+    git add .\.gitignore
+    git commit -m "Add .gitignore"
+    ```
+
+#### Set-Variables & Variables Script
+
+- In the `TasksTracker.ContainerApps` root create a new file called `Set-Variables.ps1`.
+
+- Copy the [Set-Variables.ps1 script](../../aca/13-appendix/03-variables.md){target=_blank} into the newly-created `Set-Variables.ps1` file and save it.
+
+- Perform an initial commit of the `Set-Variables.ps1` file.
+
+    ```shell
+    git add .\Set-Variables.ps1
+    git commit -m "Initialize Set-Variables.ps1"
+    ```
+
+- Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out. Since we have not set any yet, it will be `0`.
+
+    ```shell
+    .\Set-Variables.ps1
+    ```
+
+- Perform an initial commit of the variables file.
+
+    ```shell
+    git add .\Variables.ps1
+    git commit -m "Initialize Variables.ps1"
     ```
 
 ### 2. Create the backend API project (Web API)
 
-- Use the `code` command to launch Visual Studio Code from that directory as shown:
-
-    ```shell
-    
-    code .
-    ```
-
-- From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps` and execute `dotnet --info`. Take note of the intalled .NET SDK versions.
+- In the terminal execute `dotnet --info`. Take note of the intalled .NET SDK versions.
 
 - Inside the `TasksTracker.ContainerApps` project folder create a new file and set the .NET SDK version from the above command:
 
@@ -65,7 +95,7 @@ This workshop spans several days. As such, you may close your tools, CLI session
     ```json
     {
         "sdk": {
-            "version": "7.0.401",
+            "version": "7.0.403",
             "rollForward": "latestFeature"
         }
     }
@@ -111,26 +141,26 @@ The code above generates ten tasks and stores them in a list in memory. It also 
 
 - Now we need to register `FakeTasksManager` on project startup. Open file `#!csharp Program.cs` and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required using statements for the task interface and class.
 
-=== "Program.cs"
+    === "Program.cs"
 
-```csharp hl_lines="1 5"
-using TasksTracker.TasksManager.Backend.Api.Services;
-
-var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
-builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
-
-// Code removed for brevity
-app.Run();
-```
+    ```csharp hl_lines="1 5"
+    using TasksTracker.TasksManager.Backend.Api.Services;
+    
+    var builder = WebApplication.CreateBuilder(args);
+    // Add services to the container.
+    builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
+    
+    // Code removed for brevity
+    app.Run();
+    ```
 
 - Inside the **Controllers** folder create a new controller with the below filename. We need to create API endpoints to manage tasks.
 
-=== "TasksController.cs"
+    === "TasksController.cs"
 
-```csharp
---8<-- "docs/aca/01-deploy-api-to-aca/TasksController.cs"
-```
+    ```csharp
+    --8<-- "docs/aca/01-deploy-api-to-aca/TasksController.cs"
+    ```
 
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
 
@@ -157,6 +187,9 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     # Install/Upgrade Azure Container Apps Extension
     az extension add --name containerapp --upgrade
 
+    # Install the application-insights extension for the CLI
+    az extension add -n application-insights
+
     # Login to Azure
     az login 
     ```
@@ -164,11 +197,14 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 - You may be able to use the queried Azure subscription ID or you may need to set it manually depending on your setup.
 
     ```shell
-    # Get/Set the Azure Subscription ID. 
-    # $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the azure portal
+    # Retrieve the currently active Azure subscription ID
     $AZURE_SUBSCRIPTION_ID = az account show --query id --output tsv
-    # Only required if you have multiple subscriptions
-    #az account set --subscription $AZURE_SUBSCRIPTION_ID
+
+    # Set a specific Azure Subscription ID (if you have multiple subscriptions)
+    # $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the Azure portal
+    # az account set --subscription $AZURE_SUBSCRIPTION_ID
+
+    echo $AZURE_SUBSCRIPTION_ID
     ```
 
 - Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:
@@ -190,9 +226,6 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```shell
     $TARGET_PORT=[exposed Docker target port from Dockerfile]
     ```
-
-??? tip "List of Variables"
-    As you progress through the different modules it may be hard to keep track of the variables that you have set so far. You can retrieve a list of all the variables that you have set throughout this workshop by executing the [variables script](../../aca/13-appendix/03-variables.md) in the same terminal where you are executing the scripts.
 
 ??? tip "Cloud Adoption Framework Abbreviations"
     Unless you have your own naming convention, we suggest to use [Cloud Adoption Framework (CAF) abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations){target=_blank} for resource prefixes.
@@ -244,9 +277,6 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 - Create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net){target=_blank} Instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing){target=_blank} between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
 
     ```shell
-    # Install the application-insights extension for the CLI
-    az extension add -n application-insights
-    
     # Create application-insights instance
     az monitor app-insights component create `
     --resource-group $RESOURCE_GROUP `
@@ -283,7 +313,9 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
     ```shell
     cd ~\TasksTracker.ContainerApps
+    ```
 
+    ```shell
     az acr build `
     --registry $AZURE_CONTAINER_REGISTRY_NAME `
     --image "tasksmanager/$BACKEND_API_NAME" `
@@ -336,22 +368,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     
         ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
 
-### 4. Persist State
-
-- Persist Module 1 to Git.
-
-    ```shell
-    git add .
-    git commit -m "Add Module 1"
-    ```
-
-- Execute the [Set-Variables.ps1 script](../../aca/13-appendix/03-variables.md){target=_blank} in the console to create a `variables.ps1` file with all current variables. The output of the script will inform you how many variables are written out.
-
-- Persist a list of all current variables.
-
-    ```shell
-    git add .\Variables.ps1
-    git commit -m "Add Variables.ps1"
-    ```
+--8<-- "snippets/persist-state.md:module1"
+--8<-- "snippets/update-variables.md"
 
 In the next module, we will see how we will add a new Frontend Web App as a microservice and how it will communicate with the backend API.
