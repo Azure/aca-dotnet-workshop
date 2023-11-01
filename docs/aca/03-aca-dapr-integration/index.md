@@ -42,6 +42,12 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
     $UI_APP_PORT=<web frontend ui application https port found under Properties->launchSettings.json. e.g. 7000>
     ```
 
+- Now that we know the `UI_APP_PORT`, we can also declare the local frontend UI URL:
+
+    ```powershell
+    $FRONTEND_UI_BASE_URL_LOCAL="https://localhost:$UI_APP_PORT"
+    ```
+
 --8<-- "snippets/update-variables.md::1"
 
 - Next, start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, run the below commands in PS terminal based on your .NET version.
@@ -197,6 +203,12 @@ The SDK offers developers three ways of making remote service invocation calls:
 
 - We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected. To do so run the two commands commands shown below (ensure that you are on the right project directory when running each command).
 
+- Obtain the local frontend UI URL to test shortly once the frontend UI and backend API are running in the next step.
+
+    ```powershell
+    $FRONTEND_UI_BASE_URL_LOCAL
+    ```
+
 - In each of the two terminals previously opened, run the frontend UI and backend API respectively.
 
     === ".NET 6 or below"
@@ -252,8 +264,7 @@ The SDK offers developers three ways of making remote service invocation calls:
     If you need to run both microservices together, you need to keep calling `dapr run` manually each time in the terminal. And when you have multiple microservices talking to each other you need to run at the same time to debug the solution. This can be a convoluted process. You can refer to the [debug and launch Dapr applications in VSCode](../13-appendix/01-run-debug-dapr-app-vscode.md) to see how to configure VScode for running and debugging Dapr applications.
 
 !!! success
-    Now both Applications are running using Dapr sidecar. Open your browser and browse for `https://localhost:{localwebappport}`. E.g. `https://localhost:7000` and provide an email to load the tasks for the user (e.g. [tjoudeh@bitoftech.net]).
-    If the application is working as expected you should see tasks list associated with the email you provided (e.g. [tjoudeh@bitoftech.net]).
+    Now both Applications are running using Dapr sidecar. Open the local frontend UI URL, ignore the certificate warning locally, then provide an email to load the tasks for the user (e.g. `tjoudeh@bitoftech.net`). If the application is working as expected you should see tasks list associated with the email you provided.
 
 --8<-- "snippets/update-variables.md"
 --8<-- "snippets/persist-state.md:module3"
