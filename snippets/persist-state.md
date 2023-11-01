@@ -13,7 +13,7 @@
 
 --8<-- [start:module2]
 
-### 4. Persist State
+### 5. Persist State
 
 - Persist the module to Git.
 
