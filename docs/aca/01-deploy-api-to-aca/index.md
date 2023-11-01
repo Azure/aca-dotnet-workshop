@@ -13,7 +13,7 @@ In this module, we will start by creating the first microservice named `ACA Web 
 
 #### Git Repository
 
-This workshop typically spans several days. As such, you may close your tools, CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.
+This workshop typically spans several days. As such, you may close your tools, end CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.
 
 - Open a command-line terminal and create a folder for your project, then switch to that folder.
 
@@ -41,6 +41,9 @@ This workshop typically spans several days. As such, you may close your tools, C
     ```
 
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder _TasksTracker.ContainerApps_.
+
+!!! note
+    Throughout the documentation, we may refer to the _TasksTracker.ContainerApps_ directory as _root_ to keep documentation simpler.
 
 - Create a `.gitignore` file in the `TasksTracker.ContainerApps` directory. This ensures we keep our git repo clean of build assets and other artifacts.
 
@@ -126,7 +129,7 @@ This workshop typically spans several days. As such, you may close your tools, C
     --8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
     ```
 
-- In the new project folder, create a new folder named **Services** (make sure it is created at the same level as the models folder and not inside the models folder itself) and add **new files** as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.
+- In the new project folder, create a new folder named **Services** (make sure it is created at the same level as the _Models_ folder and not inside the _Models_ folder itself) and add **new files** as shown below. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. We will work initially with data in memory to keep things simple with very limited dependency on any other components or data store and focus on the deployment of the backend API to ACA. In the upcoming modules we will switch this implementation with a concrete data store where we are going to store data in Redis and Azure Cosmos DB using Dapr State Store building block.
 
     === "ITasksManager.cs"
         ```csharp
@@ -340,6 +343,8 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --cpu 0.25 --memory 0.5Gi `
     --query properties.configuration.ingress.fqdn `
     --output tsv)
+
+    $BACKEND_API_EXTERNAL_BASE_URL="https://$fqdn"
 
     echo "See a listing of tasks created by the author at this URL:"
     echo "https://$fqdn/api/tasks/?createdby=tjoudeh@bitoftech.net"
