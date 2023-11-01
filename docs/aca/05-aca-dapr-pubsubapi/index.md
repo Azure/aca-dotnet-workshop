@@ -7,7 +7,7 @@ canonical_url: https://bitoftech.net/2022/09/02/azure-container-apps-async-commu
 !!! info "Module Duration"
     90 minutes
 
-In this module, we will introduce a new background service which is named `ACA-Processer Backend` according to our [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). This new service will be responsible for sending notification emails (simulated) to the task owners to notify them that a new task has been assigned to them. We can do this in the Backend API and send the email right after saving the task, but we want to offload this process to another service and keep the Backend API service responsible for managing tasks data only.
+In this module, we will introduce a new background service which is named `ACA-Processor Backend` according to our [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg). This new service will be responsible for sending notification emails (simulated) to the task owners to notify them that a new task has been assigned to them. We can do this in the Backend API and send the email right after saving the task, but we want to offload this process to another service and keep the Backend API service responsible for managing tasks data only.
 
 As a best practice, it is recommended that we decouple the two services from each other. So this means we are going to rely on the Publisher-Subscriber pattern (Pub/Sub Pattern).
 The main advantage of this pattern is that it offers loose coupling between services, where the sender/publisher of the message doesn't know anything about the receiver/consumers.
@@ -28,6 +28,8 @@ To try this out we can directly invoke the Pub/Sub API and publish a message to 
 If you navigate to the path `%USERPROFILE%\.dapr\components (assuming you are using windows)` you will find a file named `pubsub.yaml`. Inside this file, you will see the properties needed to access the local Redis instance.
 The publisher/subscriber brokers template component file structure can be found [here](https://docs.dapr.io/operations/components/setup-pubsub/){target=_blank}.
 
+--8<-- "snippets/restore-variables.md"
+
 We want to have more control and provide our own component file, so let's create pub/sub component file in our **components** folder as shown below:
 
 === "dapr-pubsub-redis.yaml"
@@ -35,8 +37,6 @@ We want to have more control and provide our own component file, so let's create
     ```yaml
     --8<-- "docs/aca/05-aca-dapr-pubsubapi/dapr-pubsub-redis.yaml"
     ```
-
---8<-- "snippets/restore-variables.md"
 
 To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md).
 
@@ -348,6 +348,13 @@ If you have followed the steps in the [appendix](../13-appendix/01-run-debug-dap
         ```json
         --8<-- "docs/aca/05-aca-dapr-pubsubapi/launch.json"
         ```
+
+This is a good opportunity to save intermediately:
+
+--8<-- "snippets/update-variables.md"
+--8<-- "snippets/persist-state.md:module51"
+
+***
 
 ### Use the Dapr .NET Client SDK to Publish Messages
 
@@ -671,23 +678,41 @@ To achieve the above, run the PowerShell script below.
 !!! note
     Notice how we removed the Ingress property totally which disables the Ingress for this Container App. Remember to replace the placeholders with your own values:
 
-```powershell
-az containerapp create `
---name "$BACKEND_SERVICE_NAME"  `
---resource-group $RESOURCE_GROUP `
---environment $ENVIRONMENT `
---image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
---registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
---min-replicas 1 `
---max-replicas 1 `
---cpu 0.25 --memory 0.5Gi `
---enable-dapr `
---dapr-app-id $BACKEND_SERVICE_NAME `
---dapr-app-port $TARGET_PORT `
-# comment out - or don't copy - these two lines if you are not using SendGrid
---secrets "sendgrid-apikey=<Replace with your SendGrid API Key>" `
---env-vars "SendGrid__ApiKey=secretref:sendgrid-apikey" "SendGrid__IntegrationEnabled=true"
-```
+=== "Using SendGrid"
+
+    ```powershell
+    az containerapp create `
+    --name "$BACKEND_SERVICE_NAME"  `
+    --resource-group $RESOURCE_GROUP `
+    --environment $ENVIRONMENT `
+    --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
+    --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
+    --min-replicas 1 `
+    --max-replicas 1 `
+    --cpu 0.25 --memory 0.5Gi `
+    --enable-dapr `
+    --dapr-app-id $BACKEND_SERVICE_NAME `
+    --dapr-app-port $TARGET_PORT `
+    --secrets "sendgrid-apikey=<Replace with your SendGrid API Key>" `
+    --env-vars "SendGrid__ApiKey=secretref:sendgrid-apikey" "SendGrid__IntegrationEnabled=true"
+    ```
+
+=== "Not Using SendGrid"
+
+    ```powershell
+    az containerapp create `
+    --name "$BACKEND_SERVICE_NAME"  `
+    --resource-group $RESOURCE_GROUP `
+    --environment $ENVIRONMENT `
+    --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
+    --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
+    --min-replicas 1 `
+    --max-replicas 1 `
+    --cpu 0.25 --memory 0.5Gi `
+    --enable-dapr `
+    --dapr-app-id $BACKEND_SERVICE_NAME `
+    --dapr-app-port $TARGET_PORT
+    ```
 
 #### 3. Deploy New Revisions of the Backend API to Azure Container Apps
 
@@ -730,7 +755,11 @@ az containerapp identity assign `
 --name $BACKEND_SERVICE_NAME `
 --system-assigned
 
-$BACKEND_SVC_PRINCIPAL_ID = az containerapp identity show --name $BACKEND_SERVICE_NAME --resource-group $RESOURCE_GROUP --query principalId
+$BACKEND_SVC_PRINCIPAL_ID=(az containerapp identity show `
+--name $BACKEND_SERVICE_NAME `
+--resource-group $RESOURCE_GROUP `
+--query principalId `
+--output tsv)
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be as the below, keep a note of the property `principalId` as we are going to use it in the next step.
@@ -745,7 +774,7 @@ This command will create an Enterprise Application (basically a Service Principa
 
 #### 2. Grant Backend Processor App the Azure Service Bus Data Receiver Role
 
-We will be using a `system-assigned` identity with a role assignments to grant our Backend Processor App the `Azure Service Bus Data Receiver` role which will allow it to receive messages from Service Bus queues and subscriptions.
+We will be using a `system-assigned` managed identity with a role assignments to grant our Backend Processor App the `Azure Service Bus Data Receiver` role which will allow it to receive messages from Service Bus queues and subscriptions.
 
 You can read more about `Azure built-in roles for Azure Service Bus` [here](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-managed-service-identity#azure-built-in-roles-for-azure-service-bus){target=_blank}.
 
@@ -826,6 +855,6 @@ az containerapp revision restart `
     Should this be the case, you can navigate to the `Revisions` blade, click on the active revision, then press `Restart`. Going back to the `daprd` sidecar in the `Log Stream` should now reveal processing of messages.
 
 --8<-- "snippets/update-variables.md"
---8<-- "snippets/persist-state.md:module5"
+--8<-- "snippets/persist-state.md:module52"
 
 The next module will delve into the implementation of Dapr bindings with ACA.
