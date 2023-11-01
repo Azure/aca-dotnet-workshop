@@ -55,7 +55,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
                 taskUpdateModel.TaskDueDate
             );
 
-            return (updated) ? Ok() : BadRequest();
+            return updated ? Ok() : BadRequest();
         }
 
         [HttpPut("{taskId}/markcomplete")]
@@ -63,7 +63,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
         {
             var updated = await _tasksManager.MarkTaskCompleted(taskId);
 
-            return (updated) ? Ok() : BadRequest();
+            return updated ? Ok() : BadRequest();
         }
 
         [HttpDelete("{taskId}")]
@@ -71,7 +71,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
         {
             var deleted = await _tasksManager.DeleteTask(taskId);
 
-            return (deleted) ? Ok() : NotFound();
+            return deleted ? Ok() : NotFound();
         }
     }
 }
