@@ -354,11 +354,7 @@ az containerapp identity assign `
 --resource-group $RESOURCE_GROUP `
 --name $BACKEND_API_NAME `
 --system-assigned
-```
 
-Give it a few seconds before executing the next command as it takes some time for the identity to become available.
-
-```Powershell
 $BACKEND_API_PRINCIPAL_ID = az containerapp identity show --name $BACKEND_API_NAME --resource-group $RESOURCE_GROUP --query principalId
 ```
 
