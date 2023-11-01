@@ -2,7 +2,7 @@ componentType: state.azure.cosmosdb
 version: v1
 metadata:
   - name: url
-    value: <The URI value of your cosmos database account>
+    value: <https://cosmos-tasks-tracker-state-store-<UNIQUE-STRING>.documents.azure.com:443/>
   - name: database
     value: tasksmanagerdb
   - name: collection

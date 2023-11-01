@@ -12,11 +12,13 @@ Moreover, we will use Redis to store tasks when we are running the application l
 
 ![dapr-stateapi-cosmosdb](../../assets/images/04-aca-dapr-stateapi/dapr-stateapi-cosmosdb.jpg)
 
+--8<-- "snippets/restore-variables.md"
+
 ### Overview of Dapr State Management API
 
 Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out, and without doing any code changes or installing any NuGet packages, we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path `%USERPROFILE%\.dapr\components` (assuming you are using Windows) you will find a file named `statestore.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. The [state store template component file structure](https://docs.dapr.io/operations/components/setup-state-store/){target=_blank} can be found on this link.
 
-To try out the State Management APIs, run the Backend API from VS Code by running the following command. Remember to replace the place holders with your own values:
+To try out the State Management APIs, run the Backend API from VS Code by running the following command.
 
 === ".NET 6 or below"
 
@@ -352,8 +354,12 @@ az containerapp identity assign `
 --resource-group $RESOURCE_GROUP `
 --name $BACKEND_API_NAME `
 --system-assigned
+```
 
-$BACKEND_API_PRINCIPAL_ID = az containerapp job identity show --name $BACKEND_API_NAME --resource-group $RESOURCE_GROUP --query principalId
+Give it a few seconds before executing the next command as it takes some time for the identity to become available.
+
+```Powershell
+$BACKEND_API_PRINCIPAL_ID = az containerapp identity show --name $BACKEND_API_NAME --resource-group $RESOURCE_GROUP --query principalId
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be similar to the one shown below.
@@ -497,5 +503,8 @@ az containerapp update `
 
 !!! success
     With this final step, we should be able to access the Frontend Web App, call the backend API app using Dapr sidecar, and store tasks to Azure Cosmos DB.
+
+--8<-- "snippets/update-variables.md"
+--8<-- "snippets/persist-state.md:module4"
 
 In the next module, we will introduce the Dapr Pub/Sub Building block which we will publish messages to Azure Service Bus when a task is saved. We will also introduce a new background service will process those incoming messages and send an email to the task assignee.
