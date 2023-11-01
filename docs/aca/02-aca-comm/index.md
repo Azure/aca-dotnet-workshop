@@ -11,7 +11,7 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
 
 --8<-- "snippets/restore-variables.md"
 
-### 1. Create the Frontend Web App project (Web APP)
+### 2. Create the Frontend Web App project (Web APP)
 
 - Initialize the web project. This will create and ASP.NET Razor Pages web app project.
 
@@ -38,7 +38,7 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
     --8<-- "docs/aca/02-aca-comm/TasksModel.cs"
     ```
 
-- Now, in the **Tasks** folder, we will add 3 Razor pages for CRUD operations which will be responsible for listing all the tasks, creating a new task, and updating existing tasks.
+- Now, in the **Tasks** folder, we will add 3 Razor pages for CRUD operations which will be responsible for listing tasks, creating a new task, and updating existing tasks.
 By looking at the cshtml content notice that the page is expecting a query string named `createdBy` which will be used to group tasks for application users.
 
 !!! note
@@ -125,8 +125,11 @@ By looking at the cshtml content notice that the page is expecting a query strin
         }
         ```
 
-- Next, we will add a new environment variable named `BackendApiConfig:BaseUrlExternalHttp` into `appsettings.json` file.
-This variable will contain the Base URL for the backend API deployed in the previous module to ACA. Later on in the workshop, we will see how we can set the environment variable once we deploy it to ACA.
+- Next, we will add a new environment variable named `BackendApiConfig:BaseUrlExternalHttp` into `appsettings.json` file. This variable will contain the Base URL for the backend API deployed in the previous module to ACA. Later on in the workshop, we will see how we can set the environment variable once we deploy it to ACA. Use the output from this script as the `BaseUrlExternalHttp` value.
+
+    ```PowerShell
+    $BACKEND_API_EXTERNAL_BASE_URL
+    ```
 
     === "appsettings.json"
 
@@ -158,13 +161,13 @@ This variable will contain the Base URL for the backend API deployed in the prev
 !!! note
     Make sure that the build is successful and that there are no build errors. Usually you should see a **Build succeeded** message in the terminal upon a successful build.
 
-### 2. Deploy Razor Pages Web App Frontend Project to ACA
+### 3. Deploy Razor Pages Web App Frontend Project to ACA
 
-We need to add the below PS variables:
+- We need to add the below PS variables:
 
-```powershell
-$FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
-```
+    ```powershell
+    $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
+    ```
 
 - Now we will build and push the Web App project docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context. In our case, we need to be on the parent directory which hosts the .csproject.
 
@@ -179,13 +182,7 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
     --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
     ```
 
-- Once this step is completed you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-frontend-webapp` has been created and there is a new docker image with a `latest` tag is created.
-
-- We need to capture the backend API url as we will use it repeatedly:
-
-    ```powershell
-    $BACKEND_API_EXTERNAL_BASE_URL="<url to your external backend API goes here. You can find this on the Azure portal overview tab. Look for the Application url property there.>"
-    ```
+- Once this step is completed you can verify the results by going to the [Azure portal](https://portal.azure.com){target=_blank} and checking that a new repository named `tasksmanager/tasksmanager-frontend-webapp` has been created and that a new docker image with a `latest` tag has been created.
 
 - Next, we will create and deploy the Web App to ACA using the following command:
 
@@ -204,9 +201,11 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
     --cpu 0.25 --memory 0.5Gi `
     --query properties.configuration.ingress.fqdn `
     --output tsv)
+
+    $FRONTEND_UI_BASE_URL="https://$fqdn"
     
     echo "See the frontend web app at this URL:"
-    echo "https://$fqdn"
+    echo $FRONTEND_UI_BASE_URL
     ```
 
 !!! tip
@@ -215,18 +214,25 @@ $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
 
 After your run the command, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-frontend-webapp` and open it in your browser, and you should be able to browse the frontend web app and manage your tasks.
 
-### 3. Update Backend Web API Container App Ingress property
+### 4. Update Backend Web API Container App Ingress property
 
 So far the Frontend App is sending HTTP requests to publicly exposed Web API which means that any REST client can invoke this API. We need to change the Web API ingress settings and make it only accessible for applications deployed within our Azure Container Environment only. Any application outside the Azure Container Environment will not be able to access the Web API.
 
 - To change the settings of the Backend API, execute the following command:
 
     ```powershell
-    az containerapp ingress enable `
+    $fqdn=(az containerapp ingress enable `
     --name $BACKEND_API_NAME  `
     --resource-group $RESOURCE_GROUP `
     --target-port $TARGET_PORT `
-    --type "internal"
+    --type "internal" `
+    --query fqdn `
+    --output tsv)
+
+    $BACKEND_API_INTERNAL_BASE_URL="https://$fqdn"
+
+    echo "The internal backend API URL:"
+    echo $BACKEND_API_INTERNAL_BASE_URL
     ```
 
 ??? tip "Want to know more about the command?"
@@ -240,10 +246,6 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
 - Now we will need to update the Frontend Web App environment variable to point to the **internal** backend Web API FQDN. The last thing we need to do here is to update the Frontend WebApp environment variable named `BackendApiConfig_BaseUrlExternalHttp` with the new value of the _internal_ Backend Web API base URL, to do so we need to update the Web App container app and it will create a new revision implicitly (more about revisions in the upcoming modules). The following command will update the container app with the changes:
 
     ```powershell
-    $BACKEND_API_INTERNAL_BASE_URL="<url to your internal backend API goes here. You can find this on the Azure portal overview tab. Look for the now-updated internal Application url property there.>"
-    ```
-
-    ```powershell
     az containerapp update `
     --name "$FRONTEND_WEBAPP_NAME" `
     --resource-group $RESOURCE_GROUP `
@@ -251,7 +253,11 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
     ```
 
 !!! success
-    Browse the web app again, and you should be able to see the same results and access the backend API endpoints from the Web App.
+    Browse the web app again, and you should be able to see the same results and access the backend API endpoints from the Web App. You can obtain the frontend URL from executing this variable.
+
+    ```powershell
+    $FRONTEND_UI_BASE_URL
+    ```
 
 --8<-- "snippets/persist-state.md:module2"
 --8<-- "snippets/update-variables.md"
