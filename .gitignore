@@ -355,4 +355,4 @@ site/
 variables.ps1
 
 # Exclude Redis Explorer extension files
-.vscode/redis-explorer.redis
+.vscode/redis-xplorer.redis
