@@ -325,7 +325,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
     ```
 
-    Once this step is completed, you can verify the results by going to the Azure portal and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created, and that there is a new Docker image with a `latest` tag.
+    Once this step is completed, you can verify the results by going to the [Azure portal](https://portal.azure.com){target=_blank} and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created, and that there is a new Docker image with a `latest` tag.
 
 - The last step here is to create and deploy the Web API to ACA following the below command:
 
@@ -360,7 +360,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
     For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
 
-- You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the Azure Portal and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 resourses created below.
+- You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the [Azure portal](https://portal.azure.com){target=_blank} and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 resourses created below.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)
 
 !!! success
@@ -369,7 +369,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     Note that the specific query string matters as you may otherwise get an empty result back. 
 
     !!! tip
-        You can find your azure container app application url on the azure portal overview tab.
+        You can find your azure container app application url on the [Azure portal](https://portal.azure.com){target=_blank} overview tab.
     
         ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
 

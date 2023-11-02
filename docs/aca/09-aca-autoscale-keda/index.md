@@ -52,7 +52,7 @@ To achieve this, we will start looking into KEDA Azure Service Bus scaler. This 
 !!! note
     Note about authentication: KEDA scaler for Azure Service Bus supports different authentication mechanisms such as [Pod Managed Identity](https://learn.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity){target=_blank}, [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/){target=_blank}, and shared access policy (connection string). At the time of writing this workshop, when using KEDA with Azure Container Apps the only supported authentication mechanism is Connection Strings. There is a work item in the ACA product backlog that involves enabling [KEDA Scale with Managed Identity.](https://github.com/microsoft/azure-container-apps/issues/592){target=_blank}
 
-Azure Container Apps has its own proprietary schema to map KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps [ARM templates](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, [yaml manifest](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, Azure CLI, or from the Azure Portal. In this module, we will cover how to do it from the Azure CLI.
+Azure Container Apps has its own proprietary schema to map KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps [ARM templates](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, [yaml manifest](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, Azure CLI, or from the [Azure portal](https://portal.azure.com){target=_blank}. In this module, we will cover how to do it from the Azure CLI.
 
 #### 1. Create a New Secret In The Container App
 
@@ -102,7 +102,7 @@ az containerapp update `
 ??? info "Curious to learn more about the different parameters passed to the `az containerapp update` command?"
     - Setting the minimum number of replicas to `1`. This means that this Container App could be scaled-in to a single replica if there are no new messages on the topic.
     - Setting the maximum number of replicas to `5`. This means that this Container App will not exceed more than 5 replicas regardless of the number of messages on the topic.
-    - Setting a friendly name for the scale rule `topic-msgs-length` which will be visible in the Azure Portal.
+    - Setting a friendly name for the scale rule `topic-msgs-length` which will be visible in the [Azure portal](https://portal.azure.com){target=_blank}.
     - Setting the scale rule type to `azure-servicebus`. This is important to tell KEDA which type of scalers our Container App is configuring.
     - Setting the authentication mechanism to type `connection` and indicating which secret reference will be used. In our case `svcbus-connstring`.
     - Setting the `metadata` dictionary of the scale rule. Those match the metadata properties in KEDA template we discussed earlier.

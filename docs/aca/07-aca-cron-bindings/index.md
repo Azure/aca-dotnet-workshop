@@ -236,7 +236,7 @@ az containerapp update `
     It is highly recommended that background periodic jobs are hosted in a container app with **one single replica**, you don't want your background periodic job to run on multiple replicas trying to do the same thing.
 
 !!! success
-    With those changes in place and deployed, from the Azure Portal, you can open the log streams of the container app hosting the `ACA-Processor-Backend` and check the logs generated when the Cron job is triggered,
+    With those changes in place and deployed, from the [Azure portal](https://portal.azure.com){target=_blank}, you can open the log streams of the container app hosting the `ACA-Processor-Backend` and check the logs generated when the Cron job is triggered,
     you should see logs similar to the below image
 
     ![app-logs](../../assets/images/07-aca-cron-bindings/cron-logs.jpg)

@@ -514,7 +514,7 @@ az containerapp secret remove --name $BACKEND_SERVICE_NAME `
 ```
 
 !!! success
-    With those changes in place and deployed, from the Azure Portal you can open the log streams section of the container app hosting the `ACA-Processor-Backend` and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.
+    With those changes in place and deployed, from the [Azure portal](https://portal.azure.com){target=_blank} you can open the log streams section of the container app hosting the `ACA-Processor-Backend` and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.
 
     ```json
     {

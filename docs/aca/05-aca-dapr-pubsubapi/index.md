@@ -499,7 +499,7 @@ Now we will switch our implementation to use Azure Service Bus as a message brok
 
 #### 1. Create Azure Service Bus Namespace and a Topic
 
-You can do this from Azure Portal or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values.
+You can do this from [Azure portal](https://portal.azure.com){target=_blank} or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values.
 You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
 
 ```powershell
@@ -850,7 +850,7 @@ az containerapp revision restart `
         ![email-log](../../assets/images/05-aca-dapr-pubsubapi/az_containerapp_logs.png)
 
 ??? tip "What to do if you do not see messages?"
-    Sometimes, the revision creation right after creating the managed identity results in the identity not yet being picked up properly. This becomes evident when we look at the Backend Service's Container App's `Log stream` blade in the Azure Portal. Specifically, the `daprd` sidecar container will show HTTP 401 errors.
+    Sometimes, the revision creation right after creating the managed identity results in the identity not yet being picked up properly. This becomes evident when we look at the Backend Service's Container App's `Log stream` blade in the [Azure portal](https://portal.azure.com){target=_blank}. Specifically, the `daprd` sidecar container will show HTTP 401 errors.
 
     Should this be the case, you can navigate to the `Revisions` blade, click on the active revision, then press `Restart`. Going back to the `daprd` sidecar in the `Log Stream` should now reveal processing of messages.
 
