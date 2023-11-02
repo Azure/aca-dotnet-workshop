@@ -200,40 +200,42 @@ $COSMOS_DB_DBNAME="tasksmanagerdb"
 $COSMOS_DB_CONTAINER="taskscollection" 
 
 # Check if Cosmos account name already exists globally
-az cosmosdb check-name-exists `
+$result = az cosmosdb check-name-exists `
 --name $COSMOS_DB_ACCOUNT
 
-# if it returns false continue with the next command 
-# else try a new unique name
+# Continue if the CosmosDB account does not yet exist
+if ($result -eq "false") {
+    echo "Creating CosmosDB account..."
 
-# Create a Cosmos account for SQL API
-az cosmosdb create `
---name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP
-
-# Create a SQL API database
-az cosmosdb sql database create `
---account-name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---name $COSMOS_DB_DBNAME
-
-# Create a SQL API container
-az cosmosdb sql container create `
---account-name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---database-name $COSMOS_DB_DBNAME `
---name $COSMOS_DB_CONTAINER `
---partition-key-path "/id" `
---throughput 400
-
-$COSMOS_DB_ENDPOINT=(az cosmosdb show `
---name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---query documentEndpoint `
---output tsv)
-
-echo "CosmosDB Endpoint: "
-echo $COSMOS_DB_ENDPOINT
+    # Create a Cosmos account for SQL API
+    az cosmosdb create `
+    --name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP
+    
+    # Create a SQL API database
+    az cosmosdb sql database create `
+    --account-name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --name $COSMOS_DB_DBNAME
+    
+    # Create a SQL API container
+    az cosmosdb sql container create `
+    --account-name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --database-name $COSMOS_DB_DBNAME `
+    --name $COSMOS_DB_CONTAINER `
+    --partition-key-path "/id" `
+    --throughput 400
+    
+    $COSMOS_DB_ENDPOINT=(az cosmosdb show `
+    --name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --query documentEndpoint `
+    --output tsv)
+    
+    echo "CosmosDB Endpoint: "
+    echo $COSMOS_DB_ENDPOINT
+}
 ```
 
 !!! note
