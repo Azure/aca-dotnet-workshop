@@ -119,7 +119,7 @@ With this step completed, we have done all the changes needed. Let's now deploy 
 #### 1. Add Application Insights Instrumentation Key As a Secret
 
 Let's create a secret named `appinsights-key` on each Container App which contains the value of the Application Insights instrumentation key.
-Remember that we can obtain this value from Azure Portal by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:
+Remember that we can obtain this value from [Azure portal](https://portal.azure.com){target=_blank} by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:
 
 ```powershell
 $APPINSIGHTS_INSTRUMENTATIONKEY = "<Application Insights Key Here>"
@@ -186,7 +186,7 @@ az containerapp update `
 ```
 
 !!! success
-    With those changes in place, you should start seeing telemetry coming to the Application Insights instance provisioned. Let's review Application Insights' key dashboards and panels in Azure Portal.
+    With those changes in place, you should start seeing telemetry coming to the Application Insights instance provisioned. Let's review Application Insights' key dashboards and panels in [Azure portal](https://portal.azure.com){target=_blank}.
 
 ### Distributed Tracing Via Application Map
 

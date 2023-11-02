@@ -7,7 +7,7 @@ spec:
   version: v1
   metadata:
     - name: url
-      value: <value>
+      value: <https://cosmos-tasks-tracker-state-store-<UNIQUE-STRING>.documents.azure.com:443/>
     - name: masterKey
       value: "<value>"
     - name: database

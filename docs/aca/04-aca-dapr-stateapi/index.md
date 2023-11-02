@@ -12,11 +12,13 @@ Moreover, we will use Redis to store tasks when we are running the application l
 
 ![dapr-stateapi-cosmosdb](../../assets/images/04-aca-dapr-stateapi/dapr-stateapi-cosmosdb.jpg)
 
+--8<-- "snippets/restore-variables.md"
+
 ### Overview of Dapr State Management API
 
 Dapr's state management API allows you to save, read, and query key/value pairs in the supported state stores. To try this out, and without doing any code changes or installing any NuGet packages, we can directly invoke the State Management API and store the data on Redis locally. When you initialized Dapr in your local development environment, it installed Redis container instance locally. So we can use Redis locally to store and retrieve state. If you navigate to the path `%USERPROFILE%\.dapr\components` (assuming you are using Windows) you will find a file named `statestore.yaml`. Inside this file, you will see the properties needed to access the local Redis instance. The [state store template component file structure](https://docs.dapr.io/operations/components/setup-state-store/){target=_blank} can be found on this link.
 
-To try out the State Management APIs, run the Backend API from VS Code by running the following command. Remember to replace the place holders with your own values:
+To try out the State Management APIs, run the Backend API from VS Code by running the following command.
 
 === ".NET 6 or below"
 
@@ -85,16 +87,16 @@ What we've done here is the following:
 - The value `statestore` in the endpoint should match the `name` value in the global component file `statestore.yaml`
 - We have sent a request to store 3 entries of books, you can put any JSON representation in the value property
 
-To see the results visually, you can install a VS Code extension to connect to Redis DB and see the results. There are several redis extensions available for VS Code. For this workshop we will use an extension named ["Redis Xplorer"](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer){target=_blank}.
+To see the results visually, you can install a VS Code extension to connect to Redis DB and see the results. There are several Redis extensions available for VS Code. For this workshop we will use an extension named ["Redis Xplorer"](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer){target=_blank}.
 
-Once you install the extension it will add a tab under the explorer section of VS Code called "REDIS XPLORER". Next you will need to connect to the redis server locally by adding a new "REDIS XPLORER" profile. Click on the + sign in the "REDIS XPLORER" section in VS Code.
-This will ask you to enter the nickname (e.g. dapr_redis) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:
+Once you install the extension it will add a tab under the explorer section of VS Code called "REDIS XPLORER". Next you will need to connect to the Redis server locally by adding a new "REDIS XPLORER" profile. Click on the + sign in the "REDIS XPLORER" section in VS Code.
+This will ask you to enter the nickname (e.g. _dapr_redis_) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:
 
 ```powershell
 docker ps
 ```
 
-Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal. Leave the password empty for now.
+Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal. Leave the password empty.
 
 ![dapr-stateapi-redis](../../assets/images/04-aca-dapr-stateapi/docker_redis.png)
 
@@ -137,8 +139,7 @@ Similar to what we have done in the Frontend Web App, we need to use Dapr Client
 
 #### 2. Create a New Concrete Implementation to Manage Tasks Persistence
 
-As you recall from the previous module, we were storing the tasks in memory. Now we need to store them in Redis and later on Azure Cosmos DB.
-The key thing to keep in mind here is that switching from redis to Azure Cosmos DB won't require changing the code below which is a huge advantage of using Dapr.
+As you recall from the previous module, we were storing the tasks in memory. Now we need to store them in Redis and, later on, Azure Cosmos DB. The key thing to keep in mind here is that switching from Redis to Azure Cosmos DB won't require changing the code below which is a huge advantage of using Dapr.
 
 Add below file under the folder named **Services**. This file will implement the interface `ITasksManager`.
 
@@ -184,7 +185,7 @@ Now we need to register the new service named `TasksStoreManager` and `DaprClien
 Now you are ready to run both applications and debug them. You can store new tasks, update them, delete existing tasks and mark them as completed. The data should be stored on your local Redis instance.
 
 !!! info
-    For now don't try running the application as you will get an error running the query against the local redis. As mentioned earlier setting up the local redis store is out of scope for this workshop.
+    For now don't try running the application as you will get an error running the query against the local Redis. As mentioned earlier setting up the local Redis store is out of scope for this workshop.
     Instead, we will focus on wiring the Azure Cosmos DB as the store for our tasks.
 
 ### Use Azure Cosmos DB with Dapr State Store Management API
@@ -199,31 +200,42 @@ $COSMOS_DB_DBNAME="tasksmanagerdb"
 $COSMOS_DB_CONTAINER="taskscollection" 
 
 # Check if Cosmos account name already exists globally
-az cosmosdb check-name-exists `
+$result = az cosmosdb check-name-exists `
 --name $COSMOS_DB_ACCOUNT
 
-# if it returns false continue with the next command 
-# else try a new unique name
+# Continue if the CosmosDB account does not yet exist
+if ($result -eq "false") {
+    echo "Creating CosmosDB account..."
 
-# Create a Cosmos account for SQL API
-az cosmosdb create `
---name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP
-
-# Create a SQL API database
-az cosmosdb sql database create `
---account-name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---name $COSMOS_DB_DBNAME
-
-# Create a SQL API container
-az cosmosdb sql container create `
---account-name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---database-name $COSMOS_DB_DBNAME `
---name $COSMOS_DB_CONTAINER `
---partition-key-path "/id" `
---throughput 400
+    # Create a Cosmos account for SQL API
+    az cosmosdb create `
+    --name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP
+    
+    # Create a SQL API database
+    az cosmosdb sql database create `
+    --account-name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --name $COSMOS_DB_DBNAME
+    
+    # Create a SQL API container
+    az cosmosdb sql container create `
+    --account-name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --database-name $COSMOS_DB_DBNAME `
+    --name $COSMOS_DB_CONTAINER `
+    --partition-key-path "/id" `
+    --throughput 400
+    
+    $COSMOS_DB_ENDPOINT=(az cosmosdb show `
+    --name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --query documentEndpoint `
+    --output tsv)
+    
+    echo "CosmosDB Endpoint: "
+    echo $COSMOS_DB_ENDPOINT
+}
 ```
 
 !!! note
@@ -234,9 +246,14 @@ Copy the value of `primaryMasterKey` as we will use it in the next step.
 
 ```powershell
 # List Azure CosmosDB keys
-az cosmosdb keys list `
+$COSMOS_DB_PRIMARY_MASTER_KEY=(az cosmosdb keys list `
 --name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP
+--resource-group $RESOURCE_GROUP `
+--query primaryMasterKey `
+--output tsv)
+
+echo "CosmosDB Primary Master Key:"
+echo $COSMOS_DB_PRIMARY_MASTER_KEY
 ```
 
 **2. Create a Component File for State Store Management:** Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.
@@ -257,7 +274,7 @@ To add the component file state store, add a new folder named **components** und
 !!! info
     You need to replace the **masterKey** value with your Cosmos Account key. Remember this is only needed for local development debugging, we will not be using the masterKey when we deploy to ACA.
 
-    Replace the **url** value with the URI value of your cosmos database account. You can get that from the Azure portal by navigating to the cosmos database account overview page and get the uri value from there. 
+    Replace the **url** value with the URI value of your cosmos database account. You can get that from the [Azure portal](https://portal.azure.com){target=_blank} by navigating to the cosmos database account overview page and get the uri value from there. 
     Basically the uri should have the following structure. [https://COSMOS_DB_ACCOUNT.documents.azure.com:443/](https://COSMOS_DB_ACCOUNT.documents.azure.com:443/).
 
 === "dapr-statestore-cosmos.yaml"
@@ -288,9 +305,6 @@ This will instruct dapr to load the local projects components located at **./com
 
 If you have been using the dapr cli commands instead of the aforementioned debugging then you will need to execute the backend api with the resources-path property as follows.
 
-!!! note
-    Remember to replace the placeholders. Remember to use https port number for the Web API application.
-
 === ".NET 6 or below"
 
     ```powershell
@@ -317,7 +331,7 @@ If you have been using the dapr cli commands instead of the aforementioned debug
 !!! note "Deprecation Warning"
     components-path is being deprecated in favor of --resources-path. At the time of producing this workshop the --resources-path was not supported yet by the VS code extension. Hence, you will notice the use of the property "componentsPath": "./components" in the tasks.json file. Check the extension documentation in case that has changed.
 
-After creating a new record you can navigate to the Data explorer on the Azure portal for the azure cosmos database account. It should look like the image below:
+After creating a new record you can navigate to the Data explorer on the [Azure portal](https://portal.azure.com){target=_blank} for the azure cosmos database account. It should look like the image below:
 
 ![cosmos-db-dapr-state-store](../../assets/images/04-aca-dapr-stateapi/cosmos-db-dapr-state-store.jpg)
 
@@ -353,7 +367,17 @@ az containerapp identity assign `
 --name $BACKEND_API_NAME `
 --system-assigned
 
-$BACKEND_API_PRINCIPAL_ID = az containerapp job identity show --name $BACKEND_API_NAME --resource-group $RESOURCE_GROUP --query principalId
+$COSMOS_DB_PRIMARY_MASTER_KEY=(az cosmosdb keys list `
+--name $COSMOS_DB_ACCOUNT `
+--resource-group $RESOURCE_GROUP `
+--query primaryMasterKey `
+--output tsv)
+
+$BACKEND_API_PRINCIPAL_ID=(az containerapp identity show `
+--name $BACKEND_API_NAME `
+--resource-group $RESOURCE_GROUP `
+--query principalId `
+--output tsv)
 ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be similar to the one shown below.
@@ -390,7 +414,7 @@ az cosmosdb sql role assignment create `
 
 ### Deploy the Backend API and Frontend Web App Projects to ACA
 
-Now we are ready to deploy all local changes from this module and the previous module to ACA. But before we do that, we need to do one more addition..
+We are almost ready to deploy all local changes from this module and the previous module to ACA. But before we do that, we need one last addition.
 
 We have to create a [dapr component schema file](https://learn.microsoft.com/en-us/azure/container-apps/dapr-overview?tabs=bicep1%2Cyaml#component-schema){target=_blank} for Azure Cosmos DB which meets the specs defined by
 Azure Container Apps. The reason for this variance is that ACA Dapr schema is slightly simplified to support Dapr components and removes unnecessary fields, including `apiVersion`, `kind`, and redundant metadata and spec properties.
@@ -402,7 +426,7 @@ Here it is recommended to separate the component files that will be used when de
 Create a new folder named **aca-components** under the directory **TasksTracker.ContainerApps**, then add a new file as shown below:
 
 !!! info
-    Remember to replace the url value with the URI value of your cosmos database account. You can get that from the Azure portal by navigating to the cosmos database account overview page and get the uri value from there.
+    Remember to replace the url value with the URI value of your cosmos database account. You can get that from the [Azure portal](https://portal.azure.com){target=_blank} by navigating to the cosmos database account overview page and get the uri value from there.
     Basically the uri should have the following structure `https://COSMOS_DB_ACCOUNT.documents.azure.com:443/`
 
 === "containerapps-statestore-cosmos.yaml"
@@ -448,9 +472,6 @@ az containerapp env dapr-component set `
 
 Until this moment Dapr was not enabled on the Container Apps we have provisioned. Enable Dapr for both Container Apps by running the two commands below in the PowerShell console.
 
-!!! info
-    Remember to replace the placeholders with your own values.
-
 ```powershell
 az containerapp dapr enable `
 --name $BACKEND_API_NAME `
@@ -490,6 +511,9 @@ az containerapp update `
 --name $BACKEND_API_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY-1
+
+echo "Azure Frontend UI URL:" 
+echo $FRONTEND_UI_BASE_URL
 ```
 
 !!! tip
@@ -497,5 +521,8 @@ az containerapp update `
 
 !!! success
     With this final step, we should be able to access the Frontend Web App, call the backend API app using Dapr sidecar, and store tasks to Azure Cosmos DB.
+
+--8<-- "snippets/update-variables.md"
+--8<-- "snippets/persist-state.md:module4"
 
 In the next module, we will introduce the Dapr Pub/Sub Building block which we will publish messages to Azure Service Bus when a task is saved. We will also introduce a new background service will process those incoming messages and send an email to the task assignee.

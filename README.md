@@ -12,7 +12,7 @@ In this workshop, we will be focusing on a new containerization service offered 
 
 This workshop is intended to be completed by going through the different modules which are hosted under our Github page located [here](https://azure.github.io/aca-dotnet-workshop/).
 
-We also include an optional [slides](https://github.com/Azure/aca-dotnet-workshop/tree/main/slides) folder which includes supporting material for those delivering the content. You can think about the slides as supporting material for an instructor but are not required for the attendees to complete the workshop. 
+We also include an optional [slides](https://github.com/Azure/aca-dotnet-workshop/tree/main/slides) folder which includes supporting material for those delivering the content. You can think about the slides as supporting material for an instructor but are not required for the attendees to complete the workshop.
 
 ##### Contributions
 

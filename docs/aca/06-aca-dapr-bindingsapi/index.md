@@ -46,17 +46,19 @@ Looking at the diagram we notice the following:
 - Once the Dapr sidecar reads the binding configuration file, our service can trigger an event that invokes the output binding API on the Dapr sidecar. In our case, the event will be creating a new blob file containing the content of the message we read earlier from the Azure Storage Queue.
 - With this in place, our service `ACA-Processor Backend` will be ready to invoke the external resource by sending a **POST** operation to the endpoint `http://localhost:3502/v1.0/bindings/ExternalTasksBlobstore` and the JSON payload will contain the content below. Alternatively, we can use the Dapr client SDK to invoke this output biding to invoke the external service and store the file in Azure Blob Storage.
 
-```json
-{
-    "data": "{
-        "taskName": "Task Coming from External System",
-        "taskAssignedTo": "user1@hotmail.com",
-        "taskCreatedBy": "tjoudeh@bitoftech.net",
-        "taskDueDate": "2022-08-19T12:45:22.0983978Z"
-    }",
-    "operation": "create"
-}
-```
+    ```json
+    {
+        "data": "{
+            "taskName": "Task Coming from External System",
+            "taskAssignedTo": "user1@hotmail.com",
+            "taskCreatedBy": "tjoudeh@bitoftech.net",
+            "taskDueDate": "2022-08-19T12:45:22.0983978Z"
+        }",
+        "operation": "create"
+    }
+    ```
+
+--8<-- "snippets/restore-variables.md"
 
 Let's start by updating our Backend Background Processor project and define the input and output bindings configuration files and event handlers.
 
@@ -90,8 +92,8 @@ $STORAGE_ACCOUNT_KEY=($(az storage account keys list `
 --account-name $STORAGE_ACCOUNT_NAME `
 --resource-group $RESOURCE_GROUP ) | ConvertFrom-Json)[0].value
 
-echo "Storage Account Name: $STORAGE_ACCOUNT_NAME"
-echo "Storage Account Key: $STORAGE_ACCOUNT_KEY"
+echo "Storage Account Name : $STORAGE_ACCOUNT_NAME"
+echo "Storage Account Key  : $STORAGE_ACCOUNT_KEY"
 ```
 
 ### Updating the Backend Background Processor Project
@@ -512,7 +514,7 @@ az containerapp secret remove --name $BACKEND_SERVICE_NAME `
 ```
 
 !!! success
-    With those changes in place and deployed, from the Azure Portal you can open the log streams section of the container app hosting the `ACA-Processor-Backend` and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.
+    With those changes in place and deployed, from the [Azure portal](https://portal.azure.com){target=_blank} you can open the log streams section of the container app hosting the `ACA-Processor-Backend` and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.
 
     ```json
     {
@@ -526,5 +528,8 @@ az containerapp secret remove --name $BACKEND_SERVICE_NAME `
     You should receive logs similar to the below:
 
     ![app-logs](../../assets/images/06-aca-dapr-bindingsapi/app-logs.png)
+
+--8<-- "snippets/update-variables.md"
+--8<-- "snippets/persist-state.md:module6"
 
 In the next module, we will cover a special type of Dapr input binding named Cron Binding.
