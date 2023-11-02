@@ -67,3 +67,14 @@
     ```
 
 --8<-- [end:module52]
+
+--8<-- [start:module6]
+
+- Persist the module to Git.
+
+    ```shell
+    git add .
+    git commit -m "Add Module 6"
+    ```
+
+--8<-- [end:module6]
