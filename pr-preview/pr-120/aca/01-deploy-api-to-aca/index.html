@@ -1649,7 +1649,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
 </span></code></pre></div>
-<p>Once this step is completed, you can verify the results by going to the Azure portal and checking that a new repository named <code>tasksmanager/tasksmanager-backend-api</code> has been created, and that there is a new Docker image with a <code>latest</code> tag.</p>
+<p>Once this step is completed, you can verify the results by going to the <a href="https://portal.azure.com" target="_blank">Azure portal</a> and checking that a new repository named <code>tasksmanager/tasksmanager-backend-api</code> has been created, and that there is a new Docker image with a <code>latest</code> tag.</p>
 </li>
 <li>
 <p>The last step here is to create and deploy the Web API to ACA following the below command:</p>
@@ -1687,7 +1687,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <p>For full details on all available parameters for this command, please visit this <a href="https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create" target="_blank">page</a>.</p>
 </details>
 <ul>
-<li>You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the Azure Portal and selecting the resource group named <code>tasks-tracker-rg</code> that you created earlier. You should see the 5 resourses created below.
+<li>You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the <a href="https://portal.azure.com" target="_blank">Azure portal</a> and selecting the resource group named <code>tasks-tracker-rg</code> that you created earlier. You should see the 5 resourses created below.
 <a class="glightbox" href="../../assets/images/01-deploy-api-to-aca/Resources.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Azure Resources" src="../../assets/images/01-deploy-api-to-aca/Resources.jpg" /></a></li>
 </ul>
 <div class="admonition success">
@@ -1696,7 +1696,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <p>Note that the specific query string matters as you may otherwise get an empty result back. </p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>You can find your azure container app application url on the azure portal overview tab.</p>
+<p>You can find your azure container app application url on the <a href="https://portal.azure.com" target="_blank">Azure portal</a> overview tab.</p>
 <p><a class="glightbox" href="../../assets/images/01-deploy-api-to-aca/Response.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Web API Response" src="../../assets/images/01-deploy-api-to-aca/Response.jpg" /></a></p>
 </div>
 </div>

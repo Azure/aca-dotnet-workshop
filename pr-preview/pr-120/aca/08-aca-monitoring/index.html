@@ -1332,7 +1332,7 @@ ACA do not support <a href="https://learn.microsoft.com/en-us/azure/azure-monito
 <h3 id="deploy-services-to-aca-and-create-new-revisions">Deploy Services to ACA and Create New Revisions<a class="headerlink" href="#deploy-services-to-aca-and-create-new-revisions" title="Permanent link">&para;</a></h3>
 <h4 id="1-add-application-insights-instrumentation-key-as-a-secret">1. Add Application Insights Instrumentation Key As a Secret<a class="headerlink" href="#1-add-application-insights-instrumentation-key-as-a-secret" title="Permanent link">&para;</a></h4>
 <p>Let's create a secret named <code>appinsights-key</code> on each Container App which contains the value of the Application Insights instrumentation key.
-Remember that we can obtain this value from Azure Portal by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:</p>
+Remember that we can obtain this value from <a href="https://portal.azure.com" target="_blank">Azure portal</a> by going to Application Insights instance we created in module 1, or we can get it from Azure CLI as we did in module 1. To create the secret use your existing PowerShell session and paste the code below:</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span> <span class="p">=</span> <span class="s2">&quot;&lt;Application Insights Key Here&gt;&quot;</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
@@ -1389,7 +1389,7 @@ Remember that we can obtain this value from Azure Portal by going to Application
 </span></code></pre></div>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
-<p>With those changes in place, you should start seeing telemetry coming to the Application Insights instance provisioned. Let's review Application Insights' key dashboards and panels in Azure Portal.</p>
+<p>With those changes in place, you should start seeing telemetry coming to the Application Insights instance provisioned. Let's review Application Insights' key dashboards and panels in <a href="https://portal.azure.com" target="_blank">Azure portal</a>.</p>
 </div>
 <h3 id="distributed-tracing-via-application-map">Distributed Tracing Via Application Map<a class="headerlink" href="#distributed-tracing-via-application-map" title="Permanent link">&para;</a></h3>
 <p>Application Map will help us spot any performance bottlenecks or failure hotspots across all our services of our distributed microservice application.
