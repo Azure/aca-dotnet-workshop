@@ -5,6 +5,7 @@ $i = 0
 "# Execute with `"$file`" to restore previously-saved variables." | Out-File -FilePath $file
 
 $vars = @(
+    "ACA_ENVIRONMENT_SUBNET_ID",
     "API_APP_PORT",
     "APPINSIGHTS_NAME",
     "APPINSIGHTS_INSTRUMENTATIONKEY",
@@ -42,6 +43,7 @@ $vars = @(
     "TARGET_PORT",
     "TODAY",
     "UI_APP_PORT",
+    "VNET_NAME",
     "WORKSPACE_ID",
     "WORKSPACE_NAME",
     "WORKSPACE_SECRET"

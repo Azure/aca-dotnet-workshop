@@ -141,13 +141,37 @@ Now we will add the model which will be used to deserialize the published messag
 
 Now we will install Dapr SDK to be able to subscribe to the service broker topic in a programmatic way. To do so, add the highlighted NuGet package to the file shown below:
 
-=== "TasksTracker.Processor.Backend.Svc.csproj"
+=== ".NET 6"
 
-    ```xml hl_lines="2"
-    <ItemGroup> 
-       <PackageReference Include="Dapr.AspNetCore" Version="1.9.0" /> 
-    </ItemGroup>
-    ```
+    === "TasksTracker.Processor.Backend.Svc.csproj"
+
+        ```xml
+        <ItemGroup>
+          <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
+        </ItemGroup>
+        ```
+
+=== ".NET 7"
+
+    === "TasksTracker.Processor.Backend.Svc.csproj"
+
+        ```xml hl_lines="10"
+        <Project Sdk="Microsoft.NET.Sdk.Web">
+        
+          <PropertyGroup>
+            <TargetFramework>net7.0</TargetFramework>
+            <Nullable>enable</Nullable>
+            <ImplicitUsings>enable</ImplicitUsings>
+          </PropertyGroup>
+      
+          <ItemGroup>
+            <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
+            <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
+            <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+          </ItemGroup>
+        
+        </Project>
+        ```
 
 #### 4. Create an API Endpoint for the Consumer to Subscribe to the Topic
 
@@ -200,29 +224,66 @@ In our case, a sample response will be as follows:
 
 Update below file in **TasksTracker.Processor.Backend.Svc** project.
 
-=== "Program.cs"
+=== ".NET 6"
 
-    ```csharp hl_lines="9 13 15"
-    namespace TasksTracker.Processor.Backend.Svc
-    {
-        public class Program
+    === "Program.cs"
+    
+        ```csharp hl_lines="9 13 15"
+        namespace TasksTracker.Processor.Backend.Svc
         {
-            public static void Main(string[] args)
+            public class Program
             {
-                var builder = WebApplication.CreateBuilder(args);
-                // Add services to the container.
-                builder.Services.AddControllers().AddDapr();
-                var app = builder.Build();
-                app.UseHttpsRedirection();
-                app.UseAuthorization();
-                app.UseCloudEvents();
-                app.MapControllers();
-                app.MapSubscribeHandler();
-                app.Run();
+                public static void Main(string[] args)
+                {
+                    var builder = WebApplication.CreateBuilder(args);
+                    // Add services to the container.
+                    builder.Services.AddControllers().AddDapr();
+                    var app = builder.Build();
+                    app.UseHttpsRedirection();
+                    app.UseAuthorization();
+                    app.UseCloudEvents();
+                    app.MapControllers();
+                    app.MapSubscribeHandler();
+                    app.Run();
+                }
             }
         }
-    }
-    ```
+        ```
+
+=== ".NET 7"
+
+    === "Program.cs"
+    
+        ```csharp hl_lines="4 22 26"
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services.AddControllers().AddDapr();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+        
+        var app = builder.Build();
+        
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+        
+        app.UseHttpsRedirection();
+        
+        app.UseAuthorization();
+        
+        app.UseCloudEvents();
+        
+        app.MapControllers();
+        
+        app.MapSubscribeHandler();
+        
+        app.Run();
+        ```
 
 - Let's verify that the Dapr dependency is restored properly and that the project compiles. From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
 
@@ -351,7 +412,7 @@ If you have followed the steps in the [appendix](../13-appendix/01-run-debug-dap
 
 This is a good opportunity to save intermediately:
 
---8<-- "snippets/update-variables.md"
+--8<-- "snippets/update-variables.md:7:12"
 --8<-- "snippets/persist-state.md:module51"
 
 ***

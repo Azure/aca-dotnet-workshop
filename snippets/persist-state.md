@@ -1,8 +1,6 @@
 --8<-- [start:module1]
 
-### 4. Persist State
-
-- Persist the module to Git.
+- Navigate to the root and persist the module to Git.
 
     ```shell
     git add .
@@ -15,7 +13,7 @@
 
 ### 5. Persist State
 
-- Persist the module to Git.
+- Navigate to the root and persist the module to Git.
 
     ```shell
     git add .
@@ -26,7 +24,7 @@
 
 --8<-- [start:module3]
 
-- Persist the module to Git.
+- Navigate to the root and persist the module to Git.
 
     ```shell
     git add .
@@ -37,7 +35,7 @@
 
 --8<-- [start:module4]
 
-- Persist the module to Git.
+- Navigate to the root and persist the module to Git.
 
     ```shell
     git add .
@@ -48,7 +46,7 @@
 
 --8<-- [start:module51]
 
-- Persist the module to Git.
+- Navigate to the root and persist the module to Git.
 
     ```shell
     git add .
@@ -59,7 +57,7 @@
 
 --8<-- [start:module52]
 
-- Persist the module to Git.
+- Navigate to the root and persist the module to Git.
 
     ```shell
     git add .
@@ -70,7 +68,7 @@
 
 --8<-- [start:module6]
 
-- Persist the module to Git.
+- Navigate to the root and persist the module to Git.
 
     ```shell
     git add .

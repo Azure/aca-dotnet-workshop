@@ -50,10 +50,6 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 
 --8<-- "snippets/update-variables.md::1"
 
-- Next, start by running the Backend Web API service using Dapr. From VS Code open a new PowerShell terminal, run the below commands in PS terminal based on your .NET version.
-
---8<-- "snippets/restore-variables.md:11:15"
-
 !!! note
     Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.
 
@@ -141,36 +137,108 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     Install DAPR SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
 
-    === "TasksTracker.WebPortal.Frontend.Ui.csproj"
+    === ".NET 6"
 
-        ```xml
-        <ItemGroup>
-            <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
-        </ItemGroup>
-        ```
+        === "TasksTracker.WebPortal.Frontend.Ui.csproj"
+    
+            ```xml
+            <ItemGroup>
+                <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
+            </ItemGroup>
+            ```
+
+    === ".NET 7"
+
+        === "TasksTracker.WebPortal.Frontend.Ui.csproj"
+    
+            ```xml
+            <Project Sdk="Microsoft.NET.Sdk.Web">
+            
+              <PropertyGroup>
+                <TargetFramework>net7.0</TargetFramework>
+                <Nullable>enable</Nullable>
+                <ImplicitUsings>enable</ImplicitUsings>
+              </PropertyGroup>
+
+              <ItemGroup>
+                <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
+              </ItemGroup>
+            
+            </Project>
+            
+            ```
 
 - Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the highlighted below.
 
-    === "Program.cs"
-
-        ```csharp hl_lines="11"
-        namespace TasksTracker.WebPortal.Frontend.Ui
-        {
-            public class Program
+    === ".NET 6"
+    
+        === "Program.cs"
+    
+            ```csharp hl_lines="11"
+            namespace TasksTracker.WebPortal.Frontend.Ui
             {
-                public static void Main(string[] args)
+                public class Program
                 {
-                    var builder = WebApplication.CreateBuilder(args);
-                    // Add services to the container.
-                    builder.Services.AddRazorPages();
-                    // Code removed for brevity
-                    builder.Services.AddDaprClient();
-                    var app = builder.Build();
-                    // Code removed for brevity 
+                    public static void Main(string[] args)
+                    {
+                        var builder = WebApplication.CreateBuilder(args);
+                        // Add services to the container.
+                        builder.Services.AddRazorPages();
+                        // Code removed for brevity
+                        builder.Services.AddDaprClient();
+                        var app = builder.Build();
+                        // Code removed for brevity 
+                    }
                 }
             }
-        }
-        ```
+            ```
+
+    === ".NET 7"
+
+        === "Program.cs"
+
+            ```csharp hl_lines="6"
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            builder.Services.AddRazorPages();
+            
+            builder.Services.AddDaprClient();
+            
+            builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
+            {
+                var backendApiBaseUrlExternalHttp = builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp");
+            
+                if (!string.IsNullOrEmpty(backendApiBaseUrlExternalHttp)) {
+                    httpClient.BaseAddress = new Uri(backendApiBaseUrlExternalHttp);
+                } else {
+                    throw new("BackendApiConfig:BaseUrlExternalHttp is not defined in App Settings.");
+                }
+            });
+            
+            var app = builder.Build();
+            
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            
+            app.UseHttpsRedirection();
+            
+            app.UseStaticFiles();
+            
+            app.UseRouting();
+            
+            app.UseAuthorization();
+            
+            app.MapRazorPages();
+            
+            app.Run();
+            
+            ```
 
 - Now, we will inject the DaprClient into the `.cshtml` pages to use the method `InvokeMethodAsync` (second approach). Update files under folder **Pages\Tasks** and use the code below for different files.
 
@@ -201,7 +269,11 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     In both options, the final request will be rewritten by the Dapr .NET SDK before it gets executed. In our case and for the GET operation it will be written to this request: `http://127.0.0.1:3500/v1/invoke/tasksmanager-backend-api/method/api/tasks?createdBy=tjoudeh@bitoftech.net`
 
-- We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected. To do so run the two commands commands shown below (ensure that you are on the right project directory when running each command).
+- We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected. 
+
+- Open another terminal inside VS Code, so that we can run the two commands shown below (ensure that you are on the right project directory when running each command).
+
+- In the second terminal, run `.\Variables.ps1` to apply all session variables.
 
 - Obtain the local frontend UI URL to test shortly once the frontend UI and backend API are running in the next step.
 
@@ -266,7 +338,9 @@ The SDK offers developers three ways of making remote service invocation calls:
 !!! success
     Now both Applications are running using Dapr sidecar. Open the local frontend UI URL, ignore the certificate warning locally, then provide an email to load the tasks for the user (e.g. `tjoudeh@bitoftech.net`). If the application is working as expected you should see tasks list associated with the email you provided.
 
---8<-- "snippets/update-variables.md"
+- Close the sessions and navigate to the root.
+
+--8<-- "snippets/update-variables.md:7:12"
 --8<-- "snippets/persist-state.md:module3"
 
 In the next module, we will integrate the Dapr state store building block by saving tasks to Azure Cosmos DB. We will also deploy the updated applications to Azure Container Apps.

@@ -88,6 +88,8 @@ This workshop typically spans several days. As such, you may close your tools, e
     git commit -m "Initialize Variables.ps1"
     ```
 
+This sets the basics for Git and variables. We can now proceed with creating our first project.
+
 ### 2. Create the backend API project (Web API)
 
 - In the terminal execute `dotnet --info`. Take note of the intalled .NET SDK versions.
@@ -177,7 +179,11 @@ The code above generates ten tasks and stores them in a list in memory. It also 
 
 Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.
 
-### 3. Deploy Web API Backend Project to ACA
+--8<-- "snippets/persist-state.md:module1"
+
+### 3. Create Azure Infrastructure
+
+#### 3.1 Define the Basics
 
 We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the following steps:
 
@@ -222,6 +228,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     $APPINSIGHTS_NAME="appi-tasks-tracker-$RANDOM_STRING"
     $BACKEND_API_NAME="tasksmanager-backend-api"
     $AZURE_CONTAINER_REGISTRY_NAME="crtaskstracker$RANDOM_STRING"
+    $VNET_NAME="vnet-tasks-tracker"
     ```
 
 - Also assign the target port from when you created the Dockerfile:
@@ -241,18 +248,39 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --location "$LOCATION"
     ```
 
-- Create an Azure Container Registry (ACR) instance in the resource group to store images of all Microservices we are going to build during this workshop. Make sure that you set the `admin-enabled` flag to true in order to seamlessly authenticate the Azure container app when trying to create the container app using the image stored in ACR.
-
-    ```shell
-    az acr create `
-    --resource-group $RESOURCE_GROUP `
-    --name $AZURE_CONTAINER_REGISTRY_NAME `
-    --sku Basic `
-    --admin-enabled true
-    ```
+#### 3.2 Create Network Infrastructure
 
 !!! note
-    Notice that we create the registry with admin rights `--admin-enabled` flag set to `true` which is not suited for real production, but good for our workshop.
+    We are keeping this implementation simple. A production workload should have Network Security Groups and a firewall.
+
+- We need to create a virtual network (Vnet) to secure our container apps. Note that while the VNet size with `/16` CIDR is arbitrary, the container app subnet must have at least a `/27` CIDR.
+
+    ```shell
+    az network vnet create `
+    --resource-group $RESOURCE_GROUP `
+    --name $VNET_NAME `
+    --address-prefix 10.0.0.0/16 `
+    --subnet-name ContainerAppSubnet `
+    --subnet-prefix 10.0.0.0/27
+    ```
+
+- Azure Container Apps requires management of the subnet, so we must delegate exclusive control.
+
+    ```shell
+    az network vnet subnet update `
+    --name ContainerAppSubnet `
+    --resource-group $RESOURCE_GROUP `
+    --vnet-name $VNET_NAME `
+    --delegations Microsoft.App/environments
+    ```
+
+- Retrieve the Azure Container App subnet resource ID as it will be referenced when the Azure Container App Environment is created later.
+
+    ```powershell
+    $ACA_ENVIRONMENT_SUBNET_ID=$(az network vnet subnet show -g $RESOURCE_GROUP --vnet-name $VNET_NAME -n ContainerAppSubnet  --query id -o tsv)
+    ```
+
+#### 3.3 Create Log Analytics Workspace & Application Insights
 
 - Create an Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace. To create it, run the command below:
 
@@ -293,6 +321,21 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --app $APPINSIGHTS_NAME ) | ConvertFrom-Json).instrumentationKey
     ```
 
+#### 3.4 Azure Container Infrastructure
+
+- Create an Azure Container Registry (ACR) instance in the resource group to store images of all Microservices we are going to build during this workshop. Make sure that you set the `admin-enabled` flag to true in order to seamlessly authenticate the Azure container app when trying to create the container app using the image stored in ACR.
+
+    ```shell
+    az acr create `
+    --resource-group $RESOURCE_GROUP `
+    --name $AZURE_CONTAINER_REGISTRY_NAME `
+    --sku Basic `
+    --admin-enabled true
+    ```
+
+!!! note
+    Notice that we create the registry with admin rights `--admin-enabled` flag set to `true` which is not suited for real production, but good for our workshop.
+
 - Now we will create an Azure Container Apps Environment. As a reminder of the different ACA component [check this link in the workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop. To create it, run the below command:
 
     ```shell
@@ -303,14 +346,22 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --location $LOCATION `
     --logs-workspace-id $WORKSPACE_ID `
     --logs-workspace-key $WORKSPACE_SECRET `
-    --dapr-instrumentation-key $APPINSIGHTS_INSTRUMENTATIONKEY
+    --dapr-instrumentation-key $APPINSIGHTS_INSTRUMENTATIONKEY `
+    --enable-workload-profiles `
+    --infrastructure-subnet-resource-id $ACA_ENVIRONMENT_SUBNET_ID
     ```
+
+!!! note
+    We are not creating an `internal-only` Azure Container App Environment. This means that the static IP will be a public IP, and container apps, by default, will be publicly available on the internet.  
+    While this is not advised in a production workload, it is suitable for the workshop to keep the architecture confined to Azure Container Apps.
 
 ??? tip "Want to learn what above command does?"
     - It creates an ACA environment and associates it with the Log Analytics Workspace created in the previous step.
     - We are setting the `--dapr-instrumentation-key` value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr in later modules and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.  
     > **_NOTE:_**
     You can set the `--dapr-instrumentation-key` after you create the ACA environment but this is not possible via the AZ CLI right now. There is an [open issue](https://github.com/microsoft/azure-container-apps/issues/293){target=_blank} which is being tracked by the product group.
+
+### 4. Deploy Web API Backend Project to ACA
 
 - Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the `.csproj`.
 
@@ -373,7 +424,6 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     
         ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
 
---8<-- "snippets/persist-state.md:module1"
 --8<-- "snippets/update-variables.md"
 
 In the next module, we will see how we will add a new Frontend Web App as a microservice and how it will communicate with the backend API.
