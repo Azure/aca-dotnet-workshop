@@ -269,7 +269,7 @@ The diagram below is from Dapr official documentation which shows some examples 
 
 ![dapr-components](../../assets/images/04-aca-dapr-stateapi/dapr-components.jpg)
 
-To add the component file state store, add a new folder named **components** under the directory **TasksTracker.ContainerApps** and add a new yaml file as show below:
+To add the component file state store, add a new folder named **components** under the directory **TasksTracker.ContainerApps** and add a new yaml file as show below. The values for `url` and `masterKey` can be found in the console output from the most recent commands.
 
 !!! info
     You need to replace the **masterKey** value with your Cosmos Account key. Remember this is only needed for local development debugging, we will not be using the masterKey when we deploy to ACA.
