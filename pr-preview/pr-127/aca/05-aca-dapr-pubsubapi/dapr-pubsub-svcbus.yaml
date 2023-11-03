@@ -1,0 +1,15 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: dapr-pubsub-servicebus
+spec:
+  type: pubsub.azure.servicebus
+  version: v1
+  metadata:
+    - name: connectionString # Used for local dev testing.
+      value: "<connection string from step 1 starting with Endpoint=sb://...>"
+    - name: consumerID
+      value: "sbts-tasks-processor"
+scopes:
+  - tasksmanager-backend-api
+  - tasksmanager-backend-processor
