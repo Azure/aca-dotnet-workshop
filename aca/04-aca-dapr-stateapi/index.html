@@ -1599,7 +1599,7 @@ These YAML files adhere to the generic <a href="https://docs.dapr.io/operations/
 As a result, it is strongly recommended to review a component's specs, paying particular attention to the sample payloads for requests to set the metadata used to interact with the component.</p>
 <p>The diagram below is from Dapr official documentation which shows some examples of the components for each component type. We are now looking at the State Stores components. Specifically the <a href="https://docs.dapr.io/reference/components-reference/supported-state-stores/setup-azure-cosmosdb/" target="_blank">Azure Cosmos DB</a>.</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/dapr-components.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-components" src="../../assets/images/04-aca-dapr-stateapi/dapr-components.jpg" /></a></p>
-<p>To add the component file state store, add a new folder named <strong>components</strong> under the directory <strong>TasksTracker.ContainerApps</strong> and add a new yaml file as show below:</p>
+<p>To add the component file state store, add a new folder named <strong>components</strong> under the directory <strong>TasksTracker.ContainerApps</strong> and add a new yaml file as show below. The values for <code>url</code> and <code>masterKey</code> can be found in the console output from the most recent commands.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>You need to replace the <strong>masterKey</strong> value with your Cosmos Account key. Remember this is only needed for local development debugging, we will not be using the masterKey when we deploy to ACA.</p>
@@ -1862,7 +1862,7 @@ This <code>dapr-app-id</code> will be used for service discovery, state encapsul
 </span></code></pre></div>
 </li>
 <li>
-<p>Persist the module to Git.</p>
+<p>Navigate to the root and persist the module to Git.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Module 4&quot;</span>
 </span></code></pre></div>
