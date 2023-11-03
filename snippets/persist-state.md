@@ -1,26 +1,13 @@
---8<-- [start:module11]
+--8<-- [start:module1]
 
 - Navigate to the root and persist the module to Git.
 
     ```shell
     git add .
-    git commit -m "Add Module 1.1"
+    git commit -m "Add Module 1"
     ```
 
---8<-- [end:module11]
-
---8<-- [start:module12]
-
-### 5. Persist State
-
-- Navigate to the root and persist the module to Git.
-
-    ```shell
-    git add .
-    git commit -m "Add Module 1.2"
-    ```
-
---8<-- [end:module12]
+--8<-- [end:module1]
 
 --8<-- [start:module2]
 

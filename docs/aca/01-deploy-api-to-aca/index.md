@@ -179,7 +179,7 @@ The code above generates ten tasks and stores them in a list in memory. It also 
 
 Make sure that the build is successful and that there are no build errors. Usually you should see a "Build succeeded" message in the terminal upon a successful build.
 
---8<-- "snippets/persist-state.md:module11"
+--8<-- "snippets/persist-state.md:module1"
 
 ### 3. Create Azure Infrastructure
 
