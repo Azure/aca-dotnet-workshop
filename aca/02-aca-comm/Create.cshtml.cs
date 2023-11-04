@@ -11,10 +11,13 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
         {
             _httpClientFactory = httpClientFactory;
         }
+        public string? TasksCreatedBy { get; set; }
 
         public IActionResult OnGet()
         {
-            return Page();
+            TasksCreatedBy = Request.Cookies["TasksCreatedByCookie"];
+
+            return (!String.IsNullOrEmpty(TasksCreatedBy)) ? Page() : RedirectToPage("../Index");
         }
 
         [BindProperty]

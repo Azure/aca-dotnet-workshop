@@ -17,12 +17,18 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task OnGetAsync()
+        public async Task<IAcionResult> OnGetAsync()
         {
             TasksCreatedBy = Request.Cookies["TasksCreatedByCookie"];
-            // direct svc to svc http request
-            var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
-            TasksList = await httpClient.GetFromJsonAsync<List<TaskModel>>($"api/tasks?createdBy={TasksCreatedBy}");
+
+            if (!String.IsNullOrEmpty(TasksCreatedBy)) {
+                // direct svc to svc http request
+                var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
+                TasksList = await httpClient.GetFromJsonAsync<List<TaskModel>>($"api/tasks?createdBy={TasksCreatedBy}");
+                return Page();
+            } else {
+                return RedirectToPage("../Index");
+            }
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(Guid id)
