@@ -4,7 +4,9 @@
 }
 
 <h1>Tasks Manager</h1>
-<h4>Tasks for (@Model.TasksCreatedBy)</h4>
+@if (!String.IsNullOrEmpty(Model.TasksCreatedBy)) {
+    <h4>Tasks for (@Model.TasksCreatedBy)</h4>
+}
 <form method="post">
     <table class="table">
         <thead>
