@@ -12,6 +12,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
 
         [BindProperty]
         public TaskUpdateModel? TaskUpdate { get; set; }
+        public string? TasksCreatedBy { get; set; }
 
         public EditModel(IHttpClientFactory httpClientFactory, DaprClient daprClient)
         {
@@ -21,6 +22,12 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
+            TasksCreatedBy = Request.Cookies["TasksCreatedByCookie"];
+
+            if (String.IsNullOrEmpty(TasksCreatedBy)) {
+                return RedirectToPage("../Index");
+            }
+            
             if (id == null)
             {
                 return NotFound();
