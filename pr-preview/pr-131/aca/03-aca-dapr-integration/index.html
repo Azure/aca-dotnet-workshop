@@ -570,22 +570,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-benefits-of-integrating-dapr-in-azure-container-apps" class="md-nav__link">
-    1.1 Benefits of Integrating Dapr in Azure Container Apps
+  <a href="#11-restore-variables" class="md-nav__link">
+    1.1 Restore Variables
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-configure-dapr-on-a-local-development-machine" class="md-nav__link">
-    1.2 Configure Dapr on a Local Development Machine
+  <a href="#12-benefits-of-integrating-dapr-in-azure-container-apps" class="md-nav__link">
+    1.2 Benefits of Integrating Dapr in Azure Container Apps
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-restore-variables" class="md-nav__link">
-    1.3 Restore Variables
+  <a href="#13-configure-dapr-on-a-local-development-machine" class="md-nav__link">
+    1.3 Configure Dapr on a Local Development Machine
   </a>
   
 </li>
@@ -1067,22 +1067,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-benefits-of-integrating-dapr-in-azure-container-apps" class="md-nav__link">
-    1.1 Benefits of Integrating Dapr in Azure Container Apps
+  <a href="#11-restore-variables" class="md-nav__link">
+    1.1 Restore Variables
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-configure-dapr-on-a-local-development-machine" class="md-nav__link">
-    1.2 Configure Dapr on a Local Development Machine
+  <a href="#12-benefits-of-integrating-dapr-in-azure-container-apps" class="md-nav__link">
+    1.2 Benefits of Integrating Dapr in Azure Container Apps
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-restore-variables" class="md-nav__link">
-    1.3 Restore Variables
+  <a href="#13-configure-dapr-on-a-local-development-machine" class="md-nav__link">
+    1.3 Configure Dapr on a Local Development Machine
   </a>
   
 </li>
@@ -1148,22 +1148,7 @@
 </ol>
 <h2 id="module-sections">Module Sections<a class="headerlink" href="#module-sections" title="Permanent link">&para;</a></h2>
 <h3 id="1-introduce-dapr">1. Introduce Dapr<a class="headerlink" href="#1-introduce-dapr" title="Permanent link">&para;</a></h3>
-<h4 id="11-benefits-of-integrating-dapr-in-azure-container-apps">1.1 Benefits of Integrating Dapr in Azure Container Apps<a class="headerlink" href="#11-benefits-of-integrating-dapr-in-azure-container-apps" title="Permanent link">&para;</a></h4>
-<p>The Tasks Tracker microservice application is composed of multiple microservices. Function calls are spread across the network. To support the distributed nature of microservices,
-we need to account for failures, retries, and timeouts. While Azure Container Apps features the building blocks for running microservices, using the Distributed Application Runtime (Dapr) provides an even richer microservices programming model.</p>
-<p>Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more.
-Here is a good <a href="https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation" target="_blank">link</a> which touches on some of the benefits of the Dapr service invocation building block which we will be building upon in this module.
-Because the calls will flow through container sidecars, Dapr can inject some useful cross-cutting behaviors that are meaningfully abstracted from our application containers.</p>
-<p>Although we won't tap into all these benefits in this workshop, it's worth noting that you will probably need to rely on these features in production:</p>
-<ul>
-<li>Automatically retry calls upon failure.</li>
-<li>Make calls between services secured  with mutual authentication (mTLS), including automatic certificate rollover.</li>
-<li>Control what operations clients can perform using access control policies.</li>
-<li>Capture traces and metrics for all calls between services to provide insights and diagnostics.</li>
-</ul>
-<h4 id="12-configure-dapr-on-a-local-development-machine">1.2 Configure Dapr on a Local Development Machine<a class="headerlink" href="#12-configure-dapr-on-a-local-development-machine" title="Permanent link">&para;</a></h4>
-<p>In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to <a href="https://docs.dapr.io/getting-started/install-dapr-cli/" target="_blank">install</a> Dapr and then <a href="https://docs.dapr.io/getting-started/install-dapr-selfhost/" target="_blank">Initialize</a> it.</p>
-<h4 id="13-restore-variables">1.3 Restore Variables<a class="headerlink" href="#13-restore-variables" title="Permanent link">&para;</a></h4>
+<h4 id="11-restore-variables">1.1 Restore Variables<a class="headerlink" href="#11-restore-variables" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code></p>
@@ -1176,18 +1161,33 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 </span></code></pre></div>
 </li>
 </ul>
+<h4 id="12-benefits-of-integrating-dapr-in-azure-container-apps">1.2 Benefits of Integrating Dapr in Azure Container Apps<a class="headerlink" href="#12-benefits-of-integrating-dapr-in-azure-container-apps" title="Permanent link">&para;</a></h4>
+<p>The Tasks Tracker microservice application is composed of multiple microservices. Function calls are spread across the network. To support the distributed nature of microservices,
+we need to account for failures, retries, and timeouts. While Azure Container Apps features the building blocks for running microservices, using the Distributed Application Runtime (Dapr) provides an even richer microservices programming model.</p>
+<p>Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more.
+Here is a good <a href="https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation" target="_blank">link</a> which touches on some of the benefits of the Dapr service invocation building block which we will be building upon in this module.
+Because the calls will flow through container sidecars, Dapr can inject some useful cross-cutting behaviors that are meaningfully abstracted from our application containers.</p>
+<p>Although we won't tap into all these benefits in this workshop, it's worth noting that you will probably need to rely on these features in production:</p>
+<ul>
+<li>Automatically retry calls upon failure.</li>
+<li>Make calls between services secured  with mutual authentication (mTLS), including automatic certificate rollover.</li>
+<li>Control what operations clients can perform using access control policies.</li>
+<li>Capture traces and metrics for all calls between services to provide insights and diagnostics.</li>
+</ul>
+<h4 id="13-configure-dapr-on-a-local-development-machine">1.3 Configure Dapr on a Local Development Machine<a class="headerlink" href="#13-configure-dapr-on-a-local-development-machine" title="Permanent link">&para;</a></h4>
+<p>In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to <a href="https://docs.dapr.io/getting-started/install-dapr-cli/" target="_blank">install</a> Dapr and then <a href="https://docs.dapr.io/getting-started/install-dapr-selfhost/" target="_blank">Initialize</a> it.</p>
 <h4 id="14-configure-backend-api-and-frontend-web-app-locally-using-dapr">1.4 Configure Backend API and Frontend Web App Locally Using Dapr<a class="headerlink" href="#14-configure-backend-api-and-frontend-web-app-locally-using-dapr" title="Permanent link">&para;</a></h4>
 <p>You are now ready to run the applications locally using the Dapr sidecar in a self-hosted mode. The <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr" target="_blank">Dapr</a> VS Code extension will allow you to run, debug, and interact with Dapr-enabled applications.</p>
 <ul>
 <li>
 <p>Let's start by capturing the UI and API localhost ports:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$API_APP_PORT</span><span class="p">=&lt;</span><span class="n">web</span> <span class="n">api</span> <span class="n">application</span> <span class="n">https</span> <span class="n">port</span> <span class="n">number</span> <span class="n">found</span> <span class="n">under</span> <span class="n">Properties</span><span class="p">-&gt;</span><span class="n">launchSettings</span><span class="p">.</span><span class="n">json</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">7112</span><span class="p">&gt;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">$UI_APP_PORT</span><span class="p">=&lt;</span><span class="n">web</span> <span class="n">frontend</span> <span class="n">ui</span> <span class="n">application</span> <span class="n">https</span> <span class="n">port</span> <span class="n">found</span> <span class="n">under</span> <span class="n">Properties</span><span class="p">-&gt;</span><span class="n">launchSettings</span><span class="p">.</span><span class="n">json</span><span class="p">.</span> <span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span> <span class="n">7000</span><span class="p">&gt;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$API_APP_PORT</span><span class="o">=</span>&lt;web<span class="w"> </span>api<span class="w"> </span>application<span class="w"> </span>https<span class="w"> </span>port<span class="w"> </span>number<span class="w"> </span>found<span class="w"> </span>under<span class="w"> </span>Properties-&gt;launchSettings.json.<span class="w"> </span>e.g.<span class="w"> </span><span class="m">7112</span>&gt;
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">$UI_APP_PORT</span><span class="o">=</span>&lt;web<span class="w"> </span>frontend<span class="w"> </span>ui<span class="w"> </span>application<span class="w"> </span>https<span class="w"> </span>port<span class="w"> </span>found<span class="w"> </span>under<span class="w"> </span>Properties-&gt;launchSettings.json.<span class="w"> </span>e.g.<span class="w"> </span><span class="m">7000</span>&gt;
 </span></code></pre></div>
 </li>
 <li>
 <p>Now that we know the <code>UI_APP_PORT</code>, we can also declare the local frontend UI URL:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$FRONTEND_UI_BASE_URL_LOCAL</span><span class="p">=</span><span class="s2">&quot;https://localhost:$UI_APP_PORT&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$FRONTEND_UI_BASE_URL_LOCAL</span><span class="o">=</span><span class="s2">&quot;https://localhost:</span><span class="nv">$UI_APP_PORT</span><span class="s2">&quot;</span>
 </span></code></pre></div>
 </li>
 <li>
@@ -1201,25 +1201,25 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">.NET 6 or below</label><label for="__tabbed_1_2">.NET 7 or above</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">TasksManager</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Api</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
 </span></code></pre></div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">`</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">`</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">-</span><span class="n">-app-port</span> <span class="nv">$API_APP_PORT</span> <span class="p">`</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">`</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">-</span><span class="n">-app-ssl</span> <span class="p">`</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>--app-id<span class="w"> </span>tasksmanager-backend-api<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>--app-port<span class="w"> </span><span class="nv">$API_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>--dapr-http-port<span class="w"> </span><span class="m">3500</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">TasksManager</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Api</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
 </span></code></pre></div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">`</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">`</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">-</span><span class="n">-app-port</span> <span class="nv">$API_APP_PORT</span> <span class="p">`</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">`</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">-</span><span class="n">-app-ssl</span> <span class="p">`</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span> <span class="p">-</span><span class="n">-launch-profile</span> <span class="n">https</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>--app-id<span class="w"> </span>tasksmanager-backend-api<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>--app-port<span class="w"> </span><span class="nv">$API_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>--dapr-http-port<span class="w"> </span><span class="m">3500</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run<span class="w"> </span>--launch-profile<span class="w"> </span>https
 </span></code></pre></div>
 </div>
 </div>
@@ -1622,7 +1622,7 @@ The SDK offers developers three ways of making remote service invocation calls:<
 </li>
 <li>
 <p>Obtain the local frontend UI URL to test shortly once the frontend UI and backend API are running in the next step.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">$FRONTEND_UI_BASE_URL_LOCAL</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">$FRONTEND_UI_BASE_URL_LOCAL</span>
 </span></code></pre></div>
 </li>
 <li>
@@ -1630,42 +1630,42 @@ The SDK offers developers three ways of making remote service invocation calls:<
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">.NET 6 or below</label><label for="__tabbed_9_2">.NET 7 or above</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">WebPortal</span><span class="p">.</span><span class="n">Frontend</span><span class="p">.</span><span class="n">Ui</span> 
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui<span class="w"> </span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">`</span>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-frontend-webapp</span> <span class="p">`</span>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">-</span><span class="n">-app-port</span> <span class="nv">$UI_APP_PORT</span> <span class="p">`</span>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3501</span> <span class="p">`</span>
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="p">-</span><span class="n">-app-ssl</span> <span class="p">`</span>
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span> 
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>--app-id<span class="w"> </span>tasksmanager-frontend-webapp<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>--app-port<span class="w"> </span><span class="nv">$UI_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3501</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run<span class="w"> </span>
 </span></code></pre></div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">TasksManager</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Api</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">`</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">`</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">-</span><span class="n">-app-port</span> <span class="nv">$API_APP_PORT</span> <span class="p">`</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">`</span>
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="p">-</span><span class="n">-app-ssl</span> <span class="p">`</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>--app-id<span class="w"> </span>tasksmanager-backend-api<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>--app-port<span class="w"> </span><span class="nv">$API_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>--dapr-http-port<span class="w"> </span><span class="m">3500</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">WebPortal</span><span class="p">.</span><span class="n">Frontend</span><span class="p">.</span><span class="n">Ui</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">`</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-frontend-webapp</span> <span class="p">`</span>
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">-</span><span class="n">-app-port</span> <span class="nv">$UI_APP_PORT</span> <span class="p">`</span>
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3501</span> <span class="p">`</span>
-</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="p">-</span><span class="n">-app-ssl</span> <span class="p">`</span>
-</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span> <span class="p">-</span><span class="n">-launch-profile</span> <span class="n">https</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>--app-id<span class="w"> </span>tasksmanager-frontend-webapp<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>--app-port<span class="w"> </span><span class="nv">$UI_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3501</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run<span class="w"> </span>--launch-profile<span class="w"> </span>https
 </span></code></pre></div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">cd </span><span class="p">~\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">ContainerApps</span><span class="p">\</span><span class="n">TasksTracker</span><span class="p">.</span><span class="n">TasksManager</span><span class="p">.</span><span class="n">Backend</span><span class="p">.</span><span class="n">Api</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">dapr</span> <span class="n">run</span> <span class="p">`</span>
-</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="p">-</span><span class="n">-app-id</span> <span class="n">tasksmanager-backend-api</span> <span class="p">`</span>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="p">-</span><span class="n">-app-port</span> <span class="nv">$API_APP_PORT</span> <span class="p">`</span>
-</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="p">-</span><span class="n">-dapr-http-port</span> <span class="n">3500</span> <span class="p">`</span>
-</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="p">-</span><span class="n">-app-ssl</span> <span class="p">`</span>
-</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="p">--</span> <span class="n">dotnet</span> <span class="n">run</span> <span class="p">-</span><span class="n">-launch-profile</span> <span class="n">https</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>--app-id<span class="w"> </span>tasksmanager-backend-api<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>--app-port<span class="w"> </span><span class="nv">$API_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3500</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run<span class="w"> </span>--launch-profile<span class="w"> </span>https
 </span></code></pre></div>
 </div>
 </div>
