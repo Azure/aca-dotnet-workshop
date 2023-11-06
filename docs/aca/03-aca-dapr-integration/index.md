@@ -17,7 +17,11 @@ In this module, we will accomplish one objective:
 
 ### 1. Introduce Dapr
 
-#### 1.1 Benefits of Integrating Dapr in Azure Container Apps
+#### 1.1 Restore Variables
+
+--8<-- "snippets/restore-variables.md"
+
+#### 1.2 Benefits of Integrating Dapr in Azure Container Apps
 
 The Tasks Tracker microservice application is composed of multiple microservices. Function calls are spread across the network. To support the distributed nature of microservices,
 we need to account for failures, retries, and timeouts. While Azure Container Apps features the building blocks for running microservices, using the Distributed Application Runtime (Dapr) provides an even richer microservices programming model.
@@ -33,13 +37,9 @@ Although we won't tap into all these benefits in this workshop, it's worth notin
 - Control what operations clients can perform using access control policies.
 - Capture traces and metrics for all calls between services to provide insights and diagnostics.
 
-#### 1.2 Configure Dapr on a Local Development Machine
+#### 1.3 Configure Dapr on a Local Development Machine
 
 In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to [install](https://docs.dapr.io/getting-started/install-dapr-cli/){target=_blank} Dapr and then [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/){target=_blank} it.
-
-#### 1.3 Restore Variables
-
---8<-- "snippets/restore-variables.md"
 
 #### 1.4 Configure Backend API and Frontend Web App Locally Using Dapr
 
