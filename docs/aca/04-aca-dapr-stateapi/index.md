@@ -106,7 +106,7 @@ What we've done here is the following:
 To see the results visually, you can install a VS Code extension to connect to Redis DB and see the results. There are several Redis extensions available for VS Code. For this workshop we will use an extension named ["Redis Xplorer"](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer){target=_blank}.
 
 Once you install the extension it will add a tab under the explorer section of VS Code called "REDIS XPLORER". Next you will need to connect to the Redis server locally by adding a new "REDIS XPLORER" profile. Click on the + sign in the "REDIS XPLORER" section in VS Code.
-This will ask you to enter the nickname (e.g. _dapr_redis_) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:
+This will ask you to enter the nickname (e.g. *dapr_redis*) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:
 
 ```shell
 docker ps
