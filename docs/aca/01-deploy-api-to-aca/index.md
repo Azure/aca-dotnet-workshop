@@ -15,9 +15,9 @@ canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application
 
 In this module, we will accomplish three objectives:
 
-1. Create the first microservice, `ACA Web API - Backend`, which serves as the API for our tasks.
+1. Create the first microservice, `{{ apps.backend}}`, which serves as the API for our tasks.
 1. Create the initial Azure infrastructure that we will need throughout this workshop.
-1. Deploy the `ACA Web API - Backend` microservice to Azure.
+1. Deploy the ``{{ apps.backend }}` container app to Azure.
 
 ## Module Sections
 
@@ -31,12 +31,7 @@ In this module, we will accomplish three objectives:
 
     === "global.json"
     ```json hl_lines="3"
-    {
-        "sdk": {
-            "version": "7.0.403",
-            "rollForward": "latestFeature"
-        }
-    }
+    --8<-- "docs/aca/01-deploy-api-to-aca/global.json"
     ```
 
 - Now we can initialize the backend API project. This will create and ASP.NET Web API project scaffolded with a single controller.
@@ -67,13 +62,13 @@ In this module, we will accomplish three objectives:
 - In the root create a new folder named **Services** and add the two files below. Ensure to create it as a sibling to the *Models* folder. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. In this module we will work with data in memory. Later on, we will implement a data store. 
 
     === "ITasksManager.cs"
-        ```csharp
-        --8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
-        ```
+    ```csharp
+    --8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
+    ```
     === "FakeTasksManager.cs"
-        ```csharp
-        --8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
-        ```
+    ```csharp
+    --8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
+    ```
 
 - The code above generates ten tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.
 
@@ -87,7 +82,6 @@ In this module, we will accomplish three objectives:
 - Inside the **Controllers** folder create a new controller with the below filename. We need to create API endpoints to manage tasks.
 
     === "TasksController.cs"
-
     ```csharp
     --8<-- "docs/aca/01-deploy-api-to-aca/TasksController.cs"
     ```
@@ -352,12 +346,14 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
 --8<-- "snippets/update-variables.md"
 
+***
+
 ## Review
 
 In this module, we have accomplished three objectives:
 
-1. Created the first microservice, `ACA Web API - Backend`, which serves as the API for our tasks.
+1. Created the first microservice, `{{ apps.backend }}`, which serves as the API for our tasks.
 1. Created the initial Azure infrastructure that we will need throughout this workshop.
-1. Deployed the `ACA Web API - Backend` microservice to Azure.
+1. Deployed the `{{ apps.backend }}` microservice to Azure.
 
 In the next module, we will add a new frontend web app as a microservice to communicate with the backend API.
