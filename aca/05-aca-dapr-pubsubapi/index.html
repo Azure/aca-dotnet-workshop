@@ -585,13 +585,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-restore-variables" class="md-nav__link">
-    1. Restore Variables
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#setting-up-the-backend-background-processor-project" class="md-nav__link">
     Setting up the Backend Background Processor Project
   </a>
@@ -1174,13 +1167,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-restore-variables" class="md-nav__link">
-    1. Restore Variables
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#setting-up-the-backend-background-processor-project" class="md-nav__link">
     Setting up the Backend Background Processor Project
   </a>
@@ -1415,7 +1401,6 @@ In addition, each message broker has its own SDK and implementation. So you need
 <p>To try this out we can directly invoke the Pub/Sub API and publish a message to Redis locally. If you remember from <a href="../03-aca-dapr-integration/">module 3</a> once we initialized Dapr in a local development environment, it installed Redis container instance locally. So we can use Redis locally to publish and subscribe to a message.
 If you navigate to the path <code>%USERPROFILE%\.dapr\components (assuming you are using windows)</code> you will find a file named <code>pubsub.yaml</code>. Inside this file, you will see the properties needed to access the local Redis instance.
 The publisher/subscriber brokers template component file structure can be found <a href="https://docs.dapr.io/operations/components/setup-pubsub/" target="_blank">here</a>.</p>
-<h3 id="1-restore-variables">1. Restore Variables<a class="headerlink" href="#1-restore-variables" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p>From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code></p>
@@ -1781,13 +1766,10 @@ When this endpoint is called, it will automatically find all WebAPI action metho
 </li>
 </ul>
 <p>To do so, run the below commands in two separate PowerShell console, ensure you are on the right root folder of each respective project.</p>
-<ul>
-<li>
-<p>Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>.<span class="se">\V</span>ariables.ps1
-</span></code></pre></div>
-</li>
-</ul>
+<div class="language-text highlight"><pre><span></span><code>```shell
+.\Variables.ps1
+```
+</code></pre></div>
 <div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">.NET 6 or below</label><label for="__tabbed_11_2">.NET 7 or above</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2761,7 +2743,7 @@ application and start creating new tasks. You should start seeing logs similar t
   <small>
     
       Last update:
-      2023-11-04
+      2023-11-06
     
   </small>
 </div>
@@ -2875,7 +2857,7 @@ application and start creating new tasks. You should start seeing logs similar t
     <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.81fa17fe.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

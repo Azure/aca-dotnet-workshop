@@ -17,7 +17,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IAcionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             TasksCreatedBy = Request.Cookies["TasksCreatedByCookie"];
 

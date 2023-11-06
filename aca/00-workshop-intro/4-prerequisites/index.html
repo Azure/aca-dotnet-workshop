@@ -483,8 +483,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#workshop-instructions" class="md-nav__link">
-    Workshop Instructions
+  <a href="#set-up-git-repository-variable-scripts" class="md-nav__link">
+    Set up Git Repository &amp; Variable Scripts
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up Git Repository & Variable Scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git-repository" class="md-nav__link">
+    Git Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-variables-variables-script" class="md-nav__link">
+    Set-Variables &amp; Variables Script
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jump-ahead" class="md-nav__link">
+    Jump Ahead
   </a>
   
 </li>
@@ -982,8 +1009,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#workshop-instructions" class="md-nav__link">
-    Workshop Instructions
+  <a href="#set-up-git-repository-variable-scripts" class="md-nav__link">
+    Set up Git Repository &amp; Variable Scripts
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up Git Repository & Variable Scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git-repository" class="md-nav__link">
+    Git Repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-variables-variables-script" class="md-nav__link">
+    Set-Variables &amp; Variables Script
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jump-ahead" class="md-nav__link">
+    Jump Ahead
   </a>
   
 </li>
@@ -1009,6 +1063,7 @@
   <h1>Prerequisites</h1>
 
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.  </p>
 <p>Make sure you have your development environment set up and configured.</p>
 <ol>
 <li>An Azure account with an active subscription - <a href="https://azure.microsoft.com/free/?ref=microsoft.com&amp;utm_source=microsoft.com&amp;utm_medium=docs&amp;utm_campaign=visualstudio" target="_blank">Create an account for free</a></li>
@@ -1021,22 +1076,105 @@
 <li>Azure CLI - <a href="https://docs.microsoft.com/cli/azure/install-azure-cli" target="_blank">Install</a></li>
 <li>Git CLI - <a href="https://git-scm.com" target="_blank">Install</a></li>
 </ol>
-<h2 id="workshop-instructions">Workshop Instructions<a class="headerlink" href="#workshop-instructions" title="Permanent link">&para;</a></h2>
-<p>The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.</p>
-<p>If you don't want to build the solution code from scratch, you can clone the source code repository final version by utilizing below command, and you can use the modules to deploy Azure resources using the provided Azure CLI commands.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Azure/aca-dotnet-workshop.git
+<h2 id="set-up-git-repository-variable-scripts">Set up Git Repository &amp; Variable Scripts<a class="headerlink" href="#set-up-git-repository-variable-scripts" title="Permanent link">&para;</a></h2>
+<h3 id="git-repository">Git Repository<a class="headerlink" href="#git-repository" title="Permanent link">&para;</a></h3>
+<p>This workshop typically spans several days. As such, you may close your tools, end CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.</p>
+<ul>
+<li>
+<p>Open a command-line terminal and create a folder for your project, then switch to that folder.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">Linux</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>md<span class="w"> </span>TasksTracker.ContainerApps
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>TasksTracker.ContainerApps
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Initialize the git repository.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>init
+</span></code></pre></div>
+</li>
+<li>
+<p>Use the <code>code</code> command to launch Visual Studio Code from that directory as shown:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>code<span class="w"> </span>.
+</span></code></pre></div>
+</li>
+<li>
+<p>From VS Code's <em>Terminal</em> tab, select <em>New Terminal</em> to open a (PowerShell) terminal in the project folder <em>TasksTracker.ContainerApps</em>.</p>
+</li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In a production setting, it is advisable to fully automate the entire workflow by adhering to the guidelines provided in <a href="../../10-aca-iac-bicep/">module 10</a>, as opposed to relying on the manual procedures showcased in various modules within this workshop, which were primarily intended for educational purposes.</p>
+<p>Throughout the documentation, we may refer to the <em>TasksTracker.ContainerApps</em> directory as <em>root</em> to keep documentation simpler.</p>
 </div>
+<ul>
+<li>
+<p>In the root create a <code>.gitignore</code> file. This ensures we keep our git repo clean of build assets and other artifacts.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">.gitignore</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Exclude build artifacts</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>**/obj/
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>**/bin/
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>**/dist/
+</span></code></pre></div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Commit the <code>.gitignore</code> file.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\.</span>gitignore
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add .gitignore&quot;</span>
+</span></code></pre></div>
+</li>
+</ul>
+<h3 id="set-variables-variables-script">Set-Variables &amp; Variables Script<a class="headerlink" href="#set-variables-variables-script" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>In the root create a new file called <code>Set-Variables.ps1</code>.</p>
+</li>
+<li>
+<p>Copy the <a href="../../13-appendix/03-variables/" target="_blank">Set-Variables.ps1 script</a> into the newly-created <code>Set-Variables.ps1</code> file and save it.</p>
+</li>
+<li>
+<p>Perform an initial commit of the <code>Set-Variables.ps1</code> file.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\S</span>et-Variables.ps1
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initialize Set-Variables.ps1&quot;</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.<span class="se">\S</span>et-Variables.ps1
+</span></code></pre></div>
+</li>
+<li>
+<p>Perform an initial commit of the variables file.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initialize Variables.ps1&quot;</span>
+</span></code></pre></div>
+</li>
+</ul>
+<p>This completes the basic setup for Git and the variables to be used.</p>
+<h2 id="jump-ahead">Jump Ahead<a class="headerlink" href="#jump-ahead" title="Permanent link">&para;</a></h2>
+<p>If you don't want to build the solution code from scratch, you can clone the source code repository final version by utilizing below command, and you can use the modules to deploy Azure resources using the provided Azure CLI commands.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Azure/aca-dotnet-workshop.git
+</span></code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      2023-11-04
+      2023-11-06
     
   </small>
 </div>
@@ -1150,7 +1288,7 @@
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.81fa17fe.min.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
