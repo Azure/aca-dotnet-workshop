@@ -7,11 +7,18 @@ canonical_url: https://bitoftech.net/2022/08/25/communication-microservices-azur
 !!! info "Module Duration"
     60 minutes
 
-In this module, we will add a service named `ACA Web API – Frontend` as illustrated in the [architecture diagram](../../assets/images/00-workshop-intro/ACA-Architecture-workshop.jpg){target=_blank}. This service will host a simple ASP.NET Razor pages web app which allows the end users to manage their tasks. After that we will provision Azure resources needed to deploy the service to ACA using Azure CLI.
+## Objective
+In this module, we will accomplish three objectives:
+
+1. Create a web app named `{{ apps.frontend }}`, which is the UI to interact with `{{ apps.backend }}`.
+1. Deploy the `{{ apps.frontend }}` container app to Azure.
+1. Shield `{{ apps.backend }}` from external access.
+
+## Module Sections
 
 --8<-- "snippets/restore-variables.md"
 
-### 2. Create the Frontend Web App project (Web APP)
+### 1. Create the Frontend Web App project
 
 - Initialize the web project. This will create and ASP.NET Razor Pages web app project.
 
@@ -33,7 +40,6 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
 - From inside the **Pages** folder, add a new folder named **Tasks**. Within that folder, add a new folder named **Models**, then create file as shown below.
 
     === "TasksModel.cs"
-
     ```csharp
     --8<-- "docs/aca/02-aca-comm/TasksModel.cs"
     ```
@@ -41,89 +47,55 @@ In this module, we will add a service named `ACA Web API – Frontend` as illust
 - Now, in the **Tasks** folder, we will add 3 Razor pages for CRUD operations which will be responsible for listing tasks, creating a new task, and updating existing tasks.
 By looking at the cshtml content notice that the page is expecting a query string named `createdBy` which will be used to group tasks for application users.
 
-!!! note
-    We are following this approach here to keep the workshop simple, but for production applications, authentication should be applied and the user email should be retrieved from the claims identity of the authenticated users.
+    !!! note
+        We are following this approach here to keep the workshop simple, but for production applications, authentication should be applied and the user email should be retrieved from the claims identity of the authenticated users.
 
-=== "Index.cshtml"
+    === "Index.cshtml"
+        ```html
+        --8<-- "docs/aca/02-aca-comm/Tasks.Index.cshtml"
+        ```
 
-    ```html
-    --8<-- "docs/aca/02-aca-comm/Tasks.Index.cshtml"
-    ```
+    === "Index.cshtml.cs"
+        ```csharp
+        --8<-- "docs/aca/02-aca-comm/Tasks.Index.cshtml.cs"
+        ```
 
-=== "Index.cshtml.cs"
+        !!! tip "What does this code do?"
+            In the code above we've injected named HttpClientFactory which is responsible to call the Backend API service as HTTP request. The index page supports deleting and marking tasks as completed along with listing tasks for certain users based on the `createdBy` property stored in a cookie named `TasksCreatedByCookie`.
+            More about populating this property later in the workshop.
 
-    ```csharp
-    --8<-- "docs/aca/02-aca-comm/Tasks.Index.cshtml.cs"
-    ```
+    === "Create.cshtml"
+        ```html
+        --8<-- "docs/aca/02-aca-comm/Create.cshtml"
+        ```
 
-    !!! tip "What does this code do?"
-        In the code above we've injected named HttpClientFactory which is responsible to call the Backend API service as HTTP request. The index page supports deleting and marking tasks as completed along with listing tasks for certain users based on the `createdBy` property stored in a cookie named `TasksCreatedByCookie`.
-        More about populating this property later in the workshop.
+    === "Create.cshtml.cs"
+        ```csharp
+        --8<-- "docs/aca/02-aca-comm/Create.cshtml.cs"
+        ```
+        
+        !!! tip "What does this code do?"
+            The code is self-explanatory here. We just injected the type HttpClientFactory in order to issue a POST request and create a new task.
 
-=== "Create.cshtml"
+    === "Edit.cshtml"
+        ```html
+        --8<-- "docs/aca/02-aca-comm/Edit.cshtml"
+        ```
 
-    ```html
-    --8<-- "docs/aca/02-aca-comm/Create.cshtml"
-    ```
-
-=== "Create.cshtml.cs"
-
-    ```csharp
-    --8<-- "docs/aca/02-aca-comm/Create.cshtml.cs"
-    ```
-    
-    !!! tip "What does this code do?"
-        The code is self-explanatory here. We just injected the type HttpClientFactory in order to issue a POST request and create a new task.
-
-=== "Edit.cshtml"
-
-    ```html
-    --8<-- "docs/aca/02-aca-comm/Edit.cshtml"
-    ```
-
-=== "Edit.cshtml.cs"
-
-    ```csharp
-    --8<-- "docs/aca/02-aca-comm/Edit.cshtml.cs"
-    ```
-    
-    !!! tip "What does this code do?"
-        The code added is similar to the create operation. The Edit page accepts the TaskId as a Guid, loads the task, and then updates the task by sending an HTTP PUT operation.
+    === "Edit.cshtml.cs"
+        ```csharp
+        --8<-- "docs/aca/02-aca-comm/Edit.cshtml.cs"
+        ```
+        
+        !!! tip "What does this code do?"
+            The code added is similar to the create operation. The Edit page accepts the TaskId as a Guid, loads the task, and then updates the task by sending an HTTP PUT operation.
 
 - Now we will inject an HTTP client factory and define environment variables. To do so we will register the HttpClientFactory named `BackEndApiExternal` to make it available for injection in controllers. Open the `Program.cs` file and update it with highlighted code below. Your file may be flattened rather than indented and not contain some of the below elements. Don't worry. Just place the highlighted lines in the right spot:
 
     === "Program.cs"
-
-        ```csharp hl_lines="12-21"
-        namespace TasksTracker.WebPortal.Frontend.Ui
-        {
-            public class Program
-            {
-                public static void Main(string[] args)
-                {
-                    var builder = WebApplication.CreateBuilder(args);
-        
-                    // Add services to the container.
-                    builder.Services.AddRazorPages();
-        
-                    builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
-                    {
-                        var backendApiBaseUrlExternalHttp = builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp");
-    
-                        if (!string.IsNullOrEmpty(backendApiBaseUrlExternalHttp)) {
-                            httpClient.BaseAddress = new Uri(backendApiBaseUrlExternalHttp);
-                        } else {
-                            throw new("BackendApiConfig:BaseUrlExternalHttp is not defined in App Settings.");
-                        }
-                    });
-        
-                    var app = builder.Build();
-        
-                    // Code removed for brevity 
-                }
-            }
-        }
-        ```
+    ```csharp hl_lines="6-15"
+    --8<-- "docs/aca/02-aca-comm/program.cs"
+    ```
 
 - Next, we will add a new environment variable named `BackendApiConfig:BaseUrlExternalHttp` into `appsettings.json` file. This variable will contain the Base URL for the backend API deployed in the previous module to ACA. Later on in the workshop, we will see how we can set the environment variable once we deploy it to ACA. Use the output from this script as the `BaseUrlExternalHttp` value.
 
@@ -132,7 +104,6 @@ By looking at the cshtml content notice that the page is expecting a query strin
     ```
 
     === "appsettings.json"
-
     ```json
         --8<-- "docs/aca/02-aca-comm/appsettings.json"
     ```
@@ -140,13 +111,11 @@ By looking at the cshtml content notice that the page is expecting a query strin
 - Lastly, we will update the web app landing page `Index.html` and `Index.cshtml.cs` inside **Pages** folder to capture the email of the tasks owner user and assign this email to a cookie named `TasksCreatedByCookie`.
 
     === "Index.cshtml"
-
         ```html
         --8<-- "docs/aca/02-aca-comm/Index.cshtml"
         ```
 
     === "Index.cshtml.cs"
-
         ```csharp
         --8<-- "docs/aca/02-aca-comm/Index.cshtml.cs"
         ```
@@ -161,7 +130,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 !!! note
     Make sure that the build is successful and that there are no build errors. Usually you should see a **Build succeeded** message in the terminal upon a successful build.
 
-### 3. Deploy Razor Pages Web App Frontend Project to ACA
+### 2. Deploy Razor Pages Web App Frontend Project to ACA
 
 - We need to add the below PS variables:
 
@@ -214,7 +183,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 
 After your run the command, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-frontend-webapp` and open it in your browser, and you should be able to browse the frontend web app and manage your tasks.
 
-### 4. Update Backend Web API Container App Ingress property
+### 3. Update Backend Web API Container App Ingress property
 
 So far the Frontend App is sending HTTP requests to publicly exposed Web API which means that any REST client can invoke this API. We need to change the Web API ingress settings and make it only accessible for applications deployed within our Azure Container Environment only. Any application outside the Azure Container Environment will not be able to access the Web API.
 
@@ -261,5 +230,12 @@ So far the Frontend App is sending HTTP requests to publicly exposed Web API whi
 
 --8<-- "snippets/persist-state.md:module2"
 --8<-- "snippets/update-variables.md"
+
+## Review
+In this module, we have accomplished three objectives:
+
+1. Created a web app named `{{ apps.frontend }}`, which is the UI to interact with `{{ apps.backend }}`.
+1. Deployed the `{{ apps.frontend }}` container app to Azure.
+1. Shielded `{{ apps.backend }}` from external access.
 
 In the next module, we will start integrating Dapr and use the service to service Building block for services discovery and invocation.

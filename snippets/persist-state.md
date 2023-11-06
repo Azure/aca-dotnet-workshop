@@ -11,8 +11,6 @@
 
 --8<-- [start:module2]
 
-### 5. Persist State
-
 - Navigate to the root and persist the module to Git.
 
     ```shell

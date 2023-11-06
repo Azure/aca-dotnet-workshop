@@ -1,5 +1,3 @@
-### 1. Restore Variables
-
 - From VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder `TasksTracker.ContainerApps`
 
     ```shell
