@@ -47,14 +47,14 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 - Let's start by capturing the UI and API localhost ports:
 
-    ```powershell
+    ```shell
     $API_APP_PORT=<web api application https port number found under Properties->launchSettings.json. e.g. 7112>
     $UI_APP_PORT=<web frontend ui application https port found under Properties->launchSettings.json. e.g. 7000>
     ```
 
 - Now that we know the `UI_APP_PORT`, we can also declare the local frontend UI URL:
 
-    ```powershell
+    ```shell
     $FRONTEND_UI_BASE_URL_LOCAL="https://localhost:$UI_APP_PORT"
     ```
 
@@ -65,11 +65,11 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 === ".NET 6 or below"
 
-    ```powershell
+    ```shell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     ```
 
-    ```powershell
+    ```shell
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -80,11 +80,11 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 === ".NET 7 or above"
 
-    ```powershell
+    ```shell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     ```
 
-    ```powershell
+    ```shell
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -233,7 +233,7 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 
 - Obtain the local frontend UI URL to test shortly once the frontend UI and backend API are running in the next step.
 
-    ```powershell
+    ```shell
     $FRONTEND_UI_BASE_URL_LOCAL
     ```
 
@@ -241,7 +241,7 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 
     === ".NET 6 or below"
 
-        ```powershell
+        ```shell
         cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui 
     
         dapr run `
@@ -252,7 +252,7 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
         -- dotnet run 
         ```
     
-        ```powershell
+        ```shell
         cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
         dapr run `
         --app-id tasksmanager-backend-api `
@@ -264,7 +264,7 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 
     === ".NET 7 or above"
 
-        ```powershell
+        ```shell
         cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui
     
         dapr run `
@@ -275,7 +275,7 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
         -- dotnet run --launch-profile https
         ```
     
-        ```powershell
+        ```shell
         cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     
         dapr run `
