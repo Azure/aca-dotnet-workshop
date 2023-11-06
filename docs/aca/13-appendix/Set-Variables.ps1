@@ -41,7 +41,6 @@ $vars = @(
     "SIGNEDIN_USERID",
     "STORAGE_ACCOUNT_NAME",
     "TARGET_PORT",
-    "TODAY",
     "UI_APP_PORT",
     "VNET_NAME",
     "WORKSPACE_ID",
@@ -58,6 +57,10 @@ foreach ($var in $vars) {
         $i++
     }
 }
+
+# $TODAY is a special variable that simply, easily captures today's date.
+"Set-Variable -Scope Global -Name TODAY -Value (Get-Date -Format 'yyyyMMdd')" | Out-File -FilePath $file -Append
+$i++
 
 # When the Variables.ps1 script executes, the following line will inform how many variables were set in the current session.
 "Write-Host `"Set $i variable$($i -eq 1 ? '' : 's').`"" | Out-File -FilePath $file -Append

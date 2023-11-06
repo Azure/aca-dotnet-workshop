@@ -81,7 +81,7 @@ Add file as shown below under the folder `bicep\modules`:
     ```
 
 ??? tip "What we've added in the Bicep file above"
-    - This module will create the Azure CosmosDB account, a CosmosDB database, and a CosmosDB collection.
+    - This module will create the Azure Cosmos DB account, a Cosmos DB database, and a Cosmos DB collection.
     - The output of this module will return three output parameters which will be used as an input for a subsequent module.
 
 #### 6. Define an Azure Storage Resource

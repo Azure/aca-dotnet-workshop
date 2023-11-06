@@ -103,6 +103,9 @@ plugins:
   - glightbox
 
 extra:
+  apps:
+    backend: "ACA API - Backend"
+    frontend: "ACA Web - Frontend"
   dapr:
     version: 1.9.0
   social:

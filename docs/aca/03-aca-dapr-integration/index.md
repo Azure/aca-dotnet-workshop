@@ -7,44 +7,54 @@ canonical_url: https://bitoftech.net/2022/08/29/dapr-integration-with-azure-cont
 !!! info "Module Duration"
     60 minutes
 
-In this module, we will start integrating Dapr into both services and see how Dapr with ACA will simplify complex microservices scenarios such as service discovery, service-to-service invocation, calling services asynchronously via pub/sub patterns, auto-scaling for overloaded services, etc..
+## Objective
 
-### Benefits of Integrating Dapr in Azure Container Apps
+In this module, we will accomplish one objective:
 
-The Tasks Tracker microservice application is composed of multiple microservices (two microservices so far), and function calls are spread across the network. To support the distributed nature of microservices,
-we need to account for failures, retries, and timeouts. While Container Apps features the building blocks for running microservices, the use of Dapr provides an even richer microservices programming model.
+1. Decouple `{{ apps.frontend }}` from `{{ apps.backend }}` by introducing Dapr.
 
-Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more.
-Here is a good [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation){target=_blank} which touches on some benefits of the Dapr service invocation building block which we will be building upon in this module.
-Because the calls will flow through sidecars, Dapr can inject some useful cross-cutting behaviors.
+## Module Sections
 
-Although we won't tap into all these benefits in this workshop its worth keeping in mind that you will most probably need to rely on these features in production.
+### 1. Introduce Dapr
 
-- Automatically retry calls upon failure.
-- Make calls between services secure with mutual (mTLS) authentication, including automatic certificate rollover.
-- Control what operations clients can do using access control policies.
-- Capture traces and metrics for all calls between services to provide insights and diagnostics.
+#### 1.1 Restore Variables
 
 --8<-- "snippets/restore-variables.md"
 
-### Configure Dapr on a Local Development Machine
+#### 1.2 Benefits of Integrating Dapr in Azure Container Apps
+
+The Tasks Tracker microservice application is composed of multiple microservices. Function calls are spread across the network. To support the distributed nature of microservices,
+we need to account for failures, retries, and timeouts. While Azure Container Apps features the building blocks for running microservices, using the Distributed Application Runtime (Dapr) provides an even richer microservices programming model.
+
+Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more.
+Here is a good [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation){target=_blank} which touches on some of the benefits of the Dapr service invocation building block which we will be building upon in this module.
+Because the calls will flow through container sidecars, Dapr can inject some useful cross-cutting behaviors that are meaningfully abstracted from our application containers.
+
+Although we won't tap into all these benefits in this workshop, it's worth noting that you will probably need to rely on these features in production:
+
+- Automatically retry calls upon failure.
+- Make calls between services secured  with mutual authentication (mTLS), including automatic certificate rollover.
+- Control what operations clients can perform using access control policies.
+- Capture traces and metrics for all calls between services to provide insights and diagnostics.
+
+#### 1.3 Configure Dapr on a Local Development Machine
 
 In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to [install](https://docs.dapr.io/getting-started/install-dapr-cli/){target=_blank} Dapr and then [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/){target=_blank} it.
 
-### Run Backend API and Frontend Web App Locally Using Dapr
+#### 1.4 Configure Backend API and Frontend Web App Locally Using Dapr
 
-You are now ready to run the applications locally using Dapr sidecar in a self-hosted mode. There is a VS code extension called [Dapr](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr){target=_blank} which will allow you to run, debug, and interact with Dapr-enabled applications in VS Code.
+You are now ready to run the applications locally using the Dapr sidecar in a self-hosted mode. The [Dapr](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr){target=_blank} VS Code extension will allow you to run, debug, and interact with Dapr-enabled applications.
 
 - Let's start by capturing the UI and API localhost ports:
 
-    ```powershell
+    ```shell
     $API_APP_PORT=<web api application https port number found under Properties->launchSettings.json. e.g. 7112>
     $UI_APP_PORT=<web frontend ui application https port found under Properties->launchSettings.json. e.g. 7000>
     ```
 
 - Now that we know the `UI_APP_PORT`, we can also declare the local frontend UI URL:
 
-    ```powershell
+    ```shell
     $FRONTEND_UI_BASE_URL_LOCAL="https://localhost:$UI_APP_PORT"
     ```
 
@@ -55,11 +65,11 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 
 === ".NET 6 or below"
 
-    ```powershell
+    ```shell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     ```
 
-    ```powershell
+    ```shell
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -70,11 +80,11 @@ You are now ready to run the applications locally using Dapr sidecar in a self-h
 
 === ".NET 7 or above"
 
-    ```powershell
+    ```shell
     cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     ```
 
-    ```powershell
+    ```shell
     dapr run `
     --app-id tasksmanager-backend-api `
     --app-port $API_APP_PORT `
@@ -138,7 +148,6 @@ The SDK offers developers three ways of making remote service invocation calls:
     Install DAPR SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
 
     === ".NET 6"
-
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
     
             ```xml
@@ -148,32 +157,17 @@ The SDK offers developers three ways of making remote service invocation calls:
             ```
 
     === ".NET 7"
-
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
     
             ```xml
-            <Project Sdk="Microsoft.NET.Sdk.Web">
-            
-              <PropertyGroup>
-                <TargetFramework>net7.0</TargetFramework>
-                <Nullable>enable</Nullable>
-                <ImplicitUsings>enable</ImplicitUsings>
-              </PropertyGroup>
-
-              <ItemGroup>
-                <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
-              </ItemGroup>
-            
-            </Project>
-            
+            --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui.csproj"
             ```
 
 - Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the highlighted below.
 
     === ".NET 6"
-    
         === "Program.cs"
-    
+
             ```csharp hl_lines="11"
             namespace TasksTracker.WebPortal.Frontend.Ui
             {
@@ -194,50 +188,10 @@ The SDK offers developers three ways of making remote service invocation calls:
             ```
 
     === ".NET 7"
-
         === "Program.cs"
 
             ```csharp hl_lines="6"
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            builder.Services.AddRazorPages();
-            
-            builder.Services.AddDaprClient();
-            
-            builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
-            {
-                var backendApiBaseUrlExternalHttp = builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp");
-            
-                if (!string.IsNullOrEmpty(backendApiBaseUrlExternalHttp)) {
-                    httpClient.BaseAddress = new Uri(backendApiBaseUrlExternalHttp);
-                } else {
-                    throw new("BackendApiConfig:BaseUrlExternalHttp is not defined in App Settings.");
-                }
-            });
-            
-            var app = builder.Build();
-            
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            
-            app.UseHttpsRedirection();
-            
-            app.UseStaticFiles();
-            
-            app.UseRouting();
-            
-            app.UseAuthorization();
-            
-            app.MapRazorPages();
-            
-            app.Run();
-            
+            --8<-- "docs/aca/03-aca-dapr-integration/Program.cs"
             ```
 
 - Now, we will inject the DaprClient into the `.cshtml` pages to use the method `InvokeMethodAsync` (second approach). Update files under folder **Pages\Tasks** and use the code below for different files.
@@ -269,7 +223,9 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     In both options, the final request will be rewritten by the Dapr .NET SDK before it gets executed. In our case and for the GET operation it will be written to this request: `http://127.0.0.1:3500/v1/invoke/tasksmanager-backend-api/method/api/tasks?createdBy=tjoudeh@bitoftech.net`
 
-- We are ready now to verify changes on Frontend Web App and test locally, we need to run the Frontend Web App along with the Backend Web API and test locally that changes using the .NET SDK and invoking services via Dapr Sidecar are working as expected. 
+#### 1.5 Run Backend API and Frontend Web App Locally Using Dapr
+
+We are ready now to verify the changes on the Frontend Web App and test locally. Therefore, we need to run the Frontend Web App along with the Backend Web API to ensure the Dapr Sidecar containers are working as expected. 
 
 - Open another terminal inside VS Code, so that we can run the two commands shown below (ensure that you are on the right project directory when running each command).
 
@@ -277,7 +233,7 @@ The SDK offers developers three ways of making remote service invocation calls:
 
 - Obtain the local frontend UI URL to test shortly once the frontend UI and backend API are running in the next step.
 
-    ```powershell
+    ```shell
     $FRONTEND_UI_BASE_URL_LOCAL
     ```
 
@@ -285,7 +241,7 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     === ".NET 6 or below"
 
-        ```powershell
+        ```shell
         cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui 
     
         dapr run `
@@ -296,7 +252,7 @@ The SDK offers developers three ways of making remote service invocation calls:
         -- dotnet run 
         ```
     
-        ```powershell
+        ```shell
         cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
         dapr run `
         --app-id tasksmanager-backend-api `
@@ -308,7 +264,7 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     === ".NET 7 or above"
 
-        ```powershell
+        ```shell
         cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui
     
         dapr run `
@@ -319,7 +275,7 @@ The SDK offers developers three ways of making remote service invocation calls:
         -- dotnet run --launch-profile https
         ```
     
-        ```powershell
+        ```shell
         cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
     
         dapr run `
@@ -342,5 +298,11 @@ The SDK offers developers three ways of making remote service invocation calls:
 
 --8<-- "snippets/update-variables.md:7:12"
 --8<-- "snippets/persist-state.md:module3"
+
+## Review
+
+In this module, we have accomplished one objective:
+
+1. Decoupled `{{ apps.frontend }}` from `{{ apps.backend }}` by introducing Dapr.
 
 In the next module, we will integrate the Dapr state store building block by saving tasks to Azure Cosmos DB. We will also deploy the updated applications to Azure Container Apps.
