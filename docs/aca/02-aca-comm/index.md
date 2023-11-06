@@ -94,7 +94,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
 
     === "Program.cs"
     ```csharp hl_lines="6-15"
-    --8<-- "docs/aca/02-aca-comm/program.cs"
+    --8<-- "docs/aca/02-aca-comm/Program.cs"
     ```
 
 - Next, we will add a new environment variable named `BackendApiConfig:BaseUrlExternalHttp` into `appsettings.json` file. This variable will contain the Base URL for the backend API deployed in the previous module to ACA. Later on in the workshop, we will see how we can set the environment variable once we deploy it to ACA. Use the output from this script as the `BaseUrlExternalHttp` value.
