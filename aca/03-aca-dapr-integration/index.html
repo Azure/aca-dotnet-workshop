@@ -1320,52 +1320,63 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 </details>
 <h4 id="23-configure-aca-web-frontend-locally">2.3 Configure <code>ACA Web - Frontend</code> Locally<a class="headerlink" href="#23-configure-aca-web-frontend-locally" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The <a href="https://github.com/dapr/dotnet-sdk" target="_blank">Dapr .NET SDK</a> provides .NET developers with an intuitive and language-specific way to interact with Dapr.</li>
-</ul>
-<p>The SDK offers developers three ways of making remote service invocation calls:</p>
-<div class="language-text highlight"><pre><span></span><code>1. Invoke HTTP services using HttpClient
-1. Invoke HTTP services using DaprClient
-1. Invoke gRPC services using DaprClient
-
-We will be using the second approach in this workshop (HTTP services using DaprClient), but it is worth spending some time explaining the first approach (Invoke HTTP services using HttpClient). We will go over the first approach briefly and then discuss the second in details.
-
-Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
-
-=== &quot;.NET 6&quot;
-    === &quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;
-
-        ```xml
-        &lt;ItemGroup&gt;
-            &lt;PackageReference Include=&quot;Dapr.AspNetCore&quot; Version=&quot;1.9.0&quot; /&gt;
-        &lt;/ItemGroup&gt;
-        ```
-
-=== &quot;.NET 7&quot;
-    === &quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;
-
-        ```xml
-        &lt;Project Sdk=&quot;Microsoft.NET.Sdk.Web&quot;&gt;
-
-            &lt;PropertyGroup&gt;
-                &lt;TargetFramework&gt;net7.0&lt;/TargetFramework&gt;
-                &lt;Nullable&gt;enable&lt;/Nullable&gt;
-                &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
-            &lt;/PropertyGroup&gt;
-
-            &lt;ItemGroup&gt;
-                &lt;PackageReference Include=&quot;Dapr.AspNetCore&quot; Version=&quot;1.9.0&quot; /&gt;
-            &lt;/ItemGroup&gt;
-
-        &lt;/Project&gt;
-        ```
-</code></pre></div>
-<ul>
 <li>
-<p>Next, open the file <code>Programs.cs</code> of the Frontend Web App and register the DaprClient as the highlighted below.</p>
+<p>Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The <a href="https://github.com/dapr/dotnet-sdk" target="_blank">Dapr .NET SDK</a> provides .NET developers with an intuitive and language-specific way to interact with Dapr.</p>
+<p>The SDK offers developers three ways of making remote service invocation calls:</p>
+<ol>
+<li>Invoke HTTP services using HttpClient</li>
+<li>Invoke HTTP services using DaprClient</li>
+<li>Invoke gRPC services using DaprClient</li>
+</ol>
+<p>We will be using the second approach in this workshop (HTTP services using DaprClient), but it is worth spending some time explaining the first approach (Invoke HTTP services using HttpClient). We will go over the first approach briefly and then discuss the second in details.</p>
+</li>
+<li>
+<p>Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">.NET 6</label><label for="__tabbed_2_2">.NET 7</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Program.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TasksTracker.WebPortal.Frontend.Ui.csproj</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">&lt;ItemGroup&gt;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">&lt;/ItemGroup&gt;</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tabbed-block">
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">TasksTracker.WebPortal.Frontend.Ui.csproj</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">&lt;Project</span><span class="w"> </span><span class="na">Sdk=</span><span class="s">&quot;Microsoft.NET.Sdk.Web&quot;</span><span class="nt">&gt;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">&lt;PropertyGroup&gt;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="nt">&lt;TargetFramework&gt;</span>net7.0<span class="nt">&lt;/TargetFramework&gt;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="nt">&lt;Nullable&gt;</span>enable<span class="nt">&lt;/Nullable&gt;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="nt">&lt;ImplicitUsings&gt;</span>enable<span class="nt">&lt;/ImplicitUsings&gt;</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nt">&lt;/PropertyGroup&gt;</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="nt">&lt;ItemGroup&gt;</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="nt">&lt;/ItemGroup&gt;</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="nt">&lt;/Project&gt;</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Next, open the file <code>Programs.cs</code> of the Frontend Web App and register the DaprClient as the highlighted below.</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">.NET 6</label><label for="__tabbed_5_2">.NET 7</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Program.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.WebPortal.Frontend.Ui</span>
@@ -1390,7 +1401,7 @@ Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the servic
 </div>
 </div>
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Program.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Program.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WebApplication</span><span class="p">.</span><span class="n">CreateBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
@@ -1442,7 +1453,7 @@ Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the servic
 </li>
 <li>
 <p>Now, we will inject the DaprClient into the <code>.cshtml</code> pages to use the method <code>InvokeMethodAsync</code> (second approach). Update files under folder <strong>Pages\Tasks</strong> and use the code below for different files.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Index.cshtml.cs</label><label for="__tabbed_5_2">Create.cshtml.cs</label><label for="__tabbed_5_3">Edit.cshtml.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Index.cshtml.cs</label><label for="__tabbed_8_2">Create.cshtml.cs</label><label for="__tabbed_8_3">Edit.cshtml.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Dapr.Client</span><span class="p">;</span>
@@ -1675,7 +1686,7 @@ Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the servic
 </li>
 <li>
 <p>In each of the two terminals previously opened, run the frontend UI and backend API respectively.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">.NET 6 or below</label><label for="__tabbed_6_2">.NET 7 or above</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">.NET 6 or below</label><label for="__tabbed_9_2">.NET 7 or above</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui<span class="w"> </span>
