@@ -17,13 +17,11 @@ In this module, we will accomplish three objectives:
 
 ## Module Sections
 
-### 1. State Management
-
-#### 1.1 Restore Variables
-
 --8<-- "snippets/restore-variables.md"
 
-#### 1.2 Overview of Dapr State Management API
+### 1. State Management
+
+#### 1.1 Overview of Dapr State Management API
 
 By using the [Dapr State Management Building Block](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/){target=_blank}, we will see how we can store the data in Azure Cosmos DB without installing any Cosmos DB SDK or write specific code to integrate our Backend API with Azure Cosmos DB.
 Moreover, we will use Redis to store tasks when we are running the application locally. You will see that we can switch between different stores without any code changes, thanks to the [Dapr pluggable state stores feature](https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/#pluggable-state-stores){target=_blank}. It is a matter of adding new Dapr Component files and the underlying store will be changed. This page shows the [supported state stores](https://docs.dapr.io/reference/components-reference/supported-state-stores/){target=_blank} in Dapr.
@@ -101,7 +99,7 @@ What we've done here is the following:
 - The value `statestore` in the endpoint should match the `name` value in the global component file `statestore.yaml`
 - We have sent a request to store 3 entries of books, you can put any JSON representation in the value property
 
-#### 1.3 Local Redis Cache 
+#### 1.2 Local Redis Cache 
 
 To see the results visually, you can install a VS Code extension to connect to Redis DB and see the results. There are several Redis extensions available for VS Code. For this workshop we will use an extension named ["Redis Xplorer"](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer){target=_blank}.
 
