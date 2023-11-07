@@ -143,7 +143,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 - Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The [Dapr .NET SDK](https://github.com/dapr/dotnet-sdk){target=_blank} provides .NET developers with an intuitive and language-specific way to interact with Dapr.
 
-The SDK offers developers three ways of making remote service invocation calls:
+    The SDK offers developers three ways of making remote service invocation calls:
 
     1. Invoke HTTP services using HttpClient
     1. Invoke HTTP services using DaprClient
@@ -151,11 +151,11 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     We will be using the second approach in this workshop (HTTP services using DaprClient), but it is worth spending some time explaining the first approach (Invoke HTTP services using HttpClient). We will go over the first approach briefly and then discuss the second in details.
 
-    Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
+- Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
 
     === ".NET 6"
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
-    
+
             ```xml
             <ItemGroup>
                 <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
@@ -164,12 +164,12 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     === ".NET 7"
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
-    
+
             ```xml
             --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui.csproj"
             ```
 
-- Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the highlighted below.
+    - Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the highlighted below.
 
     === ".NET 6"
         === "Program.cs"
