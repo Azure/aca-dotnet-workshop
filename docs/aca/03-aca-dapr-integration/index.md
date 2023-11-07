@@ -143,11 +143,13 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 - Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The [Dapr .NET SDK](https://github.com/dapr/dotnet-sdk){target=_blank} provides .NET developers with an intuitive and language-specific way to interact with Dapr.
 
+The SDK offers developers three ways of making remote service invocation calls:
+
     The SDK offers developers three ways of making remote service invocation calls:
 
     1. Invoke HTTP services using HttpClient
-    2. Invoke HTTP services using DaprClient
-    3. Invoke gRPC services using DaprClient
+    1. Invoke HTTP services using DaprClient
+    1. Invoke gRPC services using DaprClient
 
     We will be using the second approach in this workshop (HTTP services using DaprClient), but it is worth spending some time explaining the first approach (Invoke HTTP services using HttpClient). We will go over the first approach briefly and then discuss the second in details.
 
