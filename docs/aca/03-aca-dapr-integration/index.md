@@ -9,19 +9,18 @@ canonical_url: https://bitoftech.net/2022/08/29/dapr-integration-with-azure-cont
 
 ## Objective
 
-In this module, we will accomplish one objective:
+In this module, we will accomplish two objectives:
 
-1. Decouple `{{ apps.frontend }}` from `{{ apps.backend }}` by introducing Dapr.
+1. Introduce the Distributed Application Runtime (Dapr).
+1. Decouple `{{ apps.frontend }}` from `{{ apps.backend }}` locally via Dapr.
 
 ## Module Sections
 
-### 1. Introduce Dapr
-
-#### 1.1 Restore Variables
-
 --8<-- "snippets/restore-variables.md"
 
-#### 1.2 Benefits of Integrating Dapr in Azure Container Apps
+### 1. Introduce Dapr
+
+#### 1.1 Benefits of Integrating Dapr in Azure Container Apps
 
 The Tasks Tracker microservice application is composed of multiple microservices. Function calls are spread across the network. To support the distributed nature of microservices,
 we need to account for failures, retries, and timeouts. While Azure Container Apps features the building blocks for running microservices, using the Distributed Application Runtime (Dapr) provides an even richer microservices programming model.
@@ -37,11 +36,13 @@ Although we won't tap into all these benefits in this workshop, it's worth notin
 - Control what operations clients can perform using access control policies.
 - Capture traces and metrics for all calls between services to provide insights and diagnostics.
 
-#### 1.3 Configure Dapr on a Local Development Machine
+#### 1.2 Configure Dapr on a Local Development Machine
 
 In order to run applications using Dapr, we need to install and initialize Dapr CLI locally. The official documentation is quite clear, and we can follow the steps needed to [install](https://docs.dapr.io/getting-started/install-dapr-cli/){target=_blank} Dapr and then [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/){target=_blank} it.
 
-#### 1.4 Configure Backend API and Frontend Web App Locally Using Dapr
+### 2. Decouple `{{ apps.frontend }}` from `{{ apps.frontend }}` Locally via Dapr
+
+#### 2.1 Configure Local Variables
 
 You are now ready to run the applications locally using the Dapr sidecar in a self-hosted mode. The [Dapr](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr){target=_blank} VS Code extension will allow you to run, debug, and interact with Dapr-enabled applications.
 
@@ -62,6 +63,8 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 !!! note
     Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.
+
+#### 2.2 Test `{{ apps.backend }}` Locally
 
 === ".NET 6 or below"
 
@@ -96,16 +99,16 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
  ![app-port](../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png)
 
 ??? tip "Want to learn more about Dapr run command above?"
-    When using Dapr run command you are running a dapr process as a sidecar next to the Web API application. The properties you have configured are as follows:
+    When using Dapr run command you are running a Dapr process as a sidecar next to the Web API application. The properties you have configured are as follows:
 
       - app-id: The unique identifier of the application. Used for service discovery, state encapsulation, and the pub/sub consumer identifier.
-      - app-port: This parameter tells Dapr which port your application is listening on. You can get the app port from `Properties->launchSettings.json` file in the Web API Project as shown in the image above. Make sure you use the https port listed within the `Properties->launchSettings.json` as we are using the --app-ssl when running the dapr cli locally. Don't use the port inside the DockerFile. The DockerFile port will come in handy when you deploy to ACA at which point the application would be running inside a container.
+      - app-port: This parameter tells Dapr which port your application is listening on. You can get the app port from `Properties->launchSettings.json` file in the Web API Project as shown in the image above. Make sure you use the https port listed within the `Properties->launchSettings.json` as we are using the --app-ssl when running the Dapr cli locally. Don't use the port inside the DockerFile. The DockerFile port will come in handy when you deploy to ACA at which point the application would be running inside a container.
       - dapr-http-port: The HTTP port for Dapr to listen on.
       - app-ssl: Sets the URI scheme of the app to https and attempts an SSL connection.
 
     For a full list of properties, you can check this [link.](https://docs.dapr.io/reference/cli/dapr-run/)
 
- If all is working as expected, you should receive an output similar to the one below where your app logs and dapr logs will appear on the same PowerShell terminal:
+ If all is working as expected, you should receive an output similar to the one below where your app logs and Dapr logs will appear on the same PowerShell terminal:
 
  ![dapr-logs](../../assets/images/03-aca-dapr-integration/dapr-logs.jpg)
 
@@ -118,7 +121,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
       - `/v1.0/invoke` Endpoint: is the Dapr feature identifier for the "Service to Service invocation" building block. This building block enables applications to communicate with each other through well-known endpoints in the form of http or gRPC messages. Dapr provides an endpoint that acts as a combination of a reverse proxy with built-in service discovery while leveraging built-in distributed tracing and error handling.
       - `3500`: the HTTP port that Dapr is listening on.
-      - `tasksmanager-backend-api`: is the dapr application unique identifier.
+      - `tasksmanager-backend-api`: is the Dapr application unique identifier.
       - `method`: reserved word when using invoke endpoint.
       - `api/tasks?createdBy=tjoudeh@bitoftech.net`: the path of the action method that needs to be invoked in the webapi service.
 
@@ -136,16 +139,19 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
       }
       ```
 
+#### 2.3 Configure `{{ apps.frontend }}` Locally
+
 - Next, we will be using Dapr SDK in the frontend Web App to invoke Backend API services, The [Dapr .NET SDK](https://github.com/dapr/dotnet-sdk){target=_blank} provides .NET developers with an intuitive and language-specific way to interact with Dapr.
+
 The SDK offers developers three ways of making remote service invocation calls:
 
     1. Invoke HTTP services using HttpClient
-    2. Invoke HTTP services using DaprClient
-    3. Invoke gRPC services using DaprClient
+    1. Invoke HTTP services using DaprClient
+    1. Invoke gRPC services using DaprClient
 
     We will be using the second approach in this workshop (HTTP services using DaprClient), but it is worth spending some time explaining the first approach (Invoke HTTP services using HttpClient). We will go over the first approach briefly and then discuss the second in details.
 
-    Install DAPR SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
+    Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
 
     === ".NET 6"
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
@@ -223,7 +229,7 @@ The SDK offers developers three ways of making remote service invocation calls:
 
     In both options, the final request will be rewritten by the Dapr .NET SDK before it gets executed. In our case and for the GET operation it will be written to this request: `http://127.0.0.1:3500/v1/invoke/tasksmanager-backend-api/method/api/tasks?createdBy=tjoudeh@bitoftech.net`
 
-#### 1.5 Run Backend API and Frontend Web App Locally Using Dapr
+#### 2.4 Run `{{ apps.frontend }}` and `{{ apps.backend }}` Locally Using Dapr
 
 We are ready now to verify the changes on the Frontend Web App and test locally. Therefore, we need to run the Frontend Web App along with the Backend Web API to ensure the Dapr Sidecar containers are working as expected. 
 
@@ -291,6 +297,8 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 !!! note
     If you need to run both microservices together, you need to keep calling `dapr run` manually each time in the terminal. And when you have multiple microservices talking to each other you need to run at the same time to debug the solution. This can be a convoluted process. You can refer to the [debug and launch Dapr applications in VSCode](../13-appendix/01-run-debug-dapr-app-vscode.md) to see how to configure VScode for running and debugging Dapr applications.
 
+#### 2.5 Test `{{ apps.frontend }}` and `{{ apps.backend }}` Locally Using Dapr
+
 !!! success
     Now both Applications are running using Dapr sidecar. Open the local frontend UI URL, ignore the certificate warning locally, then provide an email to load the tasks for the user (e.g. `tjoudeh@bitoftech.net`). If the application is working as expected you should see tasks list associated with the email you provided.
 
@@ -301,8 +309,9 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 
 ## Review
 
-In this module, we have accomplished one objective:
+In this module, we have accomplished two objective:
 
-1. Decoupled `{{ apps.frontend }}` from `{{ apps.backend }}` by introducing Dapr.
+1. Introduced the Distributed Application Runtime (Dapr).
+1. Decoupled `{{ apps.frontend }}` from `{{ apps.backend }}` locally via Dapr.
 
 In the next module, we will integrate the Dapr state store building block by saving tasks to Azure Cosmos DB. We will also deploy the updated applications to Azure Container Apps.
