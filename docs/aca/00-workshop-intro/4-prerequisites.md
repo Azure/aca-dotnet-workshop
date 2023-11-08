@@ -100,7 +100,7 @@ This workshop typically spans several days. As such, you may close your tools, e
     git commit -m "Initialize Variables.ps1"
     ```
 
-This completes the basic setup for Git and the variables to be used.
+This completes the basic setup for Git and the variables to be used. You are ready to proceed to [Module 1](../01-deploy-api-to-aca/index.md)!
 
 ## Jump Ahead
 

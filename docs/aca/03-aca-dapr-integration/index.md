@@ -49,8 +49,8 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 - Let's start by capturing the UI and API localhost ports:
 
     ```shell
-    $API_APP_PORT=<web api application https port number found under Properties->launchSettings.json. e.g. 7112>
-    $UI_APP_PORT=<web frontend ui application https port found under Properties->launchSettings.json. e.g. 7000>
+    $API_APP_PORT=<web api https port in Properties->launchSettings.json (e.g. 7112)>
+    $UI_APP_PORT=<web ui https port in Properties->launchSettings.json (e.g. 7000)>
     ```
 
 - Now that we know the `UI_APP_PORT`, we can also declare the local frontend UI URL:
@@ -158,14 +158,14 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
             ```xml
             <ItemGroup>
-                <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
+              <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
             </ItemGroup>
             ```
 
     === ".NET 7"
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
 
-            ```xml
+            ```xml hl_lines="9-11"
             --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui.csproj"
             ```
 

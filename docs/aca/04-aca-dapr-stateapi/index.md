@@ -94,6 +94,8 @@ Content-Type: application/json
 ]
 ```
 
+You should see an *HTTP 204 No Content* response.
+
 What we've done here is the following:
 
 - The value `statestore` in the endpoint should match the `name` value in the global component file `statestore.yaml`
@@ -110,7 +112,7 @@ This will ask you to enter the nickname (e.g. *dapr_redis*) as well as the hostn
 docker ps
 ```
 
-Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal. Leave the password empty.
+Look under the Ports column and use the server and port specified there. In the image below the server is `0.0.0.0` and the port is `6379`. Use the values that you see on your own terminal. Leave the password empty.
 
 ![dapr-stateapi-redis](../../assets/images/04-aca-dapr-stateapi/docker_redis.png)
 
@@ -345,7 +347,7 @@ After creating a new record you can navigate to the Data explorer on the [Azure 
 
 ![cosmos-db-dapr-state-store](../../assets/images/04-aca-dapr-stateapi/cosmos-db-dapr-state-store.jpg)
 
-### Key Prefix Strategies
+##### Key Prefix Strategies
 
 When you look at the key stored per entry and for example `tasksmanager-backend-api||aa3eb856-8309-4e68-93af-119be0d400e8`, you will notice that the key is prefixed with the Dapr application App Id responsible
 to store this entry which in our case is `tasksmanager-backend-api`. There might be some scenarios which you need to have another service to access the same data store (not recommended as each service should be responsible about its own data store), in which case you can change the default behavior.
