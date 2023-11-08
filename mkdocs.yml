@@ -108,6 +108,8 @@ extra:
     frontend: "ACA Web - Frontend"
   dapr:
     version: 1.9.0
+  docker:
+    targetport: 5000
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Azure/aca-dotnet-workshop
