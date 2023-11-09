@@ -160,7 +160,7 @@ Now we need to register the new service named `TasksStoreManager` and `DaprClien
 
 === "Program.cs"
 
-    ```csharp hl_lines="6-8"
+    ```csharp hl_lines="7-9"
     --8<-- "docs/aca/04-aca-dapr-stateapi/Program.cs"
     ```
 

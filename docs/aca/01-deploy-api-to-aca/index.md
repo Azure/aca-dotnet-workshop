@@ -68,7 +68,7 @@ In this module, we will accomplish three objectives:
 - Now we need to register `FakeTasksManager` on project startup. Open file `#!csharp Program.cs` and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required `using` statement for the task interface and class.
 
     === "Program.cs"
-    ```csharp hl_lines="1 6"
+    ```csharp hl_lines="1 7"
     --8<-- "docs/aca/01-deploy-api-to-aca/Program.cs"
     ```
 
