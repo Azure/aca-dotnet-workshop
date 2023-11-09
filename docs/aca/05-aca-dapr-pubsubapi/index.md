@@ -52,15 +52,11 @@ To try out the Pub/Sub API, run the Backend API from VS Code by running the belo
 
 === ".NET 6 or below"
 
-    ```shell
-    --8<-- "snippets/dapr-run-backend-api-dotnet6.sh"
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
 
 === ".NET 7 or above"
 
-    ```shell
-    --8<-- "snippets/dapr-run-backend-api.sh"
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
 
 Let's try to publish a message by sending a **POST** request to [http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic](http://localhost:3500/v1.0/publish/taskspubsub/tasksavedtopic) with the below request body, don't forget to set the `Content-Type` header to `application/json`
 
@@ -241,23 +237,13 @@ To do so, run the below commands in two separate PowerShell console, ensure you 
 
 === ".NET 6 or below"
 
-    ```shell
-    --8<-- "snippets/dapr-run-backend-api-dotnet6.sh"
-    ```
-
-    ```shell
-    --8<-- "snippets/dapr-run-backend-service-dotnet6.sh"
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
+    --8<-- "snippets/dapr-run-backend-service.md:dapr-components-dotnet6"
 
 === ".NET 7 or above"
 
-    ```shell
-    --8<-- "snippets/dapr-run-backend-api.sh"
-    ```
-
-    ```shell
-    --8<-- "snippets/dapr-run-backend-service.sh"
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
+    --8<-- "snippets/dapr-run-backend-service.md:dapr-components"
 
 !!! note
     Notice that we gave the new Backend background service a Dapr App Id with the name `tasksmanager-backend-processor` and a Dapr HTTP port with the value `3502`.
@@ -412,23 +398,13 @@ With all those bits in place, we are ready to run the publisher service `Backend
 
 === ".NET 6 or below"
 
-    ```shell
-    --8<-- "snippets/dapr-run-backend-api-dotnet6.sh"
-    ```
-
-    ```shell
-    --8<-- "snippets/dapr-run-backend-service-dotnet6.sh"
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
+    --8<-- "snippets/dapr-run-backend-service.md:dapr-components-dotnet6"
 
 === ".NET 7 or above"
 
-    ```shell
-    --8<-- "snippets/dapr-run-backend-api.sh"
-    ```
-
-    ```shell
-    --8<-- "snippets/dapr-run-backend-service.sh"
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
+    --8<-- "snippets/dapr-run-backend-service.md:dapr-components"
 
 !!! note
     We gave the new Backend background service a Dapr App Id with the name `tasksmanager-backend-processor` and a Dapr HTTP port with the value **3502**.

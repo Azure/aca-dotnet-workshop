@@ -68,33 +68,11 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 === ".NET 6 or below"
 
-    ```shell
-    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-    ```
-
-    ```shell
-    dapr run `
-    --app-id tasksmanager-backend-api `
-    --app-port $API_APP_PORT `
-    --dapr-http-port 3500 `
-    --app-ssl `
-    -- dotnet run
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:basic-dotnet6"
 
 === ".NET 7 or above"
 
-    ```shell
-    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-    ```
-
-    ```shell
-    dapr run `
-    --app-id tasksmanager-backend-api `
-    --app-port $API_APP_PORT `
-    --dapr-http-port 3500 `
-    --app-ssl `
-    -- dotnet run --launch-profile https
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:basic"
 
  ![app-port](../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png)
 
@@ -247,50 +225,15 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 
     === ".NET 6 or below"
 
-        ```shell
-        cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui 
-    
-        dapr run `
-        --app-id tasksmanager-frontend-webapp `
-        --app-port $UI_APP_PORT `
-        --dapr-http-port 3501 `
-        --app-ssl `
-        -- dotnet run 
-        ```
-    
-        ```shell
-        cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-        dapr run `
-        --app-id tasksmanager-backend-api `
-        --app-port $API_APP_PORT `
-        --dapr-http-port 3500 `
-        --app-ssl `
-        -- dotnet run
-        ```
+        --8<-- "snippets/dapr-run-frontend-webapp.md:basic-dotnet6"
+
+        --8<-- "snippets/dapr-run-backend-api.md:basic-dotnet6"
 
     === ".NET 7 or above"
 
-        ```shell
-        cd ~\TasksTracker.ContainerApps\TasksTracker.WebPortal.Frontend.Ui
-    
-        dapr run `
-        --app-id tasksmanager-frontend-webapp `
-        --app-port $UI_APP_PORT `
-        --dapr-http-port 3501 `
-        --app-ssl `
-        -- dotnet run --launch-profile https
-        ```
-    
-        ```shell
-        cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-    
-        dapr run `
-        --app-id tasksmanager-backend-api `
-        --app-port $API_APP_PORT `
-        --dapr-http-port 3500 `
-        --app-ssl `
-        -- dotnet run --launch-profile https
-        ```
+        --8<-- "snippets/dapr-run-frontend-webapp.md:basic"
+
+        --8<-- "snippets/dapr-run-backend-api.md:basic"
 
  Notice how we assigned the Dapr App Id “tasksmanager-frontend-webapp” to the Frontend WebApp.
 
