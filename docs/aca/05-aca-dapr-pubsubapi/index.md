@@ -596,9 +596,7 @@ az containerapp revision restart `
 ```
 
 !!! Success
-    With this in place, you should be able to test the 3 services end to end and should receive a notification email to the task assignee email, the email will look like the below.
-
-    ![email-log](../../assets/images/05-aca-dapr-pubsubapi/email-log.jpg)
+    With this in place, you should be able to test the 3 services end to end.
 
     !!! note
     
