@@ -663,19 +663,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-prefix-strategies" class="md-nav__link">
-    Key Prefix Strategies
-  </a>
-  
-    <nav class="md-nav" aria-label="Key Prefix Strategies">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#33-configure-managed-identities-in-container-app" class="md-nav__link">
     3.3 Configure Managed Identities in Container App
@@ -1263,19 +1250,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-prefix-strategies" class="md-nav__link">
-    Key Prefix Strategies
-  </a>
-  
-    <nav class="md-nav" aria-label="Key Prefix Strategies">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#33-configure-managed-identities-in-container-app" class="md-nav__link">
     3.3 Configure Managed Identities in Container App
@@ -1470,6 +1444,7 @@ Moreover, we will use Redis to store tasks when we are running the application l
 </span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="p">]</span>
 </span></code></pre></div>
+<p>You should see an <em>HTTP 204 No Content</em> response.</p>
 <p>What we've done here is the following:</p>
 <ul>
 <li>The value <code>statestore</code> in the endpoint should match the <code>name</code> value in the global component file <code>statestore.yaml</code></li>
@@ -1481,7 +1456,7 @@ Moreover, we will use Redis to store tasks when we are running the application l
 This will ask you to enter the nickname (e.g. <em>dapr_redis</em>) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>ps
 </span></code></pre></div>
-<p>Look under the Ports column and use the server and port specified there. In the image below the server is 0.0.0.0 and the port is 6379. Use the values that you see on your own terminal. Leave the password empty.</p>
+<p>Look under the Ports column and use the server and port specified there. In the image below the server is <code>0.0.0.0</code> and the port is <code>6379</code>. Use the values that you see on your own terminal. Leave the password empty.</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/docker_redis.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-stateapi-redis" src="../../assets/images/04-aca-dapr-stateapi/docker_redis.png" /></a></p>
 <p>After you connect to Redis locally, you should see the 3 entries similar to the ones shown in the image below. Notice how each entry key is prefixed by the Dapr App Id. In our case it is <code>tasksmanager-backend-api</code>. More about <a href="#key-prefix-strategies">key prefix strategy</a> in later sections in this module.</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/dapr-api-redis.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="dapr-stateapi-redis" src="../../assets/images/04-aca-dapr-stateapi/dapr-api-redis.jpg" /></a></p>
@@ -1847,7 +1822,7 @@ This will instruct dapr to load the local projects components located at <strong
 </div>
 <p>After creating a new record you can navigate to the Data explorer on the <a href="https://portal.azure.com" target="_blank">Azure portal</a> for the azure cosmos database account. It should look like the image below:</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/cosmos-db-dapr-state-store.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="cosmos-db-dapr-state-store" src="../../assets/images/04-aca-dapr-stateapi/cosmos-db-dapr-state-store.jpg" /></a></p>
-<h3 id="key-prefix-strategies">Key Prefix Strategies<a class="headerlink" href="#key-prefix-strategies" title="Permanent link">&para;</a></h3>
+<h5 id="key-prefix-strategies">Key Prefix Strategies<a class="headerlink" href="#key-prefix-strategies" title="Permanent link">&para;</a></h5>
 <p>When you look at the key stored per entry and for example <code>tasksmanager-backend-api||aa3eb856-8309-4e68-93af-119be0d400e8</code>, you will notice that the key is prefixed with the Dapr application App Id responsible
 to store this entry which in our case is <code>tasksmanager-backend-api</code>. There might be some scenarios which you need to have another service to access the same data store (not recommended as each service should be responsible about its own data store), in which case you can change the default behavior.</p>
 <p>This can be done by adding the meta tag below to the component file. For example, if we need to set the value of the prefix to a constant value such as <code>TaskId</code> we can do the following:</p>
@@ -2045,7 +2020,7 @@ This <code>dapr-app-id</code> will be used for service discovery, state encapsul
   <small>
     
       Last update:
-      2023-11-07
+      2023-11-09
     
   </small>
 </div>

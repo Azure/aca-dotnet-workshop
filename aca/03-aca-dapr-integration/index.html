@@ -1236,8 +1236,8 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 <ul>
 <li>
 <p>Let's start by capturing the UI and API localhost ports:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$API_APP_PORT</span><span class="o">=</span>&lt;web<span class="w"> </span>api<span class="w"> </span>application<span class="w"> </span>https<span class="w"> </span>port<span class="w"> </span>number<span class="w"> </span>found<span class="w"> </span>under<span class="w"> </span>Properties-&gt;launchSettings.json.<span class="w"> </span>e.g.<span class="w"> </span><span class="m">7112</span>&gt;
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">$UI_APP_PORT</span><span class="o">=</span>&lt;web<span class="w"> </span>frontend<span class="w"> </span>ui<span class="w"> </span>application<span class="w"> </span>https<span class="w"> </span>port<span class="w"> </span>found<span class="w"> </span>under<span class="w"> </span>Properties-&gt;launchSettings.json.<span class="w"> </span>e.g.<span class="w"> </span><span class="m">7000</span>&gt;
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$API_APP_PORT</span><span class="o">=</span>&lt;web<span class="w"> </span>api<span class="w"> </span>https<span class="w"> </span>port<span class="w"> </span><span class="k">in</span><span class="w"> </span>Properties-&gt;launchSettings.json<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span><span class="m">7112</span><span class="o">)</span>&gt;
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">$UI_APP_PORT</span><span class="o">=</span>&lt;web<span class="w"> </span>ui<span class="w"> </span>https<span class="w"> </span>port<span class="w"> </span><span class="k">in</span><span class="w"> </span>Properties-&gt;launchSettings.json<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span><span class="m">7000</span><span class="o">)</span>&gt;
 </span></code></pre></div>
 </li>
 <li>
@@ -1339,7 +1339,7 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">&lt;ItemGroup&gt;</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">&lt;/ItemGroup&gt;</span>
 </span></code></pre></div>
 </div>
@@ -1352,16 +1352,16 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 <div class="tabbed-block">
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">&lt;Project</span><span class="w"> </span><span class="na">Sdk=</span><span class="s">&quot;Microsoft.NET.Sdk.Web&quot;</span><span class="nt">&gt;</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">&lt;PropertyGroup&gt;</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="nt">&lt;TargetFramework&gt;</span>net7.0<span class="nt">&lt;/TargetFramework&gt;</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="nt">&lt;Nullable&gt;</span>enable<span class="nt">&lt;/Nullable&gt;</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="nt">&lt;ImplicitUsings&gt;</span>enable<span class="nt">&lt;/ImplicitUsings&gt;</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nt">&lt;/PropertyGroup&gt;</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">&lt;PropertyGroup&gt;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">&lt;TargetFramework&gt;</span>net7.0<span class="nt">&lt;/TargetFramework&gt;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="nt">&lt;Nullable&gt;</span>enable<span class="nt">&lt;/Nullable&gt;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nt">&lt;ImplicitUsings&gt;</span>enable<span class="nt">&lt;/ImplicitUsings&gt;</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="nt">&lt;/PropertyGroup&gt;</span>
 </span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="nt">&lt;ItemGroup&gt;</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="nt">&lt;/ItemGroup&gt;</span>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="hll"><span class="w">  </span><span class="nt">&lt;ItemGroup&gt;</span>
+</span></span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="hll"><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span></span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="hll"><span class="w">  </span><span class="nt">&lt;/ItemGroup&gt;</span>
+</span></span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
 </span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="nt">&lt;/Project&gt;</span>
 </span></code></pre></div>
 </div>
@@ -1771,7 +1771,7 @@ Because the calls will flow through container sidecars, Dapr can inject some use
   <small>
     
       Last update:
-      2023-11-07
+      2023-11-09
     
   </small>
 </div>

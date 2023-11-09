@@ -1115,18 +1115,25 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA. Open the VS Code Command Palette (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span>) and select <code>Docker: Add Docker Files to Workspace...</code></p>
+<p>We need to containerize this application, so we can push it to the Azure Container Registry before we deploy it to Azure Container Apps:</p>
 <ul>
-<li>Use <code>.NET: ASP.NET Core</code> when prompted for application platform.</li>
-<li>Choose <code>TasksTracker.WebPortal.Frontend.Ui\TasksTracker.WebPortal.Fortend.Ui.csproj</code> when prompted to choose a project file.</li>
+<li>Open the VS Code Command Palette (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span>) and select <strong>Docker: Add Docker Files to Workspace...</strong></li>
+<li>Use <code>.NET: ASP.NET Core</code> when prompted for the application platform.</li>
+<li>Choose the newly-created project, if prompted.</li>
 <li>Choose <code>Linux</code> when prompted to choose the operating system.</li>
-<li>Use the <strong>same application port</strong> as you used for the backend API. This allows us to reuse <code>$TARGET_PORT</code> later on.</li>
+<li>Set the <strong>application port</strong> to <code>5000</code>. This is arbitrary but memorable for this workshop.</li>
 <li>You will be asked if you want to add Docker Compose files. Select <code>No</code>.</li>
 <li><code>Dockerfile</code> and <code>.dockerignore</code> files are added to the workspace.</li>
-</ul>
-</li>
 <li>
-<p>Open <code>Dockerfile</code> and replace <code>FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build</code> with <code>FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build</code>.</p>
+<p>Open <code>Dockerfile</code> and replace<br />
+<code>FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build</code> with<br />
+<code>FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build</code></p>
+<div class="admonition bug">
+<p class="admonition-title">Dockerfile Build Platform</p>
+<p>Azure Container Registry does not set <code>$BUILDPLATFORM</code> presently when building containers. This consequently causes the build to fail. See <a href="https://github.com/microsoft/vscode-docker/issues/4149" target="_blank">this issue</a> for details. Therefore, we remove it from the file for the time being. We expect this to be corrected in the future.</p>
+</div>
+</li>
+</ul>
 </li>
 <li>
 <p>From inside the <strong>Pages</strong> folder, add a new folder named <strong>Tasks</strong>. Within that folder, add a new folder named <strong>Models</strong>, then create file as shown below.</p>
@@ -1748,7 +1755,7 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
 </div>
 <p>After your run the command, copy the FQDN (Application URL) of the Azure container app named <code>tasksmanager-frontend-webapp</code> and open it in your browser, and you should be able to browse the frontend web app and manage your tasks.</p>
 <h3 id="3-update-backend-web-api-container-app-ingress-property">3. Update Backend Web API Container App Ingress property<a class="headerlink" href="#3-update-backend-web-api-container-app-ingress-property" title="Permanent link">&para;</a></h3>
-<p>So far the Frontend App is sending HTTP requests to publicly exposed Web API which means that any REST client can invoke this API. We need to change the Web API ingress settings and make it only accessible for applications deployed within our Azure Container Environment only. Any application outside the Azure Container Environment will not be able to access the Web API.</p>
+<p>So far the Frontend App is sending HTTP requests to the publicly exposed Web API. This means that any REST client can invoke the Web API. We need to change the Web API ingress settings and make it accessible only by applications deployed within our Azure Container Environment. Any application outside the Azure Container Environment should not be able to access the Web API.</p>
 <ul>
 <li>
 <p>To change the settings of the Backend API, execute the following command:</p>
@@ -1823,7 +1830,7 @@ The <code>ingress</code> property is set to <code>external</code> as the Web fro
   <small>
     
       Last update:
-      2023-11-07
+      2023-11-09
     
   </small>
 </div>
