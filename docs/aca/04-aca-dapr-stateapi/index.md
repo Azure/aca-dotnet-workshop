@@ -34,30 +34,11 @@ To try out the State Management APIs, run the Backend API from VS Code by runnin
 
 === ".NET 6 or below"
 
-    ```shell
-    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-
-    dapr run `
-    --app-id tasksmanager-backend-api `
-    --app-port $API_APP_PORT `
-    --dapr-http-port 3500 ` 
-    --app-ssl `
-    -- dotnet run
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:basic-dotnet6"
 
 === ".NET 7 or above"
 
-    ```shell
-
-    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-
-    dapr run `
-    --app-id tasksmanager-backend-api `
-    --app-port $API_APP_PORT `
-    --dapr-http-port 3500 `
-    --app-ssl `
-    -- dotnet run --launch-profile https
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:basic"
 
 Now from any rest client, invoke the below **POST** request to the endpoint: [http://localhost:3500/v1.0/state/statestore](http://localhost:3500/v1.0/state/statestore){target=_blank}
 
@@ -179,7 +160,7 @@ Now we need to register the new service named `TasksStoreManager` and `DaprClien
 
 === "Program.cs"
 
-    ```csharp hl_lines="6-8"
+    ```csharp hl_lines="7-9"
     --8<-- "docs/aca/04-aca-dapr-stateapi/Program.cs"
     ```
 
@@ -319,26 +300,11 @@ If you have been using the dapr cli commands instead of the aforementioned debug
 
 === ".NET 6 or below"
 
-    ```shell
-    dapr run `
-    --app-id tasksmanager-backend-api `
-    --app-port $API_APP_PORT `
-    --dapr-http-port 3500 `
-    --app-ssl `
-    --resources-path "../components" `
-    dotnet run
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
+
 === ".NET 7 or above"
 
-    ```shell
-    dapr run `
-    --app-id tasksmanager-backend-api `
-    --app-port $API_APP_PORT `
-    --dapr-http-port 3500 `
-    --app-ssl `
-    --resources-path "../components" `
-    -- dotnet run --launch-profile https
-    ```
+    --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
 
 !!! note "Deprecation Warning"
     components-path is being deprecated in favor of --resources-path. At the time of producing this workshop the --resources-path was not supported yet by the VS code extension. Hence, you will notice the use of the property "componentsPath": "./components" in the tasks.json file. Check the extension documentation in case that has changed.
