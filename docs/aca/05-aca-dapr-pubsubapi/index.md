@@ -550,7 +550,7 @@ $SVC_BUS_DATA_RECEIVER_ROLE = "Azure Service Bus Data Receiver" # Built in role 
 az role assignment create `
 --assignee $BACKEND_SVC_PRINCIPAL_ID `
 --role $SVC_BUS_DATA_RECEIVER_ROLE `
---scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
+--scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME/topics/$SERVICE_BUS_TOPIC_NAME
 ```
 
 #### 5.3 Grant Backend API App the Azure Service Bus Data Sender Role
@@ -563,8 +563,12 @@ $SVC_BUS_DATA_SENDER_ROLE = "Azure Service Bus Data Sender" # Built in role name
 az role assignment create `
 --assignee $BACKEND_API_PRINCIPAL_ID `
 --role $SVC_BUS_DATA_SENDER_ROLE `
---scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME
+--scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME/topics/$SERVICE_BUS_TOPIC_NAME
 ```
+
+!!! note "Limiting Managed Identity Scope in Azure Service Bus"
+
+    Take note of the AZ CLI commands in 5.2 and 5.3. We are setting the scope of access for the system-managed identity very narrowly to just the topic(s) that the container app should be able to access, not the entire Azure Service Bus namespace.
 
 #### 5.4 Restart Container Apps
 
