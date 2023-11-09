@@ -105,6 +105,7 @@ plugins:
 extra:
   apps:
     backend: "ACA API - Backend"
+    backendsvc: "ACA Processor - Backend"
     frontend: "ACA Web - Frontend"
   dapr:
     version: 1.9.0
