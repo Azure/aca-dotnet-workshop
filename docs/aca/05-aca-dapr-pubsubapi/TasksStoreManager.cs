@@ -96,7 +96,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
 
         private async Task PublishTaskSavedEvent(TaskModel taskModel)
         {
-            _logger.LogInformation("Publish Task Saved event for task with Id: '{0}' and Name: '{1}' for Assigne: '{2}'",
+            _logger.LogInformation("Publish Task Saved event for task with Id: '{0}' and Name: '{1}' for Assignee: '{2}'",
             taskModel.TaskId, taskModel.TaskName, taskModel.TaskAssignedTo);
             await _daprClient.PublishEventAsync("dapr-pubsub-servicebus", "tasksavedtopic", taskModel);
         }
