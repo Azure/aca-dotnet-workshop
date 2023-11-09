@@ -42,33 +42,26 @@ In this module, we will accomplish three objectives:
 
 - Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files from the new `TasksTracker.TasksManager.Backend.Api` project folder.
 
-- Next, we need to containerize this application, so we can push it to Azure Container Registry as a docker image, then deploy it to Azure Container Apps. Start by opening the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
+--8<-- "snippets/containerize-app.md"
 
-    - Use `.NET: ASP.NET Core` when prompted for application platform.
-    - Choose `Linux` when prompted to choose the operating system.
-    - Take note of the provided **application port** as we will pass it later on as the `--target-port` for the `az containerapp create` command.
-    - You will be asked if you want to add Docker Compose files. Select `No`.
-    - `Dockerfile` and `.dockerignore` files are added to the workspace.
-
-- Open `Dockerfile` and replace `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build` with `FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build`.
-
-- In the root add a new folder named **Models** and create a new file with name below. These are the DTOs that will be used across the projects.
+- In the project root add a new folder named **Models** and create a new file with name below. These are the DTOs that will be used across the projects.
 
     === "TaskModel.cs"
     ```csharp
     --8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
     ```
 
-- In the root create a new folder named **Services** and add the two files below. Ensure to create it as a sibling to the *Models* folder. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. In this module we will work with data in memory. Later on, we will implement a data store. 
+- In the project root create a new folder named **Services** and add the two files below. Ensure to create it as a sibling to the *Models* folder. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. In this module we will work with data in memory. Later on, we will implement a data store. 
 
     === "ITasksManager.cs"
-    ```csharp
-    --8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
-    ```
+        ```csharp
+        --8<-- "docs/aca/01-deploy-api-to-aca/ITasksManager.cs"
+        ```
+
     === "FakeTasksManager.cs"
-    ```csharp
-    --8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
-    ```
+        ```csharp
+        --8<-- "docs/aca/01-deploy-api-to-aca/FakeTasksManager.cs"
+        ```
 
 - The code above generates ten tasks and stores them in a list in memory. It also has some operations to add/remove/update those tasks.
 
@@ -106,19 +99,17 @@ Make sure that the build is successful and that there are no build errors. Usual
 
 We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the following steps:
 
-- We will start with Installing/Upgrading the Azure Container Apps Extension.
+- First, we need to ensure that our CLI is updated. Then we log in to Azure.
 
     ```shell
-    # Upgrade Azure CLI
+    # Upgrade the Azure CLI
     az upgrade
 
-    # Install/Upgrade Azure Container Apps Extension
-    az extension add --name containerapp --upgrade
+    # Install/upgrade the Azure Container Apps & Application Insights extensions
+    az extension add --upgrade --name containerapp
+    az extension add --upgrade --name application-insights
 
-    # Install the application-insights extension for the CLI
-    az extension add -name application-insights
-
-    # Login to Azure
+    # Log in to Azure
     az login 
     ```
 
@@ -135,7 +126,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     echo $AZURE_SUBSCRIPTION_ID
     ```
 
-- Define the variables below in the PowerShell console to use them across the different modules in the workshop. You should change the values of those variables to be able to create the resources successfully. Some of those variables should be unique across all Azure subscriptions such as Azure Container Registry name. Remember to replace the place holders with your own values:
+- Execute the variables below in the PowerShell console to use them across the different modules in the workshop. Some of these variables must be globally unique, which we attempt by using `$RANDOM_STRING`:
 
     ```shell
     # Create a random, 6-digit, Azure safe string
@@ -148,12 +139,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     $BACKEND_API_NAME="tasksmanager-backend-api"
     $AZURE_CONTAINER_REGISTRY_NAME="crtaskstracker$RANDOM_STRING"
     $VNET_NAME="vnet-tasks-tracker"
-    ```
-
-- Also assign the target port from when you created the Dockerfile:
-
-    ```shell
-    $TARGET_PORT=[exposed Docker target port from Dockerfile]
+    $TARGET_PORT={{ docker.targetport }}
     ```
 
 ???+ tip "Cloud Adoption Framework Abbreviations"

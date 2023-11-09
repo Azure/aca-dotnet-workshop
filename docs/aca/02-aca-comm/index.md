@@ -26,16 +26,7 @@ In this module, we will accomplish three objectives:
     dotnet new webapp -o TasksTracker.WebPortal.Frontend.Ui
     ```
 
-- We need to containerize this application, so we can push it to Azure Container Registry as a docker image then deploy it to ACA. Open the VS Code Command Palette (++ctrl+shift+p++) and select `Docker: Add Docker Files to Workspace...`
-
-    - Use `.NET: ASP.NET Core` when prompted for application platform.
-    - Choose `TasksTracker.WebPortal.Frontend.Ui\TasksTracker.WebPortal.Fortend.Ui.csproj` when prompted to choose a project file.
-    - Choose `Linux` when prompted to choose the operating system.
-    - Use the **same application port** as you used for the backend API. This allows us to reuse `$TARGET_PORT` later on.
-    - You will be asked if you want to add Docker Compose files. Select `No`.
-    - `Dockerfile` and `.dockerignore` files are added to the workspace.
-
-- Open `Dockerfile` and replace `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build` with `FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build`.
+--8<-- "snippets/containerize-app.md"
 
 - From inside the **Pages** folder, add a new folder named **Tasks**. Within that folder, add a new folder named **Models**, then create file as shown below.
 
@@ -185,7 +176,7 @@ After your run the command, copy the FQDN (Application URL) of the Azure contain
 
 ### 3. Update Backend Web API Container App Ingress property
 
-So far the Frontend App is sending HTTP requests to publicly exposed Web API which means that any REST client can invoke this API. We need to change the Web API ingress settings and make it only accessible for applications deployed within our Azure Container Environment only. Any application outside the Azure Container Environment will not be able to access the Web API.
+So far the Frontend App is sending HTTP requests to the publicly exposed Web API. This means that any REST client can invoke the Web API. We need to change the Web API ingress settings and make it accessible only by applications deployed within our Azure Container Environment. Any application outside the Azure Container Environment should not be able to access the Web API.
 
 - To change the settings of the Backend API, execute the following command:
 
