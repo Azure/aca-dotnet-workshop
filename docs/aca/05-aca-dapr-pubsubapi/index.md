@@ -568,7 +568,7 @@ az role assignment create `
 
 !!! note "Limiting Managed Identity Scope in Azure Service Bus"
 
-    Take note of the AZ CLI commands in 5.2 and 5.3. We are setting the scope of access for the system-managed identity very narrowly to just the topic(s) that the container app should be able to access, not the entire Azure Service Bus namespace.
+    Take note of the AZ CLI commands in 5.2 and 5.3. We are setting the scope of access for the system-assigned managed identity very narrowly to just the topic(s) that the container app should be able to access, not the entire Azure Service Bus namespace.
 
 #### 5.4 Restart Container Apps
 
