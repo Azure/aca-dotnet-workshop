@@ -604,52 +604,174 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview-of-dapr-bindings-building-block" class="md-nav__link">
-    Overview of Dapr Bindings Building Block
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#updating-the-backend-background-processor-project" class="md-nav__link">
-    Updating the Backend Background Processor Project
+  <a href="#module-sections" class="md-nav__link">
+    Module Sections
   </a>
   
-    <nav class="md-nav" aria-label="Updating the Backend Background Processor Project">
+    <nav class="md-nav" aria-label="Module Sections">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" class="md-nav__link">
-    1. Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue
+  <a href="#1-interfacing-with-an-external-system" class="md-nav__link">
+    1. Interfacing with an External System
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Interfacing with an External System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-overview-of-dapr-bindings-building-block" class="md-nav__link">
+    1.1 Overview of Dapr Bindings Building Block
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-updating-the-backend-background-processor-project" class="md-nav__link">
+    2. Updating the Backend Background Processor Project
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Updating the Backend Background Processor Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" class="md-nav__link">
+    2.1 Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-create-dapr-input-binding-component-file" class="md-nav__link">
-    2. Create Dapr Input Binding Component File
+  <a href="#22-create-dapr-input-binding-component-file" class="md-nav__link">
+    2.2 Create Dapr Input Binding Component File
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-create-dapr-output-binding-component-file" class="md-nav__link">
-    3. Create Dapr Output Binding Component File
+  <a href="#23-create-dapr-output-binding-component-file" class="md-nav__link">
+    2.3 Create Dapr Output Binding Component File
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-use-dapr-client-sdk-to-invoke-the-output-binding" class="md-nav__link">
-    4. Use Dapr client SDK to Invoke the Output Binding
+  <a href="#24-use-dapr-client-sdk-to-invoke-the-output-binding" class="md-nav__link">
+    2.4 Use Dapr client SDK to Invoke the Output Binding
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-test-dapr-bindings-locally" class="md-nav__link">
-    5. Test Dapr Bindings Locally
+  <a href="#25-test-dapr-bindings-locally" class="md-nav__link">
+    2.5 Test Dapr Bindings Locally
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-configure-dapr-secret-store-component-with-azure-key-vault" class="md-nav__link">
+    3. Configure Dapr Secret Store Component with Azure Key Vault
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Configure Dapr Secret Store Component with Azure Key Vault">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-create-an-azure-key-vault-resource" class="md-nav__link">
+    3.1 Create an Azure Key Vault resource
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" class="md-nav__link">
+    3.2 Grant Backend Processor App a Role To Read Secrets from Azure Key Vault
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-create-secrets-in-the-azure-key-vault" class="md-nav__link">
+    3.3 Create Secrets in the Azure Key Vault
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-create-a-aca-dapr-secrets-store-component-file" class="md-nav__link">
+    3.4 Create a ACA Dapr Secrets Store Component file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" class="md-nav__link">
+    3.5 Create Input and Output Binding Component Files Matching Azure Container Apps Specs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" class="md-nav__link">
+    4. Deploy a New Revision of the Backend Background Processor App to ACA
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Deploy a New Revision of the Backend Background Processor App to ACA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-build-the-backend-background-processor-image-and-push-it-to-acr" class="md-nav__link">
+    4.1 Build the Backend Background Processor Image and Push it To ACR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-add-dapr-secret-store-component-to-aca-environment" class="md-nav__link">
+    4.2 Add Dapr Secret Store Component to ACA Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-add-the-bindings-dapr-components-to-aca-environment" class="md-nav__link">
+    4.3 Add the Bindings Dapr Components to ACA Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-deploy-new-revisions-of-the-backend-background-processor-to-aca" class="md-nav__link">
+    4.4 Deploy new revisions of the Backend Background Processor to ACA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -659,145 +781,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#use-dapr-sendgrid-output-bindings" class="md-nav__link">
-    Use Dapr SendGrid Output Bindings
+  <a href="#review" class="md-nav__link">
+    Review
   </a>
-  
-    <nav class="md-nav" aria-label="Use Dapr SendGrid Output Bindings">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-create-dapr-sendgrid-output-binding-component-file" class="md-nav__link">
-    1. Create Dapr SendGrid Output Binding Component file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-remove-sendgrid-package-reference" class="md-nav__link">
-    2. Remove SendGrid package reference
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-update-sendemail-code-to-use-output-bindings-instead-of-sendgrid-sdk" class="md-nav__link">
-    3. Update SendEmail Code to Use Output Bindings Instead of SendGrid SDK
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-dapr-secret-store-component-with-azure-key-vault" class="md-nav__link">
-    Configure Dapr Secret Store Component with Azure Key Vault
-  </a>
-  
-    <nav class="md-nav" aria-label="Configure Dapr Secret Store Component with Azure Key Vault">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-create-an-azure-key-vault-resource" class="md-nav__link">
-    1. Create an Azure Key Vault resource
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" class="md-nav__link">
-    2. Grant Backend Processor App a Role To Read Secrets from Azure Key Vault
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-create-secrets-in-the-azure-key-vault" class="md-nav__link">
-    3. Create Secrets in the Azure Key Vault
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-create-a-aca-dapr-secrets-store-component-file" class="md-nav__link">
-    4. Create a ACA Dapr Secrets Store Component file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" class="md-nav__link">
-    5. Create Input and Output Binding Component Files Matching Azure Container Apps Specs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-create-sendgrid-output-binding-component-file-matching-azure-container-apps-specs" class="md-nav__link">
-    6. Create SendGrid Output Binding Component File Matching Azure Container Apps Specs
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" class="md-nav__link">
-    Deploy a New Revision of the Backend Background Processor App to ACA
-  </a>
-  
-    <nav class="md-nav" aria-label="Deploy a New Revision of the Backend Background Processor App to ACA">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-build-the-backend-background-processor-image-and-push-it-to-acr" class="md-nav__link">
-    1. Build the Backend Background Processor Image and Push it To ACR
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-add-dapr-secret-store-component-to-aca-environment" class="md-nav__link">
-    2. Add Dapr Secret Store Component to ACA Environment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-add-three-bindings-dapr-components-to-aca-environment" class="md-nav__link">
-    3. Add three Bindings Dapr Components to ACA Environment
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-deploy-new-revisions-of-the-backend-background-processor-to-aca" class="md-nav__link">
-    4. Deploy new revisions of the Backend Background Processor to ACA
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Deploy new revisions of the Backend Background Processor to ACA">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#5-remove-sendgrid-secret-from-the-backend-background-processor-app" class="md-nav__link">
-    5. Remove SendGrid Secret from the Backend Background Processor App
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1167,52 +1153,174 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview-of-dapr-bindings-building-block" class="md-nav__link">
-    Overview of Dapr Bindings Building Block
+  <a href="#objective" class="md-nav__link">
+    Objective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#updating-the-backend-background-processor-project" class="md-nav__link">
-    Updating the Backend Background Processor Project
+  <a href="#module-sections" class="md-nav__link">
+    Module Sections
   </a>
   
-    <nav class="md-nav" aria-label="Updating the Backend Background Processor Project">
+    <nav class="md-nav" aria-label="Module Sections">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" class="md-nav__link">
-    1. Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue
+  <a href="#1-interfacing-with-an-external-system" class="md-nav__link">
+    1. Interfacing with an External System
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Interfacing with an External System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-overview-of-dapr-bindings-building-block" class="md-nav__link">
+    1.1 Overview of Dapr Bindings Building Block
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-updating-the-backend-background-processor-project" class="md-nav__link">
+    2. Updating the Backend Background Processor Project
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Updating the Backend Background Processor Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" class="md-nav__link">
+    2.1 Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-create-dapr-input-binding-component-file" class="md-nav__link">
-    2. Create Dapr Input Binding Component File
+  <a href="#22-create-dapr-input-binding-component-file" class="md-nav__link">
+    2.2 Create Dapr Input Binding Component File
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-create-dapr-output-binding-component-file" class="md-nav__link">
-    3. Create Dapr Output Binding Component File
+  <a href="#23-create-dapr-output-binding-component-file" class="md-nav__link">
+    2.3 Create Dapr Output Binding Component File
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-use-dapr-client-sdk-to-invoke-the-output-binding" class="md-nav__link">
-    4. Use Dapr client SDK to Invoke the Output Binding
+  <a href="#24-use-dapr-client-sdk-to-invoke-the-output-binding" class="md-nav__link">
+    2.4 Use Dapr client SDK to Invoke the Output Binding
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-test-dapr-bindings-locally" class="md-nav__link">
-    5. Test Dapr Bindings Locally
+  <a href="#25-test-dapr-bindings-locally" class="md-nav__link">
+    2.5 Test Dapr Bindings Locally
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-configure-dapr-secret-store-component-with-azure-key-vault" class="md-nav__link">
+    3. Configure Dapr Secret Store Component with Azure Key Vault
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Configure Dapr Secret Store Component with Azure Key Vault">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-create-an-azure-key-vault-resource" class="md-nav__link">
+    3.1 Create an Azure Key Vault resource
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" class="md-nav__link">
+    3.2 Grant Backend Processor App a Role To Read Secrets from Azure Key Vault
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-create-secrets-in-the-azure-key-vault" class="md-nav__link">
+    3.3 Create Secrets in the Azure Key Vault
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-create-a-aca-dapr-secrets-store-component-file" class="md-nav__link">
+    3.4 Create a ACA Dapr Secrets Store Component file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" class="md-nav__link">
+    3.5 Create Input and Output Binding Component Files Matching Azure Container Apps Specs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" class="md-nav__link">
+    4. Deploy a New Revision of the Backend Background Processor App to ACA
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Deploy a New Revision of the Backend Background Processor App to ACA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-build-the-backend-background-processor-image-and-push-it-to-acr" class="md-nav__link">
+    4.1 Build the Backend Background Processor Image and Push it To ACR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-add-dapr-secret-store-component-to-aca-environment" class="md-nav__link">
+    4.2 Add Dapr Secret Store Component to ACA Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-add-the-bindings-dapr-components-to-aca-environment" class="md-nav__link">
+    4.3 Add the Bindings Dapr Components to ACA Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-deploy-new-revisions-of-the-backend-background-processor-to-aca" class="md-nav__link">
+    4.4 Deploy new revisions of the Backend Background Processor to ACA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1222,145 +1330,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#use-dapr-sendgrid-output-bindings" class="md-nav__link">
-    Use Dapr SendGrid Output Bindings
+  <a href="#review" class="md-nav__link">
+    Review
   </a>
-  
-    <nav class="md-nav" aria-label="Use Dapr SendGrid Output Bindings">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-create-dapr-sendgrid-output-binding-component-file" class="md-nav__link">
-    1. Create Dapr SendGrid Output Binding Component file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-remove-sendgrid-package-reference" class="md-nav__link">
-    2. Remove SendGrid package reference
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-update-sendemail-code-to-use-output-bindings-instead-of-sendgrid-sdk" class="md-nav__link">
-    3. Update SendEmail Code to Use Output Bindings Instead of SendGrid SDK
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-dapr-secret-store-component-with-azure-key-vault" class="md-nav__link">
-    Configure Dapr Secret Store Component with Azure Key Vault
-  </a>
-  
-    <nav class="md-nav" aria-label="Configure Dapr Secret Store Component with Azure Key Vault">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-create-an-azure-key-vault-resource" class="md-nav__link">
-    1. Create an Azure Key Vault resource
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" class="md-nav__link">
-    2. Grant Backend Processor App a Role To Read Secrets from Azure Key Vault
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-create-secrets-in-the-azure-key-vault" class="md-nav__link">
-    3. Create Secrets in the Azure Key Vault
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-create-a-aca-dapr-secrets-store-component-file" class="md-nav__link">
-    4. Create a ACA Dapr Secrets Store Component file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" class="md-nav__link">
-    5. Create Input and Output Binding Component Files Matching Azure Container Apps Specs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-create-sendgrid-output-binding-component-file-matching-azure-container-apps-specs" class="md-nav__link">
-    6. Create SendGrid Output Binding Component File Matching Azure Container Apps Specs
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" class="md-nav__link">
-    Deploy a New Revision of the Backend Background Processor App to ACA
-  </a>
-  
-    <nav class="md-nav" aria-label="Deploy a New Revision of the Backend Background Processor App to ACA">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-build-the-backend-background-processor-image-and-push-it-to-acr" class="md-nav__link">
-    1. Build the Backend Background Processor Image and Push it To ACR
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-add-dapr-secret-store-component-to-aca-environment" class="md-nav__link">
-    2. Add Dapr Secret Store Component to ACA Environment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-add-three-bindings-dapr-components-to-aca-environment" class="md-nav__link">
-    3. Add three Bindings Dapr Components to ACA Environment
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-deploy-new-revisions-of-the-backend-background-processor-to-aca" class="md-nav__link">
-    4. Deploy new revisions of the Backend Background Processor to ACA
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Deploy new revisions of the Backend Background Processor to ACA">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#5-remove-sendgrid-secret-from-the-backend-background-processor-app" class="md-nav__link">
-    5. Remove SendGrid Secret from the Backend Background Processor App
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1387,10 +1359,31 @@
 <p class="admonition-title">Module Duration</p>
 <p>90 minutes</p>
 </div>
-<p>In this module we are going to extend the backend background processor service  (<code>ACA-Processor Backend</code>) to interface with an external system which is outside our Tasks Tracker microservice application.
-To achieve this in a simple way we will utilize <a href="https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/" target="_blank">Dapr Input and Output Bindings</a>.</p>
-<p>The external system owns an Azure Storage Queue which the Tasks Tracker microservice application <strong>reacts</strong> to through an event handler (aka <strong>Input Binding</strong>) that receives and processes the message coming to the storage queue. Once the processing of the message completes and stores the task into Cosmos DB, the system will <strong>trigger</strong> an event (aka <strong>Output binding</strong>) that invokes the external service which in
-turn stores the content of the message into an Azure Blob Storage container. Here it is important to emphasize that both the Azure Storage Queue and the Azure Storage Blob belong to the external system.</p>
+<h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<p>In this module, we will accomplish four objectives:</p>
+<ol>
+<li>Learn how to interface with external systems.</li>
+<li>Extend the backend background processor service (<code>ACA-Processor Backend</code>) to interface with an external system.</li>
+<li>Use Azure Key Vault via a Dapr Secret Store Component to externalize secrets.</li>
+<li>Deploy updated revisions for Backend Background Processor App.</li>
+</ol>
+<h2 id="module-sections">Module Sections<a class="headerlink" href="#module-sections" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>From the VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> (<em>root</em>):</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div>
+</li>
+<li>
+<p>Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.<span class="se">\V</span>ariables.ps1
+</span></code></pre></div>
+</li>
+</ul>
+<h3 id="1-interfacing-with-an-external-system">1. Interfacing with an External System<a class="headerlink" href="#1-interfacing-with-an-external-system" title="Permanent link">&para;</a></h3>
+<p>To achieve interfacing with an external system in a simple way, we will utilize <a href="https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/" target="_blank">Dapr Input and Output Bindings</a>.</p>
+<p>The external system owns an Azure Storage Queue which the Tasks Tracker microservice application <strong>reacts</strong> to through an event handler (aka <strong>Input Binding</strong>). This event handler receives and processes the message coming to the storage queue. Once the processing of the message completes and stores the task into Cosmos DB, the system will <strong>trigger</strong> an event (aka <strong>Output binding</strong>) that invokes the external service. This service, in turn, stores the content of the message into an Azure Blob Storage container. 
+It is important to emphasize that both the Azure Storage Queue and the Azure Storage Blob belong to the <em>external</em> system.</p>
 <p>The rest of this module will implement the three scenarios mentioned below:</p>
 <ul>
 <li>Trigger a process on the <code>ACA-Processor Backend</code> based on a <strong>message sent to a specific Azure Storage Queue</strong>. This scenario will assume that the Azure Storage Queue is an external system to which external clients can submit tasks.</li>
@@ -1405,7 +1398,7 @@ turn stores the content of the message into an Azure Blob Storage container. Her
 <p>For simplicity of the workshop we are going to host those two supposedly external services in the same subscription of our Tasks Tracker microservice application.</p>
 </div>
 <p>If you look at Dapr Bindings Building Block, you will notice a lot of similarities with the Pub/Sub Building Block that we covered in the <a href="../05-aca-dapr-pubsubapi/">previous module</a>. But remember that Pub/Sub Building Block is meant to be used for async communication between services <strong>within your solution</strong>. The Binding Building Block has a wider scope and it mainly focuses on connectivity and interoperability across different systems, disparate applications, and services outside the boundaries of your own application. For a full list of <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/" target="_blank">supported bindings</a> visit this link.</p>
-<h3 id="overview-of-dapr-bindings-building-block">Overview of Dapr Bindings Building Block<a class="headerlink" href="#overview-of-dapr-bindings-building-block" title="Permanent link">&para;</a></h3>
+<h4 id="11-overview-of-dapr-bindings-building-block">1.1 Overview of Dapr Bindings Building Block<a class="headerlink" href="#11-overview-of-dapr-bindings-building-block" title="Permanent link">&para;</a></h4>
 <p>Let's take a look at the detailed Dapr Bindings Building Block architecture diagram that we are going to implement in this module to fulfill the use case we discussed earlier:
 <a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/detailed-binding.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="detailed-binding-arch" src="../../assets/images/06-aca-dapr-bindingsapi/detailed-binding.jpg" /></a></p>
 <p>Looking at the diagram we notice the following:</p>
@@ -1419,25 +1412,15 @@ turn stores the content of the message into an Azure Blob Storage container. Her
 <li>Once the Dapr sidecar reads the binding configuration file, our service can trigger an event that invokes the output binding API on the Dapr sidecar. In our case, the event will be creating a new blob file containing the content of the message we read earlier from the Azure Storage Queue.</li>
 <li>
 <p>With this in place, our service <code>ACA-Processor Backend</code> will be ready to invoke the external resource by sending a <strong>POST</strong> operation to the endpoint <code>http://localhost:3502/v1.0/bindings/ExternalTasksBlobstore</code> and the JSON payload will contain the content below. Alternatively, we can use the Dapr client SDK to invoke this output biding to invoke the external service and store the file in Azure Blob Storage.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kName</span><span class="s2">&quot;: &quot;</span><span class="err">Task</span><span class="w"> </span><span class="err">Comi</span><span class="kc">n</span><span class="err">g</span><span class="w"> </span><span class="kc">fr</span><span class="err">om</span><span class="w"> </span><span class="err">Ex</span><span class="kc">ternal</span><span class="w"> </span><span class="err">Sys</span><span class="kc">te</span><span class="err">m</span><span class="s2">&quot;,</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kAssig</span><span class="kc">ne</span><span class="err">dTo</span><span class="s2">&quot;: &quot;</span><span class="err">user</span><span class="mi">1</span><span class="err">@ho</span><span class="kc">t</span><span class="err">mail.com</span><span class="s2">&quot;,</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kCrea</span><span class="kc">te</span><span class="err">dBy</span><span class="s2">&quot;: &quot;</span><span class="kc">t</span><span class="err">joudeh@bi</span><span class="kc">t</span><span class="err">o</span><span class="kc">fte</span><span class="err">ch.</span><span class="kc">net</span><span class="s2">&quot;,</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kDueDa</span><span class="kc">te</span><span class="s2">&quot;: &quot;</span><span class="mi">2022-08-19</span><span class="err">T</span><span class="mi">12</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mf">22.0983978</span><span class="err">Z</span><span class="s2">&quot;</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="s2">    }&quot;</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&quot;operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;create&quot;</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
-</span></code></pre></div>
-</li>
-<li>
-<p>From the VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> (<em>root</em>):</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div>
-</li>
-<li>
-<p>Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>.<span class="se">\V</span>ariables.ps1
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kName</span><span class="s2">&quot;: &quot;</span><span class="err">Task</span><span class="w"> </span><span class="err">Comi</span><span class="kc">n</span><span class="err">g</span><span class="w"> </span><span class="kc">fr</span><span class="err">om</span><span class="w"> </span><span class="err">Ex</span><span class="kc">ternal</span><span class="w"> </span><span class="err">Sys</span><span class="kc">te</span><span class="err">m</span><span class="s2">&quot;,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kAssig</span><span class="kc">ne</span><span class="err">dTo</span><span class="s2">&quot;: &quot;</span><span class="err">user</span><span class="mi">1</span><span class="err">@ho</span><span class="kc">t</span><span class="err">mail.com</span><span class="s2">&quot;,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kCrea</span><span class="kc">te</span><span class="err">dBy</span><span class="s2">&quot;: &quot;</span><span class="kc">t</span><span class="err">joudeh@bi</span><span class="kc">t</span><span class="err">o</span><span class="kc">fte</span><span class="err">ch.</span><span class="kc">net</span><span class="s2">&quot;,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="s2">        &quot;</span><span class="kc">tas</span><span class="err">kDueDa</span><span class="kc">te</span><span class="s2">&quot;: &quot;</span><span class="mi">2022-08-19</span><span class="err">T</span><span class="mi">12</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mf">22.0983978</span><span class="err">Z</span><span class="s2">&quot;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="s2">    }&quot;</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">&quot;operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;create&quot;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
 </span></code></pre></div>
 </li>
 </ul>
@@ -1451,30 +1434,30 @@ When deploying the changes to ACA, we are going to store the storage key securel
 <p>We didn't use Azure Manged Identity here because the assumption is that those services are not part of our solution and thus they could theoretically be a non AD compliant services or hosted on another cloud. 
 If these services where part of your application's ecosystem it is always recommended that you use Azure Managed Identity.</p>
 </div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$STORAGE_ACCOUNT_NAME</span> <span class="p">=</span> <span class="s2">&quot;sttaskstracker$RANDOM_STRING&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sttaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$STORAGE_ACCOUNT_NAME</span> <span class="p">`</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">-</span><span class="n">-location</span> <span class="nv">$LOCATION</span> <span class="p">`</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">-</span><span class="n">-sku</span> <span class="n">Standard_LRS</span> <span class="p">`</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">-</span><span class="n">-kind</span> <span class="n">StorageV2</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>az<span class="w"> </span>storage<span class="w"> </span>account<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>--name<span class="w"> </span><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>--location<span class="w"> </span><span class="nv">$LOCATION</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>--sku<span class="w"> </span>Standard_LRS<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>--kind<span class="w"> </span>StorageV2
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c"># List Azure storage keys</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">keys</span> <span class="n">list</span> <span class="p">`</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">-</span><span class="n">-account-name</span> <span class="nv">$STORAGE_ACCOUNT_NAME</span> <span class="p">`</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># List Azure storage keys</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>az<span class="w"> </span>storage<span class="w"> </span>account<span class="w"> </span>keys<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>--account-name<span class="w"> </span><span class="nv">$STORAGE_ACCOUNT_NAME</span>
 </span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c"># Get the primary storage account key</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="nv">$STORAGE_ACCOUNT_KEY</span><span class="p">=($(</span><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">keys</span> <span class="n">list</span> <span class="p">`</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">-</span><span class="n">-account-name</span> <span class="nv">$STORAGE_ACCOUNT_NAME</span> <span class="p">`</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">)</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span><span class="p">)[</span><span class="n">0</span><span class="p">].</span><span class="n">value</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># Get the primary storage account key</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="nv">$STORAGE_ACCOUNT_KEY</span><span class="o">=(</span><span class="k">$(</span>az<span class="w"> </span>storage<span class="w"> </span>account<span class="w"> </span>keys<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>--account-name<span class="w"> </span><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="w"> </span><span class="k">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)[</span><span class="m">0</span><span class="o">]</span>.value
 </span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="nb">echo </span><span class="s2">&quot;Storage Account Name : $STORAGE_ACCOUNT_NAME&quot;</span>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="nb">echo </span><span class="s2">&quot;Storage Account Key  : $STORAGE_ACCOUNT_KEY&quot;</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Storage Account Name : </span><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="s2">&quot;</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Storage Account Key  : </span><span class="nv">$STORAGE_ACCOUNT_KEY</span><span class="s2">&quot;</span>
 </span></code></pre></div>
-<h3 id="updating-the-backend-background-processor-project">Updating the Backend Background Processor Project<a class="headerlink" href="#updating-the-backend-background-processor-project" title="Permanent link">&para;</a></h3>
-<h4 id="1-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue">1. Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue<a class="headerlink" href="#1-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" title="Permanent link">&para;</a></h4>
+<h3 id="2-updating-the-backend-background-processor-project">2. Updating the Backend Background Processor Project<a class="headerlink" href="#2-updating-the-backend-background-processor-project" title="Permanent link">&para;</a></h3>
+<h4 id="21-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue">2.1 Create an event handler (API endpoint) to respond to messages published to Azure Storage Queue<a class="headerlink" href="#21-create-an-event-handler-api-endpoint-to-respond-to-messages-published-to-azure-storage-queue" title="Permanent link">&para;</a></h4>
 <p>Let's add an endpoint that will be responsible to handle the event when a message is published to Azure Storage Queue. This endpoint will start receiving the message published from the external service.</p>
 <p>Start by adding a new controller <strong>Controllers</strong> folder under the <strong>TasksTracker.Processor.Backend.Svc</strong> project:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">ExternalTasksProcessorController.cs</label></div>
@@ -1547,7 +1530,7 @@ endpoint <code>ExternalTasksProcessor/Process</code>. </p>
 </li>
 </ul>
 </details>
-<h4 id="2-create-dapr-input-binding-component-file">2. Create Dapr Input Binding Component File<a class="headerlink" href="#2-create-dapr-input-binding-component-file" title="Permanent link">&para;</a></h4>
+<h4 id="22-create-dapr-input-binding-component-file">2.2 Create Dapr Input Binding Component File<a class="headerlink" href="#22-create-dapr-input-binding-component-file" title="Permanent link">&para;</a></h4>
 <p>Now we need to create the component configuration file which will describe the configuration as well as how our backend background processor will start handling events coming from the external service (Azure Storage Queues). To do so, add a new file under <strong>components</strong> folder.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">dapr-bindings-in-storagequeue.yaml</label></div>
 <div class="tabbed-content">
@@ -1590,7 +1573,7 @@ You can create any queue you prefer on the Azure Storage Account we created to s
 <p class="admonition-title">Note</p>
 <p>The value of the Metadata <code>storageAccessKey</code> is used as plain text here for local dev scenario. We will see how we are going to store this key securely in Azure Key Vault and use Dapr Secrets Store API to read the access key.</p>
 </div>
-<h4 id="3-create-dapr-output-binding-component-file">3. Create Dapr Output Binding Component File<a class="headerlink" href="#3-create-dapr-output-binding-component-file" title="Permanent link">&para;</a></h4>
+<h4 id="23-create-dapr-output-binding-component-file">2.3 Create Dapr Output Binding Component File<a class="headerlink" href="#23-create-dapr-output-binding-component-file" title="Permanent link">&para;</a></h4>
 <p>Now we need to create the component configuration file which will describe the configuration and how our service <code>ACA-Processor Backend</code> will be able to invoke the external service (Azure Blob Storage) and be able to create and store a JSON blob file that contains the content of the message received from Azure Storage Queues.</p>
 <p>To do so, add a new file folder <strong>components</strong>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">dapr-bindings-out-blobstorage.yaml</label></div>
@@ -1631,7 +1614,7 @@ service and create a blob file. We will assume that there is a container already
 <li>We are setting the property <code>decodeBase64</code>  to <code>false</code> as we don't want to encode file content to base64 images, we need to store the file content as is.</li>
 </ul>
 </details>
-<h4 id="4-use-dapr-client-sdk-to-invoke-the-output-binding">4. Use Dapr client SDK to Invoke the Output Binding<a class="headerlink" href="#4-use-dapr-client-sdk-to-invoke-the-output-binding" title="Permanent link">&para;</a></h4>
+<h4 id="24-use-dapr-client-sdk-to-invoke-the-output-binding">2.4 Use Dapr client SDK to Invoke the Output Binding<a class="headerlink" href="#24-use-dapr-client-sdk-to-invoke-the-output-binding" title="Permanent link">&para;</a></h4>
 <p>Now we need to invoke the output binding by using the .NET SDK.</p>
 <p>Update and replace the code in the file with the code below. Pay close attention to the updated <strong>ProcessTaskAndStore</strong> action method:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">ExternalTasksProcessorController.cs</label></div>
@@ -1673,8 +1656,8 @@ service and create a blob file. We will assume that there is a container already
 </span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>
 </span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="w">                </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Saved external task to the state store successfully. Task name: &#39;{0}&#39;, Task Id: &#39;{1}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskName</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskId</span><span class="p">);</span>
 </span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>
-</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="w">                </span><span class="c1">//code to invoke external binding and store queue message content into blob file in Azure storage</span>
-</span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="hll"><span class="w">                </span><span class="n">IReadOnlyDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">metaData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">()</span>
+</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="hll"><span class="w">                </span><span class="c1">//code to invoke external binding and store queue message content into blob file in Azure storage</span>
+</span></span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="hll"><span class="w">                </span><span class="n">IReadOnlyDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">metaData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">()</span>
 </span></span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="hll"><span class="w">                    </span><span class="p">{</span>
 </span></span><span id="__span-7-40"><a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="hll"><span class="w">                        </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;blobName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">$&quot;{taskModel.TaskId}.json&quot;</span><span class="w"> </span><span class="p">},</span>
 </span></span><span id="__span-7-41"><a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="hll"><span class="w">                    </span><span class="p">};</span>
@@ -1705,248 +1688,171 @@ defined in the configuration file, as well the second parameter <code>create</co
 <p>Notice how are setting the file name we are storing at the external service. We need the file names to be created using the same Task Identifier, so we will pass the key <code>blobName</code> with the file name values 
 into the <code>metaData</code> dictionary.</p>
 </details>
-<h4 id="5-test-dapr-bindings-locally">5. Test Dapr Bindings Locally<a class="headerlink" href="#5-test-dapr-bindings-locally" title="Permanent link">&para;</a></h4>
-<p>Now we are ready to give it an end-to-end test on our dev machines. Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together
-in this <a href="../13-appendix/01-run-debug-dapr-app-vscode/">section</a>.</p>
+<h4 id="25-test-dapr-bindings-locally">2.5 Test Dapr Bindings Locally<a class="headerlink" href="#25-test-dapr-bindings-locally" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Execute the <code>Set-Variables.ps1</code> in the root to update the <code>variables.ps1</code> file with all current variables. The output of the script will inform you how many variables are written out.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>.<span class="se">\S</span>et-Variables.ps1
+</span></code></pre></div>
+</li>
+</ul>
+<p>Now we are ready to give it an end-to-end test on our dev machines. To do so, run the below commands in three separate PowerShell console, ensure you are on the right root folder of each respective project.</p>
+<ul>
+<li>
+<p>Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>.<span class="se">\V</span>ariables.ps1
+</span></code></pre></div>
+</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">.NET 6 or below</label><label for="__tabbed_5_2">.NET 7 or above</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui<span class="w"> </span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>--app-id<span class="w"> </span>tasksmanager-frontend-webapp<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>--app-port<span class="w"> </span><span class="nv">$UI_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3501</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run<span class="w"> </span>
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>--app-id<span class="w"> </span>tasksmanager-backend-api<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>--app-port<span class="w"> </span><span class="nv">$API_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3500</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>--resources-path<span class="w"> </span><span class="s2">&quot;../components&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.Processor.Backend.Svc
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>--app-id<span class="w"> </span>tasksmanager-backend-processor<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>--app-port<span class="w"> </span><span class="nv">$BACKEND_SERVICE_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3502</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>--resources-path<span class="w"> </span><span class="s2">&quot;../components&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run
+</span></code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p><div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>--app-id<span class="w"> </span>tasksmanager-frontend-webapp<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>--app-port<span class="w"> </span><span class="nv">$UI_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3501</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run<span class="w"> </span>--launch-profile<span class="w"> </span>https
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>--app-id<span class="w"> </span>tasksmanager-backend-api<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>--app-port<span class="w"> </span><span class="nv">$API_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3500</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>--resources-path<span class="w"> </span><span class="s2">&quot;../components&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run<span class="w"> </span>--launch-profile<span class="w"> </span>https
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.Processor.Backend.Svc
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>dapr<span class="w"> </span>run<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>--app-id<span class="w"> </span>tasksmanager-backend-processor<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>--app-port<span class="w"> </span><span class="nv">$BACKEND_SERVICE_APP_PORT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>--dapr-http-port<span class="w"> </span><span class="m">3502</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>--app-ssl<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>--resources-path<span class="w"> </span><span class="s2">&quot;../components&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>--<span class="w"> </span>dotnet<span class="w"> </span>run<span class="w"> </span>--launch-profile<span class="w"> </span>https
+</span></code></pre></div></p>
+</div>
+</div>
+</div>
+<!-- Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together
+in this [section](../13-appendix/01-run-debug-dapr-app-vscode.md). -->
+
 <p>Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from <a href="https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview" target="_blank">here</a>.
 Login to your Azure Subscription and navigate to the storage account already created, create a queue, and use the same name you already used in the Dapr Input configuration file.
 In our case the name of the queue in the configuration file is <code>external-tasks-queue</code>.</p>
 <p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/Azure_Storage_Explorer.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Azure-storage-explorer" src="../../assets/images/06-aca-dapr-bindingsapi/Azure_Storage_Explorer.png" /></a></p>
 <p>The content of the message that Azure Storage Queue excepts should be as below, so try to queue a new message using the tool as the image below:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Task from External System&quot;</span><span class="p">,</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user1@hotmail.com&quot;</span><span class="p">,</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tjoudeh@bitoftech.net&quot;</span><span class="p">,</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-19T12:45:22.0983978Z&quot;</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Task from External System&quot;</span><span class="p">,</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user1@hotmail.com&quot;</span><span class="p">,</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tjoudeh@bitoftech.net&quot;</span><span class="p">,</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-19T12:45:22.0983978Z&quot;</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="p">}</span>
 </span></code></pre></div>
 <p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/storage-queue.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="storage-queue" src="../../assets/images/06-aca-dapr-bindingsapi/storage-queue.jpg" /></a></p>
 <p>If all is configured successfully you should be able to see a JSON file created as a blob in the Azure Storage Container named <code>externaltaskscontainer</code> based on your configuration.</p>
 <p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/blob-storage.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="storage-queue" src="../../assets/images/06-aca-dapr-bindingsapi/blob-storage.jpg" /></a></p>
-<h3 id="use-dapr-sendgrid-output-bindings">Use Dapr SendGrid Output Bindings<a class="headerlink" href="#use-dapr-sendgrid-output-bindings" title="Permanent link">&para;</a></h3>
-<p>In the previous module we've seen how we are sending notification emails when a task is assigned to a user by installing the SendGrid SDK NuGet package and writing some custom code to trigger sending emails.
-Dapr Can simplify this process by using the <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/" target="_blank">Dapr SendGrid Output binding component</a>.</p>
-<p>So let's see how we can simplify this and by replacing the external SendGrid SDK with dapr output binding.</p>
-<h4 id="1-create-dapr-sendgrid-output-binding-component-file">1. Create Dapr SendGrid Output Binding Component file<a class="headerlink" href="#1-create-dapr-sendgrid-output-binding-component-file" title="Permanent link">&para;</a></h4>
-<p>We need to create the component configuration file which will describe the configuration and how our service <code>ACA-Processor Backend</code> will be able to invoke SendGrid service and notify the task owner by email.</p>
-<p>Add a new file under the <strong>components</strong> folder as shown below:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">dapr-bindings-out-sendgrid.yaml</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dapr.io/v1alpha1</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Component</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sendgrid</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.twilio.sendgrid</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emailFrom</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">email</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">white</span><span class="nv"> </span><span class="s">listed</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">SendGrid</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">obtained</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">API</span><span class="nv"> </span><span class="s">Key&gt;&quot;</span>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emailFromName</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Tasks</span><span class="nv"> </span><span class="s">Tracker</span><span class="nv"> </span><span class="s">Notification&quot;</span>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apiKey</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Send</span><span class="nv"> </span><span class="s">Grid</span><span class="nv"> </span><span class="s">API</span><span class="nv"> </span><span class="s">Key&gt;&quot;</span>
-</span></code></pre></div>
-</div>
-</div>
-</div>
-<details class="tip">
-<summary>Curious to learn more about the specification of yaml file?</summary>
-<p>The full specifications of yaml file with SendGrid binding can be found on <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/#component-format" target="_blank">this link</a>,
-but let's go over the configuration we have added here:</p>
-<ul>
-<li>The type of binding is <code>bindings.twilio.sendgrid</code>.</li>
-<li>The name of this output binding is <code>sendgrid</code>. We will use this name when we use the Dapr SDK to trigger the output binding.</li>
-<li>We are setting the metadata <code>emailFrom</code>, <code>emailFromName</code>, and the <code>apiKey</code>. Those properties will describe how our backend background service will be able to connect to SendGrid API and send the email.</li>
-</ul>
-</details>
-<h4 id="2-remove-sendgrid-package-reference">2. Remove SendGrid package reference<a class="headerlink" href="#2-remove-sendgrid-package-reference" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Update file <strong>TasksTracker.Processor.Backend.Svc.csproj</strong> and remove the NuGet package reference <strong>PackageReference Include="SendGrid" Version="9.28.1"</strong>. With the introduction of Dapr SendGrid Output bindings there is no need to include the external SDKs.</li>
-</ul>
-<div class="language-csharp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">// delete these using statements</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">SendGrid</span><span class="p">;</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">using</span><span class="w"> </span><span class="nn">SendGrid.Helpers.Mail</span><span class="p">;</span>
-</span></code></pre></div>
-<h4 id="3-update-sendemail-code-to-use-output-bindings-instead-of-sendgrid-sdk">3. Update SendEmail Code to Use Output Bindings Instead of SendGrid SDK<a class="headerlink" href="#3-update-sendemail-code-to-use-output-bindings-instead-of-sendgrid-sdk" title="Permanent link">&para;</a></h4>
-<p>Now we need to invoke the SendGrid output binding by using the Dapr .NET SDK. Replace the content of the <code class="language-csharp highlight"><span class="n">TasksNotifierController</span><span class="p">.</span><span class="n">cs</span></code> file with the code below. Also its very important that you open the <code>appsettings.json</code> file and set the <code>IntegrationEnabled</code> to false to avoid sending any emails. This is important as we don't want to send several emails later on when simulate high load in module 9 while demonstrating autoscaling with KEDA.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">TasksNotifierController.cs</label><label for="__tabbed_6_2">appsettings.json</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="language-csharp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Dapr.Client</span><span class="p">;</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Http</span><span class="p">;</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">using</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc.Models</span><span class="p">;</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.Processor.Backend.Svc.Controllers</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="p">{</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="na">[Route(&quot;api/tasksnotifier&quot;)]</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="na">[ApiController]</span>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">TasksNotifierController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IConfiguration</span><span class="w"> </span><span class="n">_config</span><span class="p">;</span>
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ILogger</span><span class="w"> </span><span class="n">_logger</span><span class="p">;</span>
-</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">DaprClient</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">;</span>
-</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nf">TasksNotifierController</span><span class="p">(</span><span class="n">IConfiguration</span><span class="w"> </span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="n">ILogger</span><span class="o">&lt;</span><span class="n">TasksNotifierController</span><span class="o">&gt;</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">DaprClient</span><span class="w"> </span><span class="n">daprClient</span><span class="p">)</span>
-</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">            </span><span class="n">_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">;</span>
-</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">            </span><span class="n">_logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logger</span><span class="p">;</span>
-</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">            </span><span class="n">_daprClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">daprClient</span><span class="p">;</span>
-</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>
-</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">        </span><span class="na">[Dapr.Topic(&quot;dapr-pubsub-servicebus&quot;, &quot;tasksavedtopic&quot;)]</span>
-</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="w">        </span><span class="na">[HttpPost(&quot;tasksaved&quot;)]</span>
-</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TaskSaved</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">TaskModel</span><span class="w"> </span><span class="n">taskModel</span><span class="p">)</span>
-</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="w">            </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Started processing message with Task Name &#39;{0}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskName</span><span class="p">);</span>
-</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>
-</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">sendGridResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">SendEmail</span><span class="p">(</span><span class="n">taskModel</span><span class="p">);</span>
-</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>
-</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sendGridResponse</span><span class="p">)</span>
-</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="w">            </span><span class="p">{</span>
-</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nf">Ok</span><span class="p">();</span>
-</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>
-</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">BadRequest</span><span class="p">(</span><span class="s">&quot;Failed to send an email&quot;</span><span class="p">);</span>
-</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>
-</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">SendEmail</span><span class="p">(</span><span class="n">TaskModel</span><span class="w"> </span><span class="n">taskModel</span><span class="p">)</span>
-</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">integrationEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_config</span><span class="p">.</span><span class="n">GetValue</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;SendGrid:IntegrationEnabled&quot;</span><span class="p">);</span>
-</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">sendEmailResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
-</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;Task &#39;{taskModel.TaskName}&#39; is assigned to you!&quot;</span><span class="p">;</span>
-</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">plainTextContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;Task &#39;{taskModel.TaskName}&#39; is assigned to you. Task should be completed by the end of: {taskModel.TaskDueDate.ToString(&quot;</span><span class="n">dd</span><span class="o">/</span><span class="n">MM</span><span class="o">/</span><span class="n">yyyy</span><span class="s">&quot;)}&quot;</span><span class="p">;</span>
-</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>
-</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a><span class="w">            </span><span class="k">try</span>
-</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a><span class="w">            </span><span class="p">{</span>
-</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="w">                </span><span class="c1">//Send actual email using Dapr SendGrid Outbound Binding (Disabled when running load test)</span>
-</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">integrationEnabled</span><span class="p">)</span>
-</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a><span class="w">                </span><span class="p">{</span>
-</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a><span class="w">                    </span><span class="n">IReadOnlyDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">metaData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">()</span>
-</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="w">                </span><span class="p">{</span>
-</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a><span class="w">                    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;emailTo&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a><span class="w">                    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;emailToName&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a><span class="w">                    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;subject&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a><span class="w">                </span><span class="p">};</span>
-</span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a><span class="w">                    </span><span class="k">await</span><span class="w"> </span><span class="n">_daprClient</span><span class="p">.</span><span class="n">InvokeBindingAsync</span><span class="p">(</span><span class="s">&quot;sendgrid&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;create&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">plainTextContent</span><span class="p">,</span><span class="w"> </span><span class="n">metaData</span><span class="p">);</span>
-</span><span id="__span-11-57"><a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a><span class="w">                </span><span class="p">}</span>
-</span><span id="__span-11-58"><a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a><span class="w">                </span><span class="k">else</span>
-</span><span id="__span-11-59"><a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a><span class="w">                </span><span class="p">{</span>
-</span><span id="__span-11-60"><a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a><span class="w">                    </span><span class="c1">//Introduce artificial delay to slow down message processing</span>
-</span><span id="__span-11-61"><a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a><span class="w">                    </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Simulate slow processing for email sending for Email with Email subject &#39;{0}&#39; Email to: &#39;{1}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="p">);</span>
-</span><span id="__span-11-62"><a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a><span class="w">                    </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="m">1000</span><span class="p">);</span>
-</span><span id="__span-11-63"><a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a><span class="w">                </span><span class="p">}</span>
-</span><span id="__span-11-64"><a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>
-</span><span id="__span-11-65"><a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sendEmailResponse</span><span class="p">)</span>
-</span><span id="__span-11-66"><a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a><span class="w">                </span><span class="p">{</span>
-</span><span id="__span-11-67"><a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a><span class="w">                    </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&quot;Email with subject &#39;{0}&#39; sent to: &#39;{1}&#39; successfully&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="p">);</span>
-</span><span id="__span-11-68"><a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a><span class="w">                </span><span class="p">}</span>
-</span><span id="__span-11-69"><a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-11-70"><a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a><span class="w">            </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span>
-</span><span id="__span-11-71"><a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a><span class="w">            </span><span class="p">{</span>
-</span><span id="__span-11-72"><a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a><span class="w">                </span><span class="n">sendEmailResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
-</span><span id="__span-11-73"><a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a><span class="w">                </span><span class="n">_logger</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Failed to send email with subject &#39;{0}&#39; To: &#39;{1}&#39;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="n">taskModel</span><span class="p">.</span><span class="n">TaskAssignedTo</span><span class="p">);</span>
-</span><span id="__span-11-74"><a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a><span class="w">                </span><span class="k">throw</span><span class="p">;</span>
-</span><span id="__span-11-75"><a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-11-76"><a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">sendEmailResponse</span><span class="p">;</span>
-</span><span id="__span-11-77"><a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-11-78"><a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-11-79"><a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a><span class="p">}</span>
-</span></code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="language-json highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="nt">&quot;SendGrid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="hll"><span class="w">    </span><span class="nt">&quot;IntegrationEnabled&quot;</span><span class="p">:</span><span class="kc">false</span>
-</span></span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">}</span>
-</span></code></pre></div>
-</div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Even though we restored the code to send emails it won't actually trigger sending emails as we set the <code>IntegrationEnabled</code> flag to false. Also notice that we introduced a Thread.Sleep(1000) statement. This will come in handy in module 9 where it will be used to simulate artificial delay within the <code>ACA-Processor Backend</code> service to demonstrate autoscaling with KEDA.</p>
-</div>
-<details class="tip">
-<summary>Curious to learn more about the code above?</summary>
-<p>You will see that we calling the method <code class="language-cs highlight"><span class="n">InvokeBindingAsync</span><span class="p">()</span></code> and we are passing the binding name <code>sendgrid</code> defined in the configuration file, 
-as well the second parameter <code>create</code> which is the action we need to carry to trigger email sending using SendGrid. </p>
-<p>For a full list of supported actions on SendGrid outbound binding spec, <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/sendgrid/#binding-support" target="_blank">visit this link</a>.</p>
-<p>Notice how are setting the recipient, display name, and email subject by passing the setting the keys <code>emailTo</code>, <code>emailToName</code>, and <code>subject</code> into the <code>metaData</code> dictionary.</p>
-</details>
-<h3 id="configure-dapr-secret-store-component-with-azure-key-vault">Configure Dapr Secret Store Component with Azure Key Vault<a class="headerlink" href="#configure-dapr-secret-store-component-with-azure-key-vault" title="Permanent link">&para;</a></h3>
-<p>Currently, we have 3 Dapr components which are not Azure AD enabled services. As you may have noticed so far, the different component files are storing sensitive keys to access the different external services.
+<h3 id="3-configure-dapr-secret-store-component-with-azure-key-vault">3. Configure Dapr Secret Store Component with Azure Key Vault<a class="headerlink" href="#3-configure-dapr-secret-store-component-with-azure-key-vault" title="Permanent link">&para;</a></h3>
+<p>Currently, we have three Dapr components which are not Microsoft Entra ID enabled services. As you may have noticed so far, the different component files are storing sensitive keys to access the different external services.
 The recommended approach for retrieving these secrets is to reference an existing Dapr secret store component that securely accesses the secrets.</p>
 <p>We need Create a <a href="https://docs.dapr.io/developing-applications/building-blocks/secrets/secrets-overview/" target="_blank">Dapr secret store component</a> using the Container Apps schema. The Dapr secret store will be configured
 with <a href="https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/" target="_blank">Azure Key Vault secret store</a>.</p>
-<h4 id="1-create-an-azure-key-vault-resource">1. Create an Azure Key Vault resource<a class="headerlink" href="#1-create-an-azure-key-vault-resource" title="Permanent link">&para;</a></h4>
+<h4 id="31-create-an-azure-key-vault-resource">3.1 Create an Azure Key Vault resource<a class="headerlink" href="#31-create-an-azure-key-vault-resource" title="Permanent link">&para;</a></h4>
 <p>Create an Azure Key Vault which will be used to store securely any secret or key used in our application.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">$KEYVAULT_NAME</span> <span class="p">=</span> <span class="s2">&quot;kv-tasks-tracker-$RANDOM_STRING&quot;</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">-</span><span class="n">-location</span> <span class="nv">$LOCATION</span> <span class="p">`</span>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">-</span><span class="n">-enable-rbac-authorization</span> <span class="n">true</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nv">$KEYVAULT_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kv-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>az<span class="w"> </span>keyvault<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>--name<span class="w"> </span><span class="nv">$KEYVAULT_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>--location<span class="w"> </span><span class="nv">$LOCATION</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>--enable-rbac-authorization<span class="w"> </span><span class="nb">true</span>
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>It is important to create the Azure Key Vault with Azure RBAC for authorization by setting <code>--enable-rbac-authorization true</code> because the role we are going to assign to the Azure AD application will work only when RBAC authorization is enabled.</p>
+<p>It is important to create the Azure Key Vault with Azure RBAC for authorization by setting <code>--enable-rbac-authorization true</code> because the role we are going to assign to the Microsoft Entra ID application will work only when RBAC authorization is enabled.</p>
 </div>
-<h4 id="2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault">2. Grant Backend Processor App a Role To Read Secrets from Azure Key Vault<a class="headerlink" href="#2-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" title="Permanent link">&para;</a></h4>
+<h4 id="32-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault">3.2 Grant Backend Processor App a Role To Read Secrets from Azure Key Vault<a class="headerlink" href="#32-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" title="Permanent link">&para;</a></h4>
 <p>In the previous module we have configured the <code>system-assigned</code> identity for the service <code>ACA-Processor Backend</code>. Now we need to assign a role named <code>Key Vault Secrets User</code> to it, so it access and read secrets from Azure Key Vault.</p>
 <p>You can read more about <a href="https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations" target="_blank">Azure built-in roles for Key Vault data plane operations</a>.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">$KEYVAULT_SECRETS_USER_ROLE_ID</span> <span class="p">=</span> <span class="s2">&quot;4633458b-17de-408a-b874-0445c86b69e6&quot;</span> <span class="c"># ID for &#39;Key Vault Secrets User&#39; Role</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c"># Get PRINCIPAL ID of BACKEND Processor Service</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nv">$BACKEND_SERVICE_PRINCIPAL_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">containerapp</span> <span class="n">show</span> <span class="p">`</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="p">-</span><span class="n">-query</span> <span class="n">identity</span><span class="p">.</span><span class="n">principalId</span>
-</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
-</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$KEYVAULT_SECRETS_USER_ROLE_ID</span> <span class="p">`</span>
-</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$BACKEND_SERVICE_PRINCIPAL_ID</span> <span class="p">`</span>
-</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">$KEYVAULT_SECRETS_USER_ROLE_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;4633458b-17de-408a-b874-0445c86b69e6&quot;</span><span class="w"> </span><span class="c1"># ID for &#39;Key Vault Secrets User&#39; Role</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># Get PRINCIPAL ID of BACKEND Processor Service</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nv">$BACKEND_SERVICE_PRINCIPAL_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>containerapp<span class="w"> </span>show<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>--query<span class="w"> </span>identity.principalId
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>--role<span class="w"> </span><span class="nv">$KEYVAULT_SECRETS_USER_ROLE_ID</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>--assignee<span class="w"> </span><span class="nv">$BACKEND_SERVICE_PRINCIPAL_ID</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>--scope<span class="w"> </span><span class="s2">&quot;/subscriptions/</span><span class="nv">$AZURE_SUBSCRIPTION_ID</span><span class="s2">/resourcegroups/</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">/providers/Microsoft.KeyVault/vaults/</span><span class="nv">$KEYVAULT_NAME</span><span class="s2">&quot;</span>
 </span></code></pre></div>
-<h4 id="3-create-secrets-in-the-azure-key-vault">3. Create Secrets in the Azure Key Vault<a class="headerlink" href="#3-create-secrets-in-the-azure-key-vault" title="Permanent link">&para;</a></h4>
+<h4 id="33-create-secrets-in-the-azure-key-vault">3.3 Create Secrets in the Azure Key Vault<a class="headerlink" href="#33-create-secrets-in-the-azure-key-vault" title="Permanent link">&para;</a></h4>
 <p>To create a secret in Azure Key Vault you need to have a role which allows you to create secrets. From the Azure CLI we will assign the role <code>Key Vault Secrets Officer</code> to the user signed in to AZ CLI to
 be able to create secrets. To do so use the script below:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nv">$SIGNEDIN_USERID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">ad</span> <span class="n">signed-in-user</span> <span class="n">show</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nv">$KEYVAULT_SECRETS_OFFICER_ROLE_ID</span> <span class="p">=</span> <span class="s2">&quot;b86a8fe4-44ce-4948-aee5-eccb2c155cd7&quot;</span> <span class="c"># ID for &#39;Key Vault Secrets Office&#39; Role </span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">-</span><span class="n">-role</span> <span class="nv">$KEYVAULT_SECRETS_OFFICER_ROLE_ID</span> <span class="p">`</span>
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">-</span><span class="n">-assignee</span> <span class="nv">$SIGNEDIN_USERID</span> <span class="p">`</span>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">-</span><span class="n">-scope</span> <span class="s2">&quot;/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nv">$SIGNEDIN_USERID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>ad<span class="w"> </span>signed-in-user<span class="w"> </span>show<span class="w"> </span>--query<span class="w"> </span>id
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nv">$KEYVAULT_SECRETS_OFFICER_ROLE_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;b86a8fe4-44ce-4948-aee5-eccb2c155cd7&quot;</span><span class="w"> </span><span class="c1"># ID for &#39;Key Vault Secrets Office&#39; Role </span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>--role<span class="w"> </span><span class="nv">$KEYVAULT_SECRETS_OFFICER_ROLE_ID</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>--assignee<span class="w"> </span><span class="nv">$SIGNEDIN_USERID</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>--scope<span class="w"> </span><span class="s2">&quot;/subscriptions/</span><span class="nv">$AZURE_SUBSCRIPTION_ID</span><span class="s2">/resourcegroups/</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">/providers/Microsoft.KeyVault/vaults/</span><span class="nv">$KEYVAULT_NAME</span><span class="s2">&quot;</span>
 </span></code></pre></div>
-<p>Now we will create 2 secrets in the Azure Key Vault using the commands below:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c"># Set SendGrid API Key as a secret named &#39;sendgrid-api-key&#39;</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="p">-</span><span class="n">-vault-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">&quot;sendgrid-api-key&quot;</span> <span class="p">`</span>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">-</span><span class="n">-value</span> <span class="s2">&quot;&lt;Send Grid API Key&gt;.leave this empty if you opted not to register with the sendgrip api&quot;</span>
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c"># Set External Azure Storage Access Key as a secret named &#39;external-azure-storage-key&#39;</span>
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">az</span> <span class="n">keyvault</span> <span class="n">secret</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="p">-</span><span class="n">-vault-name</span> <span class="nv">$KEYVAULT_NAME</span> <span class="p">`</span>
-</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="p">-</span><span class="n">-name</span> <span class="s2">&quot;external-azure-storage-key&quot;</span> <span class="p">`</span>
-</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="p">-</span><span class="n">-value</span> <span class="nv">$STORAGE_ACCOUNT_KEY</span>
+<p>Now we will create the secrets in the Azure Key Vault using the commands below:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Set External Azure Storage Access Key as a secret named &#39;external-azure-storage-key&#39;</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>az<span class="w"> </span>keyvault<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>--vault-name<span class="w"> </span><span class="nv">$KEYVAULT_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>--name<span class="w"> </span><span class="s2">&quot;external-azure-storage-key&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>--value<span class="w"> </span><span class="nv">$STORAGE_ACCOUNT_KEY</span>
 </span></code></pre></div>
-<h4 id="4-create-a-aca-dapr-secrets-store-component-file">4. Create a ACA Dapr Secrets Store Component file<a class="headerlink" href="#4-create-a-aca-dapr-secrets-store-component-file" title="Permanent link">&para;</a></h4>
+<h4 id="34-create-a-aca-dapr-secrets-store-component-file">3.4 Create a ACA Dapr Secrets Store Component file<a class="headerlink" href="#34-create-a-aca-dapr-secrets-store-component-file" title="Permanent link">&para;</a></h4>
 <p>Create a new yaml file under the <strong>aca-components</strong> folder.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">containerapps-secretstore-kv.yaml</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">containerapps-secretstore-kv.yaml</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secretstores.azure.keyvault</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vaultName</span>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;Your keyvault name from $KEYVAULT_NAME goes here&gt;</span>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nt">scopes</span><span class="p">:</span>
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secretstores.azure.keyvault</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vaultName</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;Your keyvault name from $KEYVAULT_NAME goes here&gt;</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -1962,27 +1868,27 @@ via CLI similar to what we did in earlier modules.</li>
 to access the Dapr secret store. If we want to allow them to access the secrets we need to update this component file and grant the system-identity of those services a <code>Key Vault Secrets User</code> role.</li>
 </ul>
 </details>
-<h4 id="5-create-input-and-output-binding-component-files-matching-azure-container-apps-specs">5. Create Input and Output Binding Component Files Matching Azure Container Apps Specs<a class="headerlink" href="#5-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" title="Permanent link">&para;</a></h4>
+<h4 id="35-create-input-and-output-binding-component-files-matching-azure-container-apps-specs">3.5 Create Input and Output Binding Component Files Matching Azure Container Apps Specs<a class="headerlink" href="#35-create-input-and-output-binding-component-files-matching-azure-container-apps-specs" title="Permanent link">&para;</a></h4>
 <p>Add new files under the <strong>aca-components</strong> use the yaml below:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">containerapps-bindings-in-storagequeue.yaml</label><label for="__tabbed_8_2">containerapps-bindings-out-blobstorage.yaml</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">containerapps-bindings-in-storagequeue.yaml</label><label for="__tabbed_7_2">containerapps-bindings-out-blobstorage.yaml</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.azure.storagequeues</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nt">secretStoreComponent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secretstoreakv&quot;</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccount</span>
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Name&gt;&quot;</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccessKey</span>
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">    </span><span class="nt">secretRef</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external-azure-storage-key</span>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue</span>
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;external-tasks-queue&quot;</span>
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodeBase64</span>
-</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
-</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">route</span>
-</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/externaltasksprocessor/process</span>
-</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="nt">scopes</span><span class="p">:</span>
-</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.azure.storagequeues</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="nt">secretStoreComponent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secretstoreakv&quot;</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccount</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Name&gt;&quot;</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccessKey</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">    </span><span class="nt">secretRef</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external-azure-storage-key</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queue</span>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;external-tasks-queue&quot;</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodeBase64</span>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">route</span>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/externaltasksprocessor/process</span>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
 </span></code></pre></div>
 <details class="tip">
 <summary>Curious to learn more about the yaml file?</summary>
@@ -1995,22 +1901,22 @@ The only differences are the following: </p>
 </details>
 </div>
 <div class="tabbed-block">
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.azure.blobstorage</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nt">secretStoreComponent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secretstoreakv&quot;</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccount</span>
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Name&gt;&quot;</span>
-</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccessKey</span>
-</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">    </span><span class="nt">secretRef</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external-azure-storage-key</span>
-</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">container</span>
-</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;externaltaskscontainer&quot;</span>
-</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodeBase64</span>
-</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;false&quot;</span>
-</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">publicAccessLevel</span>
-</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;none&quot;</span>
-</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="nt">scopes</span><span class="p">:</span>
-</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.azure.blobstorage</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="nt">secretStoreComponent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secretstoreakv&quot;</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccount</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;Your</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Account</span><span class="nv"> </span><span class="s">Name&gt;&quot;</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storageAccessKey</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">    </span><span class="nt">secretRef</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">external-azure-storage-key</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">container</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;externaltaskscontainer&quot;</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodeBase64</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;false&quot;</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">publicAccessLevel</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;none&quot;</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="nt">scopes</span><span class="p">:</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
 </span></code></pre></div>
 <details class="tip">
 <summary>Curious to learn more about the yaml file?</summary>
@@ -2024,102 +1930,61 @@ The only differences are the following:</p>
 </div>
 </div>
 </div>
-<h4 id="6-create-sendgrid-output-binding-component-file-matching-azure-container-apps-specs">6. Create SendGrid Output Binding Component File Matching Azure Container Apps Specs<a class="headerlink" href="#6-create-sendgrid-output-binding-component-file-matching-azure-container-apps-specs" title="Permanent link">&para;</a></h4>
-<p>If you set up SendGrid integration, add a new file under the <strong>aca-components</strong> use the yaml below:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">containerapps-bindings-out-sendgrid.yaml</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">componentType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bindings.twilio.sendgrid</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="nt">secretStoreComponent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secretstoreakv&quot;</span>
-</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emailFrom</span>
-</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;mail@gmail.com&quot;</span>
-</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emailFromName</span>
-</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Tasks</span><span class="nv"> </span><span class="s">Tracker</span><span class="nv"> </span><span class="s">Notification&quot;</span>
-</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apiKey</span>
-</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">    </span><span class="nt">secretRef</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sendgrid-api-key</span>
-</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="nt">scopes</span><span class="p">:</span>
-</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tasksmanager-backend-processor</span>
-</span></code></pre></div>
-</div>
-</div>
-</div>
-<details class="tip">
-<summary>Curious to learn more about the yaml file?</summary>
-<p>The properties of this file are similar to the previous ones. The difference is that the metadata 'apiKey' value is set to <code>sendgrid-api-key</code> which is
-the name of the secret in AKV that holds SendGrid API key.</p>
-</details>
 <p>With those changes in place, we are ready to rebuild the backend background processor container image, update Azure Container Apps Env, and redeploy a new revision.</p>
-<h3 id="deploy-a-new-revision-of-the-backend-background-processor-app-to-aca">Deploy a New Revision of the Backend Background Processor App to ACA<a class="headerlink" href="#deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" title="Permanent link">&para;</a></h3>
-<h4 id="1-build-the-backend-background-processor-image-and-push-it-to-acr">1. Build the Backend Background Processor Image and Push it To ACR<a class="headerlink" href="#1-build-the-backend-background-processor-image-and-push-it-to-acr" title="Permanent link">&para;</a></h4>
+<h3 id="4-deploy-a-new-revision-of-the-backend-background-processor-app-to-aca">4. Deploy a New Revision of the Backend Background Processor App to ACA<a class="headerlink" href="#4-deploy-a-new-revision-of-the-backend-background-processor-app-to-aca" title="Permanent link">&para;</a></h3>
+<h4 id="41-build-the-backend-background-processor-image-and-push-it-to-acr">4.1 Build the Backend Background Processor Image and Push it To ACR<a class="headerlink" href="#41-build-the-backend-background-processor-image-and-push-it-to-acr" title="Permanent link">&para;</a></h4>
 <p>As we have done previously we need to build and deploy the Backend Background Processor image to ACR, so it is ready to be deployed to ACA.
 Continue using the same PowerShell console and paste the code below (make sure you are under the  <strong>TasksTracker.ContainerApps</strong> directory):</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span> <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/$BACKEND_SERVICE_NAME&quot;</span> <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span><span class="w"> </span>.
 </span></code></pre></div>
-<h4 id="2-add-dapr-secret-store-component-to-aca-environment">2. Add Dapr Secret Store Component to ACA Environment<a class="headerlink" href="#2-add-dapr-secret-store-component-to-aca-environment" title="Permanent link">&para;</a></h4>
+<h4 id="42-add-dapr-secret-store-component-to-aca-environment">4.2 Add Dapr Secret Store Component to ACA Environment<a class="headerlink" href="#42-add-dapr-secret-store-component-to-aca-environment" title="Permanent link">&para;</a></h4>
 <p>We need to run the command below from the root to create the Dapr secret store component:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">secretstoreakv</span> <span class="p">`</span>
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-secretstore-kv.yaml&#39;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>az<span class="w"> </span>containerapp<span class="w"> </span>env<span class="w"> </span>dapr-component<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>--name<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>--dapr-component-name<span class="w"> </span>secretstoreakv<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>--yaml<span class="w"> </span><span class="s1">&#39;.\aca-components\containerapps-secretstore-kv.yaml&#39;</span>
 </span></code></pre></div>
-<h4 id="3-add-three-bindings-dapr-components-to-aca-environment">3. Add three Bindings Dapr Components to ACA Environment<a class="headerlink" href="#3-add-three-bindings-dapr-components-to-aca-environment" title="Permanent link">&para;</a></h4>
-<p>Next, we will add create the three Dapr bindings components using the component files created.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c"># Input binding component for Azure Storage Queue</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">externaltasksmanager</span> <span class="p">`</span>
-</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-bindings-in-storagequeue.yaml&#39;</span>
-</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
-</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="c"># Output binding component for Azure Blob Storage</span>
-</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
-</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">externaltasksblobstore</span> <span class="p">`</span>
-</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-bindings-out-blobstorage.yaml&#39;</span>
-</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>
-</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="c"># Output binding component for SendGrid, if you are using SendGrid</span>
-</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">env</span> <span class="n">dapr-component</span> <span class="nb">set </span><span class="p">`</span>
-</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$ENVIRONMENT</span> <span class="p">`</span>
-</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="p">-</span><span class="n">-dapr-component-name</span> <span class="n">sendgrid</span> <span class="p">`</span>
-</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="p">-</span><span class="n">-yaml</span> <span class="s1">&#39;.\aca-components\containerapps-bindings-out-sendgrid.yaml&#39;</span>
+<h4 id="43-add-the-bindings-dapr-components-to-aca-environment">4.3 Add the Bindings Dapr Components to ACA Environment<a class="headerlink" href="#43-add-the-bindings-dapr-components-to-aca-environment" title="Permanent link">&para;</a></h4>
+<p>Next, we will add the Dapr bindings components using the component files created.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># Input binding component for Azure Storage Queue</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>env<span class="w"> </span>dapr-component<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>--name<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>--dapr-component-name<span class="w"> </span>externaltasksmanager<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>--yaml<span class="w"> </span><span class="s1">&#39;.\aca-components\containerapps-bindings-in-storagequeue.yaml&#39;</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="c1"># Output binding component for Azure Blob Storage</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>az<span class="w"> </span>containerapp<span class="w"> </span>env<span class="w"> </span>dapr-component<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>--name<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>--dapr-component-name<span class="w"> </span>externaltasksblobstore<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>--yaml<span class="w"> </span><span class="s1">&#39;.\aca-components\containerapps-bindings-out-blobstorage.yaml&#39;</span>
 </span></code></pre></div>
-<h3 id="4-deploy-new-revisions-of-the-backend-background-processor-to-aca">4. Deploy new revisions of the Backend Background Processor to ACA<a class="headerlink" href="#4-deploy-new-revisions-of-the-backend-background-processor-to-aca" title="Permanent link">&para;</a></h3>
+<h4 id="44-deploy-new-revisions-of-the-backend-background-processor-to-aca">4.4 Deploy new revisions of the Backend Background Processor to ACA<a class="headerlink" href="#44-deploy-new-revisions-of-the-backend-background-processor-to-aca" title="Permanent link">&para;</a></h4>
 <p>Update the Azure Container App hosting the Backend Background Processor with a new revision so our code changes are available for end users.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Notice how we are removing the environments variable named <code>SendGrid__ApiKey</code> as we are reading the key value from Dapr secret store.</p>
 </div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c"># Update Backend Background Processor container app and create a new revision </span>
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">update</span> <span class="p">`</span>
-</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
-</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="p">-</span><span class="n">-revision-suffix</span> <span class="n">v</span><span class="nv">$TODAY</span><span class="p">-</span><span class="n">3</span> <span class="p">`</span>
-</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="p">-</span><span class="n">-remove-env-vars</span> <span class="s2">&quot;SendGrid__ApiKey&quot;</span>
-</span></code></pre></div>
-<h4 id="5-remove-sendgrid-secret-from-the-backend-background-processor-app">5. Remove SendGrid Secret from the Backend Background Processor App<a class="headerlink" href="#5-remove-sendgrid-secret-from-the-backend-background-processor-app" title="Permanent link">&para;</a></h4>
-<p>Remove the secret stored in <code>Secrets</code> of the Backend Background Processor as this secret is not used anymore.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>You can skip executing the powershell script below if you opted not to set up a sendgrid account in module 5</p>
-</div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">az</span> <span class="n">containerapp</span> <span class="n">secret</span> <span class="n">remove</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$BACKEND_SERVICE_NAME</span> <span class="p">`</span>
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="p">-</span><span class="n">-secret-names</span> <span class="s2">&quot;sendgrid-apikey&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Update Backend Background Processor container app and create a new revision </span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-3<span class="w"> </span><span class="sb">`</span>
 </span></code></pre></div>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
 <p>With those changes in place and deployed, from the <a href="https://portal.azure.com" target="_blank">Azure portal</a> you can open the log streams section of the container app hosting the <code>ACA-Processor-Backend</code> and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">{</span>
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Task from External System&quot;</span><span class="p">,</span>
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user42@hotmail.com&quot;</span><span class="p">,</span>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">  </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tjoudeh@bitoftech.net&quot;</span><span class="p">,</span>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">  </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-19T12:45:22.0983978Z&quot;</span>
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="p">{</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Task from External System&quot;</span><span class="p">,</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user42@hotmail.com&quot;</span><span class="p">,</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">  </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tjoudeh@bitoftech.net&quot;</span><span class="p">,</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">  </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-19T12:45:22.0983978Z&quot;</span>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>You should receive logs similar to the below:</p>
 <p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/app-logs.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="app-logs" src="../../assets/images/06-aca-dapr-bindingsapi/app-logs.png" /></a></p>
@@ -2127,22 +1992,30 @@ Continue using the same PowerShell console and paste the code below (make sure y
 <ul>
 <li>
 <p>Execute the <code>Set-Variables.ps1</code> in the root to update the <code>variables.ps1</code> file with all current variables. The output of the script will inform you how many variables are written out.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>.<span class="se">\S</span>et-Variables.ps1
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>.<span class="se">\S</span>et-Variables.ps1
 </span></code></pre></div>
 </li>
 <li>
 <p>From the root, persist a list of all current variables.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update Variables.ps1&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update Variables.ps1&quot;</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>Navigate to the root and persist the module to Git.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
-</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Module 6&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Module 6&quot;</span>
 </span></code></pre></div>
 </li>
 </ul>
+<h2 id="review">Review<a class="headerlink" href="#review" title="Permanent link">&para;</a></h2>
+<p>In this module, we have accomplished four objectives:</p>
+<ol>
+<li>Learned how to interface with external systems.</li>
+<li>Extended the backend background processor service (<code>ACA-Processor Backend</code>) to interface with an external system.</li>
+<li>Used Azure Key Vault via a Dapr Secret Store Component to externalize secrets.</li>
+<li>Deployed updated revisions for Backend Background Processor App.</li>
+</ol>
 <p>In the next module, we will cover a special type of Dapr input binding named Cron Binding.</p>
 
   <hr>
@@ -2150,7 +2023,7 @@ Continue using the same PowerShell console and paste the code below (make sure y
   <small>
     
       Last update:
-      2023-11-09
+      2023-11-11
     
   </small>
 </div>

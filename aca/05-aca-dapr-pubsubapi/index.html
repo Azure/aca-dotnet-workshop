@@ -2633,7 +2633,7 @@ header to <code>application/json</code></p>
 </span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-42-4"><a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>--assignee<span class="w"> </span><span class="nv">$BACKEND_SVC_PRINCIPAL_ID</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-42-5"><a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a>--role<span class="w"> </span><span class="nv">$SVC_BUS_DATA_RECEIVER_ROLE</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-42-6"><a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a>--scope<span class="w"> </span>/subscriptions/<span class="nv">$AZURE_SUBSCRIPTION_ID</span>/resourcegroups/<span class="nv">$RESOURCE_GROUP</span>/providers/Microsoft.ServiceBus/namespaces/<span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span>
+</span><span id="__span-42-6"><a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a>--scope<span class="w"> </span>/subscriptions/<span class="nv">$AZURE_SUBSCRIPTION_ID</span>/resourcegroups/<span class="nv">$RESOURCE_GROUP</span>/providers/Microsoft.ServiceBus/namespaces/<span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span>/topics/<span class="nv">$SERVICE_BUS_TOPIC_NAME</span>
 </span></code></pre></div>
 <h4 id="53-grant-backend-api-app-the-azure-service-bus-data-sender-role">5.3 Grant Backend API App the Azure Service Bus Data Sender Role<a class="headerlink" href="#53-grant-backend-api-app-the-azure-service-bus-data-sender-role" title="Permanent link">&para;</a></h4>
 <p>We'll do the same with Backend API container app, but we will use a different Azure built-in roles for Azure Service Bus which is the role <code>Azure Service Bus Data Sender</code> as the Backend API is a publisher of the messages. Run the command below to associate the <code>system-assigned</code> with access-control role <code>Azure Service Bus Data Sender</code>:</p>
@@ -2642,8 +2642,12 @@ header to <code>application/json</code></p>
 </span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>--assignee<span class="w"> </span><span class="nv">$BACKEND_API_PRINCIPAL_ID</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>--role<span class="w"> </span><span class="nv">$SVC_BUS_DATA_SENDER_ROLE</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>--scope<span class="w"> </span>/subscriptions/<span class="nv">$AZURE_SUBSCRIPTION_ID</span>/resourcegroups/<span class="nv">$RESOURCE_GROUP</span>/providers/Microsoft.ServiceBus/namespaces/<span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span>
+</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>--scope<span class="w"> </span>/subscriptions/<span class="nv">$AZURE_SUBSCRIPTION_ID</span>/resourcegroups/<span class="nv">$RESOURCE_GROUP</span>/providers/Microsoft.ServiceBus/namespaces/<span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span>/topics/<span class="nv">$SERVICE_BUS_TOPIC_NAME</span>
 </span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Limiting Managed Identity Scope in Azure Service Bus</p>
+<p>Take note of the AZ CLI commands in 5.2 and 5.3. We are setting the scope of access for the system-assigned managed identity very narrowly to just the topic(s) that the container app should be able to access, not the entire Azure Service Bus namespace.</p>
+</div>
 <h4 id="54-restart-container-apps">5.4 Restart Container Apps<a class="headerlink" href="#54-restart-container-apps" title="Permanent link">&para;</a></h4>
 <p>Lastly, we need to restart both container apps revisions to pick up the role assignment.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="c1"># Get revision name and assign it to a variable</span>
@@ -2723,7 +2727,7 @@ application and start creating new tasks. You should start seeing logs similar t
   <small>
     
       Last update:
-      2023-11-09
+      2023-11-11
     
   </small>
 </div>
