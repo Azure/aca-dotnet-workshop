@@ -36,9 +36,23 @@ In this module, we will accomplish three objectives:
 
 - Now we can initialize the backend API project. This will create and ASP.NET Web API project scaffolded with a single controller.
 
-    ```shell
-    dotnet new webapi -o TasksTracker.TasksManager.Backend.Api
-    ```
+    !!! note "Controller-Based vs. Minimal APIs"
+
+        APIs can be created via the traditional, expanded controller-based structure with _Controllers_ and _Models_ folders, etc. or via the newer minimal APIs approach where controller actions are written inside _Program.cs_. The latter approach is preferential in a microservices project where the endpoints are overseeable and may easily be represented by a more compact view.  
+        
+        As our workshop takes advantage of microservices, the use case for minimal APIs is given. However, in order to make the workshop a bit more demonstrable, we will, for now, stick with controller-based APIs.
+
+    === ".NET 7 or below"
+
+        ```shell
+        dotnet new webapi -o TasksTracker.TasksManager.Backend.Api
+        ```
+
+    === ".NET 8 or above"
+
+        ```shell
+        dotnet new webapi --use-controllers -o TasksTracker.TasksManager.Backend.Api
+        ```
 
 - Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files from the new `TasksTracker.TasksManager.Backend.Api` project folder.
 
