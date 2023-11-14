@@ -144,7 +144,7 @@ Similar to what we have done in the Frontend Web App, we need to use Dapr Client
 === ".NET 8"
     === "TasksTracker.TasksManager.Backend.Api.csproj"
 
-        ```xml hl_lines="10"
+        ```xml hl_lines="11"
         --8<-- "docs/aca/04-aca-dapr-stateapi/Backend.Api-dotnet8.csproj"
         ```
 
