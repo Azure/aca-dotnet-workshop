@@ -96,9 +96,23 @@ In this module, we will also introduce a new background service which is named `
 
 Now we will add a new ASP.NET Core Web API project named **TasksTracker.Processor.Backend.Svc**. Open a command-line terminal and navigate to the workshop's root.
 
-```shell
-dotnet new webapi -o TasksTracker.Processor.Backend.Svc
-```
+!!! note "Controller-Based vs. Minimal APIs"
+
+    APIs can be created via the traditional, expanded controller-based structure with _Controllers_ and _Models_ folders, etc. or via the newer minimal APIs approach where controller actions are written inside _Program.cs_. The latter approach is preferential in a microservices project where the endpoints are overseeable and may easily be represented by a more compact view.  
+    
+    As our workshop takes advantage of microservices, the use case for minimal APIs is given. However, in order to make the workshop a bit more demonstrable, we will, for now, stick with controller-based APIs.
+
+=== ".NET 7 or below"
+
+    ```shell
+    dotnet new webapi -o TasksTracker.Processor.Backend.Svc
+    ```
+
+=== ".NET 8 or above"
+
+    ```shell
+    dotnet new webapi --use-controllers -o TasksTracker.Processor.Backend.Svc
+    ```
 
 - Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files from the new `TasksTracker.Processor.Backend.Svc` project folder.
 
@@ -136,7 +150,15 @@ Now we will install Dapr SDK to be able to subscribe to the service broker topic
     === "TasksTracker.Processor.Backend.Svc.csproj"
 
         ```xml hl_lines="10"
-        --8<-- "docs/aca/05-aca-dapr-pubsubapi/Backend.Svc.csproj"
+        --8<-- "docs/aca/05-aca-dapr-pubsubapi/Backend.Svc-dotnet7.csproj"
+        ```
+
+=== ".NET 8"
+
+    === "TasksTracker.Processor.Backend.Svc.csproj"
+
+        ```xml hl_lines="11"
+        --8<-- "docs/aca/05-aca-dapr-pubsubapi/Backend.Svc-dotnet8.csproj"
         ```
 
 #### 2.4 Create an API Endpoint for the Consumer to Subscribe to the Topic
@@ -197,7 +219,7 @@ Update below file in **TasksTracker.Processor.Backend.Svc** project.
         --8<-- "docs/aca/05-aca-dapr-pubsubapi/Program-dotnet6.cs"
         ```
 
-=== ".NET 7"
+=== ".NET 7 or above"
 
     === "Program.cs"
 
@@ -294,13 +316,6 @@ If you have followed the steps in the [appendix](../13-appendix/01-run-debug-dap
         --8<-- "docs/aca/05-aca-dapr-pubsubapi/launch.json"
         ```
 
-This is a good opportunity to save intermediately:
-
---8<-- "snippets/update-variables.md:7:12"
---8<-- "snippets/persist-state.md:module51"
-
-***
-
 #### 2.7 Update Backend API to Publish a Message When a Task Is Saved
 
 Now we need to update our Backend API to publish a message to the message broker when a task is saved (either due to a new task being added or an existing task assignee being updated).
@@ -317,6 +332,13 @@ To do this, update below file under the project **TasksTracker.TasksManager.Back
     Notice the new method `PublishTaskSavedEvent` added to the class. All we have to do is to call the method `PublishTaskSavedEvent` and pass the Pub/Sub name. In our case we named it `dapr-pubsub-servicebus` as we are going to use Azure Service Bus as a message broker in the next step.
 
     The second parameter `tasksavedtopic` is the topic name the publisher going to send the task model to. That's all the changes required to start publishing async messages from the Backend API.
+
+This is a good opportunity to save intermediately:
+
+--8<-- "snippets/update-variables.md:7:12"
+--8<-- "snippets/persist-state.md:module51"
+
+***
 
 ### 3. Use Azure Service Bus as a Service Broker for Dapr Pub/Sub API
 
@@ -394,7 +416,7 @@ Add a new files **aca-components** as shown below:
 With all those bits in place, we are ready to run the publisher service `Backend API` and the consumer service `Backend Background Service` and test Pub/Sub pattern end to end.
 
 !!! note
-    Ensure you are on the right root folder of each respective project. Remember to replace the placeholders with your own values.
+    Ensure you are on the right root folder of each respective project.
 
 === ".NET 6 or below"
 
@@ -461,22 +483,23 @@ Now we need to create a new Azure Container App. We need to have this new contai
 To achieve the above, run the PowerShell script below.
 
 !!! note
-    Notice how we removed the Ingress property totally which disables the Ingress for this Container App. Remember to replace the placeholders with your own values:
+    Notice how we removed the Ingress property totally which disables the Ingress for this Container App.
 
-    ```shell
-    az containerapp create `
-    --name "$BACKEND_SERVICE_NAME"  `
-    --resource-group $RESOURCE_GROUP `
-    --environment $ENVIRONMENT `
-    --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
-    --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
-    --min-replicas 1 `
-    --max-replicas 1 `
-    --cpu 0.25 --memory 0.5Gi `
-    --enable-dapr `
-    --dapr-app-id $BACKEND_SERVICE_NAME `
-    --dapr-app-port $TARGET_PORT
-    ```
+```shell
+az containerapp create `
+--name "$BACKEND_SERVICE_NAME"  `
+--resource-group $RESOURCE_GROUP `
+--environment $ENVIRONMENT `
+--image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
+--registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
+--min-replicas 1 `
+--max-replicas 1 `
+--cpu 0.25 `
+--memory 0.5Gi `
+--enable-dapr `
+--dapr-app-id $BACKEND_SERVICE_NAME `
+--dapr-app-port $TARGET_PORT
+```
 
 #### 4.3 Deploy New Revisions of the Backend API to Azure Container Apps
 
@@ -602,18 +625,16 @@ az containerapp revision restart `
 !!! Success
     With this in place, you should be able to test the 3 services end to end.
 
-    !!! note
-    
-        Start by running the command below and then launch the
-        application and start creating new tasks. You should start seeing logs similar to the ones shown in the image below. The command will stop executing after 60 seconds of inactivity.
-    
-        ```shell
-        az containerapp logs show --follow `
-        -n $BACKEND_SERVICE_NAME `
-        -g $RESOURCE_GROUP
-        ```
-    
-        ![email-log](../../assets/images/05-aca-dapr-pubsubapi/az_containerapp_logs.png)
+    Start by running the command below and then launch the
+    application and start creating new tasks. You should start seeing logs similar to the ones shown in the image below. The command will stop executing after 60 seconds of inactivity.
+
+    ```shell
+    az containerapp logs show --follow `
+    -n $BACKEND_SERVICE_NAME `
+    -g $RESOURCE_GROUP
+    ```
+
+    ![email-log](../../assets/images/05-aca-dapr-pubsubapi/az_containerapp_logs.png)
 
 ??? tip "What to do if you do not see messages?"
     Sometimes, the revision creation right after creating the managed identity results in the identity not yet being picked up properly. This becomes evident when we look at the Backend Service's Container App's `Log stream` blade in the [Azure portal](https://portal.azure.com){target=_blank}. Specifically, the `daprd` sidecar container will show HTTP 401 errors.
