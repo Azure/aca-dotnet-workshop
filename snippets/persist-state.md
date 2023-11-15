@@ -85,3 +85,14 @@
     ```
 
 --8<-- [end:module7]
+
+--8<-- [start:module8]
+
+- Navigate to the root and persist the module to Git.
+
+    ```shell
+    git add .
+    git commit -m "Add Module 8"
+    ```
+
+--8<-- [end:module8]
