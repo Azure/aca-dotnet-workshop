@@ -324,6 +324,12 @@ az keyvault secret set `
 
 #### 3.4 Create a ACA Dapr Secrets Store Component file
 
+Obtain the name of the Key Vault.
+
+```shell
+$KEYVAULT_NAME
+```
+
 Create a new yaml file under the **aca-components** folder.
 
 === "containerapps-secretstore-kv.yaml"
@@ -422,9 +428,6 @@ az containerapp env dapr-component set `
 #### 4.4 Deploy new revisions of the Backend Background Processor to ACA
 
 Update the Azure Container App hosting the Backend Background Processor with a new revision so our code changes are available for end users.
-
-!!! tip
-    Notice how we are removing the environments variable named `SendGrid__ApiKey` as we are reading the key value from Dapr secret store.
 
 ```shell
 # Update Backend Background Processor container app and create a new revision 
