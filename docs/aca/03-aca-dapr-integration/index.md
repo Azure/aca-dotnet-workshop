@@ -144,7 +144,14 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
 
             ```xml hl_lines="9-11"
-            --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui.csproj"
+            --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui-dotnet7.csproj"
+            ```
+
+    === ".NET 8"
+        === "TasksTracker.WebPortal.Frontend.Ui.csproj"
+
+            ```xml hl_lines="9-11"
+            --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui-dotnet8.csproj"
             ```
 
     - Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the highlighted below.
@@ -171,7 +178,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
             }
             ```
 
-    === ".NET 7"
+    === ".NET 7 or above"
         === "Program.cs"
 
             ```csharp hl_lines="6"

@@ -125,11 +125,28 @@ Whereas in the previous section we demonstrated using Dapr State Store without c
 
 Similar to what we have done in the Frontend Web App, we need to use Dapr Client SDK to manage the state store. Update the below file with the added Dapr package reference:
 
-=== "TasksTracker.TasksManager.Backend.Api.csproj"
+=== ".NET 6"
+    === "TasksTracker.TasksManager.Backend.Api.csproj"
 
-    ```xml hl_lines="10"
-    --8<-- "docs/aca/04-aca-dapr-stateapi/Backend.Api.csproj"
-    ```
+        ```xml
+        <ItemGroup>
+            <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
+        </ItemGroup>
+        ```
+
+=== ".NET 7"
+    === "TasksTracker.TasksManager.Backend.Api.csproj"
+
+        ```xml hl_lines="10"
+        --8<-- "docs/aca/04-aca-dapr-stateapi/Backend.Api-dotnet7.csproj"
+        ```
+
+=== ".NET 8"
+    === "TasksTracker.TasksManager.Backend.Api.csproj"
+
+        ```xml hl_lines="11"
+        --8<-- "docs/aca/04-aca-dapr-stateapi/Backend.Api-dotnet8.csproj"
+        ```
 
 #### 2.2 Create a New Concrete Implementation to Manage Tasks Persistence
 

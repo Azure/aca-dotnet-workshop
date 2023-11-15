@@ -8,8 +8,8 @@
     - You will be asked if you want to add Docker Compose files. Select `No`.
     - `Dockerfile` and `.dockerignore` files are added to the workspace.
     - Open `Dockerfile` and replace  
-        `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build` with  
-        `FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build`
+        `FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build` with  
+        `FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build`
 
         !!! bug "Dockerfile Build Platform"
 

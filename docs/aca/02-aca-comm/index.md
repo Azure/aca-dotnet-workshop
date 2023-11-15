@@ -158,7 +158,8 @@ By looking at the cshtml content notice that the page is expecting a query strin
     --ingress 'external' `
     --min-replicas 1 `
     --max-replicas 1 `
-    --cpu 0.25 --memory 0.5Gi `
+    --cpu 0.25 `
+    --memory 0.5Gi `
     --query properties.configuration.ingress.fqdn `
     --output tsv)
 
