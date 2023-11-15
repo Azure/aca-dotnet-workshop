@@ -1,5 +1,6 @@
 using Microsoft.ApplicationInsights.Extensibility;
 using TasksTracker.TasksManager.Backend.Api.Services;
+using TasksTracker.TasksManager.Frontend.Ui;
 
 var builder = WebApplication.CreateBuilder(args);
 
