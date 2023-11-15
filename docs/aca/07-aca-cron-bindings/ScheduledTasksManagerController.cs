@@ -10,8 +10,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
     {
         private readonly ILogger<ScheduledTasksManagerController> _logger;
         private readonly DaprClient _daprClient;
-        public ScheduledTasksManagerController(ILogger<ScheduledTasksManagerController> logger,
-                                                DaprClient daprClient)
+        public ScheduledTasksManagerController(ILogger<ScheduledTasksManagerController> logger, DaprClient daprClient)
         {
             _logger = logger;
             _daprClient = daprClient;
