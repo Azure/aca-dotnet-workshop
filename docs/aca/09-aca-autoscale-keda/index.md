@@ -11,7 +11,7 @@ canonical_url: https://bitoftech.net/2022/09/22/azure-container-apps-auto-scalin
 
 In this module, we will accomplish four objectives:
 
-1. Understand Azure Container Apps Scaling Behaviors
+1. Understand Azure Container Apps Scaling Behaviors.
 1. Learn about the Kubernetes Event-Driven Autoscaler (KEDA).
 1. Create a scaling rule for the Backend Background Processor project.
 1. Test scaling of the Backend Background Processor.
@@ -188,7 +188,7 @@ The message structure our backend processor expects is similar to the JSON shown
 
 In this module, we accomplished four objectives:
 
-1. Understood Azure Container Apps Scaling Behaviors
+1. Understood Azure Container Apps Scaling Behaviors.
 1. Learned about the Kubernetes Event-Driven Autoscaler (KEDA).
 1. Created a scaling rule for the Backend Background Processor project.
 1. Tested scaling of the Backend Background Processor.
