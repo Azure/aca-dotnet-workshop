@@ -125,7 +125,7 @@ For each of the three projects, we will add a new file to each project's root di
 
     === "AppInsightsTelemetryInitializer.cs"
 
-        ```csharp hl_lines="10"
+        ```csharp hl_lines="13"
         --8<-- "docs/aca/08-aca-monitoring/AppInsightsTelemetryInitializer-Backend.API.cs"
         ```
 
@@ -133,7 +133,7 @@ For each of the three projects, we will add a new file to each project's root di
 
     === "AppInsightsTelemetryInitializer.cs"
 
-        ```csharp hl_lines="10"
+        ```csharp hl_lines="13"
         --8<-- "docs/aca/08-aca-monitoring/AppInsightsTelemetryInitializer-Backend.Svc.cs"
         ```
 
@@ -141,7 +141,7 @@ For each of the three projects, we will add a new file to each project's root di
 
     === "AppInsightsTelemetryInitializer.cs"
 
-        ```csharp hl_lines="10"
+        ```csharp hl_lines="13"
         --8<-- "docs/aca/08-aca-monitoring/AppInsightsTelemetryInitializer-Frontend.UI.cs"
         ```
 
@@ -157,7 +157,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
 
     === "Program.cs"
 
-        ```csharp hl_lines="1 8-11"
+        ```csharp hl_lines="1 9-12"
         --8<-- "docs/aca/08-aca-monitoring/Program-Backend.API.cs"
         ```
 
@@ -165,7 +165,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
 
     === "Program.cs"
 
-        ```csharp hl_lines="1 7-10"
+        ```csharp hl_lines="1 8-11"
         --8<-- "docs/aca/08-aca-monitoring/Program-Backend.Svc.cs"
         ```
 
@@ -173,7 +173,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
 
     === "Program.cs"
 
-        ```csharp hl_lines="1 7-10"
+        ```csharp hl_lines="1 8-11"
         --8<-- "docs/aca/08-aca-monitoring/Program-Frontend.UI.cs"
         ```
 
@@ -187,11 +187,13 @@ We need to set the Application Insights Instrumentation Key so that the projects
 
     ```json
     {
+      // Configuration removed for brevity      
       "ApplicationInsights": {
-        "InstrumentationKey": "<Application Insights Key here for local development purposes. Not required for ACA as it is being set via --set-env-vars as you will see later>"
+        "InstrumentationKey": "<Application Insights Key here for local development>"
       } 
     }
     ```
+
 With this step completed, we have done all the changes needed. Let's now deploy the changes and create new ACA revisions.
 
 ### 3. Deploy Services to ACA and Create New Revisions
