@@ -126,7 +126,7 @@ For each of the three projects, we will add a new file to each project's root di
     === "AppInsightsTelemetryInitializer.cs"
 
         ```csharp hl_lines="10"
-        --8<-- "docs/aca/08-aca-monitoring/AppInsightsTelemetryInitializer-Backend.Api.cs"
+        --8<-- "docs/aca/08-aca-monitoring/AppInsightsTelemetryInitializer-Backend.API.cs"
         ```
 
 === "Backend.Svc"
