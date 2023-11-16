@@ -1,7 +1,7 @@
-﻿using Microsoft.ApplicationInsights.Channel;
+using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.Extensibility;
 
-namespace TasksTracker.Processor.Backend.Svc
+namespace TasksTracker.TasksManager.Frontend.Ui
 {
     public class AppInsightsTelemetryInitializer : ITelemetryInitializer
     {
@@ -10,7 +10,7 @@ namespace TasksTracker.Processor.Backend.Svc
             if (string.IsNullOrEmpty(telemetry.Context.Cloud.RoleName))
             {
                 //set custom role name here
-                telemetry.Context.Cloud.RoleName = "tasksmanager-backend-processor";
+                telemetry.Context.Cloud.RoleName = "tasksmanager-frontend-webapp";
             }
         }
     }
