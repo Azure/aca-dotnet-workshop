@@ -158,7 +158,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
     === "Program.cs"
 
         ```csharp hl_lines="1 8-11"
-        --8<-- "docs/aca/08-aca-monitoring/Program-Backend.Api.cs"
+        --8<-- "docs/aca/08-aca-monitoring/Program-Backend.API.cs"
         ```
 
 === "Backend.Svc"
