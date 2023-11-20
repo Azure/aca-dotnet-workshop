@@ -53,6 +53,11 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
     $UI_APP_PORT=<web ui https port in Properties->launchSettings.json (e.g. 7000)>
     ```
 
+    !!! note
+        Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.
+
+    ![app-port](../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png)
+
 - Now that we know the `UI_APP_PORT`, we can also declare the local frontend UI URL:
 
     ```shell
@@ -60,9 +65,6 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
     ```
 
 --8<-- "snippets/update-variables.md::1"
-
-!!! note
-    Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.
 
 #### 2.2 Test `{{ apps.backend }}` Locally
 
@@ -73,8 +75,6 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 === ".NET 7 or above"
 
     --8<-- "snippets/dapr-run-backend-api.md:basic"
-
- ![app-port](../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png)
 
 ??? tip "Want to learn more about Dapr run command above?"
     When using Dapr run command you are running a Dapr process as a sidecar next to the Web API application. The properties you have configured are as follows:
