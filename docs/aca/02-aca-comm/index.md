@@ -8,6 +8,7 @@ canonical_url: https://bitoftech.net/2022/08/25/communication-microservices-azur
     60 minutes
 
 ## Objective
+
 In this module, we will accomplish three objectives:
 
 1. Create a web app named `{{ apps.frontend }}`, which is the UI to interact with `{{ apps.backend }}`.
@@ -64,7 +65,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
         ```csharp
         --8<-- "docs/aca/02-aca-comm/Create.cshtml.cs"
         ```
-        
+
         !!! tip "What does this code do?"
             The code is self-explanatory here. We just injected the type HttpClientFactory in order to issue a POST request and create a new task.
 
@@ -77,7 +78,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
         ```csharp
         --8<-- "docs/aca/02-aca-comm/Edit.cshtml.cs"
         ```
-        
+
         !!! tip "What does this code do?"
             The code added is similar to the create operation. The Edit page accepts the TaskId as a Guid, loads the task, and then updates the task by sending an HTTP PUT operation.
 
@@ -224,6 +225,7 @@ So far the Frontend App is sending HTTP requests to the publicly exposed Web API
 --8<-- "snippets/update-variables.md"
 
 ## Review
+
 In this module, we have accomplished three objectives:
 
 1. Created a web app named `{{ apps.frontend }}`, which is the UI to interact with `{{ apps.backend }}`.

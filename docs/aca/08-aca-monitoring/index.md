@@ -250,7 +250,7 @@ az acr build `
 We need to update all three container apps with new revisions so that our code changes are available for end users.
 
 !!! tip
-    Notice how we used the property `--set-env-vars` to set new environment variable named `ApplicationInsights__InstrumentationKey`. Its value is a secret reference obtained from the secret `appinsights-key` we added in [step 1](#1-add-application-insights-instrumentation-key-as-a-secret).
+    Notice how we used the property `--set-env-vars` to set new environment variable named `ApplicationInsights__InstrumentationKey`. Its value is a secret reference obtained from the secret `appinsights-key` we added in step 1.
 
 ```shell
 # Update Backend API App container app and create a new revision 

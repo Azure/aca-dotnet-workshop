@@ -26,7 +26,7 @@ The Azure login action supports two different ways of authenticating with Azure:
 - [Service principal with secrets](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-a-service-principal-secret){target=_blank}
 - [OpenID Connect (OIDC) with a Azure service principal using a Federated Identity Credential](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-openid-connect){target=_blank}
 
-In this workshop, we will use the OIDC authentication method. Assuming you are already logged in using azure cli locally, follow the steps below to configure the repository for OIDC authentication with Azure AD either using powershell or bash/wsl:
+In this workshop, we will use the OIDC authentication method. Assuming you are already logged in using Azure cli locally, follow the steps below to configure the repository for OIDC authentication with Azure AD either using powershell or bash/wsl:
 
 === "PowerShell"
 
@@ -119,7 +119,7 @@ echo $APP_ID
 
 Configure repository variables in GitHub repo as described here in [create GitHub variables](https://docs.github.com/en/actions/learn-github-actions/variables). Use below values mapped to relevant variables in GitHub.
 
-```bash 
+```bash
 # LOCATION: Azure region where resources will be deployed
 LOCATION=<location. e.g. eastus>
 

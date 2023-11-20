@@ -24,8 +24,7 @@ In this module, we will accomplish four objectives:
 
 To achieve interfacing with an external system in a simple way, we will utilize [Dapr Input and Output Bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/bindings-overview/){target=_blank}.
 
-The external system owns an Azure Storage Queue which the Tasks Tracker microservice application **reacts** to through an event handler (aka **Input Binding**). This event handler receives and processes the message coming to the storage queue. Once the processing of the message completes and stores the task into Cosmos DB, the system will **trigger** an event (aka **Output binding**) that invokes the external service. This service, in turn, stores the content of the message into an Azure Blob Storage container. 
-It is important to emphasize that both the Azure Storage Queue and the Azure Storage Blob belong to the *external* system.
+The external system owns an Azure Storage Queue which the Tasks Tracker microservice application **reacts** to through an event handler (aka **Input Binding**). This event handler receives and processes the message coming to the storage queue. Once the processing of the message completes and stores the task into Cosmos DB, the system will **trigger** an event (aka **Output binding**) that invokes the external service. This service, in turn, stores the content of the message into an Azure Blob Storage container. It is important to emphasize that both the Azure Storage Queue and the Azure Storage Blob belong to the *external* system.
 
 The rest of this module will implement the three scenarios mentioned below:
 

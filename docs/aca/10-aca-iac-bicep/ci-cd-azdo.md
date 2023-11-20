@@ -37,7 +37,7 @@ to create service connection for GitHub.
 
 #### Create Service Connection for Azure Subscription
 
-Create a new service connection to your azure subscription by following the steps at this [link](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#create-a-service-connection){target=_blank}.
+Create a new service connection to your Azure subscription by following the steps at this [link](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#create-a-service-connection){target=_blank}.
 
 !!! note
     Update the created service connection role to have **[User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator){target=_blank}** role. This is required for pipeline to be able to perform role assignments in the infrastructure components deployed. To update the role of a service connection in Azure DevOps to have the User Access Administrator role, you can follow these steps:

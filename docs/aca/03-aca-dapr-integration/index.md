@@ -216,7 +216,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 #### 2.4 Run `{{ apps.frontend }}` and `{{ apps.backend }}` Locally Using Dapr
 
-We are ready now to verify the changes on the Frontend Web App and test locally. Therefore, we need to run the Frontend Web App along with the Backend Web API to ensure the Dapr Sidecar containers are working as expected. 
+We are ready now to verify the changes on the Frontend Web App and test locally. Therefore, we need to run the Frontend Web App along with the Backend Web API to ensure the Dapr Sidecar containers are working as expected.
 
 - Open another terminal inside VS Code, so that we can run the two commands shown below (ensure that you are on the right project directory when running each command).
 
