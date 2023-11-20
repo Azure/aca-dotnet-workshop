@@ -11,7 +11,7 @@ Once we have this in place, IaC deployments will benefit us in key ways such as:
 1. By ensuring consistency and reducing human errors in resource provisioning, deployments can be made with greater confidence and consistency.
 2. Avoid configuration drifts as IaC is an idempotent operation, which means it provides the same result each time it's run.
 3. With Infrastructure as Code (IaC) in place, recreating an identical environment to the production one becomes a simple task of executing the scripts. This can be particularly useful during the application's lifecycle when short-term isolation is needed for tasks such as penetration testing or load testing.
-4. The [Azure portal](https://portal.azure.com){target=_blank} abstracts several processes when you provision resources. For instance, when you create an Azure Container Apps Environment from the portal, it automatically creates a log analytics workspace and associates it with the environment without your direct involvement. However, using Infrastructure as Code (IaC) can provide you with a deeper understanding of Azure and help you troubleshoot any issues that may arise more effectively.
+4. The [Azure portal](https://portal.azure.com){target=_blank} abstracts several processes when you provision resources. For instance, when you create an Azure Container Apps Environment from the portal, it automatically creates a Log Analytics workspace and associates it with the environment without your direct involvement. However, using Infrastructure as Code (IaC) can provide you with a deeper understanding of Azure and help you troubleshoot any issues that may arise more effectively.
 
 ### ARM Templates in Azure
 

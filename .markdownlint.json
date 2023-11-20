@@ -9,6 +9,10 @@
     "MD031": false,
     "MD038": false,
     "MD041": false,
-    "MD044": false,
+    "MD044": {
+        "code_blocks": false,
+        "html_elements": false,
+        "names": ["Application Insights", "Azure", "Azure Container Apps", "Azure Cosmos DB", "Azure Service Bus", "Cosmos", "dapr", "Dapr", "KEDA", "Log Analytics", "Log Analytics workspace"]
+    },
     "MD046": false
 }

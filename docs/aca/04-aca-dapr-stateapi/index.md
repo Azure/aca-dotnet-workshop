@@ -82,7 +82,7 @@ What we've done here is the following:
 - The value `statestore` in the endpoint should match the `name` value in the global component file `statestore.yaml`
 - We have sent a request to store 3 entries of books, you can put any JSON representation in the value property
 
-#### 1.2 Local Redis Cache 
+#### 1.2 Local Redis Cache
 
 To see the results visually, you can install a VS Code extension to connect to Redis DB and see the results. There are several Redis extensions available for VS Code. For this workshop we will use an extension named ["Redis Xplorer"](https://marketplace.visualstudio.com/items?itemName=davidsekar.redis-xplorer){target=_blank}.
 
@@ -264,7 +264,7 @@ echo "Cosmos DB Primary Master Key:"
 echo $COSMOS_DB_PRIMARY_MASTER_KEY
 ```
 
-#### 3.2. Create a Component File for State Store Management 
+#### 3.2. Create a Component File for State Store Management
 
 Dapr uses a modular design where functionality is delivered as a component. Each component has an interface definition.
 All the components are pluggable so that you can swap out one component with the same interface for another.
@@ -284,7 +284,7 @@ To add the component file state store, add a new folder named **components** und
 !!! info
     You need to replace the **masterKey** value with your Cosmos Account key. Remember this is only needed for local development debugging, we will not be using the masterKey when we deploy to ACA.
 
-    Replace the **url** value with the URI value of your cosmos database account. You can get that from the [Azure portal](https://portal.azure.com){target=_blank} by navigating to the cosmos database account overview page and get the uri value from there. 
+    Replace the **url** value with the URI value of your Azure Cosmos DB account. You can get that from the [Azure portal](https://portal.azure.com){target=_blank} by navigating to the Azure Cosmos DB account overview page and get the uri value from there. 
     Basically the uri should have the following structure. [https://COSMOS_DB_ACCOUNT.documents.azure.com:443/](https://COSMOS_DB_ACCOUNT.documents.azure.com:443/).
 
 === "dapr-statestore-cosmos.yaml"
@@ -304,7 +304,7 @@ To add the component file state store, add a new folder named **components** und
 
 Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned.
 
-If you have been running the different microservices using the [debug and launch Dapr applications in VSCode](../13-appendix/01-run-debug-dapr-app-vscode.md) then remember to uncomment the following line inside tasks.json file. 
+If you have been running the different microservices using the [debug and launch Dapr applications in VSCode](../13-appendix/01-run-debug-dapr-app-vscode.md) then remember to uncomment the following line inside tasks.json file.
 This will instruct dapr to load the local projects components located at **./components** instead of the global components' folder.
 
 ```json hl_lines="2"
@@ -326,7 +326,7 @@ If you have been using the dapr cli commands instead of the aforementioned debug
 !!! note "Deprecation Warning"
     components-path is being deprecated in favor of --resources-path. At the time of producing this workshop the --resources-path was not supported yet by the VS code extension. Hence, you will notice the use of the property "componentsPath": "./components" in the tasks.json file. Check the extension documentation in case that has changed.
 
-After creating a new record you can navigate to the Data explorer on the [Azure portal](https://portal.azure.com){target=_blank} for the azure cosmos database account. It should look like the image below:
+After creating a new record you can navigate to the Data explorer on the [Azure portal](https://portal.azure.com){target=_blank} for the Azure Cosmos DB account. It should look like the image below:
 
 ![cosmos-db-dapr-state-store](../../assets/images/04-aca-dapr-stateapi/cosmos-db-dapr-state-store.jpg)
 
@@ -421,7 +421,7 @@ Here it is recommended to separate the component files that will be used when de
 Create a new folder named **aca-components** under the directory **TasksTracker.ContainerApps**, then add a new file as shown below:
 
 !!! info
-    Remember to replace the url value with the URI value of your cosmos database account. You can get that from the [Azure portal](https://portal.azure.com){target=_blank} by navigating to the cosmos database account overview page and get the uri value from there.
+    Remember to replace the url value with the URI value of your cosmos database account. You can get that from the [Azure portal](https://portal.azure.com){target=_blank} by navigating to the Azure Cosmos DB account overview page and get the uri value from there.
     Basically the uri should have the following structure `https://COSMOS_DB_ACCOUNT.documents.azure.com:443/`
 
 === "containerapps-statestore-cosmos.yaml"

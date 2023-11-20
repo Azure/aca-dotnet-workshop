@@ -65,7 +65,7 @@ In this module, we will accomplish three objectives:
     --8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
     ```
 
-- In the project root create a new folder named **Services** and add the two files below. Ensure to create it as a sibling to the *Models* folder. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. In this module we will work with data in memory. Later on, we will implement a data store. 
+- In the project root create a new folder named **Services** and add the two files below. Ensure to create it as a sibling to the *Models* folder. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. In this module we will work with data in memory. Later on, we will implement a data store.
 
     === "ITasksManager.cs"
         ```csharp
@@ -204,24 +204,24 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --output tsv)
     ```
 
-#### 2.3 Create Log Analytics Workspace & Application Insights
+#### 2.3 Create Log Analytics workspace & Application Insights
 
-- Create an Azure Log Analytics Workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics Workspace.
+- Create an Azure Log Analytics workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics workspace.
 
     ```shell
-    # Create the Log Analytics Workspace
+    # Create the Log Analytics workspace
     az monitor log-analytics workspace create `
     --resource-group $RESOURCE_GROUP `
     --workspace-name $WORKSPACE_NAME
 
-    # Retrieve the Log Analytics Workspace ID
+    # Retrieve the Log Analytics workspace ID
     $WORKSPACE_ID=az monitor log-analytics workspace show `
     --resource-group $RESOURCE_GROUP `
     --workspace-name $WORKSPACE_NAME `
     --query customerId `
     --output tsv
 
-    # Retrieve the Log Analytics Workspace secret
+    # Retrieve the Log Analytics workspace secret
     $WORKSPACE_SECRET=az monitor log-analytics workspace get-shared-keys `
     --resource-group $RESOURCE_GROUP `
     --workspace-name $WORKSPACE_NAME `
@@ -280,9 +280,9 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     While this is not advised in a production workload, it is suitable for the workshop to keep the architecture confined to Azure Container Apps.
 
 ??? tip "Want to learn what above command does?"
-    - It creates an ACA environment and associates it with the Log Analytics Workspace created in the previous step.
+    - It creates an ACA environment and associates it with the Log Analytics workspace created in the previous step.
     - We are setting the `--dapr-instrumentation-key` value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr in later modules and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.  
-    > **_NOTE:_**
+    > ***NOTE:***
     You can set the `--dapr-instrumentation-key` after you create the ACA environment but this is not possible via the AZ CLI right now. There is an [open issue](https://github.com/microsoft/azure-container-apps/issues/293){target=_blank} which is being tracked by the product group.
 
 ### 3. Deploy Web API Backend Project to ACA
@@ -341,7 +341,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     Note that the specific query string matters as you may otherwise get an empty result back. 
 
     !!! tip
-        You can find your azure container app application url on the [Azure portal](https://portal.azure.com){target=_blank} overview tab.
+        You can find your Azure container app application url on the [Azure portal](https://portal.azure.com){target=_blank} overview tab.
     
         ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
 

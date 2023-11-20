@@ -388,7 +388,7 @@ Add a new files **components** as shown below:
 ```
 
 !!! note
-    We used the name `dapr-pubsub-servicebus` which should match the name of Pub/Sub component we've used earlier in the [TasksNotifierController.cs](#4-create-an-api-endpoint-for-the-consumer-to-subscribe-to-the-topic) controller on the action method with the attribute `Topic`.
+    We used the name `dapr-pubsub-servicebus` which should match the name of Pub/Sub component we've used earlier in the `TasksNotifierController.cs` controller on the action method with the attribute `Topic`.
 
     We set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata `consumerID` value should match the topic subscription name `sbts-tasks-processor`. 
 
