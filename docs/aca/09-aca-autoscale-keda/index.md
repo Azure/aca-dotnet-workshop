@@ -133,7 +133,7 @@ az containerapp update `
 
 ### 4. Scaling Testing
 
-#### 4.1 Run an End-to-End Test and Generate a Several Messages
+#### 4.1 Run an End-to-End Test and Generate Several Messages
 
 Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize the Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.
 
@@ -146,7 +146,7 @@ az containerapp replica list `
 --query [].name
 ```
 
-The message structure our backend processor expects is similar to the JSON shown below. So copy this message and click on Send messages button, paste the message content, set the content type to `application/json`, check the `Repeat Send` check box, select `10000` messages and put an interval of `1ms` between them. This ensures that we are sending high volume at short intervals, so that the single replica container app cannot absorb and process quickly enough and will consequently need to scale out. Finally click `Send` when you are ready.
+The message structure our backend processor expects is similar to the JSON shown below. So copy this message and click on `Send messages` button, paste the message content, set the content type to `application/json`, check the `Repeat Send` check box, select `10000` messages and put an interval of `1ms` between them. This ensures that we are sending high volume at short intervals, so that the single replica container app cannot absorb and process quickly enough and will consequently need to scale out. Finally click `Send` when you are ready.
 
 ```json
 {

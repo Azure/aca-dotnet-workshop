@@ -191,7 +191,7 @@ Update and replace the code in the file with the code below. Pay close attention
 
 === "ExternalTasksProcessorController.cs"
 
-    ```csharp hl_lines="13-14 37-46"
+    ```csharp hl_lines="13-14 37-45"
     --8<-- "docs/aca/06-aca-dapr-bindingsapi/Update.ExternalTasksProcessorController.cs"
     ```
 

@@ -1,4 +1,4 @@
-componentType: pubsub.azure.servicebus
+componentType: pubsub.azure.servicebus.topics
 version: v1
 metadata:
   - name: namespaceName
