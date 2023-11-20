@@ -3,7 +3,7 @@ kind: Component
 metadata:
   name: dapr-pubsub-servicebus
 spec:
-  type: pubsub.azure.servicebus
+  type: pubsub.azure.servicebus.topics
   version: v1
   metadata:
     - name: connectionString # Used for local dev testing.

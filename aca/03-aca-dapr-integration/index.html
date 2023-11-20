@@ -1287,6 +1287,11 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$API_APP_PORT</span><span class="o">=</span>&lt;web<span class="w"> </span>api<span class="w"> </span>https<span class="w"> </span>port<span class="w"> </span><span class="k">in</span><span class="w"> </span>Properties-&gt;launchSettings.json<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span><span class="m">7112</span><span class="o">)</span>&gt;
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">$UI_APP_PORT</span><span class="o">=</span>&lt;web<span class="w"> </span>ui<span class="w"> </span>https<span class="w"> </span>port<span class="w"> </span><span class="k">in</span><span class="w"> </span>Properties-&gt;launchSettings.json<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span><span class="m">7000</span><span class="o">)</span>&gt;
 </span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.</p>
+</div>
+<p><a class="glightbox" href="../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="app-port" src="../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png" /></a></p>
 </li>
 <li>
 <p>Now that we know the <code>UI_APP_PORT</code>, we can also declare the local frontend UI URL:</p>
@@ -1297,10 +1302,6 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 <p>Execute the <code>Set-Variables.ps1</code> in the root to update the <code>variables.ps1</code> file with all current variables. The output of the script will inform you how many variables are written out.</p>
 </li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.</p>
-</div>
 <h4 id="22-test-aca-api-backend-locally">2.2 Test <code>ACA API - Backend</code> Locally<a class="headerlink" href="#22-test-aca-api-backend-locally" title="Permanent link">&para;</a></h4>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">.NET 6 or below</label><label for="__tabbed_1_2">.NET 7 or above</label></div>
 <div class="tabbed-content">
@@ -1328,7 +1329,6 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 </div>
 </div>
 </div>
-<p><a class="glightbox" href="../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="app-port" src="../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png" /></a></p>
 <details class="tip">
 <summary>Want to learn more about Dapr run command above?</summary>
 <p>When using Dapr run command you are running a Dapr process as a sidecar next to the Web API application. The properties you have configured are as follows:</p>
@@ -1387,7 +1387,7 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">&lt;ItemGroup&gt;</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.12.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nt">&lt;/ItemGroup&gt;</span>
 </span></code></pre></div>
 </div>
@@ -1407,7 +1407,7 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nt">&lt;/PropertyGroup&gt;</span>
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="hll"><span class="w">  </span><span class="nt">&lt;ItemGroup&gt;</span>
-</span></span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="hll"><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span></span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="hll"><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.12.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </span></span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="hll"><span class="w">  </span><span class="nt">&lt;/ItemGroup&gt;</span>
 </span></span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
 </span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="nt">&lt;/Project&gt;</span>
@@ -1429,7 +1429,7 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 </span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="nt">&lt;/PropertyGroup&gt;</span>
 </span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
 </span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="hll"><span class="w">  </span><span class="nt">&lt;ItemGroup&gt;</span>
-</span></span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="hll"><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.9.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span></span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="hll"><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.12.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </span></span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="hll"><span class="w">  </span><span class="nt">&lt;/ItemGroup&gt;</span>
 </span></span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
 </span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="nt">&lt;/Project&gt;</span>

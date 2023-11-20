@@ -765,9 +765,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-run-an-end-to-end-test-and-generate-a-several-messages" class="md-nav__link">
+  <a href="#41-run-an-end-to-end-test-and-generate-several-messages" class="md-nav__link">
     <span class="md-ellipsis">
-      4.1 Run an End-to-End Test and Generate a Several Messages
+      4.1 Run an End-to-End Test and Generate Several Messages
     </span>
   </a>
   
@@ -1214,9 +1214,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-run-an-end-to-end-test-and-generate-a-several-messages" class="md-nav__link">
+  <a href="#41-run-an-end-to-end-test-and-generate-several-messages" class="md-nav__link">
     <span class="md-ellipsis">
-      4.1 Run an End-to-End Test and Generate a Several Messages
+      4.1 Run an End-to-End Test and Generate Several Messages
     </span>
   </a>
   
@@ -1409,7 +1409,7 @@
 </ul>
 </div>
 <h3 id="4-scaling-testing">4. Scaling Testing<a class="headerlink" href="#4-scaling-testing" title="Permanent link">&para;</a></h3>
-<h4 id="41-run-an-end-to-end-test-and-generate-a-several-messages">4.1 Run an End-to-End Test and Generate a Several Messages<a class="headerlink" href="#41-run-an-end-to-end-test-and-generate-a-several-messages" title="Permanent link">&para;</a></h4>
+<h4 id="41-run-an-end-to-end-test-and-generate-several-messages">4.1 Run an End-to-End Test and Generate Several Messages<a class="headerlink" href="#41-run-an-end-to-end-test-and-generate-several-messages" title="Permanent link">&para;</a></h4>
 <p>Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize the Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.</p>
 <p>To get the number of current replicas of service <code>tasksmanager-backend-processor</code> we could run the command below, this should run single replica as we didn't load the service bus topic yet.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>az<span class="w"> </span>containerapp<span class="w"> </span>replica<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
@@ -1417,7 +1417,7 @@
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>--query<span class="w"> </span><span class="o">[]</span>.name
 </span></code></pre></div>
-<p>The message structure our backend processor expects is similar to the JSON shown below. So copy this message and click on Send messages button, paste the message content, set the content type to <code>application/json</code>, check the <code>Repeat Send</code> check box, select <code>10000</code> messages and put an interval of <code>1ms</code> between them. This ensures that we are sending high volume at short intervals, so that the single replica container app cannot absorb and process quickly enough and will consequently need to scale out. Finally click <code>Send</code> when you are ready.</p>
+<p>The message structure our backend processor expects is similar to the JSON shown below. So copy this message and click on <code>Send messages</code> button, paste the message content, set the content type to <code>application/json</code>, check the <code>Repeat Send</code> check box, select <code>10000</code> messages and put an interval of <code>1ms</code> between them. This ensures that we are sending high volume at short intervals, so that the single replica container app cannot absorb and process quickly enough and will consequently need to scale out. Finally click <code>Send</code> when you are ready.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="nt">&quot;isCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>

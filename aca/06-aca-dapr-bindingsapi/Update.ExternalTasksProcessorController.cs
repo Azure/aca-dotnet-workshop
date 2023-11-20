@@ -40,8 +40,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
                         { "blobName", $"{taskModel.TaskId}.json" },
                     };
 
-
-                 await _daprClient.InvokeBindingAsync(OUTPUT_BINDING_NAME, OUTPUT_BINDING_OPERATION, taskModel, metaData);
+                await _daprClient.InvokeBindingAsync(OUTPUT_BINDING_NAME, OUTPUT_BINDING_OPERATION, taskModel, metaData);
 
                 _logger.LogInformation("Invoked output binding '{0}' for external task. Task name: '{1}', Task Id: '{2}'", OUTPUT_BINDING_NAME, taskModel.TaskName, taskModel.TaskId);
 
