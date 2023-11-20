@@ -1879,7 +1879,7 @@ ACA does not support <a href="https://learn.microsoft.com/en-us/azure/azure-moni
 <p>We need to update all three container apps with new revisions so that our code changes are available for end users.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Notice how we used the property <code>--set-env-vars</code> to set new environment variable named <code>ApplicationInsights__InstrumentationKey</code>. Its value is a secret reference obtained from the secret <code>appinsights-key</code> we added in <a href="#1-add-application-insights-instrumentation-key-as-a-secret">step 1</a>.</p>
+<p>Notice how we used the property <code>--set-env-vars</code> to set new environment variable named <code>ApplicationInsights__InstrumentationKey</code>. Its value is a secret reference obtained from the secret <code>appinsights-key</code> we added in step 1.</p>
 </div>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Update Backend API App container app and create a new revision </span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>

@@ -1875,7 +1875,7 @@ As a result, it is strongly recommended to review a component's specs, paying pa
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>You need to replace the <strong>masterKey</strong> value with your Cosmos Account key. Remember this is only needed for local development debugging, we will not be using the masterKey when we deploy to ACA.</p>
-<p>Replace the <strong>url</strong> value with the URI value of your cosmos database account. You can get that from the <a href="https://portal.azure.com" target="_blank">Azure portal</a> by navigating to the cosmos database account overview page and get the uri value from there. 
+<p>Replace the <strong>url</strong> value with the URI value of your Azure Cosmos DB account. You can get that from the <a href="https://portal.azure.com" target="_blank">Azure portal</a> by navigating to the Azure Cosmos DB account overview page and get the uri value from there. 
 Basically the uri should have the following structure. <a href="https://COSMOS_DB_ACCOUNT.documents.azure.com:443/">https://COSMOS_DB_ACCOUNT.documents.azure.com:443/</a>.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">dapr-statestore-cosmos.yaml</label></div>
@@ -1917,7 +1917,7 @@ Using scopes is recommended for production workloads. In our case, we have set t
 <p>Dapr component scopes correspond to the Dapr application ID of a container app, not the container app name.</p>
 </div>
 <p>Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned.</p>
-<p>If you have been running the different microservices using the <a href="../13-appendix/01-run-debug-dapr-app-vscode/">debug and launch Dapr applications in VSCode</a> then remember to uncomment the following line inside tasks.json file. 
+<p>If you have been running the different microservices using the <a href="../13-appendix/01-run-debug-dapr-app-vscode/">debug and launch Dapr applications in VSCode</a> then remember to uncomment the following line inside tasks.json file.
 This will instruct dapr to load the local projects components located at <strong>./components</strong> instead of the global components' folder.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="hll"><span class="w">    </span><span class="nt">&quot;componentsPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./components&quot;</span>
@@ -1956,7 +1956,7 @@ This will instruct dapr to load the local projects components located at <strong
 <p class="admonition-title">Deprecation Warning</p>
 <p>components-path is being deprecated in favor of --resources-path. At the time of producing this workshop the --resources-path was not supported yet by the VS code extension. Hence, you will notice the use of the property "componentsPath": "./components" in the tasks.json file. Check the extension documentation in case that has changed.</p>
 </div>
-<p>After creating a new record you can navigate to the Data explorer on the <a href="https://portal.azure.com" target="_blank">Azure portal</a> for the azure cosmos database account. It should look like the image below:</p>
+<p>After creating a new record you can navigate to the Data explorer on the <a href="https://portal.azure.com" target="_blank">Azure portal</a> for the Azure Cosmos DB account. It should look like the image below:</p>
 <p><a class="glightbox" href="../../assets/images/04-aca-dapr-stateapi/cosmos-db-dapr-state-store.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="cosmos-db-dapr-state-store" src="../../assets/images/04-aca-dapr-stateapi/cosmos-db-dapr-state-store.jpg" /></a></p>
 <h5 id="key-prefix-strategies">Key Prefix Strategies<a class="headerlink" href="#key-prefix-strategies" title="Permanent link">&para;</a></h5>
 <p>When you look at the key stored per entry and for example <code>tasksmanager-backend-api||aa3eb856-8309-4e68-93af-119be0d400e8</code>, you will notice that the key is prefixed with the Dapr application App Id responsible
@@ -2025,7 +2025,7 @@ Azure Container Apps. The reason for this variance is that ACA Dapr schema is sl
 <p>Create a new folder named <strong>aca-components</strong> under the directory <strong>TasksTracker.ContainerApps</strong>, then add a new file as shown below:</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>Remember to replace the url value with the URI value of your cosmos database account. You can get that from the <a href="https://portal.azure.com" target="_blank">Azure portal</a> by navigating to the cosmos database account overview page and get the uri value from there.
+<p>Remember to replace the url value with the URI value of your cosmos database account. You can get that from the <a href="https://portal.azure.com" target="_blank">Azure portal</a> by navigating to the Azure Cosmos DB account overview page and get the uri value from there.
 Basically the uri should have the following structure <code>https://COSMOS_DB_ACCOUNT.documents.azure.com:443/</code></p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">containerapps-statestore-cosmos.yaml</label></div>

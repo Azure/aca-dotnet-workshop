@@ -2582,7 +2582,7 @@ You need to change the namespace variable as this one should be unique globally 
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We used the name <code>dapr-pubsub-servicebus</code> which should match the name of Pub/Sub component we've used earlier in the <a href="#4-create-an-api-endpoint-for-the-consumer-to-subscribe-to-the-topic">TasksNotifierController.cs</a> controller on the action method with the attribute <code>Topic</code>.</p>
+<p>We used the name <code>dapr-pubsub-servicebus</code> which should match the name of Pub/Sub component we've used earlier in the <code>TasksNotifierController.cs</code> controller on the action method with the attribute <code>Topic</code>.</p>
 <p>We set the metadata (key/value) to allow us to connect to Azure Service Bus topic. The metadata <code>consumerID</code> value should match the topic subscription name <code>sbts-tasks-processor</code>. </p>
 <p>We have set the scopes section to include the <code>tasksmanager-backend-api</code> and <code>tasksmanager-backend-processor</code> app ids, as those will be the Dapr apps that need access to Azure Service Bus for publishing and 
 consuming the messages.</p>
