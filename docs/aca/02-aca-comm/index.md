@@ -199,7 +199,7 @@ So far the Frontend App is sending HTTP requests to the publicly exposed Web API
 ??? tip "Want to know more about the command?"
     When you do this change, the FQDN (Application URL) will change, and it will be similar to the one shown below. Notice how there is an `Internal` part of the URL. `https://tasksmanager-backend-api.internal.[Environment unique identifier].eastus.azurecontainerapps.io/api/tasks/`
 
-    If you try to invoke the URL from the browser directly it will return 404 as this Internal Url can only be accessed from container apps within the container environment.
+    If you try to invoke the URL directly it will return *403 - Forbidden* as this internal Url can only be accessed successfully from container apps within the container environment. This means that while the API is not accessible, it still provides a clue that something exists at that URL. Ideally, we would want to see a *404 - Not Found*. However, recall from module 1 that we did *not* set `internal-only` for simplicity's sake of the workshop. In a production scenario, this should be done with completely private networking to not reveal anything.
     
     The FQDN consists of multiple parts. For example, all our Container Apps will be under a specific Environment unique identifier (e.g. `agreeablestone-8c14c04c`) and the Container App will vary based on the name provided, check the image below for a better explanation.
     ![Container Apps FQDN](../../assets/images/02-aca-comm/container-apps-fqdn.jpg)
