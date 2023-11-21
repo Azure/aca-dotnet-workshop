@@ -20,7 +20,7 @@ In this module, we will accomplish two objectives:
 
 ### 1. Optimizing Containers
 
-Azure Container Apps makes it simply to quickly become effective with containers. But even a managed container platform requires hygiene and can benefit greatly from smaller containers.  
+Azure Container Apps makes it simple to quickly become effective with containers. But even a managed container platform requires hygiene and can benefit greatly from smaller containers.  
 
 In this module, we will look into the benefits of optimized containers such as:
 
