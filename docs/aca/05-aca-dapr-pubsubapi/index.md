@@ -48,7 +48,7 @@ However, we want to have more control and provide our own component file, so let
     --8<-- "docs/aca/05-aca-dapr-pubsubapi/dapr-pubsub-redis.yaml"
     ```
 
-To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md).
+To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../30-appendix/01-run-debug-dapr-app-vscode.md).
 
 === ".NET 6 or below"
 
@@ -298,7 +298,7 @@ Shut down the sessions.
 
 #### 2.6 Optional: Update VS Code Tasks and Launch Configuration Files
 
-If you have followed the steps in the [appendix](../13-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added.
+If you have followed the steps in the [appendix](../30-appendix/01-run-debug-dapr-app-vscode.md) so far in order to be able to run the three services together (frontend, backend api, and backend processor) and debug them in VS Code, we need to update the files `tasks.json` and `launch.json` to include the new service we have added.
 
 ??? example "Click to expand the files to update"
 

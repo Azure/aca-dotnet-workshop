@@ -121,7 +121,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/Azure/
 
 ### Making Contributions
 
-Please familiarize yourself with how to run this project [here](https://azure.github.io/aca-dotnet-workshop/aca/13-appendix/02-github-local-codespaces).
+Please familiarize yourself with how to run this project [here](https://azure.github.io/aca-dotnet-workshop/aca/30-appendix/02-github-local-codespaces).
 
 Whenever you are submitting any changes to the guide, please follow these recommendations:
 

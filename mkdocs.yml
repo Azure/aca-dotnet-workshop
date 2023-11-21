@@ -27,9 +27,9 @@ nav:
   - Module 99 - Optimize Containers: aca/99-optimize-containers/index.md
   - About The Authors: aca/12-about-the-authors/index.md
   - Appendix:
-    - Debug and Launch Dapr Applications in VSCode: aca/13-appendix/01-run-debug-dapr-app-vscode.md
-    - Testing Changes Locally or with GitHub Codespaces: aca/13-appendix/02-github-local-codespaces.md
-    - Variables: aca/13-appendix/03-variables.md
+    - Debug and Launch Dapr Applications in VSCode: aca/30-appendix/01-run-debug-dapr-app-vscode.md
+    - Testing Changes Locally or with GitHub Codespaces: aca/30-appendix/02-github-local-codespaces.md
+    - Variables: aca/30-appendix/03-variables.md
   
 theme:
   name: material
