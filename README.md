@@ -20,4 +20,4 @@ We are most grateful for community involvement. Please see [CONTRIBUTING.md](htt
 
 ##### Acknowledgment
 
-The workshop's material, concepts, and code samples draw inspiration from a collection of blog articles authored by [Taiseer Joudeh](https://github.com/tjoudeh) and published on his [personal blog](https://bitoftech.net). The [workshop authors](https://azure.github.io/aca-dotnet-workshop/aca/12-about-the-authors/) have worked collaboratively to modify and augment the content, resulting in the current version of the workshop.
+The workshop's material, concepts, and code samples draw inspiration from a collection of blog articles authored by [Taiseer Joudeh](https://github.com/tjoudeh) and published on his [personal blog](https://bitoftech.net). The [workshop authors](https://azure.github.io/aca-dotnet-workshop/aca/29-about-the-authors/) have worked collaboratively to modify and augment the content, resulting in the current version of the workshop.
