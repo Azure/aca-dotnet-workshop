@@ -24,7 +24,7 @@ nav:
     - Deploy Infrastructure using Bicep via GitHub Actions: aca/10-aca-iac-bicep/ci-cd-git-action.md
     - Deploy infrastructure using Azure Devops Pipeline: aca/10-aca-iac-bicep/ci-cd-azdo.md
   - Module 11 - Integration with Azure Container Apps landing zone accelerator: aca/11-aca-landing-zone/index.md
-  - Module 99 - Optimize Containers: aca/99-optimize-containers/index.md
+  - Module 12 - Optimize Containers: aca/12-optimize-containers/index.md
   - About The Authors: aca/29-about-the-authors/index.md
   - Appendix:
     - Debug and Launch Dapr Applications in VSCode: aca/30-appendix/01-run-debug-dapr-app-vscode.md

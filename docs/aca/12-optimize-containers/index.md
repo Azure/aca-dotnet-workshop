@@ -2,10 +2,10 @@
 canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
 ---
 
-# Module 99 - Container Optimization
+# Module 12 - Container Optimization
 
 !!! info "Module Duration"
-    45 minutes
+    45-60 minutes
 
 ## Objective
 
@@ -300,7 +300,7 @@ Verify that the application continues to work with the three much smaller contai
 $FRONTEND_UI_BASE_URL
 ```
 
---8<-- "snippets/persist-state.md:module99"
+--8<-- "snippets/persist-state.md:module12"
 
 ## Review
 
