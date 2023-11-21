@@ -40,7 +40,7 @@ Our original `Dockerfile` looks like this:
 
 === "Backend.Api Dockerfile"
 ```Dockerfile
---8<-- "docs/aca/99-optimize-containers/Backend.Api.Dockerfile"
+--8<-- "docs/aca/12-optimize-containers/Backend.Api.Dockerfile"
 ```
 
 ```shell
@@ -55,11 +55,11 @@ docker image list
 
 This yields a sizable image at **222 MB**!
 
-![Backend API Status Quo](../../assets/images/99-optimize-containers/backend-api-status-quo.png)
+![Backend API Status Quo](../../assets/images/12-optimize-containers/backend-api-status-quo.png)
 
 This image is comprised of two images, 452 packages, and has 19 vulnerabilities.
 
-![Backend API Status Quo Image Stats](../../assets/images/99-optimize-containers/backend-api-status-quo-image-stats.png)
+![Backend API Status Quo Image Stats](../../assets/images/12-optimize-containers/backend-api-status-quo-image-stats.png)
 
 #### 1.2. Chiseled Images
 
@@ -67,7 +67,7 @@ Microsoft and Ubuntu's creator, Canonical, collaborated on the concept of a [chi
 
 === "Backend.Api Dockerfile.chiseled"
 ```Dockerfile hl_lines="1 8"
---8<-- "docs/aca/99-optimize-containers/Backend.Api.Dockerfile.chiseled"
+--8<-- "docs/aca/12-optimize-containers/Backend.Api.Dockerfile.chiseled"
 ```
 
 Create a new file, `Dockerfile.chiseled` in the Backend Api root directory, then build the image again:
@@ -80,11 +80,11 @@ docker image list
 
 Our image now stands at a much smaller **115 MB** - a drop of 107 MB and a size just 51.8% of the status quo image!
 
-![Backend API Chiseled](../../assets/images/99-optimize-containers/backend-api-chiseled.png)
+![Backend API Chiseled](../../assets/images/12-optimize-containers/backend-api-chiseled.png)
 
 This image is comprised of one image, 331 packages, and has five vulnerabilities.
 
-![Backend API Status Quo Image Stats](../../assets/images/99-optimize-containers/backend-api-chiseled-image-stats.png)
+![Backend API Status Quo Image Stats](../../assets/images/12-optimize-containers/backend-api-chiseled-image-stats.png)
 
 #### 1.3 Chiseled & Ahead-of-time (AOT) Compilation
 
@@ -92,7 +92,7 @@ This image is comprised of one image, 331 packages, and has five vulnerabilities
 
 === "Backend.Api Dockerfile.chiseled.aot"
 ```Dockerfile hl_lines="1 8"
---8<-- "docs/aca/99-optimize-containers/Backend.Api.Dockerfile.chiseled.aot"
+--8<-- "docs/aca/12-optimize-containers/Backend.Api.Dockerfile.chiseled.aot"
 ```
 
 Create a new file, `Dockerfile.chiseled.aot` in the Backend Api root directory, then build the image again:
@@ -109,12 +109,12 @@ docker image list
 
 Another massive reduction takes the image down to a mere **16 MB** - a total drop of 206 MB and a size just 7.2% of the status quo image!
 
-![Backend API Chiseled AOT](../../assets/images/99-optimize-containers/backend-api-chiseled-aot.png)
+![Backend API Chiseled AOT](../../assets/images/12-optimize-containers/backend-api-chiseled-aot.png)
 
 This image is comprised of one image, just 23 packages, and has nine vulnerabilities.  
 Notably, the four additional vulnerabilities are in the `openssl 3.0.2` package in this image.
 
-![Backend API Status Quo Image Stats](../../assets/images/99-optimize-containers/backend-api-chiseled-aot-image-stats.png)
+![Backend API Status Quo Image Stats](../../assets/images/12-optimize-containers/backend-api-chiseled-aot-image-stats.png)
 
 #### 1.4 Deploying the new Status Quo
 
@@ -156,7 +156,7 @@ Our original `Dockerfile` looks like this:
 
 === "Frontend.Ui Dockerfile"
 ```Dockerfile
---8<-- "docs/aca/99-optimize-containers/Frontend.Ui.Dockerfile"
+--8<-- "docs/aca/12-optimize-containers/Frontend.Ui.Dockerfile"
 ```
 
 ```shell
@@ -177,7 +177,7 @@ Skipping straight to AOT images:
 
 === "Frontend.Ui Dockerfile.chiseled.aot"
 ```Dockerfile hl_lines="1 8"
---8<-- "docs/aca/99-optimize-containers/Frontend.Ui.Dockerfile.chiseled.aot"
+--8<-- "docs/aca/12-optimize-containers/Frontend.Ui.Dockerfile.chiseled.aot"
 ```
 
 Create a new file, `Dockerfile.chiseled.aot` in the Frontend Ui root directory, then build the image again:
@@ -198,7 +198,7 @@ Our original `Dockerfile` looks like this:
 
 === "Backend.Svc Dockerfile"
 ```Dockerfile
---8<-- "docs/aca/99-optimize-containers/Backend.Svc.Dockerfile"
+--8<-- "docs/aca/12-optimize-containers/Backend.Svc.Dockerfile"
 ```
 
 ```shell
@@ -219,7 +219,7 @@ Skipping straight to AOT images:
 
 === "Backend.Svc Dockerfile.chiseled.aot"
 ```Dockerfile hl_lines="1 8"
---8<-- "docs/aca/99-optimize-containers/Backend.Svc.Dockerfile.chiseled.aot"
+--8<-- "docs/aca/12-optimize-containers/Backend.Svc.Dockerfile.chiseled.aot"
 ```
 
 Create a new file, `Dockerfile.chiseled.aot` in the Backend Svc root directory, then build the image again:
