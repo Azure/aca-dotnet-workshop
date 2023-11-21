@@ -13,7 +13,7 @@ Execute this script to persist all variables in the current session at any time.
 
 === "Set-Variables.ps1"
     ```powershell
-    --8<-- "docs/aca/13-appendix/Set-Variables.ps1"
+    --8<-- "docs/aca/30-appendix/Set-Variables.ps1"
     ```
 
 ## Restoring Variables

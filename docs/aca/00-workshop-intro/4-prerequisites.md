@@ -78,7 +78,7 @@ This workshop typically spans several days. As such, you may close your tools, e
 
 - In the root create a new file called `Set-Variables.ps1`.
 
-- Copy the [Set-Variables.ps1 script](../../aca/13-appendix/03-variables.md){target=_blank} into the newly-created `Set-Variables.ps1` file and save it.
+- Copy the [Set-Variables.ps1 script](../../aca/30-appendix/03-variables.md){target=_blank} into the newly-created `Set-Variables.ps1` file and save it.
 
 - Perform an initial commit of the `Set-Variables.ps1` file.
 

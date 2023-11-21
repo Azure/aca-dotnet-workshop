@@ -225,7 +225,7 @@ Now we are ready to give it an end-to-end test on our dev machines. To do so, ru
     --8<-- "snippets/dapr-run-backend-service.md:dapr-components"
 
 <!-- Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together
-in this [section](../13-appendix/01-run-debug-dapr-app-vscode.md). -->
+in this [section](../30-appendix/01-run-debug-dapr-app-vscode.md). -->
 
 Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from [here](https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview){target=_blank}.
 Login to your Azure Subscription and navigate to the storage account already created, create a queue, and use the same name you already used in the Dapr Input configuration file.
