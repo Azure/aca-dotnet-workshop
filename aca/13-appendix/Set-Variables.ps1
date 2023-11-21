@@ -55,6 +55,12 @@ foreach ($var in $vars) {
 
     if (Test-Path variable:$var) {
         $val = Get-Variable -Name $var -ValueOnly
+
+        # Powershell 7.4.0 requires a bit more type safety by setting quotes around strings.
+        if ($val.GetType().Name -eq "String") {
+            $val = "`"$val`""
+        }
+
         "Set-Variable -Scope Global -Name $var -Value $val" | Out-File -FilePath $file -Append
         $i++
     }
