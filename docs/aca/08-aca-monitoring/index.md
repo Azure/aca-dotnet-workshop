@@ -226,23 +226,15 @@ As we did before, we are required to build and push the images of the three appl
 To accomplish this, continue using the same PowerShell console and paste the code below (make sure you are on the following directory **TasksTracker.ContainerApps**):
 
 ```shell
-# Build Backend API on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+dotnet publish --project TasksTracker.TasksManager.Backend.Api `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_API_NAME
 
-# Build Backend Service on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_SERVICE_NAME" `
---file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
-
-# Build Frontend Web App on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
---file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+dotnet publish --project TasksTracker.Processor.Backend.Svc `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_SERVICE_NAME
 ```
 
 #### 3.3 Deploy New Revisions of the Services to ACA and Set a New Environment Variable

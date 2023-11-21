@@ -145,15 +145,20 @@ Add a new file folder **aca-components**. This file will be used when updating t
 To prepare for deployment to Azure Container Apps, we must build and deploy both application images to ACR, just as we did before. We can use the same PowerShell console use the following code (make sure you are on directory **TasksTracker.ContainerApps**):
 
 ```shell
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+dotnet publish --project TasksTracker.TasksManager.Backend.Api `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_API_NAME
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_SERVICE_NAME" `
---file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+dotnet publish --project TasksTracker.Processor.Backend.Svc `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_SERVICE_NAME
+
+dotnet publish --project TasksTracker.WebPortal.Frontend.Ui `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$FRONTEND_WEBAPP_NAME
 ```
 
 #### 3.2 Add the Cron Dapr Component to ACA Environment

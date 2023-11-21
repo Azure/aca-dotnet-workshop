@@ -62,18 +62,21 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.BACKEND_API_IMAGE_NAME }}
+          sep-tags: ';'
           tags: |
               type=raw,value=latest,enable={{is_default_branch}}
               type=ref,event=branch
               type=sha
-
+      - name: Install .NET
+        uses: actions/setup-dotnet@v3
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          file: ./TasksTracker.TasksManager.Backend.Api/Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+        run: dotnet publish -t:PublishContainer -p
+        working-directory: ./TasksTracker.TasksManager.Backend.Api
+        #TODO: no easy way to set more labels from env/cli 
+        env:
+          ContainerImageTags: ${{ steps.meta.outputs.tags }}
+          ContainerRegistry: ${{ env.REGISTRY }}
+          ContainerRepository: ${{ env.BACKEND_API_IMAGE_NAME }}
 
   build-and-push-frontend-image:
     needs: detect-changes
@@ -102,13 +105,16 @@ jobs:
             type=ref,event=branch
             type=sha
 
+      - name: Install .NET
+        uses: actions/setup-dotnet@v3
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          file: ./TasksTracker.WebPortal.Frontend.Ui/Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+        run: dotnet publish -t:PublishContainer -p
+        working-directory: ./TasksTracker.WebPortal.Frontend.Ui
+        #TODO: no easy way to set more labels from env/cli 
+        env:
+          ContainerImageTags: ${{ steps.meta.outputs.tags }}
+          ContainerRegistry: ${{ env.REGISTRY }}
+          ContainerRepository: ${{ env.FRONTEND_APP_IMAGE_NAME }}
 
   build-and-push-backend-processor-image:
     needs: detect-changes
@@ -131,16 +137,18 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.BACKEND_PROCESSOR_IMAGE_NAME }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=branch
             type=sha
 
+      - name: Install .NET
+        uses: actions/setup-dotnet@v3
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          file: ./TasksTracker.Processor.Backend.Svc/Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+        run: dotnet publish -t:PublishContainer -p
+        working-directory: ./TasksTracker.Processor.Backend.Svc
+        #TODO: no easy way to set more labels from env/cli 
+        env:
+          ContainerImageTags: ${{ steps.meta.outputs.tags }}
+          ContainerRegistry: ${{ env.REGISTRY }}
+          ContainerRepository: ${{ env.BACKEND_PROCESSOR_IMAGE_NAME }}

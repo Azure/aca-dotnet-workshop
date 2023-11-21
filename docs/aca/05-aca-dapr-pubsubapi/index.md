@@ -116,8 +116,6 @@ Now we will add a new ASP.NET Core Web API project named **TasksTracker.Processo
 
 - Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files from the new `TasksTracker.Processor.Backend.Svc` project folder.
 
---8<-- "snippets/containerize-app.md"
-
 #### 2.2 Add Models
 
 Now we will add the model which will be used to deserialize the published message. Create a **Models** folder and add this file:
@@ -462,15 +460,15 @@ As we have done previously we need to build and deploy both app images to ACR, s
 ```shell
 $BACKEND_SERVICE_NAME="tasksmanager-backend-processor"
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+dotnet publish --project TasksTracker.TasksManager.Backend.Api `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_API_NAME
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_SERVICE_NAME" `
---file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+dotnet publish --project TasksTracker.Processor.Backend.Svc `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_SERVICE_NAME
 ```
 
 #### 4.2 Create a new Azure Container App to host the new Backend Background Processor

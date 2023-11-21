@@ -308,21 +308,20 @@ Next, we will prepare container images for the three container apps and update t
 
         ## Build Backend API on ACR and Push to ACR
 
-        az acr build --registry $CONTAINER_REGISTRY_NAME `
-            --image "tasksmanager/tasksmanager-backend-api" `
-            --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
-        
-        ## Build Backend Service on ACR and Push to ACR
+        dotnet publish --project TasksTracker.TasksManager.Backend.Api `
+        -t:PublishContainer `
+        -p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+        -p ContainerRepository=tasksmanager/$BACKEND_API_NAME
 
-        az acr build --registry $CONTAINER_REGISTRY_NAME `
-            --image "tasksmanager/tasksmanager-backend-processor" `
-            --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+        dotnet publish --project TasksTracker.Processor.Backend.Svc `
+        -t:PublishContainer `
+        -p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+        -p ContainerRepository=tasksmanager/$BACKEND_SERVICE_NAME
 
-        ## Build Frontend Web App on ACR and Push to ACR
-
-        az acr build --registry $CONTAINER_REGISTRY_NAME `
-            --image "tasksmanager/tasksmanager-frontend-webapp" `
-            --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+        dotnet publish --project TasksTracker.WebPortal.Frontend.Ui `
+        -t:PublishContainer `
+        -p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+        -p ContainerRepository=tasksmanager/$FRONTEND_WEBAPP_NAME
         ```
 
     3. Update the `main.parameters.json` file with the container registry name and the container images names as shown below:

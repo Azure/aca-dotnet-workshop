@@ -36,21 +36,17 @@ Please ensure you have the Docker daemon ready. Running *Docker Desktop* does it
 
 Let's focus on our first project, the Backend API. This is an ASP.NET Core application.
 
-Our original `Dockerfile` looks like this:
-
-=== "Backend.Api Dockerfile"
-```Dockerfile
---8<-- "docs/aca/12-optimize-containers/Backend.Api.Dockerfile"
-```
+With no changes, the container produced by `dotnet publish` uses the `mcr.microsoft.com/dotnet/aspnet:8.0` base image. Let's publish it locally to inspect the image. 
 
 ```shell
 cd ~\TasksTracker.ContainerApps
 ```
 
 ```shell
-docker build -t backend-api-status-quo -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile .
+dotnet publish -t:PublishContainer `
+    -p ContainerRepository=tasksmanager/$BACKEND_API_NAME
 
-docker image list
+docker image list tasksmanager*
 ```
 
 This yields a sizable image at **222 MB**!
@@ -65,17 +61,14 @@ This image is comprised of two images, 452 packages, and has 19 vulnerabilities.
 
 Microsoft and Ubuntu's creator, Canonical, collaborated on the concept of a [chiseled image for .NET](https://learn.microsoft.com/en-us/dotnet/core/docker/container-images#scenario-based-images){target=_blank}. Take a general-purpose base image and start chiseling away until you are left with an image that contains nothing more than the bare necessities to run your workload. No shell, no package manager, no bloat.
 
-=== "Backend.Api Dockerfile.chiseled"
-```Dockerfile hl_lines="1 8"
---8<-- "docs/aca/12-optimize-containers/Backend.Api.Dockerfile.chiseled"
-```
-
-Create a new file, `Dockerfile.chiseled` in the Backend Api root directory, then build the image again:
+Let's use the .NET SDK to choose these base images:
 
 ```shell
-docker build -t backend-api-chiseled -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile.chiseled .
+dotnet publish -t:PublishContainer `
+    -p ContainerRepository=tasksmanager/$BACKEND_API_NAME `
+    -p ContainerFamily=jammy-chiseled
 
-docker image list
+docker image list taskmanager*
 ```
 
 Our image now stands at a much smaller **115 MB** - a drop of 107 MB and a size just 51.8% of the status quo image!
@@ -90,15 +83,13 @@ This image is comprised of one image, 331 packages, and has five vulnerabilities
 
 [Ahead-of-time (AOT) compilation](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot){target_blank} was first introduced with .NET 7. AOT compiles the application to native code instead of Intermediate Language (IL). This means that we must have foresight as to what platform will be hosting the application. Our process is simplified by the fact that containers in Azure Container Apps are only Linux-hosted. By using native code, we will bypass the just-in-time (JIT) compiler when the container executes, which means we will have faster startup and a smaller memory footprint. It also means these images can run in environments where JIT compilation may not be permitted.
 
-=== "Backend.Api Dockerfile.chiseled.aot"
-```Dockerfile hl_lines="1 8"
---8<-- "docs/aca/12-optimize-containers/Backend.Api.Dockerfile.chiseled.aot"
-```
-
-Create a new file, `Dockerfile.chiseled.aot` in the Backend Api root directory, then build the image again:
+Let's build our app targeting a chiseled image and using AOT compilation:
 
 ```shell
-docker build -t backend-api-chiseled-aot -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile.chiseled.aot .
+dotnet publish -t:PublishContainer `
+    -p ContainerRepository=tasksmanager/$BACKEND_API_NAME `
+    -p PublishAot=true `
+    -p ContainerBaseImage=mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot
 
 docker image list
 ```
@@ -123,12 +114,14 @@ While the image is vastly reduced, what hasn't changed is the functionality of t
 Let's update our existing Backend API container app with a new build and revision:
 
 ```shell hl_lines="6"
-## Build Backend Service on ACR and Push to ACR
+## Build Backend Service and Push to ACR
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot' . 
+dotnet publish --project TasksTracker.TasksManager.Backend.Api `
+-t:PublishContainer `
+-p PublishAot=true `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_API_NAME `
+-p ContainerBaseImage=mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot
 
 # Update Backend API App container app and create a new revision 
 az containerapp update `
@@ -152,21 +145,19 @@ As all three projects use ASP.NET Core, we can follow the same approach with the
 
 #### 2.1.1 The Status Quo
 
-Our original `Dockerfile` looks like this:
-
-=== "Frontend.Ui Dockerfile"
-```Dockerfile
---8<-- "docs/aca/12-optimize-containers/Frontend.Ui.Dockerfile"
-```
+Our original container looks like this:
 
 ```shell
 cd ~\TasksTracker.ContainerApps
 ```
 
 ```shell
-docker build -t frontend-ui-status-quo -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile .
+dotnet publish `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$FRONTEND_WEBAPP_NAME `
 
-docker image list
+docker image list tasksmanager*
 ```
 
 This yields an image size of **227 MB**.
@@ -175,15 +166,13 @@ This yields an image size of **227 MB**.
 
 Skipping straight to AOT images:
 
-=== "Frontend.Ui Dockerfile.chiseled.aot"
-```Dockerfile hl_lines="1 8"
---8<-- "docs/aca/12-optimize-containers/Frontend.Ui.Dockerfile.chiseled.aot"
-```
-
-Create a new file, `Dockerfile.chiseled.aot` in the Frontend Ui root directory, then build the image again:
-
 ```shell
-docker build -t frontend-ui-chiseled-aot -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile.chiseled.aot .
+dotnet publish `
+-t:PublishContainer `
+-p PublishAot=true `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$FRONTEND_WEBAPP_NAME `
+-p ContainerBaseImage=mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot
 
 docker image list
 ```
@@ -194,21 +183,19 @@ This much-improved image is now **20.6 MB**.
 
 #### 2.2.1 The Status Quo
 
-Our original `Dockerfile` looks like this:
-
-=== "Backend.Svc Dockerfile"
-```Dockerfile
---8<-- "docs/aca/12-optimize-containers/Backend.Svc.Dockerfile"
-```
+Our original container looks like this:
 
 ```shell
 cd ~\TasksTracker.ContainerApps
 ```
 
 ```shell
-docker build -t backend-svc-status-quo -f .\TasksTracker.Processor.Backend.Svc\Dockerfile .
+dotnet publish `
+-t:PublishContainer `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_SERVICE_NAME `
 
-docker image list
+docker image list tasksmanager*
 ```
 
 This yields an image size of **222 MB**.
@@ -217,17 +204,15 @@ This yields an image size of **222 MB**.
 
 Skipping straight to AOT images:
 
-=== "Backend.Svc Dockerfile.chiseled.aot"
-```Dockerfile hl_lines="1 8"
---8<-- "docs/aca/12-optimize-containers/Backend.Svc.Dockerfile.chiseled.aot"
-```
-
-Create a new file, `Dockerfile.chiseled.aot` in the Backend Svc root directory, then build the image again:
-
 ```shell
-docker build -t backend-svc-chiseled-aot -f .\TasksTracker.Processor.Backend.Svc\Dockerfile.chiseled.aot .
+dotnet publish `
+-t:PublishContainer `
+-p PublishAot=true `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_SERVICE_NAME `
+-p ContainerBaseImage=mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot
 
-docker image list
+docker image list tasksmanager*
 ```
 
 This much-improved image is now **16 MB**.
@@ -252,23 +237,30 @@ The Backend API and the Backend Svc projects are all but identical while the Fro
 The last step is to build & deploy updated images. For good measure, let's do the Backend API as well even though we did it earlier already.
 
 ```shell hl_lines="5 11 17"
-# Build Backend API on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot' . 
+# Build Backend API and Push to ACR
+dotnet publish --project TasksTracker.TasksManager.Backend.Api `
+-t:PublishContainer `
+-p PublishAot=true `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_API_NAME `
+-p ContainerBaseImage=mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot
 
-# Build Backend Service on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_SERVICE_NAME" `
---file 'TasksTracker.Processor.Backend.Svc/Dockerfile.chiseled.aot' .
+# Build Backend Service and Push to ACR
+dotnet publish --project TasksTracker.Processor.Backend.Svc `
+-t:PublishContainer `
+-p PublishAot=true `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$BACKEND_SERVICE_NAME `
+-p ContainerBaseImage=mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot
 
 # Build Frontend Web App on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
---file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile.chiseled.aot' .
+dotnet publish --project TasksTracker.WebPortal.Frontend.Ui `
+-t:PublishContainer `
+-p PublishAot=true `
+-p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+-p ContainerRepository=tasksmanager/$FRONTEND_WEBAPP_NAME `
+-p ContainerBaseImage=mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot
+
 ```
 
 ```shell

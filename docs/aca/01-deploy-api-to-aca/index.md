@@ -56,8 +56,6 @@ In this module, we will accomplish three objectives:
 
 - Delete the boilerplate `WeatherForecast.cs` and `Controllers\WeatherForecastController.cs` files from the new `TasksTracker.TasksManager.Backend.Api` project folder.
 
---8<-- "snippets/containerize-app.md"
-
 - In the project root add a new folder named **Models** and create a new file with name below. These are the DTOs that will be used across the projects.
 
     === "TaskModel.cs"
@@ -287,13 +285,13 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
 ### 3. Deploy Web API Backend Project to ACA
 
-- Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the `.csproj`.
+- Build the Web API project on ACR and push the docker image to ACR. Use the below command to use the .NET SDK to publish a container for the backend API.
 
     ```shell
-    az acr build `
-    --registry $AZURE_CONTAINER_REGISTRY_NAME `
-    --image "tasksmanager/$BACKEND_API_NAME" `
-    --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+    dotnet publish --project TasksTracker.TasksManager.Backend.Api `
+        -t:PublishContainer `
+        -p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+        -p ContainerRepository=tasksmanager/$BACKEND_API_NAME
     ```
 
     Once this step is completed, you can verify the results by going to the [Azure portal](https://portal.azure.com){target=_blank} and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created, and that there is a new Docker image with a `latest` tag.

@@ -27,8 +27,6 @@ In this module, we will accomplish three objectives:
     dotnet new webapp -o TasksTracker.WebPortal.Frontend.Ui
     ```
 
---8<-- "snippets/containerize-app.md"
-
 - From inside the **Pages** folder, add a new folder named **Tasks**. Within that folder, add a new folder named **Models**, then create file as shown below.
 
     === "TasksModel.cs"
@@ -130,17 +128,17 @@ By looking at the cshtml content notice that the page is expecting a query strin
     $FRONTEND_WEBAPP_NAME="tasksmanager-frontend-webapp"
     ```
 
-- Now we will build and push the Web App project docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context. In our case, we need to be on the parent directory which hosts the .csproject.
+- Now we will build and push the Web App project docker image to ACR. Use the below command to use the .NET SDK to publish a container for the Web App project.
 
     ```powershell
     cd ~\TasksTracker.ContainerApps
     ```
 
     ```powershell
-    az acr build `
-    --registry $AZURE_CONTAINER_REGISTRY_NAME `
-    --image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
-    --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+    dotnet publish --project TasksTracker.WebPortal.Frontend.Ui `
+        -t:PublishContainer `
+        -p ContainerRegistry=$AZURE_CONTAINER_REGISTRY_NAME `
+        -p ContainerRepository=tasksmanager/$FRONTEND_WEBAPP_NAME
     ```
 
 - Once this step is completed you can verify the results by going to the [Azure portal](https://portal.azure.com){target=_blank} and checking that a new repository named `tasksmanager/tasksmanager-frontend-webapp` has been created and that a new docker image with a `latest` tag has been created.
