@@ -42,7 +42,7 @@
 
     
       
-        <title>Module 99 - Optimize Containers - Azure Container Apps - Workshop</title>
+        <title>Module 12 - Optimize Containers - Azure Container Apps - Workshop</title>
       
     
     
@@ -124,7 +124,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-99-container-optimization" class="md-skip">
+        <a href="#module-12-container-optimization" class="md-skip">
           Skip to content
         </a>
       
@@ -159,7 +159,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Module 99 - Optimize Containers
+              Module 12 - Optimize Containers
             
           </span>
         </div>
@@ -791,7 +791,7 @@
           
   
   <span class="md-ellipsis">
-    Module 99 - Optimize Containers
+    Module 12 - Optimize Containers
   </span>
   
 
@@ -802,7 +802,7 @@
         
   
   <span class="md-ellipsis">
-    Module 99 - Optimize Containers
+    Module 12 - Optimize Containers
   </span>
   
 
@@ -1377,10 +1377,10 @@
   
 
 
-<h1 id="module-99-container-optimization">Module 99 - Container Optimization<a class="headerlink" href="#module-99-container-optimization" title="Permanent link">&para;</a></h1>
+<h1 id="module-12-container-optimization">Module 12 - Container Optimization<a class="headerlink" href="#module-12-container-optimization" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Module Duration</p>
-<p>45 minutes</p>
+<p>45-60 minutes</p>
 </div>
 <h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>In this module, we will accomplish two objectives:</p>
@@ -1451,9 +1451,9 @@
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
 </span></code></pre></div>
 <p>This yields a sizable image at <strong>222 MB</strong>!</p>
-<p><a class="glightbox" href="../../assets/images/99-optimize-containers/backend-api-status-quo.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo" src="../../assets/images/99-optimize-containers/backend-api-status-quo.png" /></a></p>
+<p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-status-quo.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo" src="../../assets/images/12-optimize-containers/backend-api-status-quo.png" /></a></p>
 <p>This image is comprised of two images, 452 packages, and has 19 vulnerabilities.</p>
-<p><a class="glightbox" href="../../assets/images/99-optimize-containers/backend-api-status-quo-image-stats.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo Image Stats" src="../../assets/images/99-optimize-containers/backend-api-status-quo-image-stats.png" /></a></p>
+<p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-status-quo-image-stats.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo Image Stats" src="../../assets/images/12-optimize-containers/backend-api-status-quo-image-stats.png" /></a></p>
 <h4 id="12-chiseled-images">1.2. Chiseled Images<a class="headerlink" href="#12-chiseled-images" title="Permanent link">&para;</a></h4>
 <p>Microsoft and Ubuntu's creator, Canonical, collaborated on the concept of a <a href="https://learn.microsoft.com/en-us/dotnet/core/docker/container-images#scenario-based-images" target="_blank">chiseled image for .NET</a>. Take a general-purpose base image and start chiseling away until you are left with an image that contains nothing more than the bare necessities to run your workload. No shell, no package manager, no bloat.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Backend.Api Dockerfile.chiseled</label></div>
@@ -1492,9 +1492,9 @@
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
 </span></code></pre></div>
 <p>Our image now stands at a much smaller <strong>115 MB</strong> - a drop of 107 MB and a size just 51.8% of the status quo image!</p>
-<p><a class="glightbox" href="../../assets/images/99-optimize-containers/backend-api-chiseled.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Chiseled" src="../../assets/images/99-optimize-containers/backend-api-chiseled.png" /></a></p>
+<p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-chiseled.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Chiseled" src="../../assets/images/12-optimize-containers/backend-api-chiseled.png" /></a></p>
 <p>This image is comprised of one image, 331 packages, and has five vulnerabilities.</p>
-<p><a class="glightbox" href="../../assets/images/99-optimize-containers/backend-api-chiseled-image-stats.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo Image Stats" src="../../assets/images/99-optimize-containers/backend-api-chiseled-image-stats.png" /></a></p>
+<p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-chiseled-image-stats.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo Image Stats" src="../../assets/images/12-optimize-containers/backend-api-chiseled-image-stats.png" /></a></p>
 <h4 id="13-chiseled-ahead-of-time-aot-compilation">1.3 Chiseled &amp; Ahead-of-time (AOT) Compilation<a class="headerlink" href="#13-chiseled-ahead-of-time-aot-compilation" title="Permanent link">&para;</a></h4>
 <p><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot" target_blank="target_blank">Ahead-of-time (AOT) compilation</a> was first introduced with .NET 7. AOT compiles the application to native code instead of Intermediate Language (IL). This means that we must have foresight as to what platform will be hosting the application. Our process is simplified by the fact that containers in Azure Container Apps are only Linux-hosted. By using native code, we will bypass the just-in-time (JIT) compiler when the container executes, which means we will have faster startup and a smaller memory footprint. It also means these images can run in environments where JIT compilation may not be permitted.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Backend.Api Dockerfile.chiseled.aot</label></div>
@@ -1537,10 +1537,10 @@
 <p>As the name implies, these images are produced nightly. They are not yet images that are versioned and stable in the registry. Your mileage may vary.</p>
 </div>
 <p>Another massive reduction takes the image down to a mere <strong>16 MB</strong> - a total drop of 206 MB and a size just 7.2% of the status quo image!</p>
-<p><a class="glightbox" href="../../assets/images/99-optimize-containers/backend-api-chiseled-aot.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Chiseled AOT" src="../../assets/images/99-optimize-containers/backend-api-chiseled-aot.png" /></a></p>
+<p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-chiseled-aot.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Chiseled AOT" src="../../assets/images/12-optimize-containers/backend-api-chiseled-aot.png" /></a></p>
 <p>This image is comprised of one image, just 23 packages, and has nine vulnerabilities.<br />
 Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</code> package in this image.</p>
-<p><a class="glightbox" href="../../assets/images/99-optimize-containers/backend-api-chiseled-aot-image-stats.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo Image Stats" src="../../assets/images/99-optimize-containers/backend-api-chiseled-aot-image-stats.png" /></a></p>
+<p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-chiseled-aot-image-stats.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo Image Stats" src="../../assets/images/12-optimize-containers/backend-api-chiseled-aot-image-stats.png" /></a></p>
 <h4 id="14-deploying-the-new-status-quo">1.4 Deploying the new Status Quo<a class="headerlink" href="#14-deploying-the-new-status-quo" title="Permanent link">&para;</a></h4>
 <p>While the image is vastly reduced, what hasn't changed is the functionality of the API. Whether you are executing it locally or deploying to Azure, the Backend API will continue to function as it always has. However, now it has less vulnerabilities, less time to transfer from the registry, less startup time, and less of a memory footprint. Furthermore, 16 MB is the uncompressed image. With compression, we are likely to continue dropping in size.</p>
 <p>Let's update our existing Backend API container app with a new build and revision:</p>
@@ -1832,7 +1832,7 @@ Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</cod
 <li>
 <p>Navigate to the root and persist the module to Git.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Module 99&quot;</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Module 12&quot;</span>
 </span></code></pre></div>
 </li>
 </ul>
