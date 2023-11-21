@@ -128,7 +128,7 @@ Let's update our existing Backend API container app with a new build and revisio
 az acr build `
 --registry $AZURE_CONTAINER_REGISTRY_NAME `
 --image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+--file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot' . 
 
 # Update Backend API App container app and create a new revision 
 az containerapp update `
