@@ -13,7 +13,7 @@ Make sure you have your development environment set up and configured.
 
 1. An Azure account with an active subscription - [Create an account for free](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio){target=_blank}
 1. dotnet 6.0 or a higher version - [Install](https://dotnet.microsoft.com/en-us/download){target=_blank}
-1. PowerShell 7.0 or higher version - [Install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
+1. PowerShell 7.0 or higher version (For Windows Users only!) - [Install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
 1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/){target=_blank}
 1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}
 1. VS Code Docker extension - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker){target=_blank}
