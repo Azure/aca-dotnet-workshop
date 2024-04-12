@@ -43,4 +43,8 @@ jobs:
   publish-docs:
     name: Publish
     needs: release-docs
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     uses: ./.github/workflows/publish-docs.yml
