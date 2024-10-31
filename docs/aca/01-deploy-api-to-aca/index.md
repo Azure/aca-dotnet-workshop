@@ -42,12 +42,6 @@ In this module, we will accomplish three objectives:
         
         As our workshop takes advantage of microservices, the use case for minimal APIs is given. However, in order to make the workshop a bit more demonstrable, we will, for now, stick with controller-based APIs.
 
-    === ".NET 7 or below"
-
-        ```shell
-        dotnet new webapi -o TasksTracker.TasksManager.Backend.Api
-        ```
-
     === ".NET 8 or above"
 
         ```shell
