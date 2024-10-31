@@ -17,9 +17,6 @@ To accomplish this, open file `launch.json` and add the two configurations shown
             ```json
             --8<-- "https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.vscode/launch.json"
             ```
-!!! note
-    The configuration below assumes that you are using **.net 6**. If you are using a different .net version make sure you update the paths to use the correct version.
-    For example if using .net 7 then change the path to say net7.0 instead of net6.0.
 
 === "launch.json"
 

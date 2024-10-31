@@ -212,13 +212,7 @@ Now we are ready to give it an end-to-end test on our dev machines. To do so, ru
 
 --8<-- "snippets/restore-variables.md:7:11"
 
-=== ".NET 6 or below"
-
-    --8<-- "snippets/dapr-run-frontend-webapp.md:basic-dotnet6"
-    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
-    --8<-- "snippets/dapr-run-backend-service.md:dapr-components-dotnet6"
-
-=== ".NET 7 or above"
+=== ".NET 8 or above"
 
     --8<-- "snippets/dapr-run-frontend-webapp.md:basic"
     --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
