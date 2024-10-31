@@ -83,7 +83,7 @@ jobs:
     needs: [ validate ]
     name: Run what-if on the bicep template
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: azure/login@v1
         name: Sign in to Azure
         with:
@@ -105,7 +105,7 @@ jobs:
     if : ${{ vars.CONTAINER_REGISTRY_NAME != '' }}
     needs: [ preview ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: azure/login@v1
         name: Sign in to Azure
         with:
@@ -115,7 +115,7 @@ jobs:
       - name: Create ACR ${{ vars.CONTAINER_REGISTRY_NAME }} if does not exist
         uses: azure/CLI@v1
         with:
-          inlineScript: | 
+          inlineScript: |
             if [[ $(az acr check-name -n ${{ vars.CONTAINER_REGISTRY_NAME }}  -o tsv --query "nameAvailable") == false ]]
             then
               echo "ACR already exists."
@@ -144,7 +144,7 @@ jobs:
     needs: [ create-acr]
     name: Deploy to Azure subscription with ACR
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: azure/login@v1
         name: Sign in to Azure
         with:
@@ -169,7 +169,7 @@ jobs:
     needs: [ preview ]
     name: Deploy to Azure subscription with GHCR
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: azure/login@v1
         name: Sign in to Azure
         with:
@@ -192,7 +192,7 @@ jobs:
     runs-on: ubuntu-latest
     if : ${{ github.event.inputs.teardown == 'true' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: azure/login@v1
         name: Sign in to Azure
         with:
