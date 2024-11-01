@@ -50,11 +50,7 @@ However, we want to have more control and provide our own component file, so let
 
 To try out the Pub/Sub API, run the Backend API from VS Code by running the below command or using the Run and Debug tasks we have created in the [appendix](../30-appendix/01-run-debug-dapr-app-vscode.md).
 
-=== ".NET 6 or below"
-
-    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
-
-=== ".NET 7 or above"
+=== ".NET 8 or above"
 
     --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
 
@@ -102,12 +98,6 @@ Now we will add a new ASP.NET Core Web API project named **TasksTracker.Processo
     
     As our workshop takes advantage of microservices, the use case for minimal APIs is given. However, in order to make the workshop a bit more demonstrable, we will, for now, stick with controller-based APIs.
 
-=== ".NET 7 or below"
-
-    ```shell
-    dotnet new webapi -o TasksTracker.Processor.Backend.Svc
-    ```
-
 === ".NET 8 or above"
 
     ```shell
@@ -135,25 +125,7 @@ Now we will add the model which will be used to deserialize the published messag
 
 Now we will install Dapr SDK to be able to subscribe to the service broker topic in a programmatic way. Add the highlighted NuGet package to the file shown below:
 
-=== ".NET 6"
-
-    === "TasksTracker.Processor.Backend.Svc.csproj"
-
-        ```xml
-        <ItemGroup>
-          <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
-        </ItemGroup>
-        ```
-
-=== ".NET 7"
-
-    === "TasksTracker.Processor.Backend.Svc.csproj"
-
-        ```xml hl_lines="10"
-        --8<-- "docs/aca/05-aca-dapr-pubsubapi/Backend.Svc-dotnet7.csproj"
-        ```
-
-=== ".NET 8"
+=== ".NET 8 or above"
 
     === "TasksTracker.Processor.Backend.Svc.csproj"
 
@@ -211,15 +183,7 @@ In our case, a sample response will be as follows:
 
 Update below file in **TasksTracker.Processor.Backend.Svc** project.
 
-=== ".NET 6"
-
-    === "Program.cs"
-    
-        ```csharp hl_lines="9 13 15"
-        --8<-- "docs/aca/05-aca-dapr-pubsubapi/Program-dotnet6.cs"
-        ```
-
-=== ".NET 7 or above"
+=== ".NET 8 or above"
 
     === "Program.cs"
 
@@ -257,12 +221,7 @@ To do so, run the below commands in two separate PowerShell console, ensure you 
 
 --8<-- "snippets/restore-variables.md:7:11"
 
-=== ".NET 6 or below"
-
-    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
-    --8<-- "snippets/dapr-run-backend-service.md:dapr-components-dotnet6"
-
-=== ".NET 7 or above"
+=== ".NET 8 or above"
 
     --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
     --8<-- "snippets/dapr-run-backend-service.md:dapr-components"
@@ -418,12 +377,7 @@ With all those bits in place, we are ready to run the publisher service `Backend
 !!! note
     Ensure you are on the right root folder of each respective project.
 
-=== ".NET 6 or below"
-
-    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
-    --8<-- "snippets/dapr-run-backend-service.md:dapr-components-dotnet6"
-
-=== ".NET 7 or above"
+=== ".NET 8 or above"
 
     --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
     --8<-- "snippets/dapr-run-backend-service.md:dapr-components"

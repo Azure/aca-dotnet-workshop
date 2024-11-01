@@ -68,11 +68,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 #### 2.2 Test `{{ apps.backend }}` Locally
 
-=== ".NET 6 or below"
-
-    --8<-- "snippets/dapr-run-backend-api.md:basic-dotnet6"
-
-=== ".NET 7 or above"
+=== ".NET 8 or above"
 
     --8<-- "snippets/dapr-run-backend-api.md:basic"
 
@@ -131,23 +127,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 - Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
 
-    === ".NET 6"
-        === "TasksTracker.WebPortal.Frontend.Ui.csproj"
-
-            ```xml
-            <ItemGroup>
-              <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
-            </ItemGroup>
-            ```
-
-    === ".NET 7"
-        === "TasksTracker.WebPortal.Frontend.Ui.csproj"
-
-            ```xml hl_lines="9-11"
-            --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui-dotnet7.csproj"
-            ```
-
-    === ".NET 8"
+    === ".NET 8 or above"
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
 
             ```xml hl_lines="9-11"
@@ -156,29 +136,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
     - Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the highlighted below.
 
-    === ".NET 6"
-        === "Program.cs"
-
-            ```csharp hl_lines="11"
-            namespace TasksTracker.WebPortal.Frontend.Ui
-            {
-                public class Program
-                {
-                    public static void Main(string[] args)
-                    {
-                        var builder = WebApplication.CreateBuilder(args);
-                        // Add services to the container.
-                        builder.Services.AddRazorPages();
-                        // Code removed for brevity
-                        builder.Services.AddDaprClient();
-                        var app = builder.Build();
-                        // Code removed for brevity 
-                    }
-                }
-            }
-            ```
-
-    === ".NET 7 or above"
+    === ".NET 8 or above"
         === "Program.cs"
 
             ```csharp hl_lines="6"
@@ -230,13 +188,7 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 
 - In each of the two terminals previously opened, run the frontend UI and backend API respectively.
 
-    === ".NET 6 or below"
-
-        --8<-- "snippets/dapr-run-frontend-webapp.md:basic-dotnet6"
-
-        --8<-- "snippets/dapr-run-backend-api.md:basic-dotnet6"
-
-    === ".NET 7 or above"
+    === ".NET 8 or above"
 
         --8<-- "snippets/dapr-run-frontend-webapp.md:basic"
 

@@ -51,54 +51,7 @@ Our next step is to incorporate the Application Insights SDK into the **three mi
 
 To incorporate the SDK, use the NuGet reference below in the `csproj` file of the Backend API project. You may locate the csproj file in the project directory **TasksTracker.TasksManager.Backend.Api**:
 
-=== ".NET 6"
-    === "TasksTracker.TasksManager.Backend.Api.csproj"
-
-        ```xml hl_lines="3"
-        <ItemGroup>
-            <!--Other packages are removed for brevity-->
-            <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-        </ItemGroup>
-        ```
-
-    === "TasksTracker.TasksManager.Backend.Svc.csproj"
-
-        ```xml hl_lines="3"
-        <ItemGroup>
-            <!--Other packages are removed for brevity-->
-            <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-        </ItemGroup>
-        ```
-
-    === "TasksTracker.TasksManager.Frontend.Ui.csproj"
-
-        ```xml hl_lines="3"
-        <ItemGroup>
-            <!--Other packages are removed for brevity-->
-            <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-        </ItemGroup>
-        ```
-
-=== ".NET 7"
-    === "TasksTracker.TasksManager.Backend.Api.csproj"
-
-        ```xml hl_lines="11"
-        --8<-- "docs/aca/08-aca-monitoring/Backend.Api-dotnet7.csproj"
-        ```
-
-    === "TasksTracker.TasksManager.Backend.Svc.csproj"
-
-        ```xml hl_lines="11"
-        --8<-- "docs/aca/08-aca-monitoring/Backend.Svc-dotnet7.csproj"
-        ```
-
-    === "TasksTracker.TasksManager.Frontend.Ui.csproj"
-
-        ```xml hl_lines="11"
-        --8<-- "docs/aca/08-aca-monitoring/Frontend.Ui-dotnet7.csproj"
-        ```
-
-=== ".NET 8"
+=== ".NET 8 or above"
     === "TasksTracker.TasksManager.Backend.Api.csproj"
 
         ```xml hl_lines="12"

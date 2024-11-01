@@ -14,3 +14,4 @@
         !!! bug "Dockerfile Build Platform"
 
             Azure Container Registry does not set `$BUILDPLATFORM` presently when building containers. This consequently causes the build to fail. See [this issue](https://github.com/microsoft/vscode-docker/issues/4149){target=_blank} for details. Therefore, we remove it from the file for the time being. We expect this to be corrected in the future.
+            
