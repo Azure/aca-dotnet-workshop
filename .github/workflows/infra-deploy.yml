@@ -14,13 +14,22 @@ on:
                 required: true
                 type: boolean
 
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
+
 concurrency:
   group: infra-deploy-demo-env
   cancel-in-progress: false
-
-permissions:
-  id-token: write
-  contents: read
 
 env:
   REGISTRY: ghcr.io

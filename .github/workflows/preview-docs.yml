@@ -1,10 +1,5 @@
 name: Build and Preview Workshop Docs
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 on:
   pull_request:
     branches:
@@ -18,6 +13,19 @@ on:
       - 'docs/**'
       - 'mkdocs.yml'
       - 'Makefile'
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
 
 concurrency:
   group: preview-${{ github.ref }}
@@ -43,14 +51,14 @@ jobs:
         run: |
           echo "GIT_PYTHON_REFRESH=quiet"
           make build-docs-website
-      # - name: Release preview to branch
-      #   if: "! github.event.pull_request.head.repo.fork "
-      #   uses: rossjrw/pr-preview-action@v1
-      #   with:
-      #     source-dir: ./dist/
-      #     preview-branch: gh-pages
-      #     umbrella-dir: pr-preview
-      #     action: auto
+      - name: Release preview to branch
+        if: "! github.event.pull_request.head.repo.fork "
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./dist/
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
   publish-preview-docs:
     if: "! github.event.pull_request.head.repo.fork "
     name: Preview

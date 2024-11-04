@@ -3,6 +3,19 @@ name: Deploy static content to Pages
 on:
   workflow_call:
 
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
+
 jobs:
   # Single deploy job since we're just deploying
   deploy:

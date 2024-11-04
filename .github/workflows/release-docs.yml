@@ -11,9 +11,17 @@ on:
   workflow_dispatch: {}
 
 permissions:
-    contents: write
-    pages: write
-    id-token: write
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
 
 concurrency:
   group: "pages"
