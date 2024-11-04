@@ -1,5 +1,8 @@
 name: Build and Preview Workshop Docs
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     branches:
