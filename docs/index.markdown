@@ -15,8 +15,3 @@ We are most grateful for community involvement. Please see [CONTRIBUTING.md](htt
 ##### Acknowledgments
 
 The workshop's material, concepts, and code samples draw inspiration from a collection of blog articles authored by [Taiseer Joudeh](https://github.com/tjoudeh){target=_blank} and published on his [personal blog](https://bitoftech.net){target=_blank}. The [workshop authors](aca/29-about-the-authors/index.md) have worked collaboratively to modify and augment the content, resulting in the current version of the workshop.
-
-
-##### Addendum
-
-2

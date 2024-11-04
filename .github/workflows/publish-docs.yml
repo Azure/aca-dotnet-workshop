@@ -4,18 +4,10 @@ on:
   workflow_call:
 
 permissions:
-  # actions: write
-  # checks: write
-  contents: write
-  deployments: write
-  id-token: write
-  # issues: write
-  # packages: write
-  pages: write
-  # pull-requests: write
-  # repository-projects: write
-  # security-events: write
-  # statuses: write
+  contents: write         # Required for checkout and upload-pages-artifact actions
+  deployments: write      # Required for deploy-pages action
+  id-token: write         # Required for deploy-pages action if using OIDC for authentication
+  pages: write            # Required for configure-pages, upload-pages-artifact, and deploy-pages actions
 
 jobs:
   # Single deploy job since we're just deploying
