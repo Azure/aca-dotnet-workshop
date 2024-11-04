@@ -17,7 +17,7 @@ on:
 permissions:
   actions: write          # Required for the pr-preview-action
   contents: read         # Required for the pr-preview-action
-  #deployments: write      # Required for the pr-preview-action
+  deployments: read      # Required for the pr-preview-action
   #id-token: write         # Required for the pr-preview-action
   #pages: write            # Required for the pr-preview-action
 
