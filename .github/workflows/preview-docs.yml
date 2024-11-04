@@ -16,7 +16,7 @@ on:
 
 permissions:
   actions: write          # Required for the pr-preview-action
-  contents: write         # Required for the pr-preview-action
+  contents: read         # Required to kick off the preview-docs job
   #deployments: write      # Required for the pr-preview-action
   #id-token: write         # Required for the pr-preview-action
   #pages: write            # Required for the pr-preview-action
