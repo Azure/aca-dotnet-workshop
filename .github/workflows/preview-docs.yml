@@ -17,9 +17,9 @@ on:
 permissions:
   actions: write          # Required for the pr-preview-action
   contents: write         # Required for the pr-preview-action
-  deployments: write      # Required for the pr-preview-action
-  id-token: write         # Required for the pr-preview-action
-  pages: write            # Required for the pr-preview-action
+  #deployments: write      # Required for the pr-preview-action
+  #id-token: write         # Required for the pr-preview-action
+  #pages: write            # Required for the pr-preview-action
 
 concurrency:
   group: preview-${{ github.ref }}
