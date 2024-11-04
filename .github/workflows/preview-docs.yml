@@ -15,18 +15,11 @@ on:
       - 'Makefile'
 
 permissions:
-  actions: write
-  # checks: write
-  contents: write
-  deployments: write
-  id-token: write
-  # issues: write
-  # packages: write
-  pages: write
-  # pull-requests: write
-  # repository-projects: write
-  # security-events: write
-  # statuses: write
+  actions: write          # Required for the pr-preview-action
+  #contents: write         # Required for the pr-preview-action
+  #deployments: write      # Required for the pr-preview-action
+  #id-token: write         # Required for the pr-preview-action
+  #pages: write            # Required for the pr-preview-action
 
 concurrency:
   group: preview-${{ github.ref }}
