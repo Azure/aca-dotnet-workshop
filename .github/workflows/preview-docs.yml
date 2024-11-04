@@ -27,13 +27,9 @@ permissions:
   deployments: write
   id-token: write
   pages: write
-  #checks: write
-  #issues: write
-  #packages: write
   pull-requests: write
-  repository-projects: write
-  #security-events: write
-  statuses: write
+  #repository-projects: write
+  #statuses: write
 
 concurrency:
   group: preview-${{ github.ref }}
