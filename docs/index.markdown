@@ -1,6 +1,6 @@
 ![Azure Container Apps](assets/images/00-workshop-intro/azure-container-apps-image.png)
 
-There is no doubt that building containerized applications and following a microservices architecture is one of the most common software architecture patterns observed in the past couple of years.
+There is no doubt that building containerized applications and following a microservices architecture is one of the most common software architecture patterns observed in the past couple of years. 
 
 Microsoft Azure offers different services to package, deploy, and manage cloud-native applications, each of which serves a certain purpose and has its own pros and cons. This [page](https://learn.microsoft.com/en-us/azure/container-apps/compare-options){target=_blank} provides a good comparison between the available services to host and manage cloud-native containerized applications in Azure.
 
