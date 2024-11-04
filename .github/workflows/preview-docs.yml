@@ -42,14 +42,14 @@ jobs:
         run: |
           echo "GIT_PYTHON_REFRESH=quiet"
           make build-docs-website
-      - name: Release preview to branch
-        if: "! github.event.pull_request.head.repo.fork "
-        uses: rossjrw/pr-preview-action@v1
-        with:
-          source-dir: ./dist/
-          preview-branch: gh-pages
-          umbrella-dir: pr-preview
-          action: auto
+      # - name: Release preview to branch
+      #   if: "! github.event.pull_request.head.repo.fork "
+      #   uses: rossjrw/pr-preview-action@v1
+      #   with:
+      #     source-dir: ./dist/
+      #     preview-branch: gh-pages
+      #     umbrella-dir: pr-preview
+      #     action: auto
   publish-preview-docs:
     if: "! github.event.pull_request.head.repo.fork "
     name: Preview
