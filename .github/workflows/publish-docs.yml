@@ -4,18 +4,18 @@ on:
   workflow_call:
 
 permissions:
-  actions: write
-  checks: write
+  # actions: write
+  # checks: write
   contents: write
   deployments: write
   id-token: write
-  issues: write
-  packages: write
+  # issues: write
+  # packages: write
   pages: write
-  pull-requests: write
-  repository-projects: write
-  security-events: write
-  statuses: write
+  # pull-requests: write
+  # repository-projects: write
+  # security-events: write
+  # statuses: write
 
 jobs:
   # Single deploy job since we're just deploying
