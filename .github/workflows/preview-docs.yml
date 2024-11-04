@@ -15,7 +15,7 @@ on:
       - 'Makefile'
 
 permissions:
-  # actions: write
+  actions: write
   # checks: write
   contents: write
   deployments: write
