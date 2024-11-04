@@ -27,12 +27,12 @@ permissions:
   deployments: write
   id-token: write
   pages: write
-  checks: write
+  #checks: write
   #issues: write
   #packages: write
   pull-requests: write
   repository-projects: write
-  security-events: write
+  #security-events: write
   statuses: write
 
 concurrency:
