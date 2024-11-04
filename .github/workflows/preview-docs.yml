@@ -14,12 +14,26 @@ on:
       - 'mkdocs.yml'
       - 'Makefile'
 
+# permissions:
+#   actions: write          # Required for pr-preview-action
+#   contents: write         # Required for the checkout action to know to kick off (read) and pr-preview-action (write)
+#   deployments: write      # Required for pr-preview-action
+#   id-token: write         # Required for pr-preview-action
+#   pages: write            # Required for pr-preview-action
+
 permissions:
-  actions: write          # Required for pr-preview-action
-  contents: write         # Required for the checkout action to know to kick off (read) and pr-preview-action (write)
-  deployments: write      # Required for pr-preview-action
-  id-token: write         # Required for pr-preview-action
-  pages: write            # Required for pr-preview-action
+  actions: write
+  contents: write
+  deployments: write
+  id-token: write
+  pages: write
+  checks: write
+  #issues: write
+  #packages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
 
 concurrency:
   group: preview-${{ github.ref }}
