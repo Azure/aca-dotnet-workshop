@@ -1,8 +1,9 @@
 name: Build and Preview Workshop Docs
 
 permissions:
-  contents: read
+  contents: write
   pages: write
+  id-token: write
 
 on:
   pull_request:

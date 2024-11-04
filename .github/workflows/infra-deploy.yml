@@ -35,7 +35,7 @@ jobs:
       if : ${{ github.event.inputs.teardown != 'true' }}
       name: Lint bicep files
       steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Perform linting
         run: az bicep build --f bicep/main.bicep
 
@@ -46,7 +46,7 @@ jobs:
       name: Create RG and Validate bicep template
       needs: [ lint ]
       steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Azure login
         uses: azure/login@v1
         with:
