@@ -54,8 +54,8 @@ jobs:
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: auto
-  # publish-preview-docs:
-  #   if: "! github.event.pull_request.head.repo.fork "
-  #   name: Preview
-  #   needs: preview-docs
-  #   uses: ./.github/workflows/publish-docs.yml
+  publish-preview-docs:
+    if: "! github.event.pull_request.head.repo.fork "
+    name: Preview
+    needs: preview-docs
+    uses: ./.github/workflows/publish-docs.yml
