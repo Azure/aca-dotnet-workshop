@@ -32,11 +32,7 @@ Dapr's state management API allows you to save, read, and query key/value pairs 
 
 To try out the State Management APIs, run the Backend API from VS Code by running the following command.
 
-=== ".NET 6 or below"
-
-    --8<-- "snippets/dapr-run-backend-api.md:basic-dotnet6"
-
-=== ".NET 7 or above"
+=== ".NET 8 or above"
 
     --8<-- "snippets/dapr-run-backend-api.md:basic"
 
@@ -124,22 +120,6 @@ Whereas in the previous section we demonstrated using Dapr State Store without c
 #### 2.1 Add Dapr Client SDK With The Backend API
 
 Similar to what we have done in the Frontend Web App, we need to use Dapr Client SDK to manage the state store. Update the below file with the added Dapr package reference:
-
-=== ".NET 6"
-    === "TasksTracker.TasksManager.Backend.Api.csproj"
-
-        ```xml
-        <ItemGroup>
-            <PackageReference Include="Dapr.AspNetCore" Version="{{ dapr.version }}" />
-        </ItemGroup>
-        ```
-
-=== ".NET 7"
-    === "TasksTracker.TasksManager.Backend.Api.csproj"
-
-        ```xml hl_lines="10"
-        --8<-- "docs/aca/04-aca-dapr-stateapi/Backend.Api-dotnet7.csproj"
-        ```
 
 === ".NET 8"
     === "TasksTracker.TasksManager.Backend.Api.csproj"
@@ -315,11 +295,7 @@ This will instruct dapr to load the local projects components located at **./com
 
 If you have been using the dapr cli commands instead of the aforementioned debugging then you will need to execute the backend api with the resources-path property as follows.
 
-=== ".NET 6 or below"
-
-    --8<-- "snippets/dapr-run-backend-api.md:dapr-components-dotnet6"
-
-=== ".NET 7 or above"
+=== ".NET 8 or above"
 
     --8<-- "snippets/dapr-run-backend-api.md:dapr-components"
 
