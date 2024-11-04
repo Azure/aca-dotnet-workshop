@@ -2,6 +2,7 @@ name: Build and Preview Workshop Docs
 
 permissions:
   contents: read
+  pages: write
 
 on:
   pull_request:
