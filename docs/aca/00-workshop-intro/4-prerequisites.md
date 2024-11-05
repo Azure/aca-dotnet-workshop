@@ -1,5 +1,5 @@
 ---
-title: Prerequisites  
+title: Prerequisites
 parent: Workshop Introduction
 has_children: false
 nav_order: 4
@@ -7,12 +7,13 @@ nav_order: 4
 
 ## Prerequisites
 
-The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.  
+The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.
 
 Make sure you have your development environment set up and configured.
 
 1. An Azure account with an active subscription - [Create an account for free](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio){target=_blank}
 1. .NET 8 or a higher version - [Install](https://dotnet.microsoft.com/en-us/download){target=_blank}
+   _While newer versions may be available, we primarily focus on the [long-term support (LTS) versions](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core#lifecycle) for this workshop._
 1. PowerShell 7.0 or higher version (For Windows Users only!) - [Install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
 1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/){target=_blank}
 1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}
