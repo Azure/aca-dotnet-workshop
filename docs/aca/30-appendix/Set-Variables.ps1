@@ -15,9 +15,11 @@ $vars = @(
     "BACKEND_API_INTERNAL_BASE_URL",
     "BACKEND_API_NAME",
     "BACKEND_API_PRINCIPAL_ID",
+    "BACKEND_API_REVISION_NAME",
     "BACKEND_SERVICE_APP_PORT",
     "BACKEND_SERVICE_NAME",
     "BACKEND_SERVICE_PRINCIPAL_ID",
+    "BACKEND_SERVICE_REVISION_NAME",
     "COSMOS_DB_ACCOUNT",
     "COSMOS_DB_CONTAINER",
     "COSMOS_DB_DBNAME",
@@ -33,7 +35,6 @@ $vars = @(
     "LOCATION",
     "RANDOM_STRING",
     "RESOURCE_GROUP",
-    "REVISION_NAME",
     "ROLE_ID",
     "SERVICE_BUS_CONNECTION_STRING",
     "SERVICE_BUS_NAMESPACE_NAME",
@@ -50,7 +51,7 @@ $vars = @(
     "WORKSPACE_SECRET"
 );
 
-foreach ($var in $vars) { 
+foreach ($var in $vars) {
     # Ensure the variable exists. If not, don't attempt to get it and don't write out a blank value.
 
     if (Test-Path variable:$var) {
