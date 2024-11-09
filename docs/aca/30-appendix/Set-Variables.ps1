@@ -49,6 +49,7 @@ $vars = @(
     "WORKSPACE_SECRET"
 );
 
+<<<<<<< HEAD
 # Ensure that variables exist in the terminal session. If none exist, we need to prevent accidental wiping of the Variables.ps1 file.
 foreach ($var in $vars) {
     if (Test-Path variable:$var) {
@@ -66,6 +67,9 @@ if ($existingVars -eq 0) {
 "# Execute with `"$file`" to restore previously-saved variables." | Out-File -FilePath $file
 
 foreach ($var in $vars) { 
+=======
+foreach ($var in $vars) {
+>>>>>>> origin/feature/dotnet-9-and-fixes
     # Ensure the variable exists. If not, don't attempt to get it and don't write out a blank value.
 
     if (Test-Path variable:$var) {
