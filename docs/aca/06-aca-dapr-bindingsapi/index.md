@@ -101,7 +101,8 @@ az storage account keys list `
 # Get the primary storage account key
 $STORAGE_ACCOUNT_KEY=($(az storage account keys list `
 --resource-group $RESOURCE_GROUP `
---account-name $STORAGE_ACCOUNT_NAME ) | ConvertFrom-Json)[0].value
+--account-name $STORAGE_ACCOUNT_NAME `
+--output json) | ConvertFrom-Json)[0].value
 
 echo "Storage Account Name : $STORAGE_ACCOUNT_NAME"
 echo "Storage Account Key  : $STORAGE_ACCOUNT_KEY"
