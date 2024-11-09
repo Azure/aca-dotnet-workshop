@@ -2149,7 +2149,10 @@
 <span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-19-10">10</a></span>
-<span class="normal"><a href="#__codelineno-19-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="c1"># Create Application Insights instance</span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="c1"># Create Application Insights instance</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a>--location<span class="w"> </span><span class="nv">$LOCATION</span><span class="w"> </span><span class="sb">`</span>
@@ -2159,7 +2162,10 @@
 </span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="c1"># Get Application Insights Instrumentation Key</span>
 </span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="o">=(</span><span class="k">$(</span>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>show<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11"></a>--app<span class="w"> </span><span class="nv">$APPINSIGHTS_NAME</span><span class="w"> </span><span class="k">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)</span>.instrumentationKey
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11"></a>--app<span class="w"> </span><span class="nv">$APPINSIGHTS_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12"></a>--output<span class="w"> </span>json<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)</span>.instrumentationKey
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13"></a>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span>
 </span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
