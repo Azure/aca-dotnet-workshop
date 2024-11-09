@@ -570,9 +570,10 @@ Lastly, we need to restart both container apps revisions to pick up the role ass
 ```shell
 # Get revision name and assign it to a variable
 $BACKEND_SERVICE_REVISION_NAME = (az containerapp revision list `
-        --name $BACKEND_SERVICE_NAME  `
+        --name $BACKEND_SERVICE_NAME `
         --resource-group $RESOURCE_GROUP `
-        --query [0].name)
+        --query [0].name `
+        --output tsv)
 
 # Restart revision by name
 az containerapp revision restart `
@@ -581,9 +582,10 @@ az containerapp revision restart `
 --revision $BACKEND_SERVICE_REVISION_NAME
 
 $BACKEND_API_REVISION_NAME = (az containerapp revision list `
-        --name $BACKEND_API_NAME  `
+        --name $BACKEND_API_NAME `
         --resource-group $RESOURCE_GROUP `
-        --query [0].name)
+        --query [0].name `
+        --output tsv)
 
 # Restart revision by name
 az containerapp revision restart `
