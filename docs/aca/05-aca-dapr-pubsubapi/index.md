@@ -299,7 +299,7 @@ To do this, update below file under the project **TasksTracker.TasksManager.Back
 
 === "TasksStoreManager.cs"
 
-    ```csharp hl_lines="33 88-91 97-102"
+    ```csharp hl_lines="33 92-95 101-106"
     --8<-- "docs/aca/05-aca-dapr-pubsubapi/TasksStoreManager.cs"
     ```
 
