@@ -110,9 +110,9 @@ extra:
     backendsvc: "ACA Processor - Backend"
     frontend: "ACA Web - Frontend"
   dapr:
-    version: 1.12.0
+    version: 1.14.0
   docker:
-    targetport: 5000
+    targetport: 8080
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Azure/aca-dotnet-workshop

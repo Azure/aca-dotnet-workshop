@@ -4,7 +4,7 @@
     - Use `.NET: ASP.NET Core` when prompted for the application platform.
     - Choose the newly-created project, if prompted.
     - Choose `Linux` when prompted to choose the operating system.
-    - Set the **application port** to `5000`. This is arbitrary but memorable for this workshop.
+    - Set the **application port** to `8080`, which is the default non-privileged port since .NET 8.
     - You will be asked if you want to add Docker Compose files. Select `No`.
     - `Dockerfile` and `.dockerignore` files are added to the project workspace.
     - Open `Dockerfile` and remove `--platform=$BUILDPLATFORM` from the `FROM` instruction.

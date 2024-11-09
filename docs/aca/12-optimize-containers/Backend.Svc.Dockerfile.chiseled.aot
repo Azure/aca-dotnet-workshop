@@ -1,8 +1,8 @@
 FROM mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot AS base
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 8080
 
-ENV ASPNETCORE_URLS=http://+:5000
+ENV ASPNETCORE_URLS=http://+:8080
 
 USER app
 FROM mcr.microsoft.com/dotnet/nightly/sdk:8.0-jammy-aot AS build
