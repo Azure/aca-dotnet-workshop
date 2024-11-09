@@ -81,13 +81,6 @@ This workshop typically spans several days. As such, you may close your tools, e
 
 - Copy the [Set-Variables.ps1 script](../../aca/30-appendix/03-variables.md){target=_blank} into the newly-created `Set-Variables.ps1` file and save it.
 
-- Perform an initial commit of the `Set-Variables.ps1` file.
-
-    ```shell
-    git add .\Set-Variables.ps1
-    git commit -m "Initialize Set-Variables.ps1"
-    ```
-
 - Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out.
 
     ```shell
