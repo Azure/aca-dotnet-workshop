@@ -153,7 +153,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
             --8<-- "docs/aca/08-aca-monitoring/Program-Frontend.UI-dotnet8.cs"
             ```
 
-=== ".NET 8"
+=== ".NET 9"
 
     === "Backend.Api"
 
