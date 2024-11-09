@@ -32,7 +32,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
 
                 _logger.LogInformation("Saved external task to the state store successfully. Task name: '{0}', Task Id: '{1}'", taskModel.TaskName, taskModel.TaskId);
 
-                //ToDo: code to invoke external binding and store queue message content into blob file in Azure storage
+                //TODO: code to invoke external binding and store queue message content into blob file in Azure storage
 
                 return Ok();
             }

@@ -17,30 +17,37 @@ In this module, we will accomplish three objectives:
 
 1. Create the first microservice, `{{ apps.backend}}`, which serves as the API for our tasks.
 1. Create the initial Azure infrastructure that we will need throughout this workshop.
-1. Deploy the ``{{ apps.backend }}` container app to Azure.
+1. Deploy the `{{ apps.backend }}` container app to Azure.
 
 ## Module Sections
 
 ### 1. Create the backend API project (Web API)
 
-- From VS Code's *Terminal* tab, select *New Terminal* to open a (PowerShell) terminal in the project folder *TasksTracker.ContainerApps* (also referred to as *root*).
+- If a terminal is not yet open, from VS Code's *Terminal* tab, select *New Terminal* to open a (PowerShell) terminal in the project folder *TasksTracker.ContainerApps* (also referred to as *root*).
 
 - We need to define the .NET version we will use throughout this workshop. In the terminal execute `dotnet --info`. Take note of the intalled .NET SDK versions and select the one with which you wish to proceed.
 
 - In the root folder create a new file and set the .NET SDK version from the above command:
 
-    === "global.json"
-    ```json hl_lines="3"
-    --8<-- "docs/aca/01-deploy-api-to-aca/global.json"
-    ```
+    === ".NET 8"
+
+        === "global.json"
+        ```json hl_lines="3"
+        --8<-- "docs/aca/01-deploy-api-to-aca/global-dotnet8.json"
+        ```
+
+    === ".NET 9"
+
+        === "global.json"
+        ```json hl_lines="3"
+        --8<-- "docs/aca/01-deploy-api-to-aca/global-dotnet9.json"
+        ```
 
 - Now we can initialize the backend API project. This will create and ASP.NET Web API project scaffolded with a single controller.
 
     !!! note "Controller-Based vs. Minimal APIs"
 
-        APIs can be created via the traditional, expanded controller-based structure with _Controllers_ and _Models_ folders, etc. or via the newer minimal APIs approach where controller actions are written inside _Program.cs_. The latter approach is preferential in a microservices project where the endpoints are overseeable and may easily be represented by a more compact view.  
-        
-        As our workshop takes advantage of microservices, the use case for minimal APIs is given. However, in order to make the workshop a bit more demonstrable, we will, for now, stick with controller-based APIs.
+        APIs can be created via the traditional, expanded controller-based structure with _Controllers_ and _Models_ folders, etc. or via the newer minimal APIs approach where controller actions are written inside _Program.cs_. The latter approach is preferential in a microservices project where the endpoints are overseeable and may easily be represented by a more compact view. As our workshop takes advantage of microservices, the use case for minimal APIs is given. However, in order to make the workshop a bit more demonstrable, we will - for now - stick with controller-based APIs.
 
     === ".NET 8 or above"
 
@@ -59,7 +66,7 @@ In this module, we will accomplish three objectives:
     --8<-- "docs/aca/01-deploy-api-to-aca/TaskModel.cs"
     ```
 
-- In the project root create a new folder named **Services** and add the two files below. Ensure to create it as a sibling to the *Models* folder. Add the Fake Tasks Manager service. This will be the interface of Tasks Manager service. In this module we will work with data in memory. Later on, we will implement a data store.
+- In the project root create a new folder named **Services** as a sibling to the *Models* folder. Add the two files below to the *Services* folder. Add the Fake Tasks Manager service as we will work with data in memory in this module. Later on, we will implement a data store.
 
     === "ITasksManager.cs"
         ```csharp
@@ -75,10 +82,19 @@ In this module, we will accomplish three objectives:
 
 - Now we need to register `FakeTasksManager` on project startup. Open file `#!csharp Program.cs` and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required `using` statement for the task interface and class.
 
-    === "Program.cs"
-    ```csharp hl_lines="1 7"
-    --8<-- "docs/aca/01-deploy-api-to-aca/Program.cs"
-    ```
+    === ".NET 8"
+
+        === "Program.cs"
+        ```csharp hl_lines="1 7"
+        --8<-- "docs/aca/01-deploy-api-to-aca/Program-dotnet8.cs"
+        ```
+
+    === ".NET 9"
+
+        === "Program.cs"
+        ```csharp hl_lines="1 7"
+        --8<-- "docs/aca/01-deploy-api-to-aca/Program-dotnet9.cs"
+        ```
 
 - Inside the **Controllers** folder create a new controller with the below filename. We need to create API endpoints to manage tasks.
 
@@ -118,7 +134,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     az extension add --upgrade --name application-insights
 
     # Log in to Azure
-    az login 
+    az login
     ```
 
 - You may be able to use the queried Azure subscription ID or you may need to set it manually depending on your setup.
@@ -232,11 +248,14 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --location $LOCATION `
     --app $APPINSIGHTS_NAME `
     --workspace $WORKSPACE_NAME
-    
+
     # Get Application Insights Instrumentation Key
     $APPINSIGHTS_INSTRUMENTATIONKEY=($(az monitor app-insights component show `
     --resource-group $RESOURCE_GROUP `
-    --app $APPINSIGHTS_NAME ) | ConvertFrom-Json).instrumentationKey
+    --app $APPINSIGHTS_NAME `
+    --output json) | ConvertFrom-Json).instrumentationKey
+
+    echo $APPINSIGHTS_INSTRUMENTATIONKEY
     ```
 
 #### 2.4 Azure Container Infrastructure
@@ -270,12 +289,12 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
 
 !!! note
-    We are not creating an `internal-only` Azure Container App Environment. This means that the static IP will be a public IP, and container apps, by default, will be publicly available on the internet.  
+    We are not creating an `internal-only` Azure Container App Environment. This means that the static IP will be a public IP, and container apps, by default, will be publicly available on the internet.
     While this is not advised in a production workload, it is suitable for the workshop to keep the architecture confined to Azure Container Apps.
 
-??? tip "Want to learn what above command does?"
+??? tip "Want to learn what the above command does?"
     - It creates an ACA environment and associates it with the Log Analytics workspace created in the previous step.
-    - We are setting the `--dapr-instrumentation-key` value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr in later modules and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.  
+    - We are setting the `--dapr-instrumentation-key` value to the instrumentation key of the Application Insights instance. This will come handy when we introduce Dapr in later modules and show how the distributed tracing between microservices/container apps are captured and visualized in Application Insights.
     > ***NOTE:***
     You can set the `--dapr-instrumentation-key` after you create the ACA environment but this is not possible via the AZ CLI right now. There is an [open issue](https://github.com/microsoft/azure-container-apps/issues/293){target=_blank} which is being tracked by the product group.
 
@@ -316,7 +335,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     echo "https://$fqdn/api/tasks/?createdby=tjoudeh@bitoftech.net"
     ```
 
-??? tip "Want to learn what above command does?"
+??? tip "Want to learn what the above command does?"
     - Ingress param is set to `external` which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to `Internal` or `External` it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found [here](https://learn.microsoft.com/en-us/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names){target=_blank}.
     - The target port param is set to 80, this is the port our Web API container listens to for incoming requests.
     - We didn't specify the ACR registry username and password, `az containerapp create` command was able to look up ACR username and password and add them as a secret under the created Azure container app for future container updates.
@@ -332,11 +351,11 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 !!! success
     To test the backend api service, either click on the URL output by the last command or copy the FQDN (Application URL) of the Azure container app named `tasksmanager-backend-api`, then issue a `GET` request similar to this one: `https://tasksmanager-backend-api.<your-aca-env-unique-id>.eastus.azurecontainerapps.io/api/tasks/?createdby=tjoudeh@bitoftech.net` and you should receive an array of the 10 tasks similar to the below image.
 
-    Note that the specific query string matters as you may otherwise get an empty result back. 
+    Note that the specific query string matters as you may otherwise get an empty result back.
 
     !!! tip
         You can find your Azure container app application url on the [Azure portal](https://portal.azure.com){target=_blank} overview tab.
-    
+
         ![Web API Response](../../assets/images/01-deploy-api-to-aca/Response.jpg)
 
 --8<-- "snippets/update-variables.md"

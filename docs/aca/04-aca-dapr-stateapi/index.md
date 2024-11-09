@@ -122,10 +122,19 @@ Whereas in the previous section we demonstrated using Dapr State Store without c
 Similar to what we have done in the Frontend Web App, we need to use Dapr Client SDK to manage the state store. Update the below file with the added Dapr package reference:
 
 === ".NET 8"
+
     === "TasksTracker.TasksManager.Backend.Api.csproj"
 
         ```xml hl_lines="11"
         --8<-- "docs/aca/04-aca-dapr-stateapi/Backend.Api-dotnet8.csproj"
+        ```
+
+=== ".NET 9"
+
+    === "TasksTracker.TasksManager.Backend.Api.csproj"
+
+        ```xml hl_lines="10"
+        --8<-- "docs/aca/04-aca-dapr-stateapi/Backend.Api-dotnet9.csproj"
         ```
 
 #### 2.2 Create a New Concrete Implementation to Manage Tasks Persistence
@@ -155,11 +164,21 @@ Now we need to register the new service named `TasksStoreManager` and `DaprClien
 !!! note
     Do not forget to comment out the registration of the `FakeTasksManager` service as we don't want to store tasks in memory anymore.
 
-=== "Program.cs"
+=== ".NET 8"
 
-    ```csharp hl_lines="7-9"
-    --8<-- "docs/aca/04-aca-dapr-stateapi/Program.cs"
-    ```
+    === "Program.cs"
+
+        ```csharp hl_lines="7-9"
+        --8<-- "docs/aca/04-aca-dapr-stateapi/Program-dotnet8.cs"
+        ```
+
+=== ".NET 9"
+
+    === "Program.cs"
+
+        ```csharp hl_lines="7-9"
+        --8<-- "docs/aca/04-aca-dapr-stateapi/Program-dotnet9.cs"
+        ```
 
 - Let's verify that the Dapr dependency is restored properly and that the project compiles. From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
 
@@ -185,7 +204,7 @@ You need to set the variable name of the `$COSMOS_DB_ACCOUNT` to a unique name a
 ```shell
 $COSMOS_DB_ACCOUNT="cosmos-tasks-tracker-state-store-$RANDOM_STRING"
 $COSMOS_DB_DBNAME="tasksmanagerdb"
-$COSMOS_DB_CONTAINER="taskscollection" 
+$COSMOS_DB_CONTAINER="taskscollection"
 
 # Check if Cosmos account name already exists globally
 $result = az cosmosdb check-name-exists `
@@ -199,13 +218,13 @@ if ($result -eq "false") {
     az cosmosdb create `
     --name $COSMOS_DB_ACCOUNT `
     --resource-group $RESOURCE_GROUP
-    
+
     # Create a SQL API database
     az cosmosdb sql database create `
     --name $COSMOS_DB_DBNAME `
     --resource-group $RESOURCE_GROUP `
     --account-name $COSMOS_DB_ACCOUNT
-    
+
     # Create a SQL API container
     az cosmosdb sql container create `
     --name $COSMOS_DB_CONTAINER `
@@ -214,13 +233,13 @@ if ($result -eq "false") {
     --database-name $COSMOS_DB_DBNAME `
     --partition-key-path "/id" `
     --throughput 400
-    
+
     $COSMOS_DB_ENDPOINT=(az cosmosdb show `
     --name $COSMOS_DB_ACCOUNT `
     --resource-group $RESOURCE_GROUP `
     --query documentEndpoint `
     --output tsv)
-    
+
     echo "Cosmos DB Endpoint: "
     echo $COSMOS_DB_ENDPOINT
 }
@@ -264,8 +283,8 @@ To add the component file state store, add a new folder named **components** und
 !!! info
     You need to replace the **masterKey** value with your Cosmos Account key. Remember this is only needed for local development debugging, we will not be using the masterKey when we deploy to ACA.
 
-    Replace the **url** value with the URI value of your Azure Cosmos DB account. You can get that from the [Azure portal](https://portal.azure.com){target=_blank} by navigating to the Azure Cosmos DB account overview page and get the uri value from there. 
-    Basically the uri should have the following structure. [https://COSMOS_DB_ACCOUNT.documents.azure.com:443/](https://COSMOS_DB_ACCOUNT.documents.azure.com:443/).
+    Replace the **url** value with the URI value of your Azure Cosmos DB account. You can get that from the [Azure portal](https://portal.azure.com){target=_blank} by navigating to the Azure Cosmos DB account overview page and get the uri value from there.
+    Basically, the uri should have the following structure: [https://COSMOS_DB_ACCOUNT.documents.azure.com:443/](https://COSMOS_DB_ACCOUNT.documents.azure.com:443/).
 
 === "dapr-statestore-cosmos.yaml"
 
@@ -283,6 +302,7 @@ To add the component file state store, add a new folder named **components** und
     Dapr component scopes correspond to the Dapr application ID of a container app, not the container app name.
 
 Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned.
+**TODO: Add instructions to run both again.**
 
 If you have been running the different microservices using the [debug and launch Dapr applications in VSCode](../30-appendix/01-run-debug-dapr-app-vscode.md) then remember to uncomment the following line inside tasks.json file.
 This will instruct dapr to load the local projects components located at **./components** instead of the global components' folder.
@@ -373,7 +393,7 @@ Run the command below to associate the container app `system-assigned` identity 
     Remember to replace the placeholders with your own values:
 
 ```shell
-$ROLE_ID = "00000000-0000-0000-0000-000000000002" #"Cosmos DB Built-in Data Contributor" 
+$ROLE_ID = "00000000-0000-0000-0000-000000000002" #"Cosmos DB Built-in Data Contributor"
 
 az cosmosdb sql role assignment create `
 --resource-group $RESOURCE_GROUP `
@@ -469,19 +489,19 @@ az containerapp dapr enable `
 The last thing we need to do here is to update both container apps and deploy the new images from ACR. To do so we need to run the commands found below.
 
 ```shell
-# Update Frontend web app container app and create a new revision 
+# Update Frontend web app container app and create a new revision
 az containerapp update `
 --name $FRONTEND_WEBAPP_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY
 
-# Update Backend API App container app and create a new revision 
+# Update Backend API App container app and create a new revision
 az containerapp update `
 --name $BACKEND_API_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY-1
 
-echo "Azure Frontend UI URL:" 
+echo "Azure Frontend UI URL:"
 echo $FRONTEND_UI_BASE_URL
 ```
 

@@ -80,19 +80,19 @@ Run the PowerShell script below to create Azure Storage Account and get the mast
     We will be retrieving the storage account key for local dev testing purposes. Note that the command below will return two keys. You will only need one of them for this exercise.
     When deploying the changes to ACA, we are going to store the storage key securely into Azure Key Vault using [Dapr Secrets Store Building Block with AKV](https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/){target=_blank}.
 
-    We didn't use Azure Manged Identity here because the assumption is that those services are not part of our solution and thus they could theoretically be a non AD compliant services or hosted on another cloud. 
+    We didn't use Azure Manged Identity here because the assumption is that those services are not part of our solution and thus they could theoretically be a non AD compliant services or hosted on another cloud.
     If these services where part of your application's ecosystem it is always recommended that you use Azure Managed Identity.
 
 ```shell
 $STORAGE_ACCOUNT_NAME = "sttaskstracker$RANDOM_STRING"
-    
+
 az storage account create `
 --name $STORAGE_ACCOUNT_NAME `
 --resource-group $RESOURCE_GROUP `
 --location $LOCATION `
 --sku Standard_LRS `
 --kind StorageV2
-    
+
 # List Azure storage keys
 az storage account keys list `
 --resource-group $RESOURCE_GROUP `
@@ -101,11 +101,14 @@ az storage account keys list `
 # Get the primary storage account key
 $STORAGE_ACCOUNT_KEY=($(az storage account keys list `
 --resource-group $RESOURCE_GROUP `
---account-name $STORAGE_ACCOUNT_NAME ) | ConvertFrom-Json)[0].value
+--account-name $STORAGE_ACCOUNT_NAME `
+--output json) | ConvertFrom-Json)[0].value
 
 echo "Storage Account Name : $STORAGE_ACCOUNT_NAME"
 echo "Storage Account Key  : $STORAGE_ACCOUNT_KEY"
 ```
+
+Take note of the **Storage Account Name** and **Storage Account Key** as we will use both below.
 
 ### 2. Updating the Backend Background Processor Project
 
@@ -123,11 +126,11 @@ Start by adding a new controller **Controllers** folder under the **TasksTracker
 
 ??? tip "Curious to know more about the code?"
 
-    - We defined an action method named `ProcessTaskAndStore` which can be accessed by sending HTTP POST operation on the 
-    endpoint `ExternalTasksProcessor/Process`. 
-    
-    - This action method accepts the TaskModel in the request body as JSON payload.This is what will be received from the external service (Azure Storage Queue). 
-    
+    - We defined an action method named `ProcessTaskAndStore` which can be accessed by sending HTTP POST operation on the
+    endpoint `ExternalTasksProcessor/Process`.
+
+    - This action method accepts the TaskModel in the request body as JSON payload.This is what will be received from the external service (Azure Storage Queue).
+
     - Within this action method, we are going to store the received task by sending a POST request to `/api/tasks` which is part of the backend api named `tasksmanager-backend-api`.
 
     - Then we return `200 OK` to acknowledge that message received is processed successfully and should be removed from the external service queue.
@@ -141,6 +144,8 @@ Now we need to create the component configuration file which will describe the c
     ```yaml
     --8<-- "docs/aca/06-aca-dapr-bindingsapi/dapr-bindings-in-storagequeue.yaml"
     ```
+
+Ensure that you replace `<Your Storage Account Name>` and `<Your Storage Account Key>` with the values from step 1.1.
 
 ??? tip "Curious to learn more about the specification of yaml file?"
 
@@ -168,16 +173,18 @@ To do so, add a new file folder **components**.
     --8<-- "docs/aca/06-aca-dapr-bindingsapi/dapr-bindings-out-blobstorage.yaml"
     ```
 
+Ensure that you replace `<Your Storage Account Name>` and `<Your Storage Account Key>` with the values from step 1.1.
+
 ??? tip "Curious to learn more about the specification of yaml file?"
 
-    The full specifications of yaml file with Azure blob storage can be found on [this link](https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/){target=_blank}, 
+    The full specifications of yaml file with Azure blob storage can be found on [this link](https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/){target=_blank},
     but let's go over the configuration we have added here:
 
     - The type of binding is `bindings.azure.blobstorage`.
     - The name of this output binding is `externaltasksblobstore`. We will use this name when we use the Dapr SDK to trigger the output binding.
     - We are setting the `storageAccount` name, `storageAccessKey` value, and the `container` name. Those properties will describe how our backend background service will be able to connect to the external
     service and create a blob file. We will assume that there is a container already created on the external service and named `externaltaskscontainer` as shown in the image below
-    
+
     ![Storage-Account-Container](../../assets/images/06-aca-dapr-bindingsapi/StorageAccountContainer.png)
 
     - We are setting the property `decodeBase64`  to `false` as we don't want to encode file content to base64 images, we need to store the file content as is.
@@ -196,12 +203,12 @@ Update and replace the code in the file with the code below. Pay close attention
 
 ??? tip "Curious to know more about the code?"
 
-    Looking at the `ProcessTaskAndStore` action method above, you will see that we are calling the method `InvokeBindingAsync` and we are passing the binding name `externaltasksblobstore` 
-    defined in the configuration file, as well the second parameter `create` which is the action we need to carry against the external blob storage. 
+    Looking at the `ProcessTaskAndStore` action method above, you will see that we are calling the method `InvokeBindingAsync` and we are passing the binding name `externaltasksblobstore`
+    defined in the configuration file, as well the second parameter `create` which is the action we need to carry against the external blob storage.
 
     You can for example delete or get a content of a certain file. For a full list of supported actions on Azure Blob Storage, [visit this link](https://docs.dapr.io/reference/components-reference/supported-bindings/blobstorage/#binding-support){target=_blank}.
 
-    Notice how are setting the file name we are storing at the external service. We need the file names to be created using the same Task Identifier, so we will pass the key `blobName` with the file name values 
+    Notice how are setting the file name we are storing at the external service. We need the file names to be created using the same Task Identifier, so we will pass the key `blobName` with the file name values
     into the `metaData` dictionary.
 
 #### 2.5 Test Dapr Bindings Locally
@@ -282,7 +289,8 @@ $KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for
 $BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
---query identity.principalId
+--query identity.principalId `
+--output tsv
 
 az role assignment create `
 --role $KEYVAULT_SECRETS_USER_ROLE_ID `
@@ -296,8 +304,8 @@ To create a secret in Azure Key Vault you need to have a role which allows you t
 be able to create secrets. To do so use the script below:
 
 ```shell
-$SIGNEDIN_USERID = az ad signed-in-user show --query id
-$KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" # ID for 'Key Vault Secrets Office' Role 
+$SIGNEDIN_USERID = az ad signed-in-user show --query id --output tsv
+$KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" # ID for 'Key Vault Secrets Office' Role
 
 az role assignment create `
 --role $KEYVAULT_SECRETS_OFFICER_ROLE_ID `
@@ -333,10 +341,10 @@ Create a new yaml file under the **aca-components** folder.
 
 ??? tip "Curious to learn more about the yaml file?"
 
-    - We didn't specify the component name `secretstoreakv` in the metadata of the this component yaml file. We are going to specify it once we add this dapr component to Azure Container Apps Environment 
+    - We didn't specify the component name `secretstoreakv` in the metadata of the this component yaml file. We are going to specify it once we add this dapr component to Azure Container Apps Environment
     via CLI similar to what we did in earlier modules.
-    - We are not referencing any service bus connection strings as the authentication between Dapr and Azure Service Bus will be configured using Managed Identities. 
-    - The metadata `vaultName` value is set to the name of the Azure Key Vault we've just created. 
+    - We are not referencing any service bus connection strings as the authentication between Dapr and Azure Service Bus will be configured using Managed Identities.
+    - The metadata `vaultName` value is set to the name of the Azure Key Vault we've just created.
     - We are allowing this component only to be accessed by the dapr with application id `tasksmanager-backend-processor`. This means that our Backend API or Frontend Web App services will not be able
     to access the Dapr secret store. If we want to allow them to access the secrets we need to update this component file and grant the system-identity of those services a `Key Vault Secrets User` role.
 
@@ -350,10 +358,10 @@ Add new files under the **aca-components** use the yaml below:
     --8<-- "docs/aca/06-aca-dapr-bindingsapi/containerapps-bindings-in-storagequeue.yaml"
     ```
     ??? tip "Curious to learn more about the yaml file?"
-    
-        The properties of this file are matching the ones used in Dapr component-specific file. It is a component of type `bindings.azure.storagequeues`. 
-        The only differences are the following: 
-    
+
+        The properties of this file are matching the ones used in Dapr component-specific file. It is a component of type `bindings.azure.storagequeues`.
+        The only differences are the following:
+
         - We are setting the property `secretStoreComponent` value to `secretstoreakv` which is the name of Dapr secret store component.
         - We are using `secretRef` when setting the metadata `storageAccessKey`. The value `external-azure-storage-key` represents the AKV secret created earlier.
 
@@ -364,9 +372,9 @@ Add new files under the **aca-components** use the yaml below:
     ```
     ??? tip "Curious to learn more about the yaml file?"
 
-        The properties of this file are matching the ones used in Dapr component-specific file. It is a component of type `bindings.azure.blobstorage`. 
+        The properties of this file are matching the ones used in Dapr component-specific file. It is a component of type `bindings.azure.blobstorage`.
         The only differences are the following:
-    
+
         - We are setting the property `secretStoreComponent` value to `secretstoreakv` which is the name of Dapr secret store component.
         - We are using `secretRef` when setting the metadata `storageAccessKey`. The value `external-azure-storage-key` represents the AKV secret created earlier
 
@@ -409,7 +417,7 @@ az containerapp env dapr-component set `
 --resource-group $RESOURCE_GROUP `
 --dapr-component-name externaltasksmanager `
 --yaml '.\aca-components\containerapps-bindings-in-storagequeue.yaml'
-    
+
 # Output binding component for Azure Blob Storage
 az containerapp env dapr-component set `
 --name $ENVIRONMENT `
@@ -423,11 +431,11 @@ az containerapp env dapr-component set `
 Update the Azure Container App hosting the Backend Background Processor with a new revision so our code changes are available for end users.
 
 ```shell
-# Update Backend Background Processor container app and create a new revision 
+# Update Backend Background Processor container app and create a new revision
 az containerapp update `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-3 `
+--revision-suffix v$TODAY-3
 ```
 
 !!! success

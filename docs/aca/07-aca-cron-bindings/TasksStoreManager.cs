@@ -59,7 +59,11 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
 
             var queryResponse = await _daprClient.QueryStateAsync<TaskModel>(STORE_NAME, query);
 
-            var tasksList = queryResponse.Results.Select(q => q.Data).OrderByDescending(o=>o.TaskCreatedOn);
+            var tasksList = queryResponse.Results
+                .Where(q => q.Data != null)         // filter null data
+                .Select(q => q.Data!)
+                .OrderByDescending(o=>o.TaskCreatedOn);
+
             return tasksList.ToList();
         }
 
@@ -108,21 +112,27 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
             var yesterday = DateTime.Today.AddDays(-1);
-        
+
             var jsonDate = JsonSerializer.Serialize(yesterday, options);
-            
+
             _logger.LogInformation("Getting overdue tasks for yesterday date: '{0}'", jsonDate);
-            
+
             var query = "{" +
                     "\"filter\": {" +
                         "\"EQ\": { \"taskDueDate\": " + jsonDate + " }" +
                     "}}";
-        
+
             var queryResponse = await _daprClient.QueryStateAsync<TaskModel>(STORE_NAME, query);
-            var tasksList = queryResponse.Results.Select(q => q.Data).Where(q=>q.IsCompleted==false && q.IsOverDue==false).OrderBy(o=>o.TaskCreatedOn);
-            return tasksList.ToList();
+
+            var tasksList = queryResponse.Results
+                             .Where(q => q.Data != null)         // filter null data
+                             .Select(q => q.Data)
+                             .Where(q => q!.IsCompleted == false && q.IsOverDue == false)
+                             .OrderBy(o => o!.TaskCreatedOn);
+
+            return tasksList.ToList()!;
         }
-        
+
         public async Task MarkOverdueTasks(List<TaskModel> overDueTasksList)
         {
             foreach (var taskModel in overDueTasksList)

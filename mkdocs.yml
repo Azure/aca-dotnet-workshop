@@ -30,7 +30,7 @@ nav:
     - Debug and Launch Dapr Applications in VSCode: aca/30-appendix/01-run-debug-dapr-app-vscode.md
     - Testing Changes Locally or with GitHub Codespaces: aca/30-appendix/02-github-local-codespaces.md
     - Variables: aca/30-appendix/03-variables.md
-  
+
 theme:
   name: material
   custom_dir: docs/overrides
@@ -74,6 +74,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.highlight:
       anchor_linenums: true
+      linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.tabbed:
@@ -109,9 +110,9 @@ extra:
     backendsvc: "ACA Processor - Backend"
     frontend: "ACA Web - Frontend"
   dapr:
-    version: 1.12.0
+    version: 1.14.0
   docker:
-    targetport: 5000
+    targetport: 8080
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Azure/aca-dotnet-workshop

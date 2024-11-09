@@ -127,27 +127,45 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 - Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
 
-    === ".NET 8 or above"
+    === ".NET 8"
+
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
 
             ```xml hl_lines="9-11"
             --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui-dotnet8.csproj"
             ```
 
+    === ".NET 9"
+
+        === "TasksTracker.WebPortal.Frontend.Ui.csproj"
+
+            ```xml hl_lines="9-11"
+            --8<-- "docs/aca/03-aca-dapr-integration/Frontend.Ui-dotnet9.csproj"
+            ```
+
     - Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the highlighted below.
 
-    === ".NET 8 or above"
+    === ".NET 8"
+
         === "Program.cs"
 
             ```csharp hl_lines="6"
-            --8<-- "docs/aca/03-aca-dapr-integration/Program.cs"
+            --8<-- "docs/aca/03-aca-dapr-integration/Program-dotnet8.cs"
+            ```
+
+    === ".NET 9"
+
+        === "Program.cs"
+
+            ```csharp hl_lines="6"
+            --8<-- "docs/aca/03-aca-dapr-integration/Program-dotnet9.cs"
             ```
 
 - Now, we will inject the DaprClient into the `.cshtml` pages to use the method `InvokeMethodAsync` (second approach). Update files under folder **Pages\Tasks** and use the code below for different files.
 
     === "Index.cshtml.cs"
 
-        ```csharp    
+        ```csharp
         --8<-- "docs/aca/03-aca-dapr-integration/Tasks.Index.cshtml.cs"
         ```
 
@@ -161,7 +179,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
         ```csharp
         --8<-- "docs/aca/03-aca-dapr-integration/Edit.cshtml.cs"
-        ``` 
+        ```
 
 ???+ tip
     Notice how we are not using the `HttpClientFactory` anymore and how we were able from the Frontend Dapr Sidecar to invoke backend API Sidecar using the method `InvokeMethodAsync` which accepts the Dapr **remote App ID** for the Backend API `tasksmanager-backend-api` and it will be able to discover the URL and invoke the method based on the specified input params.

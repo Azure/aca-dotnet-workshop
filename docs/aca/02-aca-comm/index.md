@@ -82,12 +82,21 @@ By looking at the cshtml content notice that the page is expecting a query strin
         !!! tip "What does this code do?"
             The code added is similar to the create operation. The Edit page accepts the TaskId as a Guid, loads the task, and then updates the task by sending an HTTP PUT operation.
 
-- Now we will inject an HTTP client factory and define environment variables. To do so we will register the HttpClientFactory named `BackEndApiExternal` to make it available for injection in controllers. Open the `Program.cs` file and update it with highlighted code below. Your file may be flattened rather than indented and not contain some of the below elements. Don't worry. Just place the highlighted lines in the right spot:
+- Now we will inject an HTTP client factory and define environment variables. To do so, we will register the HttpClientFactory named `BackEndApiExternal` to make it available for injection in controllers. Open the `Program.cs` file and update it with highlighted code below. Your file may be flattened rather than indented and not contain some of the below elements. Don't worry. Just place the highlighted lines in the right spot:
 
-    === "Program.cs"
-    ```csharp hl_lines="6-15"
-    --8<-- "docs/aca/02-aca-comm/Program.cs"
-    ```
+    === ".NET 8"
+
+        === "Program.cs"
+        ```csharp hl_lines="6-15"
+        --8<-- "docs/aca/02-aca-comm/Program-dotnet8.cs"
+        ```
+
+    === ".NET 9"
+
+        === "Program.cs"
+        ```csharp hl_lines="6-15"
+        --8<-- "docs/aca/02-aca-comm/Program-dotnet9.cs"
+        ```
 
 - Next, we will add a new environment variable named `BackendApiConfig:BaseUrlExternalHttp` into `appsettings.json` file. This variable will contain the Base URL for the backend API deployed in the previous module to ACA. Later on in the workshop, we will see how we can set the environment variable once we deploy it to ACA. Use the output from this script as the `BaseUrlExternalHttp` value.
 
@@ -165,7 +174,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
     --output tsv)
 
     $FRONTEND_UI_BASE_URL="https://$fqdn"
-    
+
     echo "See the frontend web app at this URL:"
     echo $FRONTEND_UI_BASE_URL
     ```
@@ -174,7 +183,7 @@ By looking at the cshtml content notice that the page is expecting a query strin
     Notice how we used the property `env-vars` to set the value of the environment variable named `BackendApiConfig_BaseUrlExternalHttp` which we added in the AppSettings.json file. You can set multiple environment variables at the same time by using a space between each variable.
     The `ingress` property is set to `external` as the Web frontend App will be exposed to the public internet for users.
 
-After your run the command, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-frontend-webapp` and open it in your browser, and you should be able to browse the frontend web app and manage your tasks.
+After you run the command, copy the FQDN (Application URL) of the Azure container app named `tasksmanager-frontend-webapp` and open it in your browser, and you should be able to browse the frontend web app and manage your tasks.
 
 ### 3. Update Backend Web API Container App Ingress property
 
@@ -201,7 +210,7 @@ So far the Frontend App is sending HTTP requests to the publicly exposed Web API
     When you do this change, the FQDN (Application URL) will change, and it will be similar to the one shown below. Notice how there is an `Internal` part of the URL. `https://tasksmanager-backend-api.internal.[Environment unique identifier].eastus.azurecontainerapps.io/api/tasks/`
 
     If you try to invoke the URL directly it will return *403 - Forbidden* as this internal Url can only be accessed successfully from container apps within the container environment. This means that while the API is not accessible, it still provides a clue that something exists at that URL. Ideally, we would want to see a *404 - Not Found*. However, recall from module 1 that we did *not* set `internal-only` for simplicity's sake of the workshop. In a production scenario, this should be done with completely private networking to not reveal anything.
-    
+
     The FQDN consists of multiple parts. For example, all our Container Apps will be under a specific Environment unique identifier (e.g. `agreeablestone-8c14c04c`) and the Container App will vary based on the name provided, check the image below for a better explanation.
     ![Container Apps FQDN](../../assets/images/02-aca-comm/container-apps-fqdn.jpg)
 

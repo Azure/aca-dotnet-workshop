@@ -1,5 +1,5 @@
 ---
-title: Prerequisites  
+title: Prerequisites
 parent: Workshop Introduction
 has_children: false
 nav_order: 4
@@ -7,12 +7,12 @@ nav_order: 4
 
 ## Prerequisites
 
-The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.  
+The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.
 
 Make sure you have your development environment set up and configured.
 
 1. An Azure account with an active subscription - [Create an account for free](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio){target=_blank}
-1. .NET 8 or a higher version - [Install](https://dotnet.microsoft.com/en-us/download){target=_blank}
+1. .NET 8 or a higher version (we primarily focus on LTS versions) - [Install](https://dotnet.microsoft.com/en-us/download){target=_blank}
 1. PowerShell 7.0 or higher version (For Windows Users only!) - [Install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
 1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/){target=_blank}
 1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}
@@ -81,14 +81,7 @@ This workshop typically spans several days. As such, you may close your tools, e
 
 - Copy the [Set-Variables.ps1 script](../../aca/30-appendix/03-variables.md){target=_blank} into the newly-created `Set-Variables.ps1` file and save it.
 
-- Perform an initial commit of the `Set-Variables.ps1` file.
-
-    ```shell
-    git add .\Set-Variables.ps1
-    git commit -m "Initialize Set-Variables.ps1"
-    ```
-
-- Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out.
+- Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out. As we have not yet defined any variables, the output will indicate that the script has exited. This is intentional and expected at this stage.
 
     ```shell
     .\Set-Variables.ps1
