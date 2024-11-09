@@ -22,6 +22,6 @@ Pankaj loves writing technical blogs and contributing to open source projects. H
 
 ### [:material-github: Simon Kurtz](https://github.com/simonkurtz-MSFT){target=_blank}
 
-Simon is a Senior Cloud Solutions Architect at Microsoft, focused primarily on App Innovation and Platform-as-a-Service (PaaS). He has been heavily involved in Azure API Management and Azure Container Apps. Simon has enjoyed working with diverse customers and empowering everyone and every organization to be successful with Azure. He is very passionate about teaching and community outreach, posting frequently on blogs and LinkedIn.
+Simon is a Principal Cloud Solutions Architect at Microsoft, focused primarily on App Innovation and Platform-as-a-Service (PaaS). He has been heavily involved in Azure API Management, Azure Container Apps, and application and API integration with Azure OpenAI. Simon has enjoyed working with many diverse customers, large and small, across many industries. He thrives on empowering everyone and every organization to be successful with Azure. Simon is also very passionate about teaching and community outreach, posting frequently on blogs and LinkedIn.
 
 Originally from Germany, he has lived in the United States for more than a quarter century and has called Columbia, MD his home for many years. When not working with technology, he is a Cub Scout den leader and soccer coach. Connect with Simon on [:material-linkedin: LinkedIn](https://www.linkedin.com/in/simonkurtz){target=_blank}.
