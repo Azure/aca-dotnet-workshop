@@ -29,10 +29,19 @@ In this module, we will accomplish three objectives:
 
 - In the root folder create a new file and set the .NET SDK version from the above command:
 
-    === "global.json"
-    ```json hl_lines="3"
-    --8<-- "docs/aca/01-deploy-api-to-aca/global.json"
-    ```
+    === ".NET 8"
+
+        === "global.json"
+        ```json hl_lines="3"
+        --8<-- "docs/aca/01-deploy-api-to-aca/global-dotnet8.json"
+        ```
+
+    === ".NET 9"
+
+        === "global.json"
+        ```json hl_lines="3"
+        --8<-- "docs/aca/01-deploy-api-to-aca/global-dotnet9.json"
+        ```
 
 - Now we can initialize the backend API project. This will create and ASP.NET Web API project scaffolded with a single controller.
 
