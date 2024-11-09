@@ -1586,7 +1586,8 @@ If these services where part of your application's ecosystem it is always recomm
 <span class="normal"><a href="#__codelineno-3-18">18</a></span>
 <span class="normal"><a href="#__codelineno-3-19">19</a></span>
 <span class="normal"><a href="#__codelineno-3-20">20</a></span>
-<span class="normal"><a href="#__codelineno-3-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sttaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sttaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>az<span class="w"> </span>storage<span class="w"> </span>account<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a>--name<span class="w"> </span><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="w"> </span><span class="sb">`</span>
@@ -1603,10 +1604,11 @@ If these services where part of your application's ecosystem it is always recomm
 </span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="c1"># Get the primary storage account key</span>
 </span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="nv">$STORAGE_ACCOUNT_KEY</span><span class="o">=(</span><span class="k">$(</span>az<span class="w"> </span>storage<span class="w"> </span>account<span class="w"> </span>keys<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18"></a>--account-name<span class="w"> </span><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="w"> </span><span class="k">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)[</span><span class="m">0</span><span class="o">]</span>.value
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19"></a>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Storage Account Name : </span><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="s2">&quot;</span>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Storage Account Key  : </span><span class="nv">$STORAGE_ACCOUNT_KEY</span><span class="s2">&quot;</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18"></a>--account-name<span class="w"> </span><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19"></a>--output<span class="w"> </span>json<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)[</span><span class="m">0</span><span class="o">]</span>.value
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Storage Account Name : </span><span class="nv">$STORAGE_ACCOUNT_NAME</span><span class="s2">&quot;</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Storage Account Key  : </span><span class="nv">$STORAGE_ACCOUNT_KEY</span><span class="s2">&quot;</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Take note of the <strong>Storage Account Name</strong> and <strong>Storage Account Key</strong> as we will use both below.</p>
 <h3 id="2-updating-the-backend-background-processor-project">2. Updating the Backend Background Processor Project<a class="headerlink" href="#2-updating-the-backend-background-processor-project" title="Permanent link">&para;</a></h3>
