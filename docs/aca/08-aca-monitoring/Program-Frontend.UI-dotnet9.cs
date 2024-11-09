@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.Configure<TelemetryConfiguration>((o) => {
-    o.TelemetryInitializers.Add(new AppInsightsTelemetryInitializer());
+    o.TelemetryInitializers.Add(new TasksTracker.TasksManager.Frontend.Ui.AppInsightsTelemetryInitializer());
 });
 
 builder.Services.AddRazorPages();
