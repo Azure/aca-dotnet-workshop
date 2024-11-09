@@ -1322,13 +1322,13 @@
 <ul>
 <li>
 <p>From the VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> (<em>root</em>):</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.<span class="se">\V</span>ariables.ps1
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a>.<span class="se">\V</span>ariables.ps1
+</span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
 <h3 id="1-azure-container-apps-scaling-behaviors">1. Azure Container Apps Scaling Behaviors<a class="headerlink" href="#1-azure-container-apps-scaling-behaviors" title="Permanent link">&para;</a></h3>
@@ -1355,23 +1355,38 @@
 <li>The maximum number of replicas should not exceed five.</li>
 </ul>
 <p>To achieve this, we look to the <a href="https://keda.sh/docs/2.0/scalers/azure-service-bus" target="_blank">KEDA Azure Service Bus scaler</a>. This specification describes the <code>azure-servicebus</code> trigger for Azure Service Bus Queue or Topic. Let's take a look at the yaml file below which contains a generic template for the KEDA specification:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">triggers</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure-servicebus</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="c1"># Required: queueName OR topicName and subscriptionName</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">queueName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queueName</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="c1"># or</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">topicName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topicName</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">subscriptionName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subscriptionName</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="c1"># Optional, required when pod identity is used</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service-bus-namespace</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="c1"># Optional, can use TriggerAuthentication as well</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nt">connectionFromEnv</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVICEBUS_CONNECTIONSTRING_ENV_NAME</span><span class="w"> </span><span class="c1"># This must be a connection string for a queue itself, and not a namespace level (e.g. RootAccessPolicy) connection string </span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="c1"># Optional</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nt">messageCount</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="w"> </span><span class="c1"># Optional. Count of messages to trigger scaling on. Default: 5 messages</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nt">cloud</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Private</span><span class="w"> </span><span class="c1"># Optional. Default: AzurePublicCloud</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="nt">endpointSuffix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">servicebus.airgap.example</span><span class="w"> </span><span class="c1"># Required when cloud=Private</span>
-</span></code></pre></div>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nt">triggers</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure-servicebus</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="c1"># Required: queueName OR topicName and subscriptionName</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="nt">queueName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">queueName</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="c1"># or</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="nt">topicName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topicName</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="nt">subscriptionName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subscriptionName</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="c1"># Optional, required when pod identity is used</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service-bus-namespace</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="c1"># Optional, can use TriggerAuthentication as well</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="nt">connectionFromEnv</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVICEBUS_CONNECTIONSTRING_ENV_NAME</span><span class="w"> </span><span class="c1"># This must be a connection string for a queue itself, and not a namespace level (e.g. RootAccessPolicy) connection string </span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="c1"># Optional</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="nt">messageCount</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="w"> </span><span class="c1"># Optional. Count of messages to trigger scaling on. Default: 5 messages</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="nt">cloud</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Private</span><span class="w"> </span><span class="c1"># Optional. Default: AzurePublicCloud</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="nt">endpointSuffix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">servicebus.airgap.example</span><span class="w"> </span><span class="c1"># Required when cloud=Private</span>
+</span></code></pre></div></td></tr></table></div>
 <details class="info">
 <summary>Curious to learn more about the contents of the yaml file?</summary>
 <ul>
@@ -1390,41 +1405,66 @@
 <p>Azure Container Apps has its own proprietary schema to map a KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps <a href="https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples" target="_blank">ARM templates</a>, <a href="https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples" target="_blank">yaml manifest</a>, Azure CLI, or from the <a href="https://portal.azure.com" target="_blank">Azure portal</a>. In this module, we will cover how to do it from the Azure CLI.</p>
 <h4 id="32-create-a-new-secret-in-the-container-app">3.2 Create a New Secret In The Container App<a class="headerlink" href="#32-create-a-new-secret-in-the-container-app" title="Permanent link">&para;</a></h4>
 <p>Let's now create a secret named <code>svcbus-connstring</code> in our <code>tasksmanager-backend-processor</code> Container App. This secret will contain the value of Azure Service Bus shared access policy (connection string) with <code>Manage</code> policy. To accomplish this, run the following commands in the Azure CLI to get the connection string, and then add this secret using the second command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># List Service Bus Access Policy RootManageSharedAccessKey</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">$SERVICE_BUS_CONNECTION_STRING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>servicebus<span class="w"> </span>namespace<span class="w"> </span>authorization-rule<span class="w"> </span>keys<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>--name<span class="w"> </span>RootManageSharedAccessKey<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>--namespace-name<span class="w"> </span><span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>--query<span class="w"> </span>primaryConnectionString<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>--output<span class="w"> </span>tsv
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># Create a new secret named &#39;svcbus-connstring&#39; in backend processer container app</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>az<span class="w"> </span>containerapp<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>--secrets<span class="w"> </span><span class="s2">&quot;svcbus-connstring=</span><span class="nv">$SERVICE_BUS_CONNECTION_STRING</span><span class="s2">&quot;</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># List Service Bus Access Policy RootManageSharedAccessKey</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nv">$SERVICE_BUS_CONNECTION_STRING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>servicebus<span class="w"> </span>namespace<span class="w"> </span>authorization-rule<span class="w"> </span>keys<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>--name<span class="w"> </span>RootManageSharedAccessKey<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>--namespace-name<span class="w"> </span><span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a>--query<span class="w"> </span>primaryConnectionString<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>--output<span class="w"> </span>tsv
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="c1"># Create a new secret named &#39;svcbus-connstring&#39; in backend processer container app</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a>az<span class="w"> </span>containerapp<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13"></a>--secrets<span class="w"> </span><span class="s2">&quot;svcbus-connstring=</span><span class="nv">$SERVICE_BUS_CONNECTION_STRING</span><span class="s2">&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 <h4 id="2-create-a-custom-scaling-rule-from-azure-cli">2. Create a Custom Scaling Rule from Azure CLI<a class="headerlink" href="#2-create-a-custom-scaling-rule-from-azure-cli" title="Permanent link">&para;</a></h4>
 <p>Now we are ready to add a new custom scaling rule to match the business requirements. To accomplish this, we need to run the Azure CLI command below:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You might need to upgrade the extension if you are on an older version of <code>az containerapp</code> which didn't allow you to create a scaling rule from CLI. To update the extension you can run the following command <code>az extension update --name containerapp</code> inside your PowerShell terminal.</p>
 </div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>--min-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>--max-replicas<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-6<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>--scale-rule-name<span class="w"> </span><span class="s2">&quot;topic-msgs-length&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>--scale-rule-type<span class="w"> </span><span class="s2">&quot;azure-servicebus&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>--scale-rule-auth<span class="w"> </span><span class="s2">&quot;connection=svcbus-connstring&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>--scale-rule-metadata<span class="w"> </span><span class="s2">&quot;topicName=</span><span class="nv">$SERVICE_BUS_TOPIC_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">                        </span><span class="s2">&quot;subscriptionName=</span><span class="nv">$SERVICE_BUS_TOPIC_SUBSCRIPTION</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">                        </span><span class="s2">&quot;namespace=</span><span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">                        </span><span class="s2">&quot;messageCount=10&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">                        </span><span class="s2">&quot;connectionFromEnv=svcbus-connstring&quot;</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a>--min-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a>--max-replicas<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-6<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a>--scale-rule-name<span class="w"> </span><span class="s2">&quot;topic-msgs-length&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a>--scale-rule-type<span class="w"> </span><span class="s2">&quot;azure-servicebus&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a>--scale-rule-auth<span class="w"> </span><span class="s2">&quot;connection=svcbus-connstring&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a>--scale-rule-metadata<span class="w"> </span><span class="s2">&quot;topicName=</span><span class="nv">$SERVICE_BUS_TOPIC_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">                        </span><span class="s2">&quot;subscriptionName=</span><span class="nv">$SERVICE_BUS_TOPIC_SUBSCRIPTION</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">                        </span><span class="s2">&quot;namespace=</span><span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">                        </span><span class="s2">&quot;messageCount=10&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">                        </span><span class="s2">&quot;connectionFromEnv=svcbus-connstring&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 <details class="info">
 <summary>Curious to learn more about the different parameters passed to the <code>az containerapp update</code> command?</summary>
 <ul>
@@ -1449,25 +1489,39 @@
 <h4 id="41-run-an-end-to-end-test-and-generate-several-messages">4.1 Run an End-to-End Test and Generate Several Messages<a class="headerlink" href="#41-run-an-end-to-end-test-and-generate-several-messages" title="Permanent link">&para;</a></h4>
 <p>Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize the Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.</p>
 <p>To get the number of current replicas of service <code>tasksmanager-backend-processor</code> we could run the command below, this should run single replica as we didn't load the service bus topic yet.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>az<span class="w"> </span>containerapp<span class="w"> </span>replica<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>--query<span class="w"> </span><span class="o">[]</span>.name
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>az<span class="w"> </span>containerapp<span class="w"> </span>replica<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>--query<span class="w"> </span><span class="o">[]</span>.name
+</span></code></pre></div></td></tr></table></div>
 <p>The message structure our backend processor expects is similar to the JSON shown below. So copy this message and click on <code>Send messages</code> button, paste the message content, set the content type to <code>application/json</code>, check the <code>Repeat Send</code> check box, select <code>10000</code> messages and put an interval of <code>1ms</code> between them. This ensures that we are sending high volume at short intervals, so that the single replica container app cannot absorb and process quickly enough and will consequently need to scale out. Finally click <code>Send</code> when you are ready.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="nt">&quot;isCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="nt">&quot;isOverDue&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temp@mail.com&quot;</span><span class="p">,</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;someone@mail.com&quot;</span><span class="p">,</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="nt">&quot;taskCreatedOn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-18T12:45:22.0984036Z&quot;</span><span class="p">,</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-02-24T12:45:22.0983978Z&quot;</span><span class="p">,</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">        </span><span class="nt">&quot;taskId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6a051aeb-f567-40dd-a434-39927f2b93c5&quot;</span><span class="p">,</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Auto scale Task&quot;</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">}</span>
-</span></code></pre></div>
+<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">        </span><span class="nt">&quot;isCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">        </span><span class="nt">&quot;isOverDue&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">        </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temp@mail.com&quot;</span><span class="p">,</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">        </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;someone@mail.com&quot;</span><span class="p">,</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">        </span><span class="nt">&quot;taskCreatedOn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-18T12:45:22.0984036Z&quot;</span><span class="p">,</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">        </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-02-24T12:45:22.0983978Z&quot;</span><span class="p">,</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">        </span><span class="nt">&quot;taskId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6a051aeb-f567-40dd-a434-39927f2b93c5&quot;</span><span class="p">,</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">        </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Auto scale Task&quot;</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
 <p><a class="glightbox" href="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="svcbus-send" src="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg" /></a></p>
 <h4 id="42-verify-that-multiple-replicas-are-created">4.2 Verify that Multiple Replicas Are Created<a class="headerlink" href="#42-verify-that-multiple-replicas-are-created" title="Permanent link">&para;</a></h4>
 <div class="admonition success">
@@ -1492,14 +1546,15 @@ Currently, there is no way to override this value, yet there is an <a href="http
 <ul>
 <li>
 <p>Execute the <code>Set-Variables.ps1</code> in the root to update the <code>variables.ps1</code> file with all current variables. The output of the script will inform you how many variables are written out.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.<span class="se">\S</span>et-Variables.ps1
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a>.<span class="se">\S</span>et-Variables.ps1
+</span></code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>From the root, persist a list of all current variables.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update Variables.ps1&quot;</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update Variables.ps1&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
 <h2 id="review">Review<a class="headerlink" href="#review" title="Permanent link">&para;</a></h2>
@@ -1530,7 +1585,7 @@ Currently, there is no way to override this value, yet there is an <a href="http
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2024-11-08
+    2024-11-09
   </span>
 
     

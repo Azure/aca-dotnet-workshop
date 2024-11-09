@@ -1140,15 +1140,22 @@
 <ul>
 <li>Execute the following commands in PowerShell to create an Azure AD application and service principal.</li>
 </ul>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$AZURE_TENANT</span> <span class="p">=</span> <span class="n">az</span> <span class="n">account</span> <span class="n">show</span> <span class="n">-o</span> <span class="n">tsv</span> <span class="p">-</span><span class="n">-query</span> <span class="n">tenantId</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">$SUBSCRIPTION_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">account</span> <span class="n">show</span> <span class="n">-o</span> <span class="n">tsv</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">$APP_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">ad</span> <span class="n">app</span> <span class="n">create</span> <span class="p">-</span><span class="n">-display-name</span> <span class="n">aca-dotnet-workshop-oidc</span> <span class="p">-</span><span class="n">-query</span> <span class="n">appId</span> <span class="n">-otsv</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">az</span> <span class="n">ad</span> <span class="nb">sp </span><span class="n">create</span> <span class="p">-</span><span class="n">-id</span> <span class="nv">$APP_ID</span> <span class="p">-</span><span class="n">-query</span> <span class="n">appId</span> <span class="n">-otsv</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nv">$OBJECT_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">ad</span> <span class="n">app</span> <span class="n">show</span> <span class="p">-</span><span class="n">-id</span> <span class="nv">$APP_ID</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span> <span class="n">-otsv</span>
-</span></code></pre></div>
+<div class="language-powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nv">$AZURE_TENANT</span> <span class="p">=</span> <span class="n">az</span> <span class="n">account</span> <span class="n">show</span> <span class="n">-o</span> <span class="n">tsv</span> <span class="p">-</span><span class="n">-query</span> <span class="n">tenantId</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nv">$SUBSCRIPTION_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">account</span> <span class="n">show</span> <span class="n">-o</span> <span class="n">tsv</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="nv">$APP_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">ad</span> <span class="n">app</span> <span class="n">create</span> <span class="p">-</span><span class="n">-display-name</span> <span class="n">aca-dotnet-workshop-oidc</span> <span class="p">-</span><span class="n">-query</span> <span class="n">appId</span> <span class="n">-otsv</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">az</span> <span class="n">ad</span> <span class="nb">sp </span><span class="n">create</span> <span class="p">-</span><span class="n">-id</span> <span class="nv">$APP_ID</span> <span class="p">-</span><span class="n">-query</span> <span class="n">appId</span> <span class="n">-otsv</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="nv">$OBJECT_ID</span> <span class="p">=</span> <span class="n">az</span> <span class="n">ad</span> <span class="n">app</span> <span class="n">show</span> <span class="p">-</span><span class="n">-id</span> <span class="nv">$APP_ID</span> <span class="p">-</span><span class="n">-query</span> <span class="n">id</span> <span class="n">-otsv</span>
+</span></code></pre></div></td></tr></table></div>
 <ul>
 <li>Execute below command to create a federated identity credential for the Azure AD application.</li>
 </ul>
@@ -1156,28 +1163,36 @@
 <p class="admonition-title">Note</p>
 <p>Replace <code>&lt;Repo owner&gt;</code> in below json with your GitHub username where you forked the workshop repository.</p>
 </div>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">az</span> <span class="n">rest</span> <span class="p">-</span><span class="n">-method</span> <span class="n">POST</span> <span class="p">-</span><span class="n">-uri</span> <span class="s2">&quot;https://graph.microsoft.com/beta/applications/$OBJECT_ID/federatedIdentityCredentials&quot;</span> <span class="p">-</span><span class="n">-body</span> <span class="s1">&#39;{\&quot;name\&quot;:\&quot;aca-dotnet-workshop-federated-identity\&quot;,\&quot;issuer\&quot;:\&quot;https://token.actions.githubusercontent.com\&quot;,\&quot;subject\&quot;:\&quot;repo:&lt;Repo owner&gt;/aca-dotnet-workshop:ref:refs/heads/main\&quot;,\&quot;description\&quot;:\&quot;GitHub\&quot;,\&quot;audiences\&quot;:[\&quot;api://AzureADTokenExchange\&quot;]}&#39;</span> <span class="p">-</span><span class="n">-headers</span> <span class="s2">&quot;Content-Type=application/json&quot;</span>
-</span></code></pre></div>
+<div class="language-powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">az</span> <span class="n">rest</span> <span class="p">-</span><span class="n">-method</span> <span class="n">POST</span> <span class="p">-</span><span class="n">-uri</span> <span class="s2">&quot;https://graph.microsoft.com/beta/applications/$OBJECT_ID/federatedIdentityCredentials&quot;</span> <span class="p">-</span><span class="n">-body</span> <span class="s1">&#39;{\&quot;name\&quot;:\&quot;aca-dotnet-workshop-federated-identity\&quot;,\&quot;issuer\&quot;:\&quot;https://token.actions.githubusercontent.com\&quot;,\&quot;subject\&quot;:\&quot;repo:&lt;Repo owner&gt;/aca-dotnet-workshop:ref:refs/heads/main\&quot;,\&quot;description\&quot;:\&quot;GitHub\&quot;,\&quot;audiences\&quot;:[\&quot;api://AzureADTokenExchange\&quot;]}&#39;</span> <span class="p">-</span><span class="n">-headers</span> <span class="s2">&quot;Content-Type=application/json&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 <ul>
 <li>Perform role assignment for the Azure AD application to access the subscription.</li>
 </ul>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">-</span><span class="n">-assignee</span> <span class="nv">$APP_ID</span> <span class="p">-</span><span class="n">-role</span> <span class="n">contributor</span> <span class="p">-</span><span class="n">-scope</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/</span><span class="nv">$SUBSCRIPTION_ID</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">-</span><span class="n">-assignee</span> <span class="nv">$APP_ID</span> <span class="p">-</span><span class="n">-role</span> <span class="s1">&#39;User Access Administrator&#39;</span> <span class="p">-</span><span class="n">-scope</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/</span><span class="nv">$SUBSCRIPTION_ID</span>
-</span></code></pre></div>
+<div class="language-powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">-</span><span class="n">-assignee</span> <span class="nv">$APP_ID</span> <span class="p">-</span><span class="n">-role</span> <span class="n">contributor</span> <span class="p">-</span><span class="n">-scope</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/</span><span class="nv">$SUBSCRIPTION_ID</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">-</span><span class="n">-assignee</span> <span class="nv">$APP_ID</span> <span class="p">-</span><span class="n">-role</span> <span class="s1">&#39;User Access Administrator&#39;</span> <span class="p">-</span><span class="n">-scope</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/</span><span class="nv">$SUBSCRIPTION_ID</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <ul>
 <li>Execute the following commands in PowerShell to create an Azure AD application and service principal.</li>
 </ul>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">AZURE_TENANT</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>tenantId<span class="k">)</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">SUBSCRIPTION_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>id<span class="k">)</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">APP_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>create<span class="w"> </span>--display-name<span class="w"> </span>aca-dotnet-workshop-oidc<span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv<span class="k">)</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>az<span class="w"> </span>ad<span class="w"> </span>sp<span class="w"> </span>create<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nv">OBJECT_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>show<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-otsv<span class="k">)</span>
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span>
+<span class="normal"><a href="#__codelineno-3-7">7</a></span>
+<span class="normal"><a href="#__codelineno-3-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nv">AZURE_TENANT</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>tenantId<span class="k">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nv">SUBSCRIPTION_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>id<span class="k">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="nv">APP_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>create<span class="w"> </span>--display-name<span class="w"> </span>aca-dotnet-workshop-oidc<span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv<span class="k">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a>az<span class="w"> </span>ad<span class="w"> </span>sp<span class="w"> </span>create<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="nv">OBJECT_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>show<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-otsv<span class="k">)</span>
+</span></code></pre></div></td></tr></table></div>
 <ul>
 <li>Execute below command to create a federated identity credential for the Azure AD application.</li>
 </ul>
@@ -1185,49 +1200,74 @@
 <p class="admonition-title">Note</p>
 <p>Replace <code>&lt;Repo owner&gt;</code> in below json with your GitHub username where you forked the workshop repository.</p>
 </div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF &gt; body.json</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s">{</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="s">    &quot;name&quot;: &quot;aca-dotnet-workshop-federated-identity&quot;,</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s">    &quot;issuer&quot;: &quot;https://token.actions.githubusercontent.com&quot;,</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s">    &quot;subject&quot;: &quot;repo:&lt;Repo owner&gt;/aca-dotnet-workshop:ref:refs/heads/main&quot;,</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s">    &quot;description&quot;: &quot;GitHub&quot;,</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s">    &quot;audiences&quot;: [</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s">        &quot;api://AzureADTokenExchange&quot;</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="s">    ]</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="s">}</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="s">EOF</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>az<span class="w"> </span>rest<span class="w"> </span>--method<span class="w"> </span>POST<span class="w"> </span>--uri<span class="w"> </span><span class="s2">&quot;https://graph.microsoft.com/beta/applications/</span><span class="nv">$OBJECT_ID</span><span class="s2">/federatedIdentityCredentials&quot;</span><span class="w"> </span>--body<span class="w"> </span>@body.json
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF &gt; body.json</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="s">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="s">    &quot;name&quot;: &quot;aca-dotnet-workshop-federated-identity&quot;,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="s">    &quot;issuer&quot;: &quot;https://token.actions.githubusercontent.com&quot;,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="s">    &quot;subject&quot;: &quot;repo:&lt;Repo owner&gt;/aca-dotnet-workshop:ref:refs/heads/main&quot;,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="s">    &quot;description&quot;: &quot;GitHub&quot;,</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="s">    &quot;audiences&quot;: [</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="s">        &quot;api://AzureADTokenExchange&quot;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="s">    ]</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="s">}</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="s">EOF</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a>az<span class="w"> </span>rest<span class="w"> </span>--method<span class="w"> </span>POST<span class="w"> </span>--uri<span class="w"> </span><span class="s2">&quot;https://graph.microsoft.com/beta/applications/</span><span class="nv">$OBJECT_ID</span><span class="s2">/federatedIdentityCredentials&quot;</span><span class="w"> </span>--body<span class="w"> </span>@body.json
+</span></code></pre></div></td></tr></table></div>
 <ul>
 <li>Perform role assignment for the Azure AD application to access the subscription.</li>
 </ul>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--role<span class="w"> </span>contributor<span class="w"> </span>--scope<span class="w"> </span>/subscriptions/<span class="nv">$SUBSCRIPTION_ID</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--role<span class="w"> </span><span class="s1">&#39;User Access Administrator&#39;</span><span class="w"> </span>--scope<span class="w"> </span>/subscriptions/<span class="nv">$SUBSCRIPTION_ID</span>
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--role<span class="w"> </span>contributor<span class="w"> </span>--scope<span class="w"> </span>/subscriptions/<span class="nv">$SUBSCRIPTION_ID</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--role<span class="w"> </span><span class="s1">&#39;User Access Administrator&#39;</span><span class="w"> </span>--scope<span class="w"> </span>/subscriptions/<span class="nv">$SUBSCRIPTION_ID</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <h3 id="configure-github-repository-secrets">Configure GitHub Repository Secrets<a class="headerlink" href="#configure-github-repository-secrets" title="Permanent link">&para;</a></h3>
 <p>Configure secrets details in GitHub repo as described here in <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets" target="_blank">create GitHub secrets</a>. Use below values mapped to relevant secrets in GitHub.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># AZURE_SUBSCRIPTION_ID</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$SUBSCRIPTION_ID</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># AZURE_TENANT_ID</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$AZURE_TENANT</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># AZURE_CLIENT_ID</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APP_ID</span>
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span>
+<span class="normal"><a href="#__codelineno-6-5">5</a></span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># AZURE_SUBSCRIPTION_ID</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$SUBSCRIPTION_ID</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1"># AZURE_TENANT_ID</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$AZURE_TENANT</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="c1"># AZURE_CLIENT_ID</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APP_ID</span>
+</span></code></pre></div></td></tr></table></div>
 <h3 id="configure-github-repository-variables">Configure GitHub Repository Variables<a class="headerlink" href="#configure-github-repository-variables" title="Permanent link">&para;</a></h3>
 <p>Configure repository variables in GitHub repo as described here in <a href="https://docs.github.com/en/actions/learn-github-actions/variables">create GitHub variables</a>. Use below values mapped to relevant variables in GitHub.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location.<span class="w"> </span>e.g.<span class="w"> </span>eastus&gt;
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># RESOURCE_GROUP: Name of the resource group which will be created and resources will be deployed</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nv">RESOURCE_GROUP</span><span class="o">=</span>&lt;resource<span class="w"> </span>group<span class="w"> </span>name&gt;
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span>&lt;container<span class="w"> </span>registry<span class="w"> </span>name&gt;
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span>
+<span class="normal"><a href="#__codelineno-7-6">6</a></span>
+<span class="normal"><a href="#__codelineno-7-7">7</a></span>
+<span class="normal"><a href="#__codelineno-7-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location.<span class="w"> </span>e.g.<span class="w"> </span>eastus&gt;
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1"># RESOURCE_GROUP: Name of the resource group which will be created and resources will be deployed</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="nv">RESOURCE_GROUP</span><span class="o">=</span>&lt;resource<span class="w"> </span>group<span class="w"> </span>name&gt;
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1"># (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span>&lt;container<span class="w"> </span>registry<span class="w"> </span>name&gt;
+</span></code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Repository variables <code>CONTAINER_REGISTRY_NAME</code> is only needed by workflow, if you wish the images to be deployed from private ACR.</p>
@@ -1265,7 +1305,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2024-11-08
+    2024-11-09
   </span>
 
     

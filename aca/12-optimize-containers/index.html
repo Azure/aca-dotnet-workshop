@@ -1410,13 +1410,13 @@
 <ul>
 <li>
 <p>From the VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> (<em>root</em>):</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.<span class="se">\V</span>ariables.ps1
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a>.<span class="se">\V</span>ariables.ps1
+</span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
 <h3 id="1-optimizing-containers">1. Optimizing Containers<a class="headerlink" href="#1-optimizing-containers" title="Permanent link">&para;</a></h3>
@@ -1427,7 +1427,7 @@
 <li>Potentially less <em>Common Vulnerabilities and Exposures (CVEs)</em>.</li>
 <li>No bloat and unnecessary components such as shells, package managers, etc.</li>
 </ul>
-<p>While available prior to .NET 8, the general availability introduction of .NET 8 in November 2023 came with an expanded focus on container optimization and a move away from general-purpose containers.</p>
+<p>While available prior to .NET 8, the general availability introduction of .NET 8 in November 2023 came with an expanded focus on container optimization and a move away from general-purpose containers. You can apply similar steps for .NET versions newer than 8, but we omit them here for brevity.</p>
 <p>Please ensure you have the Docker daemon ready. Running <em>Docker Desktop</em> does it.</p>
 <h4 id="11-the-status-quo">1.1 The Status Quo<a class="headerlink" href="#11-the-status-quo" title="Permanent link">&para;</a></h4>
 <p>Let's focus on our first project, the Backend API. This is an ASP.NET Core application.</p>
@@ -1437,37 +1437,62 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-Dockerfile highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:5000
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/&quot;</span><span class="o">]</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.TasksManager.Backend.Api&quot;</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.dll&quot;</span><span class="p">]</span>
-</span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-api-status-quo<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.TasksManager.Backend.Api<span class="se">\D</span>ockerfile<span class="w"> </span>.
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
-</span></code></pre></div>
+<div class="language-Dockerfile highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">8080</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:8080
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/&quot;</span><span class="o">]</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.TasksManager.Backend.Api&quot;</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.dll&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-api-status-quo<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.TasksManager.Backend.Api<span class="se">\D</span>ockerfile<span class="w"> </span>.
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
+</span></code></pre></div></td></tr></table></div>
 <p>This yields a sizable image at <strong>222 MB</strong>!</p>
 <p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-status-quo.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo" src="../../assets/images/12-optimize-containers/backend-api-status-quo.png" /></a></p>
 <p>This image is comprised of two images, 452 packages, and has 19 vulnerabilities.</p>
@@ -1479,36 +1504,61 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-Dockerfile highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
-</span></span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:5000
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0-jammy</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
-</span></span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/&quot;</span><span class="o">]</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.TasksManager.Backend.Api&quot;</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
-</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
-</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
-</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
-</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.dll&quot;</span><span class="p">]</span>
-</span></code></pre></div>
+<div class="language-Dockerfile highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+</span></span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">8080</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:8080
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0-jammy</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
+</span></span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/&quot;</span><span class="o">]</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.TasksManager.Backend.Api&quot;</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16"></a>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20"></a>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.dll&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Create a new file, <code>Dockerfile.chiseled</code> in the Backend Api root directory, then build the image again:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-api-chiseled<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.TasksManager.Backend.Api<span class="se">\D</span>ockerfile.chiseled<span class="w"> </span>.
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-api-chiseled<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.TasksManager.Backend.Api<span class="se">\D</span>ockerfile.chiseled<span class="w"> </span>.
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
+</span></code></pre></div></td></tr></table></div>
 <p>Our image now stands at a much smaller <strong>115 MB</strong> - a drop of 107 MB and a size just 51.8% of the status quo image!</p>
 <p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-chiseled.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Backend API Chiseled" src="../../assets/images/12-optimize-containers/backend-api-chiseled.png" /></a></p>
 <p>This image is comprised of one image, 331 packages, and has five vulnerabilities.</p>
@@ -1520,36 +1570,61 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-Dockerfile highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
-</span></span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:5000
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/sdk:8.0-jammy-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
-</span></span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/&quot;</span><span class="o">]</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.TasksManager.Backend.Api&quot;</span>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
-</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.dll&quot;</span><span class="p">]</span>
-</span></code></pre></div>
+<div class="language-Dockerfile highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+</span></span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">8080</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:8080
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/sdk:8.0-jammy-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
+</span></span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/&quot;</span><span class="o">]</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj&quot;</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.TasksManager.Backend.Api&quot;</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20"></a>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api.dll&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Create a new file, <code>Dockerfile.chiseled.aot</code> in the Backend Api root directory, then build the image again:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-api-chiseled-aot<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.TasksManager.Backend.Api<span class="se">\D</span>ockerfile.chiseled.aot<span class="w"> </span>.
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-api-chiseled-aot<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.TasksManager.Backend.Api<span class="se">\D</span>ockerfile.chiseled.aot<span class="w"> </span>.
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
+</span></code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Nightly Images</p>
 <p>As the name implies, these images are produced nightly. They are not yet images that are versioned and stable in the registry. Your mileage may vary.</p>
@@ -1562,23 +1637,35 @@ Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</cod
 <h4 id="14-deploying-the-new-status-quo">1.4 Deploying the new Status Quo<a class="headerlink" href="#14-deploying-the-new-status-quo" title="Permanent link">&para;</a></h4>
 <p>While the image is vastly reduced, what hasn't changed is the functionality of the API. Whether you are executing it locally or deploying to Azure, the Backend API will continue to function as it always has. However, now it has less vulnerabilities, less time to transfer from the registry, less startup time, and less of a memory footprint. Furthermore, 16 MB is the uncompressed image. With compression, we are likely to continue dropping in size.</p>
 <p>Let's update our existing Backend API container app with a new build and revision:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">## Build Backend Service on ACR and Push to ACR</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="hll">--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot&#39;</span><span class="w"> </span>.<span class="w"> </span>
-</span></span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># Update Backend API App container app and create a new revision </span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w">  </span><span class="sb">`</span>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-6<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1">## Build Backend Service on ACR and Push to ACR</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="hll">--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot&#39;</span><span class="w"> </span>.<span class="w"> </span>
+</span></span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="c1"># Update Backend API App container app and create a new revision </span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w">  </span><span class="sb">`</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-6<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Verify that the application continues to work:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">$FRONTEND_UI_BASE_URL</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nv">$FRONTEND_UI_BASE_URL</span>
+</span></code></pre></div></td></tr></table></div>
 <h3 id="2-optimizing-frontend-ui-backend-service-containers">2. Optimizing Frontend UI &amp; Backend Service Containers<a class="headerlink" href="#2-optimizing-frontend-ui-backend-service-containers" title="Permanent link">&para;</a></h3>
 <p>As all three projects use ASP.NET Core, we can follow the same approach with these two projects as well.how much you are able to reduce!</p>
 <h4 id="21-frontend-ui">2.1 Frontend UI<a class="headerlink" href="#21-frontend-ui" title="Permanent link">&para;</a></h4>
@@ -1589,37 +1676,62 @@ Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</cod
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-Dockerfile highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:5000
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/&quot;</span><span class="o">]</span>
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span>
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.WebPortal.Frontend.Ui&quot;</span>
-</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
-</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
-</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
-</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
-</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
-</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
-</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
-</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.dll&quot;</span><span class="p">]</span>
-</span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>frontend-ui-status-quo<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui<span class="se">\D</span>ockerfile<span class="w"> </span>.
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
-</span></code></pre></div>
+<div class="language-Dockerfile highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span>
+<span class="normal"><a href="#__codelineno-11-13">13</a></span>
+<span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span>
+<span class="normal"><a href="#__codelineno-11-16">16</a></span>
+<span class="normal"><a href="#__codelineno-11-17">17</a></span>
+<span class="normal"><a href="#__codelineno-11-18">18</a></span>
+<span class="normal"><a href="#__codelineno-11-19">19</a></span>
+<span class="normal"><a href="#__codelineno-11-20">20</a></span>
+<span class="normal"><a href="#__codelineno-11-21">21</a></span>
+<span class="normal"><a href="#__codelineno-11-22">22</a></span>
+<span class="normal"><a href="#__codelineno-11-23">23</a></span>
+<span class="normal"><a href="#__codelineno-11-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">8080</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:8080
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/&quot;</span><span class="o">]</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.WebPortal.Frontend.Ui&quot;</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16"></a>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20"></a>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.dll&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>frontend-ui-status-quo<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui<span class="se">\D</span>ockerfile<span class="w"> </span>.
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
+</span></code></pre></div></td></tr></table></div>
 <p>This yields an image size of <strong>227 MB</strong>.</p>
 <h4 id="212-chiseled-ahead-of-time-aot-compilation">2.1.2 Chiseled &amp; Ahead-of-time (AOT) Compilation<a class="headerlink" href="#212-chiseled-ahead-of-time-aot-compilation" title="Permanent link">&para;</a></h4>
 <p>Skipping straight to AOT images:</p>
@@ -1628,36 +1740,61 @@ Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</cod
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-Dockerfile highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
-</span></span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:5000
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
-</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/sdk:8.0-jammy-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
-</span></span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
-</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/&quot;</span><span class="o">]</span>
-</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span>
-</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.WebPortal.Frontend.Ui&quot;</span>
-</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
-</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
-</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
-</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
-</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>
-</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
-</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
-</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.dll&quot;</span><span class="p">]</span>
-</span></code></pre></div>
+<div class="language-Dockerfile highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span>
+<span class="normal"><a href="#__codelineno-14-12">12</a></span>
+<span class="normal"><a href="#__codelineno-14-13">13</a></span>
+<span class="normal"><a href="#__codelineno-14-14">14</a></span>
+<span class="normal"><a href="#__codelineno-14-15">15</a></span>
+<span class="normal"><a href="#__codelineno-14-16">16</a></span>
+<span class="normal"><a href="#__codelineno-14-17">17</a></span>
+<span class="normal"><a href="#__codelineno-14-18">18</a></span>
+<span class="normal"><a href="#__codelineno-14-19">19</a></span>
+<span class="normal"><a href="#__codelineno-14-20">20</a></span>
+<span class="normal"><a href="#__codelineno-14-21">21</a></span>
+<span class="normal"><a href="#__codelineno-14-22">22</a></span>
+<span class="normal"><a href="#__codelineno-14-23">23</a></span>
+<span class="normal"><a href="#__codelineno-14-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+</span></span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">8080</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:8080
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/sdk:8.0-jammy-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
+</span></span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/&quot;</span><span class="o">]</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.WebPortal.Frontend.Ui&quot;</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16"></a>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20"></a>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.dll&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Create a new file, <code>Dockerfile.chiseled.aot</code> in the Frontend Ui root directory, then build the image again:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>frontend-ui-chiseled-aot<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui<span class="se">\D</span>ockerfile.chiseled.aot<span class="w"> </span>.
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>frontend-ui-chiseled-aot<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.WebPortal.Frontend.Ui<span class="se">\D</span>ockerfile.chiseled.aot<span class="w"> </span>.
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
+</span></code></pre></div></td></tr></table></div>
 <p>This much-improved image is now <strong>20.6 MB</strong>.</p>
 <h4 id="22-backend-service">2.2 Backend Service<a class="headerlink" href="#22-backend-service" title="Permanent link">&para;</a></h4>
 <h4 id="221-the-status-quo">2.2.1 The Status Quo<a class="headerlink" href="#221-the-status-quo" title="Permanent link">&para;</a></h4>
@@ -1667,37 +1804,62 @@ Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</cod
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-Dockerfile highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:5000
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
-</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
-</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/&quot;</span><span class="o">]</span>
-</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj&quot;</span>
-</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.Processor.Backend.Svc&quot;</span>
-</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
-</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>
-</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
-</span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
-</span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>
-</span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
-</span><span id="__span-16-22"><a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-16-23"><a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
-</span><span id="__span-16-24"><a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.dll&quot;</span><span class="p">]</span>
-</span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-svc-status-quo<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.Processor.Backend.Svc<span class="se">\D</span>ockerfile<span class="w"> </span>.
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
-</span></code></pre></div>
+<div class="language-Dockerfile highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span>
+<span class="normal"><a href="#__codelineno-16-12">12</a></span>
+<span class="normal"><a href="#__codelineno-16-13">13</a></span>
+<span class="normal"><a href="#__codelineno-16-14">14</a></span>
+<span class="normal"><a href="#__codelineno-16-15">15</a></span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span>
+<span class="normal"><a href="#__codelineno-16-18">18</a></span>
+<span class="normal"><a href="#__codelineno-16-19">19</a></span>
+<span class="normal"><a href="#__codelineno-16-20">20</a></span>
+<span class="normal"><a href="#__codelineno-16-21">21</a></span>
+<span class="normal"><a href="#__codelineno-16-22">22</a></span>
+<span class="normal"><a href="#__codelineno-16-23">23</a></span>
+<span class="normal"><a href="#__codelineno-16-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">8080</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:8080
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6"></a>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/&quot;</span><span class="o">]</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj&quot;</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.Processor.Backend.Svc&quot;</span>
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16"></a>
+</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
+</span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
+</span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20"></a>
+</span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
+</span><span id="__span-16-22"><a id="__codelineno-16-22" name="__codelineno-16-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-16-23"><a id="__codelineno-16-23" name="__codelineno-16-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
+</span><span id="__span-16-24"><a id="__codelineno-16-24" name="__codelineno-16-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.dll&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-svc-status-quo<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.Processor.Backend.Svc<span class="se">\D</span>ockerfile<span class="w"> </span>.
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
+</span></code></pre></div></td></tr></table></div>
 <p>This yields an image size of <strong>222 MB</strong>.</p>
 <h4 id="222-chiseled-ahead-of-time-aot-compilation">2.2.2 Chiseled &amp; Ahead-of-time (AOT) Compilation<a class="headerlink" href="#222-chiseled-ahead-of-time-aot-compilation" title="Permanent link">&para;</a></h4>
 <p>Skipping straight to AOT images:</p>
@@ -1706,36 +1868,61 @@ Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</cod
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-Dockerfile highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
-</span></span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:5000
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
-</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
-</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/sdk:8.0-jammy-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
-</span></span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
-</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/&quot;</span><span class="o">]</span>
-</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj&quot;</span>
-</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.Processor.Backend.Svc&quot;</span>
-</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
-</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>
-</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
-</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
-</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
-</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>
-</span><span id="__span-19-21"><a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
-</span><span id="__span-19-22"><a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-19-23"><a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
-</span><span id="__span-19-24"><a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.dll&quot;</span><span class="p">]</span>
-</span></code></pre></div>
+<div class="language-Dockerfile highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span>
+<span class="normal"><a href="#__codelineno-19-15">15</a></span>
+<span class="normal"><a href="#__codelineno-19-16">16</a></span>
+<span class="normal"><a href="#__codelineno-19-17">17</a></span>
+<span class="normal"><a href="#__codelineno-19-18">18</a></span>
+<span class="normal"><a href="#__codelineno-19-19">19</a></span>
+<span class="normal"><a href="#__codelineno-19-20">20</a></span>
+<span class="normal"><a href="#__codelineno-19-21">21</a></span>
+<span class="normal"><a href="#__codelineno-19-22">22</a></span>
+<span class="normal"><a href="#__codelineno-19-23">23</a></span>
+<span class="normal"><a href="#__codelineno-19-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+</span></span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">8080</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:8080
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6"></a>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="hll"><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/nightly/sdk:8.0-jammy-aot</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
+</span></span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="k">COPY</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj&quot;</span>,<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/&quot;</span><span class="o">]</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>restore<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj&quot;</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">&quot;/src/TasksTracker.Processor.Backend.Svc&quot;</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>build<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/build
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16"></a>
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="k">FROM</span><span class="w"> </span><span class="s">build</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">configuration</span><span class="o">=</span>Release
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.csproj&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="nv">$configuration</span><span class="w"> </span>-o<span class="w"> </span>/app/publish<span class="w"> </span>/p:UseAppHost<span class="o">=</span>false
+</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20"></a>
+</span><span id="__span-19-21"><a id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
+</span><span id="__span-19-22"><a id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-19-23"><a id="__codelineno-19-23" name="__codelineno-19-23"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
+</span><span id="__span-19-24"><a id="__codelineno-19-24" name="__codelineno-19-24"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.Processor.Backend.Svc.dll&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Create a new file, <code>Dockerfile.chiseled.aot</code> in the Backend Svc root directory, then build the image again:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-svc-chiseled-aot<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.Processor.Backend.Svc<span class="se">\D</span>ockerfile.chiseled.aot<span class="w"> </span>.
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>backend-svc-chiseled-aot<span class="w"> </span>-f<span class="w"> </span>.<span class="se">\T</span>asksTracker.Processor.Backend.Svc<span class="se">\D</span>ockerfile.chiseled.aot<span class="w"> </span>.
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a>docker<span class="w"> </span>image<span class="w"> </span>list
+</span></code></pre></div></td></tr></table></div>
 <p>This much-improved image is now <strong>16 MB</strong>.</p>
 <h3 id="3-optimization-summary">3. Optimization Summary<a class="headerlink" href="#3-optimization-summary" title="Permanent link">&para;</a></h3>
 <h4 id="31-table-of-improvements">3.1 Table of Improvements<a class="headerlink" href="#31-table-of-improvements" title="Permanent link">&para;</a></h4>
@@ -1804,54 +1991,90 @@ Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</cod
 </table>
 <h4 id="32-build-deploy-all-services">3.2 Build &amp; Deploy All Services<a class="headerlink" href="#32-build-deploy-all-services" title="Permanent link">&para;</a></h4>
 <p>The last step is to build &amp; deploy updated images. For good measure, let's do the Backend API as well even though we did it earlier already.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># Build Backend API on ACR and Push to ACR</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="hll">--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot&#39;</span><span class="w"> </span>.<span class="w"> </span>
-</span></span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>
-</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="c1"># Build Backend Service on ACR and Push to ACR</span>
-</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="hll">--file<span class="w"> </span><span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile.chiseled.aot&#39;</span><span class="w"> </span>.
-</span></span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>
-</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="c1"># Build Frontend Web App on ACR and Push to ACR</span>
-</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$FRONTEND_WEBAPP_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="hll">--file<span class="w"> </span><span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile.chiseled.aot&#39;</span><span class="w"> </span>.
-</span></span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Update Backend API App container app and create a new revision </span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w">  </span><span class="sb">`</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-7<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="c1"># Update Frontend Web App container app and create a new revision </span>
-</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>--name<span class="w"> </span><span class="nv">$FRONTEND_WEBAPP_NAME</span><span class="w">  </span><span class="sb">`</span>
-</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-7<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
-</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>
-</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="c1"># Update Backend Background Service container app and create a new revision </span>
-</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-7<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-21-10">10</a></span>
+<span class="normal"><a href="#__codelineno-21-11">11</a></span>
+<span class="normal"><a href="#__codelineno-21-12">12</a></span>
+<span class="normal"><a href="#__codelineno-21-13">13</a></span>
+<span class="normal"><a href="#__codelineno-21-14">14</a></span>
+<span class="normal"><a href="#__codelineno-21-15">15</a></span>
+<span class="normal"><a href="#__codelineno-21-16">16</a></span>
+<span class="normal"><a href="#__codelineno-21-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="c1"># Build Backend API on ACR and Push to ACR</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="hll">--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot&#39;</span><span class="w"> </span>.<span class="w"> </span>
+</span></span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="c1"># Build Backend Service on ACR and Push to ACR</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="hll">--file<span class="w"> </span><span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile.chiseled.aot&#39;</span><span class="w"> </span>.
+</span></span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12"></a>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="c1"># Build Frontend Web App on ACR and Push to ACR</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$FRONTEND_WEBAPP_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="hll">--file<span class="w"> </span><span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile.chiseled.aot&#39;</span><span class="w"> </span>.
+</span></span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span>
+<span class="normal"><a href="#__codelineno-22-18">18</a></span>
+<span class="normal"><a href="#__codelineno-22-19">19</a></span>
+<span class="normal"><a href="#__codelineno-22-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="c1"># Update Backend API App container app and create a new revision </span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w">  </span><span class="sb">`</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-7<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7"></a>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="c1"># Update Frontend Web App container app and create a new revision </span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10"></a>--name<span class="w"> </span><span class="nv">$FRONTEND_WEBAPP_NAME</span><span class="w">  </span><span class="sb">`</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-7<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14"></a>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="c1"># Update Backend Background Service container app and create a new revision </span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-7<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Verify that the application continues to work with the three much smaller containers:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">$FRONTEND_UI_BASE_URL</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="nv">$FRONTEND_UI_BASE_URL</span>
+</span></code></pre></div></td></tr></table></div>
 <ul>
 <li>
 <p>Navigate to the root and persist the module to Git.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Module 12&quot;</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Module 12&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
 <h2 id="review">Review<a class="headerlink" href="#review" title="Permanent link">&para;</a></h2>
@@ -1880,7 +2103,7 @@ Notably, the four additional vulnerabilities are in the <code>openssl 3.0.2</cod
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2024-11-08
+    2024-11-09
   </span>
 
     

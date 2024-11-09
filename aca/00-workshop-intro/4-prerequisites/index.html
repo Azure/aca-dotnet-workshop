@@ -1120,11 +1120,11 @@
   <h1>Prerequisites</h1>
 
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.  </p>
+<p>The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.</p>
 <p>Make sure you have your development environment set up and configured.</p>
 <ol>
 <li>An Azure account with an active subscription - <a href="https://azure.microsoft.com/free/?ref=microsoft.com&amp;utm_source=microsoft.com&amp;utm_medium=docs&amp;utm_campaign=visualstudio" target="_blank">Create an account for free</a></li>
-<li>.NET 8 or a higher version - <a href="https://dotnet.microsoft.com/en-us/download" target="_blank">Install</a></li>
+<li>.NET 8 or a higher version (we primarily focus on LTS versions) - <a href="https://dotnet.microsoft.com/en-us/download" target="_blank">Install</a></li>
 <li>PowerShell 7.0 or higher version (For Windows Users only!) - <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package" target="_blank">Install</a></li>
 <li>Docker Desktop - <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank">Install</a></li>
 <li>Visual Studio Code - <a href="https://code.visualstudio.com/" target="_blank">Install</a></li>
@@ -1143,27 +1143,29 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Windows</label><label for="__tabbed_1_2">Linux</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>md<span class="w"> </span>TasksTracker.ContainerApps
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>TasksTracker.ContainerApps
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>md<span class="w"> </span>TasksTracker.ContainerApps
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>TasksTracker.ContainerApps
+</span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a>mkdir<span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 </li>
 <li>
 <p>Initialize the git repository.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>init
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>git<span class="w"> </span>init
+</span></code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>Use the <code>code</code> command to launch Visual Studio Code from that directory as shown:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>code<span class="w"> </span>.
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a>code<span class="w"> </span>.
+</span></code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>From VS Code's <em>Terminal</em> tab, select <em>New Terminal</em> to open a (PowerShell) terminal in the project folder <em>TasksTracker.ContainerApps</em>.</p>
@@ -1179,20 +1181,24 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">.gitignore</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Exclude build artifacts</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>**/obj/
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>**/bin/
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>**/dist/
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># Exclude build artifacts</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>**/obj/
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a>**/bin/
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a>**/dist/
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 </li>
 <li>
 <p>Commit the <code>.gitignore</code> file.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\.</span>gitignore
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add .gitignore&quot;</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\.</span>gitignore
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add .gitignore&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
 <h3 id="set-variables-variables-script">Set-Variables &amp; Variables Script<a class="headerlink" href="#set-variables-variables-script" title="Permanent link">&para;</a></h3>
@@ -1204,28 +1210,23 @@
 <p>Copy the <a href="../../30-appendix/03-variables/" target="_blank">Set-Variables.ps1 script</a> into the newly-created <code>Set-Variables.ps1</code> file and save it.</p>
 </li>
 <li>
-<p>Perform an initial commit of the <code>Set-Variables.ps1</code> file.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\S</span>et-Variables.ps1
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initialize Set-Variables.ps1&quot;</span>
-</span></code></pre></div>
-</li>
-<li>
-<p>Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.<span class="se">\S</span>et-Variables.ps1
-</span></code></pre></div>
+<p>Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out. As we have not yet defined any variables, the output will indicate that the script has exited. This is intentional and expected at this stage.</p>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a>.<span class="se">\S</span>et-Variables.ps1
+</span></code></pre></div></td></tr></table></div>
 </li>
 <li>
 <p>Perform an initial commit of the variables file.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initialize Variables.ps1&quot;</span>
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initialize Variables.ps1&quot;</span>
+</span></code></pre></div></td></tr></table></div>
 </li>
 </ul>
 <p>This completes the basic setup for Git and the variables to be used. You are ready to proceed to <a href="../../01-deploy-api-to-aca/">Module 1</a>!</p>
 <h2 id="jump-ahead">Jump Ahead<a class="headerlink" href="#jump-ahead" title="Permanent link">&para;</a></h2>
 <p>If you don't want to build the solution code from scratch, you can clone the source code repository final version by utilizing below command, and you can use the modules to deploy Azure resources using the provided Azure CLI commands.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Azure/aca-dotnet-workshop.git
-</span></code></pre></div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Azure/aca-dotnet-workshop.git
+</span></code></pre></div></td></tr></table></div>
 
 
 
@@ -1246,7 +1247,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2024-11-08
+    2024-11-09
   </span>
 
     

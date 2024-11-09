@@ -1055,37 +1055,60 @@ It is recommended to deploy only the first four building blocks of the landing z
 <li>Use the pre-built public images from Azure Container Registry</li>
 </ol>
 <p>For the first options, you need the name of the container registry. You can get this name from the landing zone deployment:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">LZA_DEPLOYMENT_NAME</span><span class="o">=</span>&lt;LZA_DEPLOYMENT_NAME&gt;
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.containerRegistryName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nv">LZA_DEPLOYMENT_NAME</span><span class="o">=</span>&lt;LZA_DEPLOYMENT_NAME&gt;
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.containerRegistryName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span></code></pre></div></td></tr></table></div>
 <p>Where <code>LZA_DEPLOYMENT_NAME</code> is the name of the deployment of the landing zone.</p>
 <p>The latest images can be found <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop">here</a></p>
 <h3 id="option-1-import-pre-built-public-images-to-your-private-azure-container-registry">Option 1 - Import pre-built public images to your private Azure Container Registry<a class="headerlink" href="#option-1-import-pre-built-public-images-to-your-private-azure-container-registry" title="Permanent link">&para;</a></h3>
 <p>All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can import it directly into your private container instance as shown below. Note - you might need to execute this from a jump box or workstation which can reach your private container registry instance.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">TAG</span><span class="o">=</span>&lt;TAG&gt;
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">BACKEND_PROCESSOR_IMAGE</span><span class="o">=</span><span class="nv">$CONTAINER_REGISTRY_NAME</span>.azurecr.io/tasksmanager-backend-processor:<span class="nv">$TAG</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">FRONTEND_IMAGE</span><span class="o">=</span><span class="nv">$CONTAINER_REGISTRY_NAME</span>.azurecr.io/tasksmanager-frontend-webapp:<span class="nv">$TAG</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">TASKS_API_IMAGE</span><span class="o">=</span><span class="nv">$CONTAINER_REGISTRY_NAME</span>.azurecr.io/tasksmanager-backend-api:<span class="nv">$TAG</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>az<span class="w"> </span>login
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>az<span class="w"> </span>acr<span class="w"> </span>login<span class="w"> </span>-n<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager-backend-processor:<span class="nv">$TAG</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-backend-processor:latest
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager-frontend-webapp:<span class="nv">$TAG</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-frontend-webapp:latest
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager-backend-api:<span class="nv">$TAG</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-backend-api:latest
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nv">TAG</span><span class="o">=</span>&lt;TAG&gt;
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nv">BACKEND_PROCESSOR_IMAGE</span><span class="o">=</span><span class="nv">$CONTAINER_REGISTRY_NAME</span>.azurecr.io/tasksmanager-backend-processor:<span class="nv">$TAG</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="nv">FRONTEND_IMAGE</span><span class="o">=</span><span class="nv">$CONTAINER_REGISTRY_NAME</span>.azurecr.io/tasksmanager-frontend-webapp:<span class="nv">$TAG</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="nv">TASKS_API_IMAGE</span><span class="o">=</span><span class="nv">$CONTAINER_REGISTRY_NAME</span>.azurecr.io/tasksmanager-backend-api:<span class="nv">$TAG</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a>az<span class="w"> </span>login
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a>az<span class="w"> </span>acr<span class="w"> </span>login<span class="w"> </span>-n<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager-backend-processor:<span class="nv">$TAG</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-backend-processor:latest
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager-frontend-webapp:<span class="nv">$TAG</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-frontend-webapp:latest
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager-backend-api:<span class="nv">$TAG</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-backend-api:latest
+</span></code></pre></div></td></tr></table></div>
 <p>Where <code>TAG</code> is the tag of the container images. </p>
 <p>You can set the Bicep parameters for the image in the <code>main.parameters.jsonc</code> or use the environment variables defined above.</p>
 <blockquote>
@@ -1096,94 +1119,158 @@ It is recommended to deploy only the first four building blocks of the landing z
 <p><img alt="⬇" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2b07.svg" title=":arrow_down:" /> <a href="#deploy-the-sample-app">Deploy the sample app</a></p>
 <h3 id="option-2-use-the-public-container-images-and-deploy-them-directly-in-azure-container-apps">Option 2 - Use the public container images and deploy them directly in Azure Container Apps<a class="headerlink" href="#option-2-use-the-public-container-images-and-deploy-them-directly-in-azure-container-apps" title="Permanent link">&para;</a></h3>
 <p>The public images can be set directly in the <code>main.parameters.jsonc</code> file:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;containerRegistryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-backend-processor:latest&quot;</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-backend-api:latest&quot;</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-frontend-webapp:latest&quot;</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}</span><span class="w">  </span>
-</span></code></pre></div>
+<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;containerRegistryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-backend-processor:latest&quot;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-backend-api:latest&quot;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-frontend-webapp:latest&quot;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="p">}</span><span class="w">  </span>
+</span></code></pre></div></td></tr></table></div>
 <p>or in the environment variables:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">BACKEND_PROCESSOR_IMAGE</span><span class="o">=</span>ghcr.io/azure/tasksmanager-backend-processor:latest
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">FRONTEND_IMAGE</span><span class="o">=</span>ghcr.io/azure/tasksmanager-frontend-webapp:latest
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">TASKS_API_IMAGE</span><span class="o">=</span>ghcr.io/azure/tasksmanager-backend-api:latest
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nv">BACKEND_PROCESSOR_IMAGE</span><span class="o">=</span>ghcr.io/azure/tasksmanager-backend-processor:latest
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="nv">FRONTEND_IMAGE</span><span class="o">=</span>ghcr.io/azure/tasksmanager-frontend-webapp:latest
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="nv">TASKS_API_IMAGE</span><span class="o">=</span>ghcr.io/azure/tasksmanager-backend-api:latest
+</span></code></pre></div></td></tr></table></div>
 <h2 id="deploy-the-sample-app">Deploy the sample app<a class="headerlink" href="#deploy-the-sample-app" title="Permanent link">&para;</a></h2>
 <p>The sample app can be deployed using the <a href="../main.bicep">main.bicep</a> template.</p>
 <p>To set the parameters for the deployment, you can either use the <code>main.parameters.jsonc</code> file or set environment variables.</p>
 <h3 id="deploy-the-sample-app-using-environment-variables">Deploy the sample app using environment variables<a class="headerlink" href="#deploy-the-sample-app-using-environment-variables" title="Permanent link">&para;</a></h3>
 <p>You can override the parameters in the <code>main.parameters.jsonc</code> when creating the deployment using:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">  </span>--parameters<span class="w"> </span>&lt;parameter-name&gt;<span class="o">=</span>&lt;parameter-value&gt;
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="w">  </span>--parameters<span class="w"> </span>&lt;parameter-name&gt;<span class="o">=</span>&lt;parameter-value&gt;
+</span></code></pre></div></td></tr></table></div>
 <p>Where <code>&lt;parameter-name&gt;</code> is the name of the parameter and <code>&lt;parameter-value&gt;</code> is the value of the parameter.</p>
 <p>You can get the parameters from the landing zone deployment:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Set a parameter with the Subscription Deployment name you used for the ACA LZA. This is required to query and get several names of resources</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">LZA_DEPLOYMENT_NAME</span><span class="o">=</span>&lt;LZA_DEPLOYMENT_NAME&gt;
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Get the name of the Spoke Resoure Group</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nv">SPOKE_RESOURCE_GROUP_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.spokeResourceGroupName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Get the name of the Container Apps Environment that has been deployed by the ACA LZA</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nv">CONTAINER_APPS_ENVIRONMENT_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.containerAppsEnvironmentName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Get the Resource ID of the Hub&#39;s Virtual Network</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nv">HUB_VNET_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.hubVNetId.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1"># Get the name of the spoke&#39;s Virtual Network</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="nv">SPOKE_VNET_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.spokeVnetName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="c1"># Get the name of the subnet that holds the private endpoints (their NICs)</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="nv">SPOKE_PRIVATE_ENDPOINTS_SUBNET_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.spokePrivateEndpointsSubnetName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="c1"># Get the Resource ID of the the KeyVault</span>
-</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="nv">KEY_VAULT_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.keyVaultId.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
-</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="c1"># Get the name of the ACR</span>
-</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.containerRegistryName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
-</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="c1"># Get the ID of the ACR IDentity</span>
-</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="nv">CONTAINER_REGISTRY_USER_ASSIGNED_IDENTITY_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.containerRegistryUserAssignedIdentityId.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
-</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="c1"># Get the name of the application gateway subnet</span>
-</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="nv">SPOKE_APPLICATION_GATEWAY_SUBNET_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.spokeApplicationGatewaySubnetName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>
-</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
-</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="c1"># Set app insights name to empty if workload name is same as that of used when deploying the landing zone. If not, Set with the name of the app insights created for the workload</span>
-</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="nv">APPLICATION_INSIGHTS_NAME</span><span class="o">=</span>&lt;APPLICATION_INSIGHTS_NAME&gt;
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span>
+<span class="normal"><a href="#__codelineno-5-32">32</a></span>
+<span class="normal"><a href="#__codelineno-5-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1"># Set a parameter with the Subscription Deployment name you used for the ACA LZA. This is required to query and get several names of resources</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="nv">LZA_DEPLOYMENT_NAME</span><span class="o">=</span>&lt;LZA_DEPLOYMENT_NAME&gt;
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="c1"># Get the name of the Spoke Resoure Group</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="nv">SPOKE_RESOURCE_GROUP_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.spokeResourceGroupName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="c1"># Get the name of the Container Apps Environment that has been deployed by the ACA LZA</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="nv">CONTAINER_APPS_ENVIRONMENT_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.containerAppsEnvironmentName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="c1"># Get the Resource ID of the Hub&#39;s Virtual Network</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="nv">HUB_VNET_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.hubVNetId.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12"></a>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="c1"># Get the name of the spoke&#39;s Virtual Network</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="nv">SPOKE_VNET_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.spokeVnetName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15"></a>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="c1"># Get the name of the subnet that holds the private endpoints (their NICs)</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="nv">SPOKE_PRIVATE_ENDPOINTS_SUBNET_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.spokePrivateEndpointsSubnetName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18"></a>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="c1"># Get the Resource ID of the the KeyVault</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="nv">KEY_VAULT_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.keyVaultId.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21"></a>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="c1"># Get the name of the ACR</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.containerRegistryName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24"></a>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="c1"># Get the ID of the ACR IDentity</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="nv">CONTAINER_REGISTRY_USER_ASSIGNED_IDENTITY_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.containerRegistryUserAssignedIdentityId.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27"></a>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="c1"># Get the name of the application gateway subnet</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="nv">SPOKE_APPLICATION_GATEWAY_SUBNET_NAME</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>show<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_NAME</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.spokeApplicationGatewaySubnetName.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30"></a>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31"></a>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32"></a><span class="c1"># Set app insights name to empty if workload name is same as that of used when deploying the landing zone. If not, Set with the name of the app insights created for the workload</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33"></a><span class="nv">APPLICATION_INSIGHTS_NAME</span><span class="o">=</span>&lt;APPLICATION_INSIGHTS_NAME&gt;
+</span></code></pre></div></td></tr></table></div>
 <p>Where <code>&lt;LZA_DEPLOYMENT_NAME&gt;</code> is the name of the landing zone deployment.</p>
 <p>To deploy the sample app using environment variables, run the following command in the <code>bicep</code> folder:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">LZA_DEPLOYMENT_SAMPLE_DOTNET</span><span class="o">=</span>bicepLzaDeploymentSampleDotNet<span class="w">  </span><span class="c1"># or any other value that suits your needs</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>az<span class="w"> </span>deployment<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SPOKE_RESOURCE_GROUP_NAME</span><span class="s2">&quot;</span><span class="w"> </span>-f<span class="w"> </span>main.bicep<span class="w"> </span>-p<span class="w"> </span>main.parameters.jsonc<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$LZA_DEPLOYMENT_SAMPLE_DOTNET</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">containerAppsEnvironmentName</span><span class="o">=</span><span class="nv">$CONTAINER_APPS_ENVIRONMENT_NAME</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">hubVNetId</span><span class="o">=</span><span class="nv">$HUB_VNET_ID</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">spokeVNetName</span><span class="o">=</span><span class="nv">$SPOKE_VNET_NAME</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">spokePrivateEndpointsSubnetName</span><span class="o">=</span><span class="nv">$SPOKE_PRIVATE_ENDPOINTS_SUBNET_NAME</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">keyVaultId</span><span class="o">=</span><span class="nv">$KEY_VAULT_ID</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">containerRegistryName</span><span class="o">=</span><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">backendProcessorServiceImage</span><span class="o">=</span><span class="nv">$BACKEND_PROCESSOR_IMAGE</span><span class="se">\</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">frontendWebAppServiceImage</span><span class="o">=</span><span class="nv">$FRONTEND_IMAGE</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">backendApiServiceImage</span><span class="o">=</span><span class="nv">$TASKS_API_IMAGE</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">spokeApplicationGatewaySubnetName</span><span class="o">=</span><span class="nv">$SPOKE_APPLICATION_GATEWAY_SUBNET_NAME</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">applicationInsightsName</span><span class="o">=</span><span class="nv">$APPLICATION_INSIGHTS_NAME</span>
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nv">LZA_DEPLOYMENT_SAMPLE_DOTNET</span><span class="o">=</span>bicepLzaDeploymentSampleDotNet<span class="w">  </span><span class="c1"># or any other value that suits your needs</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a>az<span class="w"> </span>deployment<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SPOKE_RESOURCE_GROUP_NAME</span><span class="s2">&quot;</span><span class="w"> </span>-f<span class="w"> </span>main.bicep<span class="w"> </span>-p<span class="w"> </span>main.parameters.jsonc<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$LZA_DEPLOYMENT_SAMPLE_DOTNET</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">containerAppsEnvironmentName</span><span class="o">=</span><span class="nv">$CONTAINER_APPS_ENVIRONMENT_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">hubVNetId</span><span class="o">=</span><span class="nv">$HUB_VNET_ID</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">spokeVNetName</span><span class="o">=</span><span class="nv">$SPOKE_VNET_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">spokePrivateEndpointsSubnetName</span><span class="o">=</span><span class="nv">$SPOKE_PRIVATE_ENDPOINTS_SUBNET_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">keyVaultId</span><span class="o">=</span><span class="nv">$KEY_VAULT_ID</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">containerRegistryName</span><span class="o">=</span><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">backendProcessorServiceImage</span><span class="o">=</span><span class="nv">$BACKEND_PROCESSOR_IMAGE</span><span class="se">\</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">frontendWebAppServiceImage</span><span class="o">=</span><span class="nv">$FRONTEND_IMAGE</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">backendApiServiceImage</span><span class="o">=</span><span class="nv">$TASKS_API_IMAGE</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">spokeApplicationGatewaySubnetName</span><span class="o">=</span><span class="nv">$SPOKE_APPLICATION_GATEWAY_SUBNET_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="nv">applicationInsightsName</span><span class="o">=</span><span class="nv">$APPLICATION_INSIGHTS_NAME</span>
+</span></code></pre></div></td></tr></table></div>
 <h3 id="test-the-sample-app">Test the sample app<a class="headerlink" href="#test-the-sample-app" title="Permanent link">&para;</a></h3>
 <p>Navigate to the spoke resource group and get the public IP address of the application gateway</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">APP_GATEWAY_IP</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>group<span class="w"> </span>show<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SPOKE_RESOURCE_GROUP_NAME</span><span class="s2">&quot;</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_SAMPLE_DOTNET</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.applicationGatewayPublicIp.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://<span class="nv">$APP_GATEWAY_IP</span><span class="w"> </span><span class="c1"># or open https://$APP_GATEWAY_IP in a browser</span>
-</span></code></pre></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nv">APP_GATEWAY_IP</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>deployment<span class="w"> </span>group<span class="w"> </span>show<span class="w"> </span>-g<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SPOKE_RESOURCE_GROUP_NAME</span><span class="s2">&quot;</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LZA_DEPLOYMENT_SAMPLE_DOTNET</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>properties.outputs.applicationGatewayPublicIp.value<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://<span class="nv">$APP_GATEWAY_IP</span><span class="w"> </span><span class="c1"># or open https://$APP_GATEWAY_IP in a browser</span>
+</span></code></pre></div></td></tr></table></div>
 
 
 
@@ -1204,7 +1291,7 @@ It is recommended to deploy only the first four building blocks of the landing z
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2024-11-08
+    2024-11-09
   </span>
 
     
