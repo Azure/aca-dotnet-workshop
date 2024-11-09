@@ -159,7 +159,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
 
         === "Program.cs"
 
-            ```csharp hl_lines="1 9-12"
+            ```csharp hl_lines="1 8-11"
             --8<-- "docs/aca/08-aca-monitoring/Program-Backend.API-dotnet9.cs"
             ```
 
@@ -167,7 +167,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
 
         === "Program.cs"
 
-            ```csharp hl_lines="1 8-11"
+            ```csharp hl_lines="1 7-10"
             --8<-- "docs/aca/08-aca-monitoring/Program-Backend.Svc-dotnet9.cs"
             ```
 
@@ -175,7 +175,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
 
         === "Program.cs"
 
-            ```csharp hl_lines="1 8-11"
+            ```csharp hl_lines="1 6-9"
             --8<-- "docs/aca/08-aca-monitoring/Program-Frontend.UI-dotnet9.cs"
             ```            
 
