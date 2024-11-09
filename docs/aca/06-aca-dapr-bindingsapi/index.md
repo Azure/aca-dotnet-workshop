@@ -289,7 +289,8 @@ $KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for
 $BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
---query identity.principalId
+--query identity.principalId `
+--output tsv
 
 az role assignment create `
 --role $KEYVAULT_SECRETS_USER_ROLE_ID `
@@ -303,7 +304,7 @@ To create a secret in Azure Key Vault you need to have a role which allows you t
 be able to create secrets. To do so use the script below:
 
 ```shell
-$SIGNEDIN_USERID = az ad signed-in-user show --query id
+$SIGNEDIN_USERID = az ad signed-in-user show --query id --output tsv
 $KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" # ID for 'Key Vault Secrets Office' Role
 
 az role assignment create `
