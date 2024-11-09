@@ -122,6 +122,7 @@ Whereas in the previous section we demonstrated using Dapr State Store without c
 Similar to what we have done in the Frontend Web App, we need to use Dapr Client SDK to manage the state store. Update the below file with the added Dapr package reference:
 
 === ".NET 8"
+
     === "TasksTracker.TasksManager.Backend.Api.csproj"
 
         ```xml hl_lines="11"
@@ -129,6 +130,7 @@ Similar to what we have done in the Frontend Web App, we need to use Dapr Client
         ```
 
 === ".NET 9"
+
     === "TasksTracker.TasksManager.Backend.Api.csproj"
 
         ```xml hl_lines="10"
@@ -163,6 +165,7 @@ Now we need to register the new service named `TasksStoreManager` and `DaprClien
     Do not forget to comment out the registration of the `FakeTasksManager` service as we don't want to store tasks in memory anymore.
 
 === ".NET 8"
+
     === "Program.cs"
 
         ```csharp hl_lines="7-9"
@@ -170,6 +173,7 @@ Now we need to register the new service named `TasksStoreManager` and `DaprClien
         ```
 
 === ".NET 9"
+
     === "Program.cs"
 
         ```csharp hl_lines="7-9"

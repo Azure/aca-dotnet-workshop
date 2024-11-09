@@ -128,6 +128,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 - Install Dapr SDK for .NET Core in the Frontend Web APP, so we can use the service discovery and service invocation offered by Dapr Sidecar. To do so, add below nuget package to the project.
 
     === ".NET 8"
+
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
 
             ```xml hl_lines="9-11"
@@ -135,6 +136,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
             ```
 
     === ".NET 9"
+
         === "TasksTracker.WebPortal.Frontend.Ui.csproj"
 
             ```xml hl_lines="9-11"
@@ -144,6 +146,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
     - Next, open the file `Programs.cs` of the Frontend Web App and register the DaprClient as the highlighted below.
 
     === ".NET 8"
+
         === "Program.cs"
 
             ```csharp hl_lines="6"
@@ -151,6 +154,7 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
             ```
 
     === ".NET 9"
+
         === "Program.cs"
 
             ```csharp hl_lines="6"
