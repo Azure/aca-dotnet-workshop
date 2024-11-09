@@ -56,8 +56,11 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
 
             var queryResponse = await _daprClient.QueryStateAsync<TaskModel>(STORE_NAME, query);
 
-            // TODO: Account for nullable queryResponse.Results
-            var tasksList = queryResponse.Results.Select(q => q.Data).OrderByDescending(o=>o.TaskCreatedOn);
+            var tasksList = queryResponse.Results
+                .Where(q => q.Data != null)         // filter null data
+                .Select(q => q.Data!)
+                .OrderByDescending(o=>o.TaskCreatedOn);
+                
             return tasksList.ToList();
         }
 
