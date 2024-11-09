@@ -51,7 +51,8 @@ Our next step is to incorporate the Application Insights SDK into the **three mi
 
 To incorporate the SDK, use the NuGet reference below in the `csproj` file of the Backend API project. You may locate the csproj file in the project directory **TasksTracker.TasksManager.Backend.Api**:
 
-=== ".NET 8 or above"
+=== ".NET 8"
+
     === "TasksTracker.TasksManager.Backend.Api.csproj"
 
         ```xml hl_lines="12"
@@ -68,6 +69,26 @@ To incorporate the SDK, use the NuGet reference below in the `csproj` file of th
 
         ```xml hl_lines="11"
         --8<-- "docs/aca/08-aca-monitoring/Frontend.Ui-dotnet8.csproj"
+        ```
+
+=== ".NET 9"
+
+    === "TasksTracker.TasksManager.Backend.Api.csproj"
+
+        ```xml hl_lines="12"
+        --8<-- "docs/aca/08-aca-monitoring/Backend.Api-dotnet9.csproj"
+        ```
+
+    === "TasksTracker.TasksManager.Backend.Svc.csproj"
+
+        ```xml hl_lines="12"
+        --8<-- "docs/aca/08-aca-monitoring/Backend.Svc-dotnet9.csproj"
+        ```
+
+    === "TasksTracker.TasksManager.Frontend.Ui.csproj"
+
+        ```xml hl_lines="11"
+        --8<-- "docs/aca/08-aca-monitoring/Frontend.Ui-dotnet9.csproj"
         ```
 
 #### 2.2 Set RoleName Property in All the Services
@@ -106,29 +127,57 @@ For each of the three projects, we will add a new file to each project's root di
 
 Next, we need to register this `AppInsightsTelemetryInitializer` class in **Program.cs** in each of the three projects.
 
-=== "Backend.Api"
+=== ".NET 8"
 
-    === "Program.cs"
+    === "Backend.Api"
 
-        ```csharp hl_lines="1 9-12"
-        --8<-- "docs/aca/08-aca-monitoring/Program-Backend.API.cs"
-        ```
+        === "Program.cs"
 
-=== "Backend.Svc"
+            ```csharp hl_lines="1 9-12"
+            --8<-- "docs/aca/08-aca-monitoring/Program-Backend.API-dotnet8.cs"
+            ```
 
-    === "Program.cs"
+    === "Backend.Svc"
 
-        ```csharp hl_lines="1 8-11"
-        --8<-- "docs/aca/08-aca-monitoring/Program-Backend.Svc.cs"
-        ```
+        === "Program.cs"
 
-=== "Frontend.Ui"
+            ```csharp hl_lines="1 8-11"
+            --8<-- "docs/aca/08-aca-monitoring/Program-Backend.Svc-dotnet8.cs"
+            ```
 
-    === "Program.cs"
+    === "Frontend.Ui"
 
-        ```csharp hl_lines="1 8-11"
-        --8<-- "docs/aca/08-aca-monitoring/Program-Frontend.UI.cs"
-        ```
+        === "Program.cs"
+
+            ```csharp hl_lines="1 8-11"
+            --8<-- "docs/aca/08-aca-monitoring/Program-Frontend.UI-dotnet8.cs"
+            ```
+
+=== ".NET 8"
+
+    === "Backend.Api"
+
+        === "Program.cs"
+
+            ```csharp hl_lines="1 9-12"
+            --8<-- "docs/aca/08-aca-monitoring/Program-Backend.API-dotnet9.cs"
+            ```
+
+    === "Backend.Svc"
+
+        === "Program.cs"
+
+            ```csharp hl_lines="1 8-11"
+            --8<-- "docs/aca/08-aca-monitoring/Program-Backend.Svc-dotnet9.cs"
+            ```
+
+    === "Frontend.Ui"
+
+        === "Program.cs"
+
+            ```csharp hl_lines="1 8-11"
+            --8<-- "docs/aca/08-aca-monitoring/Program-Frontend.UI-dotnet9.cs"
+            ```            
 
 #### 2.3 Set the Application Insights Instrumentation Key
 
