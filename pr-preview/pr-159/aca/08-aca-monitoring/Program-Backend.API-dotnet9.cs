@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.Configure<TelemetryConfiguration>((o) => {
-    o.TelemetryInitializers.Add(new AppInsightsTelemetryInitializer());
+    o.TelemetryInitializers.Add(new TasksTracker.TasksManager.Backend.Api.AppInsightsTelemetryInitializer());
 });
 
 builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
