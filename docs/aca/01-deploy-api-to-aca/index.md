@@ -252,7 +252,10 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     # Get Application Insights Instrumentation Key
     $APPINSIGHTS_INSTRUMENTATIONKEY=($(az monitor app-insights component show `
     --resource-group $RESOURCE_GROUP `
-    --app $APPINSIGHTS_NAME ) | ConvertFrom-Json).instrumentationKey
+    --app $APPINSIGHTS_NAME `
+    --output json) | ConvertFrom-Json).instrumentationKey
+
+    echo $APPINSIGHTS_INSTRUMENTATIONKEY
     ```
 
 #### 2.4 Azure Container Infrastructure
