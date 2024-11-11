@@ -220,7 +220,7 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 #### 2.5 Test `{{ apps.frontend }}` and `{{ apps.backend }}` Locally Using Dapr
 
 !!! success
-    Now both Applications are running using Dapr sidecar. Open the local frontend UI URL, ignore the certificate warning locally, then provide an email to load the tasks for the user (e.g. `tjoudeh@bitoftech.net`). If the application is working as expected you should see tasks list associated with the email you provided.
+    Now both Applications are running using Dapr sidecar. Note how ports 3500 and 3501 are used when starting the container apps. These ports instruct the container runtime to communicate with the Dapr sidecar, whereas the https ports from the appsettings files are the ports you use to launch the application locally. Open the local frontend UI URL (use `$FRONTEND_UI_BASE_URL_LOCAL` from step 2.4), ignore the certificate warning locally, then provide an email to load the tasks for the user (e.g. `tjoudeh@bitoftech.net`). If the application is working as expected you should see tasks list associated with the email you provided.
 
 - Close the sessions and navigate to the root.
 
