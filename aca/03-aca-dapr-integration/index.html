@@ -2149,7 +2149,7 @@ Because the calls will flow through container sidecars, Dapr can inject some use
 <h4 id="25-test-aca-web-frontend-and-aca-api-backend-locally-using-dapr">2.5 Test <code>ACA Web - Frontend</code> and <code>ACA API - Backend</code> Locally Using Dapr<a class="headerlink" href="#25-test-aca-web-frontend-and-aca-api-backend-locally-using-dapr" title="Permanent link">&para;</a></h4>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
-<p>Now both Applications are running using Dapr sidecar. Open the local frontend UI URL, ignore the certificate warning locally, then provide an email to load the tasks for the user (e.g. <code>tjoudeh@bitoftech.net</code>). If the application is working as expected you should see tasks list associated with the email you provided.</p>
+<p>Now both Applications are running using Dapr sidecar. Note how ports 3500 and 3501 are used when starting the container apps. These ports instruct the container runtime to communicate with the Dapr sidecar, whereas the https ports from the appsettings files are the ports you use to launch the application locally. Open the local frontend UI URL (use <code>$FRONTEND_UI_BASE_URL_LOCAL</code> from step 2.4), ignore the certificate warning locally, then provide an email to load the tasks for the user (e.g. <code>tjoudeh@bitoftech.net</code>). If the application is working as expected you should see tasks list associated with the email you provided.</p>
 </div>
 <ul>
 <li>
