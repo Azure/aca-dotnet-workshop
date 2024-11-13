@@ -1136,6 +1136,7 @@
 <li>VS Code Dapr extension. Depends on Dapr CLI - <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr" target="_blank">Install</a></li>
 <li>Azure CLI - <a href="https://docs.microsoft.com/cli/azure/install-azure-cli" target="_blank">Install</a></li>
 <li>Git CLI - <a href="https://git-scm.com" target="_blank">Install</a></li>
+<li>(Optional) A REST client such as <a href="https://www.postman.com/" target="_blank">Postman</a> or <a href="https://insomnia.rest/" target="_blank">Insomnia</a> or similar.</li>
 </ol>
 <h2 id="set-up-git-repository-variable-scripts">Set up Git Repository &amp; Variable Scripts<a class="headerlink" href="#set-up-git-repository-variable-scripts" title="Permanent link">&para;</a></h2>
 <h3 id="git-repository">Git Repository<a class="headerlink" href="#git-repository" title="Permanent link">&para;</a></h3>
@@ -1213,15 +1214,15 @@
 <p>Copy the <a href="../../30-appendix/03-variables/" target="_blank">Set-Variables.ps1 script</a> into the newly-created <code>Set-Variables.ps1</code> file and save it.</p>
 </li>
 <li>
-<p>Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out. As we have not yet defined any variables, the output will indicate that the script has exited. This is intentional and expected at this stage.</p>
+<p>Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out. As we have not yet defined any variables, the output will indicate that the script has exited (without writing out to the file). This is intentional and expected at this stage.</p>
 <div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a>.<span class="se">\S</span>et-Variables.ps1
 </span></code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>Perform an initial commit of the variables file.</p>
+<p>Commit the <code>Set-Variables.ps1</code> file.</p>
 <div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initialize Variables.ps1&quot;</span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\S</span>et-Variables.ps1
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Set-Variables.ps1&quot;</span>
 </span></code></pre></div></td></tr></table></div>
 </li>
 </ul>

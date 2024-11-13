@@ -1705,7 +1705,7 @@ For example if you execute the following GET <a href="http://localhost:3500/v1.0
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a>
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">  </span><span class="nt">&lt;ItemGroup&gt;</span>
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="hll"><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Dapr.AspNetCore&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;1.14.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-</span></span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Microsoft.AspNetCore.OpenApi&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;9.0.0-rc.2.24474.3&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span></span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">    </span><span class="nt">&lt;PackageReference</span><span class="w"> </span><span class="na">Include=</span><span class="s">&quot;Microsoft.AspNetCore.OpenApi&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;9.0.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">  </span><span class="nt">&lt;/ItemGroup&gt;</span>
 </span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a>
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="nt">&lt;/Project&gt;</span>
@@ -2266,8 +2266,7 @@ Using scopes is recommended for production workloads. In our case, we have set t
 <p class="admonition-title">Note</p>
 <p>Dapr component scopes correspond to the Dapr application ID of a container app, not the container app name.</p>
 </div>
-<p>Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned.
-<strong>TODO: Add instructions to run both again.</strong></p>
+<p>Now you should be ready to launch both applications and start doing CRUD operations from the Frontend Web App including querying the store. All your data will be stored in Cosmos DB Database you just provisioned.</p>
 <p>If you have been running the different microservices using the <a href="../30-appendix/01-run-debug-dapr-app-vscode/">debug and launch Dapr applications in VSCode</a> then remember to uncomment the following line inside tasks.json file.
 This will instruct dapr to load the local projects components located at <strong>./components</strong> instead of the global components' folder.</p>
 <div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
