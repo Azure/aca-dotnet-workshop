@@ -38,7 +38,7 @@ The term *Telemetry* refers to the information gathered to monitor our applicati
 
 1. Logging: provides insights into how code is executing and if errors have occurred.
 
-In [module 1](../../aca/01-deploy-api-to-aca/index.md#2-deploy-web-api-backend-project-to-aca) we have already provisioned a Workspace-based Application Insights Instance and configured it for the ACA environment by setting the property `--dapr-instrumentation-key`. We presume that you have already set up an instance of Application Insights that is available for use across the three container apps.
+In [module 1](../../aca/01-deploy-api-to-aca/index.md#3-deploy-web-api-backend-project-to-aca) we have already provisioned a Workspace-based Application Insights Instance and configured it for the ACA environment by setting the property `--dapr-instrumentation-key`. We presume that you have already set up an instance of Application Insights that is available for use across the three container apps.
 
 ### 2. Installing Application Insights SDK Into the Three Microservices Apps
 

@@ -136,7 +136,6 @@ az containerapp update `
 #### 4.1 Run an End-to-End Test and Generate Several Messages
 
 Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize the Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.
-
 To get the number of current replicas of service `tasksmanager-backend-processor` we could run the command below, this should run single replica as we didn't load the service bus topic yet.
 
 ```shell
@@ -170,7 +169,7 @@ The message structure our backend processor expects is similar to the JSON shown
 !!! success
     If all is setup correctly, five replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:
 
-    * You can run the Azure CLI command used in [previous step](#3-run-an-end-to-end-test-and-generate-a-load-of-messages) to list the names of replicas.
+    * You can run the Azure CLI command used in [previous step](#41-run-an-end-to-end-test-and-generate-several-messages) to list the names of replicas.
     * You can verify this from Container Apps `Console` tab where you will see those replicas in the drop-down list
     ![replica-console](../../assets/images/09-aca-autoscale-keda/replica-console.png)
 
