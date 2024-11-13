@@ -20,7 +20,7 @@ In this module, we will accomplish two objectives:
 
 ### 1. Optimizing Containers
 
-Azure Container Apps makes it simple to quickly become effective with containers. But even a managed container platform requires hygiene and can benefit greatly from smaller containers.  
+Azure Container Apps makes it simple to quickly become effective with containers. But even a managed container platform requires hygiene and can benefit greatly from smaller containers.
 
 In this module, we will look into the benefits of optimized containers such as:
 
@@ -63,7 +63,7 @@ This image is comprised of two images, 452 packages, and has 19 vulnerabilities.
 
 #### 1.2. Chiseled Images
 
-Microsoft and Ubuntu's creator, Canonical, collaborated on the concept of a [chiseled image for .NET](https://learn.microsoft.com/en-us/dotnet/core/docker/container-images#scenario-based-images){target=_blank}. Take a general-purpose base image and start chiseling away until you are left with an image that contains nothing more than the bare necessities to run your workload. No shell, no package manager, no bloat.
+Microsoft and Ubuntu's creator, Canonical, collaborated on the concept of a [chiseled image for .NET](https://learn.microsoft.com/dotnet/core/docker/container-images#scenario-based-images){target=_blank}. Take a general-purpose base image and start chiseling away until you are left with an image that contains nothing more than the bare necessities to run your workload. No shell, no package manager, no bloat.
 
 === "Backend.Api Dockerfile.chiseled"
 ```Dockerfile hl_lines="1 8"
@@ -88,7 +88,7 @@ This image is comprised of one image, 331 packages, and has five vulnerabilities
 
 #### 1.3 Chiseled & Ahead-of-time (AOT) Compilation
 
-[Ahead-of-time (AOT) compilation](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot){target_blank} was first introduced with .NET 7. AOT compiles the application to native code instead of Intermediate Language (IL). This means that we must have foresight as to what platform will be hosting the application. Our process is simplified by the fact that containers in Azure Container Apps are only Linux-hosted. By using native code, we will bypass the just-in-time (JIT) compiler when the container executes, which means we will have faster startup and a smaller memory footprint. It also means these images can run in environments where JIT compilation may not be permitted.
+[Ahead-of-time (AOT) compilation](https://learn.microsoft.com/dotnet/core/deploying/native-aot){target_blank} was first introduced with .NET 7. AOT compiles the application to native code instead of Intermediate Language (IL). This means that we must have foresight as to what platform will be hosting the application. Our process is simplified by the fact that containers in Azure Container Apps are only Linux-hosted. By using native code, we will bypass the just-in-time (JIT) compiler when the container executes, which means we will have faster startup and a smaller memory footprint. It also means these images can run in environments where JIT compilation may not be permitted.
 
 === "Backend.Api Dockerfile.chiseled.aot"
 ```Dockerfile hl_lines="1 8"
@@ -111,7 +111,7 @@ Another massive reduction takes the image down to a mere **16 MB** - a total dro
 
 ![Backend API Chiseled AOT](../../assets/images/12-optimize-containers/backend-api-chiseled-aot.png)
 
-This image is comprised of one image, just 23 packages, and has nine vulnerabilities.  
+This image is comprised of one image, just 23 packages, and has nine vulnerabilities.
 Notably, the four additional vulnerabilities are in the `openssl 3.0.2` package in this image.
 
 ![Backend API Status Quo Image Stats](../../assets/images/12-optimize-containers/backend-api-chiseled-aot-image-stats.png)
@@ -128,9 +128,9 @@ Let's update our existing Backend API container app with a new build and revisio
 az acr build `
 --registry $AZURE_CONTAINER_REGISTRY_NAME `
 --image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot' . 
+--file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot' .
 
-# Update Backend API App container app and create a new revision 
+# Update Backend API App container app and create a new revision
 az containerapp update `
 --name $BACKEND_API_NAME  `
 --resource-group $RESOURCE_GROUP `
@@ -256,7 +256,7 @@ The last step is to build & deploy updated images. For good measure, let's do th
 az acr build `
 --registry $AZURE_CONTAINER_REGISTRY_NAME `
 --image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot' . 
+--file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled.aot' .
 
 # Build Backend Service on ACR and Push to ACR
 az acr build `
@@ -272,21 +272,21 @@ az acr build `
 ```
 
 ```shell
-# Update Backend API App container app and create a new revision 
+# Update Backend API App container app and create a new revision
 az containerapp update `
 --name $BACKEND_API_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY-7 `
 --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
 
-# Update Frontend Web App container app and create a new revision 
+# Update Frontend Web App container app and create a new revision
 az containerapp update `
 --name $FRONTEND_WEBAPP_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY-7 `
 --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
 
-# Update Backend Background Service container app and create a new revision 
+# Update Backend Background Service container app and create a new revision
 az containerapp update `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `

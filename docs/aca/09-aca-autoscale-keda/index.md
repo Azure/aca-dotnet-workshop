@@ -30,8 +30,8 @@ Azure Container Apps support horizontal scaling, also known as **scaling out** a
 
 Azure Container Apps supports different scaling triggers including:
 
-* [HTTP traffic](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#http){target=_blank}: Scaling based on the number of concurrent HTTP requests to your revision.
-* [CPU](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#cpu){target=_blank} or [Memory](https://learn.microsoft.com/en-us/azure/container-apps/scale-app#memory){target=_blank} usage: Scaling based on the amount of CPU utilized or memory consumed by a replica.
+* [HTTP traffic](https://learn.microsoft.com/azure/container-apps/scale-app#http){target=_blank}: Scaling based on the number of concurrent HTTP requests to your revision.
+* [CPU](https://learn.microsoft.com/azure/container-apps/scale-app#cpu){target=_blank} or [Memory](https://learn.microsoft.com/azure/container-apps/scale-app#memory){target=_blank} usage: Scaling based on the amount of CPU utilized or memory consumed by a replica.
 * Azure Storage Queues: Scaling based on the number of messages in Azure Storage Queue.
 * Event-driven using [KEDA](https://keda.sh/){target=_blank}: Scaling based on events triggers, such as the number of messages in Azure Service Bus Topic or the number of blobs in Azure Blob Storage container.
 
@@ -68,9 +68,9 @@ To achieve this, we look to the [KEDA Azure Service Bus scaler](https://keda.sh/
     - The property `cloud` represents the name of the cloud environment that the service bus belongs to.
 
 !!! note
-    Note about authentication: KEDA scaler for Azure Service Bus supports different authentication mechanisms such as [Pod Managed Identity](https://learn.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity){target=_blank}, [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/){target=_blank}, and shared access policy (connection string). At the time of writing this workshop, when using KEDA with Azure Container Apps the only supported authentication mechanism is Connection Strings. There is a work item in the ACA product backlog that involves enabling [KEDA Scale with Managed Identity.](https://github.com/microsoft/azure-container-apps/issues/592){target=_blank}
+    Note about authentication: KEDA scaler for Azure Service Bus supports different authentication mechanisms such as [Pod Managed Identity](https://learn.microsoft.com/azure/aks/use-azure-ad-pod-identity){target=_blank}, [Azure AD Workload Identity](https://azure.github.io/azure-workload-identity/docs/){target=_blank}, and shared access policy (connection string). At the time of writing this workshop, when using KEDA with Azure Container Apps the only supported authentication mechanism is Connection Strings. There is a work item in the ACA product backlog that involves enabling [KEDA Scale with Managed Identity.](https://github.com/microsoft/azure-container-apps/issues/592){target=_blank}
 
-Azure Container Apps has its own proprietary schema to map a KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps [ARM templates](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, [yaml manifest](https://learn.microsoft.com/en-us/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, Azure CLI, or from the [Azure portal](https://portal.azure.com){target=_blank}. In this module, we will cover how to do it from the Azure CLI.
+Azure Container Apps has its own proprietary schema to map a KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps [ARM templates](https://learn.microsoft.com/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, [yaml manifest](https://learn.microsoft.com/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples){target=_blank}, Azure CLI, or from the [Azure portal](https://portal.azure.com){target=_blank}. In this module, we will cover how to do it from the Azure CLI.
 
 #### 3.2 Create a New Secret In The Container App
 
@@ -129,7 +129,7 @@ az containerapp update `
     **Note About Setting Minimum Replicas To 0:**
     * We can set the minimum number of replicas to `zero` to avoid any charges when the backend processor is not processing any message from Azure Service Bus Topic, but this will impact running the other features within this backend processor such as the periodic cron job as well as the external input bidding and output bindings. We are configuring the minimum number of replicas to one, ensuring that a backend processor instance is always running and capable of handling tasks, even if there are no messages being received by the Azure Service Bus Topic.
 
-    * When the single replica of the backend processor is not doing anything, it will be running in an `idle mode`. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit this [link](https://azure.microsoft.com/en-us/pricing/details/container-apps/){target=_blank}.
+    * When the single replica of the backend processor is not doing anything, it will be running in an `idle mode`. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit this [link](https://azure.microsoft.com/pricing/details/container-apps/){target=_blank}.
 
 ### 4. Scaling Testing
 

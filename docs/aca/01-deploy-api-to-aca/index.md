@@ -167,7 +167,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
 
 ???+ tip "Cloud Adoption Framework Abbreviations"
-    Unless you have your own naming convention, we suggest to use [Cloud Adoption Framework (CAF) abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations){target=_blank} for resource prefixes.
+    Unless you have your own naming convention, we suggest to use [Cloud Adoption Framework (CAF) abbreviations](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations){target=_blank} for resource prefixes.
 
 - Create a resource group to organize the services related to the application, run the below command:
 
@@ -239,7 +239,7 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     --output tsv
     ```
 
-- Create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net){target=_blank} instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing){target=_blank} between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
+- Create an [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview?tabs=net){target=_blank} instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing){target=_blank} between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
 
     ```shell
     # Create Application Insights instance
@@ -336,14 +336,14 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
     ```
 
 ??? tip "Want to learn what the above command does?"
-    - Ingress param is set to `external` which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to `Internal` or `External` it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found [here](https://learn.microsoft.com/en-us/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names){target=_blank}.
+    - Ingress param is set to `external` which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to `Internal` or `External` it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found [here](https://learn.microsoft.com/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names){target=_blank}.
     - The target port param is set to 80, this is the port our Web API container listens to for incoming requests.
     - We didn't specify the ACR registry username and password, `az containerapp create` command was able to look up ACR username and password and add them as a secret under the created Azure container app for future container updates.
     - The minimum and the maximum number of replicas are set. More about this when we cover Autoscaling in later modules. For the time being, only a single instance of this container app will be provisioned as Auto scale is not configured.
-    - We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link [here](https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration){target=_blank}.
+    - We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link [here](https://docs.microsoft.com/azure/container-apps/containers#configuration){target=_blank}.
     - The `query` property will filter the response coming from the command and just return the FQDN. Take note of this FQDN as you will need it for the next step.
 
-    For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
+    For full details on all available parameters for this command, please visit this [page](https://docs.microsoft.com/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create){target=_blank}.
 
 - You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the [Azure portal](https://portal.azure.com){target=_blank} and selecting the resource group named `tasks-tracker-rg` that you created earlier. You should see the 5 resourses created below.
 ![Azure Resources](../../assets/images/01-deploy-api-to-aca/Resources.jpg)

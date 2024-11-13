@@ -228,7 +228,7 @@ Now we are ready to give it an end-to-end test on our dev machines. To do so, ru
 <!-- Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together
 in this [section](../30-appendix/01-run-debug-dapr-app-vscode.md). -->
 
-Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from [here](https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview){target=_blank}.
+Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from [here](https://azure.microsoft.com/products/storage/storage-explorer/#overview){target=_blank}.
 Login to your Azure Subscription and navigate to the storage account already created, create a queue, and use the same name you already used in the Dapr Input configuration file.
 In our case the name of the queue in the configuration file is `external-tasks-queue`.
 
@@ -280,7 +280,7 @@ az keyvault create `
 
 In the previous module we have configured the `system-assigned` identity for the service `ACA-Processor Backend`. Now we need to assign a role named `Key Vault Secrets User` to it, so it access and read secrets from Azure Key Vault.
 
-You can read more about [Azure built-in roles for Key Vault data plane operations](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations){target=_blank}.
+You can read more about [Azure built-in roles for Key Vault data plane operations](https://learn.microsoft.com/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations){target=_blank}.
 
 ```shell
 $KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
