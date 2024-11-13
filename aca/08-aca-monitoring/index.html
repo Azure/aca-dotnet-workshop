@@ -1434,9 +1434,9 @@
 </li>
 </ul>
 <h3 id="1-azure-container-apps-application-insights">1. Azure Container Apps &amp; Application Insights<a class="headerlink" href="#1-azure-container-apps-application-insights" title="Permanent link">&para;</a></h3>
-<p>In this module, we will explore how we can configure ACA and ACA Environment with <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview" target="_blank">Application Insights</a> which will provide a holistic
+<p>In this module, we will explore how we can configure ACA and ACA Environment with <a href="https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview" target="_blank">Application Insights</a> which will provide a holistic
 view of our container apps health, performance metrics, logs data, various telemetries and traces.
-ACA does not support <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers" target="_blank">Auto-Instrumentation</a> for Application Insights, so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.</p>
+ACA does not support <a href="https://learn.microsoft.com/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers" target="_blank">Auto-Instrumentation</a> for Application Insights, so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.</p>
 <h4 id="11-application-insights-overview">1.1 Application Insights Overview<a class="headerlink" href="#11-application-insights-overview" title="Permanent link">&para;</a></h4>
 <p>Application Insights is an offering from Azure Monitor that empowers us to monitor all ACAs under the same Container App Environment and collect telemetry about the workload services. Furthermore, it supports us in understanding the usage of the services and users' engagement via integrated analytics tools.</p>
 <p>The term <em>Telemetry</em> refers to the information gathered to monitor our application, which can be classified into three distinct groups:</p>
@@ -1806,7 +1806,7 @@ ACA does not support <a href="https://learn.microsoft.com/en-us/azure/azure-moni
 </div>
 <div class="admonition important">
 <p class="admonition-title">RoleName property for three services</p>
-<p>The only difference between each file on the 3 projects is the <strong>RoleName</strong> property value. </p>
+<p>The only difference between each file on the 3 projects is the <strong>RoleName</strong> property value.</p>
 <p>Application Insights will utilize this property to recognize the elements on the application map. Additionally, it will prove beneficial for us in case we want to filter through all the warning logs produced by the Backend API service. Therefore, we will apply the tasksmanager-backend-api value for filtering purposes.</p>
 </div>
 <p>Next, we need to register this <code>AppInsightsTelemetryInitializer</code> class in <strong>Program.cs</strong> in each of the three projects.</p>
@@ -2354,10 +2354,10 @@ ACA does not support <a href="https://learn.microsoft.com/en-us/azure/azure-moni
 <span class="normal"><a href="#__codelineno-18-4">4</a></span>
 <span class="normal"><a href="#__codelineno-18-5">5</a></span>
 <span class="normal"><a href="#__codelineno-18-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="p">{</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">  </span><span class="c1">// Configuration removed for brevity      </span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">  </span><span class="c1">// Configuration removed for brevity</span>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">  </span><span class="nt">&quot;ApplicationInsights&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="nt">&quot;InstrumentationKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;Application Insights Key here for local development&gt;&quot;</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="p">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -2418,7 +2418,7 @@ ACA does not support <a href="https://learn.microsoft.com/en-us/azure/azure-moni
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.<span class="w"> </span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
 </span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a>
 </span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="c1"># Build Backend Service on ACR and Push to ACR</span>
 </span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
@@ -2457,21 +2457,21 @@ ACA does not support <a href="https://learn.microsoft.com/en-us/azure/azure-moni
 <span class="normal"><a href="#__codelineno-21-17">17</a></span>
 <span class="normal"><a href="#__codelineno-21-18">18</a></span>
 <span class="normal"><a href="#__codelineno-21-19">19</a></span>
-<span class="normal"><a href="#__codelineno-21-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="c1"># Update Backend API App container app and create a new revision </span>
+<span class="normal"><a href="#__codelineno-21-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="c1"># Update Backend API App container app and create a new revision</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w">  </span><span class="sb">`</span>
 </span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-5<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
 </span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a>
-</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="c1"># Update Frontend Web App container app and create a new revision </span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="c1"># Update Frontend Web App container app and create a new revision</span>
 </span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10"></a>--name<span class="w"> </span><span class="nv">$FRONTEND_WEBAPP_NAME</span><span class="w">  </span><span class="sb">`</span>
 </span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-5<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13"></a>--set-env-vars<span class="w"> </span><span class="s2">&quot;ApplicationInsights__InstrumentationKey=secretref:appinsights-key&quot;</span>
 </span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14"></a>
-</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="c1"># Update Backend Background Service container app and create a new revision </span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="c1"># Update Backend Background Service container app and create a new revision</span>
 </span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>

@@ -1984,7 +1984,7 @@ The answer for this is that at startup on the consumer service (more on that bel
 </span></code></pre></div></td></tr></table></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Follow this <a href="https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works" target="_blank">link</a> to find a detailed diagram of how the consumers will discover and subscribe to
+<p>Follow this <a href="https://learn.microsoft.com/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works" target="_blank">link</a> to find a detailed diagram of how the consumers will discover and subscribe to
 those endpoints.</p>
 </div>
 <h4 id="25-register-dapr-and-subscribe-handler-at-the-consumer-startup">2.5 Register Dapr and Subscribe Handler at the Consumer Startup<a class="headerlink" href="#25-register-dapr-and-subscribe-handler-at-the-consumer-startup" title="Permanent link">&para;</a></h4>
@@ -3143,7 +3143,7 @@ When this endpoint is called, it will automatically find all WebAPI action metho
 <p>Now we will switch our implementation to use Azure Service Bus as a message broker. Redis worked perfectly for local development and testing, but we need to prepare ourselves for the cloud deployment. To do so we need to create Service Bus Namespace followed by a Topic. A namespace provides a scoping container for Service Bus resources within your application.</p>
 <h4 id="31-create-azure-service-bus-namespace-and-a-topic">3.1 Create Azure Service Bus Namespace and a Topic<a class="headerlink" href="#31-create-azure-service-bus-namespace-and-a-topic" title="Permanent link">&para;</a></h4>
 <p>You can do this from <a href="https://portal.azure.com" target="_blank">Azure portal</a> or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values.
-You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found <a href="https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters" target="_blank">here</a>.</p>
+You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found <a href="https://learn.microsoft.com/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters" target="_blank">here</a>.</p>
 <div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>

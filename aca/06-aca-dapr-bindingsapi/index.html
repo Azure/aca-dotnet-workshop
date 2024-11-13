@@ -2051,7 +2051,7 @@ into the <code>metaData</code> dictionary.</p>
 <!-- Run the 3 applications together using Debug and Run button from VS Code. You can read how we configured the 3 apps to run together
 in this [section](../30-appendix/01-run-debug-dapr-app-vscode.md). -->
 
-<p>Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from <a href="https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview" target="_blank">here</a>.
+<p>Open Azure Storage Explorer on your local machine. If you don't have it installed you can install it from <a href="https://azure.microsoft.com/products/storage/storage-explorer/#overview" target="_blank">here</a>.
 Login to your Azure Subscription and navigate to the storage account already created, create a queue, and use the same name you already used in the Dapr Input configuration file.
 In our case the name of the queue in the configuration file is <code>external-tasks-queue</code>.</p>
 <p><a class="glightbox" href="../../assets/images/06-aca-dapr-bindingsapi/Azure_Storage_Explorer.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Azure-storage-explorer" src="../../assets/images/06-aca-dapr-bindingsapi/Azure_Storage_Explorer.png" /></a></p>
@@ -2098,7 +2098,7 @@ with <a href="https://docs.dapr.io/reference/components-reference/supported-secr
 </div>
 <h4 id="32-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault">3.2 Grant Backend Processor App a Role To Read Secrets from Azure Key Vault<a class="headerlink" href="#32-grant-backend-processor-app-a-role-to-read-secrets-from-azure-key-vault" title="Permanent link">&para;</a></h4>
 <p>In the previous module we have configured the <code>system-assigned</code> identity for the service <code>ACA-Processor Backend</code>. Now we need to assign a role named <code>Key Vault Secrets User</code> to it, so it access and read secrets from Azure Key Vault.</p>
-<p>You can read more about <a href="https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations" target="_blank">Azure built-in roles for Key Vault data plane operations</a>.</p>
+<p>You can read more about <a href="https://learn.microsoft.com/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations" target="_blank">Azure built-in roles for Key Vault data plane operations</a>.</p>
 <div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>

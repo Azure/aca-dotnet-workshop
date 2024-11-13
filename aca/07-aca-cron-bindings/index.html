@@ -1318,7 +1318,7 @@
 </div>
 <details class="tip">
 <summary>Curious about Azure Container Apps jobs?</summary>
-<p>There is a new kid on the block. <a href="https://learn.microsoft.com/en-us/azure/container-apps/jobs" target="_blank">Azure Container Apps jobs</a> became generally available in late August 2023. This workshop is not yet updated to account for this new type of container app. Stay tuned for updates!</p>
+<p>There is a new kid on the block. <a href="https://learn.microsoft.com/azure/container-apps/jobs" target="_blank">Azure Container Apps jobs</a> became generally available in late August 2023. This workshop is not yet updated to account for this new type of container app. Stay tuned for updates!</p>
 </details>
 <h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
 <p>In this module, we will accomplish three objectives:</p>
@@ -1341,13 +1341,13 @@
 </li>
 </ul>
 <h3 id="1-the-cron-binding">1. The Cron Binding<a class="headerlink" href="#1-the-cron-binding" title="Permanent link">&para;</a></h3>
-<p>In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources.  </p>
+<p>In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources.</p>
 <p>In this module we will focus on a special type of Dapr input binding named <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/cron/" target="_blank">Cron Binding</a>.</p>
 <p>The Cron binding doesn't subscribe to events coming from an external system. Instead, this binding can be used to trigger application code in our service periodically based on a configurable interval. The binding provides a simple way to implement a background worker to wake up and do some work at a regular interval, without the need to implement an endless loop with a configurable delay. We intend to utilize this binding for a specific use case, wherein it will be triggered once daily at a particular time (12:05 am), and search for tasks that have a due date matching the previous day of its execution and are still pending. Once the service identifies tasks that meet these criteria, it will designate them as overdue tasks and save the revised status on Azure Cosmos DB.</p>
 <p>Contrasting the binding to Azure Container Apps jobs, we do not need a separate container app and can integrate this binding into our existing backend service.</p>
 <h3 id="2-updating-the-backend-background-processor-project">2. Updating the Backend Background Processor Project<a class="headerlink" href="#2-updating-the-backend-background-processor-project" title="Permanent link">&para;</a></h3>
 <h4 id="21-add-cron-binding-configuration">2.1 Add Cron Binding Configuration<a class="headerlink" href="#21-add-cron-binding-configuration" title="Permanent link">&para;</a></h4>
-<p>To set up the Cron binding, we add a component file that specifies the code that requires triggering and the intervals at which it should occur.  </p>
+<p>To set up the Cron binding, we add a component file that specifies the code that requires triggering and the intervals at which it should occur.</p>
 <p>To accomplish this, create a new file called <strong>dapr-scheduled-cron.yaml</strong> within the <strong>components</strong> folder and insert the following code:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">dapr-scheduled-cron.yaml</label></div>
 <div class="tabbed-content">
@@ -1386,9 +1386,9 @@
 <p>The actions performed above are as follows:</p>
 <ul>
 <li>Added a new input binding of type <code>bindings.cron</code>.</li>
-<li>Provided the name <code>ScheduledTasksManager</code> for this binding. This means that an HTTP POST endpoint on the URL <code>/ScheduledTasksManager</code> should be added as it will be invoked when the job is triggered based on 
+<li>Provided the name <code>ScheduledTasksManager</code> for this binding. This means that an HTTP POST endpoint on the URL <code>/ScheduledTasksManager</code> should be added as it will be invoked when the job is triggered based on
 the Cron interval.</li>
-<li>Setting the interval for this Cron job to be triggered once a day at 12:05am. For full details and available options on how to set this value, 
+<li>Setting the interval for this Cron job to be triggered once a day at 12:05am. For full details and available options on how to set this value,
 visit the <a href="https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format" target="_blank">Cron binding specs.</a>.</li>
 </ul>
 </details>
@@ -1907,7 +1907,7 @@ This action method must be of the <code>POST</code> type, allowing it to be invo
 <summary>Curious to learn more about above code?</summary>
 <p>What we've implemented here is the following:</p>
 <ul>
-<li>Method <code>GetYesterdaysDueTasks</code> will query the Cosmos DB state store using Dapr State API to lookup all the yesterday's task which are not completed yet. Remember that Cron job is configured to run each day 
+<li>Method <code>GetYesterdaysDueTasks</code> will query the Cosmos DB state store using Dapr State API to lookup all the yesterday's task which are not completed yet. Remember that Cron job is configured to run each day
 at 12:05am so we are interested to check only the day before when the service runs. We initially made this implementation simple. There might be some edge cases not handled with the current implementation.</li>
 <li>Method <code>MarkOverdueTasks</code> will take list of all tasks which passed the due date and set the flag <code>IsOverDue</code> to <code>true</code>.</li>
 </ul>
@@ -2264,7 +2264,7 @@ at 12:05am so we are interested to check only the day before when the service ru
 <span class="normal"><a href="#__codelineno-10-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.<span class="w"> </span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a>
 </span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
@@ -2295,13 +2295,13 @@ To accomplish this run the PowerShell script below:</p>
 <span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-12-10">10</a></span>
-<span class="normal"><a href="#__codelineno-12-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># Update Backend API App container app and create a new revision </span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># Update Backend API App container app and create a new revision</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-4
 </span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="c1"># Update Backend Background Processor container app and create a new revision </span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="c1"># Update Backend Background Processor container app and create a new revision</span>
 </span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a>az<span class="w"> </span>containerapp<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>

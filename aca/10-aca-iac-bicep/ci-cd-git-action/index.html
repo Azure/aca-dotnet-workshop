@@ -1130,8 +1130,8 @@
 <p>In order to use the GitHub Actions workflow to deploy the infrastructure components of our application, we need to log in to Azure using the Azure CLI with <a href="https://github.com/marketplace/actions/azure-login" target="_blank">Azure login</a> action.</p>
 <p>The Azure login action supports two different ways of authenticating with Azure:</p>
 <ul>
-<li><a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-a-service-principal-secret" target="_blank">Service principal with secrets</a></li>
-<li><a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-openid-connect" target="_blank">OpenID Connect (OIDC) with a Azure service principal using a Federated Identity Credential</a></li>
+<li><a href="https://learn.microsoft.com/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-a-service-principal-secret" target="_blank">Service principal with secrets</a></li>
+<li><a href="https://learn.microsoft.com/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-openid-connect" target="_blank">OpenID Connect (OIDC) with a Azure service principal using a Federated Identity Credential</a></li>
 </ul>
 <p>In this workshop, we will use the OIDC authentication method. Assuming you are already logged in using Azure cli locally, follow the steps below to configure the repository for OIDC authentication with Azure AD either using powershell or bash/wsl:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell</label><label for="__tabbed_1_2">Bash/WSL</label></div>
@@ -1237,7 +1237,7 @@
 </div>
 </div>
 <h3 id="configure-github-repository-secrets">Configure GitHub Repository Secrets<a class="headerlink" href="#configure-github-repository-secrets" title="Permanent link">&para;</a></h3>
-<p>Configure secrets details in GitHub repo as described here in <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets" target="_blank">create GitHub secrets</a>. Use below values mapped to relevant secrets in GitHub.</p>
+<p>Configure secrets details in GitHub repo as described here in <a href="https://learn.microsoft.com/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets" target="_blank">create GitHub secrets</a>. Use below values mapped to relevant secrets in GitHub.</p>
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span>

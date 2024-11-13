@@ -2033,7 +2033,7 @@
 </ul>
 <details class="tip" open="open">
 <summary>Cloud Adoption Framework Abbreviations</summary>
-<p>Unless you have your own naming convention, we suggest to use <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations" target="_blank">Cloud Adoption Framework (CAF) abbreviations</a> for resource prefixes.</p>
+<p>Unless you have your own naming convention, we suggest to use <a href="https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations" target="_blank">Cloud Adoption Framework (CAF) abbreviations</a> for resource prefixes.</p>
 </details>
 <ul>
 <li>
@@ -2138,7 +2138,7 @@
 </span></code></pre></div></td></tr></table></div>
 </li>
 <li>
-<p>Create an <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net" target="_blank">Application Insights</a> instance which will be used mainly for <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/distributed-tracing" target="_blank">distributed tracing</a> between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:</p>
+<p>Create an <a href="https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview?tabs=net" target="_blank">Application Insights</a> instance which will be used mainly for <a href="https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing" target="_blank">distributed tracing</a> between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:</p>
 <div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -2289,14 +2289,14 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <details class="tip">
 <summary>Want to learn what the above command does?</summary>
 <ul>
-<li>Ingress param is set to <code>external</code> which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to <code>Internal</code> or <code>External</code> it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found <a href="https://learn.microsoft.com/en-us/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names" target="_blank">here</a>.</li>
+<li>Ingress param is set to <code>external</code> which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to <code>Internal</code> or <code>External</code> it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found <a href="https://learn.microsoft.com/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names" target="_blank">here</a>.</li>
 <li>The target port param is set to 80, this is the port our Web API container listens to for incoming requests.</li>
 <li>We didn't specify the ACR registry username and password, <code>az containerapp create</code> command was able to look up ACR username and password and add them as a secret under the created Azure container app for future container updates.</li>
 <li>The minimum and the maximum number of replicas are set. More about this when we cover Autoscaling in later modules. For the time being, only a single instance of this container app will be provisioned as Auto scale is not configured.</li>
-<li>We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link <a href="https://docs.microsoft.com/en-us/azure/container-apps/containers#configuration" target="_blank">here</a>.</li>
+<li>We set the size of the Container App. The total amount of CPUs and memory requested for the container app must add up to certain combinations, for full details check the link <a href="https://docs.microsoft.com/azure/container-apps/containers#configuration" target="_blank">here</a>.</li>
 <li>The <code>query</code> property will filter the response coming from the command and just return the FQDN. Take note of this FQDN as you will need it for the next step.</li>
 </ul>
-<p>For full details on all available parameters for this command, please visit this <a href="https://docs.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create" target="_blank">page</a>.</p>
+<p>For full details on all available parameters for this command, please visit this <a href="https://docs.microsoft.com/cli/azure/containerapp?view=azure-cli-latest#az-containerapp-create" target="_blank">page</a>.</p>
 </details>
 <ul>
 <li>You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the <a href="https://portal.azure.com" target="_blank">Azure portal</a> and selecting the resource group named <code>tasks-tracker-rg</code> that you created earlier. You should see the 5 resourses created below.
