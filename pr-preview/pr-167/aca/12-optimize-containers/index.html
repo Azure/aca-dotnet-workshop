@@ -1447,7 +1447,7 @@
 </span></code></pre></div></td></tr></table></div>
 <p>This yields sizable images at <strong>226+ MB</strong>!</p>
 <p><a class="glightbox" href="../../assets/images/12-optimize-containers/docker-status-quo.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Docker Status Quo" src="../../assets/images/12-optimize-containers/docker-status-quo.png" /></a></p>
-<p>For example, the Backend API image is comprised of two images, 452 packages, and has 19 vulnerabilities.</p>
+<p>For example, the Backend API image is comprised of two images, 451 packages, and has 25 vulnerabilities.</p>
 <p><a class="glightbox" href="../../assets/images/12-optimize-containers/backend-api-status-quo-image-stats.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Backend API Status Quo Image Stats" src="../../assets/images/12-optimize-containers/backend-api-status-quo-image-stats.png" /></a></p>
 <h4 id="12-more-concise-dockerfile">1.2 More Concise Dockerfile<a class="headerlink" href="#12-more-concise-dockerfile" title="Permanent link">&para;</a></h4>
 <p>The VS Code Docker extension produces a Dockerfile that's helpful for development but not as ideal for creation of production containers. We can significantly simplify and streamline the files (note that <code>publish</code> builds for <code>Release</code> by default, so we don't need to declare the configuration). These changes do not immediately impact image size yet.</p>
