@@ -15,4 +15,4 @@ It is recommended to deploy only the first four building blocks of the landing z
 
 To have Dapr observability in Application Insights, you need to set the attributes `enableApplicationInsights` and `enableDaprInstrumentation` to `true` in the parameters file of the landing zone. To know more about monitoring and observability, you can follow this documentation [Operations management considerations for Azure Container Apps](https://github.com/Azure/aca-landing-zone-accelerator/blob/main/docs/design-areas/management.md){target=_blank}.
 
---8<-- "https://raw.githubusercontent.com/Azure/aca-landing-zone-accelerator/main/scenarios/aca-internal/bicep/sample-apps/dotnet-task-tracker-service/docs/02-container-apps.md"
+Please see the [Azure Container Apps Landing Zone Accelerator Task Tracker Service](https://github.com/Azure/aca-landing-zone-accelerator/blob/main/scenarios/aca-internal/bicep/sample-apps/dotnet-task-tracker-service/docs/02-container-apps.md) for details as to how to deploy the container apps.

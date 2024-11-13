@@ -9,6 +9,5 @@ build-docs-website:
 	cp -R site/* dist/
 
 docs-local:
-	docker pull squidfunk/mkdocs-material:latest
 	docker build -t squidfunk/mkdocs-material:latest ./docs/
-	docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
+	docker run --rm -it -p 8000:8000 -v $(CURDIR):/docs squidfunk/mkdocs-material

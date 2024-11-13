@@ -500,7 +500,7 @@ az containerapp env dapr-component set `
 
 ### 5. Configure Managed Identities for Both Container Apps
 
-In the previous module we have [already configured](../04-aca-dapr-stateapi/index.md#configure-managed-identities-in-container-app) and used system-assigned identity for the Backend API container app. We follow the same steps here to create an association between the backend processor container app and Azure Service Bus.
+In the previous module we have [already configured](../04-aca-dapr-stateapi/index.md#33-configure-managed-identities-in-container-app) and used system-assigned identity for the Backend API container app. We follow the same steps here to create an association between the backend processor container app and Azure Service Bus.
 
 #### 5.1 Create system-assigned identity for Backend Processor App
 
