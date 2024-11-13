@@ -75,13 +75,13 @@ To incorporate the SDK, use the NuGet reference below in the `csproj` file of th
 
     === "TasksTracker.TasksManager.Backend.Api.csproj"
 
-        ```xml hl_lines="12"
+        ```xml hl_lines="11"
         --8<-- "docs/aca/08-aca-monitoring/Backend.Api-dotnet9.csproj"
         ```
 
     === "TasksTracker.TasksManager.Backend.Svc.csproj"
 
-        ```xml hl_lines="12"
+        ```xml hl_lines="11"
         --8<-- "docs/aca/08-aca-monitoring/Backend.Svc-dotnet9.csproj"
         ```
 
