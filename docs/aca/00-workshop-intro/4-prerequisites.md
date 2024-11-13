@@ -15,7 +15,7 @@ Make sure you have your development environment set up and configured.
 1. .NET SDK 8 or a higher version (we primarily focus on LTS versions) - [Install](https://dotnet.microsoft.com/en-us/download){target=_blank}
 1. PowerShell 7.0 or higher version (For Windows Users only!) - [Install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
 1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/){target=_blank}
-    As of November 2024, Docker Desktop continues to be free for education purposes. Please consult the [Docker Desktop license agreement](https://docs.docker.com/subscription/desktop-license/) for any updates.
+   > As of November 2024, Docker Desktop continues to be free for education purposes. Please consult the [Docker Desktop license agreement](https://docs.docker.com/subscription/desktop-license/) for any updates.
 1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}
 1. VS Code Docker extension - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker){target=_blank}
 1. Dapr CLI - [Install](https://docs.dapr.io/getting-started/install-dapr-cli/){target=_blank} and [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/){target=_blank}
