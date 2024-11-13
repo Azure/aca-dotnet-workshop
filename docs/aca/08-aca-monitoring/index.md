@@ -22,9 +22,9 @@ In this module, we will accomplish four objectives:
 
 ### 1. Azure Container Apps & Application Insights
 
-In this module, we will explore how we can configure ACA and ACA Environment with [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview){target=_blank} which will provide a holistic
+In this module, we will explore how we can configure ACA and ACA Environment with [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview){target=_blank} which will provide a holistic
 view of our container apps health, performance metrics, logs data, various telemetries and traces.
-ACA does not support [Auto-Instrumentation](https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers){target=_blank} for Application Insights, so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.
+ACA does not support [Auto-Instrumentation](https://learn.microsoft.com/azure/azure-monitor/app/codeless-overview#supported-environments-languages-and-resource-providers){target=_blank} for Application Insights, so in this module, we will be focusing on how we can integrate Application Insights into our microservice application.
 
 #### 1.1 Application Insights Overview
 
@@ -121,8 +121,8 @@ For each of the three projects, we will add a new file to each project's root di
 
 !!! important "RoleName property for three services"
 
-    The only difference between each file on the 3 projects is the **RoleName** property value. 
-   
+    The only difference between each file on the 3 projects is the **RoleName** property value.
+
     Application Insights will utilize this property to recognize the elements on the application map. Additionally, it will prove beneficial for us in case we want to filter through all the warning logs produced by the Backend API service. Therefore, we will apply the tasksmanager-backend-api value for filtering purposes.
 
 Next, we need to register this `AppInsightsTelemetryInitializer` class in **Program.cs** in each of the three projects.
@@ -177,7 +177,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
 
             ```csharp hl_lines="1 6-9"
             --8<-- "docs/aca/08-aca-monitoring/Program-Frontend.UI-dotnet9.cs"
-            ```            
+            ```
 
 #### 2.3 Set the Application Insights Instrumentation Key
 
@@ -193,10 +193,10 @@ $APPINSIGHTS_INSTRUMENTATIONKEY
 
     ```json
     {
-      // Configuration removed for brevity      
+      // Configuration removed for brevity
       "ApplicationInsights": {
         "InstrumentationKey": "<Application Insights Key here for local development>"
-      } 
+      }
     }
     ```
 
@@ -236,7 +236,7 @@ To accomplish this, continue using the same PowerShell console and paste the cod
 az acr build `
 --registry $AZURE_CONTAINER_REGISTRY_NAME `
 --image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+--file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
 
 # Build Backend Service on ACR and Push to ACR
 az acr build `
@@ -259,21 +259,21 @@ We need to update all three container apps with new revisions so that our code c
     Notice how we used the property `--set-env-vars` to set new environment variable named `ApplicationInsights__InstrumentationKey`. Its value is a secret reference obtained from the secret `appinsights-key` we added in step 1.
 
 ```shell
-# Update Backend API App container app and create a new revision 
+# Update Backend API App container app and create a new revision
 az containerapp update `
 --name $BACKEND_API_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY-5 `
 --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
 
-# Update Frontend Web App container app and create a new revision 
+# Update Frontend Web App container app and create a new revision
 az containerapp update `
 --name $FRONTEND_WEBAPP_NAME  `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY-5 `
 --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
 
-# Update Backend Background Service container app and create a new revision 
+# Update Backend Background Service container app and create a new revision
 az containerapp update `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `

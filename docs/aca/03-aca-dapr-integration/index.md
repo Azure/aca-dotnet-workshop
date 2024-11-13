@@ -26,7 +26,7 @@ The Tasks Tracker microservice application is composed of multiple microservices
 we need to account for failures, retries, and timeouts. While Azure Container Apps features the building blocks for running microservices, using the Distributed Application Runtime (Dapr) provides an even richer microservices programming model.
 
 Dapr includes features like service discovery, pub/sub, service-to-service invocation with mutual TLS, retries, state store management, and more.
-Here is a good [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/service-invocation){target=_blank} which touches on some of the benefits of the Dapr service invocation building block which we will be building upon in this module.
+Here is a good [link](https://learn.microsoft.com/dotnet/architecture/dapr-for-net-developers/service-invocation){target=_blank} which touches on some of the benefits of the Dapr service invocation building block which we will be building upon in this module.
 Because the calls will flow through container sidecars, Dapr can inject some useful cross-cutting behaviors that are meaningfully abstracted from our application containers.
 
 Although we won't tap into all these benefits in this workshop, it's worth noting that you will probably need to rely on these features in production:

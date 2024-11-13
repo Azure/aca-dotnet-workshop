@@ -30,17 +30,17 @@ Provide access to the repository forked above by creating a service connection t
 
 The repository in which the YAML file is present is called self repository. By default, this is the repository that your pipeline builds.
 
-There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating a pipeline. Follow guide at this [link](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#access-to-github-repositories){target=_blank}
+There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating a pipeline. Follow guide at this [link](https://learn.microsoft.com/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#access-to-github-repositories){target=_blank}
 to create service connection for GitHub.
 
 ![AZDO GitHub Connection](../../assets/gifs/azdo-github-connection.gif)
 
 #### Create Service Connection for Azure Subscription
 
-Create a new service connection to your Azure subscription by following the steps at this [link](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#create-a-service-connection){target=_blank}.
+Create a new service connection to your Azure subscription by following the steps at this [link](https://docs.microsoft.com/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#create-a-service-connection){target=_blank}.
 
 !!! note
-    Update the created service connection role to have **[User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator){target=_blank}** role. This is required for pipeline to be able to perform role assignments in the infrastructure components deployed. To update the role of a service connection in Azure DevOps to have the User Access Administrator role, you can follow these steps:
+    Update the created service connection role to have **[User Access Administrator](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator){target=_blank}** role. This is required for pipeline to be able to perform role assignments in the infrastructure components deployed. To update the role of a service connection in Azure DevOps to have the User Access Administrator role, you can follow these steps:
 
     - Navigate to the [Azure portal](https://portal.azure.com){target=_blank} and select the subscription where the service connection is created.
 

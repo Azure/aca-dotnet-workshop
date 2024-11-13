@@ -2,7 +2,7 @@
 
 There is no doubt that building containerized applications and following a microservices architecture is one of the most common software architecture patterns observed in the past couple of years.
 
-Microsoft Azure offers different services to package, deploy, and manage cloud-native applications, each of which serves a certain purpose and has its own pros and cons. This [page](https://learn.microsoft.com/en-us/azure/container-apps/compare-options) provides a good comparison between the available services to host and manage cloud-native containerized applications in Azure.
+Microsoft Azure offers different services to package, deploy, and manage cloud-native applications, each of which serves a certain purpose and has its own pros and cons. This [page](https://learn.microsoft.com/azure/container-apps/compare-options) provides a good comparison between the available services to host and manage cloud-native containerized applications in Azure.
 
 Whereas building cloud-native apps on Azure Kubernetes Service (AKS) is powerful,  there is a bit of a learning curve needed when it comes to creating and configuring the cluster, configuring networking between microservices, services discovery, certificates provisioning, and, lastly, managing the cluster over the lifetime of the application.
 

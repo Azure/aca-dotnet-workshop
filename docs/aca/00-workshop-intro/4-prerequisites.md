@@ -12,8 +12,8 @@ The workshop is divided into separate modules. Each module will guide you throug
 Make sure you have your development environment set up and configured.
 
 1. An Azure account with an active subscription - [Create an account for free](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio){target=_blank}
-1. .NET SDK 8 or a higher version (we primarily focus on LTS versions) - [Install](https://dotnet.microsoft.com/en-us/download){target=_blank}
-1. PowerShell 7.0 or higher version (For Windows Users only!) - [Install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
+1. .NET SDK 8 or a higher version (we primarily focus on LTS versions) - [Install](https://dotnet.microsoft.com/download){target=_blank}
+1. PowerShell 7.0 or higher version (For Windows Users only!) - [Install](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
 1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/){target=_blank}
    > As of November 2024, Docker Desktop continues to be free for education purposes. Please consult the [Docker Desktop license agreement](https://docs.docker.com/subscription/desktop-license/) for any updates.
 1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}

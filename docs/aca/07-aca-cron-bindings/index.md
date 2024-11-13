@@ -9,7 +9,7 @@ canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-b
 
 ??? tip "Curious about Azure Container Apps jobs?"
 
-    There is a new kid on the block. [Azure Container Apps jobs](https://learn.microsoft.com/en-us/azure/container-apps/jobs){target=_blank} became generally available in late August 2023. This workshop is not yet updated to account for this new type of container app. Stay tuned for updates!
+    There is a new kid on the block. [Azure Container Apps jobs](https://learn.microsoft.com/azure/container-apps/jobs){target=_blank} became generally available in late August 2023. This workshop is not yet updated to account for this new type of container app. Stay tuned for updates!
 
 ## Objective
 
@@ -25,7 +25,7 @@ In this module, we will accomplish three objectives:
 
 ### 1. The Cron Binding
 
-In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources.  
+In the preceding module, we discussed how Dapr bindings can simplify the integration process with external systems by facilitating the handling of events and the invocation of external resources.
 
 In this module we will focus on a special type of Dapr input binding named [Cron Binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/){target=_blank}.
 
@@ -37,7 +37,7 @@ Contrasting the binding to Azure Container Apps jobs, we do not need a separate 
 
 #### 2.1 Add Cron Binding Configuration
 
-To set up the Cron binding, we add a component file that specifies the code that requires triggering and the intervals at which it should occur.  
+To set up the Cron binding, we add a component file that specifies the code that requires triggering and the intervals at which it should occur.
 
 To accomplish this, create a new file called **dapr-scheduled-cron.yaml** within the **components** folder and insert the following code:
 
@@ -52,9 +52,9 @@ To accomplish this, create a new file called **dapr-scheduled-cron.yaml** within
     The actions performed above are as follows:
 
     * Added a new input binding of type `bindings.cron`.
-    * Provided the name `ScheduledTasksManager` for this binding. This means that an HTTP POST endpoint on the URL `/ScheduledTasksManager` should be added as it will be invoked when the job is triggered based on 
+    * Provided the name `ScheduledTasksManager` for this binding. This means that an HTTP POST endpoint on the URL `/ScheduledTasksManager` should be added as it will be invoked when the job is triggered based on
     the Cron interval.
-    * Setting the interval for this Cron job to be triggered once a day at 12:05am. For full details and available options on how to set this value, 
+    * Setting the interval for this Cron job to be triggered once a day at 12:05am. For full details and available options on how to set this value,
     visit the [Cron binding specs.](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/#schedule-format){target=_blank}.
 
 #### 2.2 Add the Endpoint Which Will be Invoked by Cron Binding
@@ -101,7 +101,7 @@ Add a new file in a new **Utilities** folder in the project **TasksTracker.Tasks
 
     What we've implemented here is the following:
 
-    - Method `GetYesterdaysDueTasks` will query the Cosmos DB state store using Dapr State API to lookup all the yesterday's task which are not completed yet. Remember that Cron job is configured to run each day 
+    - Method `GetYesterdaysDueTasks` will query the Cosmos DB state store using Dapr State API to lookup all the yesterday's task which are not completed yet. Remember that Cron job is configured to run each day
     at 12:05am so we are interested to check only the day before when the service runs. We initially made this implementation simple. There might be some edge cases not handled with the current implementation.
     - Method `MarkOverdueTasks` will take list of all tasks which passed the due date and set the flag `IsOverDue` to `true`.
 
@@ -148,7 +148,7 @@ To prepare for deployment to Azure Container Apps, we must build and deploy both
 az acr build `
 --registry $AZURE_CONTAINER_REGISTRY_NAME `
 --image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' . 
+--file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
 
 az acr build `
 --registry $AZURE_CONTAINER_REGISTRY_NAME `
@@ -172,13 +172,13 @@ As we did before, we need to update the Azure Container App hosting the Backend 
 To accomplish this run the PowerShell script below:
 
 ```shell
-# Update Backend API App container app and create a new revision 
+# Update Backend API App container app and create a new revision
 az containerapp update `
 --name $BACKEND_API_NAME `
 --resource-group $RESOURCE_GROUP `
 --revision-suffix v$TODAY-4
 
-# Update Backend Background Processor container app and create a new revision 
+# Update Backend Background Processor container app and create a new revision
 az containerapp update `
 --name $BACKEND_SERVICE_NAME `
 --resource-group $RESOURCE_GROUP `
@@ -195,7 +195,7 @@ az containerapp update `
     you should see logs similar to the below image
 
     ![app-logs](../../assets/images/07-aca-cron-bindings/cron-logs.jpg)
-    
+
     !!! note
         Keep in mind though that you won't be able to see the results instantaneously as the cron job searches for tasks that have a due date matching the previous day of its execution and are still pending.
 

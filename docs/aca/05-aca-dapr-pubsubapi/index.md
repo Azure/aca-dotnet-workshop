@@ -184,7 +184,7 @@ In our case, a sample response will be as follows:
 ```
 
 !!! tip
-    Follow this [link](https://learn.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works){target=_blank} to find a detailed diagram of how the consumers will discover and subscribe to
+    Follow this [link](https://learn.microsoft.com/dotnet/architecture/dapr-for-net-developers/publish-subscribe#how-it-works){target=_blank} to find a detailed diagram of how the consumers will discover and subscribe to
     those endpoints.
 
 #### 2.5 Register Dapr and Subscribe Handler at the Consumer Startup
@@ -322,7 +322,7 @@ Now we will switch our implementation to use Azure Service Bus as a message brok
 #### 3.1 Create Azure Service Bus Namespace and a Topic
 
 You can do this from [Azure portal](https://portal.azure.com){target=_blank} or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values.
-You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/en-us/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
+You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
 
 ```shell
 $SERVICE_BUS_NAMESPACE_NAME="sbns-taskstracker-$RANDOM_STRING"
