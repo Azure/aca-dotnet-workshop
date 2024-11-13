@@ -69,7 +69,7 @@ This yields sizable images at **226+ MB**!
 
 ![Docker Status Quo](../../assets/images/12-optimize-containers/docker-status-quo.png)
 
-For example, the Backend API image is comprised of two images, 452 packages, and has 19 vulnerabilities.
+For example, the Backend API image is comprised of two images, 451 packages, and has 25 vulnerabilities.
 
 ![Backend API Status Quo Image Stats](../../assets/images/12-optimize-containers/backend-api-status-quo-image-stats.png)
 
