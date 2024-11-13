@@ -1487,8 +1487,8 @@
 </div>
 <h3 id="4-scaling-testing">4. Scaling Testing<a class="headerlink" href="#4-scaling-testing" title="Permanent link">&para;</a></h3>
 <h4 id="41-run-an-end-to-end-test-and-generate-several-messages">4.1 Run an End-to-End Test and Generate Several Messages<a class="headerlink" href="#41-run-an-end-to-end-test-and-generate-several-messages" title="Permanent link">&para;</a></h4>
-<p>Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize the Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.</p>
-<p>To get the number of current replicas of service <code>tasksmanager-backend-processor</code> we could run the command below, this should run single replica as we didn't load the service bus topic yet.</p>
+<p>Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize the Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.
+To get the number of current replicas of service <code>tasksmanager-backend-processor</code> we could run the command below, this should run single replica as we didn't load the service bus topic yet.</p>
 <div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">3</a></span>
@@ -1528,7 +1528,7 @@
 <p class="admonition-title">Success</p>
 <p>If all is setup correctly, five replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:</p>
 <ul>
-<li>You can run the Azure CLI command used in <a href="#3-run-an-end-to-end-test-and-generate-a-load-of-messages">previous step</a> to list the names of replicas.</li>
+<li>You can run the Azure CLI command used in <a href="#41-run-an-end-to-end-test-and-generate-several-messages">previous step</a> to list the names of replicas.</li>
 <li>You can verify this from Container Apps <code>Console</code> tab where you will see those replicas in the drop-down list
 <a class="glightbox" href="../../assets/images/09-aca-autoscale-keda/replica-console.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="replica-console" src="../../assets/images/09-aca-autoscale-keda/replica-console.png" /></a></li>
 </ul>
