@@ -117,7 +117,7 @@ Microsoft and Ubuntu's creator, Canonical, collaborated on the concept of a [chi
     ```
 
 === "Chiseled Frontend.Ui Dockerfile"
-    ```Chiseled
+    ```Dockerfile
     --8<-- "docs/aca/12-optimize-containers/Frontend.Ui.Dockerfile.chiseled"
     ```
 
