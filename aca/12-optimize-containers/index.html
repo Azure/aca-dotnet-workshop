@@ -1631,7 +1631,7 @@
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<div class="language-Dockerfile highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
@@ -1645,21 +1645,21 @@
 <span class="normal"><a href="#__codelineno-12-12">12</a></span>
 <span class="normal"><a href="#__codelineno-12-13">13</a></span>
 <span class="normal"><a href="#__codelineno-12-14">14</a></span>
-<span class="normal"><a href="#__codelineno-12-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a>FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled AS base
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a>WORKDIR /app
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a>EXPOSE 8080
+<span class="normal"><a href="#__codelineno-12-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">8080</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a>ENV ASPNETCORE_URLS=http://+:8080
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">ASPNETCORE_URLS</span><span class="o">=</span>http://+:8080
 </span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a>USER app
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a>FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS publish
-</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>WORKDIR /src
-</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a>COPY . .
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a>RUN dotnet publish -o /app/publish
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/dotnet/sdk:8.0-jammy</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">publish</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/src</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="k">RUN</span><span class="w"> </span>dotnet<span class="w"> </span>publish<span class="w"> </span>-o<span class="w"> </span>/app/publish
 </span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a>
-</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a>FROM base AS final
-</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a>COPY --from=publish /app/publish .
-</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a>ENTRYPOINT [&quot;dotnet&quot;, &quot;TasksTracker.WebPortal.Frontend.Ui.dll&quot;]
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>publish<span class="w"> </span>/app/publish<span class="w"> </span>.
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dotnet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TasksTracker.WebPortal.Frontend.Ui.dll&quot;</span><span class="p">]</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
