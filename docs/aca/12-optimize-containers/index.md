@@ -28,7 +28,7 @@ In this module, we will look into the benefits of optimized containers such as:
 - Potentially less *Common Vulnerabilities and Exposures (CVEs)*.
 - No bloat and unnecessary components such as shells, package managers, etc.
 
-While available prior to .NET 8, the general availability introduction of .NET 8 in November 2023 came with an expanded focus on container optimization and a move away from general-purpose containers. You can apply similar steps for .NET versions newer than 8, but we omit them here for brevity.
+While available prior to .NET 8, the general availability introduction of .NET 8 in November 2023 came with an expanded focus on container optimization. You can apply similar steps for .NET versions newer than 8, but we omit them here for brevity.
 
 **For .NET 9, replace `8.0-jammy` with `9.0-noble`.**
 
