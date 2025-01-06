@@ -212,7 +212,7 @@ $result = az cosmosdb check-name-exists `
 
 # Continue if the Cosmos DB account does not yet exist
 if ($result -eq "false") {
-    echo "Creating Cosmos DB account..."
+    echo "Creating Cosmos DB account. This may take a few minutes..."
 
     # Create a Cosmos account for SQL API
     az cosmosdb create `
@@ -320,6 +320,12 @@ If you have been using the dapr cli commands instead of the aforementioned debug
 
 !!! note "Deprecation Warning"
     components-path is being deprecated in favor of --resources-path. At the time of producing this workshop the --resources-path was not supported yet by the VS code extension. Hence, you will notice the use of the property "componentsPath": "./components" in the tasks.json file. Check the extension documentation in case that has changed.
+
+Run the local frontend UI in the other terminal again:
+
+=== ".NET 8 or above"
+
+    --8<-- "snippets/dapr-run-frontend-webapp.md:basic"
 
 After creating a new record you can navigate to the Data explorer on the [Azure portal](https://portal.azure.com){target=_blank} for the Azure Cosmos DB account. It should look like the image below:
 
