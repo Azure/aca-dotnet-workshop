@@ -139,7 +139,6 @@ This image is comprised of one image, 331 packages, and has five vulnerabilities
 
 ![Backend API Status Quo Image Stats](../../assets/images/12-optimize-containers/backend-api-chiseled-image-stats.png)
 
-
 #### 1.4 Deploying the Updated Images
 
 While the image is vastly reduced, what hasn't changed is the functionality of the API. Whether you are executing it locally or deploying to Azure, the Backend API will continue to function as it always has. However, now it has less vulnerabilities, less time to transfer from the registry, less startup time, and less of a memory footprint. Furthermore, 16 MB is the uncompressed image. With compression, we are likely to continue dropping in size.
