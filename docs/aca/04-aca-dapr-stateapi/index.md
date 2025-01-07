@@ -217,7 +217,14 @@ if ($result -eq "false") {
     # Create a Cosmos account for SQL API
     az cosmosdb create `
     --name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP
+    --resource-group $RESOURCE_GROUP `
+
+    # Enable local authentication to avoid a 401 when running locally.
+    az resource update `
+    --name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --resource-type "Microsoft.DocumentDB/databaseAccounts" `
+    --set properties.disableLocalAuth=false
 
     # Create a SQL API database
     az cosmosdb sql database create `
@@ -246,7 +253,7 @@ if ($result -eq "false") {
 ```
 
 !!! note
-    The `primaryMasterKey` connection string is only needed for our local testing on the development machine, we'll be using a different approach (**Managed Identities**) when deploying Dapr component to Azure Container Apps Environment.
+    The `primaryMasterKey` connection string is only needed for our local testing on the development machine, we'll be using a different approach (**Managed Identities**) when deploying Dapr component to Azure Container Apps Environment. For this workshop, we are allowing local authentication with the `az resource update` command above, but this should not be done for production workloads.
 
 Once the scripts execution is completed, we need to get the `primaryMasterKey` of the Cosmos DB account next. You can do this using the PowerShell script below.
 Copy the value of `primaryMasterKey` as we will use it in the next step.
