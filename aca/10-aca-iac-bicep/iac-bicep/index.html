@@ -3217,7 +3217,7 @@ different options of getting images pushed to either Azure Container Registry (A
 </span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25"></a>
 </span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26"></a>// Cosmos DB
 </span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27"></a>@description(&#39;The name of the provisioned Cosmos DB resource.&#39;)
-</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28"></a>param cosmosDbName string 
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28"></a>param cosmosDbName string
 </span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29"></a>
 </span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30"></a>@description(&#39;The name of the provisioned Cosmos DB\&#39;s database.&#39;)
 </span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31"></a>param cosmosDbDatabaseName string
@@ -3334,7 +3334,7 @@ different options of getting images pushed to either Azure Container Registry (A
 </span><span id="__span-9-142"><a id="__codelineno-9-142" name="__codelineno-9-142"></a>}
 </span><span id="__span-9-143"><a id="__codelineno-9-143" name="__codelineno-9-143"></a>
 </span><span id="__span-9-144"><a id="__codelineno-9-144" name="__codelineno-9-144"></a>// Assign cosmosdb account read/write access to aca system assigned identity
-</span><span id="__span-9-145"><a id="__codelineno-9-145" name="__codelineno-9-145"></a>// To know more: https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac
+</span><span id="__span-9-145"><a id="__codelineno-9-145" name="__codelineno-9-145"></a>// To know more: https://learn.microsoft.com/azure/cosmos-db/how-to-setup-rbac
 </span><span id="__span-9-146"><a id="__codelineno-9-146" name="__codelineno-9-146"></a>resource backendApiService_cosmosdb_role_assignment &#39;Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2022-08-15&#39; = {
 </span><span id="__span-9-147"><a id="__codelineno-9-147" name="__codelineno-9-147"></a>  name: guid(subscription().id, backendApiService.name, &#39;00000000-0000-0000-0000-000000000002&#39;)
 </span><span id="__span-9-148"><a id="__codelineno-9-148" name="__codelineno-9-148"></a>  parent: cosmosDbAccount
