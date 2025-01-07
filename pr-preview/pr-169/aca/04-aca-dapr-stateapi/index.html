@@ -2135,7 +2135,14 @@ You need to set the variable name of the <code>$COSMOS_DB_ACCOUNT</code> to a un
 <span class="normal"><a href="#__codelineno-12-38">38</a></span>
 <span class="normal"><a href="#__codelineno-12-39">39</a></span>
 <span class="normal"><a href="#__codelineno-12-40">40</a></span>
-<span class="normal"><a href="#__codelineno-12-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="o">=</span><span class="s2">&quot;cosmos-tasks-tracker-state-store-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
+<span class="normal"><a href="#__codelineno-12-41">41</a></span>
+<span class="normal"><a href="#__codelineno-12-42">42</a></span>
+<span class="normal"><a href="#__codelineno-12-43">43</a></span>
+<span class="normal"><a href="#__codelineno-12-44">44</a></span>
+<span class="normal"><a href="#__codelineno-12-45">45</a></span>
+<span class="normal"><a href="#__codelineno-12-46">46</a></span>
+<span class="normal"><a href="#__codelineno-12-47">47</a></span>
+<span class="normal"><a href="#__codelineno-12-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="o">=</span><span class="s2">&quot;cosmos-tasks-tracker-state-store-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="nv">$COSMOS_DB_DBNAME</span><span class="o">=</span><span class="s2">&quot;tasksmanagerdb&quot;</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="nv">$COSMOS_DB_CONTAINER</span><span class="o">=</span><span class="s2">&quot;taskscollection&quot;</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a>
@@ -2150,36 +2157,43 @@ You need to set the variable name of the <code>$COSMOS_DB_ACCOUNT</code> to a un
 </span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="c1"># Create a Cosmos account for SQL API</span>
 </span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span>az<span class="w"> </span>cosmosdb<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span>--name<span class="w"> </span><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17"></a>
-</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="c1"># Create a SQL API database</span>
-</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">    </span>az<span class="w"> </span>cosmosdb<span class="w"> </span>sql<span class="w"> </span>database<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">    </span>--name<span class="w"> </span><span class="nv">$COSMOS_DB_DBNAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="c1"># Enable local authentication to avoid a 401 when running locally.</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">    </span>az<span class="w"> </span>resource<span class="w"> </span>update<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">    </span>--name<span class="w"> </span><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">    </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="w">    </span>--account-name<span class="w"> </span><span class="nv">$COSMOS_DB_ACCOUNT</span>
-</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23"></a>
-</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="w">    </span><span class="c1"># Create a SQL API container</span>
-</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="w">    </span>az<span class="w"> </span>cosmosdb<span class="w"> </span>sql<span class="w"> </span>container<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="w">    </span>--name<span class="w"> </span><span class="nv">$COSMOS_DB_CONTAINER</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="w">    </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">    </span>--account-name<span class="w"> </span><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">    </span>--database-name<span class="w"> </span><span class="nv">$COSMOS_DB_DBNAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="w">    </span>--partition-key-path<span class="w"> </span><span class="s2">&quot;/id&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">    </span>--throughput<span class="w"> </span><span class="m">400</span>
-</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32"></a>
-</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">    </span><span class="nv">$COSMOS_DB_ENDPOINT</span><span class="o">=(</span>az<span class="w"> </span>cosmosdb<span class="w"> </span>show<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="w">    </span>--name<span class="w"> </span><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">    </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">    </span>--query<span class="w"> </span>documentEndpoint<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="w">    </span>--output<span class="w"> </span>tsv<span class="o">)</span>
-</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38"></a>
-</span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Cosmos DB Endpoint: &quot;</span>
-</span><span id="__span-12-40"><a id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$COSMOS_DB_ENDPOINT</span>
-</span><span id="__span-12-41"><a id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="o">}</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="w">    </span>--resource-type<span class="w"> </span><span class="s2">&quot;Microsoft.DocumentDB/databaseAccounts&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="w">    </span>--set<span class="w"> </span>properties.disableLocalAuth<span class="o">=</span><span class="nb">false</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24"></a>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="w">    </span><span class="c1"># Create a SQL API database</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="w">    </span>az<span class="w"> </span>cosmosdb<span class="w"> </span>sql<span class="w"> </span>database<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="w">    </span>--name<span class="w"> </span><span class="nv">$COSMOS_DB_DBNAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">    </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">    </span>--account-name<span class="w"> </span><span class="nv">$COSMOS_DB_ACCOUNT</span>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30"></a>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">    </span><span class="c1"># Create a SQL API container</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="w">    </span>az<span class="w"> </span>cosmosdb<span class="w"> </span>sql<span class="w"> </span>container<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">    </span>--name<span class="w"> </span><span class="nv">$COSMOS_DB_CONTAINER</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="w">    </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">    </span>--account-name<span class="w"> </span><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">    </span>--database-name<span class="w"> </span><span class="nv">$COSMOS_DB_DBNAME</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="w">    </span>--partition-key-path<span class="w"> </span><span class="s2">&quot;/id&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38"></a><span class="w">    </span>--throughput<span class="w"> </span><span class="m">400</span>
+</span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39"></a>
+</span><span id="__span-12-40"><a id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="w">    </span><span class="nv">$COSMOS_DB_ENDPOINT</span><span class="o">=(</span>az<span class="w"> </span>cosmosdb<span class="w"> </span>show<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-41"><a id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="w">    </span>--name<span class="w"> </span><span class="nv">$COSMOS_DB_ACCOUNT</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-42"><a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="w">    </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-43"><a id="__codelineno-12-43" name="__codelineno-12-43"></a><span class="w">    </span>--query<span class="w"> </span>documentEndpoint<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-12-44"><a id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="w">    </span>--output<span class="w"> </span>tsv<span class="o">)</span>
+</span><span id="__span-12-45"><a id="__codelineno-12-45" name="__codelineno-12-45"></a>
+</span><span id="__span-12-46"><a id="__codelineno-12-46" name="__codelineno-12-46"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Cosmos DB Endpoint: &quot;</span>
+</span><span id="__span-12-47"><a id="__codelineno-12-47" name="__codelineno-12-47"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$COSMOS_DB_ENDPOINT</span>
+</span><span id="__span-12-48"><a id="__codelineno-12-48" name="__codelineno-12-48"></a><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code>primaryMasterKey</code> connection string is only needed for our local testing on the development machine, we'll be using a different approach (<strong>Managed Identities</strong>) when deploying Dapr component to Azure Container Apps Environment.</p>
+<p>The <code>primaryMasterKey</code> connection string is only needed for our local testing on the development machine, we'll be using a different approach (<strong>Managed Identities</strong>) when deploying Dapr component to Azure Container Apps Environment. For this workshop, we are allowing local authentication with the <code>az resource update</code> command above, but this should not be done for production workloads.</p>
 </div>
 <p>Once the scripts execution is completed, we need to get the <code>primaryMasterKey</code> of the Cosmos DB account next. You can do this using the PowerShell script below.
 Copy the value of <code>primaryMasterKey</code> as we will use it in the next step.</p>
