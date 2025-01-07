@@ -1,7 +1,7 @@
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.Extensibility;
 
-namespace TasksTracker.TasksManager.Backend.Svc
+namespace TasksTracker.Processor.Backend.Svc
 {
     public class AppInsightsTelemetryInitializer : ITelemetryInitializer
     {
