@@ -212,12 +212,19 @@ $result = az cosmosdb check-name-exists `
 
 # Continue if the Cosmos DB account does not yet exist
 if ($result -eq "false") {
-    echo "Creating Cosmos DB account..."
+    echo "Creating Cosmos DB account. This may take a few minutes..."
 
     # Create a Cosmos account for SQL API
     az cosmosdb create `
     --name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP
+    --resource-group $RESOURCE_GROUP `
+
+    # Enable local authentication to avoid a 401 when running locally.
+    az resource update `
+    --name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --resource-type "Microsoft.DocumentDB/databaseAccounts" `
+    --set properties.disableLocalAuth=false
 
     # Create a SQL API database
     az cosmosdb sql database create `
@@ -246,7 +253,7 @@ if ($result -eq "false") {
 ```
 
 !!! note
-    The `primaryMasterKey` connection string is only needed for our local testing on the development machine, we'll be using a different approach (**Managed Identities**) when deploying Dapr component to Azure Container Apps Environment.
+    The `primaryMasterKey` connection string is only needed for our local testing on the development machine, we'll be using a different approach (**Managed Identities**) when deploying Dapr component to Azure Container Apps Environment. For this workshop, we are allowing local authentication with the `az resource update` command above, but this should not be done for production workloads.
 
 Once the scripts execution is completed, we need to get the `primaryMasterKey` of the Cosmos DB account next. You can do this using the PowerShell script below.
 Copy the value of `primaryMasterKey` as we will use it in the next step.
@@ -320,6 +327,12 @@ If you have been using the dapr cli commands instead of the aforementioned debug
 
 !!! note "Deprecation Warning"
     components-path is being deprecated in favor of --resources-path. At the time of producing this workshop the --resources-path was not supported yet by the VS code extension. Hence, you will notice the use of the property "componentsPath": "./components" in the tasks.json file. Check the extension documentation in case that has changed.
+
+Run the local frontend UI in the other terminal again:
+
+=== ".NET 8 or above"
+
+    --8<-- "snippets/dapr-run-frontend-webapp.md:basic"
 
 After creating a new record you can navigate to the Data explorer on the [Azure portal](https://portal.azure.com){target=_blank} for the Azure Cosmos DB account. It should look like the image below:
 

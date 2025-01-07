@@ -99,7 +99,7 @@
 
 --8<-- [start:module12]
 
-- Navigate to the root and persist the module to Git.
+Navigate to the root and persist the module to Git.
 
     ```shell
     git add .

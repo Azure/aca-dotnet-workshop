@@ -210,7 +210,7 @@ Update below file in **TasksTracker.Processor.Backend.Svc** project.
 - Let's verify that the Dapr dependency is restored properly and that the project compiles. From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
 
     ```shell
-    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Svc
+    cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
     dotnet build
     ```
 
@@ -356,7 +356,7 @@ az servicebus namespace authorization-rule keys list `
 
 #### 3.2 Create a local Dapr Component file for Pub/Sub API Using Azure Service Bus
 
-We need to add a new [Dapr Azure Service Bus Topic component](https://docs.dapr.io/reference/components-reference/supported-pubsub/setup-azure-servicebus-topics){target=_blank}. Add a new file in the **components** folder as shown below:
+We need to add a new [Dapr Azure Service Bus Topic component](https://docs.dapr.io/reference/components-reference/supported-pubsub/setup-azure-servicebus-topics){target=_blank}. Add a new file in the **components** folder as shown below. Be sure to update the connection string value.
 
 ```yaml title="dapr-pubsub-svcbus.yaml"
 --8<-- "docs/aca/05-aca-dapr-pubsubapi/dapr-pubsub-svcbus.yaml"

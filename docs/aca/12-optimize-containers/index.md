@@ -55,9 +55,9 @@ Our original `Dockerfile` files look like this:
     --8<-- "docs/aca/12-optimize-containers/Frontend.Ui.Dockerfile"
     ```
 
-```shell
-cd ~\TasksTracker.ContainerApps
+From the TasksTracker.ContainerApps directory, run the following commands:
 
+```shell
 docker build -t backend-api-status-quo -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile .
 docker build -t backend-svc-status-quo -f .\TasksTracker.Processor.Backend.Svc\Dockerfile .
 docker build -t frontend-ui-status-quo -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile .
@@ -77,6 +77,8 @@ For example, the Backend API image is comprised of two images, 451 packages, and
 
 The VS Code Docker extension produces a Dockerfile that's helpful for development but not as ideal for creation of production containers. We can significantly simplify and streamline the files (note that `publish` builds for `Release` by default, so we don't need to declare the configuration). These changes do not immediately impact image size yet.
 
+Create three new files, `Dockerfile.concise` in each of their respective directories:
+
 === "Concise Backend.API Dockerfile"
     ```Dockerfile
     --8<-- "docs/aca/12-optimize-containers/Backend.Api.Dockerfile.concise"
@@ -92,7 +94,7 @@ The VS Code Docker extension produces a Dockerfile that's helpful for developmen
     --8<-- "docs/aca/12-optimize-containers/Frontend.Ui.Dockerfile.concise"
     ```
 
-Create three new files, `Dockerfile.concise` in each of their respective directories, then run the following commands from the project root directory to build the concise images. All images will build, but they will continue to essentially be identical to the status quo images.
+Run the following commands from the project root directory to build the concise images. All images will build, but they will continue to essentially be identical to the status quo images.
 
 ```shell
 docker build -t backend-api-concise -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile.concise .\TasksTracker.TasksManager.Backend.Api
@@ -105,6 +107,8 @@ docker image list
 #### 1.3 Chiseled Images
 
 Microsoft and Ubuntu's creator, Canonical, collaborated on the concept of a [chiseled image for .NET](https://learn.microsoft.com/dotnet/core/docker/container-images#scenario-based-images){target=_blank}. Take a general-purpose base image and start chiseling away until you are left with an image that contains nothing more than the bare necessities to run your workload. No shell, no package manager, no bloat.
+
+Create three new files, `Dockerfile.chiseled` in each of their respective directories:
 
 === "Chiseled Backend.API Dockerfile"
     ```Dockerfile
@@ -121,7 +125,7 @@ Microsoft and Ubuntu's creator, Canonical, collaborated on the concept of a [chi
     --8<-- "docs/aca/12-optimize-containers/Frontend.Ui.Dockerfile.chiseled"
     ```
 
-Create three new files, `Dockerfile.chiseled` in each of their respective directories, then run the following commands from the project root directory to build the chiseled images:
+Run the following commands from the project root directory to build the chiseled images:
 
 ```shell
 docker build -t backend-api-chiseled -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile.chiseled .\TasksTracker.TasksManager.Backend.Api
@@ -138,7 +142,6 @@ docker image list
 This image is comprised of one image, 331 packages, and has five vulnerabilities.
 
 ![Backend API Status Quo Image Stats](../../assets/images/12-optimize-containers/backend-api-chiseled-image-stats.png)
-
 
 #### 1.4 Deploying the Updated Images
 
@@ -207,6 +210,8 @@ The Backend API and the Backend Svc projects are all but identical while the Fro
 | Backend Svc Status Quo     |     226 MB |                |                           |      2 |      451 |   25 |
 | Backend Svc Concise        |     226 MB |           0 MB |                           |      2 |      451 |   25 |
 | Backend Svc Chiseled       |     119 MB |         107 MB |                     56.6% |      1 |      328 |    2 |
+
+--8<-- "snippets/persist-state.md:module12"
 
 ## Review
 
