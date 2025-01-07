@@ -59,13 +59,13 @@ To incorporate the SDK, use the NuGet reference below in the `csproj` file of th
         --8<-- "docs/aca/08-aca-monitoring/Backend.Api-dotnet8.csproj"
         ```
 
-    === "TasksTracker.TasksManager.Backend.Svc.csproj"
+    === "TasksTracker.Processor.Backend.Svc.csproj"
 
         ```xml hl_lines="12"
         --8<-- "docs/aca/08-aca-monitoring/Backend.Svc-dotnet8.csproj"
         ```
 
-    === "TasksTracker.TasksManager.Frontend.Ui.csproj"
+    === "TasksTracker.WebPortal.Frontend.Ui.csproj"
 
         ```xml hl_lines="11"
         --8<-- "docs/aca/08-aca-monitoring/Frontend.Ui-dotnet8.csproj"
@@ -79,13 +79,13 @@ To incorporate the SDK, use the NuGet reference below in the `csproj` file of th
         --8<-- "docs/aca/08-aca-monitoring/Backend.Api-dotnet9.csproj"
         ```
 
-    === "TasksTracker.TasksManager.Backend.Svc.csproj"
+    === "TasksTracker.Processor.Backend.Svc.csproj"
 
         ```xml hl_lines="11"
         --8<-- "docs/aca/08-aca-monitoring/Backend.Svc-dotnet9.csproj"
         ```
 
-    === "TasksTracker.TasksManager.Frontend.Ui.csproj"
+    === "TasksTracker.WebPortal.Frontend.Ui.csproj"
 
         ```xml hl_lines="11"
         --8<-- "docs/aca/08-aca-monitoring/Frontend.Ui-dotnet9.csproj"
