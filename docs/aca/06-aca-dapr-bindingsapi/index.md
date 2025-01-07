@@ -378,6 +378,7 @@ Add new files under the **aca-components** use the yaml below:
         - We are setting the property `secretStoreComponent` value to `secretstoreakv` which is the name of Dapr secret store component.
         - We are using `secretRef` when setting the metadata `storageAccessKey`. The value `external-azure-storage-key` represents the AKV secret created earlier
 
+Ensure that you replace `<Your Storage Account Name>` with the value from step 1.1.
 With those changes in place, we are ready to rebuild the backend background processor container image, update Azure Container Apps Env, and redeploy a new revision.
 
 ### 4. Deploy a New Revision of the Backend Background Processor App to ACA
