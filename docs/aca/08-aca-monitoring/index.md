@@ -183,7 +183,7 @@ Next, we need to register this `AppInsightsTelemetryInitializer` class in **Prog
 
 In the previous module, we've used Dapr Secret Store to store connection strings and keys. In this module we will demonstrate how we can use another approach to secrets in Container Apps.
 
-We need to set the Application Insights Instrumentation Key so that the projects are able to send telemetry data to the Application Insights instance. We are going to set this via secrets and environment variables once we redeploy the Container Apps and create new revisions. Locally, we can set it in each appsettings.json file. Obtain the key from the variable:
+We need to set the Application Insights Instrumentation Key so that the projects are able to send telemetry data to the Application Insights instance. We are going to set this via secrets and environment variables once we redeploy the Container Apps and create new revisions. Locally, we can **set it in each appsettings.json** file. Obtain the key from the variable:
 
 ```shell
 $APPINSIGHTS_INSTRUMENTATIONKEY
