@@ -9,11 +9,15 @@ nav_order: 4
 
 The workshop is divided into separate modules. Each module will guide you through building the solution code step-by-step. Ensure that you finish the modules in the right order as they have dependencies on each other.
 
+!!! note
+    Please follow these prerequisites exactly. We understand you have many choices in tooling and personal preferences. However, adhering closely to the workshop's approach increases the likelihood of your success with these labs.
+
 Make sure you have your development environment set up and configured.
 
 1. An Azure account with an active subscription - [Create an account for free](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio){target=_blank}
 1. .NET SDK 8 or a higher version (we primarily focus on LTS versions) - [Install](https://dotnet.microsoft.com/download){target=_blank}
 1. PowerShell 7.0 or higher version (For Windows Users only!) - [Install](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
+   > [Do not use PowerShell 5.1!](https://github.com/Azure/aca-dotnet-workshop/issues/150){target=_blank}
 1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/){target=_blank}
    > As of November 2024, Docker Desktop continues to be free for education purposes. Please consult the [Docker Desktop license agreement](https://docs.docker.com/subscription/desktop-license/) for any updates.
 1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}
@@ -30,7 +34,7 @@ Make sure you have your development environment set up and configured.
 
 This workshop typically spans several days. As such, you may close your tools, end CLI sessions, reboot, or simply want to persist working implementations in a repository as each module builds upon the one before it. A local Git repository can help.
 
-- Open a command-line terminal and create a folder for your project, then switch to that folder.
+- Open a command-line terminal and create this folder for the workshop, then switch to that folder.
 
     === "Windows"
         ```shell
