@@ -1,0 +1,43 @@
+﻿@page 
+@model TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks.IndexModel
+@{
+}
+
+<h1>Tasks Manager</h1>
+@if (!String.IsNullOrEmpty(Model.TasksCreatedBy)) {
+    <h4>Tasks for (@Model.TasksCreatedBy)</h4>
+}
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Due Date</th>
+                <th>Assigned To</th>
+                <th>Completed</th>
+                <th>Overdue</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.TasksList != null)
+            {
+                foreach (var task in Model.TasksList)
+                {
+                    <tr>
+                        <td><a asp-page="./Edit" asp-route-id="@task.TaskId">@task.TaskName</a></td>
+                        <td>@task.TaskDueDate.Date.ToString("dd-MM-yyyy")</td>
+                        <td>@task.TaskAssignedTo</td>
+                        <td>@Html.CheckBox("IsCompleted",@task.IsCompleted)</td>
+                        <td>@Html.CheckBox("IsOverDue",@task.IsOverDue)</td>
+                        <td>
+                            <button type="submit" asp-page-handler="complete" asp-route-id="@task.TaskId">Complete</button>
+                            <button type="submit" asp-page-handler="delete" asp-route-id="@task.TaskId">Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <a asp-page="Create">Create New</a>
+</form>
