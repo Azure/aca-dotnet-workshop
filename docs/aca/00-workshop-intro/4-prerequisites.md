@@ -19,6 +19,7 @@ Make sure you have your development environment set up and configured.
 1. PowerShell 7.0 or higher version (For Windows Users only!) - [Install](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4#installing-the-msi-package){target=_blank}
    > [Do not use PowerShell 5.1!](https://github.com/Azure/aca-dotnet-workshop/issues/150){target=_blank}
    > If you are unsure which version of PowerShell is running, you can execute `$PSVersionTable.PSVersion` in a PowerShell terminal.
+1. On Windows, please [ensure that Hyper-V is enabled](https://learn.microsoft.com/virtualization/windowscontainers/deploy-containers/linux-containers){target=_blank} to run Linux containers in Docker.
 1. Docker Desktop - [Install](https://docs.docker.com/desktop/install/windows-install/){target=_blank}
    > As of November 2024, Docker Desktop continues to be free for education purposes. Please consult the [Docker Desktop license agreement](https://docs.docker.com/subscription/desktop-license/) for any updates.
 1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}
