@@ -24,7 +24,7 @@ Make sure you have your development environment set up and configured.
    > As of November 2024, Docker Desktop continues to be free for education purposes. Please consult the [Docker Desktop license agreement](https://docs.docker.com/subscription/desktop-license/) for any updates.
 1. Visual Studio Code - [Install](https://code.visualstudio.com/){target=_blank}
 1. VS Code Docker extension - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker){target=_blank}
-1. Dapr CLI - [Install](https://docs.dapr.io/getting-started/install-dapr-cli/){target=_blank} and [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/){target=_blank}
+1. Dapr CLI - [Install](https://docs.dapr.io/getting-started/install-dapr-cli/){target=_blank} and [Initialize](https://docs.dapr.io/getting-started/install-dapr-selfhost/){target=_blank}(`dapr init`, not `dapr init --slim`, as we need configuration and containers in place)
 1. VS Code Dapr extension. Depends on Dapr CLI - [Install](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-dapr){target=_blank}
 1. Azure CLI - [Install](https://docs.microsoft.com/cli/azure/install-azure-cli){target=_blank}
 1. Git CLI - [Install](https://git-scm.com){target=_blank}
