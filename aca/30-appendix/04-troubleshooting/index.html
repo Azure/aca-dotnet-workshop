@@ -18,17 +18,13 @@
 
     <!-- Canonical -->
     
-        <link rel="canonical" href="https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/">
-    
 
     <!-- Previous page -->
     
-        <link rel="prev" href="../" />
+        <link rel="prev" href="../03-variables/" />
     
 
     <!-- Next page -->
-    
-        <link rel="next" href="../2-scenario-architecture/" />
     
 
     <!-- Favicon -->
@@ -42,7 +38,7 @@
 
     
       
-        <title>ACA Core Components Overview - Azure Container Apps - Workshop</title>
+        <title>Troubleshooting - Azure Container Apps - Workshop</title>
       
     
     
@@ -88,8 +84,6 @@
     
     
     
-        <meta name="og:url" content="https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/" />
-    
 
    <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
@@ -119,7 +113,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview-of-azure-container-apps-core-components" class="md-skip">
+        <a href="#troubleshooting" class="md-skip">
           Skip to content
         </a>
       
@@ -154,7 +148,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ACA Core Components Overview
+              Troubleshooting
             
           </span>
         </div>
@@ -313,8 +307,6 @@
       
   
   
-    
-  
   
   
     
@@ -335,16 +327,16 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../00-workshop-intro/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -361,7 +353,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Workshop Introduction
@@ -374,28 +366,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    ACA Core Components Overview
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../00-workshop-intro/1-aca-core-components/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -404,33 +378,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview-of-azure-container-apps-core-components" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview of Azure Container Apps Core Components
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -443,7 +390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2-scenario-architecture/" class="md-nav__link">
+      <a href="../../00-workshop-intro/2-scenario-architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -464,7 +411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3-dapr-integration/" class="md-nav__link">
+      <a href="../../00-workshop-intro/3-dapr-integration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -485,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../4-prerequisites/" class="md-nav__link">
+      <a href="../../00-workshop-intro/4-prerequisites/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -877,8 +824,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -893,11 +842,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" checked>
         
           
           <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
@@ -911,7 +860,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             Appendix
@@ -925,7 +874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../30-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
+      <a href="../01-run-debug-dapr-app-vscode/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -946,7 +895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../30-appendix/02-github-local-codespaces/" class="md-nav__link">
+      <a href="../02-github-local-codespaces/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -967,7 +916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../30-appendix/03-variables/" class="md-nav__link">
+      <a href="../03-variables/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -985,10 +934,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../30-appendix/04-troubleshooting/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -997,6 +964,63 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dapr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dapr
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dapr">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#err_direct_invoke" class="md-nav__link">
+    <span class="md-ellipsis">
+      ERR_DIRECT_INVOKE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1034,11 +1058,41 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview-of-azure-container-apps-core-components" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview of Azure Container Apps Core Components
+      Troubleshooting
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dapr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dapr
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dapr">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#err_direct_invoke" class="md-nav__link">
+    <span class="md-ellipsis">
+      ERR_DIRECT_INVOKE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1060,33 +1114,18 @@
   
 
 
-  <h1>ACA Core Components Overview</h1>
+  <h1>Troubleshooting</h1>
 
-<h2 id="overview-of-azure-container-apps-core-components">Overview of Azure Container Apps Core Components<a class="headerlink" href="#overview-of-azure-container-apps-core-components" title="Permanent link">&para;</a></h2>
-<p>The main components of Azure Container Apps are:</p>
-<p><a class="glightbox" href="../../../assets/images/00-workshop-intro/ACA-Tutorial-ACA-Components.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Azure Container Apps main components" src="../../../assets/images/00-workshop-intro/ACA-Tutorial-ACA-Components.jpg" /></a></p>
-<ol>
-<li>
-<p><strong>Environments</strong>
-The Container App Environment is a secure boundary around several Container Apps. It contains one or more container apps. All container apps within an environment are deployed into a dedicated Azure Virtual Network, which makes it possible for these different container apps to communicate securely. In addition, all the logs produced from all container apps in the environment are sent to a dedicated Log Analytics workspace.</p>
-</li>
-<li>
-<p><strong>Log Analytics workspace</strong>
-Used to provide monitoring and observability functionality. Each environment will have its own Log Analytics workspace and will be shared among all container apps within the environment.</p>
-</li>
-<li>
-<p><strong>Container Apps</strong>
-Each container App represents a single deployable unit that can contain one or more related containers. Using more than one container in a container app is an advanced use case. For this workshop we will deploy a single container in each container app. More about multiple containers in the same single Azure Container App can be found <a href="https://docs.microsoft.com/azure/container-apps/containers#multiple-containers" target="_blank">here</a>.</p>
-</li>
-<li>
-<p><strong>Revisions</strong>
-For each container app, you can create up to 100 revisions. Revisions are a way to deploy multiple versions of an app where you have the option to send the traffic to a certain revision. You can select if revision mode will support one or multiple active revisions at the same time to support A/B testing scenarios or canary deployments. A container app running in single revision mode will have a single revision that is backed by zero-many Pods/replicas.</p>
-</li>
-<li>
-<p><strong>Containers</strong>
-Containers in the Azure Container Apps are grouped together in pods/replicas inside revision snapshots. A pod/replica is composed of the application container and any required sidecar containers. Containers can be deployed from any public or private container registry, and they support any Linux-based x86-64 (linux/amd64) images. At the time of creating this workshop Windows based images are not supported.</p>
-</li>
-</ol>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p>You may encounter some challenges while progressing through this workshop. Please <a href="https://github.com/Azure/aca-dotnet-workshop/issues?q=is%3Aissue" target="_blank">update or create an issue</a> to help us resolutions below. Thank you!</p>
+<h3 id="dapr">Dapr<a class="headerlink" href="#dapr" title="Permanent link">&para;</a></h3>
+<h4 id="err_direct_invoke">ERR_DIRECT_INVOKE<a class="headerlink" href="#err_direct_invoke" title="Permanent link">&para;</a></h4>
+<p><a class="glightbox" href="../../../assets/images/appendix/dapr-err-direct-invoke.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="dapr-vscode-extension" src="../../../assets/images/appendix/dapr-err-direct-invoke.png" /></a></p>
+<p>If you encounter an <code>ERR_DIRECT_INVOKE</code> error with Dapr, check that ...</p>
+<ul>
+<li>You have <a href="../../00-workshop-intro/4-prerequisites/" target="_blank">installed and initialized Dapr</a>, and</li>
+<li>You do not have a restrictive VPN or firewall running.</li>
+</ul>
 
 
 
@@ -1147,7 +1186,7 @@ Containers in the Azure Container Apps are grouped together in pods/replicas ins
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction">
+          <a href="../03-variables/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Variables">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1157,27 +1196,11 @@ Containers in the Azure Container Apps are grouped together in pods/replicas ins
                 Previous
               </span>
               <div class="md-ellipsis">
-                Introduction
+                Variables
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../2-scenario-architecture/" class="md-footer__link md-footer__link--next" aria-label="Next: Scenario and Solution Architecture">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Scenario and Solution Architecture
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
