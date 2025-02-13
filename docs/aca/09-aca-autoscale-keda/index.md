@@ -1,5 +1,5 @@
 ---
-canonical_url: https://bitoftech.net/2022/09/22/azure-container-apps-auto-scaling-with-keda-part-11/
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
 ---
 
 # Module 9 - ACA Auto Scaling with KEDA
@@ -76,21 +76,38 @@ Azure Container Apps has its own proprietary schema to map a KEDA Scaler templat
 
 Let's now create a secret named `svcbus-connstring` in our `tasksmanager-backend-processor` Container App. This secret will contain the value of Azure Service Bus shared access policy (connection string) with `Manage` policy. To accomplish this, run the following commands in the Azure CLI to get the connection string, and then add this secret using the second command:
 
-```shell
-# List Service Bus Access Policy RootManageSharedAccessKey
-$SERVICE_BUS_CONNECTION_STRING = az servicebus namespace authorization-rule keys list `
---name RootManageSharedAccessKey `
---resource-group $RESOURCE_GROUP `
---namespace-name $SERVICE_BUS_NAMESPACE_NAME `
---query primaryConnectionString `
---output tsv
+=== "PowerShell"
+    ```shell
+    # List Service Bus Access Policy RootManageSharedAccessKey
+    $SERVICE_BUS_CONNECTION_STRING = az servicebus namespace authorization-rule keys list `
+    --name RootManageSharedAccessKey `
+    --resource-group $RESOURCE_GROUP `
+    --namespace-name $SERVICE_BUS_NAMESPACE_NAME `
+    --query primaryConnectionString `
+    --output tsv
 
-# Create a new secret named 'svcbus-connstring' in backend processer container app
-az containerapp secret set `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
-```
+    # Create a new secret named 'svcbus-connstring' in backend processor container app
+    az containerapp secret set `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
+    ```
+=== "Bash"
+    ```shell
+    # List Service Bus Access Policy RootManageSharedAccessKey
+    export SERVICE_BUS_CONNECTION_STRING=$(az servicebus namespace authorization-rule keys list \
+      --name RootManageSharedAccessKey \
+      --resource-group $RESOURCE_GROUP \
+      --namespace-name $SERVICE_BUS_NAMESPACE_NAME \
+      --query primaryConnectionString \
+      --output tsv)
+
+    # Create a new secret named 'svcbus-connstring' in backend processor container app
+    az containerapp secret set \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
+    ```
 
 #### 2. Create a Custom Scaling Rule from Azure CLI
 
@@ -99,22 +116,40 @@ Now we are ready to add a new custom scaling rule to match the business requirem
 !!! note
     You might need to upgrade the extension if you are on an older version of `az containerapp` which didn't allow you to create a scaling rule from CLI. To update the extension you can run the following command `az extension update --name containerapp` inside your PowerShell terminal.
 
-```shell
-az containerapp update `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---min-replicas 1 `
---max-replicas 5 `
---revision-suffix v$TODAY-6 `
---scale-rule-name "topic-msgs-length" `
---scale-rule-type "azure-servicebus" `
---scale-rule-auth "connection=svcbus-connstring" `
---scale-rule-metadata "topicName=$SERVICE_BUS_TOPIC_NAME" `
-                        "subscriptionName=$SERVICE_BUS_TOPIC_SUBSCRIPTION" `
-                        "namespace=$SERVICE_BUS_NAMESPACE_NAME" `
-                        "messageCount=10" `
+=== "PowerShell"
+    ```shell
+    az containerapp update `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --min-replicas 1 `
+    --max-replicas 5 `
+    --revision-suffix v$TODAY-6 `
+    --scale-rule-name "topic-msgs-length" `
+    --scale-rule-type "azure-servicebus" `
+    --scale-rule-auth "connection=svcbus-connstring" `
+    --scale-rule-metadata "topicName=$SERVICE_BUS_TOPIC_NAME" `
+                            "subscriptionName=$SERVICE_BUS_TOPIC_SUBSCRIPTION" `
+                            "namespace=$SERVICE_BUS_NAMESPACE_NAME" `
+                            "messageCount=10" `
+                            "connectionFromEnv=svcbus-connstring"
+    ```
+=== "Bash"
+    ```shell
+    az containerapp update \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --min-replicas 1 \
+      --max-replicas 5 \
+      --revision-suffix v$TODAY-6 \
+      --scale-rule-name "topic-msgs-length" \
+      --scale-rule-type "azure-servicebus" \
+      --scale-rule-auth "connection=svcbus-connstring" \
+      --scale-rule-metadata "topicName=$SERVICE_BUS_TOPIC_NAME" \
+                        "subscriptionName=$SERVICE_BUS_TOPIC_SUBSCRIPTION" \
+                        "namespace=$SERVICE_BUS_NAMESPACE_NAME" \
+                        "messageCount=10" \
                         "connectionFromEnv=svcbus-connstring"
-```
+    ```
 
 ??? info "Curious to learn more about the different parameters passed to the `az containerapp update` command?"
     - Setting the minimum number of replicas to `1`. This means that this Container App could be scaled-in to a single replica if there are no new messages on the topic.
@@ -138,12 +173,20 @@ az containerapp update `
 Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize the Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.
 To get the number of current replicas of service `tasksmanager-backend-processor` we could run the command below, this should run single replica as we didn't load the service bus topic yet.
 
-```shell
-az containerapp replica list `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---query [].name
-```
+=== "PowerShell"
+    ```shell
+    az containerapp replica list `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --query [].name
+    ```
+=== "Bash"
+    ```shell
+    az containerapp replica list \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --query "[].name"
+    ```
 
 The message structure our backend processor expects is similar to the JSON shown below. So copy this message and click on `Send messages` button, paste the message content, set the content type to `application/json`, check the `Repeat Send` check box, select `10000` messages and put an interval of `1ms` between them. This ensures that we are sending high volume at short intervals, so that the single replica container app cannot absorb and process quickly enough and will consequently need to scale out. Finally click `Send` when you are ready.
 

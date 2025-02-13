@@ -1,5 +1,5 @@
 ---
-canonical_url: https://bitoftech.net/2022/08/29/dapr-integration-with-azure-container-apps/
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
 ---
 
 # Module 3 - Dapr Integration with ACA
@@ -48,20 +48,31 @@ You are now ready to run the applications locally using the Dapr sidecar in a se
 
 - Let's start by capturing the UI and API localhost ports:
 
+=== "PowerShell"
     ```shell
     $API_APP_PORT=<web api https port in Properties->launchSettings.json (e.g. 7112)>
     $UI_APP_PORT=<web ui https port in Properties->launchSettings.json (e.g. 7000)>
     ```
+=== "Bash"
+    ```shell
+    export API_APP_PORT=<web api https port in Properties->launchSettings.json (e.g. 7112)>
+    export UI_APP_PORT=<web ui https port in Properties->launchSettings.json (e.g. 7000)>
+    ```
 
-    !!! note
-        Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.
+!!! note
+    Remember to replace the placeholders with your own values based on image below. Remember to use https port number for the Web API application.
 
-    ![app-port](../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png)
+![app-port](../../assets/images/03-aca-dapr-integration/self_hosted_dapr_app-port.png)
 
 - Now that we know the `UI_APP_PORT`, we can also declare the local frontend UI URL:
 
+=== "PowerShell"
     ```shell
     $FRONTEND_UI_BASE_URL_LOCAL="https://localhost:$UI_APP_PORT"
+    ```
+=== "Bash"
+    ```shell
+    export FRONTEND_UI_BASE_URL_LOCAL="https://localhost:$UI_APP_PORT"
     ```
 
 --8<-- "snippets/update-variables.md::1"
@@ -196,12 +207,26 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 
 - Open another terminal inside VS Code, so that we can run the two commands shown below (ensure that you are on the right project directory when running each command).
 
-- In the second terminal, run `.\Variables.ps1` to apply all session variables.
+- In the second terminal, run the variables script to load session variables:
+
+=== "PowerShell"
+    ```shell
+    .\Variables.ps1
+    ```
+=== "Bash"
+    ```shell
+    . ./variables.sh
+    ```
 
 - Obtain the local frontend UI URL to test shortly once the frontend UI and backend API are running in the next step.
-
+    
+=== "PowerShell"
     ```shell
     $FRONTEND_UI_BASE_URL_LOCAL
+    ```
+=== "Bash"
+    ```shell
+    echo $FRONTEND_UI_BASE_URL_LOCAL
     ```
 
 - In each of the two terminals previously opened, run the frontend UI and backend API respectively.
@@ -222,9 +247,9 @@ We are ready now to verify the changes on the Frontend Web App and test locally.
 !!! success
     Now both Applications are running using Dapr sidecar. Note how ports 3500 and 3501 are used when starting the container apps. These ports instruct the container runtime to communicate with the Dapr sidecar, whereas the https ports from the appsettings files are the ports you use to launch the application locally. Open the local frontend UI URL (use `$FRONTEND_UI_BASE_URL_LOCAL` from step 2.4), ignore the certificate warning locally, then provide an email to load the tasks for the user (e.g. `tjoudeh@bitoftech.net`). If the application is working as expected you should see tasks list associated with the email you provided.
 
-- Close the sessions and navigate to the root.
+- Close the dapr sessions.
 
---8<-- "snippets/update-variables.md:7:12"
+--8<-- "snippets/update-variables.md"
 --8<-- "snippets/persist-state.md:module3"
 
 ## Review

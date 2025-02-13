@@ -1,5 +1,5 @@
 ---
-canonical_url: https://bitoftech.net/2022/09/02/azure-container-apps-async-communication-with-dapr-pub-sub-api-part-6/
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
 ---
 
 # Module 5 - ACA Async Communication with Dapr Pub/Sub API
@@ -98,8 +98,11 @@ Now we will add a new ASP.NET Core Web API project named **TasksTracker.Processo
 
     As our workshop takes advantage of microservices, the use case for minimal APIs is given. However, in order to make the workshop a bit more demonstrable, we will, for now, stick with controller-based APIs.
 
-=== ".NET 8 or above"
-
+=== "PowerShell"
+    ```shell
+    dotnet new webapi --use-controllers -o TasksTracker.Processor.Backend.Svc
+    ```
+=== "Bash"
     ```shell
     dotnet new webapi --use-controllers -o TasksTracker.Processor.Backend.Svc
     ```
@@ -207,10 +210,17 @@ Update below file in **TasksTracker.Processor.Backend.Svc** project.
         --8<-- "docs/aca/05-aca-dapr-pubsubapi/Program-dotnet9.cs"
         ```
 
-- Let's verify that the Dapr dependency is restored properly and that the project compiles. From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
+- Let's verify that the Dapr dependency is restored properly and that the project compiles. From VS Code Terminal tab, open a new developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
 
+=== "PowerShell"    
     ```shell
     cd ~\TasksTracker.ContainerApps\TasksTracker.Processor.Backend.Svc
+    dotnet build
+    ```
+=== "Bash"
+    ```shell
+    # the PROJECT_ROOT variable is not yet set in the new terminal so you need to manually move into your project's root folder eg.
+    cd ~/TasksTracker.ContainerApps/TasksTracker.Processor.Backend.Svc
     dotnet build
     ```
 
@@ -227,15 +237,24 @@ Update below file in **TasksTracker.Processor.Backend.Svc** project.
 
 With all those bits in place, we are ready to run the publisher service `Backend API` and the consumer service `Backend Background Service` and test Pub/Sub pattern end to end.
 
-```shell
-$BACKEND_SERVICE_APP_PORT=<backend service https port in Properties->launchSettings.json (e.g. 7051)>
-```
+=== "PowerShell"
+    ```shell
+    $BACKEND_SERVICE_APP_PORT=<backend service https port in Properties->launchSettings.json (e.g. 7051)>
+    ```
+=== "Bash"
+    ```shell
+    export BACKEND_SERVICE_APP_PORT=<backend service https port in Properties->launchSettings.json (e.g. 7051)>
+    ```
 
---8<-- "snippets/update-variables.md::5"
+First let's update our variable file with our new variable and restore the rest of the variables.
 
-To do so, run the below commands in two separate PowerShell console, ensure you are on the right root folder of each respective project.
+--8<-- "snippets/update-variables.md:2:13"
 
---8<-- "snippets/restore-variables.md:7:11"
+We then update the variables using the below commands in the two open separate consoles, ensure you are on the right root folder of each respective project.
+
+--8<-- "snippets/restore-variables.md:16:23"
+
+Now let's run the projects directly with the `dapr` command.
 
 === ".NET 8 or above"
 
@@ -310,7 +329,8 @@ To do this, update below file under the project **TasksTracker.TasksManager.Back
 
 This is a good opportunity to save intermediately:
 
---8<-- "snippets/update-variables.md:7:12"
+--8<-- "snippets/update-variables.md:2:13"
+
 --8<-- "snippets/persist-state.md:module51"
 
 ***
@@ -324,32 +344,60 @@ Now we will switch our implementation to use Azure Service Bus as a message brok
 You can do this from [Azure portal](https://portal.azure.com){target=_blank} or use the below PowerShell command to create the services. We will assume you are using the same PowerShell session from the previous module so variables still hold the right values.
 You need to change the namespace variable as this one should be unique globally across all Azure subscriptions. Also, you will notice that we are opting for standard sku (default if not passed) as topics only available on the standard tier not and not on the basic tier. More details can be found [here](https://learn.microsoft.com/cli/azure/servicebus/namespace?view=azure-cli-latest#az-servicebus-namespace-create-optional-parameters){target=_blank}.
 
-```shell
-$SERVICE_BUS_NAMESPACE_NAME="sbns-taskstracker-$RANDOM_STRING"
-$SERVICE_BUS_TOPIC_NAME="tasksavedtopic"
-$SERVICE_BUS_TOPIC_SUBSCRIPTION="sbts-tasks-processor"
+=== "PowerShell"
+    ```shell
+    $SERVICE_BUS_NAMESPACE_NAME="sbns-taskstracker-$RANDOM_STRING"
+    $SERVICE_BUS_TOPIC_NAME="tasksavedtopic"
+    $SERVICE_BUS_TOPIC_SUBSCRIPTION="sbts-tasks-processor"
 
-# Create servicebus namespace
-az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICE_BUS_NAMESPACE_NAME --location $LOCATION --sku Standard
+    # Create servicebus namespace
+    az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICE_BUS_NAMESPACE_NAME --location $LOCATION --sku Standard
 
-# Create a topic under the namespace
-az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $SERVICE_BUS_NAMESPACE_NAME --name $SERVICE_BUS_TOPIC_NAME
+    # Create a topic under the namespace
+    az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $SERVICE_BUS_NAMESPACE_NAME --name $SERVICE_BUS_TOPIC_NAME
 
-# Create a topic subscription
-az servicebus topic subscription create `
---resource-group $RESOURCE_GROUP `
---namespace-name $SERVICE_BUS_NAMESPACE_NAME `
---topic-name $SERVICE_BUS_TOPIC_NAME `
---name $SERVICE_BUS_TOPIC_SUBSCRIPTION
+    # Create a topic subscription
+    az servicebus topic subscription create `
+    --resource-group $RESOURCE_GROUP `
+    --namespace-name $SERVICE_BUS_NAMESPACE_NAME `
+    --topic-name $SERVICE_BUS_TOPIC_NAME `
+    --name $SERVICE_BUS_TOPIC_SUBSCRIPTION
 
-# List connection string
-az servicebus namespace authorization-rule keys list `
---resource-group $RESOURCE_GROUP `
---namespace-name $SERVICE_BUS_NAMESPACE_NAME `
---name RootManageSharedAccessKey `
---query primaryConnectionString `
---output tsv
-```
+    # List connection string
+    az servicebus namespace authorization-rule keys list `
+    --resource-group $RESOURCE_GROUP `
+    --namespace-name $SERVICE_BUS_NAMESPACE_NAME `
+    --name RootManageSharedAccessKey `
+    --query primaryConnectionString `
+    --output tsv
+    ```
+=== "Bash"
+    ```shell
+    export SERVICE_BUS_NAMESPACE_NAME="sbns-taskstracker-$RANDOM_STRING"
+    export SERVICE_BUS_TOPIC_NAME="tasksavedtopic"
+    export SERVICE_BUS_TOPIC_SUBSCRIPTION="sbts-tasks-processor"
+
+    # Create servicebus namespace
+    az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICE_BUS_NAMESPACE_NAME --location $LOCATION --sku Standard
+
+    # Create a topic under the namespace
+    az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $SERVICE_BUS_NAMESPACE_NAME --name $SERVICE_BUS_TOPIC_NAME
+
+    # Create a topic subscription
+    az servicebus topic subscription create \
+      --resource-group $RESOURCE_GROUP \
+      --namespace-name $SERVICE_BUS_NAMESPACE_NAME \
+      --topic-name $SERVICE_BUS_TOPIC_NAME \
+      --name $SERVICE_BUS_TOPIC_SUBSCRIPTION
+
+    # List connection string
+    az servicebus namespace authorization-rule keys list \
+      --resource-group $RESOURCE_GROUP \
+      --namespace-name $SERVICE_BUS_NAMESPACE_NAME \
+      --name RootManageSharedAccessKey \
+      --query primaryConnectionString \
+      --output tsv
+    ```
 
 !!! note
     Primary connection string is only needed for local dev testing. We will be using Managed Identities when publishing container apps to ACA.
@@ -429,19 +477,34 @@ As we have done previously we need to build and deploy both app images to ACR, s
 !!! note
     Make sure you are in root directory of the project, i.e. **TasksTracker.ContainerApps**
 
-```shell
-$BACKEND_SERVICE_NAME="tasksmanager-backend-processor"
+=== "PowerShell"
+    ```shell
+    $BACKEND_SERVICE_NAME="tasksmanager-backend-processor"
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_API_NAME" `
+    --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_SERVICE_NAME" `
---file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
-```
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_SERVICE_NAME" `
+    --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+    ```
+=== "Bash"
+    ```shell
+    export BACKEND_SERVICE_NAME="tasksmanager-backend-processor"
+
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$BACKEND_API_NAME" \
+      --file "TasksTracker.TasksManager.Backend.Api/Dockerfile" .
+
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$BACKEND_SERVICE_NAME" \
+      --file "TasksTracker.Processor.Backend.Svc/Dockerfile" .
+    ```
 
 #### 4.2 Create a new Azure Container App to host the new Backend Background Processor
 
@@ -455,45 +518,80 @@ To achieve the above, run the PowerShell script below.
 !!! note
     Notice how we removed the Ingress property totally which disables the Ingress for this Container App.
 
-```shell
-az containerapp create `
---name "$BACKEND_SERVICE_NAME"  `
---resource-group $RESOURCE_GROUP `
---environment $ENVIRONMENT `
---image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
---registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
---min-replicas 1 `
---max-replicas 1 `
---cpu 0.25 `
---memory 0.5Gi `
---enable-dapr `
---dapr-app-id $BACKEND_SERVICE_NAME `
---dapr-app-port $TARGET_PORT
-```
+=== "PowerShell"
+    ```shell
+    az containerapp create `
+    --name "$BACKEND_SERVICE_NAME"  `
+    --resource-group $RESOURCE_GROUP `
+    --environment $ENVIRONMENT `
+    --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" `
+    --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
+    --min-replicas 1 `
+    --max-replicas 1 `
+    --cpu 0.25 `
+    --memory 0.5Gi `
+    --enable-dapr `
+    --dapr-app-id $BACKEND_SERVICE_NAME `
+    --dapr-app-port $TARGET_PORT
+    ```
+=== "Bash"
+    ```shell
+    az containerapp create \
+      --name "$BACKEND_SERVICE_NAME"  \
+      --resource-group $RESOURCE_GROUP \
+      --environment $ENVIRONMENT \
+      --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_SERVICE_NAME" \
+      --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" \
+      --min-replicas 1 \
+      --max-replicas 1 \
+      --cpu 0.25 \
+      --memory 0.5Gi \
+      --enable-dapr \
+      --dapr-app-id $BACKEND_SERVICE_NAME \
+      --dapr-app-port $TARGET_PORT
+    ```
 
 #### 4.3 Deploy New Revisions of the Backend API to Azure Container Apps
 
 We need to update the Azure Container App hosting the Backend API with a new revision so our code changes for publishing messages after a task is saved is available for users.
 
-```shell
-# Update Backend API App container app and create a new revision
-az containerapp update `
---name $BACKEND_API_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-2
-```
+=== "PowerShell"
+    ```shell
+    # Update Backend API App container app and create a new revision
+    az containerapp update `
+    --name $BACKEND_API_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-2
+    ```
+=== "Bash"
+    ```shell
+    # Update Backend API App container app and create a new revision
+    az containerapp update \
+      --name $BACKEND_API_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --revision-suffix v$TODAY-2
+    ```
 
 #### 4.4 Add Azure Service Bus Dapr Pub/Sub Component to Azure Container Apps Environment
 
 Deploy the Dapr Pub/Sub Component to the Azure Container Apps Environment using the following command:
 
-```shell
-az containerapp env dapr-component set `
---name $ENVIRONMENT `
---resource-group $RESOURCE_GROUP `
---dapr-component-name dapr-pubsub-servicebus `
---yaml '.\aca-components\containerapps-pubsub-svcbus.yaml'
-```
+=== "PowerShell"
+    ```shell
+    az containerapp env dapr-component set `
+    --name $ENVIRONMENT `
+    --resource-group $RESOURCE_GROUP `
+    --dapr-component-name dapr-pubsub-servicebus `
+    --yaml '.\aca-components\containerapps-pubsub-svcbus.yaml'
+    ```
+=== "Bash"
+    ```shell
+    az containerapp env dapr-component set \
+      --name $ENVIRONMENT \
+      --resource-group $RESOURCE_GROUP \
+      --dapr-component-name dapr-pubsub-servicebus \
+      --yaml './aca-components/containerapps-pubsub-svcbus.yaml'
+    ```
 
 !!! note
     Notice that we set the component name `dapr-pubsub-servicebus` when we added it to the Container Apps Environment.
@@ -506,18 +604,32 @@ In the previous module we have [already configured](../04-aca-dapr-stateapi/inde
 
 Run the command below to create `system-assigned` identity for our Backend Processor App:
 
-```shell
-az containerapp identity assign `
---resource-group $RESOURCE_GROUP `
---name $BACKEND_SERVICE_NAME `
---system-assigned
+=== "PowerShell"
+    ```shell
+    az containerapp identity assign `
+    --resource-group $RESOURCE_GROUP `
+    --name $BACKEND_SERVICE_NAME `
+    --system-assigned
 
-$BACKEND_SVC_PRINCIPAL_ID=(az containerapp identity show `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---query principalId `
---output tsv)
-```
+    $BACKEND_SVC_PRINCIPAL_ID=(az containerapp identity show `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --query principalId `
+    --output tsv)
+    ```
+=== "Bash"
+    ```shell
+    az containerapp identity assign \
+      --resource-group $RESOURCE_GROUP \
+      --name $BACKEND_SERVICE_NAME \
+      --system-assigned
+
+    export BACKEND_SVC_PRINCIPAL_ID=$(az containerapp identity show \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --query principalId \
+      --output tsv)
+    ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be as the below, keep a note of the property `principalId` as we are going to use it in the next step.
 
@@ -537,27 +649,47 @@ You can read more about `Azure built-in roles for Azure Service Bus` [here](http
 
 Run the command below to associate the `system-assigned` identity with the access-control role `Azure Service Bus Data Receiver`:
 
-```shell
-$SVC_BUS_DATA_RECEIVER_ROLE = "Azure Service Bus Data Receiver" # Built in role name
+=== "PowerShell"
+    ```shell
+    $SVC_BUS_DATA_RECEIVER_ROLE = "Azure Service Bus Data Receiver" # Built in role name
 
-az role assignment create `
---assignee $BACKEND_SVC_PRINCIPAL_ID `
---role $SVC_BUS_DATA_RECEIVER_ROLE `
---scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME/topics/$SERVICE_BUS_TOPIC_NAME
-```
+    az role assignment create `
+    --assignee $BACKEND_SVC_PRINCIPAL_ID `
+    --role $SVC_BUS_DATA_RECEIVER_ROLE `
+    --scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME/topics/$SERVICE_BUS_TOPIC_NAME
+    ```
+=== "Bash"
+    ```shell
+    export SVC_BUS_DATA_RECEIVER_ROLE="Azure Service Bus Data Receiver" # Built in role name
+
+    az role assignment create \
+      --assignee $BACKEND_SVC_PRINCIPAL_ID \
+      --role "$SVC_BUS_DATA_RECEIVER_ROLE" \
+      --scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME/topics/$SERVICE_BUS_TOPIC_NAME
+    ```
 
 #### 5.3 Grant Backend API App the Azure Service Bus Data Sender Role
 
 We'll do the same with Backend API container app, but we will use a different Azure built-in roles for Azure Service Bus which is the role `Azure Service Bus Data Sender` as the Backend API is a publisher of the messages. Run the command below to associate the `system-assigned` with access-control role `Azure Service Bus Data Sender`:
 
-```shell
-$SVC_BUS_DATA_SENDER_ROLE = "Azure Service Bus Data Sender" # Built in role name
+=== "PowerShell"
+    ```shell
+    $SVC_BUS_DATA_SENDER_ROLE = "Azure Service Bus Data Sender" # Built in role name
 
-az role assignment create `
---assignee $BACKEND_API_PRINCIPAL_ID `
---role $SVC_BUS_DATA_SENDER_ROLE `
---scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME/topics/$SERVICE_BUS_TOPIC_NAME
-```
+    az role assignment create `
+    --assignee $BACKEND_API_PRINCIPAL_ID `
+    --role $SVC_BUS_DATA_SENDER_ROLE `
+    --scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME/topics/$SERVICE_BUS_TOPIC_NAME
+    ```
+=== "Bash"
+    ```shell
+    export SVC_BUS_DATA_SENDER_ROLE="Azure Service Bus Data Sender" # Built in role name
+
+    az role assignment create \
+      --assignee $BACKEND_API_PRINCIPAL_ID \
+      --role "$SVC_BUS_DATA_SENDER_ROLE" \
+      --scope /subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$SERVICE_BUS_NAMESPACE_NAME/topics/$SERVICE_BUS_TOPIC_NAME
+    ```
 
 !!! note "Limiting Managed Identity Scope in Azure Service Bus"
 
@@ -567,32 +699,60 @@ az role assignment create `
 
 Lastly, we need to restart both container apps revisions to pick up the role assignment.
 
-```shell
-# Get revision name and assign it to a variable
-$BACKEND_SERVICE_REVISION_NAME = (az containerapp revision list `
-        --name $BACKEND_SERVICE_NAME `
-        --resource-group $RESOURCE_GROUP `
-        --query [0].name `
-        --output tsv)
+=== "PowerShell"
+    ```shell
+    # Get revision name and assign it to a variable
+    $BACKEND_SERVICE_REVISION_NAME = (az containerapp revision list `
+            --name $BACKEND_SERVICE_NAME `
+            --resource-group $RESOURCE_GROUP `
+            --query [0].name `
+            --output tsv)
 
-# Restart revision by name
-az containerapp revision restart `
---resource-group $RESOURCE_GROUP `
---name $BACKEND_SERVICE_NAME  `
---revision $BACKEND_SERVICE_REVISION_NAME
+    # Restart revision by name
+    az containerapp revision restart `
+    --resource-group $RESOURCE_GROUP `
+    --name $BACKEND_SERVICE_NAME  `
+    --revision $BACKEND_SERVICE_REVISION_NAME
 
-$BACKEND_API_REVISION_NAME = (az containerapp revision list `
-        --name $BACKEND_API_NAME `
-        --resource-group $RESOURCE_GROUP `
-        --query [0].name `
-        --output tsv)
+    $BACKEND_API_REVISION_NAME = (az containerapp revision list `
+            --name $BACKEND_API_NAME `
+            --resource-group $RESOURCE_GROUP `
+            --query [0].name `
+            --output tsv)
 
-# Restart revision by name
-az containerapp revision restart `
---resource-group $RESOURCE_GROUP `
---name $BACKEND_API_NAME  `
---revision $BACKEND_API_REVISION_NAME
-```
+    # Restart revision by name
+    az containerapp revision restart `
+    --resource-group $RESOURCE_GROUP `
+    --name $BACKEND_API_NAME  `
+    --revision $BACKEND_API_REVISION_NAME
+    ```
+=== "Bash"
+    ```shell
+    # Get revision name and assign it to a variable
+    export BACKEND_SERVICE_REVISION_NAME=$(az containerapp revision list \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --query "[0].name" \
+      --output tsv)
+
+    # Restart revision by name
+    az containerapp revision restart \
+      --resource-group $RESOURCE_GROUP \
+      --name $BACKEND_SERVICE_NAME  \
+      --revision $BACKEND_SERVICE_REVISION_NAME
+
+    export BACKEND_API_REVISION_NAME=$(az containerapp revision list \
+      --name $BACKEND_API_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --query "[0].name" \
+      --output tsv)
+
+    # Restart revision by name
+    az containerapp revision restart \
+      --resource-group $RESOURCE_GROUP \
+      --name $BACKEND_API_NAME  \
+      --revision $BACKEND_API_REVISION_NAME
+    ```
 
 !!! Success
     With this in place, you should be able to test the 3 services end to end.
@@ -600,11 +760,18 @@ az containerapp revision restart `
     Start by running the command below and then launch the
     application and start creating new tasks. You should start seeing logs similar to the ones shown in the image below. The command will stop executing after 60 seconds of inactivity.
 
-    ```shell
-    az containerapp logs show --follow `
-    -n $BACKEND_SERVICE_NAME `
-    -g $RESOURCE_GROUP
-    ```
+    === "PowerShell"
+        ```shell
+        az containerapp logs show --follow `
+        -n $BACKEND_SERVICE_NAME `
+        -g $RESOURCE_GROUP
+        ```
+    === "Bash"
+        ```shell
+        az containerapp logs show --follow \
+        -n $BACKEND_SERVICE_NAME \
+        -g $RESOURCE_GROUP
+        ```
 
     ![email-log](../../assets/images/05-aca-dapr-pubsubapi/az_containerapp_logs.png)
 

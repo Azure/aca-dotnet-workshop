@@ -10,6 +10,7 @@ builder.Services.Configure<TelemetryConfiguration>((o) => {
     o.TelemetryInitializers.Add(new TasksTracker.TasksManager.Backend.Api.AppInsightsTelemetryInitializer());
 });
 
+builder.Services.AddDaprClient();
 builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

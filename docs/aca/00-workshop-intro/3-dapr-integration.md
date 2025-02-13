@@ -3,7 +3,7 @@ title: Dapr Integration in ACA
 parent: Workshop Introduction
 has_children: false
 nav_order: 3
-canonical_url: 'https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/'
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
 ---
 
 ## Dapr Overview

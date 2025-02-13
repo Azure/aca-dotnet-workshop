@@ -1,10 +1,17 @@
+---
+title: Deploy Infrastructure using Bicep via GitHub Actions
+parent: Module 10 - Deployment Via Bicep and DevOps
+has_children: false
+nav_order: 2
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+---
 
 # Deploy Infrastructure Using GitHub Actions
 
 !!! info "Module Duration"
     30 minutes
 
-In the [previous section](../../aca/10-aca-iac-bicep/iac-bicep.md), we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. GitHub Actions is a great solution for automating workflows, and in this section, we'll explain how to create a GitHub Action workflow for deploying the infrastructure components of our application.
+In the [previous section](../../aca/10-aca-iac-bicep/01-iac-bicep.md), we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. GitHub Actions is a great solution for automating workflows, and in this section, we'll explain how to create a GitHub Action workflow for deploying the infrastructure components of our application.
 
 The workshop repository contains a GitHub Action workflow file that will be used to deploy the infrastructure components of our application. Follow the steps below to create a GitHub Action workflow to deploy the infrastructure components of our application.
 
@@ -30,9 +37,9 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
 
 === "PowerShell"
 
-    - Execute the following commands in PowerShell to create an Azure AD application and service principal.
+    - Execute the following commands to create an Azure AD application and service principal.
 
-    ```powershell
+    ```shell
     $AZURE_TENANT = az account show -o tsv --query tenantId
     $SUBSCRIPTION_ID = az account show -o tsv --query id
 
@@ -48,22 +55,22 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
     !!! note
         Replace `<Repo owner>` in below json with your GitHub username where you forked the workshop repository.
 
-    ```powershell
+    ```shell
     az rest --method POST --uri "https://graph.microsoft.com/beta/applications/$OBJECT_ID/federatedIdentityCredentials" --body '{\"name\":\"aca-dotnet-workshop-federated-identity\",\"issuer\":\"https://token.actions.githubusercontent.com\",\"subject\":\"repo:<Repo owner>/aca-dotnet-workshop:ref:refs/heads/main\",\"description\":\"GitHub\",\"audiences\":[\"api://AzureADTokenExchange\"]}' --headers "Content-Type=application/json"
     ```
 
     - Perform role assignment for the Azure AD application to access the subscription.
 
-    ```powershell
+    ```shell
     az role assignment create --assignee $APP_ID --role contributor --scope /subscriptions/$SUBSCRIPTION_ID
     az role assignment create --assignee $APP_ID --role 'User Access Administrator' --scope /subscriptions/$SUBSCRIPTION_ID
     ```
 
-=== "Bash/WSL"
+=== "Bash"
 
-    - Execute the following commands in PowerShell to create an Azure AD application and service principal.
+    - Execute the following commands to create an Azure AD application and service principal.
 
-    ```bash
+    ```shell
     AZURE_TENANT=$(az account show -o tsv --query tenantId)
     SUBSCRIPTION_ID=$(az account show -o tsv --query id)
 
@@ -79,7 +86,7 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
     !!! note
         Replace `<Repo owner>` in below json with your GitHub username where you forked the workshop repository.
 
-    ```bash
+    ```shell
     cat <<EOF > body.json
     {
         "name": "aca-dotnet-workshop-federated-identity",
@@ -97,7 +104,7 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
 
     - Perform role assignment for the Azure AD application to access the subscription.
 
-    ```bash
+    ```shell
     az role assignment create --assignee $APP_ID --role contributor --scope /subscriptions/$SUBSCRIPTION_ID
     az role assignment create --assignee $APP_ID --role 'User Access Administrator' --scope /subscriptions/$SUBSCRIPTION_ID
     ```
