@@ -1,3 +1,11 @@
+---
+title: Variables
+parent: Appendix
+has_children: false
+nav_order: 3
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+---
+
 # Variables
 
 We declare numerous variables throughout this workshop. As these modules are lengthy, you will likely complete them over multiple sessions. However, as sessions are additive, they require previously-set variables.

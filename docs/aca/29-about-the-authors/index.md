@@ -1,3 +1,7 @@
+---
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+---
+
 # Authors
 
 ### [:material-github: Taiseer Joudeh](https://github.com/tjoudeh){target=_blank}
