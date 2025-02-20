@@ -1,5 +1,5 @@
 ---
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+canonical_url: https://bitoftech.net/2022/09/09/azure-container-apps-monitoring-and-observability-with-application-insights-part-8/
 ---
 
 # Module 8 - ACA Monitoring and Observability with Application Insights

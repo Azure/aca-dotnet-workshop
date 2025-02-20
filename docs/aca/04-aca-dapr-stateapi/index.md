@@ -1,5 +1,5 @@
 ---
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+canonical_url: https://bitoftech.net/2022/08/29/azure-container-apps-state-store-with-dapr-state-management-api/
 ---
 
 # Module 4 - ACA State Store With Dapr State Management API

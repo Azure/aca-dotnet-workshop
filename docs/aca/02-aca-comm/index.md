@@ -1,5 +1,5 @@
 ---
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+canonical_url: https://bitoftech.net/2022/08/25/communication-microservices-azure-container-apps/
 ---
 
 # Module 2 - Communication Between Microservices in ACA

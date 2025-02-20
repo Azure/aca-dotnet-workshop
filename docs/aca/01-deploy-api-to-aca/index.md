@@ -1,5 +1,5 @@
 ---
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application-azure-container-apps/'
 ---
 
 # Module 1 - Deploy Backend API to ACA

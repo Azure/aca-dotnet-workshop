@@ -3,7 +3,7 @@ title: Scenario and Solution Architecture
 parent: Workshop Introduction
 has_children: false
 nav_order: 2
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+canonical_url: https://bitoftech.net/2022/08/25/tutorial-building-microservice-applications-azure-container-apps-dapr/
 ---
 
 ## Workshop Scenario

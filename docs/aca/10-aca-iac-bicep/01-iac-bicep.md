@@ -3,7 +3,7 @@ title: Deploy Infrastructure using Bicep
 parent: Module 10 - Deployment Via Bicep and DevOps
 has_children: false
 nav_order: 1
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+canonical_url: https://bitoftech.net/2022/09/16/use-bicep-to-deploy-dapr-microservices-apps-to-azure-container-apps-part-10/
 ---
 
 # Build the Infrastructure as Code Using Bicep
