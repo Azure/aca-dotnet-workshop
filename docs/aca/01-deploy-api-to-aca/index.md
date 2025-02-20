@@ -25,7 +25,7 @@ In this module, we will accomplish three objectives:
 
 - If a terminal is not yet open, from VS Code's *Terminal* tab, select *New Terminal* to open a (PowerShell or Bash ) terminal in the project folder *TasksTracker.ContainerApps* (also referred to as *root*).
 
-- We need to define the .NET version we will use throughout this workshop. In the terminal execute `dotnet --info` or, more specifically, `dotnet --list-sdks`. Take note of the intalled .NET SDK versions and select the one with which you wish to proceed.
+- We need to define the .NET version we will use throughout this workshop. In the terminal execute `dotnet --info` or, more specifically, `dotnet --list-sdks`. Take note of the installed .NET SDK versions and select the one with which you wish to proceed.
 
 - In the root folder create a new file and set the .NET SDK version from the above command:
 

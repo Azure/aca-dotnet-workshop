@@ -3,7 +3,6 @@ title: Prerequisites
 parent: Workshop Introduction
 has_children: false
 nav_order: 4
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
 ---
 
 ## Prerequisites

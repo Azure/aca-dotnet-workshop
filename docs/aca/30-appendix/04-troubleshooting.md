@@ -2,8 +2,7 @@
 title: Troubleshooting
 parent: Appendix
 has_children: false
-nav_order: 4
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+nav_order: 5
 ---
 
 ## Troubleshooting

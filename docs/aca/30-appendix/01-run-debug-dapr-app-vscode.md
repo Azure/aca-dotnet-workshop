@@ -1,11 +1,3 @@
----
-title: Variables
-parent: Appendix
-has_children: false
-nav_order: 1
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
----
-
 This page shows you how to configure VSCode to run and debug multiple Dapr applications at same time.
 
 ### Debug and launch Dapr applications in VSCode

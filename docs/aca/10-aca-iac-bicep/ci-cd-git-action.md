@@ -1,17 +1,10 @@
----
-title: Deploy Infrastructure using Bicep via GitHub Actions
-parent: Module 10 - Deployment Via Bicep and DevOps
-has_children: false
-nav_order: 2
-canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
----
 
 # Deploy Infrastructure Using GitHub Actions
 
 !!! info "Module Duration"
     30 minutes
 
-In the [previous section](../../aca/10-aca-iac-bicep/01-iac-bicep.md), we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. GitHub Actions is a great solution for automating workflows, and in this section, we'll explain how to create a GitHub Action workflow for deploying the infrastructure components of our application.
+In the [previous section](../../aca/10-aca-iac-bicep/iac-bicep.md), we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. GitHub Actions is a great solution for automating workflows, and in this section, we'll explain how to create a GitHub Action workflow for deploying the infrastructure components of our application.
 
 The workshop repository contains a GitHub Action workflow file that will be used to deploy the infrastructure components of our application. Follow the steps below to create a GitHub Action workflow to deploy the infrastructure components of our application.
 
