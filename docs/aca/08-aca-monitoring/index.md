@@ -185,9 +185,16 @@ In the previous module, we've used Dapr Secret Store to store connection strings
 
 We need to set the Application Insights Instrumentation Key so that the projects are able to send telemetry data to the Application Insights instance. We are going to set this via secrets and environment variables once we redeploy the Container Apps and create new revisions. Locally, we can **set it in each appsettings.json** file. Obtain the key from the variable:
 
-```shell
-$APPINSIGHTS_INSTRUMENTATIONKEY
-```
+=== "PowerShell"
+    ```shell
+    $APPINSIGHTS_INSTRUMENTATIONKEY
+    ```
+=== "Bash"
+    ```shell
+    echo $APPINSIGHTS_INSTRUMENTATIONKEY
+    ```
+
+You then update the appsettings file with this key.
 
 === "appsettings.json"
 
@@ -208,48 +215,93 @@ With this step completed, we have done all the changes needed. Let's now deploy 
 
 Let's create a secret named `appinsights-key` on each Container App which contains the value of the Application Insights instrumentation key:
 
-```shell
-az containerapp secret set `
---name $BACKEND_API_NAME `
---resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
+=== "PowerShell"
+    ```shell
+    az containerapp secret set `
+    --name $BACKEND_API_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 
-az containerapp secret set `
---name $FRONTEND_WEBAPP_NAME `
---resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
+    az containerapp secret set `
+    --name $FRONTEND_WEBAPP_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
 
-az containerapp secret set `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
-```
+    az containerapp secret set `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY "
+    ```
+
+=== "Bash"
+    ```shell
+    az containerapp secret set \
+      --name $BACKEND_API_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY"
+
+    az containerapp secret set \
+      --name $FRONTEND_WEBAPP_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY"
+
+    az containerapp secret set \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --secrets "appinsights-key=$APPINSIGHTS_INSTRUMENTATIONKEY"
+    ```
 
 #### 3.2 Build New Images and Push Them to ACR
 
 As we did before, we are required to build and push the images of the three applications to ACR. By doing so, they will be prepared to be deployed in ACA.
 
-To accomplish this, continue using the same PowerShell console and paste the code below (make sure you are on the following directory **TasksTracker.ContainerApps**):
+To accomplish this, continue using the same PowerShell console and paste the code below:
 
-```shell
-# Build Backend API on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+=== "PowerShell"
+    ```shell
+    cd ~\TasksTracker.ContainerApps
 
-# Build Backend Service on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_SERVICE_NAME" `
---file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+    # Build Backend API on ACR and Push to ACR
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_API_NAME" `
+    --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
 
-# Build Frontend Web App on ACR and Push to ACR
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
---file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
-```
+    # Build Backend Service on ACR and Push to ACR
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_SERVICE_NAME" `
+    --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+
+    # Build Frontend Web App on ACR and Push to ACR
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
+    --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+    ```
+
+=== "Bash"
+    ```shell
+    cd $PROJECT_ROOT
+    
+    # Build Backend API on ACR and Push to ACR
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$BACKEND_API_NAME" \
+      --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+
+    # Build Backend Service on ACR and Push to ACR
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$BACKEND_SERVICE_NAME" \
+      --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+
+    # Build Frontend Web App on ACR and Push to ACR
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$FRONTEND_WEBAPP_NAME" \
+      --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+    ```
 
 #### 3.3 Deploy New Revisions of the Services to ACA and Set a New Environment Variable
 
@@ -258,28 +310,53 @@ We need to update all three container apps with new revisions so that our code c
 !!! tip
     Notice how we used the property `--set-env-vars` to set new environment variable named `ApplicationInsights__InstrumentationKey`. Its value is a secret reference obtained from the secret `appinsights-key` we added in step 1.
 
-```shell
-# Update Backend API App container app and create a new revision
-az containerapp update `
---name $BACKEND_API_NAME  `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-5 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+=== "PowerShell"
+    ```shell
+    # Update Backend API App container app and create a new revision
+    az containerapp update `
+    --name $BACKEND_API_NAME  `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-5 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
 
-# Update Frontend Web App container app and create a new revision
-az containerapp update `
---name $FRONTEND_WEBAPP_NAME  `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-5 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    # Update Frontend Web App container app and create a new revision
+    az containerapp update `
+    --name $FRONTEND_WEBAPP_NAME  `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-5 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
 
-# Update Backend Background Service container app and create a new revision
-az containerapp update `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-5 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
-```
+    # Update Backend Background Service container app and create a new revision
+    az containerapp update `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-5 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    ```
+
+=== "Bash"
+    ```shell
+    # Update Backend API App container app and create a new revision
+    az containerapp update \
+      --name $BACKEND_API_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --revision-suffix v$TODAY-5 \
+      --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+
+    # Update Frontend Web App container app and create a new revision
+    az containerapp update \
+      --name $FRONTEND_WEBAPP_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --revision-suffix v$TODAY-5 \
+      --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+
+    # Update Backend Background Service container app and create a new revision
+    az containerapp update \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --revision-suffix v$TODAY-5 \
+      --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    ```
 
 !!! success
     With those changes in place, you should start seeing telemetry coming to the Application Insights instance provisioned. Let's review Application Insights' key dashboards and panels in [Azure portal](https://portal.azure.com){target=_blank}.

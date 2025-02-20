@@ -85,9 +85,14 @@ To see the results visually, you can install a VS Code extension to connect to R
 Once you install the extension it will add a tab under the explorer section of VS Code called "REDIS XPLORER". Next you will need to connect to the Redis server locally by adding a new "REDIS XPLORER" profile. Click on the + sign in the "REDIS XPLORER" section in VS Code.
 This will ask you to enter the nickname (e.g. *dapr_redis*) as well as the hostname and port. For the hostname and port you can get this information by executing the following command in your powershell terminal:
 
-```shell
-docker ps
-```
+=== "PowerShell"
+    ```shell
+    docker ps
+    ```
+=== "Bash"
+    ```shell
+    docker ps
+    ```
 
 Look under the Ports column and use the server and port specified there. In the image below the server is `0.0.0.0` and the port is `6379`. Use the values that you see on your own terminal. Leave the password empty.
 
@@ -201,56 +206,107 @@ Now we will create an Azure Cosmos DB account, Database, and a new container tha
 You can use the PowerShell script below to create the Cosmos DB resources on the same resource group we used in the previous module.
 You need to set the variable name of the `$COSMOS_DB_ACCOUNT` to a unique name as it needs to be unique globally. Remember to replace the placeholders with your own values:
 
-```shell
-$COSMOS_DB_ACCOUNT="cosmos-tasks-tracker-state-store-$RANDOM_STRING"
-$COSMOS_DB_DBNAME="tasksmanagerdb"
-$COSMOS_DB_CONTAINER="taskscollection"
+=== "PowerShell"
+    ```shell
+    $COSMOS_DB_ACCOUNT="cosmos-tasks-tracker-state-store-$RANDOM_STRING"
+    $COSMOS_DB_DBNAME="tasksmanagerdb"
+    $COSMOS_DB_CONTAINER="taskscollection"
 
-# Check if Cosmos account name already exists globally
-$result = az cosmosdb check-name-exists `
---name $COSMOS_DB_ACCOUNT
+    # Check if Cosmos account name already exists globally
+    $result = az cosmosdb check-name-exists `
+    --name $COSMOS_DB_ACCOUNT
 
-# Continue if the Cosmos DB account does not yet exist
-if ($result -eq "false") {
-    echo "Creating Cosmos DB account. This may take a few minutes..."
+    # Continue if the Cosmos DB account does not yet exist
+    if ($result -eq "false") {
+        echo "Creating Cosmos DB account. This may take a few minutes..."
 
-    # Create a Cosmos account for SQL API
-    az cosmosdb create `
-    --name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP `
+        # Create a Cosmos account for SQL API
+        az cosmosdb create `
+        --name $COSMOS_DB_ACCOUNT `
+        --resource-group $RESOURCE_GROUP `
 
-    # Enable local authentication to avoid a 401 when running locally.
-    az resource update `
-    --name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP `
-    --resource-type "Microsoft.DocumentDB/databaseAccounts" `
-    --set properties.disableLocalAuth=false
+        # Enable local authentication to avoid a 401 when running locally.
+        az resource update `
+        --name $COSMOS_DB_ACCOUNT `
+        --resource-group $RESOURCE_GROUP `
+        --resource-type "Microsoft.DocumentDB/databaseAccounts" `
+        --set properties.disableLocalAuth=false
 
-    # Create a SQL API database
-    az cosmosdb sql database create `
-    --name $COSMOS_DB_DBNAME `
-    --resource-group $RESOURCE_GROUP `
-    --account-name $COSMOS_DB_ACCOUNT
+        # Create a SQL API database
+        az cosmosdb sql database create `
+        --name $COSMOS_DB_DBNAME `
+        --resource-group $RESOURCE_GROUP `
+        --account-name $COSMOS_DB_ACCOUNT
 
-    # Create a SQL API container
-    az cosmosdb sql container create `
-    --name $COSMOS_DB_CONTAINER `
-    --resource-group $RESOURCE_GROUP `
-    --account-name $COSMOS_DB_ACCOUNT `
-    --database-name $COSMOS_DB_DBNAME `
-    --partition-key-path "/id" `
-    --throughput 400
+        # Create a SQL API container
+        az cosmosdb sql container create `
+        --name $COSMOS_DB_CONTAINER `
+        --resource-group $RESOURCE_GROUP `
+        --account-name $COSMOS_DB_ACCOUNT `
+        --database-name $COSMOS_DB_DBNAME `
+        --partition-key-path "/id" `
+        --throughput 400
 
-    $COSMOS_DB_ENDPOINT=(az cosmosdb show `
-    --name $COSMOS_DB_ACCOUNT `
-    --resource-group $RESOURCE_GROUP `
-    --query documentEndpoint `
-    --output tsv)
+        $COSMOS_DB_ENDPOINT=(az cosmosdb show `
+        --name $COSMOS_DB_ACCOUNT `
+        --resource-group $RESOURCE_GROUP `
+        --query documentEndpoint `
+        --output tsv)
 
-    echo "Cosmos DB Endpoint: "
-    echo $COSMOS_DB_ENDPOINT
-}
-```
+        echo "Cosmos DB Endpoint: "
+        echo $COSMOS_DB_ENDPOINT
+    }
+    ```
+=== "Bash"
+    ```shell
+    export COSMOS_DB_ACCOUNT="cosmos-tasks-tracker-state-store-$RANDOM_STRING"
+    export COSMOS_DB_DBNAME="tasksmanagerdb"
+    export COSMOS_DB_CONTAINER="taskscollection"
+    
+    # Check if Cosmos account name already exists globally
+    result=$(az cosmosdb check-name-exists --name "$COSMOS_DB_ACCOUNT")
+    
+    # Continue if the Cosmos DB account does not yet exist
+    if [ "$result" = "false" ]; then
+        echo "Creating Cosmos DB account. This may take a few minutes..."
+    
+        # Create a Cosmos account for SQL API
+        az cosmosdb create \
+         --name "$COSMOS_DB_ACCOUNT" \
+         --resource-group "$RESOURCE_GROUP"
+    
+        # Enable local authentication to avoid a 401 when running locally.
+        az resource update \
+         --name "$COSMOS_DB_ACCOUNT" \
+         --resource-group "$RESOURCE_GROUP" \
+         --resource-type "Microsoft.DocumentDB/databaseAccounts" \
+         --set properties.disableLocalAuth=false
+    
+        # Create a SQL API database
+        az cosmosdb sql database create \
+         --name "$COSMOS_DB_DBNAME" \
+         --resource-group "$RESOURCE_GROUP" \
+         --account-name "$COSMOS_DB_ACCOUNT"
+    
+        # Create a SQL API container
+        az cosmosdb sql container create \
+         --name "$COSMOS_DB_CONTAINER" \
+         --resource-group "$RESOURCE_GROUP" \
+         --account-name "$COSMOS_DB_ACCOUNT" \
+         --database-name "$COSMOS_DB_DBNAME" \
+         --partition-key-path "/id" \
+         --throughput 400
+    
+        export COSMOS_DB_ENDPOINT=$(az cosmosdb show \
+         --name "$COSMOS_DB_ACCOUNT" \
+         --resource-group "$RESOURCE_GROUP" \
+         --query documentEndpoint \
+         --output tsv)
+    
+        echo "Cosmos DB Endpoint: "
+        echo "$COSMOS_DB_ENDPOINT"
+    fi
+    ```
 
 !!! note
     The `primaryMasterKey` connection string is only needed for our local testing on the development machine, we'll be using a different approach (**Managed Identities**) when deploying Dapr component to Azure Container Apps Environment. For this workshop, we are allowing local authentication with the `az resource update` command above, but this should not be done for production workloads.
@@ -258,17 +314,30 @@ if ($result -eq "false") {
 Once the scripts execution is completed, we need to get the `primaryMasterKey` of the Cosmos DB account next. You can do this using the PowerShell script below.
 Copy the value of `primaryMasterKey` as we will use it in the next step.
 
-```shell
-# List Azure Cosmos DB keys
-$COSMOS_DB_PRIMARY_MASTER_KEY=(az cosmosdb keys list `
---name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---query primaryMasterKey `
---output tsv)
+=== "PowerShell"
+    ```shell
+    # List Azure Cosmos DB keys
+    $COSMOS_DB_PRIMARY_MASTER_KEY=(az cosmosdb keys list `
+    --name $COSMOS_DB_ACCOUNT `
+    --resource-group $RESOURCE_GROUP `
+    --query primaryMasterKey `
+    --output tsv)
 
-echo "Cosmos DB Primary Master Key:"
-echo $COSMOS_DB_PRIMARY_MASTER_KEY
-```
+    echo "Cosmos DB Primary Master Key:"
+    echo $COSMOS_DB_PRIMARY_MASTER_KEY
+    ```
+=== "Bash"
+    ```shell
+    # List Azure Cosmos DB keys
+    export COSMOS_DB_PRIMARY_MASTER_KEY=$(az cosmosdb keys list \
+     --name "$COSMOS_DB_ACCOUNT" \
+     --resource-group "$RESOURCE_GROUP" \
+     --query primaryMasterKey \
+     --output tsv)
+    
+    echo "Cosmos DB Primary Master Key:"
+    echo "$COSMOS_DB_PRIMARY_MASTER_KEY"
+    ```
 
 #### 3.2. Create a Component File for State Store Management
 
@@ -364,24 +433,32 @@ We will be using a `system-assigned` identity with a role assignment to grant ou
 
 Run the command below to create `system-assigned` identity for our Backend API container app:
 
-```shell
-az containerapp identity assign `
---name $BACKEND_API_NAME `
---resource-group $RESOURCE_GROUP `
---system-assigned
+=== "PowerShell"
+    ```shell
+    az containerapp identity assign `
+    --name $BACKEND_API_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --system-assigned
 
-$COSMOS_DB_PRIMARY_MASTER_KEY=(az cosmosdb keys list `
---name $COSMOS_DB_ACCOUNT `
---resource-group $RESOURCE_GROUP `
---query primaryMasterKey `
---output tsv)
-
-$BACKEND_API_PRINCIPAL_ID=(az containerapp identity show `
---name $BACKEND_API_NAME `
---resource-group $RESOURCE_GROUP `
---query principalId `
---output tsv)
-```
+    $BACKEND_API_PRINCIPAL_ID=(az containerapp identity show `
+    --name $BACKEND_API_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --query principalId `
+    --output tsv)
+    ```
+=== "Bash"
+    ```shell
+    az containerapp identity assign \
+     --name "$BACKEND_API_NAME" \
+     --resource-group "$RESOURCE_GROUP" \
+     --system-assigned
+     
+    export BACKEND_API_PRINCIPAL_ID=$(az containerapp identity show \
+     --name "$BACKEND_API_NAME" \
+     --resource-group "$RESOURCE_GROUP" \
+     --query principalId \
+     --output tsv)
+    ```
 
 This command will create an Enterprise Application (basically a Service Principal) within Azure AD, which is linked to our container app. The output of this command will be similar to the one shown below.
 Keep a note of the property `principalId` as we are going to use it in the next step.
@@ -404,16 +481,28 @@ Run the command below to associate the container app `system-assigned` identity 
     Make sure you save this principal id somewhere as you will need it in later modules. You can't rely on having it saved in powershell under `$BACKEND_API_PRINCIPAL_ID` as this variable could replace later on.
     Remember to replace the placeholders with your own values:
 
-```shell
-$ROLE_ID = "00000000-0000-0000-0000-000000000002" #"Cosmos DB Built-in Data Contributor"
+=== "PowerShell"
+    ```shell
+    $ROLE_ID = "00000000-0000-0000-0000-000000000002" #"Cosmos DB Built-in Data Contributor"
 
-az cosmosdb sql role assignment create `
---resource-group $RESOURCE_GROUP `
---account-name  $COSMOS_DB_ACCOUNT `
---scope "/" `
---principal-id $BACKEND_API_PRINCIPAL_ID `
---role-definition-id $ROLE_ID
-```
+    az cosmosdb sql role assignment create `
+    --resource-group $RESOURCE_GROUP `
+    --account-name  $COSMOS_DB_ACCOUNT `
+    --scope "/" `
+    --principal-id $BACKEND_API_PRINCIPAL_ID `
+    --role-definition-id $ROLE_ID
+    ```
+=== "Bash"
+    ```shell
+    export ROLE_ID="00000000-0000-0000-0000-000000000002" # "Cosmos DB Built-in Data Contributor"
+    
+    az cosmosdb sql role assignment create \
+     --resource-group "$RESOURCE_GROUP" \
+     --account-name "$COSMOS_DB_ACCOUNT" \
+     --scope "/" \
+     --principal-id "$BACKEND_API_PRINCIPAL_ID" \
+     --role-definition-id "$ROLE_ID"
+    ```
 
 ### 3.4 Deploy the Backend API and Frontend Web App Projects to ACA
 
@@ -447,47 +536,84 @@ Create a new folder named **aca-components** under the directory **TasksTracker.
 As we have done previously, we need to build and deploy both app images to ACR, so they are ready to be deployed to Azure Container Apps.
 To do so, continue using the same PowerShell console and paste the code below. Ensure you are in the root directory:
 
-```shell
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+=== "PowerShell"
+    ```shell
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_API_NAME" `
+    --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
---file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
-```
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
+    --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile' .
+    ```
+=== "Bash"
+    ```shell
+    az acr build \
+     --registry "$AZURE_CONTAINER_REGISTRY_NAME" \
+     --image "tasksmanager/$BACKEND_API_NAME" \
+     --file "TasksTracker.TasksManager.Backend.Api/Dockerfile" .
+    
+    az acr build \
+     --registry "$AZURE_CONTAINER_REGISTRY_NAME" \
+     --image "tasksmanager/$FRONTEND_WEBAPP_NAME" \
+     --file "TasksTracker.WebPortal.Frontend.Ui/Dockerfile" .
+    ```
 
 #### 3.4.3 Add Cosmos DB Dapr State Store to Azure Container Apps Environment
 
 We need to run the command below to add the yaml file `.\aca-components\containerapps-statestore-cosmos.yaml` to Azure Container Apps Environment.
 
-```shell
-az containerapp env dapr-component set `
---name $ENVIRONMENT `
---resource-group $RESOURCE_GROUP `
---dapr-component-name statestore `
---yaml '.\aca-components\containerapps-statestore-cosmos.yaml'
-```
+=== "PowerShell"
+    ```shell
+    az containerapp env dapr-component set `
+    --name $ENVIRONMENT `
+    --resource-group $RESOURCE_GROUP `
+    --dapr-component-name statestore `
+    --yaml '.\aca-components\containerapps-statestore-cosmos.yaml'
+    ```
+=== "Bash"
+    ```shell
+    az containerapp env dapr-component set \
+     --name "$ENVIRONMENT" \
+     --resource-group "$RESOURCE_GROUP" \
+     --dapr-component-name statestore \
+     --yaml './aca-components/containerapps-statestore-cosmos.yaml'
+    ```
 
 #### 3.4.4 Enable Dapr for the Frontend Web App and Backend API Container Apps
 
 Until this moment Dapr was not enabled on the Container Apps we have provisioned. Enable Dapr for both Container Apps by running the two commands below in the PowerShell console.
 
-```shell
-az containerapp dapr enable `
---name $BACKEND_API_NAME `
---resource-group $RESOURCE_GROUP `
---dapr-app-id  $BACKEND_API_NAME `
---dapr-app-port $TARGET_PORT
+=== "PowerShell"
+    ```shell
+    az containerapp dapr enable `
+    --name $BACKEND_API_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --dapr-app-id  $BACKEND_API_NAME `
+    --dapr-app-port $TARGET_PORT
 
-az containerapp dapr enable `
---name $FRONTEND_WEBAPP_NAME `
---resource-group $RESOURCE_GROUP `
---dapr-app-id  $FRONTEND_WEBAPP_NAME `
---dapr-app-port $TARGET_PORT
-```
+    az containerapp dapr enable `
+    --name $FRONTEND_WEBAPP_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --dapr-app-id  $FRONTEND_WEBAPP_NAME `
+    --dapr-app-port $TARGET_PORT
+    ```
+=== "Bash"
+    ```shell
+    az containerapp dapr enable \
+     --name "$BACKEND_API_NAME" \
+     --resource-group "$RESOURCE_GROUP" \
+     --dapr-app-id "$BACKEND_API_NAME" \
+     --dapr-app-port "$TARGET_PORT"
+    
+    az containerapp dapr enable \
+     --name "$FRONTEND_WEBAPP_NAME" \
+     --resource-group "$RESOURCE_GROUP" \
+     --dapr-app-id "$FRONTEND_WEBAPP_NAME" \
+     --dapr-app-port "$TARGET_PORT"
+    ```
 
 ??? tip "Curious to learn more about the command above?"
     - We've enabled Dapr on both container apps and specified a unique Dapr identifier for the Back End API and Front End Web App container apps.
@@ -500,22 +626,40 @@ az containerapp dapr enable `
 
 The last thing we need to do here is to update both container apps and deploy the new images from ACR. To do so we need to run the commands found below.
 
-```shell
-# Update Frontend web app container app and create a new revision
-az containerapp update `
---name $FRONTEND_WEBAPP_NAME  `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY
+=== "PowerShell"
+    ```shell
+    # Update Frontend web app container app and create a new revision
+    az containerapp update `
+    --name $FRONTEND_WEBAPP_NAME  `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY
 
-# Update Backend API App container app and create a new revision
-az containerapp update `
---name $BACKEND_API_NAME  `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-1
+    # Update Backend API App container app and create a new revision
+    az containerapp update `
+    --name $BACKEND_API_NAME  `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-1
 
-echo "Azure Frontend UI URL:"
-echo $FRONTEND_UI_BASE_URL
-```
+    echo "Azure Frontend UI URL:"
+    echo $FRONTEND_UI_BASE_URL
+    ```
+=== "Bash"
+    ```shell
+    # Update Frontend web app container app and create a new revision
+    az containerapp update \
+     --name "$FRONTEND_WEBAPP_NAME" \
+     --resource-group "$RESOURCE_GROUP" \
+     --revision-suffix v$TODAY
+    
+    # Update Backend API App container app and create a new revision
+    az containerapp update \
+     --name "$BACKEND_API_NAME" \
+     --resource-group "$RESOURCE_GROUP" \
+     --revision-suffix v$TODAY-1
+    
+    echo "Azure Frontend UI URL:"
+    echo "$FRONTEND_UI_BASE_URL"
+    ```
 
 !!! tip
     Notice here that we used a `revision-suffix` property, so it will append to the revision name which offers you better visibility on which revision you are looking at.

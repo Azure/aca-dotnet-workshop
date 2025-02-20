@@ -30,7 +30,7 @@ In this module, we will look into the benefits of optimized containers such as:
 
 While available prior to .NET 8, the general availability introduction of .NET 8 in November 2023 came with an expanded focus on container optimization. You can apply similar steps for .NET versions newer than 8, but we omit them here for brevity.
 
-**For .NET 9, replace `8.0-jammy` with `9.0-noble`.**
+**For .NET 9, replace `8.0-jammy` with `9.0-noble`. This also applies to Chiseled images (ie `9.0-noble-chiseled`).**
 
 Please ensure you have the Docker daemon ready. Running *Docker Desktop* does it.
 
@@ -56,14 +56,32 @@ Our original `Dockerfile` files look like this:
     ```
 
 From the TasksTracker.ContainerApps directory, run the following commands:
+=== "PowerShell"
+    ```shell
+    docker build -t backend-api-status-quo `
+    -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile .
+    
+    docker build -t backend-svc-status-quo `
+    -f .\TasksTracker.Processor.Backend.Svc\Dockerfile .
 
-```shell
-docker build -t backend-api-status-quo -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile .
-docker build -t backend-svc-status-quo -f .\TasksTracker.Processor.Backend.Svc\Dockerfile .
-docker build -t frontend-ui-status-quo -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile .
+    docker build -t frontend-ui-status-quo `
+    -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile .
 
-docker image list
-```
+    docker image list
+    ```
+=== "Bash"
+    ```shell
+    docker build -t backend-api-status-quo \
+      -f ./TasksTracker.TasksManager.Backend.Api/Dockerfile .
+
+    docker build -t backend-svc-status-quo \
+      -f ./TasksTracker.Processor.Backend.Svc/Dockerfile .
+    
+    docker build -t frontend-ui-status-quo \
+      -f ./TasksTracker.WebPortal.Frontend.Ui/Dockerfile .
+
+    docker image list
+    ```
 
 This yields sizable images at **226+ MB**!
 
@@ -96,13 +114,38 @@ Create three new files, `Dockerfile.concise` in each of their respective directo
 
 Run the following commands from the project root directory to build the concise images. All images will build, but they will continue to essentially be identical to the status quo images.
 
-```shell
-docker build -t backend-api-concise -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile.concise .\TasksTracker.TasksManager.Backend.Api
-docker build -t backend-svc-concise -f .\TasksTracker.Processor.Backend.Svc\Dockerfile.concise .\TasksTracker.Processor.Backend.Svc
-docker build -t frontend-ui-concise -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile.concise .\TasksTracker.WebPortal.Frontend.Ui
+=== "PowerShell"
+    ```shell
+    docker build -t backend-api-concise `
+    -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile.concise `
+    .\TasksTracker.TasksManager.Backend.Api
 
-docker image list
-```
+    docker build -t backend-svc-concise `
+    -f .\TasksTracker.Processor.Backend.Svc\Dockerfile.concise `
+    .\TasksTracker.Processor.Backend.Svc
+
+    docker build -t frontend-ui-concise `
+    -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile.concise `
+    .\TasksTracker.WebPortal.Frontend.Ui
+
+    docker image list
+    ```
+=== "Bash"
+    ```shell
+    docker build -t backend-api-concise \
+    -f ./TasksTracker.TasksManager.Backend.Api/Dockerfile.concise \
+    ./TasksTracker.TasksManager.Backend.Api
+
+    docker build -t backend-svc-concise \
+    -f ./TasksTracker.Processor.Backend.Svc/Dockerfile.concise \
+    ./TasksTracker.Processor.Backend.Svc
+
+    docker build -t frontend-ui-concise \
+    -f ./TasksTracker.WebPortal.Frontend.Ui/Dockerfile.concise \
+    ./TasksTracker.WebPortal.Frontend.Ui
+
+    docker image list
+    ```
 
 #### 1.3 Chiseled Images
 
@@ -127,13 +170,38 @@ Create three new files, `Dockerfile.chiseled` in each of their respective direct
 
 Run the following commands from the project root directory to build the chiseled images:
 
-```shell
-docker build -t backend-api-chiseled -f .\TasksTracker.TasksManager.Backend.Api\Dockerfile.chiseled .\TasksTracker.TasksManager.Backend.Api
-docker build -t backend-svc-chiseled -f .\TasksTracker.Processor.Backend.Svc\Dockerfile.chiseled .\TasksTracker.Processor.Backend.Svc
-docker build -t frontend-ui-chiseled -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile.chiseled .\TasksTracker.WebPortal.Frontend.Ui
+=== "PowerShell"
+    ```shell
+    docker build -t backend-api-chiseled `
+    -f .\Tracker.TasksManager.Backend.Api\Dockerfile.chiseled `
+    .\TasksTracker.TasksManager.Backend.Api
 
-docker image list
-```
+    docker build -t backend-svc-chiseled `
+    -f .\TasksTracker.Processor.Backend.Svc\Dockerfile.chiseled `
+    .\TasksTracker.Processor.Backend.Svc
+
+    docker build -t frontend-ui-chiseled `
+    -f .\TasksTracker.WebPortal.Frontend.Ui\Dockerfile.chiseled `
+    .\TasksTracker.WebPortal.Frontend.Ui
+
+    docker image list
+    ```
+=== "Bash"
+    ```shell
+    docker build -t backend-api-chiseled \
+    -f ./Tracker.TasksManager.Backend.Api/Dockerfile.chiseled \
+    ./TasksTracker.TasksManager.Backend.Api
+
+    docker build -t backend-svc-chiseled \
+    -f ./TasksTracker.Processor.Backend.Svc/Dockerfile.chiseled \
+    ./TasksTracker.Processor.Backend.Svc
+
+    docker build -t frontend-ui-chiseled \
+    -f ./TasksTracker.WebPortal.Frontend.Ui/Dockerfile.chiseled \
+    ./TasksTracker.WebPortal.Frontend.Ui
+
+    docker image list
+    ```
 
 **Our images are half of their original size now!**
 
@@ -149,49 +217,94 @@ While the image is vastly reduced, what hasn't changed is the functionality of t
 
 Let's update our existing Backend API container app with a new build and revision:
 
-```shell hl_lines="6"
-## Build ACR and Update the Container Apps
+=== "PowerShell"
+    ```shell
+    ## Build ACR and Update the Container Apps
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_API_NAME" `
---file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled' .\TasksTracker.TasksManager.Backend.Api
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_API_NAME" `
+    --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled' .\TasksTracker.TasksManager.Backend.Api
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_SERVICE_NAME" `
---file 'TasksTracker.Processor.Backend.Svc/Dockerfile.chiseled' .\TasksTracker.Processor.Backend.Svc
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_SERVICE_NAME" `
+    --file 'TasksTracker.Processor.Backend.Svc/Dockerfile.chiseled' .\TasksTracker.Processor.Backend.Svc
 
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
---file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile.chiseled' .\TasksTracker.WebPortal.Frontend.Ui
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$FRONTEND_WEBAPP_NAME" `
+    --file 'TasksTracker.WebPortal.Frontend.Ui/Dockerfile.chiseled' .\TasksTracker.WebPortal.Frontend.Ui
 
-# Update all container apps
-az containerapp update `
---name $BACKEND_API_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-6 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    # Update all container apps
+    az containerapp update `
+    --name $BACKEND_API_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-6 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
 
-az containerapp update `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-6 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    az containerapp update `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-6 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
 
-az containerapp update `
---name $FRONTEND_WEBAPP_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-6 `
---set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
-```
+    az containerapp update `
+    --name $FRONTEND_WEBAPP_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-6 `
+    --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    ```
+=== "Bash"
+    ```shell
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$BACKEND_API_NAME" \
+      --file TasksTracker.TasksManager.Backend.Api/Dockerfile.chiseled \
+      ./TasksTracker.TasksManager.Backend.Api
+
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$BACKEND_SERVICE_NAME" \
+      --file TasksTracker.Processor.Backend.Svc/Dockerfile.chiseled \
+      ./TasksTracker.Processor.Backend.Svc
+
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$FRONTEND_WEBAPP_NAME" \
+      --file TasksTracker.WebPortal.Frontend.Ui/Dockerfile.chiseled \
+      ./TasksTracker.WebPortal.Frontend.Ui
+
+    # Update all container apps
+    az containerapp update \
+      --name $BACKEND_API_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --revision-suffix v$TODAY-6 \
+     --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+
+    az containerapp update \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --revision-suffix v$TODAY-6 \
+      --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+
+    az containerapp update \
+      --name $FRONTEND_WEBAPP_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --revision-suffix v$TODAY-6 \
+      --set-env-vars "ApplicationInsights__InstrumentationKey=secretref:appinsights-key"
+    ```
 
 Verify that the application continues to work:
 
-```shell
-$FRONTEND_UI_BASE_URL
-```
+=== "PowerShell"
+    ```shell
+    $FRONTEND_UI_BASE_URL
+    ```
+=== "Bash"
+    ```shell
+    echo $FRONTEND_UI_BASE_URL
+    ```
 
 ### 3. Optimization Summary
 

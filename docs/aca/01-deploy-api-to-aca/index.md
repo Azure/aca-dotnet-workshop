@@ -23,9 +23,9 @@ In this module, we will accomplish three objectives:
 
 ### 1. Create the backend API project (Web API)
 
-- If a terminal is not yet open, from VS Code's *Terminal* tab, select *New Terminal* to open a (PowerShell) terminal in the project folder *TasksTracker.ContainerApps* (also referred to as *root*).
+- If a terminal is not yet open, from VS Code's *Terminal* tab, select *New Terminal* to open a (PowerShell or Bash ) terminal in the project folder *TasksTracker.ContainerApps* (also referred to as *root*).
 
-- We need to define the .NET version we will use throughout this workshop. In the terminal execute `dotnet --info` or, more specifically, `dotnet --list-sdks`. Take note of the intalled .NET SDK versions and select the one with which you wish to proceed.
+- We need to define the .NET version we will use throughout this workshop. In the terminal execute `dotnet --info` or, more specifically, `dotnet --list-sdks`. Take note of the installed .NET SDK versions and select the one with which you wish to proceed.
 
 - In the root folder create a new file and set the .NET SDK version from the above command:
 
@@ -106,12 +106,18 @@ In this module, we will accomplish three objectives:
     --8<-- "docs/aca/01-deploy-api-to-aca/TasksController.cs"
     ```
 
-- From VS Code Terminal tab, open developer command prompt or PowerShell terminal and navigate to the parent directory which hosts the `.csproj` project folder and build the project.
+- From VS Code Terminal tab, navigate to the parent directory which hosts the `.csproj` project folder and build the project.
 
-    ```shell
-    cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
-    dotnet build
-    ```
+    === "PowerShell"
+        ```shell
+        cd ~\TasksTracker.ContainerApps\TasksTracker.TasksManager.Backend.Api
+        dotnet build
+        ```
+    === "Bash"
+        ```shell
+        cd $PROJECT_ROOT/TasksTracker.TasksManager.Backend.Api
+        dotnet build
+        ```
 
 !!! note
     Throughout the documentation, we will use the the tilde character [~] to represent the base / parent folder where you chose to install the workshop assets.
@@ -128,57 +134,104 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
 - First, we need to ensure that our CLI is updated. Then we log in to Azure.
 
-    ```shell
-    # Upgrade the Azure CLI
-    az upgrade
+    === "PowerShell"
+        ```shell
+        # Upgrade the Azure CLI
+        az upgrade
 
-    # Install/upgrade the Azure Container Apps & Application Insights extensions
-    az extension add --upgrade --name containerapp
-    az extension add --upgrade --name application-insights
+        # Install/upgrade the Azure Container Apps & Application Insights extensions
+        az extension add --upgrade --name containerapp
+        az extension add --upgrade --name application-insights
 
-    # Log in to Azure
-    az login
-    ```
+        # Log in to Azure
+        az login
+        ```
+    === "Bash"
+        ```shell
+        # Upgrade the Azure CLI
+        az upgrade
+
+        # Install/upgrade the Azure Container Apps & Application Insights extensions
+        az extension add --upgrade --name containerapp
+        az extension add --upgrade --name application-insights
+
+        # Log in to Azure
+        az login
+        ```
 
 - You may be able to use the queried Azure subscription ID or you may need to set it manually depending on your setup.
 
-    ```shell
-    # Retrieve the currently active Azure subscription ID
-    $AZURE_SUBSCRIPTION_ID = az account show --query id --output tsv
+    === "PowerShell"
+        ```shell
+        # Retrieve the currently active Azure subscription ID
+        $AZURE_SUBSCRIPTION_ID = az account show --query id --output tsv
 
-    # Set a specific Azure Subscription ID (if you have multiple subscriptions)
-    # $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the Azure portal
-    # az account set --subscription $AZURE_SUBSCRIPTION_ID
+        # Set a specific Azure Subscription ID (if you have multiple subscriptions)
+        # $AZURE_SUBSCRIPTION_ID = "<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the Azure portal
+        # az account set --subscription $AZURE_SUBSCRIPTION_ID
 
-    echo $AZURE_SUBSCRIPTION_ID
-    ```
+        echo $AZURE_SUBSCRIPTION_ID
+        ```
+    === "Bash"
+        ```shell
+        # Retrieve the currently active Azure subscription ID
+        export AZURE_SUBSCRIPTION_ID=$(az account show --query id --output tsv)
 
-- Execute the variables below in the PowerShell console to use them across the different modules in the workshop. Some of these variables must be globally unique, which we attempt by using `$RANDOM_STRING`:
+        # Set a specific Azure Subscription ID (if you have multiple subscriptions)
+        # export AZURE_SUBSCRIPTION_ID="<Your Azure Subscription ID>" # Your Azure Subscription id which you can find on the Azure portal
+        # az account set --subscription $AZURE_SUBSCRIPTION_ID
 
-    ```shell
-    # Create a random, 6-digit, Azure safe string
-    $RANDOM_STRING=-join ((97..122) + (48..57) | Get-Random -Count 6 | ForEach-Object { [char]$_})
-    $RESOURCE_GROUP="rg-tasks-tracker-$RANDOM_STRING"
-    $LOCATION="eastus"
-    $ENVIRONMENT="cae-tasks-tracker"
-    $WORKSPACE_NAME="log-tasks-tracker-$RANDOM_STRING"
-    $APPINSIGHTS_NAME="appi-tasks-tracker-$RANDOM_STRING"
-    $BACKEND_API_NAME="tasksmanager-backend-api"
-    $AZURE_CONTAINER_REGISTRY_NAME="crtaskstracker$RANDOM_STRING"
-    $VNET_NAME="vnet-tasks-tracker"
-    $TARGET_PORT={{ docker.targetport }}
-    ```
+        echo $AZURE_SUBSCRIPTION_ID
+        ```
+
+- Execute the variables below in the console to use them across the different modules in the workshop. Some of these variables must be globally unique, which we attempt by using `$RANDOM_STRING`:
+
+    === "PowerShell"
+        ```shell
+        # Create a random, 6-digit, Azure safe string
+        $RANDOM_STRING=-join ((97..122) + (48..57) | Get-Random -Count 6 | ForEach-Object { [char]$_})
+        $RESOURCE_GROUP="rg-tasks-tracker-$RANDOM_STRING"
+        $LOCATION="westus2"
+        $ENVIRONMENT="cae-tasks-tracker"
+        $WORKSPACE_NAME="log-tasks-tracker-$RANDOM_STRING"
+        $APPINSIGHTS_NAME="appi-tasks-tracker-$RANDOM_STRING"
+        $BACKEND_API_NAME="tasksmanager-backend-api"
+        $AZURE_CONTAINER_REGISTRY_NAME="crtaskstracker$RANDOM_STRING"
+        $VNET_NAME="vnet-tasks-tracker"
+        $TARGET_PORT={{ docker.targetport }}
+        ```
+    === "Bash"
+        ```shell
+        # Create a random, 6-digit, Azure safe string
+        export RANDOM_STRING=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 6 | head -n 1)
+        export RESOURCE_GROUP="rg-tasks-tracker-$RANDOM_STRING"
+        export LOCATION="westus2"
+        export ENVIRONMENT="cae-tasks-tracker"
+        export WORKSPACE_NAME="log-tasks-tracker-$RANDOM_STRING"
+        export APPINSIGHTS_NAME="appi-tasks-tracker-$RANDOM_STRING"
+        export BACKEND_API_NAME="tasksmanager-backend-api"
+        export AZURE_CONTAINER_REGISTRY_NAME="crtaskstracker$RANDOM_STRING"
+        export VNET_NAME="vnet-tasks-tracker"
+        export TARGET_PORT={{ docker.targetport }}
+        ```
 
 ???+ tip "Cloud Adoption Framework Abbreviations"
     Unless you have your own naming convention, we suggest to use [Cloud Adoption Framework (CAF) abbreviations](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations){target=_blank} for resource prefixes.
 
 - Create a resource group to organize the services related to the application, run the below command:
 
-    ```shell
-    az group create `
-    --name $RESOURCE_GROUP `
-    --location "$LOCATION"
-    ```
+    === "PowerShell"
+        ```shell
+        az group create `
+        --name $RESOURCE_GROUP `
+        --location "$LOCATION"
+        ```
+    === "Bash"
+        ```shell
+        az group create \
+        --name "$RESOURCE_GROUP" \
+        --location "$LOCATION"
+        ```
 
 #### 2.2 Create Network Infrastructure
 
@@ -187,109 +240,201 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
 - We need to create a virtual network (VNet) to secure our container apps. Note that while the VNet size with `/16` CIDR is arbitrary, the container app subnet must have at least a `/27` CIDR.
 
-    ```shell
-    az network vnet create `
-    --name $VNET_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --address-prefix 10.0.0.0/16 `
-    --subnet-name ContainerAppSubnet `
-    --subnet-prefix 10.0.0.0/27
-    ```
+    === "PowerShell"
+        ```shell
+        az network vnet create `
+        --name $VNET_NAME `
+        --resource-group $RESOURCE_GROUP `
+        --address-prefix 10.0.0.0/16 `
+        --subnet-name ContainerAppSubnet `
+        --subnet-prefix 10.0.0.0/27
+        ```
+    === "Bash"
+        ```shell
+        az network vnet create \
+        --name "$VNET_NAME" \
+        --resource-group "$RESOURCE_GROUP" \
+        --address-prefix 10.0.0.0/16 \
+        --subnet-name ContainerAppSubnet \
+        --subnet-prefix 10.0.0.0/27
+        ```
 
 - Azure Container Apps requires management of the subnet, so we must delegate exclusive control.
 
-    ```shell
-    az network vnet subnet update `
-    --name ContainerAppSubnet `
-    --resource-group $RESOURCE_GROUP `
-    --vnet-name $VNET_NAME `
-    --delegations Microsoft.App/environments
-    ```
+    === "PowerShell"
+        ```shell
+        az network vnet subnet update `
+        --name ContainerAppSubnet `
+        --resource-group $RESOURCE_GROUP `
+        --vnet-name $VNET_NAME `
+        --delegations Microsoft.App/environments
+        ```
+    === "Bash"
+        ```shell
+        az network vnet subnet update \
+        --name ContainerAppSubnet \
+        --resource-group "$RESOURCE_GROUP" \
+        --vnet-name "$VNET_NAME" \
+        --delegations Microsoft.App/environments
+        ```
 
 - Retrieve the Azure Container App subnet resource ID as it will be referenced when the Azure Container App Environment is created later.
 
-    ```shell
-    $ACA_ENVIRONMENT_SUBNET_ID=$(az network vnet subnet show `
-    --name ContainerAppSubnet `
-    --resource-group $RESOURCE_GROUP `
-    --vnet-name $VNET_NAME `
-    --query id `
-    --output tsv)
-    ```
+    === "PowerShell"
+        ```shell
+        $ACA_ENVIRONMENT_SUBNET_ID=$(az network vnet subnet show `
+        --name ContainerAppSubnet `
+        --resource-group $RESOURCE_GROUP `
+        --vnet-name $VNET_NAME `
+        --query id `
+        --output tsv)
+        ```
+    === "Bash"
+        ```shell
+        export ACA_ENVIRONMENT_SUBNET_ID=$(az network vnet subnet show \
+        --name ContainerAppSubnet \
+        --resource-group "$RESOURCE_GROUP" \
+        --vnet-name "$VNET_NAME" \
+        --query id \
+        --output tsv)
+        ```
 
 #### 2.3 Create Log Analytics workspace & Application Insights
 
 - Create an Azure Log Analytics workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics workspace.
 
-    ```shell
-    # Create the Log Analytics workspace
-    az monitor log-analytics workspace create `
-    --resource-group $RESOURCE_GROUP `
-    --workspace-name $WORKSPACE_NAME
+    === "PowerShell"
+        ```shell
+        # Create the Log Analytics workspace
+        az monitor log-analytics workspace create `
+        --resource-group $RESOURCE_GROUP `
+        --workspace-name $WORKSPACE_NAME
 
-    # Retrieve the Log Analytics workspace ID
-    $WORKSPACE_ID=az monitor log-analytics workspace show `
-    --resource-group $RESOURCE_GROUP `
-    --workspace-name $WORKSPACE_NAME `
-    --query customerId `
-    --output tsv
+        # Retrieve the Log Analytics workspace ID
+        $WORKSPACE_ID=az monitor log-analytics workspace show `
+        --resource-group $RESOURCE_GROUP `
+        --workspace-name $WORKSPACE_NAME `
+        --query customerId `
+        --output tsv
 
-    # Retrieve the Log Analytics workspace secret
-    $WORKSPACE_SECRET=az monitor log-analytics workspace get-shared-keys `
-    --resource-group $RESOURCE_GROUP `
-    --workspace-name $WORKSPACE_NAME `
-    --query primarySharedKey `
-    --output tsv
-    ```
+        # Retrieve the Log Analytics workspace secret
+        $WORKSPACE_SECRET=az monitor log-analytics workspace get-shared-keys `
+        --resource-group $RESOURCE_GROUP `
+        --workspace-name $WORKSPACE_NAME `
+        --query primarySharedKey `
+        --output tsv
+        ```
+    === "Bash"
+        ```shell
+        # Create the Log Analytics workspace
+        az monitor log-analytics workspace create \
+        --resource-group "$RESOURCE_GROUP" \
+        --workspace-name "$WORKSPACE_NAME"
+
+        # Retrieve the Log Analytics workspace ID
+        export WORKSPACE_ID=$(az monitor log-analytics workspace show \
+        --resource-group "$RESOURCE_GROUP" \
+        --workspace-name "$WORKSPACE_NAME" \
+        --query customerId \
+        --output tsv)
+
+        # Retrieve the Log Analytics workspace secret
+        export WORKSPACE_SECRET=$(az monitor log-analytics workspace get-shared-keys \
+        --resource-group "$RESOURCE_GROUP" \
+        --workspace-name "$WORKSPACE_NAME" \
+        --query primarySharedKey \
+        --output tsv)
+        ```
 
 - Create an [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview?tabs=net){target=_blank} instance which will be used mainly for [distributed tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing){target=_blank} between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:
 
-    ```shell
-    # Create Application Insights instance
-    az monitor app-insights component create `
-    --resource-group $RESOURCE_GROUP `
-    --location $LOCATION `
-    --app $APPINSIGHTS_NAME `
-    --workspace $WORKSPACE_NAME
+    === "PowerShell"
+        ```shell
+        # Create Application Insights instance
+        az monitor app-insights component create `
+        --resource-group $RESOURCE_GROUP `
+        --location $LOCATION `
+        --app $APPINSIGHTS_NAME `
+        --workspace $WORKSPACE_NAME
 
-    # Get Application Insights Instrumentation Key
-    $APPINSIGHTS_INSTRUMENTATIONKEY=($(az monitor app-insights component show `
-    --resource-group $RESOURCE_GROUP `
-    --app $APPINSIGHTS_NAME `
-    --output json) | ConvertFrom-Json).instrumentationKey
+        # Get Application Insights Instrumentation Key
+        $APPINSIGHTS_INSTRUMENTATIONKEY=($(az monitor app-insights component show `
+        --resource-group $RESOURCE_GROUP `
+        --app $APPINSIGHTS_NAME `
+        --output json) | ConvertFrom-Json).instrumentationKey
 
-    echo $APPINSIGHTS_INSTRUMENTATIONKEY
-    ```
+        echo $APPINSIGHTS_INSTRUMENTATIONKEY
+        ```
+    === "Bash"
+        ```shell
+        # Create Application Insights instance
+        az monitor app-insights component create \
+        --resource-group "$RESOURCE_GROUP" \
+        --location "$LOCATION" \
+        --app "$APPINSIGHTS_NAME" \
+        --workspace "$WORKSPACE_NAME"
+
+        # Get Application Insights Instrumentation Key
+        export APPINSIGHTS_INSTRUMENTATIONKEY=$(az monitor app-insights component show \
+        --resource-group "$RESOURCE_GROUP" \
+        --app "$APPINSIGHTS_NAME" \
+        --output tsv --query instrumentationKey)
+
+        echo $APPINSIGHTS_INSTRUMENTATIONKEY
+        ```
 
 #### 2.4 Azure Container Infrastructure
 
 - Create an Azure Container Registry (ACR) instance in the resource group to store images of all Microservices we are going to build during this workshop. Make sure that you set the `admin-enabled` flag to true in order to seamlessly authenticate the Azure container app when trying to create the container app using the image stored in ACR.
 
-    ```shell
-    az acr create `
-    --name $AZURE_CONTAINER_REGISTRY_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --sku Basic `
-    --admin-enabled true
-    ```
+    === "PowerShell"
+        ```shell
+        az acr create `
+        --name $AZURE_CONTAINER_REGISTRY_NAME `
+        --resource-group $RESOURCE_GROUP `
+        --sku Basic `
+        --admin-enabled true
+        ```
+    === "Bash"
+        ```shell
+        az acr create \
+        --name "$AZURE_CONTAINER_REGISTRY_NAME" \
+        --resource-group "$RESOURCE_GROUP" \
+        --sku Basic \
+        --admin-enabled true
+        ```
 
 !!! note
     Notice that we create the registry with admin rights `--admin-enabled` flag set to `true` which is not suited for real production, but good for our workshop.
 
 - Now we will create an Azure Container Apps Environment. As a reminder of the different ACA components, [see this link in the workshop introduction](../../aca/00-workshop-intro/1-aca-core-components.md). The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop.
 
-    ```shell
-    # Create the ACA environment
-    az containerapp env create `
-    --name $ENVIRONMENT `
-    --resource-group $RESOURCE_GROUP `
-    --location $LOCATION `
-    --logs-workspace-id $WORKSPACE_ID `
-    --logs-workspace-key $WORKSPACE_SECRET `
-    --dapr-instrumentation-key $APPINSIGHTS_INSTRUMENTATIONKEY `
-    --enable-workload-profiles `
-    --infrastructure-subnet-resource-id $ACA_ENVIRONMENT_SUBNET_ID
-    ```
+    === "PowerShell"
+        ```shell
+        # Create the ACA environment
+        az containerapp env create `
+        --name $ENVIRONMENT `
+        --resource-group $RESOURCE_GROUP `
+        --location $LOCATION `
+        --logs-workspace-id $WORKSPACE_ID `
+        --logs-workspace-key $WORKSPACE_SECRET `
+        --dapr-instrumentation-key $APPINSIGHTS_INSTRUMENTATIONKEY `
+        --enable-workload-profiles `
+        --infrastructure-subnet-resource-id $ACA_ENVIRONMENT_SUBNET_ID
+        ```
+    === "Bash"
+        ```shell
+        # Create the ACA environment
+        az containerapp env create \
+        --name "$ENVIRONMENT" \
+        --resource-group "$RESOURCE_GROUP" \
+        --location "$LOCATION" \
+        --logs-workspace-id "$WORKSPACE_ID" \
+        --logs-workspace-key "$WORKSPACE_SECRET" \
+        --dapr-instrumentation-key "$APPINSIGHTS_INSTRUMENTATIONKEY" \
+        --enable-workload-profiles \
+        --infrastructure-subnet-resource-id "$ACA_ENVIRONMENT_SUBNET_ID"
+        ```
 
 !!! note
     We are not creating an `internal-only` Azure Container App Environment. This means that the static IP will be a public IP, and container apps, by default, will be publicly available on the internet.
@@ -305,38 +450,69 @@ We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the 
 
 - Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The `.` at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the `.csproj`.
 
-    ```shell
-    az acr build `
-    --registry $AZURE_CONTAINER_REGISTRY_NAME `
-    --image "tasksmanager/$BACKEND_API_NAME" `
-    --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
-    ```
+    === "PowerShell"
+        ```shell
+        az acr build `
+        --registry $AZURE_CONTAINER_REGISTRY_NAME `
+        --image "tasksmanager/$BACKEND_API_NAME" `
+        --file 'TasksTracker.TasksManager.Backend.Api/Dockerfile' .
+        ```
+    === "Bash"
+        ```shell
+        az acr build \
+        --registry "$AZURE_CONTAINER_REGISTRY_NAME" \
+        --image "tasksmanager/$BACKEND_API_NAME" \
+        --file "TasksTracker.TasksManager.Backend.Api/Dockerfile" .
+        ```
 
     Once this step is completed, you can verify the results by going to the [Azure portal](https://portal.azure.com){target=_blank} and checking that a new repository named `tasksmanager/tasksmanager-backend-api` has been created, and that there is a new Docker image with a `latest` tag.
 
 - The last step here is to create and deploy the Web API to ACA following the below command:
 
-    ```shell
-    $fqdn=(az containerapp create `
-    --name $BACKEND_API_NAME `
-    --resource-group $RESOURCE_GROUP `
-    --environment $ENVIRONMENT `
-    --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_API_NAME" `
-    --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
-    --target-port $TARGET_PORT `
-    --ingress 'external' `
-    --min-replicas 1 `
-    --max-replicas 1 `
-    --cpu 0.25 `
-    --memory 0.5Gi `
-    --query properties.configuration.ingress.fqdn `
-    --output tsv)
+    === "PowerShell"
+        ```shell
+        $fqdn=(az containerapp create `
+        --name $BACKEND_API_NAME `
+        --resource-group $RESOURCE_GROUP `
+        --environment $ENVIRONMENT `
+        --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_API_NAME" `
+        --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" `
+        --target-port $TARGET_PORT `
+        --ingress 'external' `
+        --min-replicas 1 `
+        --max-replicas 1 `
+        --cpu 0.25 `
+        --memory 0.5Gi `
+        --query properties.configuration.ingress.fqdn `
+        --output tsv)
 
-    $BACKEND_API_EXTERNAL_BASE_URL="https://$fqdn"
+        $BACKEND_API_EXTERNAL_BASE_URL="https://$fqdn"
 
-    echo "See a listing of tasks created by the author at this URL:"
-    echo "https://$fqdn/api/tasks/?createdby=tjoudeh@bitoftech.net"
-    ```
+        echo "See a listing of tasks created by the author at this URL:"
+        echo "https://$fqdn/api/tasks/?createdby=tjoudeh@bitoftech.net"
+        ```
+    === "Bash"
+        ```shell
+        fqdn=$(az containerapp create \
+        --name "$BACKEND_API_NAME" \
+        --resource-group "$RESOURCE_GROUP" \
+        --environment "$ENVIRONMENT" \
+        --image "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io/tasksmanager/$BACKEND_API_NAME" \
+        --registry-server "$AZURE_CONTAINER_REGISTRY_NAME.azurecr.io" \
+        --target-port "$TARGET_PORT" \
+        --ingress external \
+        --min-replicas 1 \
+        --max-replicas 1 \
+        --cpu 0.25 \
+        --memory 0.5Gi \
+        --query properties.configuration.ingress.fqdn \
+        --output tsv)
+
+        export BACKEND_API_EXTERNAL_BASE_URL="https://$fqdn"
+
+        echo "See a listing of tasks created by the author at this URL:"
+        echo "https://$fqdn/api/tasks/?createdby=tjoudeh@bitoftech.net"
+        ```
 
 ??? tip "Want to learn what the above command does?"
     - Ingress param is set to `external` which means that this container app (Web API) project will be accessible from the public internet. When Ingress is set to `Internal` or `External` it will be assigned a fully qualified domain name (FQDN). Important notes about IP addresses and domain names can be found [here](https://learn.microsoft.com/azure/container-apps/ingress?tabs=bash#ip-addresses-and-domain-names){target=_blank}.

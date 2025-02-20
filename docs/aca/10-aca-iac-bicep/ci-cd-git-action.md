@@ -30,9 +30,9 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
 
 === "PowerShell"
 
-    - Execute the following commands in PowerShell to create an Azure AD application and service principal.
+    - Execute the following commands to create an Azure AD application and service principal.
 
-    ```powershell
+    ```shell
     $AZURE_TENANT = az account show -o tsv --query tenantId
     $SUBSCRIPTION_ID = az account show -o tsv --query id
 
@@ -48,22 +48,22 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
     !!! note
         Replace `<Repo owner>` in below json with your GitHub username where you forked the workshop repository.
 
-    ```powershell
+    ```shell
     az rest --method POST --uri "https://graph.microsoft.com/beta/applications/$OBJECT_ID/federatedIdentityCredentials" --body '{\"name\":\"aca-dotnet-workshop-federated-identity\",\"issuer\":\"https://token.actions.githubusercontent.com\",\"subject\":\"repo:<Repo owner>/aca-dotnet-workshop:ref:refs/heads/main\",\"description\":\"GitHub\",\"audiences\":[\"api://AzureADTokenExchange\"]}' --headers "Content-Type=application/json"
     ```
 
     - Perform role assignment for the Azure AD application to access the subscription.
 
-    ```powershell
+    ```shell
     az role assignment create --assignee $APP_ID --role contributor --scope /subscriptions/$SUBSCRIPTION_ID
     az role assignment create --assignee $APP_ID --role 'User Access Administrator' --scope /subscriptions/$SUBSCRIPTION_ID
     ```
 
-=== "Bash/WSL"
+=== "Bash"
 
-    - Execute the following commands in PowerShell to create an Azure AD application and service principal.
+    - Execute the following commands to create an Azure AD application and service principal.
 
-    ```bash
+    ```shell
     AZURE_TENANT=$(az account show -o tsv --query tenantId)
     SUBSCRIPTION_ID=$(az account show -o tsv --query id)
 
@@ -79,7 +79,7 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
     !!! note
         Replace `<Repo owner>` in below json with your GitHub username where you forked the workshop repository.
 
-    ```bash
+    ```shell
     cat <<EOF > body.json
     {
         "name": "aca-dotnet-workshop-federated-identity",
@@ -97,7 +97,7 @@ In this workshop, we will use the OIDC authentication method. Assuming you are a
 
     - Perform role assignment for the Azure AD application to access the subscription.
 
-    ```bash
+    ```shell
     az role assignment create --assignee $APP_ID --role contributor --scope /subscriptions/$SUBSCRIPTION_ID
     az role assignment create --assignee $APP_ID --role 'User Access Administrator' --scope /subscriptions/$SUBSCRIPTION_ID
     ```

@@ -80,33 +80,60 @@ Run the PowerShell script below to create Azure Storage Account and get the mast
     We will be retrieving the storage account key for local dev testing purposes. Note that the command below will return two keys. You will only need one of them for this exercise.
     When deploying the changes to ACA, we are going to store the storage key securely into Azure Key Vault using [Dapr Secrets Store Building Block with AKV](https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/){target=_blank}.
 
-    We didn't use Azure Manged Identity here because the assumption is that those services are not part of our solution and thus they could theoretically be a non AD compliant services or hosted on another cloud.
+    We didn't use Azure Managed Identity here because the assumption is that those services are not part of our solution and thus they could theoretically be a non AD compliant services or hosted on another cloud.
     If these services where part of your application's ecosystem it is always recommended that you use Azure Managed Identity.
 
-```shell
-$STORAGE_ACCOUNT_NAME = "sttaskstracker$RANDOM_STRING"
+=== "PowerShell"
+    ```shell
+    $STORAGE_ACCOUNT_NAME = "sttaskstracker$RANDOM_STRING"
 
-az storage account create `
---name $STORAGE_ACCOUNT_NAME `
---resource-group $RESOURCE_GROUP `
---location $LOCATION `
---sku Standard_LRS `
---kind StorageV2
+    az storage account create `
+    --name $STORAGE_ACCOUNT_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --location $LOCATION `
+    --sku Standard_LRS `
+    --kind StorageV2
 
-# List Azure storage keys
-az storage account keys list `
---resource-group $RESOURCE_GROUP `
---account-name $STORAGE_ACCOUNT_NAME
+    # List Azure storage keys
+    az storage account keys list `
+    --resource-group $RESOURCE_GROUP `
+    --account-name $STORAGE_ACCOUNT_NAME
 
-# Get the primary storage account key
-$STORAGE_ACCOUNT_KEY=($(az storage account keys list `
---resource-group $RESOURCE_GROUP `
---account-name $STORAGE_ACCOUNT_NAME `
---output json) | ConvertFrom-Json)[0].value
+    # Get the primary storage account key
+    $STORAGE_ACCOUNT_KEY=($(az storage account keys list `
+    --resource-group $RESOURCE_GROUP `
+    --account-name $STORAGE_ACCOUNT_NAME `
+    --output json) | ConvertFrom-Json)[0].value
 
-echo "Storage Account Name : $STORAGE_ACCOUNT_NAME"
-echo "Storage Account Key  : $STORAGE_ACCOUNT_KEY"
-```
+    echo "Storage Account Name : $STORAGE_ACCOUNT_NAME"
+    echo "Storage Account Key  : $STORAGE_ACCOUNT_KEY"
+    ```
+=== "Bash"
+    ```shell
+    export STORAGE_ACCOUNT_NAME="sttaskstracker$RANDOM_STRING"
+
+    az storage account create \
+      --name $STORAGE_ACCOUNT_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --location $LOCATION \
+      --sku Standard_LRS \
+      --kind StorageV2
+
+    # List Azure storage keys
+    az storage account keys list \
+      --resource-group $RESOURCE_GROUP \
+      --account-name $STORAGE_ACCOUNT_NAME
+
+    # Get the primary storage account key
+    export STORAGE_ACCOUNT_KEY=$(az storage account keys list \
+      --resource-group $RESOURCE_GROUP \
+      --account-name $STORAGE_ACCOUNT_NAME \
+      --query '[0].value' \
+      --output tsv)
+
+    echo "Storage Account Name : $STORAGE_ACCOUNT_NAME"
+    echo "Storage Account Key  : $STORAGE_ACCOUNT_KEY"
+    ```
 
 Take note of the **Storage Account Name** and **Storage Account Key** as we will use both below.
 
@@ -213,11 +240,13 @@ Update and replace the code in the file with the code below. Pay close attention
 
 #### 2.5 Test Dapr Bindings Locally
 
---8<-- "snippets/update-variables.md::5"
+--8<-- "snippets/update-variables.md::13"
 
-Now we are ready to give it an end-to-end test on our dev machines. To do so, run the below commands in three separate PowerShell console, ensure you are on the right root folder of each respective project.
+Now we are ready to give it an end-to-end test on our dev machines. To do so, first restore the variables in three separate console, ensure you are on the right root folder of each respective project:
 
---8<-- "snippets/restore-variables.md:7:11"
+--8<-- "snippets/restore-variables.md:15:23"
+
+Once the variables are restored on each terminal, execute the following commands:
 
 === ".NET 8 or above"
 
@@ -263,15 +292,26 @@ with [Azure Key Vault secret store](https://docs.dapr.io/reference/components-re
 
 Create an Azure Key Vault which will be used to store securely any secret or key used in our application.
 
-```shell
-$KEYVAULT_NAME = "kv-tasks-tracker-$RANDOM_STRING"
+=== "PowerShell"
+    ```shell
+    $KEYVAULT_NAME = "kv-tasks-tracker-$RANDOM_STRING"
 
-az keyvault create `
---name $KEYVAULT_NAME `
---resource-group $RESOURCE_GROUP `
---location $LOCATION `
---enable-rbac-authorization true
-```
+    az keyvault create `
+    --name $KEYVAULT_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --location $LOCATION `
+    --enable-rbac-authorization true
+    ```
+=== "Bash"
+    ```shell
+    export KEYVAULT_NAME="kv-tasks-tracker-$RANDOM_STRING"
+
+    az keyvault create \
+      --name $KEYVAULT_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --location $LOCATION \
+      --enable-rbac-authorization true
+    ```
 
 !!! note
     It is important to create the Azure Key Vault with Azure RBAC for authorization by setting `--enable-rbac-authorization true` because the role we are going to assign to the Microsoft Entra ID application will work only when RBAC authorization is enabled.
@@ -282,54 +322,96 @@ In the previous module we have configured the `system-assigned` identity for the
 
 You can read more about [Azure built-in roles for Key Vault data plane operations](https://learn.microsoft.com/azure/key-vault/general/rbac-guide?tabs=azure-cli#azure-built-in-roles-for-key-vault-data-plane-operations){target=_blank}.
 
-```shell
-$KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
+=== "PowerShell"
+    ```shell
+    $KEYVAULT_SECRETS_USER_ROLE_ID = "4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
 
-# Get PRINCIPAL ID of BACKEND Processor Service
-$BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---query identity.principalId `
---output tsv
+    # Get PRINCIPAL ID of BACKEND Processor Service
+    $BACKEND_SERVICE_PRINCIPAL_ID = az containerapp show `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --query identity.principalId `
+    --output tsv
 
-az role assignment create `
---role $KEYVAULT_SECRETS_USER_ROLE_ID `
---assignee $BACKEND_SERVICE_PRINCIPAL_ID `
---scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
-```
+    az role assignment create `
+    --role $KEYVAULT_SECRETS_USER_ROLE_ID `
+    --assignee $BACKEND_SERVICE_PRINCIPAL_ID `
+    --scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
+    ```
+=== "Bash"
+    ```shell
+    export KEYVAULT_SECRETS_USER_ROLE_ID="4633458b-17de-408a-b874-0445c86b69e6" # ID for 'Key Vault Secrets User' Role
+
+    # Get PRINCIPAL ID of BACKEND Processor Service
+    export BACKEND_SERVICE_PRINCIPAL_ID=$(az containerapp show \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --query identity.principalId \
+      --output tsv)
+
+    az role assignment create \
+      --role $KEYVAULT_SECRETS_USER_ROLE_ID \
+      --assignee $BACKEND_SERVICE_PRINCIPAL_ID \
+      --scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
+    ```
 
 #### 3.3 Create Secrets in the Azure Key Vault
 
 To create a secret in Azure Key Vault you need to have a role which allows you to create secrets. From the Azure CLI we will assign the role `Key Vault Secrets Officer` to the user signed in to AZ CLI to
 be able to create secrets. To do so use the script below:
 
-```shell
-$SIGNEDIN_USERID = az ad signed-in-user show --query id --output tsv
-$KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" # ID for 'Key Vault Secrets Office' Role
+=== "PowerShell"
+    ```shell
+    $SIGNEDIN_USERID = az ad signed-in-user show --query id --output tsv
+    $KEYVAULT_SECRETS_OFFICER_ROLE_ID = "b86a8fe4-44ce-4948-aee5-eccb2c155cd7" # ID for 'Key Vault Secrets Office' Role
 
-az role assignment create `
---role $KEYVAULT_SECRETS_OFFICER_ROLE_ID `
---assignee $SIGNEDIN_USERID `
---scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
-```
+    az role assignment create `
+    --role $KEYVAULT_SECRETS_OFFICER_ROLE_ID `
+    --assignee $SIGNEDIN_USERID `
+    --scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
+    ```
+=== "Bash"
+    ```shell
+    export SIGNEDIN_USERID=$(az ad signed-in-user show --query id --output tsv)
+    export KEYVAULT_SECRETS_OFFICER_ROLE_ID="b86a8fe4-44ce-4948-aee5-eccb2c155cd7" # ID for 'Key Vault Secrets Office' Role
+
+    az role assignment create \
+      --role $KEYVAULT_SECRETS_OFFICER_ROLE_ID \
+      --assignee $SIGNEDIN_USERID \
+      --scope "/subscriptions/$AZURE_SUBSCRIPTION_ID/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.KeyVault/vaults/$KEYVAULT_NAME"
+    ```
 
 Now we will create the secrets in the Azure Key Vault using the commands below:
 
-```shell
-# Set External Azure Storage Access Key as a secret named 'external-azure-storage-key'
-az keyvault secret set `
---vault-name $KEYVAULT_NAME `
---name "external-azure-storage-key" `
---value $STORAGE_ACCOUNT_KEY
-```
+=== "PowerShell"
+    ```shell
+    # Set External Azure Storage Access Key as a secret named 'external-azure-storage-key'
+    az keyvault secret set `
+    --vault-name $KEYVAULT_NAME `
+    --name "external-azure-storage-key" `
+    --value $STORAGE_ACCOUNT_KEY
+    ```
+=== "Bash"
+    ```shell
+    # Set External Azure Storage Access Key as a secret named 'external-azure-storage-key'
+    az keyvault secret set \
+      --vault-name $KEYVAULT_NAME \
+      --name "external-azure-storage-key" \
+      --value $STORAGE_ACCOUNT_KEY
+    ```
 
 #### 3.4 Create a ACA Dapr Secrets Store Component file
 
 Obtain the name of the Key Vault.
 
-```shell
-$KEYVAULT_NAME
-```
+=== "PowerShell"
+    ```shell
+    $KEYVAULT_NAME
+    ```
+=== "Bash"
+    ```shell
+    echo $KEYVAULT_NAME
+    ```
 
 Create a new yaml file under the **aca-components** folder.
 
@@ -388,56 +470,99 @@ With those changes in place, we are ready to rebuild the backend background proc
 As we have done previously we need to build and deploy the Backend Background Processor image to ACR, so it is ready to be deployed to ACA.
 Continue using the same PowerShell console and paste the code below (make sure you are under the  **TasksTracker.ContainerApps** directory):
 
-```shell
-az acr build `
---registry $AZURE_CONTAINER_REGISTRY_NAME `
---image "tasksmanager/$BACKEND_SERVICE_NAME" `
---file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
-```
+=== "PowerShell"
+    ```shell
+    az acr build `
+    --registry $AZURE_CONTAINER_REGISTRY_NAME `
+    --image "tasksmanager/$BACKEND_SERVICE_NAME" `
+    --file 'TasksTracker.Processor.Backend.Svc/Dockerfile' .
+    ```
+=== "Bash"
+    ```shell
+    az acr build \
+      --registry $AZURE_CONTAINER_REGISTRY_NAME \
+      --image "tasksmanager/$BACKEND_SERVICE_NAME" \
+      --file "TasksTracker.Processor.Backend.Svc/Dockerfile" .
+    ```
 
 #### 4.2 Add Dapr Secret Store Component to ACA Environment
 
 We need to run the command below from the root to create the Dapr secret store component:
 
-```shell
-az containerapp env dapr-component set `
---name $ENVIRONMENT `
---resource-group $RESOURCE_GROUP `
---dapr-component-name secretstoreakv `
---yaml '.\aca-components\containerapps-secretstore-kv.yaml'
-```
+=== "PowerShell"
+    ```shell
+    az containerapp env dapr-component set `
+    --name $ENVIRONMENT `
+    --resource-group $RESOURCE_GROUP `
+    --dapr-component-name secretstoreakv `
+    --yaml '.\aca-components\containerapps-secretstore-kv.yaml'
+    ```
+=== "Bash"
+    ```shell
+    az containerapp env dapr-component set \
+      --name $ENVIRONMENT \
+      --resource-group $RESOURCE_GROUP \
+      --dapr-component-name secretstoreakv \
+      --yaml './aca-components/containerapps-secretstore-kv.yaml'
+    ```
 
 #### 4.3 Add the Bindings Dapr Components to ACA Environment
 
 Next, we will add the Dapr bindings components using the component files created.
 
-```shell
-# Input binding component for Azure Storage Queue
-az containerapp env dapr-component set `
---name $ENVIRONMENT `
---resource-group $RESOURCE_GROUP `
---dapr-component-name externaltasksmanager `
---yaml '.\aca-components\containerapps-bindings-in-storagequeue.yaml'
+=== "PowerShell"
+    ```shell
+    # Input binding component for Azure Storage Queue
+    az containerapp env dapr-component set `
+    --name $ENVIRONMENT `
+    --resource-group $RESOURCE_GROUP `
+    --dapr-component-name externaltasksmanager `
+    --yaml '.\aca-components\containerapps-bindings-in-storagequeue.yaml'
 
-# Output binding component for Azure Blob Storage
-az containerapp env dapr-component set `
---name $ENVIRONMENT `
---resource-group $RESOURCE_GROUP `
---dapr-component-name externaltasksblobstore `
---yaml '.\aca-components\containerapps-bindings-out-blobstorage.yaml'
-```
+    # Output binding component for Azure Blob Storage
+    az containerapp env dapr-component set `
+    --name $ENVIRONMENT `
+    --resource-group $RESOURCE_GROUP `
+    --dapr-component-name externaltasksblobstore `
+    --yaml '.\aca-components\containerapps-bindings-out-blobstorage.yaml'
+    ```
+=== "Bash"
+    ```shell
+    # Input binding component for Azure Storage Queue
+    az containerapp env dapr-component set \
+      --name $ENVIRONMENT \
+      --resource-group $RESOURCE_GROUP \
+      --dapr-component-name externaltasksmanager \
+      --yaml './aca-components/containerapps-bindings-in-storagequeue.yaml'
+
+    # Output binding component for Azure Blob Storage
+    az containerapp env dapr-component set \
+      --name $ENVIRONMENT \
+      --resource-group $RESOURCE_GROUP \
+      --dapr-component-name externaltasksblobstore \
+      --yaml './aca-components/containerapps-bindings-out-blobstorage.yaml'
+    ```
 
 #### 4.4 Deploy new revisions of the Backend Background Processor to ACA
 
 Update the Azure Container App hosting the Backend Background Processor with a new revision so our code changes are available for end users.
 
-```shell
-# Update Backend Background Processor container app and create a new revision
-az containerapp update `
---name $BACKEND_SERVICE_NAME `
---resource-group $RESOURCE_GROUP `
---revision-suffix v$TODAY-3
-```
+=== "PowerShell"
+    ```shell
+    # Update Backend Background Processor container app and create a new revision
+    az containerapp update `
+    --name $BACKEND_SERVICE_NAME `
+    --resource-group $RESOURCE_GROUP `
+    --revision-suffix v$TODAY-3
+    ```
+=== "Bash"
+    ```shell
+    # Update Backend Background Processor container app and create a new revision
+    az containerapp update \
+      --name $BACKEND_SERVICE_NAME \
+      --resource-group $RESOURCE_GROUP \
+      --revision-suffix v$TODAY-3
+    ```
 
 !!! success
     With those changes in place and deployed, from the [Azure portal](https://portal.azure.com){target=_blank} you can open the log streams section of the container app hosting the `ACA-Processor-Backend` and check the logs generated after queuing a message into Azure Storage Queue (using Azure Storage Explorer tool used earlier) as an external system.

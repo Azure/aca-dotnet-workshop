@@ -38,15 +38,16 @@ This workshop typically spans several days. As such, you may close your tools, e
 
 - Open a command-line terminal and create this folder for the workshop, then switch to that folder.
 
-    === "Windows"
+    === "PowerShell"
         ```shell
         md TasksTracker.ContainerApps
         cd TasksTracker.ContainerApps
         ```
-    === "Linux"
+    === "Bash"
         ```shell
-        mkdir ~\TasksTracker.ContainerApps
-        cd ~\TasksTracker.ContainerApps
+        mkdir TasksTracker.ContainerApps
+        cd TasksTracker.ContainerApps
+        export PROJECT_ROOT=$(pwd)
         ```
 
 - Initialize the git repository.
@@ -78,29 +79,54 @@ This workshop typically spans several days. As such, you may close your tools, e
 
 - Commit the `.gitignore` file.
 
-    ```shell
-    git add .\.gitignore
-    git commit -m "Add .gitignore"
-    ```
+    === "PowerShell"
+        ```shell 
+        git add .\.gitignore
+        git commit -m "Add .gitignore"
+        ```
+    === "Bash"
+        ```shell
+        git add ./.gitignore
+        git commit -m "Add .gitignore"
+        ```
 
 ### Set-Variables & Variables Script
 
-- In the root create a new file called `Set-Variables.ps1`.
+=== "PowerShell"
+    - In the root create a new file called `Set-Variables.ps1`.
 
-- Copy the [Set-Variables.ps1 script](../../aca/30-appendix/03-variables.md){target=_blank} into the newly-created `Set-Variables.ps1` file and save it.
+    - Copy the [Set-Variables.ps1 script](../../aca/30-appendix/03-variables.md){target=_blank} into the newly-created `Set-Variables.ps1` file and save it.
 
-- Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out. As we have not yet defined any variables, the output will indicate that the script has exited (without writing out to the file). This is intentional and expected at this stage.
+    - Execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out. As we have not yet defined any variables, the output will indicate that the script has exited (without writing out to the file). This is intentional and expected at this stage.
 
-    ```shell
-    .\Set-Variables.ps1
-    ```
+        ```shell
+        .\Set-Variables.ps1
+        ```
 
-- Commit the `Set-Variables.ps1` file.
+    - Commit the `Set-Variables.ps1` file.
 
-    ```shell
-    git add .\Set-Variables.ps1
-    git commit -m "Add Set-Variables.ps1"
-    ```
+        ```shell
+        git add .\Set-Variables.ps1
+        git commit -m "Add Set-Variables.ps1"
+        ```
+=== "Bash"
+    - In the root create a new file called `set_variables.sh`.
+
+    - Copy the [set_variables.sh script](../../aca/30-appendix/03-variables.md){target=_blank} into the newly-created `set_variables.sh` file and save it.
+
+    - Make it executable and execute the script. You will do this repeatedly throughout the modules. The output of the script will inform you how many variables are written out. As we have not yet defined any variables, the output will indicate that the script has exited (without writing out to the file). This is intentional and expected at this stage.
+
+        ```shell
+        chmod +x ./set_variables.sh
+        ./set_variables.sh
+        ```
+
+    - Commit the `set_variables.sh` file.
+
+        ```shell
+        git add ./set_variables.sh
+        git commit -m "Add set_variables.sh"
+        ```
 
 This completes the basic setup for Git and the variables to be used. You are ready to proceed to [Module 1](../01-deploy-api-to-aca/index.md)!
 
