@@ -46,7 +46,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.a40c8224.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -301,6 +301,7 @@
   
   <span class="md-ellipsis">
     Homepage
+    
   </span>
   
 
@@ -347,6 +348,7 @@
   
   <span class="md-ellipsis">
     Workshop Introduction
+    
   </span>
   
 
@@ -380,6 +382,7 @@
   
   <span class="md-ellipsis">
     ACA Core Components Overview
+    
   </span>
   
 
@@ -401,6 +404,7 @@
   
   <span class="md-ellipsis">
     Scenario and Solution Architecture
+    
   </span>
   
 
@@ -422,6 +426,7 @@
   
   <span class="md-ellipsis">
     Dapr Integration in ACA
+    
   </span>
   
 
@@ -443,6 +448,7 @@
   
   <span class="md-ellipsis">
     Prerequisites
+    
   </span>
   
 
@@ -471,6 +477,7 @@
   
   <span class="md-ellipsis">
     Module 1 - Deploy Backend API to ACA
+    
   </span>
   
 
@@ -491,6 +498,7 @@
   
   <span class="md-ellipsis">
     Module 2 - Communication between Microservices in ACA
+    
   </span>
   
 
@@ -511,6 +519,7 @@
   
   <span class="md-ellipsis">
     Module 3 - Dapr Integration with ACA
+    
   </span>
   
 
@@ -531,6 +540,7 @@
   
   <span class="md-ellipsis">
     Module 4 - ACA State Store With Dapr State Management API
+    
   </span>
   
 
@@ -551,6 +561,7 @@
   
   <span class="md-ellipsis">
     Module 5 - ACA Async Communication with Dapr Pub/Sub API
+    
   </span>
   
 
@@ -571,6 +582,7 @@
   
   <span class="md-ellipsis">
     Module 6 - ACA with Dapr Bindings Building Block
+    
   </span>
   
 
@@ -591,6 +603,7 @@
   
   <span class="md-ellipsis">
     Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
+    
   </span>
   
 
@@ -611,6 +624,7 @@
   
   <span class="md-ellipsis">
     Module 8 - ACA Monitoring and Observability with Application Insights
+    
   </span>
   
 
@@ -631,6 +645,7 @@
   
   <span class="md-ellipsis">
     Module 9 - ACA Auto Scaling with KEDA
+    
   </span>
   
 
@@ -677,6 +692,7 @@
   
   <span class="md-ellipsis">
     Module 10 - Deployment Via Bicep and DevOps
+    
   </span>
   
 
@@ -719,6 +735,7 @@
   
   <span class="md-ellipsis">
     Deploy Infrastructure using Bicep
+    
   </span>
   
 
@@ -730,6 +747,7 @@
   
   <span class="md-ellipsis">
     Deploy Infrastructure using Bicep
+    
   </span>
   
 
@@ -906,6 +924,7 @@
   
   <span class="md-ellipsis">
     Deploy Infrastructure using Bicep via GitHub Actions
+    
   </span>
   
 
@@ -927,6 +946,7 @@
   
   <span class="md-ellipsis">
     Deploy infrastructure using Azure Devops Pipeline
+    
   </span>
   
 
@@ -955,6 +975,7 @@
   
   <span class="md-ellipsis">
     Module 11 - Integration with Azure Container Apps landing zone accelerator
+    
   </span>
   
 
@@ -975,6 +996,7 @@
   
   <span class="md-ellipsis">
     Module 12 - Optimize Containers
+    
   </span>
   
 
@@ -995,6 +1017,7 @@
   
   <span class="md-ellipsis">
     About The Authors
+    
   </span>
   
 
@@ -1035,6 +1058,7 @@
   
   <span class="md-ellipsis">
     Appendix
+    
   </span>
   
 
@@ -1060,6 +1084,7 @@
   
   <span class="md-ellipsis">
     Debug and Launch Dapr Applications in VSCode
+    
   </span>
   
 
@@ -1081,6 +1106,7 @@
   
   <span class="md-ellipsis">
     Testing Changes Locally or with GitHub Codespaces
+    
   </span>
   
 
@@ -1102,6 +1128,7 @@
   
   <span class="md-ellipsis">
     Variables
+    
   </span>
   
 
@@ -1123,6 +1150,7 @@
   
   <span class="md-ellipsis">
     Troubleshooting
+    
   </span>
   
 
@@ -1313,6 +1341,7 @@
               <article class="md-content__inner md-typeset">
                 
                   
+
 
   
   
@@ -4881,186 +4910,210 @@ different options of getting images pushed to either Azure Container Registry (A
 </details>
 <h3 id="deploy-the-infrastructure-and-create-the-components">Deploy the Infrastructure and Create the Components<a class="headerlink" href="#deploy-the-infrastructure-and-create-the-components" title="Permanent link">&para;</a></h3>
 <p>Start by creating a new resource group which will contain all the resources to be created by the Bicep scripts.</p>
-<div class="language-Powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">PowerShell</label><label for="__tabbed_13_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
 <span class="normal"><a href="#__codelineno-17-3">3</a></span>
 <span class="normal"><a href="#__codelineno-17-4">4</a></span>
 <span class="normal"><a href="#__codelineno-17-5">5</a></span>
-<span class="normal"><a href="#__codelineno-17-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="nv">$RESOURCE_GROUP</span><span class="p">=</span><span class="s2">&quot;&lt;your RG name&gt;&quot;</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nv">$LOCATION</span><span class="p">=</span><span class="s2">&quot;&lt;your location&gt;&quot;</span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="n">az</span> <span class="nb">group </span><span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="p">-</span><span class="n">-name</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="p">-</span><span class="n">-location</span> <span class="nv">$LOCATION</span>
+<span class="normal"><a href="#__codelineno-17-6">6</a></span>
+<span class="normal"><a href="#__codelineno-17-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="c1"># It is recommended to create a new resource group different from the one used for the rest of the workshop</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="o">=</span><span class="s2">&quot;&lt;your RG name&gt;&quot;</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="nv">$LOCATION_MOD10</span><span class="o">=</span><span class="s2">&quot;&lt;your location&gt;&quot;</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a>az<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a>--name<span class="w"> </span><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a>--location<span class="w"> </span><span class="nv">$LOCATION_MOD10</span>
 </span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span>
+<span class="normal"><a href="#__codelineno-18-4">4</a></span>
+<span class="normal"><a href="#__codelineno-18-5">5</a></span>
+<span class="normal"><a href="#__codelineno-18-6">6</a></span>
+<span class="normal"><a href="#__codelineno-18-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="c1"># It is recommended to create a new resource group different from the one used for the rest of the workshop</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RESOURCE_GROUP_MOD10</span><span class="o">=</span><span class="s2">&quot;&lt;your RG name&gt;&quot;</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">LOCATION_MOD10</span><span class="o">=</span><span class="s2">&quot;&lt;your location&gt;&quot;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a>az<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">  </span>--location<span class="w"> </span><span class="nv">$LOCATION_MOD10</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>Create a parameters file which will simplify the invocation of the main bicep file. To achieve this, right click on file <code>main.bicep</code> and select <strong>Generate Parameter File</strong>.
 This will result in creating a file named <code>main.parameters.json</code> similar to the file below:</p>
 <details class="example">
 <summary>Example</summary>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">main.parameters.json</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">main.parameters.json</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-18-10">10</a></span>
-<span class="normal"><a href="#__codelineno-18-11">11</a></span>
-<span class="normal"><a href="#__codelineno-18-12">12</a></span>
-<span class="normal"><a href="#__codelineno-18-13">13</a></span>
-<span class="normal"><a href="#__codelineno-18-14">14</a></span>
-<span class="normal"><a href="#__codelineno-18-15">15</a></span>
-<span class="normal"><a href="#__codelineno-18-16">16</a></span>
-<span class="normal"><a href="#__codelineno-18-17">17</a></span>
-<span class="normal"><a href="#__codelineno-18-18">18</a></span>
-<span class="normal"><a href="#__codelineno-18-19">19</a></span>
-<span class="normal"><a href="#__codelineno-18-20">20</a></span>
-<span class="normal"><a href="#__codelineno-18-21">21</a></span>
-<span class="normal"><a href="#__codelineno-18-22">22</a></span>
-<span class="normal"><a href="#__codelineno-18-23">23</a></span>
-<span class="normal"><a href="#__codelineno-18-24">24</a></span>
-<span class="normal"><a href="#__codelineno-18-25">25</a></span>
-<span class="normal"><a href="#__codelineno-18-26">26</a></span>
-<span class="normal"><a href="#__codelineno-18-27">27</a></span>
-<span class="normal"><a href="#__codelineno-18-28">28</a></span>
-<span class="normal"><a href="#__codelineno-18-29">29</a></span>
-<span class="normal"><a href="#__codelineno-18-30">30</a></span>
-<span class="normal"><a href="#__codelineno-18-31">31</a></span>
-<span class="normal"><a href="#__codelineno-18-32">32</a></span>
-<span class="normal"><a href="#__codelineno-18-33">33</a></span>
-<span class="normal"><a href="#__codelineno-18-34">34</a></span>
-<span class="normal"><a href="#__codelineno-18-35">35</a></span>
-<span class="normal"><a href="#__codelineno-18-36">36</a></span>
-<span class="normal"><a href="#__codelineno-18-37">37</a></span>
-<span class="normal"><a href="#__codelineno-18-38">38</a></span>
-<span class="normal"><a href="#__codelineno-18-39">39</a></span>
-<span class="normal"><a href="#__codelineno-18-40">40</a></span>
-<span class="normal"><a href="#__codelineno-18-41">41</a></span>
-<span class="normal"><a href="#__codelineno-18-42">42</a></span>
-<span class="normal"><a href="#__codelineno-18-43">43</a></span>
-<span class="normal"><a href="#__codelineno-18-44">44</a></span>
-<span class="normal"><a href="#__codelineno-18-45">45</a></span>
-<span class="normal"><a href="#__codelineno-18-46">46</a></span>
-<span class="normal"><a href="#__codelineno-18-47">47</a></span>
-<span class="normal"><a href="#__codelineno-18-48">48</a></span>
-<span class="normal"><a href="#__codelineno-18-49">49</a></span>
-<span class="normal"><a href="#__codelineno-18-50">50</a></span>
-<span class="normal"><a href="#__codelineno-18-51">51</a></span>
-<span class="normal"><a href="#__codelineno-18-52">52</a></span>
-<span class="normal"><a href="#__codelineno-18-53">53</a></span>
-<span class="normal"><a href="#__codelineno-18-54">54</a></span>
-<span class="normal"><a href="#__codelineno-18-55">55</a></span>
-<span class="normal"><a href="#__codelineno-18-56">56</a></span>
-<span class="normal"><a href="#__codelineno-18-57">57</a></span>
-<span class="normal"><a href="#__codelineno-18-58">58</a></span>
-<span class="normal"><a href="#__codelineno-18-59">59</a></span>
-<span class="normal"><a href="#__codelineno-18-60">60</a></span>
-<span class="normal"><a href="#__codelineno-18-61">61</a></span>
-<span class="normal"><a href="#__codelineno-18-62">62</a></span>
-<span class="normal"><a href="#__codelineno-18-63">63</a></span>
-<span class="normal"><a href="#__codelineno-18-64">64</a></span>
-<span class="normal"><a href="#__codelineno-18-65">65</a></span>
-<span class="normal"><a href="#__codelineno-18-66">66</a></span>
-<span class="normal"><a href="#__codelineno-18-67">67</a></span>
-<span class="normal"><a href="#__codelineno-18-68">68</a></span>
-<span class="normal"><a href="#__codelineno-18-69">69</a></span>
-<span class="normal"><a href="#__codelineno-18-70">70</a></span>
-<span class="normal"><a href="#__codelineno-18-71">71</a></span>
-<span class="normal"><a href="#__codelineno-18-72">72</a></span>
-<span class="normal"><a href="#__codelineno-18-73">73</a></span>
-<span class="normal"><a href="#__codelineno-18-74">74</a></span>
-<span class="normal"><a href="#__codelineno-18-75">75</a></span>
-<span class="normal"><a href="#__codelineno-18-76">76</a></span>
-<span class="normal"><a href="#__codelineno-18-77">77</a></span>
-<span class="normal"><a href="#__codelineno-18-78">78</a></span>
-<span class="normal"><a href="#__codelineno-18-79">79</a></span>
-<span class="normal"><a href="#__codelineno-18-80">80</a></span>
-<span class="normal"><a href="#__codelineno-18-81">81</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="p">{</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#&quot;</span><span class="p">,</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">  </span><span class="nt">&quot;contentVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0.0&quot;</span><span class="p">,</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">  </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
-</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksmanager-backend-processor&quot;</span>
-</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksmanager-backend-api&quot;</span>
-</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksmanager-frontend-webapp&quot;</span>
-</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23"></a><span class="w">    </span><span class="nt">&quot;serviceBusTopicName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-24"><a id="__codelineno-18-24" name="__codelineno-18-24"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksavedtopic&quot;</span>
-</span><span id="__span-18-25"><a id="__codelineno-18-25" name="__codelineno-18-25"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-26"><a id="__codelineno-18-26" name="__codelineno-18-26"></a><span class="w">    </span><span class="nt">&quot;serviceBusTopicAuthorizationRuleName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-27"><a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksavedtopic-manage-policy&quot;</span>
-</span><span id="__span-18-28"><a id="__codelineno-18-28" name="__codelineno-18-28"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-29"><a id="__codelineno-18-29" name="__codelineno-18-29"></a><span class="w">    </span><span class="nt">&quot;cosmosDbDatabaseName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-30"><a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksmanagerdb&quot;</span>
-</span><span id="__span-18-31"><a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-32"><a id="__codelineno-18-32" name="__codelineno-18-32"></a><span class="w">    </span><span class="nt">&quot;cosmosDbCollectionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-33"><a id="__codelineno-18-33" name="__codelineno-18-33"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;taskscollection&quot;</span>
-</span><span id="__span-18-34"><a id="__codelineno-18-34" name="__codelineno-18-34"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-35"><a id="__codelineno-18-35" name="__codelineno-18-35"></a><span class="w">    </span><span class="nt">&quot;sendGridKeySecretValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-36"><a id="__codelineno-18-36" name="__codelineno-18-36"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-</span><span id="__span-18-37"><a id="__codelineno-18-37" name="__codelineno-18-37"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-38"><a id="__codelineno-18-38" name="__codelineno-18-38"></a><span class="w">    </span><span class="nt">&quot;sendGridEmailFrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-39"><a id="__codelineno-18-39" name="__codelineno-18-39"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;SEND_GRID_FROM_EMAIL&gt;&quot;</span>
-</span><span id="__span-18-40"><a id="__codelineno-18-40" name="__codelineno-18-40"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-41"><a id="__codelineno-18-41" name="__codelineno-18-41"></a><span class="w">    </span><span class="nt">&quot;sendGridEmailFromName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-42"><a id="__codelineno-18-42" name="__codelineno-18-42"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tasks Tracker Notification&quot;</span>
-</span><span id="__span-18-43"><a id="__codelineno-18-43" name="__codelineno-18-43"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-44"><a id="__codelineno-18-44" name="__codelineno-18-44"></a><span class="w">    </span><span class="nt">&quot;externalTasksQueueName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-45"><a id="__codelineno-18-45" name="__codelineno-18-45"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;external-tasks-queue&quot;</span>
-</span><span id="__span-18-46"><a id="__codelineno-18-46" name="__codelineno-18-46"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-47"><a id="__codelineno-18-47" name="__codelineno-18-47"></a><span class="w">    </span><span class="nt">&quot;externalTasksContainerBlobName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-48"><a id="__codelineno-18-48" name="__codelineno-18-48"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;externaltasksblob&quot;</span>
-</span><span id="__span-18-49"><a id="__codelineno-18-49" name="__codelineno-18-49"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-50"><a id="__codelineno-18-50" name="__codelineno-18-50"></a><span class="w">    </span><span class="nt">&quot;externalStorageKeySecretName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-51"><a id="__codelineno-18-51" name="__codelineno-18-51"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;external-azure-storage-key&quot;</span>
-</span><span id="__span-18-52"><a id="__codelineno-18-52" name="__codelineno-18-52"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-53"><a id="__codelineno-18-53" name="__codelineno-18-53"></a><span class="w">    </span><span class="nt">&quot;scheduledJobCron&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-54"><a id="__codelineno-18-54" name="__codelineno-18-54"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5 0 * * *&quot;</span>
-</span><span id="__span-18-55"><a id="__codelineno-18-55" name="__codelineno-18-55"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-56"><a id="__codelineno-18-56" name="__codelineno-18-56"></a><span class="w">    </span><span class="nt">&quot;secretStoreComponentName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-57"><a id="__codelineno-18-57" name="__codelineno-18-57"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;secretstoreakv&quot;</span>
-</span><span id="__span-18-58"><a id="__codelineno-18-58" name="__codelineno-18-58"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-59"><a id="__codelineno-18-59" name="__codelineno-18-59"></a><span class="w">    </span><span class="nt">&quot;containerRegistryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-60"><a id="__codelineno-18-60" name="__codelineno-18-60"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;&quot;</span>
-</span><span id="__span-18-61"><a id="__codelineno-18-61" name="__codelineno-18-61"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-62"><a id="__codelineno-18-62" name="__codelineno-18-62"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-63"><a id="__codelineno-18-63" name="__codelineno-18-63"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest&quot;</span>
-</span><span id="__span-18-64"><a id="__codelineno-18-64" name="__codelineno-18-64"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-65"><a id="__codelineno-18-65" name="__codelineno-18-65"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-66"><a id="__codelineno-18-66" name="__codelineno-18-66"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-api:latest&quot;</span>
-</span><span id="__span-18-67"><a id="__codelineno-18-67" name="__codelineno-18-67"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-68"><a id="__codelineno-18-68" name="__codelineno-18-68"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-69"><a id="__codelineno-18-69" name="__codelineno-18-69"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest&quot;</span>
-</span><span id="__span-18-70"><a id="__codelineno-18-70" name="__codelineno-18-70"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-71"><a id="__codelineno-18-71" name="__codelineno-18-71"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppPortNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-72"><a id="__codelineno-18-72" name="__codelineno-18-72"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span>
-</span><span id="__span-18-73"><a id="__codelineno-18-73" name="__codelineno-18-73"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-74"><a id="__codelineno-18-74" name="__codelineno-18-74"></a><span class="w">    </span><span class="nt">&quot;backendApiPortNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-75"><a id="__codelineno-18-75" name="__codelineno-18-75"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span>
-</span><span id="__span-18-76"><a id="__codelineno-18-76" name="__codelineno-18-76"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-18-77"><a id="__codelineno-18-77" name="__codelineno-18-77"></a><span class="w">    </span><span class="nt">&quot;backendProcessorPortNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-78"><a id="__codelineno-18-78" name="__codelineno-18-78"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span>
-</span><span id="__span-18-79"><a id="__codelineno-18-79" name="__codelineno-18-79"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-18-80"><a id="__codelineno-18-80" name="__codelineno-18-80"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-18-81"><a id="__codelineno-18-81" name="__codelineno-18-81"></a><span class="p">}</span>
+<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span>
+<span class="normal"><a href="#__codelineno-19-15">15</a></span>
+<span class="normal"><a href="#__codelineno-19-16">16</a></span>
+<span class="normal"><a href="#__codelineno-19-17">17</a></span>
+<span class="normal"><a href="#__codelineno-19-18">18</a></span>
+<span class="normal"><a href="#__codelineno-19-19">19</a></span>
+<span class="normal"><a href="#__codelineno-19-20">20</a></span>
+<span class="normal"><a href="#__codelineno-19-21">21</a></span>
+<span class="normal"><a href="#__codelineno-19-22">22</a></span>
+<span class="normal"><a href="#__codelineno-19-23">23</a></span>
+<span class="normal"><a href="#__codelineno-19-24">24</a></span>
+<span class="normal"><a href="#__codelineno-19-25">25</a></span>
+<span class="normal"><a href="#__codelineno-19-26">26</a></span>
+<span class="normal"><a href="#__codelineno-19-27">27</a></span>
+<span class="normal"><a href="#__codelineno-19-28">28</a></span>
+<span class="normal"><a href="#__codelineno-19-29">29</a></span>
+<span class="normal"><a href="#__codelineno-19-30">30</a></span>
+<span class="normal"><a href="#__codelineno-19-31">31</a></span>
+<span class="normal"><a href="#__codelineno-19-32">32</a></span>
+<span class="normal"><a href="#__codelineno-19-33">33</a></span>
+<span class="normal"><a href="#__codelineno-19-34">34</a></span>
+<span class="normal"><a href="#__codelineno-19-35">35</a></span>
+<span class="normal"><a href="#__codelineno-19-36">36</a></span>
+<span class="normal"><a href="#__codelineno-19-37">37</a></span>
+<span class="normal"><a href="#__codelineno-19-38">38</a></span>
+<span class="normal"><a href="#__codelineno-19-39">39</a></span>
+<span class="normal"><a href="#__codelineno-19-40">40</a></span>
+<span class="normal"><a href="#__codelineno-19-41">41</a></span>
+<span class="normal"><a href="#__codelineno-19-42">42</a></span>
+<span class="normal"><a href="#__codelineno-19-43">43</a></span>
+<span class="normal"><a href="#__codelineno-19-44">44</a></span>
+<span class="normal"><a href="#__codelineno-19-45">45</a></span>
+<span class="normal"><a href="#__codelineno-19-46">46</a></span>
+<span class="normal"><a href="#__codelineno-19-47">47</a></span>
+<span class="normal"><a href="#__codelineno-19-48">48</a></span>
+<span class="normal"><a href="#__codelineno-19-49">49</a></span>
+<span class="normal"><a href="#__codelineno-19-50">50</a></span>
+<span class="normal"><a href="#__codelineno-19-51">51</a></span>
+<span class="normal"><a href="#__codelineno-19-52">52</a></span>
+<span class="normal"><a href="#__codelineno-19-53">53</a></span>
+<span class="normal"><a href="#__codelineno-19-54">54</a></span>
+<span class="normal"><a href="#__codelineno-19-55">55</a></span>
+<span class="normal"><a href="#__codelineno-19-56">56</a></span>
+<span class="normal"><a href="#__codelineno-19-57">57</a></span>
+<span class="normal"><a href="#__codelineno-19-58">58</a></span>
+<span class="normal"><a href="#__codelineno-19-59">59</a></span>
+<span class="normal"><a href="#__codelineno-19-60">60</a></span>
+<span class="normal"><a href="#__codelineno-19-61">61</a></span>
+<span class="normal"><a href="#__codelineno-19-62">62</a></span>
+<span class="normal"><a href="#__codelineno-19-63">63</a></span>
+<span class="normal"><a href="#__codelineno-19-64">64</a></span>
+<span class="normal"><a href="#__codelineno-19-65">65</a></span>
+<span class="normal"><a href="#__codelineno-19-66">66</a></span>
+<span class="normal"><a href="#__codelineno-19-67">67</a></span>
+<span class="normal"><a href="#__codelineno-19-68">68</a></span>
+<span class="normal"><a href="#__codelineno-19-69">69</a></span>
+<span class="normal"><a href="#__codelineno-19-70">70</a></span>
+<span class="normal"><a href="#__codelineno-19-71">71</a></span>
+<span class="normal"><a href="#__codelineno-19-72">72</a></span>
+<span class="normal"><a href="#__codelineno-19-73">73</a></span>
+<span class="normal"><a href="#__codelineno-19-74">74</a></span>
+<span class="normal"><a href="#__codelineno-19-75">75</a></span>
+<span class="normal"><a href="#__codelineno-19-76">76</a></span>
+<span class="normal"><a href="#__codelineno-19-77">77</a></span>
+<span class="normal"><a href="#__codelineno-19-78">78</a></span>
+<span class="normal"><a href="#__codelineno-19-79">79</a></span>
+<span class="normal"><a href="#__codelineno-19-80">80</a></span>
+<span class="normal"><a href="#__codelineno-19-81">81</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="p">{</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#&quot;</span><span class="p">,</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">  </span><span class="nt">&quot;contentVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0.0&quot;</span><span class="p">,</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">  </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksmanager-backend-processor&quot;</span>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksmanager-backend-api&quot;</span>
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-21"><a id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksmanager-frontend-webapp&quot;</span>
+</span><span id="__span-19-22"><a id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-23"><a id="__codelineno-19-23" name="__codelineno-19-23"></a><span class="w">    </span><span class="nt">&quot;serviceBusTopicName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-24"><a id="__codelineno-19-24" name="__codelineno-19-24"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksavedtopic&quot;</span>
+</span><span id="__span-19-25"><a id="__codelineno-19-25" name="__codelineno-19-25"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-26"><a id="__codelineno-19-26" name="__codelineno-19-26"></a><span class="w">    </span><span class="nt">&quot;serviceBusTopicAuthorizationRuleName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-27"><a id="__codelineno-19-27" name="__codelineno-19-27"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksavedtopic-manage-policy&quot;</span>
+</span><span id="__span-19-28"><a id="__codelineno-19-28" name="__codelineno-19-28"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-29"><a id="__codelineno-19-29" name="__codelineno-19-29"></a><span class="w">    </span><span class="nt">&quot;cosmosDbDatabaseName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-30"><a id="__codelineno-19-30" name="__codelineno-19-30"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tasksmanagerdb&quot;</span>
+</span><span id="__span-19-31"><a id="__codelineno-19-31" name="__codelineno-19-31"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-32"><a id="__codelineno-19-32" name="__codelineno-19-32"></a><span class="w">    </span><span class="nt">&quot;cosmosDbCollectionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-33"><a id="__codelineno-19-33" name="__codelineno-19-33"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;taskscollection&quot;</span>
+</span><span id="__span-19-34"><a id="__codelineno-19-34" name="__codelineno-19-34"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-35"><a id="__codelineno-19-35" name="__codelineno-19-35"></a><span class="w">    </span><span class="nt">&quot;sendGridKeySecretValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-36"><a id="__codelineno-19-36" name="__codelineno-19-36"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-19-37"><a id="__codelineno-19-37" name="__codelineno-19-37"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-38"><a id="__codelineno-19-38" name="__codelineno-19-38"></a><span class="w">    </span><span class="nt">&quot;sendGridEmailFrom&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-39"><a id="__codelineno-19-39" name="__codelineno-19-39"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;SEND_GRID_FROM_EMAIL&gt;&quot;</span>
+</span><span id="__span-19-40"><a id="__codelineno-19-40" name="__codelineno-19-40"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-41"><a id="__codelineno-19-41" name="__codelineno-19-41"></a><span class="w">    </span><span class="nt">&quot;sendGridEmailFromName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-42"><a id="__codelineno-19-42" name="__codelineno-19-42"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tasks Tracker Notification&quot;</span>
+</span><span id="__span-19-43"><a id="__codelineno-19-43" name="__codelineno-19-43"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-44"><a id="__codelineno-19-44" name="__codelineno-19-44"></a><span class="w">    </span><span class="nt">&quot;externalTasksQueueName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-45"><a id="__codelineno-19-45" name="__codelineno-19-45"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;external-tasks-queue&quot;</span>
+</span><span id="__span-19-46"><a id="__codelineno-19-46" name="__codelineno-19-46"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-47"><a id="__codelineno-19-47" name="__codelineno-19-47"></a><span class="w">    </span><span class="nt">&quot;externalTasksContainerBlobName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-48"><a id="__codelineno-19-48" name="__codelineno-19-48"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;externaltasksblob&quot;</span>
+</span><span id="__span-19-49"><a id="__codelineno-19-49" name="__codelineno-19-49"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-50"><a id="__codelineno-19-50" name="__codelineno-19-50"></a><span class="w">    </span><span class="nt">&quot;externalStorageKeySecretName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-51"><a id="__codelineno-19-51" name="__codelineno-19-51"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;external-azure-storage-key&quot;</span>
+</span><span id="__span-19-52"><a id="__codelineno-19-52" name="__codelineno-19-52"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-53"><a id="__codelineno-19-53" name="__codelineno-19-53"></a><span class="w">    </span><span class="nt">&quot;scheduledJobCron&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-54"><a id="__codelineno-19-54" name="__codelineno-19-54"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5 0 * * *&quot;</span>
+</span><span id="__span-19-55"><a id="__codelineno-19-55" name="__codelineno-19-55"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-56"><a id="__codelineno-19-56" name="__codelineno-19-56"></a><span class="w">    </span><span class="nt">&quot;secretStoreComponentName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-57"><a id="__codelineno-19-57" name="__codelineno-19-57"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;secretstoreakv&quot;</span>
+</span><span id="__span-19-58"><a id="__codelineno-19-58" name="__codelineno-19-58"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-59"><a id="__codelineno-19-59" name="__codelineno-19-59"></a><span class="w">    </span><span class="nt">&quot;containerRegistryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-60"><a id="__codelineno-19-60" name="__codelineno-19-60"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;&quot;</span>
+</span><span id="__span-19-61"><a id="__codelineno-19-61" name="__codelineno-19-61"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-62"><a id="__codelineno-19-62" name="__codelineno-19-62"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-63"><a id="__codelineno-19-63" name="__codelineno-19-63"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest&quot;</span>
+</span><span id="__span-19-64"><a id="__codelineno-19-64" name="__codelineno-19-64"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-65"><a id="__codelineno-19-65" name="__codelineno-19-65"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-66"><a id="__codelineno-19-66" name="__codelineno-19-66"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-api:latest&quot;</span>
+</span><span id="__span-19-67"><a id="__codelineno-19-67" name="__codelineno-19-67"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-68"><a id="__codelineno-19-68" name="__codelineno-19-68"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-69"><a id="__codelineno-19-69" name="__codelineno-19-69"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest&quot;</span>
+</span><span id="__span-19-70"><a id="__codelineno-19-70" name="__codelineno-19-70"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-71"><a id="__codelineno-19-71" name="__codelineno-19-71"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppPortNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-72"><a id="__codelineno-19-72" name="__codelineno-19-72"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span>
+</span><span id="__span-19-73"><a id="__codelineno-19-73" name="__codelineno-19-73"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-74"><a id="__codelineno-19-74" name="__codelineno-19-74"></a><span class="w">    </span><span class="nt">&quot;backendApiPortNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-75"><a id="__codelineno-19-75" name="__codelineno-19-75"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span>
+</span><span id="__span-19-76"><a id="__codelineno-19-76" name="__codelineno-19-76"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-19-77"><a id="__codelineno-19-77" name="__codelineno-19-77"></a><span class="w">    </span><span class="nt">&quot;backendProcessorPortNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-78"><a id="__codelineno-19-78" name="__codelineno-19-78"></a><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span>
+</span><span id="__span-19-79"><a id="__codelineno-19-79" name="__codelineno-19-79"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-19-80"><a id="__codelineno-19-80" name="__codelineno-19-80"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-19-81"><a id="__codelineno-19-81" name="__codelineno-19-81"></a><span class="p">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5074,117 +5127,87 @@ one of the three options in next step.</p>
 <p>In case you followed along with the whole workshop and would like to use your own sourcecode, make sure to replace the port numbers (80) by the port numbers that were generated when you created your docker files in vs code for your three applications (e.g., 5225). Make sure that the port numbers match the numbers in the respective docker files. If port numbers aren't matching, your deployment will work without errors, but the portal will report issues with the apps and calling one of the apps will result in a session timeout.</p>
 </div>
 <p>Next, we will prepare container images for the three container apps and update the values in <code>main.parameters.json</code> file. You can do so by any of the three options below:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:3"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><input id="__tabbed_14_3" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Option 1: Build and Push the Images to Azure Container Registry (ACR)</label><label for="__tabbed_14_2">Option 2: Import pre-built public images to your private Azure Container Registry</label><label for="__tabbed_14_3">Option 3: Use the pre-built images from the public repository</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:3"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><input id="__tabbed_15_3" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Option 1: Build and Push the Images to Azure Container Registry (ACR)</label><label for="__tabbed_15_2">Option 2: Import pre-built public images to your private Azure Container Registry</label><label for="__tabbed_15_3">Option 3: Use the pre-built images from the public repository</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
-<li>
-<p>Create an Azure Container Registry (ACR) inside the newly created Resource Group:</p>
-<div class="language-Powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
-<span class="normal"><a href="#__codelineno-19-2">2</a></span>
-<span class="normal"><a href="#__codelineno-19-3">3</a></span>
-<span class="normal"><a href="#__codelineno-19-4">4</a></span>
-<span class="normal"><a href="#__codelineno-19-5">5</a></span>
-<span class="normal"><a href="#__codelineno-19-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="p">=</span><span class="s2">&quot;&lt;your ACR name&gt;&quot;</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6"></a>    <span class="p">-</span><span class="n">-sku</span> <span class="n">Basic</span>
-</span></code></pre></div></td></tr></table></div>
-</li>
-<li>
-<p>Build and push the images to ACR. Make sure you are at the root project directory when executing the following commands:</p>
-<div class="language-Powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-20-10">10</a></span>
-<span class="normal"><a href="#__codelineno-20-11">11</a></span>
-<span class="normal"><a href="#__codelineno-20-12">12</a></span>
-<span class="normal"><a href="#__codelineno-20-13">13</a></span>
-<span class="normal"><a href="#__codelineno-20-14">14</a></span>
-<span class="normal"><a href="#__codelineno-20-15">15</a></span>
-<span class="normal"><a href="#__codelineno-20-16">16</a></span>
-<span class="normal"><a href="#__codelineno-20-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c">## Build Backend API on ACR and Push to ACR</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/tasksmanager-backend-api&quot;</span> <span class="p">`</span>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>    <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span> <span class="p">.</span>
-</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a>
-</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="c">## Build Backend Service on ACR and Push to ACR</span>
-</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8"></a>
-</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/tasksmanager-backend-processor&quot;</span> <span class="p">`</span>
-</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11"></a>    <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span> <span class="p">.</span>
-</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12"></a>
-</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="c">## Build Frontend Web App on ACR and Push to ACR</span>
-</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14"></a>
-</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">build</span> <span class="p">-</span><span class="n">-registry</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16"></a>    <span class="p">-</span><span class="n">-image</span> <span class="s2">&quot;tasksmanager/tasksmanager-frontend-webapp&quot;</span> <span class="p">`</span>
-</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17"></a>    <span class="p">-</span><span class="o">-file</span> <span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span> <span class="p">.</span>
-</span></code></pre></div></td></tr></table></div>
-</li>
-<li>
-<p>Update the <code>main.parameters.json</code> file with the container registry name and the container images names as shown below:</p>
-<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-21-10">10</a></span>
-<span class="normal"><a href="#__codelineno-21-11">11</a></span>
-<span class="normal"><a href="#__codelineno-21-12">12</a></span>
-<span class="normal"><a href="#__codelineno-21-13">13</a></span>
-<span class="normal"><a href="#__codelineno-21-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="p">{</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="nt">&quot;containerRegistryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;&quot;</span>
-</span></span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest&quot;</span>
-</span></span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-api:latest&quot;</span>
-</span></span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest&quot;</span>
-</span></span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
-</li>
+<li>Create an Azure Container Registry (ACR) inside the newly created Resource Group:</li>
 </ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">PowerShell</label><label for="__tabbed_16_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span>
+<span class="normal"><a href="#__codelineno-20-4">4</a></span>
+<span class="normal"><a href="#__codelineno-20-5">5</a></span>
+<span class="normal"><a href="#__codelineno-20-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="o">=</span><span class="s2">&quot;&lt;your ACR name&gt;&quot;</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a>--sku<span class="w"> </span>Basic
+</span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<p>All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can import it directly into 
-your private container instance as shown below.</p>
-<ol>
-<li>
-<p>Create an Azure Container Registry (ACR) inside the newly created Resource Group:</p>
-<div class="language-Powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
-<span class="normal"><a href="#__codelineno-22-2">2</a></span>
-<span class="normal"><a href="#__codelineno-22-3">3</a></span>
-<span class="normal"><a href="#__codelineno-22-4">4</a></span>
-<span class="normal"><a href="#__codelineno-22-5">5</a></span>
-<span class="normal"><a href="#__codelineno-22-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="nv">$CONTAINER_REGISTRY_NAME</span><span class="p">=</span><span class="s2">&quot;&lt;your ACR name&gt;&quot;</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2"></a>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">az</span> <span class="n">acr</span> <span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a>    <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6"></a>    <span class="p">-</span><span class="n">-sku</span> <span class="n">Basic</span>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span>
+<span class="normal"><a href="#__codelineno-21-4">4</a></span>
+<span class="normal"><a href="#__codelineno-21-5">5</a></span>
+<span class="normal"><a href="#__codelineno-21-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="o">=</span><span class="s2">&quot;&lt;your ACR name&gt;&quot;</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">  </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">  </span>--sku<span class="w"> </span>Basic
 </span></code></pre></div></td></tr></table></div>
-</li>
-<li>
-<p>Import the images to your private ACR as shown below:</p>
-<div class="language-Powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+</div>
+</div>
+</div>
+<ol>
+<li>Build and push the images to ACR. Make sure you are at the root project directory when executing the following commands:</li>
+</ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">PowerShell</label><label for="__tabbed_17_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="c1"># Build Backend API on ACR and Push to ACR</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2"></a>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/tasksmanager-backend-api&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6"></a>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="c1">## Build Backend Service on ACR and Push to ACR</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8"></a>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/tasksmanager-backend-processor&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span><span class="w"> </span>.
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12"></a>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="c1">## Build Frontend Web App on ACR and Push to ACR</span>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14"></a>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/tasksmanager-frontend-webapp&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span><span class="w"> </span>.
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
@@ -5197,22 +5220,31 @@ your private container instance as shown below.</p>
 <span class="normal"><a href="#__codelineno-23-11">11</a></span>
 <span class="normal"><a href="#__codelineno-23-12">12</a></span>
 <span class="normal"><a href="#__codelineno-23-13">13</a></span>
-<span class="normal"><a href="#__codelineno-23-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a>    <span class="n">az</span> <span class="n">acr</span> <span class="n">import</span> <span class="p">`</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-backend-api</span> <span class="p">`</span>
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a>    <span class="p">-</span><span class="n">-source</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">azure</span><span class="p">/</span><span class="n">tasksmanager-backend-api</span><span class="p">:</span><span class="n">latest</span>
-</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a>
-</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a>    <span class="n">az</span> <span class="n">acr</span> <span class="n">import</span>  <span class="p">`</span>
-</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-frontend-webapp</span> <span class="p">`</span>
-</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a>    <span class="p">-</span><span class="n">-source</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">azure</span><span class="p">/</span><span class="n">tasksmanager-frontend-webapp</span><span class="p">:</span><span class="n">latest</span>
-</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a>
-</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11"></a>    <span class="n">az</span> <span class="n">acr</span> <span class="n">import</span>  <span class="p">`</span>
-</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12"></a>    <span class="p">-</span><span class="n">-name</span> <span class="nv">$CONTAINER_REGISTRY_NAME</span> <span class="p">`</span>
-</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13"></a>    <span class="p">-</span><span class="n">-image</span> <span class="n">tasksmanager</span><span class="p">/</span><span class="n">tasksmanager-backend-processor</span> <span class="p">`</span>
-</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14"></a>    <span class="p">-</span><span class="n">-source</span> <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="n">azure</span><span class="p">/</span><span class="n">tasksmanager-backend-processor</span><span class="p">:</span><span class="n">latest</span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="c1"># Build Backend API on ACR and Push to ACR</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">  </span>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/tasksmanager-backend-api&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">  </span>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="c1"># Build Backend Service on ACR and Push to ACR</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">  </span>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/tasksmanager-backend-processor&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">  </span>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.Processor.Backend.Svc/Dockerfile&#39;</span><span class="w"> </span>.
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12"></a>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="c1"># Build Frontend Web App on ACR and Push to ACR</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14"></a>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span>--registry<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="w">  </span>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/tasksmanager-frontend-webapp&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="w">  </span>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.WebPortal.Frontend.Ui/Dockerfile&#39;</span><span class="w"> </span>.
 </span></code></pre></div></td></tr></table></div>
-</li>
+</div>
+</div>
+</div>
+<ol>
 <li>
 <p>Update the <code>main.parameters.json</code> file with the container registry name and the container images names as shown below:</p>
 <div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
@@ -5247,48 +5279,203 @@ your private container instance as shown below.</p>
 </ol>
 </div>
 <div class="tabbed-block">
-<p>All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can use the pre-built images from the public repository as shown below.</p>
-<p>The public images can be set directly in the <code>main.parameters.json</code> file:</p>
-<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-25-10">10</a></span>
-<span class="normal"><a href="#__codelineno-25-11">11</a></span>
-<span class="normal"><a href="#__codelineno-25-12">12</a></span>
-<span class="normal"><a href="#__codelineno-25-13">13</a></span>
-<span class="normal"><a href="#__codelineno-25-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="p">{</span>
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="w">    </span><span class="nt">&quot;containerRegistryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-</span></span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="hll"><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-backend-processor:latest&quot;</span>
-</span></span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="hll"><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-backend-api:latest&quot;</span>
-</span></span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="hll"><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-frontend-webapp:latest&quot;</span>
-</span></span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="p">}</span><span class="w">   </span>
+<p>All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can import it directly into 
+your private container instance as shown below.</p>
+<ol>
+<li>Create an Azure Container Registry (ACR) inside the newly created Resource Group:</li>
+</ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">PowerShell</label><label for="__tabbed_18_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span>
+<span class="normal"><a href="#__codelineno-25-3">3</a></span>
+<span class="normal"><a href="#__codelineno-25-4">4</a></span>
+<span class="normal"><a href="#__codelineno-25-5">5</a></span>
+<span class="normal"><a href="#__codelineno-25-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="o">=</span><span class="s2">&quot;&lt;your ACR name&gt;&quot;</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5"></a>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6"></a>--sku<span class="w"> </span>Basic
 </span></code></pre></div></td></tr></table></div>
 </div>
-</div>
-</div>
-<p>Start the deployment by calling <code>az deployment group create</code>. To accomplish this, open the PowerShell console and use the content below.</p>
-<div class="language-Powershell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
 <span class="normal"><a href="#__codelineno-26-2">2</a></span>
 <span class="normal"><a href="#__codelineno-26-3">3</a></span>
-<span class="normal"><a href="#__codelineno-26-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">az</span> <span class="n">deployment</span> <span class="nb">group </span><span class="n">create</span> <span class="p">`</span>
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$RESOURCE_GROUP</span> <span class="p">`</span>
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="p">-</span><span class="n">-template</span><span class="o">-file</span> <span class="s2">&quot;./bicep/main.bicep&quot;</span> <span class="p">`</span>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="p">-</span><span class="n">-parameters</span> <span class="s2">&quot;./bicep/main.parameters.json&quot;</span>
+<span class="normal"><a href="#__codelineno-26-4">4</a></span>
+<span class="normal"><a href="#__codelineno-26-5">5</a></span>
+<span class="normal"><a href="#__codelineno-26-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CONTAINER_REGISTRY_NAME_MOD10</span><span class="o">=</span><span class="s2">&quot;&lt;your ACR name&gt;&quot;</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2"></a>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="w">  </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">  </span>--sku<span class="w"> </span>Basic
 </span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<ol>
+<li>Import the images to your private ACR as shown below:</li>
+</ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">PowerShell</label><label for="__tabbed_19_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-27-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-27-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-27-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-27-10">10</a></span>
+<span class="normal"><a href="#__codelineno-27-11">11</a></span>
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span>
+<span class="normal"><a href="#__codelineno-27-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2"></a>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3"></a>--image<span class="w"> </span>tasksmanager/tasksmanager-backend-api<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4"></a>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-backend-api:latest
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5"></a>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w">  </span><span class="sb">`</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8"></a>--image<span class="w"> </span>tasksmanager/tasksmanager-frontend-webapp<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9"></a>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-frontend-webapp:latest
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10"></a>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w">  </span><span class="sb">`</span>
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12"></a>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13"></a>--image<span class="w"> </span>tasksmanager/tasksmanager-backend-processor<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14"></a>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-backend-processor:latest
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span>
+<span class="normal"><a href="#__codelineno-28-13">13</a></span>
+<span class="normal"><a href="#__codelineno-28-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager/tasksmanager-backend-api<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-backend-api:latest
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5"></a>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w">  </span><span class="se">\</span>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager/tasksmanager-frontend-webapp<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-frontend-webapp:latest
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10"></a>
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11"></a>az<span class="w"> </span>acr<span class="w"> </span>import<span class="w">  </span><span class="se">\</span>
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$CONTAINER_REGISTRY_NAME_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13"></a><span class="w">  </span>--image<span class="w"> </span>tasksmanager/tasksmanager-backend-processor<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="w">  </span>--source<span class="w"> </span>ghcr.io/azure/tasksmanager-backend-processor:latest
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<ol>
+<li>
+<p>Update the <code>main.parameters.json</code> file with the container registry name and the container images names as shown below:</p>
+<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-29-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-29-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-29-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-29-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-29-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-29-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-29-10">10</a></span>
+<span class="normal"><a href="#__codelineno-29-11">11</a></span>
+<span class="normal"><a href="#__codelineno-29-12">12</a></span>
+<span class="normal"><a href="#__codelineno-29-13">13</a></span>
+<span class="normal"><a href="#__codelineno-29-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="p">{</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="w">    </span><span class="nt">&quot;containerRegistryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;&quot;</span>
+</span></span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-processor:latest&quot;</span>
+</span></span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-backend-api:latest&quot;</span>
+</span></span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;CONTAINER_REGISTRY_NAME&gt;.azurecr.io/tasksmanager/tasksmanager-frontend-webapp:latest&quot;</span>
+</span></span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<p>All the container image are available in a public image repository. If you do not wish to build the container images from code directly, you can use the pre-built images from the public repository as shown below.</p>
+<p>The public images can be set directly in the <code>main.parameters.json</code> file:</p>
+<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span>
+<span class="normal"><a href="#__codelineno-30-12">12</a></span>
+<span class="normal"><a href="#__codelineno-30-13">13</a></span>
+<span class="normal"><a href="#__codelineno-30-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="p">{</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="w">    </span><span class="nt">&quot;containerRegistryName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span></span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="w">    </span><span class="nt">&quot;backendProcessorServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="hll"><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-backend-processor:latest&quot;</span>
+</span></span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="w">    </span><span class="nt">&quot;backendApiServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="hll"><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-backend-api:latest&quot;</span>
+</span></span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-30-11"><a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="w">    </span><span class="nt">&quot;frontendWebAppServiceImage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-12"><a id="__codelineno-30-12" name="__codelineno-30-12"></a><span class="hll"><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ghcr.io/azure/tasksmanager-frontend-webapp:latest&quot;</span>
+</span></span><span id="__span-30-13"><a id="__codelineno-30-13" name="__codelineno-30-13"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-30-14"><a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="p">}</span><span class="w">   </span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Start the deployment by calling <code>az deployment group create</code>. To accomplish this, open the console and use the content below.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">PowerShell</label><label for="__tabbed_20_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span>
+<span class="normal"><a href="#__codelineno-31-3">3</a></span>
+<span class="normal"><a href="#__codelineno-31-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a>az<span class="w"> </span>deployment<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3"></a>--template-file<span class="w"> </span><span class="s2">&quot;./bicep/main.bicep&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4"></a>--parameters<span class="w"> </span><span class="s2">&quot;./bicep/main.parameters.json&quot;</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
+<span class="normal"><a href="#__codelineno-32-2">2</a></span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span>
+<span class="normal"><a href="#__codelineno-32-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1"></a>az<span class="w"> </span>deployment<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="w">  </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP_MOD10</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="w">  </span>--template-file<span class="w"> </span><span class="s2">&quot;./bicep/main.bicep&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="w">  </span>--parameters<span class="w"> </span><span class="s2">&quot;./bicep/main.parameters.json&quot;</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>The Azure CLI will take the Bicep module and start creating the deployment in the resource group.</p>
 <h3 id="verify-the-final-results">Verify the Final Results<a class="headerlink" href="#verify-the-final-results" title="Permanent link">&para;</a></h3>
 <div class="admonition success">
@@ -5316,7 +5503,7 @@ your private container instance as shown below.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2025-01-28
+    2025-02-20
   </span>
 
     
@@ -5435,7 +5622,7 @@ your private container instance as shown below.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
     
   <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
