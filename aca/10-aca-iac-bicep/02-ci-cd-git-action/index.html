@@ -18,15 +18,17 @@
 
     <!-- Canonical -->
     
+        <link rel="canonical" href="https://azure.github.io/aca-dotnet-workshop">
+    
 
     <!-- Previous page -->
     
-        <link rel="prev" href="../ci-cd-git-action/" />
+        <link rel="prev" href="../01-iac-bicep/" />
     
 
     <!-- Next page -->
     
-        <link rel="next" href="../../11-aca-landing-zone/" />
+        <link rel="next" href="../03-ci-cd-azdo/" />
     
 
     <!-- Favicon -->
@@ -40,7 +42,7 @@
 
     
       
-        <title>Deploy infrastructure using Azure Devops Pipeline - Azure Container Apps - Workshop</title>
+        <title>Deploy Infrastructure using Bicep via GitHub Actions - Azure Container Apps - Workshop</title>
       
     
     
@@ -86,6 +88,8 @@
     
     
     
+        <meta name="og:url" content="https://azure.github.io/aca-dotnet-workshop" />
+    
 
    <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
@@ -115,7 +119,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#deploy-infrastructure-using-azure-devops" class="md-skip">
+        <a href="#deploy-infrastructure-using-github-actions" class="md-skip">
           Skip to content
         </a>
       
@@ -150,7 +154,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Deploy infrastructure using Azure Devops Pipeline
+              Deploy Infrastructure using Bicep via GitHub Actions
             
           </span>
         </div>
@@ -717,33 +721,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../iac-bicep/" class="md-nav__link">
+      <a href="../01-iac-bicep/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Deploy Infrastructure using Bicep
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ci-cd-git-action/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Deploy Infrastructure using Bicep via GitHub Actions
     
   </span>
   
@@ -774,7 +756,7 @@
           
   
   <span class="md-ellipsis">
-    Deploy infrastructure using Azure Devops Pipeline
+    Deploy Infrastructure using Bicep via GitHub Actions
     
   </span>
   
@@ -786,7 +768,7 @@
         
   
   <span class="md-ellipsis">
-    Deploy infrastructure using Azure Devops Pipeline
+    Deploy Infrastructure using Bicep via GitHub Actions
     
   </span>
   
@@ -818,51 +800,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configure-a-service-connection-for-github-and-azure-subscription" class="md-nav__link">
+  <a href="#configure-repository-for-oidc-authentication-with-azure-ad" class="md-nav__link">
     <span class="md-ellipsis">
-      Configure a Service Connection for GitHub and Azure Subscription
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configure a Service Connection for GitHub and Azure Subscription">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-a-service-connection-for-github" class="md-nav__link">
-    <span class="md-ellipsis">
-      Create a Service Connection for GitHub
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-service-connection-for-azure-subscription" class="md-nav__link">
-    <span class="md-ellipsis">
-      Create Service Connection for Azure Subscription
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-variable-group-under-azure-devops-library-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configure Variable Group under Azure DevOps Library Section
+      Configure Repository for OIDC Authentication with Azure AD
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#trigger-azure-devops-pipeline" class="md-nav__link">
+  <a href="#configure-github-repository-secrets" class="md-nav__link">
     <span class="md-ellipsis">
-      Trigger Azure Devops Pipeline
+      Configure GitHub Repository Secrets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-github-repository-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure GitHub Repository Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trigger-github-actions-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trigger GitHub Actions Workflow
     </span>
   </a>
   
@@ -872,6 +839,28 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-ci-cd-azdo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploy infrastructure using Azure Devops Pipeline
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -916,7 +905,7 @@
         
   
   <span class="md-ellipsis">
-    Module 12 - Optimize Containers
+    Module 12 - Container optimization
     
   </span>
   
@@ -1124,51 +1113,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configure-a-service-connection-for-github-and-azure-subscription" class="md-nav__link">
+  <a href="#configure-repository-for-oidc-authentication-with-azure-ad" class="md-nav__link">
     <span class="md-ellipsis">
-      Configure a Service Connection for GitHub and Azure Subscription
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configure a Service Connection for GitHub and Azure Subscription">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-a-service-connection-for-github" class="md-nav__link">
-    <span class="md-ellipsis">
-      Create a Service Connection for GitHub
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-service-connection-for-azure-subscription" class="md-nav__link">
-    <span class="md-ellipsis">
-      Create Service Connection for Azure Subscription
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-variable-group-under-azure-devops-library-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configure Variable Group under Azure DevOps Library Section
+      Configure Repository for OIDC Authentication with Azure AD
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#trigger-azure-devops-pipeline" class="md-nav__link">
+  <a href="#configure-github-repository-secrets" class="md-nav__link">
     <span class="md-ellipsis">
-      Trigger Azure Devops Pipeline
+      Configure GitHub Repository Secrets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-github-repository-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure GitHub Repository Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trigger-github-actions-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trigger GitHub Actions Workflow
     </span>
   </a>
   
@@ -1193,18 +1167,13 @@
   
 
 
-<h1 id="deploy-infrastructure-using-azure-devops">Deploy Infrastructure Using Azure DevOps<a class="headerlink" href="#deploy-infrastructure-using-azure-devops" title="Permanent link">&para;</a></h1>
+<h1 id="deploy-infrastructure-using-github-actions">Deploy Infrastructure Using GitHub Actions<a class="headerlink" href="#deploy-infrastructure-using-github-actions" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Module Duration</p>
 <p>30 minutes</p>
 </div>
-<p>In the <a href="../iac-bicep/">previous section</a>, we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. Azure DevOps is a great solution for automating workflows, and in this section, we'll explain how to create a Azure DevOps pipeline for deploying the infrastructure components of our application.</p>
-<p>The workshop repository contains a Azure Devops Pipeline yaml file that will be used to deploy the infrastructure components of our application. Follow the steps below to create a devops pipeline to deploy the infrastructure components of our application.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>The following instructions assume that you will utilize the forked Github repository both as the host for your YAML pipeline and the source code. However, it is possible to host the same assets in your Azure DevOps repository instead, if that is your preference. It is important to remember that if you choose to store your assets in your Azure DevOps repository, you will have to direct your Azure DevOps pipeline towards the Azure DevOps repository instead of the Github repository.
-</code></pre></div></td></tr></table></div>
-</div>
+<p>In the <a href="../01-iac-bicep/">previous section</a>, we demonstrated how Bicep scripts can be used to automate the deployment of infrastructure components. However, creating the container registry and deploying the Bicep scripts using the Azure CLI still required manual effort. For a more efficient and streamlined process, it's preferable to use automation. GitHub Actions is a great solution for automating workflows, and in this section, we'll explain how to create a GitHub Action workflow for deploying the infrastructure components of our application.</p>
+<p>The workshop repository contains a GitHub Action workflow file that will be used to deploy the infrastructure components of our application. Follow the steps below to create a GitHub Action workflow to deploy the infrastructure components of our application.</p>
 <h3 id="fork-the-github-repository">Fork the GitHub repository<a class="headerlink" href="#fork-the-github-repository" title="Permanent link">&para;</a></h3>
 <p>Start by forking the workshop repository to your GitHub account. Follow the steps below to fork the workshop:</p>
 <ol>
@@ -1213,83 +1182,164 @@
 <li>Select your GitHub account to fork the repository to.</li>
 <li>Wait for the repository to be forked.</li>
 </ol>
-<h3 id="configure-a-service-connection-for-github-and-azure-subscription">Configure a Service Connection for GitHub and Azure Subscription<a class="headerlink" href="#configure-a-service-connection-for-github-and-azure-subscription" title="Permanent link">&para;</a></h3>
-<p>Before we start with creating pipeline, we need to configure service connection for GitHub and Azure Subscription. You can do this in either existing or new project.</p>
-<h4 id="create-a-service-connection-for-github">Create a Service Connection for GitHub<a class="headerlink" href="#create-a-service-connection-for-github" title="Permanent link">&para;</a></h4>
-<p>Provide access to the repository forked above by creating a service connection to GitHub. You create a new pipeline by first selecting a GitHub repository and then a YAML file in repository at path <a href="https://raw.githubusercontent.com/Azure/aca-dotnet-workshop/main/.ado/infra-deploy.yml" target="_blank">.ado/infra-deploy.yml</a>.</p>
-<p>The repository in which the YAML file is present is called self repository. By default, this is the repository that your pipeline builds.</p>
-<p>There are three authentication types for granting Azure Pipelines access to your GitHub repositories while creating a pipeline. Follow guide at this <a href="https://learn.microsoft.com/azure/devops/pipelines/repos/github?view=azure-devops&amp;tabs=yaml#access-to-github-repositories" target="_blank">link</a>
-to create service connection for GitHub.</p>
-<p><a class="glightbox" href="../../../assets/gifs/azdo-github-connection.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="AZDO GitHub Connection" src="../../../assets/gifs/azdo-github-connection.gif" /></a></p>
-<h4 id="create-service-connection-for-azure-subscription">Create Service Connection for Azure Subscription<a class="headerlink" href="#create-service-connection-for-azure-subscription" title="Permanent link">&para;</a></h4>
-<p>Create a new service connection to your Azure subscription by following the steps at this <a href="https://docs.microsoft.com/azure/devops/pipelines/library/service-endpoints?view=azure-devops&amp;tabs=yaml#create-a-service-connection" target="_blank">link</a>.</p>
+<h3 id="configure-repository-for-oidc-authentication-with-azure-ad">Configure Repository for OIDC Authentication with Azure AD<a class="headerlink" href="#configure-repository-for-oidc-authentication-with-azure-ad" title="Permanent link">&para;</a></h3>
+<p>In order to use the GitHub Actions workflow to deploy the infrastructure components of our application, we need to log in to Azure using the Azure CLI with <a href="https://github.com/marketplace/actions/azure-login" target="_blank">Azure login</a> action.</p>
+<p>The Azure login action supports two different ways of authenticating with Azure:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-a-service-principal-secret" target="_blank">Service principal with secrets</a></li>
+<li><a href="https://learn.microsoft.com/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#use-the-azure-login-action-with-openid-connect" target="_blank">OpenID Connect (OIDC) with a Azure service principal using a Federated Identity Credential</a></li>
+</ul>
+<p>In this workshop, we will use the OIDC authentication method. Assuming you are already logged in using Azure cli locally, follow the steps below to configure the repository for OIDC authentication with Azure AD either using powershell or bash/wsl:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell</label><label for="__tabbed_1_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Execute the following commands to create an Azure AD application and service principal.</li>
+</ul>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nv">$AZURE_TENANT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>tenantId
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nv">$SUBSCRIPTION_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>id
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="nv">$APP_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>create<span class="w"> </span>--display-name<span class="w"> </span>aca-dotnet-workshop-oidc<span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a>az<span class="w"> </span>ad<span class="w"> </span>sp<span class="w"> </span>create<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="nv">$OBJECT_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>show<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-otsv
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li>Execute below command to create a federated identity credential for the Azure AD application.</li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Update the created service connection role to have <strong><a href="https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator" target="_blank">User Access Administrator</a></strong> role. This is required for pipeline to be able to perform role assignments in the infrastructure components deployed. To update the role of a service connection in Azure DevOps to have the User Access Administrator role, you can follow these steps:</p>
-<ul>
-<li>
-<p>Navigate to the <a href="https://portal.azure.com" target="_blank">Azure portal</a> and select the subscription where the service connection is created.</p>
-</li>
-<li>
-<p>Click on <strong>Access control (IAM)</strong> in the left-hand menu.</p>
-</li>
-<li>
-<p>Click on <strong>Add role assignment</strong>.</p>
-</li>
-<li>
-<p>For the <strong>Assignment type</strong> choose <strong>Privileged administrator roles</strong>.</p>
-</li>
-<li>
-<p>In the <strong>Role</strong> section choose <strong>User Access Administrator</strong>.</p>
-</li>
-<li>
-<p>In the <strong>Members</strong> section, search for the name of the service connection that you want to update and select it.</p>
-</li>
-<li>
-<p>Click <strong>Save</strong> to apply the changes.</p>
-</li>
-</ul>
+<p>Replace <code>&lt;Repo owner&gt;</code> in below json with your GitHub username where you forked the workshop repository.</p>
 </div>
-<h3 id="configure-variable-group-under-azure-devops-library-section">Configure Variable Group under Azure DevOps Library Section<a class="headerlink" href="#configure-variable-group-under-azure-devops-library-section" title="Permanent link">&para;</a></h3>
-<p>Create a variable group named <strong>AcaApp</strong> under Library in your Azure Devops project. Make sure the pipeline has permissions to access the created variable group under <strong>Pipeline permissions</strong>.</p>
-<p>This variable group will be used to store below details:</p>
-<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># AZURE_SUBSCRIPTION: Name of the service connection created for Azure Subscription</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nv">AZURE_SUBSCRIPTION</span><span class="o">=</span>&lt;service<span class="w"> </span>connection<span class="w"> </span>name&gt;
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location&gt;
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="c1"># RESOURCE_GROUP: Name of the resource group which will be created and where the resources will be deployed</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="nv">RESOURCE_GROUP</span><span class="o">=</span>&lt;resource<span class="w"> </span>group<span class="w"> </span>name&gt;
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="c1"># (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span>&lt;container<span class="w"> </span>registry<span class="w"> </span>name&gt;
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a>az<span class="w"> </span>rest<span class="w"> </span>--method<span class="w"> </span>POST<span class="w"> </span>--uri<span class="w"> </span><span class="s2">&quot;https://graph.microsoft.com/beta/applications/</span><span class="nv">$OBJECT_ID</span><span class="s2">/federatedIdentityCredentials&quot;</span><span class="w"> </span>--body<span class="w"> </span><span class="s1">&#39;{\&quot;name\&quot;:\&quot;aca-dotnet-workshop-federated-identity\&quot;,\&quot;issuer\&quot;:\&quot;https://token.actions.githubusercontent.com\&quot;,\&quot;subject\&quot;:\&quot;repo:&lt;Repo owner&gt;/aca-dotnet-workshop:ref:refs/heads/main\&quot;,\&quot;description\&quot;:\&quot;GitHub\&quot;,\&quot;audiences\&quot;:[\&quot;api://AzureADTokenExchange\&quot;]}&#39;</span><span class="w"> </span>--headers<span class="w"> </span><span class="s2">&quot;Content-Type=application/json&quot;</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li>Perform role assignment for the Azure AD application to access the subscription.</li>
+</ul>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--role<span class="w"> </span>contributor<span class="w"> </span>--scope<span class="w"> </span>/subscriptions/<span class="nv">$SUBSCRIPTION_ID</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--role<span class="w"> </span><span class="s1">&#39;User Access Administrator&#39;</span><span class="w"> </span>--scope<span class="w"> </span>/subscriptions/<span class="nv">$SUBSCRIPTION_ID</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Execute the following commands to create an Azure AD application and service principal.</li>
+</ul>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span>
+<span class="normal"><a href="#__codelineno-3-7">7</a></span>
+<span class="normal"><a href="#__codelineno-3-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nv">AZURE_TENANT</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>tenantId<span class="k">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nv">SUBSCRIPTION_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>-o<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>id<span class="k">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="nv">APP_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>create<span class="w"> </span>--display-name<span class="w"> </span>aca-dotnet-workshop-oidc<span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv<span class="k">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a>az<span class="w"> </span>ad<span class="w"> </span>sp<span class="w"> </span>create<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>appId<span class="w"> </span>-otsv
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="nv">OBJECT_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>show<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-otsv<span class="k">)</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li>Execute below command to create a federated identity credential for the Azure AD application.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Replace <code>&lt;Repo owner&gt;</code> in below json with your GitHub username where you forked the workshop repository.</p>
+</div>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF &gt; body.json</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="s">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="s">    &quot;name&quot;: &quot;aca-dotnet-workshop-federated-identity&quot;,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="s">    &quot;issuer&quot;: &quot;https://token.actions.githubusercontent.com&quot;,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="s">    &quot;subject&quot;: &quot;repo:&lt;Repo owner&gt;/aca-dotnet-workshop:ref:refs/heads/main&quot;,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="s">    &quot;description&quot;: &quot;GitHub&quot;,</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="s">    &quot;audiences&quot;: [</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="s">        &quot;api://AzureADTokenExchange&quot;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="s">    ]</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="s">}</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="s">EOF</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a>az<span class="w"> </span>rest<span class="w"> </span>--method<span class="w"> </span>POST<span class="w"> </span>--uri<span class="w"> </span><span class="s2">&quot;https://graph.microsoft.com/beta/applications/</span><span class="nv">$OBJECT_ID</span><span class="s2">/federatedIdentityCredentials&quot;</span><span class="w"> </span>--body<span class="w"> </span>@body.json
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li>Perform role assignment for the Azure AD application to access the subscription.</li>
+</ul>
+<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--role<span class="w"> </span>contributor<span class="w"> </span>--scope<span class="w"> </span>/subscriptions/<span class="nv">$SUBSCRIPTION_ID</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span>--role<span class="w"> </span><span class="s1">&#39;User Access Administrator&#39;</span><span class="w"> </span>--scope<span class="w"> </span>/subscriptions/<span class="nv">$SUBSCRIPTION_ID</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h3 id="configure-github-repository-secrets">Configure GitHub Repository Secrets<a class="headerlink" href="#configure-github-repository-secrets" title="Permanent link">&para;</a></h3>
+<p>Configure secrets details in GitHub repo as described here in <a href="https://learn.microsoft.com/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux#create-github-secrets" target="_blank">create GitHub secrets</a>. Use below values mapped to relevant secrets in GitHub.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span>
+<span class="normal"><a href="#__codelineno-6-5">5</a></span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># AZURE_SUBSCRIPTION_ID</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$SUBSCRIPTION_ID</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1"># AZURE_TENANT_ID</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$AZURE_TENANT</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="c1"># AZURE_CLIENT_ID</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APP_ID</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="configure-github-repository-variables">Configure GitHub Repository Variables<a class="headerlink" href="#configure-github-repository-variables" title="Permanent link">&para;</a></h3>
+<p>Configure repository variables in GitHub repo as described here in <a href="https://docs.github.com/en/actions/learn-github-actions/variables">create GitHub variables</a>. Use below values mapped to relevant variables in GitHub.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span>
+<span class="normal"><a href="#__codelineno-7-6">6</a></span>
+<span class="normal"><a href="#__codelineno-7-7">7</a></span>
+<span class="normal"><a href="#__codelineno-7-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># LOCATION: Azure region where resources will be deployed</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nv">LOCATION</span><span class="o">=</span>&lt;location.<span class="w"> </span>e.g.<span class="w"> </span>eastus&gt;
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1"># RESOURCE_GROUP: Name of the resource group which will be created and resources will be deployed</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="nv">RESOURCE_GROUP</span><span class="o">=</span>&lt;resource<span class="w"> </span>group<span class="w"> </span>name&gt;
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1"># (OPTIONAL)CONTAINER_REGISTRY_NAME: Unique name of the container registry which will be created and where images will be imported</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="nv">CONTAINER_REGISTRY_NAME</span><span class="o">=</span>&lt;container<span class="w"> </span>registry<span class="w"> </span>name&gt;
 </span></code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Repository variable <code>CONTAINER_REGISTRY_NAME</code> is only needed by pipeline if you intend to deploy images from a private Azure Container Registry (ACR). You may chose to skip defining this variable and the pipeline will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop" target="_blank">public github container registry images</a> to deploy the images.</p>
+<p>Repository variables <code>CONTAINER_REGISTRY_NAME</code> is only needed by workflow, if you wish the images to be deployed from private ACR.</p>
+<p>You may chose to skip defining this variable and the workflow will use the <a href="https://github.com/orgs/Azure/packages?repo_name=aca-dotnet-workshop" target="_blank">public github container registry images</a> to deploy the images.</p>
 </div>
-<h3 id="trigger-azure-devops-pipeline">Trigger Azure Devops Pipeline<a class="headerlink" href="#trigger-azure-devops-pipeline" title="Permanent link">&para;</a></h3>
-<p>With these steps completed, you are now ready to trigger the Pipeline.</p>
+<h3 id="trigger-github-actions-workflow">Trigger GitHub Actions Workflow<a class="headerlink" href="#trigger-github-actions-workflow" title="Permanent link">&para;</a></h3>
+<p>With these steps completed, you are now ready to trigger the GitHub Actions workflow named <strong>Build and deploy infrastructure as code to Azure</strong> using <strong>workflow dispatch</strong> to deploy the infrastructure components of the application.</p>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
-<p>Your Pipeline should be triggered and the infrastructure components of our application should be deployed successfully.</p>
-<p><a class="glightbox" href="../../../assets/gifs/azdo-trigger.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="GitHub Actions Workflow" src="../../../assets/gifs/azdo-trigger.gif" /></a></p>
+<p>Your GitHub Actions workflow should be triggered and the infrastructure components of our application should be deployed successfully.</p>
+<p><a class="glightbox" href="../../../assets/gifs/github-action.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="GitHub Actions Workflow" src="../../../assets/gifs/github-action.gif" /></a></p>
 </div>
 <details class="info">
-<summary>Want to delete the resources deployed by the pipeline?</summary>
-<p>Trigger the pipeline again select <strong>checkbox</strong> option named <strong>Should teardown infrastructure?</strong>.</p>
-<p><a class="glightbox" href="../../../assets/gifs/azdo-delete.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="GitHub Actions Workflow" src="../../../assets/gifs/azdo-delete.gif" /></a></p>
+<summary>Want to delete the resources deployed by the workflow?</summary>
+<p>Trigger the workflow again using <strong>workflow dispatch</strong> and select <strong>checkbox</strong> option.</p>
+<p><a class="glightbox" href="../../../assets/gifs/github-action-delete.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="GitHub Actions Workflow" src="../../../assets/gifs/github-action-delete.gif" /></a></p>
 </details>
 
 
@@ -1311,7 +1361,7 @@ to create service connection for GitHub.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2025-02-20
+    2025-02-21
   </span>
 
     
@@ -1351,7 +1401,7 @@ to create service connection for GitHub.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../ci-cd-git-action/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deploy Infrastructure using Bicep via GitHub Actions">
+          <a href="../01-iac-bicep/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deploy Infrastructure using Bicep">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1361,20 +1411,20 @@ to create service connection for GitHub.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Deploy Infrastructure using Bicep via GitHub Actions
+                Deploy Infrastructure using Bicep
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../11-aca-landing-zone/" class="md-footer__link md-footer__link--next" aria-label="Next: Module 11 - Integration with Azure Container Apps landing zone accelerator">
+          <a href="../03-ci-cd-azdo/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploy infrastructure using Azure Devops Pipeline">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Module 11 - Integration with Azure Container Apps landing zone accelerator
+                Deploy infrastructure using Azure Devops Pipeline
               </div>
             </div>
             <div class="md-footer__button md-icon">
