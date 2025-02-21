@@ -1,5 +1,6 @@
 ---
 canonical_url: https://bitoftech.net/2022/08/29/dapr-integration-with-azure-container-apps/
+title: Dapr Integration with ACA
 ---
 
 # Module 3 - Dapr Integration with ACA

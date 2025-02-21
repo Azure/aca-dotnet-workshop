@@ -1,5 +1,6 @@
 ---
 canonical_url: 'https://bitoftech.net/2022/08/25/deploy-microservice-application-azure-container-apps/'
+title: Deploy Backend API to ACA
 ---
 
 # Module 1 - Deploy Backend API to ACA

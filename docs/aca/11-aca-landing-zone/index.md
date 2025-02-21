@@ -1,3 +1,8 @@
+---
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+title: Integration with Azure Container Apps landing zone accelerator
+---
+
 # Module 11 - Integration with Azure Container Apps landing zone accelerator
 
 Azure landing zone accelerators provide architectural guidance, reference architectures, reference implementations, and automation to deploy workload platforms on Azure at scale. They are aligned with industry proven practices, such as those presented in Azure landing zones guidance in the Cloud Adoption Framework.

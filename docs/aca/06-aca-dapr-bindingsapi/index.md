@@ -1,5 +1,6 @@
 ---
 canonical_url: https://bitoftech.net/2022/09/05/azure-container-apps-with-dapr-bindings-building-block/
+title: ACA with Dapr Bindings building block
 ---
 
 # Module 6 - ACA with Dapr Bindings Building Block

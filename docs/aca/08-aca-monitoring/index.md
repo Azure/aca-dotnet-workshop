@@ -1,5 +1,6 @@
 ---
 canonical_url: https://bitoftech.net/2022/09/09/azure-container-apps-monitoring-and-observability-with-application-insights-part-8/
+title: ACA Monitoring and Observability with Application Insights
 ---
 
 # Module 8 - ACA Monitoring and Observability with Application Insights

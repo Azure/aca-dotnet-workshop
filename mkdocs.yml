@@ -20,11 +20,11 @@ nav:
   - Module 9 - ACA Auto Scaling with KEDA: aca/09-aca-autoscale-keda/index.md
   - Module 10 - Deployment Via Bicep and DevOps:
     - aca/10-aca-iac-bicep/index.md
-    - Deploy Infrastructure using Bicep: aca/10-aca-iac-bicep/iac-bicep.md
-    - Deploy Infrastructure using Bicep via GitHub Actions: aca/10-aca-iac-bicep/ci-cd-git-action.md
-    - Deploy infrastructure using Azure Devops Pipeline: aca/10-aca-iac-bicep/ci-cd-azdo.md
+    - Deploy Infrastructure using Bicep: aca/10-aca-iac-bicep/01-iac-bicep.md
+    - Deploy Infrastructure using Bicep via GitHub Actions: aca/10-aca-iac-bicep/02-ci-cd-git-action.md
+    - Deploy infrastructure using Azure Devops Pipeline: aca/10-aca-iac-bicep/03-ci-cd-azdo.md
   - Module 11 - Integration with Azure Container Apps landing zone accelerator: aca/11-aca-landing-zone/index.md
-  - Module 12 - Optimize Containers: aca/12-optimize-containers/index.md
+  - Module 12 - Container optimization: aca/12-optimize-containers/index.md
   - About The Authors: aca/29-about-the-authors/index.md
   - Appendix:
     - Debug and Launch Dapr Applications in VSCode: aca/30-appendix/01-run-debug-dapr-app-vscode.md

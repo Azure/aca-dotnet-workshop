@@ -1,3 +1,11 @@
+---
+title: Testing Changes Locally or with GitHub Codespaces
+parent: Appendix
+has_children: false
+nav_order: 2
+canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+---
+
 # Inner loop, testing your changes locally or using GitHub Codespaces
 
 - `docs/aca` folder , contains all the mark-down documentation files for all the modules

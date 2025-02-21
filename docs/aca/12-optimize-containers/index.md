@@ -1,5 +1,6 @@
 ---
 canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+title: Container optimization
 ---
 
 # Module 12 - Container Optimization
