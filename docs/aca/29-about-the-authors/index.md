@@ -1,6 +1,6 @@
 ---
 canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
-title: About the authors
+title: About the Authors
 ---
 
 # Authors
