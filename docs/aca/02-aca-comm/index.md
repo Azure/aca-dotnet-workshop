@@ -1,5 +1,6 @@
 ---
 canonical_url: https://bitoftech.net/2022/08/25/communication-microservices-azure-container-apps/
+title: Communication Between Microservices in ACA
 ---
 
 # Module 2 - Communication Between Microservices in ACA

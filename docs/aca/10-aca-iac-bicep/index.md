@@ -1,5 +1,6 @@
 ---
 canonical_url: https://bitoftech.net/2022/09/16/use-bicep-to-deploy-dapr-microservices-apps-to-azure-container-apps-part-10/
+title: Deployment via Bicep and DevOps
 ---
 
 # Module 10 - Deployment Via Bicep and DevOps

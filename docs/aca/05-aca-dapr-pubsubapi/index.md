@@ -1,5 +1,6 @@
 ---
 canonical_url: https://bitoftech.net/2022/09/02/azure-container-apps-async-communication-with-dapr-pub-sub-api-part-6/
+title: ACA Async Communication with Dapr Pub/Sub API
 ---
 
 # Module 5 - ACA Async Communication with Dapr Pub/Sub API

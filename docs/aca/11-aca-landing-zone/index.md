@@ -1,5 +1,7 @@
 ---
 canonical_url: 'https://azure.github.io/aca-dotnet-workshop'
+title: Integration with ACA landing zone accelerator
+
 ---
 
 # Module 11 - Integration with Azure Container Apps landing zone accelerator

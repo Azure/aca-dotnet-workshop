@@ -1,5 +1,5 @@
 ---
-title: Variables
+title: Debug and Launch Dapr Applications in VSCode
 parent: Appendix
 has_children: false
 nav_order: 1
