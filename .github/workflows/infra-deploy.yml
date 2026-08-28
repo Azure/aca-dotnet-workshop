@@ -35,7 +35,7 @@ jobs:
       if : ${{ github.event.inputs.teardown != 'true' }}
       name: Lint bicep files
       steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Perform linting
         run: az bicep build --f bicep/main.bicep
 
@@ -46,16 +46,16 @@ jobs:
       name: Create RG and Validate bicep template
       needs: [ lint ]
       steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Azure login
-        uses: azure/login@v1
+        uses: azure/login@cb79c773a3cfa27f31f25eb3f677781210c9ce3d # v1.6.1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Create Resource Group if does not exist
-        uses: azure/CLI@v1
+        uses: azure/CLI@4db43908b9df2e7ac93c8275a8f9a448c59338dd # v1.0.9
         with:
           inlineScript: |
             if [[ $(az group exists -n ${{ vars.RESOURCE_GROUP }}) == true ]]
@@ -66,7 +66,7 @@ jobs:
               echo "Resource group created"
             fi
 
-      - uses: azure/arm-deploy@v1
+      - uses: azure/arm-deploy@65ae74fb7aec7c680c88ef456811f353adae4d06 # v1.0.9
         name: Run validation
         with:
           deploymentName: ${{ github.run_number }}
@@ -83,14 +83,14 @@ jobs:
     needs: [ validate ]
     name: Run what-if on the bicep template
     steps:
-      - uses: actions/checkout@v4
-      - uses: azure/login@v1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: azure/login@cb79c773a3cfa27f31f25eb3f677781210c9ce3d # v1.6.1
         name: Sign in to Azure
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      - uses: azure/arm-deploy@v1
+      - uses: azure/arm-deploy@65ae74fb7aec7c680c88ef456811f353adae4d06 # v1.0.9
         name: Run what-if
         with:
           resourceGroupName: ${{ vars.RESOURCE_GROUP }}
@@ -105,15 +105,15 @@ jobs:
     if : ${{ vars.CONTAINER_REGISTRY_NAME != '' }}
     needs: [ preview ]
     steps:
-      - uses: actions/checkout@v4
-      - uses: azure/login@v1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: azure/login@cb79c773a3cfa27f31f25eb3f677781210c9ce3d # v1.6.1
         name: Sign in to Azure
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: Create ACR ${{ vars.CONTAINER_REGISTRY_NAME }} if does not exist
-        uses: azure/CLI@v1
+        uses: azure/CLI@4db43908b9df2e7ac93c8275a8f9a448c59338dd # v1.0.9
         with:
           inlineScript: |
             if [[ $(az acr check-name -n ${{ vars.CONTAINER_REGISTRY_NAME }}  -o tsv --query "nameAvailable") == false ]]
@@ -130,7 +130,7 @@ jobs:
               echo "ACR created"
             fi
       - name: Import images from GitHub Container Registry
-        uses: azure/CLI@v1
+        uses: azure/CLI@4db43908b9df2e7ac93c8275a8f9a448c59338dd # v1.0.9
         with:
           inlineScript: |
             az acr import --name ${{ vars.CONTAINER_REGISTRY_NAME }} --source ${{ env.REGISTRY }}/${{ env.BACKEND_PROCESSOR_IMAGE_NAME }}:latest --image tasksmanager/tasksmanager-backend-processor --force
@@ -144,14 +144,14 @@ jobs:
     needs: [ create-acr]
     name: Deploy to Azure subscription with ACR
     steps:
-      - uses: actions/checkout@v4
-      - uses: azure/login@v1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: azure/login@cb79c773a3cfa27f31f25eb3f677781210c9ce3d # v1.6.1
         name: Sign in to Azure
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      - uses: azure/arm-deploy@v1
+      - uses: azure/arm-deploy@65ae74fb7aec7c680c88ef456811f353adae4d06 # v1.0.9
         id: deployment-with-acr-images
         name: Deploy to Azure subscription
         with:
@@ -169,14 +169,14 @@ jobs:
     needs: [ preview ]
     name: Deploy to Azure subscription with GHCR
     steps:
-      - uses: actions/checkout@v4
-      - uses: azure/login@v1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: azure/login@cb79c773a3cfa27f31f25eb3f677781210c9ce3d # v1.6.1
         name: Sign in to Azure
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      - uses: azure/arm-deploy@v1
+      - uses: azure/arm-deploy@65ae74fb7aec7c680c88ef456811f353adae4d06 # v1.0.9
         id: deployment-with-ghcr-images
         name: Deploy to Azure subscription
         with:
@@ -192,15 +192,15 @@ jobs:
     runs-on: ubuntu-latest
     if : ${{ github.event.inputs.teardown == 'true' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: azure/login@v1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: azure/login@cb79c773a3cfa27f31f25eb3f677781210c9ce3d # v1.6.1
         name: Sign in to Azure
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: Delete Resource Group if exist
-        uses: azure/CLI@v1
+        uses: azure/CLI@4db43908b9df2e7ac93c8275a8f9a448c59338dd # v1.0.9
         with:
           inlineScript: |
             if [[ $(az group exists -n ${{ vars.RESOURCE_GROUP }}) == true ]]
