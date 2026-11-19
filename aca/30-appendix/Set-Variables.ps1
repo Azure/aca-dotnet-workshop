@@ -55,7 +55,7 @@ foreach ($var in $vars) {
         $existingVars++
     }
 }
- 
+
 if ($existingVars -eq 0) {
     Write-Host "`nNo variables were found in the current session. Exiting script to prevent accidental overwrite of Variables.ps1 file.`n"
     exit
@@ -65,7 +65,7 @@ if ($existingVars -eq 0) {
 # any existing file with the same name. Note how we intentionally do not use -Append, so that a fresh file gets created here.
 "# Execute with `"$file`" to restore previously-saved variables." | Out-File -FilePath $file
 
-foreach ($var in $vars) { 
+foreach ($var in $vars) {
     # Ensure the variable exists. If not, don't attempt to get it and don't write out a blank value.
 
     if (Test-Path variable:$var) {

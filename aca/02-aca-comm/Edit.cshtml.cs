@@ -24,7 +24,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
             if (String.IsNullOrEmpty(TasksCreatedBy)) {
                 return RedirectToPage("../Index");
             }
-            
+
             if (id == null)
             {
                 return NotFound();

@@ -60,8 +60,8 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
             var tasksList = queryResponse.Results
                 .Where(q => q.Data != null)         // filter null data
                 .Select(q => q.Data!)
-                .OrderByDescending(o=>o.TaskCreatedOn);
-                
+                .OrderByDescending(o => o.TaskCreatedOn);
+
             return tasksList.ToList();
         }
 

@@ -4,7 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddApplicationInsightsTelemetry();
-builder.Services.Configure<TelemetryConfiguration>((o) => {
+builder.Services.Configure<TelemetryConfiguration>((o) =>
+{
     o.TelemetryInitializers.Add(new TasksTracker.WebPortal.Frontend.Ui.AppInsightsTelemetryInitializer());
 });
 
@@ -16,9 +17,12 @@ builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
 {
     var backendApiBaseUrlExternalHttp = builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp");
 
-    if (!string.IsNullOrEmpty(backendApiBaseUrlExternalHttp)) {
+    if (!string.IsNullOrEmpty(backendApiBaseUrlExternalHttp))
+    {
         httpClient.BaseAddress = new Uri(backendApiBaseUrlExternalHttp);
-    } else {
+    }
+    else
+    {
         throw new("BackendApiConfig:BaseUrlExternalHttp is not defined in App Settings.");
     }
 });

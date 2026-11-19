@@ -24,7 +24,8 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
         {
             TasksCreatedBy = Request.Cookies["TasksCreatedByCookie"];
 
-            if (!String.IsNullOrEmpty(TasksCreatedBy)) {
+            if (!String.IsNullOrEmpty(TasksCreatedBy))
+            {
                 // Invoke via internal URL (Not Dapr)
                 //var httpClient = _httpClientFactory.CreateClient("BackEndApiExternal");
                 //TasksList = await httpClient.GetFromJsonAsync<List<TaskModel>>($"api/tasks?createdBy={TasksCreatedBy}");
@@ -36,17 +37,19 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
                 //TasksList = result;
 
                 // Invoke via DaprSDK (Invoke HTTP services using HttpClient) --> Use Dapr Appi ID (Option 1)
-                //var daprHttpClient = DaprClient.CreateInvokeHttpClient(appId: "tasksmanager-backend-api"); 
+                //var daprHttpClient = DaprClient.CreateInvokeHttpClient(appId: "tasksmanager-backend-api");
                 //TasksList = await daprHttpClient.GetFromJsonAsync<List<TaskModel>>($"api/tasks?createdBy={TasksCreatedBy}");
 
                 // Invoke via DaprSDK (Invoke HTTP services using HttpClient) --> Specify Custom Port (Option 2)
-                //var daprHttpClient = DaprClient.CreateInvokeHttpClient(daprEndpoint: "http://localhost:3500"); 
+                //var daprHttpClient = DaprClient.CreateInvokeHttpClient(daprEndpoint: "http://localhost:3500");
                 //TasksList = await daprHttpClient.GetFromJsonAsync<List<TaskModel>>($"http://tasksmanager-backend-api/api/tasks?createdBy={TasksCreatedBy}");
 
                 // Invoke via DaprSDK (Invoke HTTP services using DaprClient)
                 TasksList = await _daprClient.InvokeMethodAsync<List<TaskModel>>(HttpMethod.Get, "tasksmanager-backend-api", $"api/tasks?createdBy={TasksCreatedBy}");
                 return Page();
-            } else {
+            }
+            else
+            {
                 return RedirectToPage("../Index");
             }
         }

@@ -14,7 +14,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
         private readonly DaprClient _daprClient;
-        
+
         public TasksNotifierController(IConfiguration config, ILogger<TasksNotifierController> logger, DaprClient daprClient)
         {
             _config = config;
