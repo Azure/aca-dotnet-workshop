@@ -1,4 +1,4 @@
-﻿using Dapr.Client;
+using Dapr.Client;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TasksTracker.TasksManager.Backend.Api.Services;
@@ -15,7 +15,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
         {
             _logger = logger;
             _tasksManager = tasksManager;
-          
+
         }
 
         [HttpGet("Readiness")]

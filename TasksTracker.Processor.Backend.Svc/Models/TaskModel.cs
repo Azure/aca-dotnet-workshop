@@ -1,4 +1,4 @@
-﻿namespace TasksTracker.Processor.Backend.Svc.Models
+namespace TasksTracker.Processor.Backend.Svc.Models
 {
     public class TaskModel
     {

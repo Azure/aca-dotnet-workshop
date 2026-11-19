@@ -1,4 +1,4 @@
-﻿using Dapr.Client;
+using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
 using TasksTracker.Processor.Backend.Svc.Models;
 
@@ -31,13 +31,13 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
 
             tasksList?.ForEach(taskModel =>
             {
-                if (runAt.Date> taskModel.TaskDueDate.Date)
+                if (runAt.Date > taskModel.TaskDueDate.Date)
                 {
                     overdueTasksList.Add(taskModel);
                 }
             });
-            
-            if (overdueTasksList.Count> 0)
+
+            if (overdueTasksList.Count > 0)
             {
                 _logger.LogInformation($"ScheduledTasksManager::marking {overdueTasksList.Count()} as overdue tasks");
                 await _daprClient.InvokeMethodAsync(HttpMethod.Post, "tasksmanager-backend-api", $"api/overduetasks/markoverdue", overdueTasksList);

@@ -1,22 +1,22 @@
 {
-    "[markdown]": {
-        "files.trimTrailingWhitespace": false
-    },
-    "editor.renderWhitespace": "trailing",
-    "files.eol": "\n",
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "redisXplorer.config": {
-        "profiles": [
-            {
-                "name": "localhost",
-                "host": "127.0.0.1",
-                "accessKey": "",
-                "filter": "*",
-                "port": "6379"
-            }
-        ],
-        "scanLimit": 200
-    }
+        "[markdown]": {
+                "files.trimTrailingWhitespace": false
+        },
+        "editor.renderWhitespace": "trailing",
+        "files.eol": "\n",
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "redisXplorer.config": {
+                "profiles": [
+                        {
+                                "name": "localhost",
+                                "host": "127.0.0.1",
+                                "accessKey": "",
+                                "filter": "*",
+                                "port": "6379"
+                        }
+                ],
+                "scanLimit": 200
+        }
 }

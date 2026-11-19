@@ -200,7 +200,7 @@ jobs:
             if [[ $(az group exists -n ${{ vars.RESOURCE_GROUP }}) == true ]]
             then
               echo "Resource group exists. Deleting..."
-               az group delete -n ${{ vars.RESOURCE_GROUP }} --yes
+              az group delete -n ${{ vars.RESOURCE_GROUP }} --yes
             else
               echo "Resource group does not exist in the subscription. Nothing to delete."
             fi

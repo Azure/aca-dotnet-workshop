@@ -42,7 +42,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
             };
 
             _tasksList.Add(task);
-            
+
             return Task.FromResult(task.TaskId);
         }
 

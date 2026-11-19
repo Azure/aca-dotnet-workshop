@@ -19,7 +19,7 @@ param tags object = {}
 
 resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   name: KEYVAULT_NAME
-  location: location  
+  location: location
   tags: tags
   properties: {
     tenantId: subscription().tenantId

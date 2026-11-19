@@ -1,4 +1,4 @@
-﻿using TasksTracker.TasksManager.Backend.Api.Models;
+using TasksTracker.TasksManager.Backend.Api.Models;
 
 namespace TasksTracker.TasksManager.Backend.Api.Services
 {
@@ -80,10 +80,10 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
             if (task != null)
             {
                 task.IsCompleted = true;
-                 return Task.FromResult(true);
+                return Task.FromResult(true);
             }
 
-             return Task.FromResult(false);
+            return Task.FromResult(false);
         }
 
         public Task<bool> UpdateTask(Guid taskId, string taskName, string assignedTo, DateTime dueDate)
@@ -95,10 +95,10 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
                 task.TaskName = taskName;
                 task.TaskAssignedTo = assignedTo;
                 task.TaskDueDate = dueDate;
-                 return Task.FromResult(true);
+                return Task.FromResult(true);
             }
 
-             return Task.FromResult(false);
+            return Task.FromResult(false);
         }
 
         public Task MarkOverdueTasks(List<TaskModel> overDueTasksList)

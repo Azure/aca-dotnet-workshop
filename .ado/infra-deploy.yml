@@ -15,7 +15,7 @@ parameters:
     type: boolean
     default: false
 
-pool: 
+pool:
   vmImage: 'ubuntu-latest'
 
 variables:
@@ -34,7 +34,7 @@ stages:
   - stage: Lint
     condition:  eq('${{ parameters.teardown }}', false)
     jobs:
-    - job: Lint  
+    - job: Lint
       displayName:  Lint bicep files
       steps:
         - checkout: self
@@ -50,7 +50,7 @@ stages:
   - stage: Validate
     condition: and(succeeded(), eq('${{ parameters.teardown }}', false))
     dependsOn: Lint
-    jobs:     
+    jobs:
     - job: Validate
       displayName: Create RG and Validate bicep template
       steps:
@@ -88,7 +88,7 @@ stages:
     displayName: Deploy infrastructure using GHCR image
     dependsOn: Validate
     condition: and(succeeded() , eq(variables.CONTAINER_REGISTRY_NAME, ''))
-    jobs: 
+    jobs:
     - job: Deploy
       displayName: Deploy infrastructure using GHCR image
       steps:
@@ -153,12 +153,12 @@ stages:
                 az acr import --name $(CONTAINER_REGISTRY_NAME) --source $(REGISTRY)/$(BACKEND_PROCESSOR_IMAGE_NAME):latest --image tasksmanager/tasksmanager-backend-processor --force
                 az acr import --name $(CONTAINER_REGISTRY_NAME) --source $(REGISTRY)/$(BACKEND_API_IMAGE_NAME):latest --image tasksmanager/tasksmanager-backend-api --force
                 az acr import --name $(CONTAINER_REGISTRY_NAME) --source $(REGISTRY)/$(FRONTEND_APP_IMAGE_NAME):latest --image tasksmanager/tasksmanager-frontend-webapp --force
-      
+
   - stage: Deploy_With_ACR
     displayName: Deploy infrastructure using ACR image
     dependsOn: Create_Import_ACR
     condition: and(succeeded(), ne(variables.CONTAINER_REGISTRY_NAME, ''), eq('${{ parameters.teardown }}', false))
-    jobs: 
+    jobs:
     - job: Deploy
       displayName: Deploy infrastructure using ACR image
       steps:
@@ -181,7 +181,7 @@ stages:
     displayName: Teardown infrastructure
     dependsOn: []
     condition: eq('${{ parameters.teardown }}', true)
-    jobs: 
+    jobs:
     - job: Teardown
       displayName: Teardown infrastructure
       steps:

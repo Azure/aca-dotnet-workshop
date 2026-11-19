@@ -64,7 +64,7 @@ resource externalAzureStorageKeySecret 'Microsoft.KeyVault/vaults/secrets@2022-0
 }
 
 resource keyVaultSecretUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(subscription().id, keyVault.id, backendProcessorServicePrincipalId, keyVaultSecretUserRoleGuid) 
+  name: guid(subscription().id, keyVault.id, backendProcessorServicePrincipalId, keyVaultSecretUserRoleGuid)
   scope: keyVault
   properties: {
     principalId: backendProcessorServicePrincipalId

@@ -1,5 +1,5 @@
 name: Bug report
-description: Create a report to help us improve. Please make sure you read the docs before opening an issue 
+description: Create a report to help us improve. Please make sure you read the docs before opening an issue
 title: "[BUG]"
 
 body:
@@ -10,7 +10,7 @@ body:
       description: Please provide the description of issue you're seeing.
       placeholder: Description
     validations:
-      required: true 
+      required: true
   - type: textarea
     id: expected-behavior
     attributes:

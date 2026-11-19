@@ -24,3 +24,15 @@ indent_size = 2
 
 [*.yml]
 indent_size = 2
+
+[Makefile]
+indent_style = tab
+
+[**/wwwroot/lib/jquery/dist/*.js]
+indent_style = tab
+
+[**/wwwroot/lib/jquery-validation/dist/*.js]
+indent_style = tab
+
+[**/wwwroot/lib/bootstrap/dist/css/*.css]
+indent_size = 2

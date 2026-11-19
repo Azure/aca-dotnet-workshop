@@ -13,8 +13,9 @@ namespace TasksTracker.Processor.Backend.Svc
             builder.Services.AddControllers().AddDapr();
 
             builder.Services.AddApplicationInsightsTelemetry();
-            
-            builder.Services.Configure<TelemetryConfiguration>((o) => {
+
+            builder.Services.Configure<TelemetryConfiguration>((o) =>
+            {
                 o.TelemetryInitializers.Add(new AppInsightsTelemetryInitializer());
             });
 

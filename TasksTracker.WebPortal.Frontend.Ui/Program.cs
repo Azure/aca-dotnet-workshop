@@ -15,14 +15,15 @@ namespace TasksTracker.WebPortal.Frontend.Ui
             builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
             {
                 httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp"));
-       
+
             });
 
             builder.Services.AddDaprClient();
 
             builder.Services.AddApplicationInsightsTelemetry();
 
-            builder.Services.Configure<TelemetryConfiguration>((o) => {
+            builder.Services.Configure<TelemetryConfiguration>((o) =>
+            {
                 o.TelemetryInitializers.Add(new AppInsightsTelemetryInitializer());
             });
 

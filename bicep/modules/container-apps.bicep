@@ -35,7 +35,7 @@ param serviceBusTopicAuthorizationRuleName string
 
 // Cosmos DB
 @description('The name of the provisioned Cosmos DB resource.')
-param cosmosDbName string 
+param cosmosDbName string
 
 @description('The name of the provisioned Cosmos DB\'s database.')
 param cosmosDbDatabaseName string
@@ -117,7 +117,7 @@ resource containerRegistryUserAssignedIdentity 'Microsoft.ManagedIdentity/userAs
 }
 
 resource containerRegistryPullRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if(!empty(containerRegistryName)) {
-  name: guid(subscription().id, containerRegistry.id, containerRegistryUserAssignedIdentity.id) 
+  name: guid(subscription().id, containerRegistry.id, containerRegistryUserAssignedIdentity.id)
   scope: containerRegistry
   properties: {
     principalId: containerRegistryUserAssignedIdentity.properties.principalId
@@ -138,7 +138,7 @@ module frontendWebAppService 'container-apps/webapp-frontend-service.bicep' = {
     frontendWebAppServiceImage: frontendWebAppServiceImage
     appInsightsInstrumentationKey: applicationInsights.properties.InstrumentationKey
     frontendWebAppPortNumber: frontendWebAppPortNumber
-    
+
   }
 }
 

@@ -1,4 +1,4 @@
-﻿@page "{id:guid}"
+@page "{id:guid}"
 @model TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks.EditModel
 @{
     ViewData["Title"] = "Edit";
@@ -26,7 +26,7 @@
                 <span asp-validation-for="TaskUpdate!.TaskDueDate" class="text-danger"></span>
             </div>
 
-             <div class="form-group">
+            <div class="form-group">
                 <label asp-for="TaskUpdate!.TaskAssignedTo" class="control-label"></label>
                 <input asp-for="TaskUpdate!.TaskAssignedTo" class="form-control"/>
                 <span asp-validation-for="TaskUpdate!.TaskAssignedTo" class="text-danger"></span>

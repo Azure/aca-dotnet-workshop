@@ -42,7 +42,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
             };
 
             _tasksList.Add(task);
-            
+
             return Task.FromResult(task.TaskId);
         }
 
@@ -103,12 +103,12 @@ namespace TasksTracker.TasksManager.Backend.Api.Services
         {
             throw new NotImplementedException();
         }
-        
+
         public Task<List<TaskModel>> GetYesterdaysDueTasks()
         {
             var tasksList = _tasksList.Where(t => t.TaskDueDate.Equals(DateTime.Today.AddDays(-1))).ToList();
-        
+
             return Task.FromResult(tasksList);
-        }  
+        }
     }
 }

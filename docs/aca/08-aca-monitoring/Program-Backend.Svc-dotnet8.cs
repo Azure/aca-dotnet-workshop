@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddApplicationInsightsTelemetry();
-builder.Services.Configure<TelemetryConfiguration>((o) => {
+builder.Services.Configure<TelemetryConfiguration>((o) =>
+{
     o.TelemetryInitializers.Add(new AppInsightsTelemetryInitializer());
 });
 builder.Services.AddControllers().AddDapr();

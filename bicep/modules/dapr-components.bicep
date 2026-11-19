@@ -49,7 +49,7 @@ param sendGridEmailFromName string
 param sendGridKeySecretName string
 
 @description('The cron settings for scheduled job.')
-param scheduledJobCron string 
+param scheduledJobCron string
 
 @description('The name of the service for the backend api service. The name is used as Dapr App ID.')
 param backendApiServiceName string

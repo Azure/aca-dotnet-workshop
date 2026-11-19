@@ -9,9 +9,12 @@ builder.Services.AddHttpClient("BackEndApiExternal", httpClient =>
 {
     var backendApiBaseUrlExternalHttp = builder.Configuration.GetValue<string>("BackendApiConfig:BaseUrlExternalHttp");
 
-    if (!string.IsNullOrEmpty(backendApiBaseUrlExternalHttp)) {
+    if (!string.IsNullOrEmpty(backendApiBaseUrlExternalHttp))
+    {
         httpClient.BaseAddress = new Uri(backendApiBaseUrlExternalHttp);
-    } else {
+    }
+    else
+    {
         throw new("BackendApiConfig:BaseUrlExternalHttp is not defined in App Settings.");
     }
 });

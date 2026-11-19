@@ -11,6 +11,6 @@ metadata:
 - name: decodeBase64
   value: "true"
 - name: route
-  value: /externaltasksprocessor/process        
+  value: /externaltasksprocessor/process
 scopes:
 - tasksmanager-backend-processor

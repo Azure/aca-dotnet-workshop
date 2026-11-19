@@ -1,4 +1,4 @@
-﻿using Dapr.Client;
+using Dapr.Client;
 using Microsoft.AspNetCore.Mvc;
 using TasksTracker.Processor.Backend.Svc.Models;
 
@@ -34,7 +34,7 @@ namespace TasksTracker.Processor.Backend.Svc.Controllers
 
                 _logger.LogInformation("Saved external task to the state store successfully. Task name: '{0}', Task Id: '{1}'", taskModel.TaskName, taskModel.TaskId);
 
-                 IReadOnlyDictionary<string,string> metaData = new Dictionary<string, string>()
+                IReadOnlyDictionary<string, string> metaData = new Dictionary<string, string>()
                     {
                         { "blobName", $"{taskModel.TaskId}.json" },
                     };

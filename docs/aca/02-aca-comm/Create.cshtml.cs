@@ -43,7 +43,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
                     var result = await httpClient.PostAsJsonAsync("api/tasks/", TaskAdd);
                 }
             }
-            
+
             return RedirectToPage("./Index");
         }
     }

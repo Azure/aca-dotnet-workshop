@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using TasksTracker.TasksManager.Backend.Api.Models;
 using TasksTracker.TasksManager.Backend.Api.Services;
 
@@ -46,7 +46,7 @@ namespace TasksTracker.TasksManager.Backend.Api.Controllers
                                 taskAddModel.TaskAssignedTo,
                                 taskAddModel.TaskDueDate);
 
-        
+
             return Created($"/api/tasks/{taskId}", null);
 
         }

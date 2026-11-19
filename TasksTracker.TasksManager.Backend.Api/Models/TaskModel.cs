@@ -1,4 +1,4 @@
-﻿namespace TasksTracker.TasksManager.Backend.Api.Models
+namespace TasksTracker.TasksManager.Backend.Api.Models
 {
     public class TaskModel
     {

@@ -35,7 +35,7 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks
             if (TaskAdd != null)
             {
                 var createdBy = Request.Cookies["TasksCreatedByCookie"];
-                
+
                 TaskAdd.TaskCreatedBy = createdBy;
 
                 // direct svc to svc http request

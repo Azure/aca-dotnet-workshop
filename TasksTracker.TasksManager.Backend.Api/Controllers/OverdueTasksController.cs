@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TasksTracker.TasksManager.Backend.Api.Models;
 using TasksTracker.TasksManager.Backend.Api.Services;

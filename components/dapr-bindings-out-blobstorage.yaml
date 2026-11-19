@@ -9,7 +9,7 @@ spec:
   - name: storageAccount
     value: "<Your Storage Account Name>"
   - name: storageAccessKey
-    value: "<Your Storage Account Key>" 
+    value: "<Your Storage Account Key>"
   - name: container
     value: "externaltaskscontainer"
   - name: decodeBase64

@@ -67,7 +67,7 @@ param externalTasksQueueName string
 param externalTasksContainerBlobName string
 
 @description('The name of the secret containing the External Azure Storage Access key for the backend processor service.')
-param externalStorageKeySecretName string 
+param externalStorageKeySecretName string
 
 //SendGrid
 @description('The name of the secret containing the SendGrid API key value for the backend processor service.')
@@ -126,9 +126,9 @@ param backendProcessorPortNumber int = 80
 module containerAppsEnvironment 'modules/container-apps-environment.bicep' ={
   name: 'containerAppsEnv-${uniqueString(resourceGroup().id)}'
   params: {
-   containerAppsEnvironmentName: containerAppsEnvironmentName
-   logAnalyticsWorkspaceName: logAnalyticsWorkspaceName
-   applicationInsightName: applicationInsightName
+    containerAppsEnvironmentName: containerAppsEnvironmentName
+    logAnalyticsWorkspaceName: logAnalyticsWorkspaceName
+    applicationInsightName: applicationInsightName
     location: location
     tags: tags
   }
@@ -162,7 +162,7 @@ module cosmosDb 'modules/cosmos-db.bicep' = {
     location: location
     tags: tags
     cosmosDbDatabaseName: cosmosDbDatabaseName
-    cosmosDbCollectionName: cosmosDbCollectionName 
+    cosmosDbCollectionName: cosmosDbCollectionName
   }
 }
 
@@ -179,13 +179,13 @@ module externalStorageAccount 'modules/storage-account.bicep' = {
 module daprComponents 'modules/dapr-components.bicep' = {
   name: 'daprComponents-${uniqueString(resourceGroup().id)}'
   params: {
-    secretStoreComponentName: secretStoreComponentName 
-    containerAppsEnvironmentName: containerAppsEnvironmentName    
-    KEYVAULT_NAME: KEYVAULT_NAME    
+    secretStoreComponentName: secretStoreComponentName
+    containerAppsEnvironmentName: containerAppsEnvironmentName
+    KEYVAULT_NAME: KEYVAULT_NAME
     serviceBusName: serviceBus.outputs.serviceBusName
     cosmosDbName: cosmosDb.outputs.cosmosDbName
     cosmosDbDatabaseName: cosmosDb.outputs.cosmosDbDatabaseName
-    cosmosDbCollectionName: cosmosDb.outputs.cosmosDbCollectionName    
+    cosmosDbCollectionName: cosmosDb.outputs.cosmosDbCollectionName
     backendApiServiceName: backendApiServiceName
     backendProcessorServiceName: backendProcessorServiceName
     storageAccountName: storageAccountName
@@ -209,15 +209,15 @@ module containerApps 'modules/container-apps.bicep' = {
     tags: tags
     backendProcessorServiceName: backendProcessorServiceName
     backendApiServiceName: backendApiServiceName
-    frontendWebAppServiceName: frontendWebAppServiceName    
+    frontendWebAppServiceName: frontendWebAppServiceName
     containerAppsEnvironmentName: containerAppsEnvironmentName
     keyVaultId: keyVault.outputs.keyVaultId
     serviceBusName: serviceBus.outputs.serviceBusName
     serviceBusTopicName: serviceBus.outputs.serviceBusTopicName
-    serviceBusTopicAuthorizationRuleName: serviceBus.outputs.serviceBusTopicAuthorizationRuleName    
+    serviceBusTopicAuthorizationRuleName: serviceBus.outputs.serviceBusTopicAuthorizationRuleName
     cosmosDbName: cosmosDb.outputs.cosmosDbName
     cosmosDbDatabaseName: cosmosDb.outputs.cosmosDbDatabaseName
-    cosmosDbCollectionName: cosmosDb.outputs.cosmosDbCollectionName    
+    cosmosDbCollectionName: cosmosDb.outputs.cosmosDbCollectionName
     containerRegistryName: containerRegistryName
     backendProcessorServiceImage: backendProcessorServiceImage
     backendApiServiceImage: backendApiServiceImage

@@ -4,7 +4,7 @@ WORKDIR /home/
 
 COPY . .
 
-ENV DEBIAN_FRONTEND=noninteractive 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN bash ./setup.sh
 
 RUN echo 'export NVM_DIR="$HOME/.nvm"' >> "$HOME/.zshrc"

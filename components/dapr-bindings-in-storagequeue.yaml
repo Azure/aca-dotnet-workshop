@@ -9,10 +9,10 @@ spec:
   - name: storageAccount
     value: "<Your Storage Account Name>"
   - name: storageAccessKey
-    value: "<Your Storage Account Key>" 
+    value: "<Your Storage Account Key>"
   - name: queue
     value: "external-tasks-queue"
   - name: decodeBase64
     value: "true"
   - name: route
-    value: /externaltasksprocessor/process    
+    value: /externaltasksprocessor/process

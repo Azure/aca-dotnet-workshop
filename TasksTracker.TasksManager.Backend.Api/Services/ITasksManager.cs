@@ -1,4 +1,4 @@
-﻿using TasksTracker.TasksManager.Backend.Api.Models;
+using TasksTracker.TasksManager.Backend.Api.Models;
 
 namespace TasksTracker.TasksManager.Backend.Api.Services
 {
