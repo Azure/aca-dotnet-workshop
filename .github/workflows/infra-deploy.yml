@@ -1,12 +1,6 @@
 name: Build and deploy infrastructure as code to Azure
 
 on:
-    push:
-        branches:
-        - main
-        paths:
-        - 'bicep/**'
-        - '.github/workflows/infra-deploy.yml'
     workflow_dispatch:
         inputs:
             teardown:
