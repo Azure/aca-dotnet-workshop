@@ -1,0 +1,14 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: sendgrid
+spec:
+  type: bindings.twilio.sendgrid
+  version: v1
+  metadata:
+    - name: emailFrom
+      value: "<Your email which was white listed with SendGrid when you obtained the API Key>"
+    - name: emailFromName
+      value: "Tasks Tracker Notification"
+    - name: apiKey
+      value: "<Send Grid API Key>"

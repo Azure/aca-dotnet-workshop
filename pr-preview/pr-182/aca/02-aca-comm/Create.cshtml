@@ -1,0 +1,47 @@
+@page
+@model TasksTracker.WebPortal.Frontend.Ui.Pages.Tasks.CreateModel
+@{
+}
+
+<h1>Create Task</h1>
+
+<h4>Task</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TaskAdd!.TaskName" class="control-label"></label>
+                <input asp-for="TaskAdd!.TaskName" class="form-control" />
+                <span asp-validation-for="TaskAdd!.TaskName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TaskAdd!.TaskDueDate" class="control-label"></label>
+                <input asp-for="TaskAdd!.TaskDueDate" class="form-control" type="date" />
+                <span asp-validation-for="TaskAdd!.TaskDueDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TaskAdd!.TaskAssignedTo" class="control-label"></label>
+                <input asp-for="TaskAdd!.TaskAssignedTo" class="form-control" type="email" />
+                <span asp-validation-for="TaskAdd!.TaskAssignedTo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

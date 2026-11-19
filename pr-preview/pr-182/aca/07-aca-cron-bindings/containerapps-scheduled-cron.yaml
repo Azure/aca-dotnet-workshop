@@ -1,0 +1,7 @@
+componentType: bindings.cron
+version: v1
+metadata:
+  - name: schedule
+    value: "5 0 * * *" # Everyday at 12:05am
+scopes:
+  - tasksmanager-backend-processor

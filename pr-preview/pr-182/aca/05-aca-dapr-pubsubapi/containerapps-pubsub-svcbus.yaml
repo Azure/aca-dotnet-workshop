@@ -1,0 +1,11 @@
+componentType: pubsub.azure.servicebus.topics
+version: v1
+metadata:
+  - name: namespaceName
+    value: "sbns-taskstracker-<$RANDOM_STRING>.servicebus.windows.net"
+  - name: consumerID
+    value: "sbts-tasks-processor"
+# Application scopes
+scopes:
+  - tasksmanager-backend-api
+  - tasksmanager-backend-processor

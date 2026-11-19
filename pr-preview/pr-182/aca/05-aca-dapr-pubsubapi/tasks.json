@@ -1,0 +1,173 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-backend-api",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish-backend-api",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch-backend-api",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/TasksTracker.TasksManager.Backend.Api/TasksTracker.TasksManager.Backend.Api.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-webapp-ui",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish-webapp-ui",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch-webapp-ui",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/TasksTracker.WebPortal.Frontend.Ui/TasksTracker.WebPortal.Frontend.Ui.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-processor-svc",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish-processor-svc",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch-processor-svc",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/TasksTracker.Processor.Backend.Svc/TasksTracker.Processor.Backend.Svc.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-all",
+            "dependsOn": [
+                "build-backend-api",
+                "build-webapp-ui",
+                "build-processor-svc"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "appId": "tasksmanager-backend-api",
+            "appPort": 7088,
+            "httpPort": 3500,
+            "grpcPort": 50001,
+            "appSsl": true,
+            "label": "backend-api-dapr-debug",
+            "type": "dapr",
+            "dependsOn": "build-backend-api",
+            "componentsPath": "./components"
+        },
+        {
+            "appId": "tasksmanager-backend-api",
+            "label": "daprd-down-backend-api",
+            "type": "daprd-down"
+        },
+        {
+            "appId": "tasksmanager-frontend-webapp",
+            "appPort": 7208,
+            "httpPort": 3501,
+            "grpcPort": 50002,
+            "appSsl": true,
+            "label": "webapp-ui-dapr-debug",
+            "type": "dapr",
+            "dependsOn": "build-webapp-ui"
+        },
+        {
+            "appId": "tasksmanager-frontend-webapp",
+            "label": "webapp-ui-daprd-down",
+            "type": "daprd-down"
+        },
+        {
+            "appId": "tasksmanager-backend-processor",
+            "appPort": 7263,
+            "httpPort": 3502,
+            "grpcPort": 50003,
+            "appSsl": true,
+            "label": "processor-svc-dapr-debug",
+            "type": "dapr",
+            "dependsOn": "build-processor-svc",
+            "componentsPath": "./components"
+        },
+        {
+            "appId": "tasksmanager-backend-processor",
+            "label": "processor-svc-daprd-down",
+            "type": "daprd-down"
+        }
+    ]
+}

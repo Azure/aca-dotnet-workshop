@@ -1,0 +1,16 @@
+triggers:
+- type: azure-servicebus
+  metadata:
+    # Required: queueName OR topicName and subscriptionName
+    queueName: queueName
+    # or
+    topicName: topicName
+    subscriptionName: subscriptionName
+    # Optional, required when pod identity is used
+    namespace: service-bus-namespace
+    # Optional, can use TriggerAuthentication as well
+    connectionFromEnv: SERVICEBUS_CONNECTIONSTRING_ENV_NAME # This must be a connection string for a queue itself, and not a namespace level (e.g. RootAccessPolicy) connection string 
+    # Optional
+    messageCount: "5" # Optional. Count of messages to trigger scaling on. Default: 5 messages
+    cloud: Private # Optional. Default: AzurePublicCloud
+    endpointSuffix: servicebus.airgap.example # Required when cloud=Private
