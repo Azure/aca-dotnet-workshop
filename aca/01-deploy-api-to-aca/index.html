@@ -1,19 +1,16 @@
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
+<!DOCTYPE html><html lang="en" class="no-js"><head>
     
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <!-- Page description -->
     
-        <meta name="description" content="Azure Container Apps - Workshop" />
+        <meta name="description" content="Azure Container Apps - Workshop">
     
 
     <!-- Page author -->
     
-        <meta name="author" content="Microsoft" />
+        <meta name="author" content="Microsoft">
     
 
     <!-- Canonical -->
@@ -23,22 +20,19 @@
 
     <!-- Previous page -->
     
-        <link rel="prev" href="../00-workshop-intro/4-prerequisites/" />
+        <link rel="prev" href="../00-workshop-intro/4-prerequisites/">
     
 
     <!-- Next page -->
     
-        <link rel="next" href="../02-aca-comm/" />
+        <link rel="next" href="../02-aca-comm/">
     
 
     <!-- Favicon -->
-    <link rel="icon" href="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" />
+    <link rel="icon" href="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg">
 
     <!-- Generator banner -->
-    <meta
-            name="generator"
-            content="mkdocs-1.6.1, $md-name$-$md-version$"
-    />
+    <meta name="generator" content="mkdocs-1.6.1, $md-name$-$md-version$">
 
     
       
@@ -46,10 +40,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -62,8 +56,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
         <style>:root{--md-text-font:"Ubuntu";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -87,20 +81,20 @@
     
     
     
-    
-        <meta name="og:url" content="https://bitoftech.net/2022/08/25/deploy-microservice-application-azure-container-apps/" />
+        <meta name="og:url" content="https://bitoftech.net/2022/08/25/deploy-microservice-application-azure-container-apps/">
     
 
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
   
   
     
@@ -142,7 +136,7 @@
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -167,20 +161,20 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
     
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
       </label>
     
   
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
     
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
       </label>
     
   
@@ -192,32 +186,34 @@
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -228,13 +224,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -258,7 +255,7 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -279,7 +276,7 @@
       <a href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -287,7 +284,7 @@
 </a>
     </div>
   
-  <ul class="md-nav__list" data-md-scrollfix>
+  <ul class="md-nav__list" data-md-scrollfix="">
     
       
       
@@ -299,10 +296,16 @@
       <a href="../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Homepage
+  
+
     
   </span>
+  
   
 
       </a>
@@ -334,22 +337,28 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
         
-          
           
           <div class="md-nav__link md-nav__container">
             <a href="../00-workshop-intro/" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     Workshop Introduction
+  
+
     
   </span>
+  
   
 
             </a>
@@ -364,9 +373,13 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Workshop Introduction
+            
+  
+    Workshop Introduction
+  
+
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+          <ul class="md-nav__list" data-md-scrollfix="">
             
               
             
@@ -380,10 +393,16 @@
       <a href="../00-workshop-intro/1-aca-core-components/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     ACA Core Components Overview
+  
+
     
   </span>
+  
   
 
       </a>
@@ -402,10 +421,16 @@
       <a href="../00-workshop-intro/2-scenario-architecture/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Scenario and Solution Architecture
+  
+
     
   </span>
+  
   
 
       </a>
@@ -424,10 +449,16 @@
       <a href="../00-workshop-intro/3-dapr-integration/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Dapr Integration in ACA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -446,10 +477,16 @@
       <a href="../00-workshop-intro/4-prerequisites/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Prerequisites
+  
+
     
   </span>
+  
   
 
       </a>
@@ -484,10 +521,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 1 - Deploy Backend API to ACA
+  
+
     
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -496,10 +539,16 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 1 - Deploy Backend API to ACA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -517,12 +566,14 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
   <a href="#objective" class="md-nav__link">
     <span class="md-ellipsis">
-      Objective
+      
+        Objective
+      
     </span>
   </a>
   
@@ -531,7 +582,9 @@
         <li class="md-nav__item">
   <a href="#module-sections" class="md-nav__link">
     <span class="md-ellipsis">
-      Module Sections
+      
+        Module Sections
+      
     </span>
   </a>
   
@@ -541,7 +594,9 @@
           <li class="md-nav__item">
   <a href="#1-create-the-backend-api-project-web-api" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Create the backend API project (Web API)
+      
+        1. Create the backend API project (Web API)
+      
     </span>
   </a>
   
@@ -550,7 +605,9 @@
           <li class="md-nav__item">
   <a href="#2-create-azure-infrastructure" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create Azure Infrastructure
+      
+        2. Create Azure Infrastructure
+      
     </span>
   </a>
   
@@ -560,7 +617,9 @@
           <li class="md-nav__item">
   <a href="#21-define-the-basics" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1 Define the Basics
+      
+        2.1 Define the Basics
+      
     </span>
   </a>
   
@@ -569,7 +628,9 @@
           <li class="md-nav__item">
   <a href="#22-create-network-infrastructure" class="md-nav__link">
     <span class="md-ellipsis">
-      2.2 Create Network Infrastructure
+      
+        2.2 Create Network Infrastructure
+      
     </span>
   </a>
   
@@ -578,7 +639,9 @@
           <li class="md-nav__item">
   <a href="#23-create-log-analytics-workspace-application-insights" class="md-nav__link">
     <span class="md-ellipsis">
-      2.3 Create Log Analytics workspace &amp; Application Insights
+      
+        2.3 Create Log Analytics workspace &amp; Application Insights
+      
     </span>
   </a>
   
@@ -587,7 +650,9 @@
           <li class="md-nav__item">
   <a href="#24-azure-container-infrastructure" class="md-nav__link">
     <span class="md-ellipsis">
-      2.4 Azure Container Infrastructure
+      
+        2.4 Azure Container Infrastructure
+      
     </span>
   </a>
   
@@ -601,7 +666,9 @@
           <li class="md-nav__item">
   <a href="#3-deploy-web-api-backend-project-to-aca" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Deploy Web API Backend Project to ACA
+      
+        3. Deploy Web API Backend Project to ACA
+      
     </span>
   </a>
   
@@ -615,7 +682,9 @@
         <li class="md-nav__item">
   <a href="#review" class="md-nav__link">
     <span class="md-ellipsis">
-      Review
+      
+        Review
+      
     </span>
   </a>
   
@@ -639,10 +708,16 @@
       <a href="../02-aca-comm/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 2 - Communication between Microservices in ACA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -660,10 +735,16 @@
       <a href="../03-aca-dapr-integration/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 3 - Dapr Integration with ACA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -681,10 +762,16 @@
       <a href="../04-aca-dapr-stateapi/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 4 - ACA State Store With Dapr State Management API
+  
+
     
   </span>
+  
   
 
       </a>
@@ -702,10 +789,16 @@
       <a href="../05-aca-dapr-pubsubapi/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 5 - ACA Async Communication with Dapr Pub/Sub API
+  
+
     
   </span>
+  
   
 
       </a>
@@ -723,10 +816,16 @@
       <a href="../06-aca-dapr-bindingsapi/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 6 - ACA with Dapr Bindings Building Block
+  
+
     
   </span>
+  
   
 
       </a>
@@ -744,10 +843,16 @@
       <a href="../07-aca-cron-bindings/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
+  
+
     
   </span>
+  
   
 
       </a>
@@ -765,10 +870,16 @@
       <a href="../08-aca-monitoring/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 8 - ACA Monitoring and Observability with Application Insights
+  
+
     
   </span>
+  
   
 
       </a>
@@ -786,10 +897,16 @@
       <a href="../09-aca-autoscale-keda/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 9 - ACA Auto Scaling with KEDA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -819,22 +936,28 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
         
-          
           
           <div class="md-nav__link md-nav__container">
             <a href="../10-aca-iac-bicep/" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 10 - Deployment Via Bicep and DevOps
+  
+
     
   </span>
+  
   
 
             </a>
@@ -849,9 +972,13 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
-            Module 10 - Deployment Via Bicep and DevOps
+            
+  
+    Module 10 - Deployment Via Bicep and DevOps
+  
+
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+          <ul class="md-nav__list" data-md-scrollfix="">
             
               
             
@@ -865,10 +992,16 @@
       <a href="../10-aca-iac-bicep/01-iac-bicep/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Deploy Infrastructure using Bicep
+  
+
     
   </span>
+  
   
 
       </a>
@@ -887,10 +1020,16 @@
       <a href="../10-aca-iac-bicep/02-ci-cd-git-action/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Deploy Infrastructure using Bicep via GitHub Actions
+  
+
     
   </span>
+  
   
 
       </a>
@@ -909,10 +1048,16 @@
       <a href="../10-aca-iac-bicep/03-ci-cd-azdo/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Deploy infrastructure using Azure Devops Pipeline
+  
+
     
   </span>
+  
   
 
       </a>
@@ -938,10 +1083,16 @@
       <a href="../11-aca-landing-zone/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 11 - Integration with Azure Container Apps landing zone accelerator
+  
+
     
   </span>
+  
   
 
       </a>
@@ -959,10 +1110,16 @@
       <a href="../12-optimize-containers/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 12 - Container optimization
+  
+
     
   </span>
+  
   
 
       </a>
@@ -980,10 +1137,16 @@
       <a href="../29-about-the-authors/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     About The Authors
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1011,20 +1174,27 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16">
         
           
           <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     Appendix
+  
+
     
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -1033,9 +1203,13 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
-            Appendix
+            
+  
+    Appendix
+  
+
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+          <ul class="md-nav__list" data-md-scrollfix="">
             
               
                 
@@ -1047,10 +1221,16 @@
       <a href="../30-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Debug and Launch Dapr Applications in VSCode
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1069,10 +1249,16 @@
       <a href="../30-appendix/02-github-local-codespaces/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Testing Changes Locally or with GitHub Codespaces
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1091,10 +1277,16 @@
       <a href="../30-appendix/03-variables/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Variables
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1113,10 +1305,16 @@
       <a href="../30-appendix/04-troubleshooting/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Troubleshooting
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1140,7 +1338,7 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1156,12 +1354,14 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
   <a href="#objective" class="md-nav__link">
     <span class="md-ellipsis">
-      Objective
+      
+        Objective
+      
     </span>
   </a>
   
@@ -1170,7 +1370,9 @@
         <li class="md-nav__item">
   <a href="#module-sections" class="md-nav__link">
     <span class="md-ellipsis">
-      Module Sections
+      
+        Module Sections
+      
     </span>
   </a>
   
@@ -1180,7 +1382,9 @@
           <li class="md-nav__item">
   <a href="#1-create-the-backend-api-project-web-api" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Create the backend API project (Web API)
+      
+        1. Create the backend API project (Web API)
+      
     </span>
   </a>
   
@@ -1189,7 +1393,9 @@
           <li class="md-nav__item">
   <a href="#2-create-azure-infrastructure" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create Azure Infrastructure
+      
+        2. Create Azure Infrastructure
+      
     </span>
   </a>
   
@@ -1199,7 +1405,9 @@
           <li class="md-nav__item">
   <a href="#21-define-the-basics" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1 Define the Basics
+      
+        2.1 Define the Basics
+      
     </span>
   </a>
   
@@ -1208,7 +1416,9 @@
           <li class="md-nav__item">
   <a href="#22-create-network-infrastructure" class="md-nav__link">
     <span class="md-ellipsis">
-      2.2 Create Network Infrastructure
+      
+        2.2 Create Network Infrastructure
+      
     </span>
   </a>
   
@@ -1217,7 +1427,9 @@
           <li class="md-nav__item">
   <a href="#23-create-log-analytics-workspace-application-insights" class="md-nav__link">
     <span class="md-ellipsis">
-      2.3 Create Log Analytics workspace &amp; Application Insights
+      
+        2.3 Create Log Analytics workspace &amp; Application Insights
+      
     </span>
   </a>
   
@@ -1226,7 +1438,9 @@
           <li class="md-nav__item">
   <a href="#24-azure-container-infrastructure" class="md-nav__link">
     <span class="md-ellipsis">
-      2.4 Azure Container Infrastructure
+      
+        2.4 Azure Container Infrastructure
+      
     </span>
   </a>
   
@@ -1240,7 +1454,9 @@
           <li class="md-nav__item">
   <a href="#3-deploy-web-api-backend-project-to-aca" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Deploy Web API Backend Project to ACA
+      
+        3. Deploy Web API Backend Project to ACA
+      
     </span>
   </a>
   
@@ -1254,7 +1470,9 @@
         <li class="md-nav__item">
   <a href="#review" class="md-nav__link">
     <span class="md-ellipsis">
-      Review
+      
+        Review
+      
     </span>
   </a>
   
@@ -1270,6 +1488,7 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
@@ -1279,7 +1498,7 @@
   
 
 
-<h1 id="module-1-deploy-backend-api-to-aca">Module 1 - Deploy Backend API to ACA<a class="headerlink" href="#module-1-deploy-backend-api-to-aca" title="Permanent link">&para;</a></h1>
+<h1 id="module-1-deploy-backend-api-to-aca">Module 1 - Deploy Backend API to ACA<a class="headerlink" href="#module-1-deploy-backend-api-to-aca" title="Permanent link">¶</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Module Duration</p>
 <p>60 minutes</p>
@@ -1288,15 +1507,15 @@
 <p class="admonition-title">Prerequisities</p>
 <p>Please ensure that all <a href="../00-workshop-intro/4-prerequisites/" target="_blank">prerequisites</a> have been taken care of prior to continuing.</p>
 </div>
-<h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">¶</a></h2>
 <p>In this module, we will accomplish three objectives:</p>
 <ol>
 <li>Create the first microservice, <code>ACA API - Backend</code>, which serves as the API for our tasks.</li>
 <li>Create the initial Azure infrastructure that we will need throughout this workshop.</li>
 <li>Deploy the <code>ACA API - Backend</code> container app to Azure.</li>
 </ol>
-<h2 id="module-sections">Module Sections<a class="headerlink" href="#module-sections" title="Permanent link">&para;</a></h2>
-<h3 id="1-create-the-backend-api-project-web-api">1. Create the backend API project (Web API)<a class="headerlink" href="#1-create-the-backend-api-project-web-api" title="Permanent link">&para;</a></h3>
+<h2 id="module-sections">Module Sections<a class="headerlink" href="#module-sections" title="Permanent link">¶</a></h2>
+<h3 id="1-create-the-backend-api-project-web-api">1. Create the backend API project (Web API)<a class="headerlink" href="#1-create-the-backend-api-project-web-api" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p>If a terminal is not yet open, from VS Code's <em>Terminal</em> tab, select <em>New Terminal</em> to open a (PowerShell or Bash ) terminal in the project folder <em>TasksTracker.ContainerApps</em> (also referred to as <em>root</em>).</p>
@@ -1311,45 +1530,45 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The version in the <em>global.json</em> files below may be outdated. Please ensure you use the correct versions based on what is on your machine.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">.NET 8</label><label for="__tabbed_1_2">.NET 9</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">.NET 8</label><label for="__tabbed_1_2">.NET 9</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">global.json</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">global.json</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<div class="language-json highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span>
 <span class="normal"><a href="#__codelineno-0-4">4</a></span>
 <span class="normal"><a href="#__codelineno-0-5">5</a></span>
 <span class="normal"><a href="#__codelineno-0-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">{</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;sdk&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.0.405&quot;</span><span class="p">,</span>
-</span></span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">        </span><span class="nt">&quot;rollForward&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latestFeature&quot;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="nt">"sdk"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="hll"><span class="w">        </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.0.405"</span><span class="p">,</span>
+</span></span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">        </span><span class="nt">"rollForward"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latestFeature"</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">global.json</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">global.json</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<div class="language-json highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
 <span class="normal"><a href="#__codelineno-1-5">5</a></span>
 <span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nt">&quot;sdk&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9.0.102&quot;</span><span class="p">,</span>
-</span></span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">        </span><span class="nt">&quot;rollForward&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latestFeature&quot;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nt">"sdk"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="hll"><span class="w">        </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.0.102"</span><span class="p">,</span>
+</span></span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">        </span><span class="nt">"rollForward"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latestFeature"</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -1361,11 +1580,11 @@
 <p class="admonition-title">Controller-Based vs. Minimal APIs</p>
 <p>APIs can be created via the traditional, expanded controller-based structure with <em>Controllers</em> and <em>Models</em> folders, etc. or via the newer minimal APIs approach where controller actions are written inside <em>Program.cs</em>. The latter approach is preferential in a microservices project where the endpoints are overseeable and may easily be represented by a more compact view. As our workshop takes advantage of microservices, the use case for minimal APIs is given. However, in order to make the workshop a bit more demonstrable, we will - for now - stick with controller-based APIs.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">.NET 8 or above</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">.NET 8 or above</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapi<span class="w"> </span>--use-controllers<span class="w"> </span>-o<span class="w"> </span>TasksTracker.TasksManager.Backend.Api
-</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>dotnet<span class="w"> </span>new<span class="w"> </span>webapi<span class="w"> </span>--use-controllers<span class="w"> </span>-o<span class="w"> </span>TasksTracker.TasksManager.Backend.Api
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -1394,12 +1613,12 @@
 </li>
 <li>
 <p>In the project root add a new folder named <strong>Models</strong> and create a new file with name below. These are the DTOs that will be used across the projects.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">TaskModel.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"><div class="tabbed-labels"><label for="__tabbed_5_1">TaskModel.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-csharp highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<div class="language-csharp highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
@@ -1458,14 +1677,14 @@
 </span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">TaskAssignedTo</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
 </span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </li>
 <li>
 <p>In the project root create a new folder named <strong>Services</strong> as a sibling to the <em>Models</em> folder. Add the two files below to the <em>Services</em> folder. Add the Fake Tasks Manager service as we will work with data in memory in this module. Later on, we will implement a data store.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">ITasksManager.cs</label><label for="__tabbed_6_2">FakeTasksManager.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio"><input id="__tabbed_6_2" name="__tabbed_6" type="radio"><div class="tabbed-labels"><label for="__tabbed_6_1">ITasksManager.cs</label><label for="__tabbed_6_2">FakeTasksManager.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-csharp highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<div class="language-csharp highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
@@ -1492,10 +1711,10 @@
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">        </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">DeleteTask</span><span class="p">(</span><span class="n">Guid</span><span class="w"> </span><span class="n">taskId</span><span class="p">);</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-csharp highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">  1</a></span>
+<div class="language-csharp highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">  1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">  2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">  3</a></span>
 <span class="normal"><a href="#__codelineno-5-4">  4</a></span>
@@ -1612,11 +1831,11 @@
 </span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TaskModel</span><span class="p">()</span>
 </span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">                </span><span class="p">{</span>
 </span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">                    </span><span class="n">TaskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">(),</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">                    </span><span class="n">TaskName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;Task number: {i}&quot;</span><span class="p">,</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">                    </span><span class="n">TaskCreatedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tjoudeh@bitoftech.net&quot;</span><span class="p">,</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">                    </span><span class="n">TaskName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$"Task number: {i}"</span><span class="p">,</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">                    </span><span class="n">TaskCreatedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"tjoudeh@bitoftech.net"</span><span class="p">,</span>
 </span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">                    </span><span class="n">TaskCreatedOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">.</span><span class="n">AddMinutes</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
 </span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">                    </span><span class="n">TaskDueDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">.</span><span class="n">AddDays</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
-</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">                    </span><span class="n">TaskAssignedTo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;assignee{rnd.Next(50)}@mail.com&quot;</span><span class="p">,</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">                    </span><span class="n">TaskAssignedTo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$"assignee{rnd.Next(50)}@mail.com"</span><span class="p">,</span>
 </span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">                </span><span class="p">};</span>
 </span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="w">                </span><span class="n">_tasksList</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
 </span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="w">            </span><span class="p">}</span>
@@ -1698,7 +1917,7 @@
 </span><span id="__span-5-100"><a id="__codelineno-5-100" name="__codelineno-5-100"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-5-101"><a id="__codelineno-5-101" name="__codelineno-5-101"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-5-102"><a id="__codelineno-5-102" name="__codelineno-5-102"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -1708,15 +1927,15 @@
 </li>
 <li>
 <p>Now we need to register <code>FakeTasksManager</code> on project startup. Open file <code class="language-csharp highlight"><span class="n">Program</span><span class="p">.</span><span class="n">cs</span></code> and register the newly created service by adding the highlighted lines from below snippet. Don't forget to include the required <code>using</code> statement for the task interface and class.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">.NET 8</label><label for="__tabbed_7_2">.NET 9</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio"><input id="__tabbed_7_2" name="__tabbed_7" type="radio"><div class="tabbed-labels"><label for="__tabbed_7_1">.NET 8</label><label for="__tabbed_7_2">.NET 9</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Program.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio"><div class="tabbed-labels"><label for="__tabbed_8_1">Program.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-csharp highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<div class="language-csharp highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
@@ -1771,15 +1990,15 @@
 </span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="n">app</span><span class="p">.</span><span class="n">MapControllers</span><span class="p">();</span>
 </span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27"></a>
 </span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28"></a><span class="n">app</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Program.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio"><div class="tabbed-labels"><label for="__tabbed_9_1">Program.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-csharp highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<div class="language-csharp highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
@@ -1830,19 +2049,19 @@
 </span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="n">app</span><span class="p">.</span><span class="n">MapControllers</span><span class="p">();</span>
 </span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25"></a>
 </span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26"></a><span class="n">app</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 <li>
 <p>Inside the <strong>Controllers</strong> folder create a new controller with the below filename. We need to create API endpoints to manage tasks.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">TasksController.cs</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio"><div class="tabbed-labels"><label for="__tabbed_10_1">TasksController.cs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="language-csharp highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<div class="language-csharp highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
@@ -1924,7 +2143,7 @@
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">TasksTracker.TasksManager.Backend.Api.Controllers</span>
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="p">{</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">    </span><span class="na">[Route(&quot;api/tasks&quot;)]</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">    </span><span class="na">[Route("api/tasks")]</span>
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">    </span><span class="na">[ApiController]</span>
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">TasksController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
 </span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="p">{</span>
@@ -1943,7 +2162,7 @@
 </span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_tasksManager</span><span class="p">.</span><span class="n">GetTasksByCreator</span><span class="p">(</span><span class="n">createdBy</span><span class="p">);</span>
 </span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25"></a>
-</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="w">        </span><span class="na">[HttpGet(&quot;{taskId}&quot;)]</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="w">        </span><span class="na">[HttpGet("{taskId}")]</span>
 </span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetTask</span><span class="p">(</span><span class="n">Guid</span><span class="w"> </span><span class="n">taskId</span><span class="p">)</span>
 </span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="w">        </span><span class="p">{</span>
 </span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_tasksManager</span><span class="p">.</span><span class="n">GetTaskById</span><span class="p">(</span><span class="n">taskId</span><span class="p">);</span>
@@ -1961,11 +2180,11 @@
 </span><span id="__span-8-41"><a id="__codelineno-8-41" name="__codelineno-8-41"></a><span class="w">                </span><span class="n">taskAddModel</span><span class="p">.</span><span class="n">TaskDueDate</span>
 </span><span id="__span-8-42"><a id="__codelineno-8-42" name="__codelineno-8-42"></a><span class="w">            </span><span class="p">);</span>
 </span><span id="__span-8-43"><a id="__codelineno-8-43" name="__codelineno-8-43"></a>
-</span><span id="__span-8-44"><a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">Created</span><span class="p">(</span><span class="s">$&quot;/api/tasks/{taskId}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
+</span><span id="__span-8-44"><a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">Created</span><span class="p">(</span><span class="s">$"/api/tasks/{taskId}"</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
 </span><span id="__span-8-45"><a id="__codelineno-8-45" name="__codelineno-8-45"></a>
 </span><span id="__span-8-46"><a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-8-47"><a id="__codelineno-8-47" name="__codelineno-8-47"></a>
-</span><span id="__span-8-48"><a id="__codelineno-8-48" name="__codelineno-8-48"></a><span class="w">        </span><span class="na">[HttpPut(&quot;{taskId}&quot;)]</span>
+</span><span id="__span-8-48"><a id="__codelineno-8-48" name="__codelineno-8-48"></a><span class="w">        </span><span class="na">[HttpPut("{taskId}")]</span>
 </span><span id="__span-8-49"><a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Put</span><span class="p">(</span><span class="n">Guid</span><span class="w"> </span><span class="n">taskId</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromBody</span><span class="p">]</span><span class="w"> </span><span class="n">TaskUpdateModel</span><span class="w"> </span><span class="n">taskUpdateModel</span><span class="p">)</span>
 </span><span id="__span-8-50"><a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="w">        </span><span class="p">{</span>
 </span><span id="__span-8-51"><a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_tasksManager</span><span class="p">.</span><span class="n">UpdateTask</span><span class="p">(</span>
@@ -1978,7 +2197,7 @@
 </span><span id="__span-8-58"><a id="__codelineno-8-58" name="__codelineno-8-58"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BadRequest</span><span class="p">();</span>
 </span><span id="__span-8-59"><a id="__codelineno-8-59" name="__codelineno-8-59"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-8-60"><a id="__codelineno-8-60" name="__codelineno-8-60"></a>
-</span><span id="__span-8-61"><a id="__codelineno-8-61" name="__codelineno-8-61"></a><span class="w">        </span><span class="na">[HttpPut(&quot;{taskId}/markcomplete&quot;)]</span>
+</span><span id="__span-8-61"><a id="__codelineno-8-61" name="__codelineno-8-61"></a><span class="w">        </span><span class="na">[HttpPut("{taskId}/markcomplete")]</span>
 </span><span id="__span-8-62"><a id="__codelineno-8-62" name="__codelineno-8-62"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MarkComplete</span><span class="p">(</span><span class="n">Guid</span><span class="w"> </span><span class="n">taskId</span><span class="p">)</span>
 </span><span id="__span-8-63"><a id="__codelineno-8-63" name="__codelineno-8-63"></a><span class="w">        </span><span class="p">{</span>
 </span><span id="__span-8-64"><a id="__codelineno-8-64" name="__codelineno-8-64"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_tasksManager</span><span class="p">.</span><span class="n">MarkTaskCompleted</span><span class="p">(</span><span class="n">taskId</span><span class="p">);</span>
@@ -1986,7 +2205,7 @@
 </span><span id="__span-8-66"><a id="__codelineno-8-66" name="__codelineno-8-66"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Ok</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BadRequest</span><span class="p">();</span>
 </span><span id="__span-8-67"><a id="__codelineno-8-67" name="__codelineno-8-67"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-8-68"><a id="__codelineno-8-68" name="__codelineno-8-68"></a>
-</span><span id="__span-8-69"><a id="__codelineno-8-69" name="__codelineno-8-69"></a><span class="w">        </span><span class="na">[HttpDelete(&quot;{taskId}&quot;)]</span>
+</span><span id="__span-8-69"><a id="__codelineno-8-69" name="__codelineno-8-69"></a><span class="w">        </span><span class="na">[HttpDelete("{taskId}")]</span>
 </span><span id="__span-8-70"><a id="__codelineno-8-70" name="__codelineno-8-70"></a><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">IActionResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Delete</span><span class="p">(</span><span class="n">Guid</span><span class="w"> </span><span class="n">taskId</span><span class="p">)</span>
 </span><span id="__span-8-71"><a id="__codelineno-8-71" name="__codelineno-8-71"></a><span class="w">        </span><span class="p">{</span>
 </span><span id="__span-8-72"><a id="__codelineno-8-72" name="__codelineno-8-72"></a><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">deleted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_tasksManager</span><span class="p">.</span><span class="n">DeleteTask</span><span class="p">(</span><span class="n">taskId</span><span class="p">);</span>
@@ -1995,23 +2214,23 @@
 </span><span id="__span-8-75"><a id="__codelineno-8-75" name="__codelineno-8-75"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-8-76"><a id="__codelineno-8-76" name="__codelineno-8-76"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-8-77"><a id="__codelineno-8-77" name="__codelineno-8-77"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </li>
 <li>
 <p>From VS Code Terminal tab, navigate to the parent directory which hosts the <code>.csproj</code> project folder and build the project.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">PowerShell</label><label for="__tabbed_11_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio"><input id="__tabbed_11_2" name="__tabbed_11" type="radio"><div class="tabbed-labels"><label for="__tabbed_11_1">PowerShell</label><label for="__tabbed_11_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps<span class="se">\T</span>asksTracker.TasksManager.Backend.Api
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a>dotnet<span class="w"> </span>build
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$PROJECT_ROOT</span>/TasksTracker.TasksManager.Backend.Api
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a>dotnet<span class="w"> </span>build
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -2025,22 +2244,22 @@
 <ul>
 <li>
 <p>Navigate to the root and persist the module to Git.</p>
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add Module 1&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add Module 1"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </li>
 </ul>
-<h3 id="2-create-azure-infrastructure">2. Create Azure Infrastructure<a class="headerlink" href="#2-create-azure-infrastructure" title="Permanent link">&para;</a></h3>
-<h4 id="21-define-the-basics">2.1 Define the Basics<a class="headerlink" href="#21-define-the-basics" title="Permanent link">&para;</a></h4>
+<h3 id="2-create-azure-infrastructure">2. Create Azure Infrastructure<a class="headerlink" href="#2-create-azure-infrastructure" title="Permanent link">¶</a></h3>
+<h4 id="21-define-the-basics">2.1 Define the Basics<a class="headerlink" href="#21-define-the-basics" title="Permanent link">¶</a></h4>
 <p>We will be using Azure CLI to deploy the Web API Backend to ACA as shown in the following steps:</p>
 <ul>
 <li>
 <p>First, we need to ensure that our CLI is updated. Then we log in to Azure.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">PowerShell</label><label for="__tabbed_12_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio"><input id="__tabbed_12_2" name="__tabbed_12" type="radio"><div class="tabbed-labels"><label for="__tabbed_12_1">PowerShell</label><label for="__tabbed_12_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
 <span class="normal"><a href="#__codelineno-12-3">3</a></span>
 <span class="normal"><a href="#__codelineno-12-4">4</a></span>
@@ -2057,10 +2276,10 @@
 </span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a>
 </span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="c1"># Log in to Azure</span>
 </span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>az<span class="w"> </span>login
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
 <span class="normal"><a href="#__codelineno-13-2">2</a></span>
 <span class="normal"><a href="#__codelineno-13-3">3</a></span>
 <span class="normal"><a href="#__codelineno-13-4">4</a></span>
@@ -2077,17 +2296,17 @@
 </span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7"></a>
 </span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="c1"># Log in to Azure</span>
 </span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9"></a>az<span class="w"> </span>login
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 <li>
 <p>You may be able to use the queried Azure subscription ID or you may need to set it manually depending on your setup.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">PowerShell</label><label for="__tabbed_13_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio"><input id="__tabbed_13_2" name="__tabbed_13" type="radio"><div class="tabbed-labels"><label for="__tabbed_13_1">PowerShell</label><label for="__tabbed_13_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
 <span class="normal"><a href="#__codelineno-14-3">3</a></span>
 <span class="normal"><a href="#__codelineno-14-4">4</a></span>
@@ -2098,14 +2317,14 @@
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="nv">$AZURE_SUBSCRIPTION_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>--output<span class="w"> </span>tsv
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="c1"># Set a specific Azure Subscription ID (if you have multiple subscriptions)</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="c1"># $AZURE_SUBSCRIPTION_ID = &quot;&lt;Your Azure Subscription ID&gt;&quot; # Your Azure Subscription id which you can find on the Azure portal</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="c1"># $AZURE_SUBSCRIPTION_ID = "&lt;Your Azure Subscription ID&gt;" # Your Azure Subscription id which you can find on the Azure portal</span>
 </span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="c1"># az account set --subscription $AZURE_SUBSCRIPTION_ID</span>
 </span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a>
 </span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$AZURE_SUBSCRIPTION_ID</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span>
 <span class="normal"><a href="#__codelineno-15-4">4</a></span>
@@ -2116,21 +2335,21 @@
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">AZURE_SUBSCRIPTION_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>--output<span class="w"> </span>tsv<span class="k">)</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a>
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="c1"># Set a specific Azure Subscription ID (if you have multiple subscriptions)</span>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="c1"># export AZURE_SUBSCRIPTION_ID=&quot;&lt;Your Azure Subscription ID&gt;&quot; # Your Azure Subscription id which you can find on the Azure portal</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="c1"># export AZURE_SUBSCRIPTION_ID="&lt;Your Azure Subscription ID&gt;" # Your Azure Subscription id which you can find on the Azure portal</span>
 </span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="c1"># az account set --subscription $AZURE_SUBSCRIPTION_ID</span>
 </span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7"></a>
 </span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$AZURE_SUBSCRIPTION_ID</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 <li>
 <p>Execute the variables below in the console to use them across the different modules in the workshop. Some of these variables must be globally unique, which we attempt by using <code>$RANDOM_STRING</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">PowerShell</label><label for="__tabbed_14_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio"><input id="__tabbed_14_2" name="__tabbed_14" type="radio"><div class="tabbed-labels"><label for="__tabbed_14_1">PowerShell</label><label for="__tabbed_14_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
@@ -2142,19 +2361,19 @@
 <span class="normal"><a href="#__codelineno-16-10">10</a></span>
 <span class="normal"><a href="#__codelineno-16-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="c1"># Create a random, 6-digit, Azure safe string</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="nv">$RANDOM_STRING</span><span class="o">=</span>-join<span class="w"> </span><span class="o">((</span><span class="m">97</span>..122<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="o">(</span><span class="m">48</span>..57<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Get-Random<span class="w"> </span>-Count<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ForEach-Object<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">[</span>char<span class="o">]</span><span class="nv">$_</span><span class="o">})</span>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="nv">$RESOURCE_GROUP</span><span class="o">=</span><span class="s2">&quot;rg-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="nv">$LOCATION</span><span class="o">=</span><span class="s2">&quot;westus2&quot;</span>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="nv">$ENVIRONMENT</span><span class="o">=</span><span class="s2">&quot;cae-tasks-tracker&quot;</span>
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="nv">$WORKSPACE_NAME</span><span class="o">=</span><span class="s2">&quot;log-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="nv">$APPINSIGHTS_NAME</span><span class="o">=</span><span class="s2">&quot;appi-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="nv">$BACKEND_API_NAME</span><span class="o">=</span><span class="s2">&quot;tasksmanager-backend-api&quot;</span>
-</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="s2">&quot;crtaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="nv">$VNET_NAME</span><span class="o">=</span><span class="s2">&quot;vnet-tasks-tracker&quot;</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="nv">$RESOURCE_GROUP</span><span class="o">=</span><span class="s2">"rg-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">"</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="nv">$LOCATION</span><span class="o">=</span><span class="s2">"westus2"</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="nv">$ENVIRONMENT</span><span class="o">=</span><span class="s2">"cae-tasks-tracker"</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="nv">$WORKSPACE_NAME</span><span class="o">=</span><span class="s2">"log-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">"</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="nv">$APPINSIGHTS_NAME</span><span class="o">=</span><span class="s2">"appi-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">"</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="nv">$BACKEND_API_NAME</span><span class="o">=</span><span class="s2">"tasksmanager-backend-api"</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="s2">"crtaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">"</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="nv">$VNET_NAME</span><span class="o">=</span><span class="s2">"vnet-tasks-tracker"</span>
 </span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="nv">$TARGET_PORT</span><span class="o">=</span><span class="m">8080</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
@@ -2165,17 +2384,17 @@
 <span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-17-10">10</a></span>
 <span class="normal"><a href="#__codelineno-17-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="c1"># Create a random, 6-digit, Azure safe string</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RANDOM_STRING</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span>/dev/urandom<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-dc<span class="w"> </span><span class="s1">&#39;a-z0-9&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fold<span class="w"> </span>-w<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="k">)</span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RESOURCE_GROUP</span><span class="o">=</span><span class="s2">&quot;rg-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">LOCATION</span><span class="o">=</span><span class="s2">&quot;westus2&quot;</span>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ENVIRONMENT</span><span class="o">=</span><span class="s2">&quot;cae-tasks-tracker&quot;</span>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="nb">export</span><span class="w"> </span><span class="nv">WORKSPACE_NAME</span><span class="o">=</span><span class="s2">&quot;log-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">APPINSIGHTS_NAME</span><span class="o">=</span><span class="s2">&quot;appi-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="nb">export</span><span class="w"> </span><span class="nv">BACKEND_API_NAME</span><span class="o">=</span><span class="s2">&quot;tasksmanager-backend-api&quot;</span>
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="nb">export</span><span class="w"> </span><span class="nv">AZURE_CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="s2">&quot;crtaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">&quot;</span>
-</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VNET_NAME</span><span class="o">=</span><span class="s2">&quot;vnet-tasks-tracker&quot;</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RANDOM_STRING</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span>/dev/urandom<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-dc<span class="w"> </span><span class="s1">'a-z0-9'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fold<span class="w"> </span>-w<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="k">)</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RESOURCE_GROUP</span><span class="o">=</span><span class="s2">"rg-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">"</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">LOCATION</span><span class="o">=</span><span class="s2">"westus2"</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ENVIRONMENT</span><span class="o">=</span><span class="s2">"cae-tasks-tracker"</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="nb">export</span><span class="w"> </span><span class="nv">WORKSPACE_NAME</span><span class="o">=</span><span class="s2">"log-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">"</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">APPINSIGHTS_NAME</span><span class="o">=</span><span class="s2">"appi-tasks-tracker-</span><span class="nv">$RANDOM_STRING</span><span class="s2">"</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="nb">export</span><span class="w"> </span><span class="nv">BACKEND_API_NAME</span><span class="o">=</span><span class="s2">"tasksmanager-backend-api"</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="nb">export</span><span class="w"> </span><span class="nv">AZURE_CONTAINER_REGISTRY_NAME</span><span class="o">=</span><span class="s2">"crtaskstracker</span><span class="nv">$RANDOM_STRING</span><span class="s2">"</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="nb">export</span><span class="w"> </span><span class="nv">VNET_NAME</span><span class="o">=</span><span class="s2">"vnet-tasks-tracker"</span>
 </span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TARGET_PORT</span><span class="o">=</span><span class="m">8080</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -2188,29 +2407,29 @@
 <ul>
 <li>
 <p>Create a resource group to organize the services related to the application, run the below command:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">PowerShell</label><label for="__tabbed_15_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio"><input id="__tabbed_15_2" name="__tabbed_15" type="radio"><div class="tabbed-labels"><label for="__tabbed_15_1">PowerShell</label><label for="__tabbed_15_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a>az<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a>--name<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a>--location<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOCATION</span><span class="s2">&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a>--location<span class="w"> </span><span class="s2">"</span><span class="nv">$LOCATION</span><span class="s2">"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
 <span class="normal"><a href="#__codelineno-19-2">2</a></span>
 <span class="normal"><a href="#__codelineno-19-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a>az<span class="w"> </span>group<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a>--name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a>--location<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOCATION</span><span class="s2">&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a>--location<span class="w"> </span><span class="s2">"</span><span class="nv">$LOCATION</span><span class="s2">"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 </ul>
-<h4 id="22-create-network-infrastructure">2.2 Create Network Infrastructure<a class="headerlink" href="#22-create-network-infrastructure" title="Permanent link">&para;</a></h4>
+<h4 id="22-create-network-infrastructure">2.2 Create Network Infrastructure<a class="headerlink" href="#22-create-network-infrastructure" title="Permanent link">¶</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We are keeping this implementation simple. A production workload should have Network Security Groups and a firewall.</p>
@@ -2218,10 +2437,10 @@
 <ul>
 <li>
 <p>We need to create a virtual network (VNet) to secure our container apps. Note that while the VNet size with <code>/16</code> CIDR is arbitrary, the container app subnet must have at least a <code>/27</code> CIDR.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">PowerShell</label><label for="__tabbed_16_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio"><input id="__tabbed_16_2" name="__tabbed_16" type="radio"><div class="tabbed-labels"><label for="__tabbed_16_1">PowerShell</label><label for="__tabbed_16_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
 <span class="normal"><a href="#__codelineno-20-3">3</a></span>
 <span class="normal"><a href="#__codelineno-20-4">4</a></span>
@@ -2232,31 +2451,31 @@
 </span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a>--address-prefix<span class="w"> </span><span class="m">10</span>.0.0.0/16<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>--subnet-name<span class="w"> </span>ContainerAppSubnet<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a>--subnet-prefix<span class="w"> </span><span class="m">10</span>.0.0.0/27
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span>
 <span class="normal"><a href="#__codelineno-21-3">3</a></span>
 <span class="normal"><a href="#__codelineno-21-4">4</a></span>
 <span class="normal"><a href="#__codelineno-21-5">5</a></span>
 <span class="normal"><a href="#__codelineno-21-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>--name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VNET_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$VNET_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a>--address-prefix<span class="w"> </span><span class="m">10</span>.0.0.0/16<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a>--subnet-name<span class="w"> </span>ContainerAppSubnet<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a>--subnet-prefix<span class="w"> </span><span class="m">10</span>.0.0.0/27
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 <li>
 <p>Azure Container Apps requires management of the subnet, so we must delegate exclusive control.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">PowerShell</label><label for="__tabbed_17_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio"><input id="__tabbed_17_2" name="__tabbed_17" type="radio"><div class="tabbed-labels"><label for="__tabbed_17_1">PowerShell</label><label for="__tabbed_17_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
 <span class="normal"><a href="#__codelineno-22-2">2</a></span>
 <span class="normal"><a href="#__codelineno-22-3">3</a></span>
 <span class="normal"><a href="#__codelineno-22-4">4</a></span>
@@ -2265,29 +2484,29 @@
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a>--vnet-name<span class="w"> </span><span class="nv">$VNET_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5"></a>--delegations<span class="w"> </span>Microsoft.App/environments
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">2</a></span>
 <span class="normal"><a href="#__codelineno-23-3">3</a></span>
 <span class="normal"><a href="#__codelineno-23-4">4</a></span>
 <span class="normal"><a href="#__codelineno-23-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>subnet<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>--name<span class="w"> </span>ContainerAppSubnet<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a>--vnet-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VNET_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a>--vnet-name<span class="w"> </span><span class="s2">"</span><span class="nv">$VNET_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a>--delegations<span class="w"> </span>Microsoft.App/environments
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 <li>
 <p>Retrieve the Azure Container App subnet resource ID as it will be referenced when the Azure Container App Environment is created later.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">PowerShell</label><label for="__tabbed_18_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio"><input id="__tabbed_18_2" name="__tabbed_18" type="radio"><div class="tabbed-labels"><label for="__tabbed_18_1">PowerShell</label><label for="__tabbed_18_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
 <span class="normal"><a href="#__codelineno-24-2">2</a></span>
 <span class="normal"><a href="#__codelineno-24-3">3</a></span>
 <span class="normal"><a href="#__codelineno-24-4">4</a></span>
@@ -2298,34 +2517,34 @@
 </span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a>--vnet-name<span class="w"> </span><span class="nv">$VNET_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5"></a>--query<span class="w"> </span>id<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6"></a>--output<span class="w"> </span>tsv<span class="o">)</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
 <span class="normal"><a href="#__codelineno-25-2">2</a></span>
 <span class="normal"><a href="#__codelineno-25-3">3</a></span>
 <span class="normal"><a href="#__codelineno-25-4">4</a></span>
 <span class="normal"><a href="#__codelineno-25-5">5</a></span>
 <span class="normal"><a href="#__codelineno-25-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ACA_ENVIRONMENT_SUBNET_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>subnet<span class="w"> </span>show<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a>--name<span class="w"> </span>ContainerAppSubnet<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a>--vnet-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VNET_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a>--vnet-name<span class="w"> </span><span class="s2">"</span><span class="nv">$VNET_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5"></a>--query<span class="w"> </span>id<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6"></a>--output<span class="w"> </span>tsv<span class="k">)</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 </ul>
-<h4 id="23-create-log-analytics-workspace-application-insights">2.3 Create Log Analytics workspace &amp; Application Insights<a class="headerlink" href="#23-create-log-analytics-workspace-application-insights" title="Permanent link">&para;</a></h4>
+<h4 id="23-create-log-analytics-workspace-application-insights">2.3 Create Log Analytics workspace &amp; Application Insights<a class="headerlink" href="#23-create-log-analytics-workspace-application-insights" title="Permanent link">¶</a></h4>
 <ul>
 <li>
 <p>Create an Azure Log Analytics workspace which will provide a common place to store the system and application log data from all container apps running in the environment. Each environment should have its own Log Analytics workspace.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">PowerShell</label><label for="__tabbed_19_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio"><input id="__tabbed_19_2" name="__tabbed_19" type="radio"><div class="tabbed-labels"><label for="__tabbed_19_1">PowerShell</label><label for="__tabbed_19_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
@@ -2360,10 +2579,10 @@
 </span><span id="__span-26-16"><a id="__codelineno-26-16" name="__codelineno-26-16"></a>--workspace-name<span class="w"> </span><span class="nv">$WORKSPACE_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-26-17"><a id="__codelineno-26-17" name="__codelineno-26-17"></a>--query<span class="w"> </span>primarySharedKey<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-26-18"><a id="__codelineno-26-18" name="__codelineno-26-18"></a>--output<span class="w"> </span>tsv
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
@@ -2382,33 +2601,33 @@
 <span class="normal"><a href="#__codelineno-27-17">17</a></span>
 <span class="normal"><a href="#__codelineno-27-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="c1"># Create the Log Analytics workspace</span>
 </span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2"></a>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4"></a>--workspace-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORKSPACE_NAME</span><span class="s2">&quot;</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4"></a>--workspace-name<span class="w"> </span><span class="s2">"</span><span class="nv">$WORKSPACE_NAME</span><span class="s2">"</span>
 </span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5"></a>
 </span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="c1"># Retrieve the Log Analytics workspace ID</span>
 </span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">WORKSPACE_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>show<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9"></a>--workspace-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORKSPACE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9"></a>--workspace-name<span class="w"> </span><span class="s2">"</span><span class="nv">$WORKSPACE_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10"></a>--query<span class="w"> </span>customerId<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11"></a>--output<span class="w"> </span>tsv<span class="k">)</span>
 </span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12"></a>
 </span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="c1"># Retrieve the Log Analytics workspace secret</span>
 </span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="nb">export</span><span class="w"> </span><span class="nv">WORKSPACE_SECRET</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>monitor<span class="w"> </span>log-analytics<span class="w"> </span>workspace<span class="w"> </span>get-shared-keys<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16"></a>--workspace-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORKSPACE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16"></a>--workspace-name<span class="w"> </span><span class="s2">"</span><span class="nv">$WORKSPACE_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-27-17"><a id="__codelineno-27-17" name="__codelineno-27-17"></a>--query<span class="w"> </span>primarySharedKey<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-27-18"><a id="__codelineno-27-18" name="__codelineno-27-18"></a>--output<span class="w"> </span>tsv<span class="k">)</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 <li>
 <p>Create an <a href="https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview?tabs=net" target="_blank">Application Insights</a> instance which will be used mainly for <a href="https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing" target="_blank">distributed tracing</a> between different container apps within the ACA environment to provide searching for and visualizing an end-to-end flow of a given execution or transaction. To create it, run the command below:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">PowerShell</label><label for="__tabbed_20_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio"><input id="__tabbed_20_2" name="__tabbed_20" type="radio"><div class="tabbed-labels"><label for="__tabbed_20_1">PowerShell</label><label for="__tabbed_20_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
@@ -2435,10 +2654,10 @@
 </span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12"></a>--output<span class="w"> </span>json<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>ConvertFrom-Json<span class="o">)</span>.instrumentationKey
 </span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13"></a>
 </span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-29-4"> 4</a></span>
@@ -2453,32 +2672,32 @@
 <span class="normal"><a href="#__codelineno-29-13">13</a></span>
 <span class="normal"><a href="#__codelineno-29-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="c1"># Create Application Insights instance</span>
 </span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2"></a>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a>--location<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOCATION</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5"></a>--app<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APPINSIGHTS_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6"></a>--workspace<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORKSPACE_NAME</span><span class="s2">&quot;</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a>--location<span class="w"> </span><span class="s2">"</span><span class="nv">$LOCATION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5"></a>--app<span class="w"> </span><span class="s2">"</span><span class="nv">$APPINSIGHTS_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6"></a>--workspace<span class="w"> </span><span class="s2">"</span><span class="nv">$WORKSPACE_NAME</span><span class="s2">"</span>
 </span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7"></a>
 </span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="c1"># Get Application Insights Instrumentation Key</span>
 </span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="nb">export</span><span class="w"> </span><span class="nv">APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>monitor<span class="w"> </span>app-insights<span class="w"> </span>component<span class="w"> </span>show<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11"></a>--app<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APPINSIGHTS_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11"></a>--app<span class="w"> </span><span class="s2">"</span><span class="nv">$APPINSIGHTS_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12"></a>--output<span class="w"> </span>tsv<span class="w"> </span>--query<span class="w"> </span>instrumentationKey<span class="k">)</span>
 </span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13"></a>
 </span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </li>
 </ul>
-<h4 id="24-azure-container-infrastructure">2.4 Azure Container Infrastructure<a class="headerlink" href="#24-azure-container-infrastructure" title="Permanent link">&para;</a></h4>
+<h4 id="24-azure-container-infrastructure">2.4 Azure Container Infrastructure<a class="headerlink" href="#24-azure-container-infrastructure" title="Permanent link">¶</a></h4>
 <ul>
 <li>
 <p>Create an Azure Container Registry (ACR) instance in the resource group to store images of all Microservices we are going to build during this workshop. Make sure that you set the <code>admin-enabled</code> flag to true in order to seamlessly authenticate the Azure container app when trying to create the container app using the image stored in ACR.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">PowerShell</label><label for="__tabbed_21_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio"><input id="__tabbed_21_2" name="__tabbed_21" type="radio"><div class="tabbed-labels"><label for="__tabbed_21_1">PowerShell</label><label for="__tabbed_21_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
 <span class="normal"><a href="#__codelineno-30-2">2</a></span>
 <span class="normal"><a href="#__codelineno-30-3">3</a></span>
 <span class="normal"><a href="#__codelineno-30-4">4</a></span>
@@ -2487,19 +2706,19 @@
 </span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4"></a>--sku<span class="w"> </span>Basic<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5"></a>--admin-enabled<span class="w"> </span><span class="nb">true</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
 <span class="normal"><a href="#__codelineno-31-2">2</a></span>
 <span class="normal"><a href="#__codelineno-31-3">3</a></span>
 <span class="normal"><a href="#__codelineno-31-4">4</a></span>
 <span class="normal"><a href="#__codelineno-31-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2"></a>--name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2"></a>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4"></a>--sku<span class="w"> </span>Basic<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5"></a>--admin-enabled<span class="w"> </span><span class="nb">true</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -2512,10 +2731,10 @@
 <ul>
 <li>
 <p>Now we will create an Azure Container Apps Environment. As a reminder of the different ACA components, <a href="../00-workshop-intro/1-aca-core-components/">see this link in the workshop introduction</a>. The ACA environment acts as a secure boundary around a group of container apps that we are going to provision during this workshop.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:2"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">PowerShell</label><label for="__tabbed_22_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:2"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio"><input id="__tabbed_22_2" name="__tabbed_22" type="radio"><div class="tabbed-labels"><label for="__tabbed_22_1">PowerShell</label><label for="__tabbed_22_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-32-4"> 4</a></span>
@@ -2534,10 +2753,10 @@
 </span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8"></a>--dapr-instrumentation-key<span class="w"> </span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9"></a>--enable-workload-profiles<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10"></a>--infrastructure-subnet-resource-id<span class="w"> </span><span class="nv">$ACA_ENVIRONMENT_SUBNET_ID</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-33-4"> 4</a></span>
@@ -2548,15 +2767,15 @@
 <span class="normal"><a href="#__codelineno-33-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-33-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="c1"># Create the ACA environment</span>
 </span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2"></a>az<span class="w"> </span>containerapp<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3"></a>--name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENVIRONMENT</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5"></a>--location<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOCATION</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6"></a>--logs-workspace-id<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORKSPACE_ID</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7"></a>--logs-workspace-key<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORKSPACE_SECRET</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8"></a>--dapr-instrumentation-key<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3"></a>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$ENVIRONMENT</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5"></a>--location<span class="w"> </span><span class="s2">"</span><span class="nv">$LOCATION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6"></a>--logs-workspace-id<span class="w"> </span><span class="s2">"</span><span class="nv">$WORKSPACE_ID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7"></a>--logs-workspace-key<span class="w"> </span><span class="s2">"</span><span class="nv">$WORKSPACE_SECRET</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8"></a>--dapr-instrumentation-key<span class="w"> </span><span class="s2">"</span><span class="nv">$APPINSIGHTS_INSTRUMENTATIONKEY</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9"></a>--enable-workload-profiles<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10"></a>--infrastructure-subnet-resource-id<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ACA_ENVIRONMENT_SUBNET_ID</span><span class="s2">&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10"></a>--infrastructure-subnet-resource-id<span class="w"> </span><span class="s2">"</span><span class="nv">$ACA_ENVIRONMENT_SUBNET_ID</span><span class="s2">"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -2578,31 +2797,31 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 </li>
 </ul>
 </details>
-<h3 id="3-deploy-web-api-backend-project-to-aca">3. Deploy Web API Backend Project to ACA<a class="headerlink" href="#3-deploy-web-api-backend-project-to-aca" title="Permanent link">&para;</a></h3>
+<h3 id="3-deploy-web-api-backend-project-to-aca">3. Deploy Web API Backend Project to ACA<a class="headerlink" href="#3-deploy-web-api-backend-project-to-aca" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p>Build the Web API project on ACR and push the docker image to ACR. Use the below command to initiate the image build and push process using ACR. The <code>.</code> at the end of the command represents the docker build context, in our case, we need to be on the parent directory which hosts the <code>.csproj</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="23:2"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">PowerShell</label><label for="__tabbed_23_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="23:2"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio"><input id="__tabbed_23_2" name="__tabbed_23" type="radio"><div class="tabbed-labels"><label for="__tabbed_23_1">PowerShell</label><label for="__tabbed_23_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
 <span class="normal"><a href="#__codelineno-34-2">2</a></span>
 <span class="normal"><a href="#__codelineno-34-3">3</a></span>
 <span class="normal"><a href="#__codelineno-34-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2"></a>--registry<span class="w"> </span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4"></a>--file<span class="w"> </span><span class="s1">&#39;TasksTracker.TasksManager.Backend.Api/Dockerfile&#39;</span><span class="w"> </span>.
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3"></a>--image<span class="w"> </span><span class="s2">"tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4"></a>--file<span class="w"> </span><span class="s1">'TasksTracker.TasksManager.Backend.Api/Dockerfile'</span><span class="w"> </span>.
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
 <span class="normal"><a href="#__codelineno-35-2">2</a></span>
 <span class="normal"><a href="#__codelineno-35-3">3</a></span>
 <span class="normal"><a href="#__codelineno-35-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1"></a>az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2"></a>--registry<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3"></a>--image<span class="w"> </span><span class="s2">&quot;tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4"></a>--file<span class="w"> </span><span class="s2">&quot;TasksTracker.TasksManager.Backend.Api/Dockerfile&quot;</span><span class="w"> </span>.
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2"></a>--registry<span class="w"> </span><span class="s2">"</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3"></a>--image<span class="w"> </span><span class="s2">"tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4"></a>--file<span class="w"> </span><span class="s2">"TasksTracker.TasksManager.Backend.Api/Dockerfile"</span><span class="w"> </span>.
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -2610,10 +2829,10 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 </li>
 <li>
 <p>The last step here is to create and deploy the Web API to ACA following the below command:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="24:2"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">PowerShell</label><label for="__tabbed_24_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="24:2"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio"><input id="__tabbed_24_2" name="__tabbed_24" type="radio"><div class="tabbed-labels"><label for="__tabbed_24_1">PowerShell</label><label for="__tabbed_24_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-36-4"> 4</a></span>
@@ -2635,10 +2854,10 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 </span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2"></a>--name<span class="w"> </span><span class="nv">$BACKEND_API_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4"></a>--environment<span class="w"> </span><span class="nv">$ENVIRONMENT</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5"></a>--image<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io/tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6"></a>--registry-server<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io&quot;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5"></a>--image<span class="w"> </span><span class="s2">"</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io/tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6"></a>--registry-server<span class="w"> </span><span class="s2">"</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io"</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7"></a>--target-port<span class="w"> </span><span class="nv">$TARGET_PORT</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8"></a>--ingress<span class="w"> </span><span class="s1">&#39;external&#39;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8"></a>--ingress<span class="w"> </span><span class="s1">'external'</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9"></a>--min-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10"></a>--max-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11"></a>--cpu<span class="w"> </span><span class="m">0</span>.25<span class="w"> </span><span class="sb">`</span>
@@ -2646,14 +2865,14 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 </span><span id="__span-36-13"><a id="__codelineno-36-13" name="__codelineno-36-13"></a>--query<span class="w"> </span>properties.configuration.ingress.fqdn<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-36-14"><a id="__codelineno-36-14" name="__codelineno-36-14"></a>--output<span class="w"> </span>tsv<span class="o">)</span>
 </span><span id="__span-36-15"><a id="__codelineno-36-15" name="__codelineno-36-15"></a>
-</span><span id="__span-36-16"><a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="nv">$BACKEND_API_EXTERNAL_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">&quot;</span>
+</span><span id="__span-36-16"><a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="nv">$BACKEND_API_EXTERNAL_BASE_URL</span><span class="o">=</span><span class="s2">"https://</span><span class="nv">$fqdn</span><span class="s2">"</span>
 </span><span id="__span-36-17"><a id="__codelineno-36-17" name="__codelineno-36-17"></a>
-</span><span id="__span-36-18"><a id="__codelineno-36-18" name="__codelineno-36-18"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;See a listing of tasks created by the author at this URL:&quot;</span>
-</span><span id="__span-36-19"><a id="__codelineno-36-19" name="__codelineno-36-19"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">/api/tasks/?createdby=tjoudeh@bitoftech.net&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-36-18"><a id="__codelineno-36-18" name="__codelineno-36-18"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"See a listing of tasks created by the author at this URL:"</span>
+</span><span id="__span-36-19"><a id="__codelineno-36-19" name="__codelineno-36-19"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"https://</span><span class="nv">$fqdn</span><span class="s2">/api/tasks/?createdby=tjoudeh@bitoftech.net"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-37-4"> 4</a></span>
@@ -2672,12 +2891,12 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <span class="normal"><a href="#__codelineno-37-17">17</a></span>
 <span class="normal"><a href="#__codelineno-37-18">18</a></span>
 <span class="normal"><a href="#__codelineno-37-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="nv">fqdn</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>containerapp<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2"></a>--name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3"></a>--resource-group<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4"></a>--environment<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENVIRONMENT</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5"></a>--image<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io/tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6"></a>--registry-server<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7"></a>--target-port<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TARGET_PORT</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2"></a>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3"></a>--resource-group<span class="w"> </span><span class="s2">"</span><span class="nv">$RESOURCE_GROUP</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4"></a>--environment<span class="w"> </span><span class="s2">"</span><span class="nv">$ENVIRONMENT</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5"></a>--image<span class="w"> </span><span class="s2">"</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io/tasksmanager/</span><span class="nv">$BACKEND_API_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6"></a>--registry-server<span class="w"> </span><span class="s2">"</span><span class="nv">$AZURE_CONTAINER_REGISTRY_NAME</span><span class="s2">.azurecr.io"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7"></a>--target-port<span class="w"> </span><span class="s2">"</span><span class="nv">$TARGET_PORT</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8"></a>--ingress<span class="w"> </span>external<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9"></a>--min-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10"></a>--max-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
@@ -2686,11 +2905,11 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 </span><span id="__span-37-13"><a id="__codelineno-37-13" name="__codelineno-37-13"></a>--query<span class="w"> </span>properties.configuration.ingress.fqdn<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-37-14"><a id="__codelineno-37-14" name="__codelineno-37-14"></a>--output<span class="w"> </span>tsv<span class="k">)</span>
 </span><span id="__span-37-15"><a id="__codelineno-37-15" name="__codelineno-37-15"></a>
-</span><span id="__span-37-16"><a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="nb">export</span><span class="w"> </span><span class="nv">BACKEND_API_EXTERNAL_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">&quot;</span>
+</span><span id="__span-37-16"><a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="nb">export</span><span class="w"> </span><span class="nv">BACKEND_API_EXTERNAL_BASE_URL</span><span class="o">=</span><span class="s2">"https://</span><span class="nv">$fqdn</span><span class="s2">"</span>
 </span><span id="__span-37-17"><a id="__codelineno-37-17" name="__codelineno-37-17"></a>
-</span><span id="__span-37-18"><a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;See a listing of tasks created by the author at this URL:&quot;</span>
-</span><span id="__span-37-19"><a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;https://</span><span class="nv">$fqdn</span><span class="s2">/api/tasks/?createdby=tjoudeh@bitoftech.net&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-37-18"><a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"See a listing of tasks created by the author at this URL:"</span>
+</span><span id="__span-37-19"><a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"https://</span><span class="nv">$fqdn</span><span class="s2">/api/tasks/?createdby=tjoudeh@bitoftech.net"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -2710,7 +2929,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 </details>
 <ul>
 <li>You can now verify the deployment of the first ACA by navigating to the link at the end of the above script or to the <a href="https://portal.azure.com" target="_blank">Azure portal</a> and selecting the resource group named <code>tasks-tracker-rg</code> that you created earlier. You should see the 5 resourses created below.
-<a class="glightbox" href="../../assets/images/01-deploy-api-to-aca/Resources.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Azure Resources" src="../../assets/images/01-deploy-api-to-aca/Resources.jpg" /></a></li>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/01-deploy-api-to-aca/Resources.jpg" data-desc-position="bottom"><img alt="Azure Resources" src="../../assets/images/01-deploy-api-to-aca/Resources.jpg"></a></li>
 </ul>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
@@ -2719,47 +2938,47 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can find your Azure container app application url on the <a href="https://portal.azure.com" target="_blank">Azure portal</a> overview tab.</p>
-<p><a class="glightbox" href="../../assets/images/01-deploy-api-to-aca/Response.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Web API Response" src="../../assets/images/01-deploy-api-to-aca/Response.jpg" /></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/01-deploy-api-to-aca/Response.jpg" data-desc-position="bottom"><img alt="Web API Response" src="../../assets/images/01-deploy-api-to-aca/Response.jpg"></a></p>
 </div>
 </div>
 <ul>
 <li>From the root folder of your project, execute the script you created in the Prerequisites section to persist a list of all current variables.</li>
 </ul>
-<div class="tabbed-set tabbed-alternate" data-tabs="25:2"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio" /><input id="__tabbed_25_2" name="__tabbed_25" type="radio" /><div class="tabbed-labels"><label for="__tabbed_25_1">PowerShell</label><label for="__tabbed_25_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="25:2"><input checked="checked" id="__tabbed_25_1" name="__tabbed_25" type="radio"><input id="__tabbed_25_2" name="__tabbed_25" type="radio"><div class="tabbed-labels"><label for="__tabbed_25_1">PowerShell</label><label for="__tabbed_25_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Execute the <code>Set-Variables.ps1</code> in the root to update the <code>variables.ps1</code> file with all current variables. The output of the script will inform you how many variables are written out.
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1"></a>.<span class="se">\S</span>et-Variables.ps1
-</span></code></pre></div></td></tr></table></div></p>
+</p><div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1"></a>.<span class="se">\S</span>et-Variables.ps1
+</span></code></pre></div></td></tr></tbody></table></div><p></p>
 </div>
 <div class="tabbed-block">
 <p>Execute the <code>set_variables.sh</code> in the root to update the <code>variables.sh</code> file with all current variables. The output of the script will inform you how many variables are written out.
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1"></a>./set_variables.sh
-</span></code></pre></div></td></tr></table></div></p>
+</p><div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1"></a>./set_variables.sh
+</span></code></pre></div></td></tr></tbody></table></div><p></p>
 </div>
 </div>
 </div>
 <ul>
 <li>From the root folder of your project, persist a list of all current variables.</li>
 </ul>
-<div class="tabbed-set tabbed-alternate" data-tabs="26:2"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">PowerShell</label><label for="__tabbed_26_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="26:2"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio"><input id="__tabbed_26_2" name="__tabbed_26" type="radio"><div class="tabbed-labels"><label for="__tabbed_26_1">PowerShell</label><label for="__tabbed_26_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1">1</a></span>
 <span class="normal"><a href="#__codelineno-40-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
-</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update Variables.ps1&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Update Variables.ps1"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
 <span class="normal"><a href="#__codelineno-41-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1"></a>git<span class="w"> </span>add<span class="w"> </span>./variables.sh
-</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update variables.sh&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Update variables.sh"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
-<hr />
-<h2 id="review">Review<a class="headerlink" href="#review" title="Permanent link">&para;</a></h2>
+<hr>
+<h2 id="review">Review<a class="headerlink" href="#review" title="Permanent link">¶</a></h2>
 <p>In this module, we have accomplished three objectives:</p>
 <ol>
 <li>Created the first microservice, <code>ACA API - Backend</code>, which serves as the API for our tasks.</li>
@@ -2785,9 +3004,9 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
       
   <span class="md-source-file__fact">
     <span class="md-icon" title="Last update">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    2025-02-21
+    2026-11-19
   </span>
 
     
@@ -2812,9 +3031,9 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
   Back to top
 </button>
         
@@ -2824,13 +3043,13 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
           <a href="../00-workshop-intro/4-prerequisites/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Prerequisites">
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
@@ -2855,7 +3074,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
             </div>
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
             </div>
           </a>
         
@@ -2867,7 +3086,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2023 Microsoft
+      Copyright © 2023 Microsoft
     </div>
   
   
@@ -2878,7 +3097,8 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
   
 </div>
       
-        <div class="md-social">
+        
+<div class="md-social">
   
     
     
@@ -2888,7 +3108,7 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
       
     
     <a href="https://github.com/Azure/aca-dotnet-workshop" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
     </a>
   
 </div>
@@ -2903,13 +3123,16 @@ You can set the <code>--dapr-instrumentation-key</code> after you create the ACA
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
-</html>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

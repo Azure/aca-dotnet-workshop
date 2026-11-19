@@ -1,19 +1,16 @@
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
+<!DOCTYPE html><html lang="en" class="no-js"><head>
     
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <!-- Page description -->
     
-        <meta name="description" content="Azure Container Apps - Workshop" />
+        <meta name="description" content="Azure Container Apps - Workshop">
     
 
     <!-- Page author -->
     
-        <meta name="author" content="Microsoft" />
+        <meta name="author" content="Microsoft">
     
 
     <!-- Canonical -->
@@ -23,22 +20,19 @@
 
     <!-- Previous page -->
     
-        <link rel="prev" href="../08-aca-monitoring/" />
+        <link rel="prev" href="../08-aca-monitoring/">
     
 
     <!-- Next page -->
     
-        <link rel="next" href="../10-aca-iac-bicep/" />
+        <link rel="next" href="../10-aca-iac-bicep/">
     
 
     <!-- Favicon -->
-    <link rel="icon" href="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg" />
+    <link rel="icon" href="../../assets/images/00-workshop-intro/02884-icon-service-Worker-Container-App.svg">
 
     <!-- Generator banner -->
-    <meta
-            name="generator"
-            content="mkdocs-1.6.1, $md-name$-$md-version$"
-    />
+    <meta name="generator" content="mkdocs-1.6.1, $md-name$-$md-version$">
 
     
       
@@ -46,10 +40,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -62,8 +56,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
         <style>:root{--md-text-font:"Ubuntu";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -87,20 +81,20 @@
     
     
     
-    
-        <meta name="og:url" content="https://bitoftech.net/2022/09/22/azure-container-apps-auto-scaling-with-keda-part-11/" />
+        <meta name="og:url" content="https://bitoftech.net/2022/09/22/azure-container-apps-auto-scaling-with-keda-part-11/">
     
 
-   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }
-    .gscrollbar-fixer { padding-right: 15px; }
-    .gdesc-inner { font-size: 0.75rem; }
-    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
   
   
     
@@ -142,7 +136,7 @@
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -167,20 +161,20 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
     
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
       </label>
     
   
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
     
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
       </label>
     
   
@@ -192,32 +186,34 @@
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -228,13 +224,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -258,7 +255,7 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -279,7 +276,7 @@
       <a href="https://github.com/Azure/aca-dotnet-workshop" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -287,7 +284,7 @@
 </a>
     </div>
   
-  <ul class="md-nav__list" data-md-scrollfix>
+  <ul class="md-nav__list" data-md-scrollfix="">
     
       
       
@@ -299,10 +296,16 @@
       <a href="../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Homepage
+  
+
     
   </span>
+  
   
 
       </a>
@@ -334,22 +337,28 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
         
-          
           
           <div class="md-nav__link md-nav__container">
             <a href="../00-workshop-intro/" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     Workshop Introduction
+  
+
     
   </span>
+  
   
 
             </a>
@@ -364,9 +373,13 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Workshop Introduction
+            
+  
+    Workshop Introduction
+  
+
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+          <ul class="md-nav__list" data-md-scrollfix="">
             
               
             
@@ -380,10 +393,16 @@
       <a href="../00-workshop-intro/1-aca-core-components/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     ACA Core Components Overview
+  
+
     
   </span>
+  
   
 
       </a>
@@ -402,10 +421,16 @@
       <a href="../00-workshop-intro/2-scenario-architecture/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Scenario and Solution Architecture
+  
+
     
   </span>
+  
   
 
       </a>
@@ -424,10 +449,16 @@
       <a href="../00-workshop-intro/3-dapr-integration/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Dapr Integration in ACA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -446,10 +477,16 @@
       <a href="../00-workshop-intro/4-prerequisites/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Prerequisites
+  
+
     
   </span>
+  
   
 
       </a>
@@ -475,10 +512,16 @@
       <a href="../01-deploy-api-to-aca/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 1 - Deploy Backend API to ACA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -496,10 +539,16 @@
       <a href="../02-aca-comm/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 2 - Communication between Microservices in ACA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -517,10 +566,16 @@
       <a href="../03-aca-dapr-integration/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 3 - Dapr Integration with ACA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -538,10 +593,16 @@
       <a href="../04-aca-dapr-stateapi/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 4 - ACA State Store With Dapr State Management API
+  
+
     
   </span>
+  
   
 
       </a>
@@ -559,10 +620,16 @@
       <a href="../05-aca-dapr-pubsubapi/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 5 - ACA Async Communication with Dapr Pub/Sub API
+  
+
     
   </span>
+  
   
 
       </a>
@@ -580,10 +647,16 @@
       <a href="../06-aca-dapr-bindingsapi/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 6 - ACA with Dapr Bindings Building Block
+  
+
     
   </span>
+  
   
 
       </a>
@@ -601,10 +674,16 @@
       <a href="../07-aca-cron-bindings/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 7 - ACA Scheduled Jobs with Dapr Cron Binding
+  
+
     
   </span>
+  
   
 
       </a>
@@ -622,10 +701,16 @@
       <a href="../08-aca-monitoring/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 8 - ACA Monitoring and Observability with Application Insights
+  
+
     
   </span>
+  
   
 
       </a>
@@ -652,10 +737,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 9 - ACA Auto Scaling with KEDA
+  
+
     
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -664,10 +755,16 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 9 - ACA Auto Scaling with KEDA
+  
+
     
   </span>
+  
   
 
       </a>
@@ -685,12 +782,14 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
   <a href="#objective" class="md-nav__link">
     <span class="md-ellipsis">
-      Objective
+      
+        Objective
+      
     </span>
   </a>
   
@@ -699,7 +798,9 @@
         <li class="md-nav__item">
   <a href="#module-sections" class="md-nav__link">
     <span class="md-ellipsis">
-      Module Sections
+      
+        Module Sections
+      
     </span>
   </a>
   
@@ -709,7 +810,9 @@
           <li class="md-nav__item">
   <a href="#1-azure-container-apps-scaling-behaviors" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Azure Container Apps Scaling Behaviors
+      
+        1. Azure Container Apps Scaling Behaviors
+      
     </span>
   </a>
   
@@ -719,7 +822,9 @@
           <li class="md-nav__item">
   <a href="#11-scaling-triggers" class="md-nav__link">
     <span class="md-ellipsis">
-      1.1 Scaling Triggers
+      
+        1.1 Scaling Triggers
+      
     </span>
   </a>
   
@@ -733,7 +838,9 @@
           <li class="md-nav__item">
   <a href="#2-an-overview-of-kubernetes-event-driven-autoscaler-keda" class="md-nav__link">
     <span class="md-ellipsis">
-      2. An Overview of Kubernetes Event-Driven Autoscaler (KEDA)
+      
+        2. An Overview of Kubernetes Event-Driven Autoscaler (KEDA)
+      
     </span>
   </a>
   
@@ -742,7 +849,9 @@
           <li class="md-nav__item">
   <a href="#3-configure-scaling-rule-in-backend-background-processor-project" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Configure Scaling Rule in Backend Background Processor Project
+      
+        3. Configure Scaling Rule in Backend Background Processor Project
+      
     </span>
   </a>
   
@@ -752,7 +861,9 @@
           <li class="md-nav__item">
   <a href="#31-keda-azure-service-bus-scaler" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 KEDA Azure Service Bus Scaler
+      
+        3.1 KEDA Azure Service Bus Scaler
+      
     </span>
   </a>
   
@@ -761,7 +872,9 @@
           <li class="md-nav__item">
   <a href="#32-create-a-new-secret-in-the-container-app" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Create a New Secret In The Container App
+      
+        3.2 Create a New Secret In The Container App
+      
     </span>
   </a>
   
@@ -770,7 +883,9 @@
           <li class="md-nav__item">
   <a href="#2-create-a-custom-scaling-rule-from-azure-cli" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create a Custom Scaling Rule from Azure CLI
+      
+        2. Create a Custom Scaling Rule from Azure CLI
+      
     </span>
   </a>
   
@@ -784,7 +899,9 @@
           <li class="md-nav__item">
   <a href="#4-scaling-testing" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Scaling Testing
+      
+        4. Scaling Testing
+      
     </span>
   </a>
   
@@ -794,7 +911,9 @@
           <li class="md-nav__item">
   <a href="#41-run-an-end-to-end-test-and-generate-several-messages" class="md-nav__link">
     <span class="md-ellipsis">
-      4.1 Run an End-to-End Test and Generate Several Messages
+      
+        4.1 Run an End-to-End Test and Generate Several Messages
+      
     </span>
   </a>
   
@@ -803,7 +922,9 @@
           <li class="md-nav__item">
   <a href="#42-verify-that-multiple-replicas-are-created" class="md-nav__link">
     <span class="md-ellipsis">
-      4.2 Verify that Multiple Replicas Are Created
+      
+        4.2 Verify that Multiple Replicas Are Created
+      
     </span>
   </a>
   
@@ -822,7 +943,9 @@
         <li class="md-nav__item">
   <a href="#review" class="md-nav__link">
     <span class="md-ellipsis">
-      Review
+      
+        Review
+      
     </span>
   </a>
   
@@ -858,22 +981,28 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
         
-          
           
           <div class="md-nav__link md-nav__container">
             <a href="../10-aca-iac-bicep/" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 10 - Deployment Via Bicep and DevOps
+  
+
     
   </span>
+  
   
 
             </a>
@@ -888,9 +1017,13 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
-            Module 10 - Deployment Via Bicep and DevOps
+            
+  
+    Module 10 - Deployment Via Bicep and DevOps
+  
+
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+          <ul class="md-nav__list" data-md-scrollfix="">
             
               
             
@@ -904,10 +1037,16 @@
       <a href="../10-aca-iac-bicep/01-iac-bicep/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Deploy Infrastructure using Bicep
+  
+
     
   </span>
+  
   
 
       </a>
@@ -926,10 +1065,16 @@
       <a href="../10-aca-iac-bicep/02-ci-cd-git-action/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Deploy Infrastructure using Bicep via GitHub Actions
+  
+
     
   </span>
+  
   
 
       </a>
@@ -948,10 +1093,16 @@
       <a href="../10-aca-iac-bicep/03-ci-cd-azdo/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Deploy infrastructure using Azure Devops Pipeline
+  
+
     
   </span>
+  
   
 
       </a>
@@ -977,10 +1128,16 @@
       <a href="../11-aca-landing-zone/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 11 - Integration with Azure Container Apps landing zone accelerator
+  
+
     
   </span>
+  
   
 
       </a>
@@ -998,10 +1155,16 @@
       <a href="../12-optimize-containers/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Module 12 - Container optimization
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1019,10 +1182,16 @@
       <a href="../29-about-the-authors/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     About The Authors
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1050,20 +1219,27 @@
     
     
     
+    
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16">
         
           
           <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     Appendix
+  
+
     
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -1072,9 +1248,13 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
-            Appendix
+            
+  
+    Appendix
+  
+
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+          <ul class="md-nav__list" data-md-scrollfix="">
             
               
                 
@@ -1086,10 +1266,16 @@
       <a href="../30-appendix/01-run-debug-dapr-app-vscode/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Debug and Launch Dapr Applications in VSCode
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1108,10 +1294,16 @@
       <a href="../30-appendix/02-github-local-codespaces/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Testing Changes Locally or with GitHub Codespaces
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1130,10 +1322,16 @@
       <a href="../30-appendix/03-variables/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Variables
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1152,10 +1350,16 @@
       <a href="../30-appendix/04-troubleshooting/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Troubleshooting
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1179,7 +1383,7 @@
             
             
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1195,12 +1399,14 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
   <a href="#objective" class="md-nav__link">
     <span class="md-ellipsis">
-      Objective
+      
+        Objective
+      
     </span>
   </a>
   
@@ -1209,7 +1415,9 @@
         <li class="md-nav__item">
   <a href="#module-sections" class="md-nav__link">
     <span class="md-ellipsis">
-      Module Sections
+      
+        Module Sections
+      
     </span>
   </a>
   
@@ -1219,7 +1427,9 @@
           <li class="md-nav__item">
   <a href="#1-azure-container-apps-scaling-behaviors" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Azure Container Apps Scaling Behaviors
+      
+        1. Azure Container Apps Scaling Behaviors
+      
     </span>
   </a>
   
@@ -1229,7 +1439,9 @@
           <li class="md-nav__item">
   <a href="#11-scaling-triggers" class="md-nav__link">
     <span class="md-ellipsis">
-      1.1 Scaling Triggers
+      
+        1.1 Scaling Triggers
+      
     </span>
   </a>
   
@@ -1243,7 +1455,9 @@
           <li class="md-nav__item">
   <a href="#2-an-overview-of-kubernetes-event-driven-autoscaler-keda" class="md-nav__link">
     <span class="md-ellipsis">
-      2. An Overview of Kubernetes Event-Driven Autoscaler (KEDA)
+      
+        2. An Overview of Kubernetes Event-Driven Autoscaler (KEDA)
+      
     </span>
   </a>
   
@@ -1252,7 +1466,9 @@
           <li class="md-nav__item">
   <a href="#3-configure-scaling-rule-in-backend-background-processor-project" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Configure Scaling Rule in Backend Background Processor Project
+      
+        3. Configure Scaling Rule in Backend Background Processor Project
+      
     </span>
   </a>
   
@@ -1262,7 +1478,9 @@
           <li class="md-nav__item">
   <a href="#31-keda-azure-service-bus-scaler" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 KEDA Azure Service Bus Scaler
+      
+        3.1 KEDA Azure Service Bus Scaler
+      
     </span>
   </a>
   
@@ -1271,7 +1489,9 @@
           <li class="md-nav__item">
   <a href="#32-create-a-new-secret-in-the-container-app" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Create a New Secret In The Container App
+      
+        3.2 Create a New Secret In The Container App
+      
     </span>
   </a>
   
@@ -1280,7 +1500,9 @@
           <li class="md-nav__item">
   <a href="#2-create-a-custom-scaling-rule-from-azure-cli" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create a Custom Scaling Rule from Azure CLI
+      
+        2. Create a Custom Scaling Rule from Azure CLI
+      
     </span>
   </a>
   
@@ -1294,7 +1516,9 @@
           <li class="md-nav__item">
   <a href="#4-scaling-testing" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Scaling Testing
+      
+        4. Scaling Testing
+      
     </span>
   </a>
   
@@ -1304,7 +1528,9 @@
           <li class="md-nav__item">
   <a href="#41-run-an-end-to-end-test-and-generate-several-messages" class="md-nav__link">
     <span class="md-ellipsis">
-      4.1 Run an End-to-End Test and Generate Several Messages
+      
+        4.1 Run an End-to-End Test and Generate Several Messages
+      
     </span>
   </a>
   
@@ -1313,7 +1539,9 @@
           <li class="md-nav__item">
   <a href="#42-verify-that-multiple-replicas-are-created" class="md-nav__link">
     <span class="md-ellipsis">
-      4.2 Verify that Multiple Replicas Are Created
+      
+        4.2 Verify that Multiple Replicas Are Created
+      
     </span>
   </a>
   
@@ -1332,7 +1560,9 @@
         <li class="md-nav__item">
   <a href="#review" class="md-nav__link">
     <span class="md-ellipsis">
-      Review
+      
+        Review
+      
     </span>
   </a>
   
@@ -1348,6 +1578,7 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
@@ -1357,12 +1588,12 @@
   
 
 
-<h1 id="module-9-aca-auto-scaling-with-keda">Module 9 - ACA Auto Scaling with KEDA<a class="headerlink" href="#module-9-aca-auto-scaling-with-keda" title="Permanent link">&para;</a></h1>
+<h1 id="module-9-aca-auto-scaling-with-keda">Module 9 - ACA Auto Scaling with KEDA<a class="headerlink" href="#module-9-aca-auto-scaling-with-keda" title="Permanent link">¶</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Module Duration</p>
 <p>30 minutes</p>
 </div>
-<h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h2>
+<h2 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">¶</a></h2>
 <p>In this module, we will accomplish four objectives:</p>
 <ol>
 <li>Understand Azure Container Apps Scaling Behaviors.</li>
@@ -1370,45 +1601,45 @@
 <li>Create a scaling rule for the Backend Background Processor project.</li>
 <li>Test scaling of the Backend Background Processor.</li>
 </ol>
-<h2 id="module-sections">Module Sections<a class="headerlink" href="#module-sections" title="Permanent link">&para;</a></h2>
+<h2 id="module-sections">Module Sections<a class="headerlink" href="#module-sections" title="Permanent link">¶</a></h2>
 <ul>
 <li>From the VS Code Terminal tab, open developer command prompt or PowerShell terminal in the project folder <code>TasksTracker.ContainerApps</code> (<em>root</em> of your project):</li>
 </ul>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell</label><label for="__tabbed_1_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell</label><label for="__tabbed_1_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
-</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~<span class="se">\T</span>asksTracker.ContainerApps
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># If you still have the variables set</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$PROJECT_ROOT</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1"># Or manually cd into your project&#39;s root eg cd ~/TasksTracker.ContainerApps</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1"># Or manually cd into your project's root eg cd ~/TasksTracker.ContainerApps</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 <ul>
 <li>Restore the previously-stored variables by executing the local script. The output informs you how many variables have been set.</li>
 </ul>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">PowerShell</label><label for="__tabbed_2_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">PowerShell</label><label for="__tabbed_2_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>.<span class="se">\V</span>ariables.ps1
-</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>.<span class="se">\V</span>ariables.ps1
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a>.<span class="w"> </span>./variables.sh
-</span></code></pre></div></td></tr></table></div>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a>.<span class="w"> </span>./variables.sh
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
-<h3 id="1-azure-container-apps-scaling-behaviors">1. Azure Container Apps Scaling Behaviors<a class="headerlink" href="#1-azure-container-apps-scaling-behaviors" title="Permanent link">&para;</a></h3>
+<h3 id="1-azure-container-apps-scaling-behaviors">1. Azure Container Apps Scaling Behaviors<a class="headerlink" href="#1-azure-container-apps-scaling-behaviors" title="Permanent link">¶</a></h3>
 <p>In this module, we will explore how we can configure auto scaling rules in container apps. The <strong>Auto Scaling</strong> feature is one of the key features of any <strong>Serverless</strong> hosting platform because it empowers your application to adjust dynamically. This means your application can automatically handle higher (or lower) workloads, ensuring your system maintains its availability and performance.</p>
 <p>Azure Container Apps support horizontal scaling, also known as <strong>scaling out</strong> and <strong>scaling in</strong>. Respectively, when demand increases, Azure Container Apps can <em>add</em> (<strong>scale out</strong>) replicas (new instances of the container app), thus splitting the workload across multiple replicas to process the work in parallel. Ideally, this keeps the workload per instance somewhat consistent with that instance's capacity. Conversely, when demand decreases, Azure Container Apps will <em>remove</em> (<strong>scale In</strong>) un- or under-utilized replicas according to your configured scaling rule. With this consumption-oriented approach, you pay only for the replicas provisioned at any time. You can also configure the scaling rule to scale to <strong>zero</strong> replicas, resulting in no costs being incurred when your Container App scales down to zero. However, be aware that scaling to zero for critical workloads is advised against.</p>
-<h4 id="11-scaling-triggers">1.1 Scaling Triggers<a class="headerlink" href="#11-scaling-triggers" title="Permanent link">&para;</a></h4>
+<h4 id="11-scaling-triggers">1.1 Scaling Triggers<a class="headerlink" href="#11-scaling-triggers" title="Permanent link">¶</a></h4>
 <p>Azure Container Apps supports different scaling triggers including:</p>
 <ul>
 <li><a href="https://learn.microsoft.com/azure/container-apps/scale-app#http" target="_blank">HTTP traffic</a>: Scaling based on the number of concurrent HTTP requests to your revision.</li>
@@ -1417,10 +1648,10 @@
 <li>Event-driven using <a href="https://keda.sh/" target="_blank">KEDA</a>: Scaling based on events triggers, such as the number of messages in Azure Service Bus Topic or the number of blobs in Azure Blob Storage container.</li>
 </ul>
 <p>As we covered in the introductory module, Azure Container Apps utilize different open source technologies, including KEDA, which facilitate tasks such as event-driven autoscaling. KEDA is installed by default when you provision your Container App; there is no need to worry about installing it. All we need to focus on is enabling and configuring our container app scaling rules.</p>
-<h3 id="2-an-overview-of-kubernetes-event-driven-autoscaler-keda">2. An Overview of Kubernetes Event-Driven Autoscaler (KEDA)<a class="headerlink" href="#2-an-overview-of-kubernetes-event-driven-autoscaler-keda" title="Permanent link">&para;</a></h3>
+<h3 id="2-an-overview-of-kubernetes-event-driven-autoscaler-keda">2. An Overview of Kubernetes Event-Driven Autoscaler (KEDA)<a class="headerlink" href="#2-an-overview-of-kubernetes-event-driven-autoscaler-keda" title="Permanent link">¶</a></h3>
 <p>KEDA stands for <em>Kubernetes Event-Driven Autoscaler</em>. It is an open-source project initially started by <a href="https://cloudblogs.microsoft.com/opensource/2019/05/06/announcing-keda-kubernetes-event-driven-autoscaling-containers/" target="_blank">Microsoft and Red Hat</a> to allow any Kubernetes workload to benefit from the event-driven architecture model. Prior to KEDA, horizontally scaling a Kubernetes deployment was achieved through the <em>Horizontal Pod Autoscaler</em> (<a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" target="_blank">HPA</a>). The HPA relies on resource metrics such as Memory and CPU to determine when additional replicas should be deployed. In an enterprise application, there may be additional external metrics that we want to use to scale our application, such as the length of a Kafka topic log, an Azure Service Bus Queue, or metrics obtained from a Prometheus query. In short, scaling considerations are likely to be increasingly complex as your applications and ecosystem grow. KEDA offers more than <a href="https://keda.sh/docs/2.8/scalers/" target="_blank">50 scalers</a> to pick from based on your business need. KEDA exists to fill this gap and provides a framework for scaling based on events in conjunction with HPA scaling based on CPU and Memory.</p>
-<h3 id="3-configure-scaling-rule-in-backend-background-processor-project">3. Configure Scaling Rule in Backend Background Processor Project<a class="headerlink" href="#3-configure-scaling-rule-in-backend-background-processor-project" title="Permanent link">&para;</a></h3>
-<h4 id="31-keda-azure-service-bus-scaler">3.1 KEDA Azure Service Bus Scaler<a class="headerlink" href="#31-keda-azure-service-bus-scaler" title="Permanent link">&para;</a></h4>
+<h3 id="3-configure-scaling-rule-in-backend-background-processor-project">3. Configure Scaling Rule in Backend Background Processor Project<a class="headerlink" href="#3-configure-scaling-rule-in-backend-background-processor-project" title="Permanent link">¶</a></h3>
+<h4 id="31-keda-azure-service-bus-scaler">3.1 KEDA Azure Service Bus Scaler<a class="headerlink" href="#31-keda-azure-service-bus-scaler" title="Permanent link">¶</a></h4>
 <p>We want to configure our Backend Background Processor, <code>tasksmanager-backend-processor</code>, service to scale out to increase the number of replicas. We do that based on the number of messages in the Azure Service Bus Topic named <code>tasksavedtopic</code>. When our service is under heavy load, and a single replica is insufficient to handle the number of messages on the topic, we require the container app to create additional replicas to distribute the processing of messages on this topic.</p>
 <p>Our requirements for scaling the backend processor are as follows:</p>
 <ul>
@@ -1429,7 +1660,7 @@
 <li>The maximum number of replicas should not exceed five.</li>
 </ul>
 <p>To achieve this, we look to the <a href="https://keda.sh/docs/2.0/scalers/azure-service-bus" target="_blank">KEDA Azure Service Bus scaler</a>. This specification describes the <code>azure-servicebus</code> trigger for Azure Service Bus Queue or Topic. Let's take a look at the yaml file below which contains a generic template for the KEDA specification:</p>
-<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<div class="language-yaml highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
@@ -1457,10 +1688,10 @@
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="c1"># Optional, can use TriggerAuthentication as well</span>
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">    </span><span class="nt">connectionFromEnv</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVICEBUS_CONNECTIONSTRING_ENV_NAME</span><span class="w"> </span><span class="c1"># This must be a connection string for a queue itself, and not a namespace level (e.g. RootAccessPolicy) connection string </span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">    </span><span class="c1"># Optional</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">    </span><span class="nt">messageCount</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="w"> </span><span class="c1"># Optional. Count of messages to trigger scaling on. Default: 5 messages</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">    </span><span class="nt">messageCount</span><span class="p">:</span><span class="w"> </span><span class="s">"5"</span><span class="w"> </span><span class="c1"># Optional. Count of messages to trigger scaling on. Default: 5 messages</span>
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">    </span><span class="nt">cloud</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Private</span><span class="w"> </span><span class="c1"># Optional. Default: AzurePublicCloud</span>
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">    </span><span class="nt">endpointSuffix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">servicebus.airgap.example</span><span class="w"> </span><span class="c1"># Required when cloud=Private</span>
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 <details class="info">
 <summary>Curious to learn more about the contents of the yaml file?</summary>
 <ul>
@@ -1477,12 +1708,12 @@
 <p>Note about authentication: KEDA scaler for Azure Service Bus supports different authentication mechanisms such as <a href="https://learn.microsoft.com/azure/aks/use-azure-ad-pod-identity" target="_blank">Pod Managed Identity</a>, <a href="https://azure.github.io/azure-workload-identity/docs/" target="_blank">Azure AD Workload Identity</a>, and shared access policy (connection string). At the time of writing this workshop, when using KEDA with Azure Container Apps the only supported authentication mechanism is Connection Strings. There is a work item in the ACA product backlog that involves enabling <a href="https://github.com/microsoft/azure-container-apps/issues/592" target="_blank">KEDA Scale with Managed Identity.</a></p>
 </div>
 <p>Azure Container Apps has its own proprietary schema to map a KEDA Scaler template to its own when defining a custom scale rule. You can define this scaling rule via Container Apps <a href="https://learn.microsoft.com/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples" target="_blank">ARM templates</a>, <a href="https://learn.microsoft.com/azure/container-apps/azure-resource-manager-api-spec?tabs=arm-template#container-app-examples" target="_blank">yaml manifest</a>, Azure CLI, or from the <a href="https://portal.azure.com" target="_blank">Azure portal</a>. In this module, we will cover how to do it from the Azure CLI.</p>
-<h4 id="32-create-a-new-secret-in-the-container-app">3.2 Create a New Secret In The Container App<a class="headerlink" href="#32-create-a-new-secret-in-the-container-app" title="Permanent link">&para;</a></h4>
+<h4 id="32-create-a-new-secret-in-the-container-app">3.2 Create a New Secret In The Container App<a class="headerlink" href="#32-create-a-new-secret-in-the-container-app" title="Permanent link">¶</a></h4>
 <p>Let's now create a secret named <code>svcbus-connstring</code> in our <code>tasksmanager-backend-processor</code> Container App. This secret will contain the value of Azure Service Bus shared access policy (connection string) with <code>Manage</code> policy. To accomplish this, run the following commands in the Azure CLI to get the connection string, and then add this secret using the second command:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">PowerShell</label><label for="__tabbed_3_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">PowerShell</label><label for="__tabbed_3_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
@@ -1502,15 +1733,15 @@
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>--query<span class="w"> </span>primaryConnectionString<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a>--output<span class="w"> </span>tsv
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="c1"># Create a new secret named &#39;svcbus-connstring&#39; in backend processor container app</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="c1"># Create a new secret named 'svcbus-connstring' in backend processor container app</span>
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10"></a>az<span class="w"> </span>containerapp<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13"></a>--secrets<span class="w"> </span><span class="s2">&quot;svcbus-connstring=</span><span class="nv">$SERVICE_BUS_CONNECTION_STRING</span><span class="s2">&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13"></a>--secrets<span class="w"> </span><span class="s2">"svcbus-connstring=</span><span class="nv">$SERVICE_BUS_CONNECTION_STRING</span><span class="s2">"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
@@ -1530,25 +1761,25 @@
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span>--query<span class="w"> </span>primaryConnectionString<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">  </span>--output<span class="w"> </span>tsv<span class="k">)</span>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="c1"># Create a new secret named &#39;svcbus-connstring&#39; in backend processor container app</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="c1"># Create a new secret named 'svcbus-connstring' in backend processor container app</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>az<span class="w"> </span>containerapp<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">  </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">  </span>--secrets<span class="w"> </span><span class="s2">&quot;svcbus-connstring=</span><span class="nv">$SERVICE_BUS_CONNECTION_STRING</span><span class="s2">&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">  </span>--secrets<span class="w"> </span><span class="s2">"svcbus-connstring=</span><span class="nv">$SERVICE_BUS_CONNECTION_STRING</span><span class="s2">"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
-<h4 id="2-create-a-custom-scaling-rule-from-azure-cli">2. Create a Custom Scaling Rule from Azure CLI<a class="headerlink" href="#2-create-a-custom-scaling-rule-from-azure-cli" title="Permanent link">&para;</a></h4>
+<h4 id="2-create-a-custom-scaling-rule-from-azure-cli">2. Create a Custom Scaling Rule from Azure CLI<a class="headerlink" href="#2-create-a-custom-scaling-rule-from-azure-cli" title="Permanent link">¶</a></h4>
 <p>Now we are ready to add a new custom scaling rule to match the business requirements. To accomplish this, we need to run the Azure CLI command below:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You might need to upgrade the extension if you are on an older version of <code>az containerapp</code> which didn't allow you to create a scaling rule from CLI. To update the extension you can run the following command <code>az extension update --name containerapp</code> inside your PowerShell terminal.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">PowerShell</label><label for="__tabbed_4_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">PowerShell</label><label for="__tabbed_4_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
@@ -1567,18 +1798,18 @@
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a>--min-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a>--max-replicas<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-6<span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a>--scale-rule-name<span class="w"> </span><span class="s2">&quot;topic-msgs-length&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a>--scale-rule-type<span class="w"> </span><span class="s2">&quot;azure-servicebus&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a>--scale-rule-auth<span class="w"> </span><span class="s2">&quot;connection=svcbus-connstring&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a>--scale-rule-metadata<span class="w"> </span><span class="s2">&quot;topicName=</span><span class="nv">$SERVICE_BUS_TOPIC_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">                        </span><span class="s2">&quot;subscriptionName=</span><span class="nv">$SERVICE_BUS_TOPIC_SUBSCRIPTION</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">                        </span><span class="s2">&quot;namespace=</span><span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">                        </span><span class="s2">&quot;messageCount=10&quot;</span><span class="w"> </span><span class="sb">`</span>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">                        </span><span class="s2">&quot;connectionFromEnv=svcbus-connstring&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a>--scale-rule-name<span class="w"> </span><span class="s2">"topic-msgs-length"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a>--scale-rule-type<span class="w"> </span><span class="s2">"azure-servicebus"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a>--scale-rule-auth<span class="w"> </span><span class="s2">"connection=svcbus-connstring"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a>--scale-rule-metadata<span class="w"> </span><span class="s2">"topicName=</span><span class="nv">$SERVICE_BUS_TOPIC_NAME</span><span class="s2">"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">                        </span><span class="s2">"subscriptionName=</span><span class="nv">$SERVICE_BUS_TOPIC_SUBSCRIPTION</span><span class="s2">"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">                        </span><span class="s2">"namespace=</span><span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span><span class="s2">"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">                        </span><span class="s2">"messageCount=10"</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">                        </span><span class="s2">"connectionFromEnv=svcbus-connstring"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
@@ -1597,15 +1828,15 @@
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">  </span>--min-replicas<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">  </span>--max-replicas<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">  </span>--revision-suffix<span class="w"> </span>v<span class="nv">$TODAY</span>-6<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">  </span>--scale-rule-name<span class="w"> </span><span class="s2">&quot;topic-msgs-length&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">  </span>--scale-rule-type<span class="w"> </span><span class="s2">&quot;azure-servicebus&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">  </span>--scale-rule-auth<span class="w"> </span><span class="s2">&quot;connection=svcbus-connstring&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">  </span>--scale-rule-metadata<span class="w"> </span><span class="s2">&quot;topicName=</span><span class="nv">$SERVICE_BUS_TOPIC_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">                    </span><span class="s2">&quot;subscriptionName=</span><span class="nv">$SERVICE_BUS_TOPIC_SUBSCRIPTION</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">                    </span><span class="s2">&quot;namespace=</span><span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">                    </span><span class="s2">&quot;messageCount=10&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">                    </span><span class="s2">&quot;connectionFromEnv=svcbus-connstring&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">  </span>--scale-rule-name<span class="w"> </span><span class="s2">"topic-msgs-length"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">  </span>--scale-rule-type<span class="w"> </span><span class="s2">"azure-servicebus"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">  </span>--scale-rule-auth<span class="w"> </span><span class="s2">"connection=svcbus-connstring"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">  </span>--scale-rule-metadata<span class="w"> </span><span class="s2">"topicName=</span><span class="nv">$SERVICE_BUS_TOPIC_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">                    </span><span class="s2">"subscriptionName=</span><span class="nv">$SERVICE_BUS_TOPIC_SUBSCRIPTION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">                    </span><span class="s2">"namespace=</span><span class="nv">$SERVICE_BUS_NAMESPACE_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">                    </span><span class="s2">"messageCount=10"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">                    </span><span class="s2">"connectionFromEnv=svcbus-connstring"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -1629,36 +1860,36 @@
 <li>When the single replica of the backend processor is not doing anything, it will be running in an <code>idle mode</code>. When the replica is in idle mode usage is charged at a reduced idle rate. A replica enters an active mode and is charged at the active rate when it is starting up, and when it is processing requests. For more details about the ACA pricing visit this <a href="https://azure.microsoft.com/pricing/details/container-apps/" target="_blank">link</a>.</li>
 </ul>
 </div>
-<h3 id="4-scaling-testing">4. Scaling Testing<a class="headerlink" href="#4-scaling-testing" title="Permanent link">&para;</a></h3>
-<h4 id="41-run-an-end-to-end-test-and-generate-several-messages">4.1 Run an End-to-End Test and Generate Several Messages<a class="headerlink" href="#41-run-an-end-to-end-test-and-generate-several-messages" title="Permanent link">&para;</a></h4>
+<h3 id="4-scaling-testing">4. Scaling Testing<a class="headerlink" href="#4-scaling-testing" title="Permanent link">¶</a></h3>
+<h4 id="41-run-an-end-to-end-test-and-generate-several-messages">4.1 Run an End-to-End Test and Generate Several Messages<a class="headerlink" href="#41-run-an-end-to-end-test-and-generate-several-messages" title="Permanent link">¶</a></h4>
 <p>Now we are ready to test out our Azure Service Bus Scaling Rule. To produce a high volume of messages, you can utilize the Service Bus Explorer located within your Azure Service Bus namespace. Navigate to Azure Service Bus, choose your topic/subscription, and then select the Service Bus Explorer option.
 To get the number of current replicas of service <code>tasksmanager-backend-processor</code> we could run the command below, this should run single replica as we didn't load the service bus topic yet.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">PowerShell</label><label for="__tabbed_5_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"><input id="__tabbed_5_2" name="__tabbed_5" type="radio"><div class="tabbed-labels"><label for="__tabbed_5_1">PowerShell</label><label for="__tabbed_5_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
 <span class="normal"><a href="#__codelineno-9-3">3</a></span>
 <span class="normal"><a href="#__codelineno-9-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a>az<span class="w"> </span>containerapp<span class="w"> </span>replica<span class="w"> </span>list<span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="sb">`</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a>--query<span class="w"> </span><span class="o">[]</span>.name
-</span></code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
 <span class="normal"><a href="#__codelineno-10-3">3</a></span>
 <span class="normal"><a href="#__codelineno-10-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a>az<span class="w"> </span>containerapp<span class="w"> </span>replica<span class="w"> </span>list<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$BACKEND_SERVICE_NAME</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">  </span>--resource-group<span class="w"> </span><span class="nv">$RESOURCE_GROUP</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">  </span>--query<span class="w"> </span><span class="s2">&quot;[].name&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">  </span>--query<span class="w"> </span><span class="s2">"[].name"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 <p>The message structure our backend processor expects is similar to the JSON shown below. So copy this message and click on <code>Send messages</code> button, paste the message content, set the content type to <code>application/json</code>, check the <code>Repeat Send</code> check box, select <code>10000</code> messages and put an interval of <code>1ms</code> between them. This ensures that we are sending high volume at short intervals, so that the single replica container app cannot absorb and process quickly enough and will consequently need to scale out. Finally click <code>Send</code> when you are ready.</p>
-<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<div class="language-json highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
@@ -1670,27 +1901,27 @@ To get the number of current replicas of service <code>tasksmanager-backend-proc
 <span class="normal"><a href="#__codelineno-11-10">10</a></span>
 <span class="normal"><a href="#__codelineno-11-11">11</a></span>
 <span class="normal"><a href="#__codelineno-11-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="p">{</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">        </span><span class="nt">&quot;isCompleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">        </span><span class="nt">&quot;isOverDue&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">        </span><span class="nt">&quot;taskAssignedTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temp@mail.com&quot;</span><span class="p">,</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">        </span><span class="nt">&quot;taskCreatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;someone@mail.com&quot;</span><span class="p">,</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">        </span><span class="nt">&quot;taskCreatedOn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-08-18T12:45:22.0984036Z&quot;</span><span class="p">,</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="nt">&quot;taskDueDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-02-24T12:45:22.0983978Z&quot;</span><span class="p">,</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">        </span><span class="nt">&quot;taskId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6a051aeb-f567-40dd-a434-39927f2b93c5&quot;</span><span class="p">,</span>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">        </span><span class="nt">&quot;taskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Auto scale Task&quot;</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">        </span><span class="nt">"isCompleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">        </span><span class="nt">"isOverDue"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">        </span><span class="nt">"taskAssignedTo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"temp@mail.com"</span><span class="p">,</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">        </span><span class="nt">"taskCreatedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"someone@mail.com"</span><span class="p">,</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">        </span><span class="nt">"taskCreatedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-18T12:45:22.0984036Z"</span><span class="p">,</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="nt">"taskDueDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-02-24T12:45:22.0983978Z"</span><span class="p">,</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">        </span><span class="nt">"taskId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6a051aeb-f567-40dd-a434-39927f2b93c5"</span><span class="p">,</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">        </span><span class="nt">"taskName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto scale Task"</span>
 </span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
-<p><a class="glightbox" href="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="svcbus-send" src="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg" /></a></p>
-<h4 id="42-verify-that-multiple-replicas-are-created">4.2 Verify that Multiple Replicas Are Created<a class="headerlink" href="#42-verify-that-multiple-replicas-are-created" title="Permanent link">&para;</a></h4>
+</span></code></pre></div></td></tr></tbody></table></div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg" data-desc-position="bottom"><img alt="svcbus-send" src="../../assets/images/09-aca-autoscale-keda/svs-bus-send.jpg"></a></p>
+<h4 id="42-verify-that-multiple-replicas-are-created">4.2 Verify that Multiple Replicas Are Created<a class="headerlink" href="#42-verify-that-multiple-replicas-are-created" title="Permanent link">¶</a></h4>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
 <p>If all is setup correctly, five replicas will be created based on the number of messages we generated into the topic. There are various ways to verify this:</p>
 <ul>
 <li>You can run the Azure CLI command used in <a href="#41-run-an-end-to-end-test-and-generate-several-messages">previous step</a> to list the names of replicas.</li>
 <li>You can verify this from Container Apps <code>Console</code> tab where you will see those replicas in the drop-down list
-<a class="glightbox" href="../../assets/images/09-aca-autoscale-keda/replica-console.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="replica-console" src="../../assets/images/09-aca-autoscale-keda/replica-console.png" /></a></li>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/09-aca-autoscale-keda/replica-console.png" data-desc-position="bottom"><img alt="replica-console" src="../../assets/images/09-aca-autoscale-keda/replica-console.png"></a></li>
 </ul>
 </div>
 <div class="admonition note">
@@ -1706,40 +1937,40 @@ Currently, there is no way to override this value, yet there is an <a href="http
 <ul>
 <li>From the root folder of your project, execute the script you created in the Prerequisites section to persist a list of all current variables.</li>
 </ul>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">PowerShell</label><label for="__tabbed_6_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio"><input id="__tabbed_6_2" name="__tabbed_6" type="radio"><div class="tabbed-labels"><label for="__tabbed_6_1">PowerShell</label><label for="__tabbed_6_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Execute the <code>Set-Variables.ps1</code> in the root to update the <code>variables.ps1</code> file with all current variables. The output of the script will inform you how many variables are written out.
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a>.<span class="se">\S</span>et-Variables.ps1
-</span></code></pre></div></td></tr></table></div></p>
+</p><div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a>.<span class="se">\S</span>et-Variables.ps1
+</span></code></pre></div></td></tr></tbody></table></div><p></p>
 </div>
 <div class="tabbed-block">
 <p>Execute the <code>set_variables.sh</code> in the root to update the <code>variables.sh</code> file with all current variables. The output of the script will inform you how many variables are written out.
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a>./set_variables.sh
-</span></code></pre></div></td></tr></table></div></p>
+</p><div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a>./set_variables.sh
+</span></code></pre></div></td></tr></tbody></table></div><p></p>
 </div>
 </div>
 </div>
 <ul>
 <li>From the root folder of your project, persist a list of all current variables.</li>
 </ul>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">PowerShell</label><label for="__tabbed_7_2">Bash</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio"><input id="__tabbed_7_2" name="__tabbed_7" type="radio"><div class="tabbed-labels"><label for="__tabbed_7_1">PowerShell</label><label for="__tabbed_7_2">Bash</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a>git<span class="w"> </span>add<span class="w"> </span>.<span class="se">\V</span>ariables.ps1
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update Variables.ps1&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Update Variables.ps1"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<div class="language-shell highlight"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a>git<span class="w"> </span>add<span class="w"> </span>./variables.sh
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update variables.sh&quot;</span>
-</span></code></pre></div></td></tr></table></div>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Update variables.sh"</span>
+</span></code></pre></div></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
-<h2 id="review">Review<a class="headerlink" href="#review" title="Permanent link">&para;</a></h2>
+<h2 id="review">Review<a class="headerlink" href="#review" title="Permanent link">¶</a></h2>
 <p>In this module, we accomplished four objectives:</p>
 <ol>
 <li>Understood Azure Container Apps Scaling Behaviors.</li>
@@ -1765,9 +1996,9 @@ Currently, there is no way to override this value, yet there is an <a href="http
       
   <span class="md-source-file__fact">
     <span class="md-icon" title="Last update">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    2025-02-21
+    2026-11-19
   </span>
 
     
@@ -1792,9 +2023,9 @@ Currently, there is no way to override this value, yet there is an <a href="http
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
   Back to top
 </button>
         
@@ -1804,13 +2035,13 @@ Currently, there is no way to override this value, yet there is an <a href="http
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
           <a href="../08-aca-monitoring/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Module 8 - ACA Monitoring and Observability with Application Insights">
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
@@ -1835,7 +2066,7 @@ Currently, there is no way to override this value, yet there is an <a href="http
             </div>
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
             </div>
           </a>
         
@@ -1847,7 +2078,7 @@ Currently, there is no way to override this value, yet there is an <a href="http
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2023 Microsoft
+      Copyright © 2023 Microsoft
     </div>
   
   
@@ -1858,7 +2089,8 @@ Currently, there is no way to override this value, yet there is an <a href="http
   
 </div>
       
-        <div class="md-social">
+        
+<div class="md-social">
   
     
     
@@ -1868,7 +2100,7 @@ Currently, there is no way to override this value, yet there is an <a href="http
       
     
     <a href="https://github.com/Azure/aca-dotnet-workshop" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
     </a>
   
 </div>
@@ -1883,13 +2115,16 @@ Currently, there is no way to override this value, yet there is an <a href="http
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["header.autohide", "navigation.instant", "navigation.indexes", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
-  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
-</html>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
