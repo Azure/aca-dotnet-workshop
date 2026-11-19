@@ -24,7 +24,10 @@ namespace TasksTracker.WebPortal.Frontend.Ui.Pages
         {
             if (!string.IsNullOrEmpty(TasksCreatedBy))
             {
-                Response.Cookies.Append("TasksCreatedByCookie", TasksCreatedBy);
+                Response.Cookies.Append(
+                    "TasksCreatedByCookie",
+                    TasksCreatedBy,
+                    new CookieOptions { Secure = true });
             }
 
             return RedirectToPage("./Tasks/Index");
