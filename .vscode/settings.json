@@ -1,4 +1,12 @@
 {
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false
+    },
+    "editor.renderWhitespace": "trailing",
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
     "redisXplorer.config": {
         "profiles": [
             {

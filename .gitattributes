@@ -1,0 +1,28 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Bicep files should use LF
+*.bicep text eol=lf
+
+# JSON files should use LF
+*.json text eol=lf
+
+# YAML files should use LF
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Markdown files should use LF
+*.md text eol=lf
+
+# Windows batch files should use CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.pdn binary
